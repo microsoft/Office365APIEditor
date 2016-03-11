@@ -1,0 +1,38 @@
+﻿            Properties.Settings.Default["LastWebAppClientID"] = "6c8439d0-6144-4b63-a766-fa796fa2779c";
+            Properties.Settings.Default["LastWebAppRedirectURL"] = "http://localhost/app03";
+            Properties.Settings.Default["LastWebAppClientSecret"] = "3HasFgH9XLouiCvC6I9NJqRFirvRELbGjAIRQ6rqN2w=";
+
+            Properties.Settings.Default["LastNativeAppTenantName"] = "rykoma02.onmicrosoft.com";
+            Properties.Settings.Default["LastNativeAppClientID"] = "c5524f44-7719-4b68-a1e5-ce434b1862bd";
+            Properties.Settings.Default["LastNativeAppRedirectURL"] = "http://localhost/restoauth01";
+
+
+			https://outlook.office.com/api/v2.0/me/calendarview?startDateTime=2016-03-01T00:00:00&endDateTime=2016-03-01T23:59:59
+
+
+
+https://outlook.office.com/api/v2.0/me/sendmail
+{
+  "Message": {
+    "Subject": "Meet for lunch?",
+    "Body": {
+      "ContentType": "Text",
+      "Content": "The new cafeteria is open."
+    },
+    "ToRecipients": [
+      {
+        "EmailAddress": {
+          "Address": "exouser01@rykoma02.onmicrosoft.com"
+        }
+      }
+    ],
+    "Attachments": [
+      {
+        "@odata.type": "#Microsoft.OutlookServices.FileAttachment",
+        "Name": "menu.txt",
+        "ContentBytes": "bWFjIGFuZCBjaGVlc2UgdG9kYXk="
+      }
+    ]
+  },
+  "SaveToSentItems": "false"
+}
