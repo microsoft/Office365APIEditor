@@ -17,5 +17,16 @@ namespace Office365APIEditor
         public string access_token;
         public string refresh_token;
         public string id_token;
+
+        public string Format()
+        {
+            return "access_token : " + access_token + "\r\n" +
+                   "expires_in : " + expires_in + "\r\n" +
+                   "expires_on : " + expires_on + "\r\n" +
+                   "refresh_token : " + refresh_token + "\r\n" +
+                   "resource : " + resource + "\r\n" +
+                   "scope : " + scope + "\r\n" +
+                   "token_type : " + token_type ;
+        }
     }
 }

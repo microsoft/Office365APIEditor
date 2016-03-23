@@ -37,10 +37,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_BasicAuthPassword = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.radioButton_Get = new System.Windows.Forms.RadioButton();
+            this.radioButton_GET = new System.Windows.Forms.RadioButton();
             this.radioButton_POST = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox_RequestBody = new System.Windows.Forms.TextBox();
+            this.radioButton_PATCH = new System.Windows.Forms.RadioButton();
+            this.radioButton_DELETE = new System.Windows.Forms.RadioButton();
+            this.button_ViewTokenInfo = new System.Windows.Forms.Button();
+            this.button_RefreshToken = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -95,7 +99,7 @@
             this.textBox_BasicAuthSMTPAddress.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "BasicAuthSmtpAddress", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_BasicAuthSMTPAddress.Location = new System.Drawing.Point(103, 6);
             this.textBox_BasicAuthSMTPAddress.Name = "textBox_BasicAuthSMTPAddress";
-            this.textBox_BasicAuthSMTPAddress.Size = new System.Drawing.Size(295, 20);
+            this.textBox_BasicAuthSMTPAddress.Size = new System.Drawing.Size(253, 20);
             this.textBox_BasicAuthSMTPAddress.TabIndex = 25;
             this.textBox_BasicAuthSMTPAddress.Text = global::Office365APIEditor.Properties.Settings.Default.BasicAuthSmtpAddress;
             // 
@@ -111,7 +115,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(454, 9);
+            this.label2.Location = new System.Drawing.Point(378, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 26;
@@ -119,9 +123,9 @@
             // 
             // textBox_BasicAuthPassword
             // 
-            this.textBox_BasicAuthPassword.Location = new System.Drawing.Point(513, 6);
+            this.textBox_BasicAuthPassword.Location = new System.Drawing.Point(437, 6);
             this.textBox_BasicAuthPassword.Name = "textBox_BasicAuthPassword";
-            this.textBox_BasicAuthPassword.Size = new System.Drawing.Size(295, 20);
+            this.textBox_BasicAuthPassword.Size = new System.Drawing.Size(253, 20);
             this.textBox_BasicAuthPassword.TabIndex = 27;
             this.textBox_BasicAuthPassword.UseSystemPasswordChar = true;
             // 
@@ -134,18 +138,18 @@
             this.label4.TabIndex = 28;
             this.label4.Text = "Request";
             // 
-            // radioButton_Get
+            // radioButton_GET
             // 
-            this.radioButton_Get.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.radioButton_Get.AutoSize = true;
-            this.radioButton_Get.Checked = true;
-            this.radioButton_Get.Location = new System.Drawing.Point(701, 109);
-            this.radioButton_Get.Name = "radioButton_Get";
-            this.radioButton_Get.Size = new System.Drawing.Size(47, 17);
-            this.radioButton_Get.TabIndex = 29;
-            this.radioButton_Get.TabStop = true;
-            this.radioButton_Get.Text = "GET";
-            this.radioButton_Get.UseVisualStyleBackColor = true;
+            this.radioButton_GET.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.radioButton_GET.AutoSize = true;
+            this.radioButton_GET.Checked = true;
+            this.radioButton_GET.Location = new System.Drawing.Point(701, 109);
+            this.radioButton_GET.Name = "radioButton_GET";
+            this.radioButton_GET.Size = new System.Drawing.Size(47, 17);
+            this.radioButton_GET.TabIndex = 29;
+            this.radioButton_GET.TabStop = true;
+            this.radioButton_GET.Text = "GET";
+            this.radioButton_GET.UseVisualStyleBackColor = true;
             // 
             // radioButton_POST
             // 
@@ -179,15 +183,63 @@
             this.textBox_RequestBody.TabIndex = 32;
             this.textBox_RequestBody.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_RequestBody_KeyDown);
             // 
+            // radioButton_PATCH
+            // 
+            this.radioButton_PATCH.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.radioButton_PATCH.AutoSize = true;
+            this.radioButton_PATCH.Location = new System.Drawing.Point(754, 107);
+            this.radioButton_PATCH.Name = "radioButton_PATCH";
+            this.radioButton_PATCH.Size = new System.Drawing.Size(61, 17);
+            this.radioButton_PATCH.TabIndex = 33;
+            this.radioButton_PATCH.Text = "PATCH";
+            this.radioButton_PATCH.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_DELETE
+            // 
+            this.radioButton_DELETE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.radioButton_DELETE.AutoSize = true;
+            this.radioButton_DELETE.Location = new System.Drawing.Point(754, 132);
+            this.radioButton_DELETE.Name = "radioButton_DELETE";
+            this.radioButton_DELETE.Size = new System.Drawing.Size(67, 17);
+            this.radioButton_DELETE.TabIndex = 34;
+            this.radioButton_DELETE.Text = "DELETE";
+            this.radioButton_DELETE.UseVisualStyleBackColor = true;
+            // 
+            // button_ViewTokenInfo
+            // 
+            this.button_ViewTokenInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_ViewTokenInfo.Location = new System.Drawing.Point(701, 4);
+            this.button_ViewTokenInfo.Name = "button_ViewTokenInfo";
+            this.button_ViewTokenInfo.Size = new System.Drawing.Size(107, 23);
+            this.button_ViewTokenInfo.TabIndex = 35;
+            this.button_ViewTokenInfo.Text = "View token info";
+            this.button_ViewTokenInfo.UseVisualStyleBackColor = true;
+            this.button_ViewTokenInfo.Click += new System.EventHandler(this.button_ViewTokenInfo_Click);
+            // 
+            // button_RefreshToken
+            // 
+            this.button_RefreshToken.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_RefreshToken.Location = new System.Drawing.Point(701, 33);
+            this.button_RefreshToken.Name = "button_RefreshToken";
+            this.button_RefreshToken.Size = new System.Drawing.Size(107, 23);
+            this.button_RefreshToken.TabIndex = 36;
+            this.button_RefreshToken.Text = "Refresh token";
+            this.button_RefreshToken.UseVisualStyleBackColor = true;
+            this.button_RefreshToken.Click += new System.EventHandler(this.button_RefreshToken_Click);
+            // 
             // RequestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 447);
+            this.Controls.Add(this.button_RefreshToken);
+            this.Controls.Add(this.button_ViewTokenInfo);
+            this.Controls.Add(this.radioButton_DELETE);
+            this.Controls.Add(this.radioButton_PATCH);
             this.Controls.Add(this.textBox_RequestBody);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.radioButton_POST);
-            this.Controls.Add(this.radioButton_Get);
+            this.Controls.Add(this.radioButton_GET);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox_BasicAuthPassword);
             this.Controls.Add(this.label2);
@@ -217,9 +269,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox_BasicAuthPassword;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RadioButton radioButton_Get;
+        private System.Windows.Forms.RadioButton radioButton_GET;
         private System.Windows.Forms.RadioButton radioButton_POST;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox_RequestBody;
+        private System.Windows.Forms.RadioButton radioButton_PATCH;
+        private System.Windows.Forms.RadioButton radioButton_DELETE;
+        private System.Windows.Forms.Button button_ViewTokenInfo;
+        private System.Windows.Forms.Button button_RefreshToken;
     }
 }

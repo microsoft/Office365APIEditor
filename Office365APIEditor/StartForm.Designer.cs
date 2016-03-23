@@ -31,6 +31,7 @@
             this.button_Cancel = new System.Windows.Forms.Button();
             this.button_AcquireAccessToken = new System.Windows.Forms.Button();
             this.groupBox_NativeApp = new System.Windows.Forms.GroupBox();
+            this.radioButton_NativeAppGraphResource = new System.Windows.Forms.RadioButton();
             this.label13 = new System.Windows.Forms.Label();
             this.textBox_NativeAppRedirectUri = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -41,6 +42,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox_WebApp = new System.Windows.Forms.GroupBox();
+            this.radioButton_WebAppGraphResource = new System.Windows.Forms.RadioButton();
             this.textBox_WebAppCode = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.button_WebAppGetCode = new System.Windows.Forms.Button();
@@ -58,8 +60,6 @@
             this.groupBox_BasicAuth = new System.Windows.Forms.GroupBox();
             this.textBox_BasicAuthSMTPAddress = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.radioButton_WebAppGraphResource = new System.Windows.Forms.RadioButton();
-            this.radioButton_NativeAppGraphResource = new System.Windows.Forms.RadioButton();
             this.groupBox_NativeApp.SuspendLayout();
             this.groupBox_WebApp.SuspendLayout();
             this.groupBox_BasicAuth.SuspendLayout();
@@ -105,6 +105,16 @@
             this.groupBox_NativeApp.TabIndex = 31;
             this.groupBox_NativeApp.TabStop = false;
             this.groupBox_NativeApp.Text = "Native application options";
+            // 
+            // radioButton_NativeAppGraphResource
+            // 
+            this.radioButton_NativeAppGraphResource.AutoSize = true;
+            this.radioButton_NativeAppGraphResource.Location = new System.Drawing.Point(220, 97);
+            this.radioButton_NativeAppGraphResource.Name = "radioButton_NativeAppGraphResource";
+            this.radioButton_NativeAppGraphResource.Size = new System.Drawing.Size(100, 17);
+            this.radioButton_NativeAppGraphResource.TabIndex = 30;
+            this.radioButton_NativeAppGraphResource.Text = "Microsoft Graph";
+            this.radioButton_NativeAppGraphResource.UseVisualStyleBackColor = true;
             // 
             // label13
             // 
@@ -211,6 +221,16 @@
             this.groupBox_WebApp.TabStop = false;
             this.groupBox_WebApp.Text = "Web application options";
             // 
+            // radioButton_WebAppGraphResource
+            // 
+            this.radioButton_WebAppGraphResource.AutoSize = true;
+            this.radioButton_WebAppGraphResource.Location = new System.Drawing.Point(220, 71);
+            this.radioButton_WebAppGraphResource.Name = "radioButton_WebAppGraphResource";
+            this.radioButton_WebAppGraphResource.Size = new System.Drawing.Size(100, 17);
+            this.radioButton_WebAppGraphResource.TabIndex = 25;
+            this.radioButton_WebAppGraphResource.Text = "Microsoft Graph";
+            this.radioButton_WebAppGraphResource.UseVisualStyleBackColor = true;
+            // 
             // textBox_WebAppCode
             // 
             this.textBox_WebAppCode.Enabled = false;
@@ -291,6 +311,7 @@
             this.radioButton_WebAppExoResource.Name = "radioButton_WebAppExoResource";
             this.radioButton_WebAppExoResource.Size = new System.Drawing.Size(106, 17);
             this.radioButton_WebAppExoResource.TabIndex = 19;
+            this.radioButton_WebAppExoResource.TabStop = true;
             this.radioButton_WebAppExoResource.Text = "Exchange Online";
             this.radioButton_WebAppExoResource.UseVisualStyleBackColor = true;
             // 
@@ -377,26 +398,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "SMTP Address";
             // 
-            // radioButton_WebAppGraphResource
-            // 
-            this.radioButton_WebAppGraphResource.AutoSize = true;
-            this.radioButton_WebAppGraphResource.Location = new System.Drawing.Point(220, 71);
-            this.radioButton_WebAppGraphResource.Name = "radioButton_WebAppGraphResource";
-            this.radioButton_WebAppGraphResource.Size = new System.Drawing.Size(100, 17);
-            this.radioButton_WebAppGraphResource.TabIndex = 25;
-            this.radioButton_WebAppGraphResource.Text = "Microsoft Graph";
-            this.radioButton_WebAppGraphResource.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_NativeAppGraphResource
-            // 
-            this.radioButton_NativeAppGraphResource.AutoSize = true;
-            this.radioButton_NativeAppGraphResource.Location = new System.Drawing.Point(220, 97);
-            this.radioButton_NativeAppGraphResource.Name = "radioButton_NativeAppGraphResource";
-            this.radioButton_NativeAppGraphResource.Size = new System.Drawing.Size(100, 17);
-            this.radioButton_NativeAppGraphResource.TabIndex = 30;
-            this.radioButton_NativeAppGraphResource.Text = "Microsoft Graph";
-            this.radioButton_NativeAppGraphResource.UseVisualStyleBackColor = true;
-            // 
             // StartForm
             // 
             this.AcceptButton = this.button_AcquireAccessToken;
@@ -418,6 +419,7 @@
             this.MinimizeBox = false;
             this.Name = "StartForm";
             this.Text = "Welcome";
+            this.Load += new System.EventHandler(this.StartForm_Load);
             this.groupBox_NativeApp.ResumeLayout(false);
             this.groupBox_NativeApp.PerformLayout();
             this.groupBox_WebApp.ResumeLayout(false);

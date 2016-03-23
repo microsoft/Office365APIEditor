@@ -11,11 +11,24 @@ namespace Office365APIEditor
 {
     public partial class StartForm : Form
     {
-        private string _accessToken = "";
+        // 戻り値用
+        
+        private TokenResponse _tokenResponse;
+        private string _resource = "";
 
         public StartForm()
         {
             InitializeComponent();
+        }
+        
+        private void StartForm_Load(object sender, EventArgs e)
+        {
+            // RequestForm で自動的に保存してしまうため、SMTP アドレスではなく OAuth になっている場合がある。
+            // その場合は内容をクリアする。
+            if (textBox_BasicAuthSMTPAddress.Text.StartsWith("OAuth"))
+            {
+                textBox_BasicAuthSMTPAddress.Text = "";
+            }
         }
 
         public enum ResourceTypes
@@ -23,10 +36,22 @@ namespace Office365APIEditor
 
         }
 
-        public DialogResult ShowDialog(out string AccessToken)
+        public DialogResult ShowDialog(out TokenResponse AccessToken, out string Resource, out string ClientID, out string ClientSecret)
         {
             DialogResult reult = this.ShowDialog();
-            AccessToken = _accessToken;
+            AccessToken = _tokenResponse;
+            Resource = _resource;
+
+            if (radioButton_WebApp.Checked)
+            {
+                ClientID = textBox_WebAppClientID.Text;
+                ClientSecret = textBox_WebAppClientSecret.Text;
+            }
+            else
+            {
+                ClientID = "";
+                ClientSecret = "";
+            }
             return reult;
         }
 
@@ -60,7 +85,7 @@ namespace Office365APIEditor
         private void button_AcquireAccessToken_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.None;
-            _accessToken = "";
+            _tokenResponse = null;
 
             if (radioButton_BasicAuth.Checked)
             {
@@ -73,7 +98,7 @@ namespace Office365APIEditor
                 {
                     SaveSettings();
 
-                    _accessToken = "USEBASICBASIC";
+                    _tokenResponse = new TokenResponse { access_token = "USEBASICBASIC" };
 
                     this.DialogResult = DialogResult.OK;
                     this.Close();
@@ -92,7 +117,7 @@ namespace Office365APIEditor
                     return;
                 }
 
-                _accessToken = AcquireAccessTokenOfWebApp();
+                _tokenResponse = AcquireAccessTokenOfWebApp();
             }
             else
             {
@@ -102,10 +127,10 @@ namespace Office365APIEditor
                     return;
                 }
 
-                _accessToken = AcquireAccessTokenOfNativeApp();
+                _tokenResponse = AcquireAccessTokenOfNativeApp();
             }
 
-            if (_accessToken != "")
+            if (_tokenResponse != null)
             {
                 SaveSettings();
 
@@ -133,7 +158,8 @@ namespace Office365APIEditor
 
             string Code = "";
 
-            GetCodeForm getCodeForm = new GetCodeForm(textBox_WebAppClientID.Text, textBox_WebAppRedirectUri.Text, GetResourceURL(GetResourceNameForWebApp()));
+            _resource = GetResourceNameForWebApp();
+            GetCodeForm getCodeForm = new GetCodeForm(textBox_WebAppClientID.Text, textBox_WebAppRedirectUri.Text, GetResourceURL(_resource));
             if (getCodeForm.ShowDialog(out Code) == DialogResult.OK)
             {
                 if (Code == "")
@@ -248,8 +274,9 @@ namespace Office365APIEditor
             }
         }
 
-        private string AcquireAccessTokenOfWebApp()
+        private TokenResponse AcquireAccessTokenOfWebApp()
         {
+            TokenResponse result = null;
             string accessToken = "";
 
             //文字コードを指定する
@@ -299,7 +326,7 @@ namespace Office365APIEditor
                     string response = sr.ReadToEnd();
 
                     // デシリアライズして Access Token を取得
-                    var result = Deserialize<TokenResponse>(response);
+                    result = Deserialize<TokenResponse>(response);
                     accessToken = result.access_token;
                 }
             }
@@ -308,15 +335,16 @@ namespace Office365APIEditor
                 MessageBox.Show(ex.Message + "\r\n\r\n" + ex.StackTrace);
             }
 
-            return accessToken;
+            return result;
         }
 
-        private string AcquireAccessTokenOfNativeApp()
+        private TokenResponse AcquireAccessTokenOfNativeApp()
         {
             string authority = "https://login.windows.net/" + textBox_NativeAppTenantName.Text;
             string clientId = textBox_NativeAppClientID.Text;
             Uri redirectUri = new Uri(textBox_NativeAppRedirectUri.Text);
-            string resourceName = GetResourceURL(GetResourceNameForNativeApp());
+            _resource = GetResourceNameForNativeApp();
+            string resourceName = GetResourceURL(_resource);
 
             AuthenticationResult authenticationResult = null;
             AuthenticationContext authenticationContext = new AuthenticationContext(authority, false);
@@ -346,11 +374,11 @@ namespace Office365APIEditor
             if (!string.IsNullOrEmpty(errorMessage))
             {
                 MessageBox.Show(errorMessage, "RESTAPIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return "";
+                return null;
             }
             else
             {
-                return authenticationResult.AccessToken;
+                return ConvertAuthenticationResultToTokenResponse(authenticationResult);
             }
         }
         
@@ -386,7 +414,7 @@ namespace Office365APIEditor
             }
         }
 
-        private string GetResourceURL(string ResourceName)
+        public static string GetResourceURL(string ResourceName)
         {
             switch (ResourceName)
             {
@@ -418,13 +446,26 @@ namespace Office365APIEditor
             return returnValue;
         }
 
+        public static TokenResponse ConvertAuthenticationResultToTokenResponse(AuthenticationResult value)
+        {
+            return new TokenResponse
+            {
+                token_type = value.AccessTokenType,
+                expires_in = "",
+                scope = "",
+                expires_on = value.ExpiresOn.ToString(),
+                not_before = "",
+                resource = "",
+                access_token = value.AccessToken,
+                refresh_token = value.RefreshToken,
+                id_token = value.IdToken
+            };
+        }
+
         public void SaveSettings()
         {
             // Save settings.
             Properties.Settings.Default.Save();
         }
-
-        
-
     }
 }
