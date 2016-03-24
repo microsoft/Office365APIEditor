@@ -353,10 +353,10 @@ namespace Office365APIEditor
             try
             {
                 // Office365 のサインインページを表示する
-                //authenticationResult = authenticationContext.AcquireToken(resourceName, clientId, redirectUri, PromptBehavior.Always);
+                authenticationResult = authenticationContext.AcquireToken(resourceName, clientId, redirectUri, PromptBehavior.Always);
 
                 // 資格情報をハードコードする場合
-                authenticationResult = authenticationContext.AcquireToken(resourceName, clientId, new UserCredential("ExoUser01@rykoma02.onmicrosoft.com", "P@ssword1"));
+                // authenticationResult = authenticationContext.AcquireToken(resourceName, clientId, new UserCredential("SMTP Address", "password"));
             }
             catch (AdalException ex)
             {
