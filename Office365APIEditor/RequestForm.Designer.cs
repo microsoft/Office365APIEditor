@@ -96,12 +96,10 @@
             // 
             // textBox_BasicAuthSMTPAddress
             // 
-            this.textBox_BasicAuthSMTPAddress.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "BasicAuthSmtpAddress", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_BasicAuthSMTPAddress.Location = new System.Drawing.Point(103, 6);
             this.textBox_BasicAuthSMTPAddress.Name = "textBox_BasicAuthSMTPAddress";
             this.textBox_BasicAuthSMTPAddress.Size = new System.Drawing.Size(253, 20);
             this.textBox_BasicAuthSMTPAddress.TabIndex = 25;
-            this.textBox_BasicAuthSMTPAddress.Text = global::Office365APIEditor.Properties.Settings.Default.BasicAuthSmtpAddress;
             // 
             // label3
             // 
@@ -251,7 +249,7 @@
             this.Controls.Add(this.textBox_Request);
             this.MinimumSize = new System.Drawing.Size(836, 486);
             this.Name = "RequestForm";
-            this.Text = "RequestForm";
+            this.Text = "Office365APIEditor";
             this.Load += new System.EventHandler(this.RequestForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

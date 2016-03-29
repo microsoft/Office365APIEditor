@@ -23,12 +23,6 @@ namespace Office365APIEditor
         
         private void StartForm_Load(object sender, EventArgs e)
         {
-            // RequestForm で自動的に保存してしまうため、SMTP アドレスではなく OAuth になっている場合がある。
-            // その場合は内容をクリアする。
-            if (textBox_BasicAuthSMTPAddress.Text.StartsWith("OAuth"))
-            {
-                textBox_BasicAuthSMTPAddress.Text = "";
-            }
         }
 
         public enum ResourceTypes
@@ -60,8 +54,6 @@ namespace Office365APIEditor
             groupBox_WebApp.Enabled = true;
             groupBox_NativeApp.Enabled = false;
             groupBox_BasicAuth.Enabled = false;
-
-            button_AcquireAccessToken.Text = "Acquire Access Token";
         }
 
         private void radioButton_NativeApp_CheckedChanged(object sender, EventArgs e)
@@ -69,8 +61,6 @@ namespace Office365APIEditor
             groupBox_NativeApp.Enabled = true;
             groupBox_WebApp.Enabled = false;
             groupBox_BasicAuth.Enabled = false;
-
-            button_AcquireAccessToken.Text = "Acquire Access Token";
         }
 
         private void radioButton_BasicAuth_CheckedChanged(object sender, EventArgs e)
@@ -78,57 +68,21 @@ namespace Office365APIEditor
             groupBox_BasicAuth.Enabled = true;
             groupBox_NativeApp.Enabled = false;
             groupBox_WebApp.Enabled = false;
-
-            button_AcquireAccessToken.Text = "OK";
         }
 
-        private void button_AcquireAccessToken_Click(object sender, EventArgs e)
+
+        private void button_NativeAppAcquireAccessToken_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.None;
             _tokenResponse = null;
 
-            if (radioButton_BasicAuth.Checked)
+            if (CheckNativeAppParam() == false)
             {
-                //Basic auth の場合
-                if (CheckBasicAuthParam() == false)
-                {
-                    return;
-                }
-                else
-                {
-                    SaveSettings();
-
-                    _tokenResponse = new TokenResponse { access_token = "USEBASICBASIC" };
-
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
+                return;
             }
-            else if (radioButton_WebApp.Checked)
-            {
-                // Web app の場合
-                if (CheckWebAppParam() == false)
-                {
-                    return;
-                }
-                else if (textBox_WebAppCode.Text == "")
-                {
-                    MessageBox.Show("Enter the Authorization Code.", "RESTAPIEditor");
-                    return;
-                }
 
-                _tokenResponse = AcquireAccessTokenOfWebApp();
-            }
-            else
-            {
-                // Native app の場合
-                if (CheckNativeAppParam() == false)
-                {
-                    return;
-                }
+            _tokenResponse = AcquireAccessTokenOfNativeApp();
 
-                _tokenResponse = AcquireAccessTokenOfNativeApp();
-            }
 
             if (_tokenResponse != null)
             {
@@ -143,6 +97,46 @@ namespace Office365APIEditor
             }
         }
 
+        private void button_WebAppAcquireAccessToken_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.None;
+            _tokenResponse = null;
+
+            if (CheckWebAppParam() == false)
+            {
+                return;
+            }
+            else if (textBox_WebAppCode.Text == "")
+            {
+                MessageBox.Show("Enter the Authorization Code.", "RESTAPIEditor");
+                return;
+            }
+
+            _tokenResponse = AcquireAccessTokenOfWebApp();
+
+            if (_tokenResponse != null)
+            {
+                SaveSettings();
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Acquiring Access Token was failed.");
+            }
+        }
+        
+        private void button_BasicAuthGoNext_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
+
+            _tokenResponse = new TokenResponse { access_token = "USEBASICBASIC" };
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+        
         private void button_Cancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
@@ -257,20 +251,6 @@ namespace Office365APIEditor
             else
             {
                 return true;
-            }
-        }
-
-        private bool CheckBasicAuthParam()
-        {
-            try
-            {
-                System.Net.Mail.MailAddress address = new System.Net.Mail.MailAddress(textBox_BasicAuthSMTPAddress.Text);
-                return true;
-            }
-            catch
-            {
-                MessageBox.Show("Format of SMTP Address is invalid.", "Office 365 API Editor");
-                return false;
             }
         }
 

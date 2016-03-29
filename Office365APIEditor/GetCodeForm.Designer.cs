@@ -48,7 +48,6 @@
             this.ClientSize = new System.Drawing.Size(566, 705);
             this.Controls.Add(this.webBrowser1);
             this.Name = "GetCodeForm";
-            this.Text = "GetCodeForm";
             this.Load += new System.EventHandler(this.GetCodeForm_Load);
             this.ResumeLayout(false);
 

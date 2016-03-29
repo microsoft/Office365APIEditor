@@ -25,6 +25,12 @@ namespace Office365APIEditor
             redirectUrl = RedirectUri;
             AuthenticationUrl = "https://login.windows.net/common/oauth2/authorize?response_type=code&client_id=" + ClientID + "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) + "&resource=" + System.Web.HttpUtility.UrlEncode(ResourceUri) + "&prompt=login";
 
+            webBrowser1.DocumentTitleChanged += new EventHandler(webBrowser1_DocumentTitleChanged);
+        }
+
+        private void webBrowser1_DocumentTitleChanged(object sender, EventArgs e)
+        {
+            this.Text = webBrowser1.Document.Title;
         }
 
         private void GetCodeForm_Load(object sender, EventArgs e)
