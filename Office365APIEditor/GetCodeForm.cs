@@ -35,9 +35,7 @@ namespace Office365APIEditor
 
         private void GetCodeForm_Load(object sender, EventArgs e)
         {
-            var ua = string.Format("User-Agent: {0}",
-                "Mozilla/5.0 (Windows Phone 10.0;  Android 4.2.1; Nokia; Lumia 520) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Mobile Safari/537.36 Edge/12.0");
-            webBrowser1.Navigate(AuthenticationUrl, null, null, ua);
+            webBrowser1.Navigate(AuthenticationUrl);
         }
 
         private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)

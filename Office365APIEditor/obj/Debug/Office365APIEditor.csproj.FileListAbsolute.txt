@@ -14,4 +14,3 @@ d:\documents\visual studio 2015\Projects\Office365APIEditor\Office365APIEditor\b
 d:\documents\visual studio 2015\Projects\Office365APIEditor\Office365APIEditor\obj\Debug\Office365APIEditor.GetCodeForm.resources
 d:\documents\visual studio 2015\Projects\Office365APIEditor\Office365APIEditor\obj\Debug\Office365APIEditor.RequestForm.resources
 d:\documents\visual studio 2015\Projects\Office365APIEditor\Office365APIEditor\obj\Debug\Office365APIEditor.StartForm.resources
-D:\Documents\Visual Studio 2015\Projects\Office365APIEditor\Office365APIEditor\bin\Debug\license.txt
