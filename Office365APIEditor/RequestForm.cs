@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -131,8 +131,7 @@ namespace Office365APIEditor
                 textBox_Result.Text += "Response Header : \r\n" + res.Headers.ToString() + "\r\n\r\n";
 
                 // JSON をパースして読みやすくする。
-                dynamic parsedJson = JsonConvert.DeserializeObject(jsonResponse);
-                textBox_Result.Text += "Response Body : \r\n" + JsonConvert.SerializeObject(parsedJson, Newtonsoft.Json.Formatting.Indented);
+                textBox_Result.Text = parseJson(jsonResponse);
 
                 // Save application setting.
                 Properties.Settings.Default.Save();
@@ -248,8 +247,7 @@ namespace Office365APIEditor
                 textBox_Result.Text += "Response Header : \r\n" + res.Headers.ToString() + "\r\n\r\n";
 
                 // JSON をパースして読みやすくする。
-                dynamic parsedJson = JsonConvert.DeserializeObject(jsonResponse);
-                textBox_Result.Text += "Response Body : \r\n" + JsonConvert.SerializeObject(parsedJson, Newtonsoft.Json.Formatting.Indented);
+                textBox_Result.Text = parseJson(jsonResponse);
 
                 // デシリアライズして Access Token を取得
                 _tokenResponse = StartForm.Deserialize<TokenResponse>(jsonResponse);
@@ -268,5 +266,55 @@ namespace Office365APIEditor
                 this.Cursor = Cursors.Default;
             }
         }
+
+        public string parseJson(string Data)
+        {
+            TextElementEnumerator textEnum = StringInfo.GetTextElementEnumerator(Data);
+            StringBuilder parsedData = new StringBuilder();
+
+            Int32 indentCount = 0;
+
+            while (true)
+            {
+                if (textEnum.MoveNext() == false)
+                {
+                    break;
+                }
+
+                if (textEnum.Current.ToString() == ",")
+                {
+                    parsedData.Append(textEnum.Current + "\r\n" + CreateTabString(indentCount));
+                }
+                else if (textEnum.Current.ToString() == "{")
+                {
+                    indentCount += 1;
+                    parsedData.Append(textEnum.Current + "\r\n" + CreateTabString(indentCount));
+                }
+                else if (textEnum.Current.ToString() == "}")
+                {
+                    indentCount -= 1;
+                    parsedData.Append(textEnum.Current);
+                }
+                else
+                {
+                    parsedData.Append(textEnum.Current);
+                }
+            }
+
+            return parsedData.ToString();
+        }
+
+        private string CreateTabString(Int32 Length)
+        {
+            StringBuilder result = new StringBuilder();
+
+            for (int i = 0; i < Length; i++)
+            {
+                result.Append("\t");
+            }
+
+            return result.ToString();
+        }
+
     }
 }
