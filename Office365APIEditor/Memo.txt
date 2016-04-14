@@ -2,6 +2,11 @@
             Properties.Settings.Default["LastWebAppRedirectURL"] = "http://localhost/app03";
             Properties.Settings.Default["LastWebAppClientSecret"] = "3HasFgH9XLouiCvC6I9NJqRFirvRELbGjAIRQ6rqN2w=";
 
+			99bef61c-f239-4544-b869-51dbf50a6960
+			http://localhost/webapp01
+			kr5KGgq12M4L8t5Te1uaZ5Np7KkkdpFuFe5QkvmSRQ4=
+
+
             Properties.Settings.Default["LastNativeAppTenantName"] = "rykoma02.onmicrosoft.com";
             Properties.Settings.Default["LastNativeAppClientID"] = "c5524f44-7719-4b68-a1e5-ce434b1862bd";
             Properties.Settings.Default["LastNativeAppRedirectURL"] = "http://localhost/restoauth01";
@@ -36,3 +41,6 @@ https://outlook.office.com/api/v2.0/me/sendmail
   },
   "SaveToSentItems": "false"
 }
+
+
+a

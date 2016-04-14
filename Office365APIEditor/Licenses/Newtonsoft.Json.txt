@@ -1,3 +1,0 @@
-﻿Newtonsoft.Json
-Copyright (c) 2007 James Newton-King
-https://raw.githubusercontent.com/JamesNK/Newtonsoft.Json/master/LICENSE.md

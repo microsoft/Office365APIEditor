@@ -1002,6 +1002,11 @@
             Authentication failed.
             </summary>
         </member>
+        <member name="F:Microsoft.IdentityModel.Clients.ActiveDirectory.AdalError.NonHttpsRedirectNotSupported">
+            <summary>
+            non https redirect failed.
+            </summary>
+        </member>
         <member name="F:Microsoft.IdentityModel.Clients.ActiveDirectory.AdalError.AuthenticationCanceled">
             <summary>
             Authentication canceled.
@@ -1516,14 +1521,14 @@
         </member>
         <member name="M:Microsoft.IdentityModel.Clients.ActiveDirectory.UserAssertion.#ctor(System.String,System.String)">
             <summary>
-            Constructor to create credential with client id, assertion and assertionType
+            Constructor to create credential with assertion and assertionType
             </summary>
             <param name="assertion">Assertion representing the user.</param>
             <param name="assertionType">Type of the assertion representing the user.</param>
         </member>
         <member name="M:Microsoft.IdentityModel.Clients.ActiveDirectory.UserAssertion.#ctor(System.String,System.String,System.String)">
             <summary>
-            Constructor to create credential with client id, assertion, assertionType and userId
+            Constructor to create credential with assertion, assertionType and userId
             </summary>
             <param name="assertion">Assertion representing the user.</param>
             <param name="assertionType">Type of the assertion representing the user.</param>
@@ -1557,20 +1562,21 @@
         </member>
         <member name="M:Microsoft.IdentityModel.Clients.ActiveDirectory.UserCredential.#ctor(System.String)">
             <summary>
-            Constructor to create credential with client id and secret
+            Constructor to create user  credential. Using this constructor would imply integrated authentication with logged in user
+            and it can only be used in domain joined scenarios.
             </summary>
             <param name="userName">Identifier of the user application requests token on behalf.</param>
         </member>
         <member name="M:Microsoft.IdentityModel.Clients.ActiveDirectory.UserCredential.#ctor(System.String,System.String)">
             <summary>
-            Constructor to create credential with client id and secret
+            Constructor to create credential with username and password
             </summary>
             <param name="userName">Identifier of the user application requests token on behalf.</param>
             <param name="password">User password.</param>
         </member>
         <member name="M:Microsoft.IdentityModel.Clients.ActiveDirectory.UserCredential.#ctor(System.String,System.Security.SecureString)">
             <summary>
-            Constructor to create credential with client id and secret
+            Constructor to create credential with username and password
             </summary>
             <param name="userName">Identifier of the user application requests token on behalf.</param>
             <param name="securePassword">User password.</param>
