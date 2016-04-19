@@ -1,21 +1,27 @@
-﻿            Properties.Settings.Default["LastWebAppClientID"] = "6c8439d0-6144-4b63-a766-fa796fa2779c";
-            Properties.Settings.Default["LastWebAppRedirectURL"] = "http://localhost/app03";
-            Properties.Settings.Default["LastWebAppClientSecret"] = "3HasFgH9XLouiCvC6I9NJqRFirvRELbGjAIRQ6rqN2w=";
+﻿Web Application (rykoma02)
+	Client ID : 6c8439d0-6144-4b63-a766-fa796fa2779c
+	Redirect URL : http://localhost/app03
+	Resource : Exchange Online (Microsoft Graph でも可)
+	Client Secret : 3HasFgH9XLouiCvC6I9NJqRFirvRELbGjAIRQ6rqN2w=
 
-			99bef61c-f239-4544-b869-51dbf50a6960
-			http://localhost/webapp01
-			kr5KGgq12M4L8t5Te1uaZ5Np7KkkdpFuFe5QkvmSRQ4=
+Web Application (rykoma03)
+	Client ID : 072e0ce2-c143-4f05-8b3a-9700e1e23387
+	Redirect URL : http://localhost/webapp02
+	Resource : Exchange Online
+	Client Secret : wc/0CiCk1AI2N57HC6G81vjBKtWefRyKNHxTuBx7k1M=
+
+Native Application (rykoma02)
+	Tenant Name rykoma02.onmicrosoft.com
+	Client ID : c5524f44-7719-4b68-a1e5-ce434b1862bd
+	Resource : Exchange Online (Microsoft Graph でも可)
+	Redirect URL : http://localhost/restoauth01
 
 
-            Properties.Settings.Default["LastNativeAppTenantName"] = "rykoma02.onmicrosoft.com";
-            Properties.Settings.Default["LastNativeAppClientID"] = "c5524f44-7719-4b68-a1e5-ce434b1862bd";
-            Properties.Settings.Default["LastNativeAppRedirectURL"] = "http://localhost/restoauth01";
+GET
+https://outlook.office.com/api/v2.0/me/calendarview?startDateTime=2016-03-01T00:00:00&endDateTime=2016-03-01T23:59:59
 
 
-			https://outlook.office.com/api/v2.0/me/calendarview?startDateTime=2016-03-01T00:00:00&endDateTime=2016-03-01T23:59:59
-
-
-
+POST
 https://outlook.office.com/api/v2.0/me/sendmail
 {
   "Message": {
@@ -43,4 +49,22 @@ https://outlook.office.com/api/v2.0/me/sendmail
 }
 
 
-a
+GET
+https://outlook.office.com/api/v2.0/me/MailFolders/Inbox/messages/?$select=Id&$top=1
+
+
+
+DELETE
+https://outlook.office.com/api/v2.0/me/messages/{message_id}
+
+
+
+PATCH
+https://outlook.office.com/api/v2.0/me/messages/{message_id}
+{
+  "Categories": [
+    "Orange category",
+    "Green category"
+  ],
+  "IsRead": true
+}

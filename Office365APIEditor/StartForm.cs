@@ -1,4 +1,7 @@
-﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
+﻿// Copyright (c) Microsoft. All rights reserved. 
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
+
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System;
 using System.Collections;
 using System.Text;
@@ -11,8 +14,7 @@ namespace Office365APIEditor
 {
     public partial class StartForm : Form
     {
-        // 戻り値用
-        
+        // Return values
         private TokenResponse _tokenResponse;
         private string _resource = "";
 
@@ -20,19 +22,18 @@ namespace Office365APIEditor
         {
             InitializeComponent();
         }
-        
+
         private void StartForm_Load(object sender, EventArgs e)
         {
-        }
-
-        public enum ResourceTypes
-        {
-
+            radioButton_WebApp.Focus();
         }
 
         public DialogResult ShowDialog(out TokenResponse AccessToken, out string Resource, out string ClientID, out string ClientSecret)
         {
             DialogResult reult = this.ShowDialog();
+
+            // Build return values.
+
             AccessToken = _tokenResponse;
             Resource = _resource;
 
@@ -46,6 +47,7 @@ namespace Office365APIEditor
                 ClientID = "";
                 ClientSecret = "";
             }
+
             return reult;
         }
 
@@ -69,8 +71,7 @@ namespace Office365APIEditor
             groupBox_NativeApp.Enabled = false;
             groupBox_WebApp.Enabled = false;
         }
-
-
+        
         private void button_NativeAppAcquireAccessToken_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.None;
@@ -93,7 +94,7 @@ namespace Office365APIEditor
             }
             else
             {
-                MessageBox.Show("Acquiring Access Token was failed.");
+                MessageBox.Show("Acquiring Access Token was failed.", "Office365APIEditor");
             }
         }
 
@@ -106,13 +107,15 @@ namespace Office365APIEditor
             {
                 return;
             }
-            else if (textBox_WebAppCode.Text == "")
+
+            string authorizationCode = AcquireAuthorizationCode();
+
+            if (authorizationCode == "")
             {
-                MessageBox.Show("Enter the Authorization Code.", "RESTAPIEditor");
                 return;
             }
 
-            _tokenResponse = AcquireAccessTokenOfWebApp();
+            _tokenResponse = AcquireAccessTokenOfWebApp(authorizationCode);
 
             if (_tokenResponse != null)
             {
@@ -123,7 +126,7 @@ namespace Office365APIEditor
             }
             else
             {
-                MessageBox.Show("Acquiring Access Token was failed.");
+                MessageBox.Show("Acquiring Access Token was failed.", "Office365APIEditor");
             }
         }
         
@@ -140,37 +143,7 @@ namespace Office365APIEditor
         private void button_Cancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-            Close();
-        }
-
-        private void button_WebAppGetCode_Click(object sender, EventArgs e)
-        {
-            if (CheckWebAppParam() == false)
-            {
-                return;
-            }
-
-            string Code = "";
-
-            _resource = GetResourceNameForWebApp();
-            GetCodeForm getCodeForm = new GetCodeForm(textBox_WebAppClientID.Text, textBox_WebAppRedirectUri.Text, GetResourceURL(_resource));
-            if (getCodeForm.ShowDialog(out Code) == DialogResult.OK)
-            {
-                if (Code == "")
-                {
-                    MessageBox.Show("Getting Authorization Code was failed.", "RESTAPIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    textBox_WebAppCode.Text = "";
-                }
-                else
-                {
-                    textBox_WebAppCode.Text = Code;
-                }
-            }
-            else
-            {
-                MessageBox.Show("authentication_canceled: User canceled authentication", "RESTAPIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                textBox_WebAppCode.Text = "";
-            }
+            this.Close();
         }
 
         private bool IsValidUrl(string Uri)
@@ -188,25 +161,26 @@ namespace Office365APIEditor
 
         private bool CheckWebAppParam()
         {
-            // Web app の入力値のチェック
+            // Check the form for web app.
+
             if (textBox_WebAppClientID.Text == "")
             {
-                MessageBox.Show("Enter the Client ID.", "RESTAPIEditor");
+                MessageBox.Show("Enter the Client ID.", "Office365APIEditor");
                 return false;
             }
             else if (textBox_WebAppRedirectUri.Text == "")
             {
-                MessageBox.Show("Enter the Redirect URL.", "RESTAPIEditor");
+                MessageBox.Show("Enter the Redirect URL.", "Office365APIEditor");
                 return false;
             }
             else if (!IsValidUrl(textBox_WebAppRedirectUri.Text))
             {
-                MessageBox.Show("Format of Redirect URL is invalid.", "RESTAPIEditor");
+                MessageBox.Show("Format of Redirect URL is invalid.", "Office365APIEditor");
                 return false;
             }
             else if (textBox_WebAppClientSecret.Text == "")
             {
-                MessageBox.Show("Enter the Client Secret.", "RESTAPIEditor");
+                MessageBox.Show("Enter the Client Secret.", "Office365APIEditor");
                 return false;
             }
             else
@@ -217,35 +191,36 @@ namespace Office365APIEditor
 
         private bool CheckNativeAppParam()
         {
-            // Native app の入力値チェック
+            // Check the form for native app.
+
             if (textBox_NativeAppTenantName.Text == "")
             {
-                MessageBox.Show("Enter the Tenant Name.", "RESTAPIEditor");
+                MessageBox.Show("Enter the Tenant Name.", "Office365APIEditor");
                 return false;
             }
             else if (!textBox_NativeAppTenantName.Text.EndsWith(".onmicrosoft.com"))
             {
-                MessageBox.Show("Format of Tenant Name is invalid.\ne.g. contoso.onmicrosoft.com", "RESTAPIEditor");
+                MessageBox.Show("Format of Tenant Name is invalid.\ne.g. contoso.onmicrosoft.com", "Office365APIEditor");
                 return false;
             }
             else if (!IsValidUrl("https://login.windows.net/" + textBox_NativeAppTenantName.Text))
             {
-                MessageBox.Show("Format of Tenant Name is invalid.\ne.g. contoso.onmicrosoft.com", "RESTAPIEditor");
+                MessageBox.Show("Format of Tenant Name is invalid.\ne.g. contoso.onmicrosoft.com", "Office365APIEditor");
                 return false;
             }
             else if (textBox_NativeAppClientID.Text == "")
             {
-                MessageBox.Show("Enter the Client ID.", "RESTAPIEditor");
+                MessageBox.Show("Enter the Client ID.", "Office365APIEditor");
                 return false;
             }
             else if (textBox_NativeAppRedirectUri.Text == "")
             {
-                MessageBox.Show("Enter the Redirect URL.", "RESTAPIEditor");
+                MessageBox.Show("Enter the Redirect URL.", "Office365APIEditor");
                 return false;
             }
             else if (!IsValidUrl(textBox_NativeAppRedirectUri.Text))
             {
-                MessageBox.Show("Format of Redirect URL is invalid.", "RESTAPIEditor");
+                MessageBox.Show("Format of Redirect URL is invalid.", "Office365APIEditor");
                 return false;
             }
             else
@@ -254,65 +229,76 @@ namespace Office365APIEditor
             }
         }
 
-        private TokenResponse AcquireAccessTokenOfWebApp()
+        private string AcquireAuthorizationCode()
+        {
+            string Code = "";
+
+            _resource = GetResourceNameForWebApp();
+            GetCodeForm getCodeForm = new GetCodeForm(textBox_WebAppClientID.Text, textBox_WebAppRedirectUri.Text, GetResourceURL(_resource));
+
+            if (getCodeForm.ShowDialog(out Code) == DialogResult.OK)
+            {
+                if (Code == "")
+                {
+                    MessageBox.Show("Getting Authorization Code was failed.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("authentication_canceled: User canceled authentication", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Code;
+        }
+
+        private TokenResponse AcquireAccessTokenOfWebApp(string AuthorizationCode)
         {
             TokenResponse result = null;
             string accessToken = "";
 
-            //文字コードを指定する
-            System.Text.Encoding enc = System.Text.Encoding.Default;
+            // Build a POST body.
+            string postBody = "";
+            Hashtable tempTable = new Hashtable();
 
-            //POST送信する文字列を作成
-            string param = "";
-            Hashtable ht = new Hashtable();
+            tempTable["grant_type"] = "authorization_code";
+            tempTable["code"] = AuthorizationCode;
+            tempTable["redirect_uri"] = textBox_WebAppRedirectUri.Text;
+            tempTable["client_id"] = textBox_WebAppClientID.Text;
+            tempTable["client_secret"] = textBox_WebAppClientSecret.Text;
 
-            ht["grant_type"] = "authorization_code";
-            ht["code"] = textBox_WebAppCode.Text;
-            ht["redirect_uri"] = textBox_WebAppRedirectUri.Text;
-            ht["client_id"] = textBox_WebAppClientID.Text;
-            ht["client_secret"] = textBox_WebAppClientSecret.Text;
-
-            foreach (string k in ht.Keys)
+            foreach (string key in tempTable.Keys)
             {
-                param += String.Format("{0}={1}&", k, ht[k]);
+                postBody += String.Format("{0}={1}&", key, tempTable[key]);
             }
-            byte[] postDataBytes = Encoding.ASCII.GetBytes(param);
+            byte[] postDataBytes = Encoding.ASCII.GetBytes(postBody);
 
-            //WebRequestの作成
-            System.Net.WebRequest req = System.Net.WebRequest.Create("https://login.windows.net/common/oauth2/token/");
-            //メソッドにPOSTを指定
-            req.Method = "POST";
-            //ContentTypeを"application/x-www-form-urlencoded"にする
-            req.ContentType = "application/x-www-form-urlencoded";
-            //POST送信するデータの長さを指定
-            req.ContentLength = postDataBytes.Length;
+            System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.windows.net/common/oauth2/token/");
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = postDataBytes.Length;
 
             try
             {
-                //データをPOST送信するためのStreamを取得
-                using (System.IO.Stream reqStream = req.GetRequestStream())
+                // Get a RequestStream to POST a data.
+                using (Stream reqestStream = request.GetRequestStream())
                 {
-                    //送信するデータを書き込む
-                    reqStream.Write(postDataBytes, 0, postDataBytes.Length);
+                    reqestStream.Write(postDataBytes, 0, postDataBytes.Length);
                 }
 
-                //サーバーからの応答を受信するためのWebResponseを取得
-                System.Net.WebResponse res = req.GetResponse();
-                //応答データを受信するためのStreamを取得
-                using (System.IO.Stream resStream = res.GetResponseStream())
+                System.Net.WebResponse response = request.GetResponse();
+                using (Stream responseStream = response.GetResponseStream())
                 {
-                    //受信して表示
-                    System.IO.StreamReader sr = new System.IO.StreamReader(resStream, enc);
-                    string response = sr.ReadToEnd();
+                    StreamReader reader = new StreamReader(responseStream, Encoding.Default);
+                    string jsonResponse = reader.ReadToEnd();
 
-                    // デシリアライズして Access Token を取得
-                    result = Deserialize<TokenResponse>(response);
+                    // Deserialize and get an Access Token.
+                    result = Deserialize<TokenResponse>(jsonResponse);
                     accessToken = result.access_token;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\r\n\r\n" + ex.StackTrace);
+                MessageBox.Show(ex.Message + "\r\n\r\n" + ex.StackTrace, "Office365APIEditor");
             }
 
             return result;
@@ -332,10 +318,10 @@ namespace Office365APIEditor
             string errorMessage = null;
             try
             {
-                // Office365 のサインインページを表示する
+                // Show a Sign-in page of Office365.
                 authenticationResult = authenticationContext.AcquireToken(resourceName, clientId, redirectUri, PromptBehavior.Always);
 
-                // 資格情報をハードコードする場合
+                // If we use hardcoded user credential, use this method.
                 // authenticationResult = authenticationContext.AcquireToken(resourceName, clientId, new UserCredential("SMTP Address", "password"));
             }
             catch (AdalException ex)
@@ -353,7 +339,7 @@ namespace Office365APIEditor
 
             if (!string.IsNullOrEmpty(errorMessage))
             {
-                MessageBox.Show(errorMessage, "RESTAPIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(errorMessage, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
             else
@@ -410,20 +396,23 @@ namespace Office365APIEditor
 
         public static T Deserialize<T>(string json)
         {
-            T returnValue;
+            T result;
+
             using (var memoryStream = new MemoryStream())
             {
-                byte[] jsonBytes = Encoding.UTF8.GetBytes(json);
-                memoryStream.Write(jsonBytes, 0, jsonBytes.Length);
+                byte[] jsonByteArray = Encoding.UTF8.GetBytes(json);
+
+                memoryStream.Write(jsonByteArray, 0, jsonByteArray.Length);
                 memoryStream.Seek(0, SeekOrigin.Begin);
+
                 using (var jsonReader = JsonReaderWriterFactory.CreateJsonReader(memoryStream, Encoding.UTF8, XmlDictionaryReaderQuotas.Max, null))
                 {
                     var serializer = new DataContractJsonSerializer(typeof(T));
-                    returnValue = (T)serializer.ReadObject(jsonReader);
-
+                    result = (T)serializer.ReadObject(jsonReader);
                 }
             }
-            return returnValue;
+
+            return result;
         }
 
         public static TokenResponse ConvertAuthenticationResultToTokenResponse(AuthenticationResult value)

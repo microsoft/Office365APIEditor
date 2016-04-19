@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RequestForm));
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_Result = new System.Windows.Forms.TextBox();
             this.button_Run = new System.Windows.Forms.Button();
@@ -247,6 +248,7 @@
             this.Controls.Add(this.textBox_Result);
             this.Controls.Add(this.button_Run);
             this.Controls.Add(this.textBox_Request);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(836, 486);
             this.Name = "RequestForm";
             this.Text = "Office365APIEditor";

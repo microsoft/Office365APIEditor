@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Microsoft. All rights reserved. 
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
+
+using System;
 using System.Collections;
 using System.Globalization;
 using System.IO;
@@ -22,11 +25,15 @@ namespace Office365APIEditor
 
         private void RequestForm_Load(object sender, EventArgs e)
         {
+            // First of all, we have to get an access token.
+
             StartForm startForm = new StartForm();
             if (startForm.ShowDialog(out _tokenResponse, out _resource, out _clientID, out _clientSecret) == DialogResult.OK)
             {
                 if (_tokenResponse.access_token.StartsWith("USEBASICBASIC"))
                 {
+                    // Basic auth
+
                     useBasicAuth = true;
                     textBox_BasicAuthSMTPAddress.Enabled = true;
                     textBox_BasicAuthPassword.Enabled = true;
@@ -34,6 +41,8 @@ namespace Office365APIEditor
                 }
                 else
                 {
+                    // OAuth
+
                     useBasicAuth = false;
                     textBox_BasicAuthSMTPAddress.Enabled = false;
                     textBox_BasicAuthSMTPAddress.Text = "OAuth (" + _resource + ")";
@@ -51,40 +60,37 @@ namespace Office365APIEditor
 
         private void button_Run_Click(object sender, EventArgs e)
         {
-            //文字コードを指定する
-            Encoding enc = Encoding.Default;
-
-            System.Net.WebRequest req = System.Net.WebRequest.Create(textBox_Request.Text);
+            System.Net.WebRequest request = System.Net.WebRequest.Create(textBox_Request.Text);
+            request.ContentType = "application/json";
 
             if (useBasicAuth == true)
             {
                 // Basic authentication
-                string cred = Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(textBox_BasicAuthSMTPAddress.Text + ":" + textBox_BasicAuthPassword.Text));
-                req.Headers.Add("Authorization:Basic " + cred);
+                string credential = Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(textBox_BasicAuthSMTPAddress.Text + ":" + textBox_BasicAuthPassword.Text));
+                request.Headers.Add("Authorization:Basic " + credential);
             }
             else
             {
                 // OAuth authentication
-                req.Headers.Add("Authorization:Bearer " + _tokenResponse.access_token);
+                request.Headers.Add("Authorization:Bearer " + _tokenResponse.access_token);
             }
 
             if (radioButton_GET.Checked)
             {
                 // Request is GET.
-                req.Method = "GET";
-                req.ContentType = "application/json";
+                request.Method = "GET";
             }
             else if (radioButton_POST.Checked)
             {
                 // Request is POST.
-                req.Method = "POST";
-                req.ContentType = "application/json";
+                request.Method = "POST";
 
-                using (var streamWriter = new StreamWriter(req.GetRequestStream()))
+                // Build a body.
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
-                    string json = textBox_RequestBody.Text;
+                    string body = textBox_RequestBody.Text;
 
-                    streamWriter.Write(json);
+                    streamWriter.Write(body);
                     streamWriter.Flush();
                     streamWriter.Close();
                 }
@@ -92,14 +98,14 @@ namespace Office365APIEditor
             else if (radioButton_PATCH.Checked)
             {
                 // Request if PATCH
-                req.Method = "PATCH";
-                req.ContentType = "application/json";
+                request.Method = "PATCH";
 
-                using (var streamWriter = new StreamWriter(req.GetRequestStream()))
+                // Build a body.
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
-                    string json = textBox_RequestBody.Text;
+                    string body = textBox_RequestBody.Text;
 
-                    streamWriter.Write(json);
+                    streamWriter.Write(body);
                     streamWriter.Flush();
                     streamWriter.Close();
                 }
@@ -107,8 +113,7 @@ namespace Office365APIEditor
             else
             {
                 // Request is DELETE.
-                req.Method = "DELETE";
-                req.ContentType = "application/json";
+                request.Method = "DELETE";
             }
             
             try
@@ -116,22 +121,22 @@ namespace Office365APIEditor
                 // Change cursor.
                 this.Cursor = Cursors.WaitCursor;
 
-                //サーバーからの応答を受信するためのWebResponseを取得
-                System.Net.HttpWebResponse res = (System.Net.HttpWebResponse)req.GetResponse();
-                //応答データを受信するためのStreamを取得
+                // Get a response and response stream.
+                System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse();
+
                 string jsonResponse = "";
-                using (System.IO.Stream resStream = res.GetResponseStream())
+                using (Stream responseStream = response.GetResponseStream())
                 {
-                    System.IO.StreamReader sr = new System.IO.StreamReader(resStream, enc);
-                    jsonResponse = sr.ReadToEnd();
+                    StreamReader reader = new StreamReader(responseStream, Encoding.Default);
+                    jsonResponse = reader.ReadToEnd();
                 }
 
                 // Display the results.
-                textBox_Result.Text = "StatusCode : " + res.StatusCode.ToString() + "\r\n\r\n";
-                textBox_Result.Text += "Response Header : \r\n" + res.Headers.ToString() + "\r\n\r\n";
+                textBox_Result.Text = "StatusCode : " + response.StatusCode.ToString() + "\r\n\r\n";
+                textBox_Result.Text += "Response Header : \r\n" + response.Headers.ToString() + "\r\n\r\n";
 
-                // JSON をパースして読みやすくする。
-                textBox_Result.Text = parseJson(jsonResponse);
+                // Parse the JSON data.
+                textBox_Result.Text += parseJson(jsonResponse);
 
                 // Save application setting.
                 Properties.Settings.Default.Save();
@@ -153,6 +158,7 @@ namespace Office365APIEditor
 
         private void textBox_Request_KeyDown(object sender, KeyEventArgs e)
         {
+            // Enable 'Ctrl + A'
             if (e.Control && e.KeyCode == Keys.A)
             {
                 textBox_Request.SelectAll();
@@ -161,6 +167,7 @@ namespace Office365APIEditor
 
         private void textBox_RequestBody_KeyDown(object sender, KeyEventArgs e)
         {
+            // Enable 'Ctrl + A'
             if (e.Control && e.KeyCode == Keys.A)
             {
                 textBox_RequestBody.SelectAll();
@@ -169,6 +176,7 @@ namespace Office365APIEditor
 
         private void textBox_Result_KeyDown(object sender, KeyEventArgs e)
         {
+            // Enable 'Ctrl + A'
             if (e.Control && e.KeyCode == Keys.A)
             {
                 textBox_Result.SelectAll();
@@ -184,72 +192,64 @@ namespace Office365APIEditor
         {
             // Request another access token with refresh token.
 
-            //文字コードを指定する
-            Encoding enc = Encoding.Default;
-
-            // string resourceURL = StartForm.GetResourceURL(_resource);
             string resourceURL = StartForm.GetResourceURL(_resource);
 
-            //POST送信する文字列を作成
-            string param = "";
-            Hashtable ht = new Hashtable();
+            // Build a POST body.
+            string postBody = "";
+            Hashtable tempTable = new Hashtable();
 
-            ht["grant_type"] = "refresh_token";
-            ht["refresh_token"] = _tokenResponse.refresh_token;
-            ht["resource"] = System.Web.HttpUtility.UrlEncode(resourceURL);
+            tempTable["grant_type"] = "refresh_token";
+            tempTable["refresh_token"] = _tokenResponse.refresh_token;
+            tempTable["resource"] = System.Web.HttpUtility.UrlEncode(resourceURL);
 
             if (_clientID != "")
             {
                 // If _clientID has value, we're working with web app.
-                ht["client_id"] = _clientID;
-                ht["client_secret"] = _clientSecret;
+                // So we have to add Client ID and Client Secret.
+                tempTable["client_id"] = _clientID;
+                tempTable["client_secret"] = _clientSecret;
             }
             
-            foreach (string k in ht.Keys)
+            foreach (string key in tempTable.Keys)
             {
-                param += String.Format("{0}={1}&", k, ht[k]);
+                postBody += String.Format("{0}={1}&", key, tempTable[key]);
             }
-            byte[] postDataBytes = Encoding.ASCII.GetBytes(param);
+            byte[] postDataBytes = Encoding.ASCII.GetBytes(postBody);
             
-            //WebRequestの作成
-            System.Net.WebRequest req = System.Net.WebRequest.Create("https://login.windows.net/common/oauth2/token/");
-            //メソッドにPOSTを指定
-            req.Method = "POST";
-            //ContentTypeを"application/x-www-form-urlencoded"にする
-            req.ContentType = "application/x-www-form-urlencoded";
-            //POST送信するデータの長さを指定
-            req.ContentLength = postDataBytes.Length;
+            System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.windows.net/common/oauth2/token/");
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = postDataBytes.Length;
 
             try
             {
                 // Change a cursor.
                 this.Cursor = Cursors.WaitCursor;
 
-                //データをPOST送信するためのStreamを取得
-                using (System.IO.Stream reqStream = req.GetRequestStream())
+                // Get a RequestStream to POST a data.
+                using (Stream reqStream = request.GetRequestStream())
                 {
-                    //送信するデータを書き込む
                     reqStream.Write(postDataBytes, 0, postDataBytes.Length);
                 }
 
-                //サーバーからの応答を受信するためのWebResponseを取得
-                System.Net.HttpWebResponse res = (System.Net.HttpWebResponse)req.GetResponse();
-                //応答データを受信するためのStreamを取得
                 string jsonResponse = "";
-                using (System.IO.Stream resStream = res.GetResponseStream())
+
+                System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse();
+                
+                using (Stream responseStream = response.GetResponseStream())
                 {
-                    System.IO.StreamReader sr = new System.IO.StreamReader(resStream, enc);
-                    jsonResponse = sr.ReadToEnd();
+                    StreamReader reader = new StreamReader(responseStream, Encoding.Default);
+                    jsonResponse = reader.ReadToEnd();
                 }
 
                 // Display the results.
-                textBox_Result.Text = "StatusCode : " + res.StatusCode.ToString() + "\r\n\r\n";
-                textBox_Result.Text += "Response Header : \r\n" + res.Headers.ToString() + "\r\n\r\n";
+                textBox_Result.Text = "StatusCode : " + response.StatusCode.ToString() + "\r\n\r\n";
+                textBox_Result.Text += "Response Header : \r\n" + response.Headers.ToString() + "\r\n\r\n";
 
-                // JSON をパースして読みやすくする。
-                textBox_Result.Text = parseJson(jsonResponse);
+                // Parse the JSON data.
+                textBox_Result.Text += parseJson(jsonResponse);
 
-                // デシリアライズして Access Token を取得
+                // Deserialize and get Access Token.
                 _tokenResponse = StartForm.Deserialize<TokenResponse>(jsonResponse);
             }
             catch (System.Net.WebException ex)
@@ -283,15 +283,18 @@ namespace Office365APIEditor
 
                 if (textEnum.Current.ToString() == ",")
                 {
+                    // If ',' appreared, add new line.
                     parsedData.Append(textEnum.Current + "\r\n" + CreateTabString(indentCount));
                 }
                 else if (textEnum.Current.ToString() == "{")
                 {
+                    // If '{' appreared, add new new line and increment indentCount by 1.
                     indentCount += 1;
                     parsedData.Append(textEnum.Current + "\r\n" + CreateTabString(indentCount));
                 }
                 else if (textEnum.Current.ToString() == "}")
                 {
+                    // If '}' appreared, decrement indentCount by 1.
                     indentCount -= 1;
                     parsedData.Append(textEnum.Current);
                 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Microsoft. All rights reserved. 
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
+
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -14,16 +17,18 @@ namespace Office365APIEditor
     public partial class GetCodeForm : Form
     {
         private string redirectUrl;
-        private string AuthenticationUrl;
+        private string authenticationUrl;
 
-        private string acquiredCode = "";
+        // Return value
+        private string _acquiredCode = "";
 
         public GetCodeForm(string ClientID, string RedirectUri, string ResourceUri)
         {
             InitializeComponent();
 
             redirectUrl = RedirectUri;
-            AuthenticationUrl = "https://login.windows.net/common/oauth2/authorize?response_type=code&client_id=" + ClientID + "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) + "&resource=" + System.Web.HttpUtility.UrlEncode(ResourceUri) + "&prompt=login";
+            // Build an URL of sign-in page.
+            authenticationUrl = "https://login.windows.net/common/oauth2/authorize?response_type=code&client_id=" + ClientID + "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) + "&resource=" + System.Web.HttpUtility.UrlEncode(ResourceUri) + "&prompt=login";
 
             webBrowser1.DocumentTitleChanged += new EventHandler(webBrowser1_DocumentTitleChanged);
         }
@@ -35,27 +40,35 @@ namespace Office365APIEditor
 
         private void GetCodeForm_Load(object sender, EventArgs e)
         {
-            webBrowser1.Navigate(AuthenticationUrl);
+            // Navigate to the sing-in page.
+            webBrowser1.Navigate(authenticationUrl);
         }
 
         private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
-            if ((e.Url.AbsoluteUri.StartsWith(redirectUrl)) && (e.Url.AbsoluteUri.Contains("code")))
+            // Check whether the URL is RedirectUrl.
+
+            if ((e.Url.AbsoluteUri.ToLower().StartsWith(redirectUrl.ToLower())) && (e.Url.AbsoluteUri.Contains("code")))
             {
+                // Get the Authorization Code from a query string.
+
                 var queryString = e.Url.AbsoluteUri.Substring(e.Url.AbsoluteUri.IndexOf("?"));
                 NameValueCollection temp = System.Web.HttpUtility.ParseQueryString(queryString);
-                acquiredCode = temp["code"];
+                _acquiredCode = temp["code"];
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+
+            // If we couldn't get the Authorization Code, do nothing.
+            // Authorization is in progress, or error messages is displayed on the page.
         }
 
         public DialogResult ShowDialog(out string code)
         {
             DialogResult result = this.ShowDialog();
 
-            code = acquiredCode;
+            code = _acquiredCode;
             return result;
         }
     }
