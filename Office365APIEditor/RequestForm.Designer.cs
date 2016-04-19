@@ -67,7 +67,7 @@
             this.textBox_Result.Name = "textBox_Result";
             this.textBox_Result.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox_Result.Size = new System.Drawing.Size(785, 226);
-            this.textBox_Result.TabIndex = 22;
+            this.textBox_Result.TabIndex = 7;
             this.textBox_Result.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Result_KeyDown);
             // 
             // button_Run
@@ -76,7 +76,7 @@
             this.button_Run.Location = new System.Drawing.Point(701, 155);
             this.button_Run.Name = "button_Run";
             this.button_Run.Size = new System.Drawing.Size(107, 23);
-            this.button_Run.TabIndex = 21;
+            this.button_Run.TabIndex = 6;
             this.button_Run.Text = "Run";
             this.button_Run.UseVisualStyleBackColor = true;
             this.button_Run.Click += new System.EventHandler(this.button_Run_Click);
@@ -91,7 +91,7 @@
             this.textBox_Request.Name = "textBox_Request";
             this.textBox_Request.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_Request.Size = new System.Drawing.Size(587, 70);
-            this.textBox_Request.TabIndex = 20;
+            this.textBox_Request.TabIndex = 3;
             this.textBox_Request.Text = global::Office365APIEditor.Properties.Settings.Default.LastRequest;
             this.textBox_Request.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Request_KeyDown);
             // 
@@ -100,7 +100,7 @@
             this.textBox_BasicAuthSMTPAddress.Location = new System.Drawing.Point(103, 6);
             this.textBox_BasicAuthSMTPAddress.Name = "textBox_BasicAuthSMTPAddress";
             this.textBox_BasicAuthSMTPAddress.Size = new System.Drawing.Size(253, 20);
-            this.textBox_BasicAuthSMTPAddress.TabIndex = 25;
+            this.textBox_BasicAuthSMTPAddress.TabIndex = 1;
             // 
             // label3
             // 
@@ -125,7 +125,7 @@
             this.textBox_BasicAuthPassword.Location = new System.Drawing.Point(437, 6);
             this.textBox_BasicAuthPassword.Name = "textBox_BasicAuthPassword";
             this.textBox_BasicAuthPassword.Size = new System.Drawing.Size(253, 20);
-            this.textBox_BasicAuthPassword.TabIndex = 27;
+            this.textBox_BasicAuthPassword.TabIndex = 2;
             this.textBox_BasicAuthPassword.UseSystemPasswordChar = true;
             // 
             // label4
@@ -145,7 +145,7 @@
             this.radioButton_GET.Location = new System.Drawing.Point(701, 109);
             this.radioButton_GET.Name = "radioButton_GET";
             this.radioButton_GET.Size = new System.Drawing.Size(47, 17);
-            this.radioButton_GET.TabIndex = 29;
+            this.radioButton_GET.TabIndex = 5;
             this.radioButton_GET.TabStop = true;
             this.radioButton_GET.Text = "GET";
             this.radioButton_GET.UseVisualStyleBackColor = true;
@@ -172,6 +172,7 @@
             // 
             // textBox_RequestBody
             // 
+            this.textBox_RequestBody.AcceptsReturn = true;
             this.textBox_RequestBody.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_RequestBody.Location = new System.Drawing.Point(103, 108);
@@ -179,7 +180,7 @@
             this.textBox_RequestBody.Name = "textBox_RequestBody";
             this.textBox_RequestBody.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_RequestBody.Size = new System.Drawing.Size(587, 70);
-            this.textBox_RequestBody.TabIndex = 32;
+            this.textBox_RequestBody.TabIndex = 4;
             this.textBox_RequestBody.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_RequestBody_KeyDown);
             // 
             // radioButton_PATCH
@@ -210,7 +211,7 @@
             this.button_ViewTokenInfo.Location = new System.Drawing.Point(701, 4);
             this.button_ViewTokenInfo.Name = "button_ViewTokenInfo";
             this.button_ViewTokenInfo.Size = new System.Drawing.Size(107, 23);
-            this.button_ViewTokenInfo.TabIndex = 35;
+            this.button_ViewTokenInfo.TabIndex = 8;
             this.button_ViewTokenInfo.Text = "View token info";
             this.button_ViewTokenInfo.UseVisualStyleBackColor = true;
             this.button_ViewTokenInfo.Click += new System.EventHandler(this.button_ViewTokenInfo_Click);
@@ -221,13 +222,14 @@
             this.button_RefreshToken.Location = new System.Drawing.Point(701, 33);
             this.button_RefreshToken.Name = "button_RefreshToken";
             this.button_RefreshToken.Size = new System.Drawing.Size(107, 23);
-            this.button_RefreshToken.TabIndex = 36;
+            this.button_RefreshToken.TabIndex = 9;
             this.button_RefreshToken.Text = "Refresh token";
             this.button_RefreshToken.UseVisualStyleBackColor = true;
             this.button_RefreshToken.Click += new System.EventHandler(this.button_RefreshToken_Click);
             // 
             // RequestForm
             // 
+            this.AcceptButton = this.button_Run;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 447);

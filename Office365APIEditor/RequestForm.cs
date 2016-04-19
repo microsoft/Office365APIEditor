@@ -38,6 +38,7 @@ namespace Office365APIEditor
                     textBox_BasicAuthSMTPAddress.Enabled = true;
                     textBox_BasicAuthPassword.Enabled = true;
                     button_ViewTokenInfo.Enabled = false;
+                    button_RefreshToken.Enabled = false;
                 }
                 else
                 {
@@ -66,6 +67,21 @@ namespace Office365APIEditor
             if (useBasicAuth == true)
             {
                 // Basic authentication
+
+                if (textBox_BasicAuthSMTPAddress.Text == "")
+                {
+                    MessageBox.Show("Enter your SMTP address", "Office365APIEditor");
+                    textBox_BasicAuthSMTPAddress.Focus();
+                    return;
+                }
+
+                if (textBox_BasicAuthPassword.Text == "")
+                {
+                    MessageBox.Show("Enter your password", "Office365APIEditor");
+                    textBox_BasicAuthPassword.Focus();
+                    return;
+                }
+
                 string credential = Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(textBox_BasicAuthSMTPAddress.Text + ":" + textBox_BasicAuthPassword.Text));
                 request.Headers.Add("Authorization:Basic " + credential);
             }
