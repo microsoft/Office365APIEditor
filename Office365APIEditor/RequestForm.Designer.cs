@@ -46,6 +46,7 @@
             this.radioButton_DELETE = new System.Windows.Forms.RadioButton();
             this.button_ViewTokenInfo = new System.Windows.Forms.Button();
             this.button_RefreshToken = new System.Windows.Forms.Button();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
             // label1
@@ -227,12 +228,21 @@
             this.button_RefreshToken.UseVisualStyleBackColor = true;
             this.button_RefreshToken.Click += new System.EventHandler(this.button_RefreshToken_Click);
             // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Location = new System.Drawing.Point(12, 87);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(83, 62);
+            this.webBrowser1.TabIndex = 35;
+            // 
             // RequestForm
             // 
             this.AcceptButton = this.button_Run;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 447);
+            this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.button_RefreshToken);
             this.Controls.Add(this.button_ViewTokenInfo);
             this.Controls.Add(this.radioButton_DELETE);
@@ -279,5 +289,6 @@
         private System.Windows.Forms.RadioButton radioButton_DELETE;
         private System.Windows.Forms.Button button_ViewTokenInfo;
         private System.Windows.Forms.Button button_RefreshToken;
+        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }

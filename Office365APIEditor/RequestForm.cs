@@ -6,6 +6,7 @@ using System.Collections;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Office365APIEditor
@@ -152,7 +153,8 @@ namespace Office365APIEditor
                 textBox_Result.Text += "Response Header : \r\n" + response.Headers.ToString() + "\r\n\r\n";
 
                 // Parse the JSON data.
-                textBox_Result.Text += parseJson(jsonResponse);
+                // Then, decode double byte characters.
+                textBox_Result.Text += DecodeJsonResponse(parseJson(jsonResponse));
 
                 // Save application setting.
                 Properties.Settings.Default.Save();
@@ -335,5 +337,39 @@ namespace Office365APIEditor
             return result.ToString();
         }
 
+        public static string DecodeJsonResponse(string jsonResponse)
+        {
+            // Convert unicode style character to string.
+            // Then, convert to their unescaped form.
+
+            Hashtable CharTable = new Hashtable();
+
+            Regex unicodeExpression = new Regex(@"(\\u){1}[0-9a-fA-F]{4}");
+
+            for (Match matchedUniCode = unicodeExpression.Match(jsonResponse); matchedUniCode.Success; matchedUniCode = matchedUniCode.NextMatch())
+            {
+                string unicodeValue = matchedUniCode.Groups[0].Value.Replace(@"\u", "");
+
+                if (!CharTable.ContainsKey(unicodeValue))
+                {
+                    char[] charArray = unicodeValue.ToCharArray();
+                    int intValue1 = Convert.ToByte(charArray[0].ToString(), 16) * 16 + Convert.ToByte(charArray[1].ToString(), 16);
+                    int intValue2 = Convert.ToByte(charArray[2].ToString(), 16) * 16 + Convert.ToByte(charArray[3].ToString(), 16);
+
+                    string encodedValue = Encoding.Unicode.GetString(new byte[] { (byte)intValue2, (byte)intValue1 });
+
+                    CharTable.Add(unicodeValue, encodedValue);
+                }
+            }
+
+            string result = jsonResponse;
+
+            foreach (string key in CharTable.Keys)
+            {
+                result = result.Replace("\\u" + key, CharTable[key].ToString());
+            }
+
+            return Regex.Unescape(result);
+        }
     }
 }

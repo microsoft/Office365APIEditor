@@ -16,55 +16,108 @@ Native Application (rykoma02)
 	Resource : Exchange Online (Microsoft Graph でも可)
 	Redirect URL : http://localhost/restoauth01
 
-
-GET
-https://outlook.office.com/api/v2.0/me/calendarview?startDateTime=2016-03-01T00:00:00&endDateTime=2016-03-01T23:59:59
-
-
-POST
-https://outlook.office.com/api/v2.0/me/sendmail
-{
-  "Message": {
-    "Subject": "Meet for lunch?",
-    "Body": {
-      "ContentType": "Text",
-      "Content": "The new cafeteria is open."
-    },
-    "ToRecipients": [
-      {
-        "EmailAddress": {
-          "Address": "exouser01@rykoma02.onmicrosoft.com"
-        }
-      }
-    ],
-    "Attachments": [
-      {
-        "@odata.type": "#Microsoft.OutlookServices.FileAttachment",
-        "Name": "menu.txt",
-        "ContentBytes": "bWFjIGFuZCBjaGVlc2UgdG9kYXk="
-      }
-    ]
-  },
-  "SaveToSentItems": "false"
-}
+Native Application (rykoma03)
+	Tenant Name rykoma03.onmicrosoft.com
+	Client ID : 652048ee-63ee-4774-93a4-2188e13e0d91
+	Resource : Exchange Online (Microsoft Graph でも可)
+	Redirect URL : http://localhost/nativeapp02
 
 
-GET
-https://outlook.office.com/api/v2.0/me/MailFolders/Inbox/messages/?$select=Id&$top=1
+1. アプリケーションを起動します。
 
+2. [Web application] か [Native application] を選択して、必要な情報を入力します。
+   ご自身で Azure AD に登録しているアプリケーションがあればその情報を使用してください。
+   テスト用として以下の情報も使用できます。
+   
+   Web application の場合
+   --------------------
+   Client ID : 072e0ce2-c143-4f05-8b3a-9700e1e23387
+   Redirect URL : http://localhost/webapp02
+   Resource : Exchange Online (Microsoft Graph でも可)
+   Client Secret : wc/0CiCk1AI2N57HC6G81vjBKtWefRyKNHxTuBx7k1M=
+   
+   Native application の場合
+   -----------------------
+   Tenant Name rykoma03.onmicrosoft.com
+   Client ID : 652048ee-63ee-4774-93a4-2188e13e0d91
+   Resource : Exchange Online (Microsoft Graph でも可)
+   Redirect URL : http://localhost/nativeapp02
 
+3. [Acquire Access Token] をクリックして認証します。
+   アプリケーションの情報にご自身の情報を使用した場合は、ご自身のテナントのユーザーでサインインしてください。
+   テスト用の情報を使用した場合は、以下の資格情報でサインインできます。
+   
+   Username : exouser01@rykoma03.onmicrosoft.com
+   Password : P@ssword1
 
-DELETE
-https://outlook.office.com/api/v2.0/me/messages/{message_id}
+4. ウィンドウが変わります。
+   Office 365 API のリクエストを入力して、[Run] をクリックして動作をご確認ください。
+   例えば以下のようなことができます。
+   
+   メールを取得する
+   ----------
+   Request : https://outlook.office.com/api/v2.0/me/messages
+   Method : GET
+   
+   予定を取得する
+   ----------
+   Request : https://outlook.office.com/api/v2.0/me/calendarview?startDateTime=2016-04-01T00:00:00&endDateTime=2016-05-01T00:00:00
+   Method : GET
+   
+   添付ファイル付きのメールを送信する
+   ---------------------
+   Request : https://outlook.office.com/api/v2.0/me/sendmail
+   Method : POST
+   Body : 
+	----- ここから -----
+	{
+	  "Message": {
+		"Subject": "Meet for lunch?",
+		"Body": {
+		  "ContentType": "Text",
+		  "Content": "The new cafeteria is open."
+		},
+		"ToRecipients": [
+		  {
+			"EmailAddress": {
+			  "Address": "exouser01@rykoma03.onmicrosoft.com"
+			}
+		  }
+		],
+		"Attachments": [
+		  {
+			"@odata.type": "#Microsoft.OutlookServices.FileAttachment",
+			"Name": "menu.txt",
+			"ContentBytes": "bWFjIGFuZCBjaGVlc2UgdG9kYXk="
+		  }
+		]
+	  },
+	  "SaveToSentItems": "false"
+	}
+	----- ここまで -----
 
+   受信トレイの先頭のアイテムの id を取得する
+   ----------------------------
+   Request : https://outlook.office.com/api/v2.0/me/MailFolders/Inbox/messages/?$select=Id&$top=1
+   Method : GET
+   
+   特定の id のアイテムに分類項目を設定して既読にする
+   ----------------------------------
+   Request : https://outlook.office.com/api/v2.0/me/messages/{message_id}
+   Method : PATCH
+   Body : 
+	----- ここから -----
+	{
+	  "Categories": [
+		"Orange category",
+		"Green category"
+	  ],
+	  "IsRead": true
+	}
+	----- ここまで -----
 
-
-PATCH
-https://outlook.office.com/api/v2.0/me/messages/{message_id}
-{
-  "Categories": [
-    "Orange category",
-    "Green category"
-  ],
-  "IsRead": true
-}
+   特定の id のアイテムを削除する
+   --------------------
+   Request : https://outlook.office.com/api/v2.0/me/messages/{message_id}
+   Method : DELETE
+   
