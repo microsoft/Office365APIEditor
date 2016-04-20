@@ -230,4 +230,4 @@ paket-files/
 .idea/
 *.sln.iml
 
-Memo.txt
+*/Memo.txt
