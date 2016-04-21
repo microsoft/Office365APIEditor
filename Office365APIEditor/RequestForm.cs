@@ -154,8 +154,10 @@ namespace Office365APIEditor
 
                 // Parse the JSON data.
                 // Then, decode double byte characters.
-                // TODO: add switch
+                // TODO: add switcha
                 textBox_Result.Text += DecodeJsonResponse(parseJson(jsonResponse));
+
+                int i = 5;
 
                 // Save application setting.
                 Properties.Settings.Default.Save();
