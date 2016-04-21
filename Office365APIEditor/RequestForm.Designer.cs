@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RequestForm));
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_Result = new System.Windows.Forms.TextBox();
@@ -46,13 +47,17 @@
             this.radioButton_DELETE = new System.Windows.Forms.RadioButton();
             this.button_ViewTokenInfo = new System.Windows.Forms.Button();
             this.button_RefreshToken = new System.Windows.Forms.Button();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.checkBox_Decode = new System.Windows.Forms.CheckBox();
+            this.checkBox_Indent = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 189);
+            this.label1.Location = new System.Drawing.Point(19, 185);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 23;
@@ -74,7 +79,7 @@
             // button_Run
             // 
             this.button_Run.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Run.Location = new System.Drawing.Point(701, 155);
+            this.button_Run.Location = new System.Drawing.Point(701, 147);
             this.button_Run.Name = "button_Run";
             this.button_Run.Size = new System.Drawing.Size(107, 23);
             this.button_Run.TabIndex = 6;
@@ -91,7 +96,7 @@
             this.textBox_Request.Multiline = true;
             this.textBox_Request.Name = "textBox_Request";
             this.textBox_Request.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_Request.Size = new System.Drawing.Size(587, 70);
+            this.textBox_Request.Size = new System.Drawing.Size(587, 36);
             this.textBox_Request.TabIndex = 3;
             this.textBox_Request.Text = global::Office365APIEditor.Properties.Settings.Default.LastRequest;
             this.textBox_Request.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Request_KeyDown);
@@ -140,10 +145,9 @@
             // 
             // radioButton_GET
             // 
-            this.radioButton_GET.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton_GET.AutoSize = true;
             this.radioButton_GET.Checked = true;
-            this.radioButton_GET.Location = new System.Drawing.Point(701, 109);
+            this.radioButton_GET.Location = new System.Drawing.Point(103, 150);
             this.radioButton_GET.Name = "radioButton_GET";
             this.radioButton_GET.Size = new System.Drawing.Size(47, 17);
             this.radioButton_GET.TabIndex = 5;
@@ -153,9 +157,8 @@
             // 
             // radioButton_POST
             // 
-            this.radioButton_POST.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton_POST.AutoSize = true;
-            this.radioButton_POST.Location = new System.Drawing.Point(701, 132);
+            this.radioButton_POST.Location = new System.Drawing.Point(156, 150);
             this.radioButton_POST.Name = "radioButton_POST";
             this.radioButton_POST.Size = new System.Drawing.Size(54, 17);
             this.radioButton_POST.TabIndex = 30;
@@ -165,7 +168,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(66, 111);
+            this.label5.Location = new System.Drawing.Point(66, 77);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 13);
             this.label5.TabIndex = 31;
@@ -176,7 +179,7 @@
             this.textBox_RequestBody.AcceptsReturn = true;
             this.textBox_RequestBody.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_RequestBody.Location = new System.Drawing.Point(103, 108);
+            this.textBox_RequestBody.Location = new System.Drawing.Point(103, 74);
             this.textBox_RequestBody.Multiline = true;
             this.textBox_RequestBody.Name = "textBox_RequestBody";
             this.textBox_RequestBody.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -186,9 +189,8 @@
             // 
             // radioButton_PATCH
             // 
-            this.radioButton_PATCH.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton_PATCH.AutoSize = true;
-            this.radioButton_PATCH.Location = new System.Drawing.Point(754, 107);
+            this.radioButton_PATCH.Location = new System.Drawing.Point(216, 150);
             this.radioButton_PATCH.Name = "radioButton_PATCH";
             this.radioButton_PATCH.Size = new System.Drawing.Size(61, 17);
             this.radioButton_PATCH.TabIndex = 33;
@@ -197,9 +199,8 @@
             // 
             // radioButton_DELETE
             // 
-            this.radioButton_DELETE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton_DELETE.AutoSize = true;
-            this.radioButton_DELETE.Location = new System.Drawing.Point(754, 132);
+            this.radioButton_DELETE.Location = new System.Drawing.Point(283, 150);
             this.radioButton_DELETE.Name = "radioButton_DELETE";
             this.radioButton_DELETE.Size = new System.Drawing.Size(67, 17);
             this.radioButton_DELETE.TabIndex = 34;
@@ -228,13 +229,54 @@
             this.button_RefreshToken.UseVisualStyleBackColor = true;
             this.button_RefreshToken.Click += new System.EventHandler(this.button_RefreshToken_Click);
             // 
-            // webBrowser1
+            // checkBox_Decode
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(12, 87);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(83, 62);
-            this.webBrowser1.TabIndex = 35;
+            this.checkBox_Decode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox_Decode.AutoSize = true;
+            this.checkBox_Decode.Checked = true;
+            this.checkBox_Decode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_Decode.Location = new System.Drawing.Point(739, 184);
+            this.checkBox_Decode.Name = "checkBox_Decode";
+            this.checkBox_Decode.Size = new System.Drawing.Size(64, 17);
+            this.checkBox_Decode.TabIndex = 35;
+            this.checkBox_Decode.Text = "Decode";
+            this.toolTip1.SetToolTip(this.checkBox_Decode, "Convert control characters and unicode sequences");
+            this.checkBox_Decode.UseVisualStyleBackColor = true;
+            this.checkBox_Decode.CheckedChanged += new System.EventHandler(this.checkBox_Decode_CheckedChanged);
+            // 
+            // checkBox_Indent
+            // 
+            this.checkBox_Indent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox_Indent.AutoSize = true;
+            this.checkBox_Indent.Checked = true;
+            this.checkBox_Indent.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_Indent.Location = new System.Drawing.Point(677, 184);
+            this.checkBox_Indent.Name = "checkBox_Indent";
+            this.checkBox_Indent.Size = new System.Drawing.Size(56, 17);
+            this.checkBox_Indent.TabIndex = 36;
+            this.checkBox_Indent.Text = "Indent";
+            this.toolTip1.SetToolTip(this.checkBox_Indent, "Add indents to JSON response.");
+            this.checkBox_Indent.UseVisualStyleBackColor = true;
+            this.checkBox_Indent.CheckedChanged += new System.EventHandler(this.checkBox_Indent_CheckedChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(54, 152);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(43, 13);
+            this.label6.TabIndex = 37;
+            this.label6.Text = "Method";
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(586, 185);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(85, 13);
+            this.label7.TabIndex = 38;
+            this.label7.Text = "Format options : ";
             // 
             // RequestForm
             // 
@@ -242,7 +284,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 447);
-            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.checkBox_Indent);
+            this.Controls.Add(this.checkBox_Decode);
             this.Controls.Add(this.button_RefreshToken);
             this.Controls.Add(this.button_ViewTokenInfo);
             this.Controls.Add(this.radioButton_DELETE);
@@ -289,6 +334,10 @@
         private System.Windows.Forms.RadioButton radioButton_DELETE;
         private System.Windows.Forms.Button button_ViewTokenInfo;
         private System.Windows.Forms.Button button_RefreshToken;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.CheckBox checkBox_Decode;
+        private System.Windows.Forms.CheckBox checkBox_Indent;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -19,6 +19,12 @@ namespace Office365APIEditor
         string _clientID = "";
         string _clientSecret = "";
 
+        string originalResponseHeaders = "";
+        string originalJsonResponse = "";
+        string indentedJsonResponse = "";
+        string decodedJsonResponse = "";
+        string indentedAndDecodedJsonResponse = "";
+
         public RequestForm()
         {
             InitializeComponent();
@@ -62,6 +68,12 @@ namespace Office365APIEditor
 
         private void button_Run_Click(object sender, EventArgs e)
         {
+            originalResponseHeaders = "";
+            originalJsonResponse = "";
+            indentedJsonResponse = "";
+            decodedJsonResponse = "";
+            indentedAndDecodedJsonResponse = "";
+
             System.Net.WebRequest request = System.Net.WebRequest.Create(textBox_Request.Text);
             request.ContentType = "application/json";
 
@@ -149,15 +161,12 @@ namespace Office365APIEditor
                 }
 
                 // Display the results.
-                textBox_Result.Text = "StatusCode : " + response.StatusCode.ToString() + "\r\n\r\n";
-                textBox_Result.Text += "Response Header : \r\n" + response.Headers.ToString() + "\r\n\r\n";
+                originalResponseHeaders = "StatusCode : " + response.StatusCode.ToString() + "\r\n\r\n";
+                originalResponseHeaders += "Response Header : \r\n" + response.Headers.ToString() + "\r\n\r\n";
 
-                // Parse the JSON data.
-                // Then, decode double byte characters.
-                // TODO: add switcha
-                textBox_Result.Text += DecodeJsonResponse(parseJson(jsonResponse));
-
-                int i = 5;
+                // Shape the JSON data.
+                originalJsonResponse = jsonResponse;
+                textBox_Result.Text = originalResponseHeaders + shapeJsonResponseIfNeeded(originalJsonResponse);
 
                 // Save application setting.
                 Properties.Settings.Default.Save();
@@ -213,6 +222,12 @@ namespace Office365APIEditor
         {
             // Request another access token with refresh token.
 
+            originalResponseHeaders = "";
+            originalJsonResponse = "";
+            indentedJsonResponse = "";
+            decodedJsonResponse = "";
+            indentedAndDecodedJsonResponse = "";
+
             string resourceURL = StartForm.GetResourceURL(_resource);
 
             // Build a POST body.
@@ -264,11 +279,13 @@ namespace Office365APIEditor
                 }
 
                 // Display the results.
-                textBox_Result.Text = "StatusCode : " + response.StatusCode.ToString() + "\r\n\r\n";
-                textBox_Result.Text += "Response Header : \r\n" + response.Headers.ToString() + "\r\n\r\n";
+                originalResponseHeaders = "StatusCode : " + response.StatusCode.ToString() + "\r\n\r\n";
+                originalResponseHeaders += "Response Header : \r\n" + response.Headers.ToString() + "\r\n\r\n";
+
+                originalJsonResponse = jsonResponse;
 
                 // Parse the JSON data.
-                textBox_Result.Text += parseJson(jsonResponse);
+                textBox_Result.Text = originalResponseHeaders + shapeJsonResponseIfNeeded(originalJsonResponse);
 
                 // Deserialize and get Access Token.
                 _tokenResponse = StartForm.Deserialize<TokenResponse>(jsonResponse);
@@ -288,7 +305,60 @@ namespace Office365APIEditor
             }
         }
 
-        public string parseJson(string Data)
+        private void checkBox_Indent_CheckedChanged(object sender, EventArgs e)
+        {
+            if (originalJsonResponse != "")
+            {
+                textBox_Result.Text = originalResponseHeaders + shapeJsonResponseIfNeeded(originalJsonResponse);
+            }
+        }
+
+        private void checkBox_Decode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (originalJsonResponse != "")
+            {
+                textBox_Result.Text = originalResponseHeaders + shapeJsonResponseIfNeeded(originalJsonResponse);
+            }
+        }
+
+        public string shapeJsonResponseIfNeeded(string Data)
+        {
+            // Check the status of checkbox and shape the JSON Response.
+
+            string result = Data;
+
+            if (checkBox_Indent.Checked && checkBox_Decode.Checked)
+            {
+                if (indentedAndDecodedJsonResponse == "")
+                {
+                    indentedAndDecodedJsonResponse = DecodeJsonResponse(parseJsonResponse(result));
+                }
+
+                result = indentedAndDecodedJsonResponse;
+            }
+            else if (checkBox_Indent.Checked)
+            {
+                if (indentedJsonResponse == "")
+                {
+                    indentedJsonResponse = parseJsonResponse(result);
+                }
+
+                result = indentedJsonResponse;
+            }
+            else if (checkBox_Decode.Checked)
+            {
+                if (decodedJsonResponse == "")
+                {
+                    decodedJsonResponse = DecodeJsonResponse(result);
+                }
+
+                result = decodedJsonResponse;
+            }
+
+            return result;
+        }
+
+        public string parseJsonResponse(string Data)
         {
             TextElementEnumerator textEnum = StringInfo.GetTextElementEnumerator(Data);
             StringBuilder parsedData = new StringBuilder();
