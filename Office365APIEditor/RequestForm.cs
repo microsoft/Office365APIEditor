@@ -215,7 +215,8 @@ namespace Office365APIEditor
 
         private void button_ViewTokenInfo_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(_tokenResponse.Format(), "Office365APIEditor");
+            TokenViewer tokenViewer = new TokenViewer(_tokenResponse);
+            tokenViewer.ShowDialog();
         }
 
         private void button_RefreshToken_Click(object sender, EventArgs e)
@@ -358,7 +359,7 @@ namespace Office365APIEditor
             return result;
         }
 
-        public string parseJsonResponse(string Data)
+        public static string parseJsonResponse(string Data)
         {
             TextElementEnumerator textEnum = StringInfo.GetTextElementEnumerator(Data);
             StringBuilder parsedData = new StringBuilder();
@@ -398,7 +399,7 @@ namespace Office365APIEditor
             return parsedData.ToString();
         }
 
-        private string CreateTabString(Int32 Length)
+        private static string CreateTabString(Int32 Length)
         {
             StringBuilder result = new StringBuilder();
 
