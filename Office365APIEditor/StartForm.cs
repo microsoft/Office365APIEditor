@@ -272,7 +272,12 @@ namespace Office365APIEditor
             }
             byte[] postDataBytes = Encoding.ASCII.GetBytes(postBody);
 
-            System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.windows.net/common/oauth2/token/");
+            // This URL is old.
+            // System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.windows.net/common/oauth2/token/");
+
+            // So, use new one. (access point is same.)
+            System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.microsoftonline.com/common/oauth2/token");
+
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = postDataBytes.Length;
@@ -306,7 +311,12 @@ namespace Office365APIEditor
 
         private TokenResponse AcquireAccessTokenOfNativeApp()
         {
-            string authority = "https://login.windows.net/" + textBox_NativeAppTenantName.Text;
+            // This URL is old.
+            // string authority = "https://login.windows.net/" + textBox_NativeAppTenantName.Text;
+
+            // So, use new one. (access point is same.)
+            string authority = "https://login.microsoftonline.com/" + textBox_NativeAppTenantName.Text;
+
             string clientId = textBox_NativeAppClientID.Text;
             Uri redirectUri = new Uri(textBox_NativeAppRedirectUri.Text);
             _resource = GetResourceNameForNativeApp();
