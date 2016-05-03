@@ -28,27 +28,62 @@ namespace Office365APIEditor
             radioButton_WebApp.Focus();
         }
 
-        public DialogResult ShowDialog(out TokenResponse AccessToken, out string Resource, out string ClientID, out string ClientSecret)
+        public DialogResult ShowDialog(out TokenResponse AccessToken, out string Resource, out string ClientID, out string ClientSecret, out string Scopes, out string RedirectUri, out bool UseV2Endpoint)
         {
-            DialogResult reult = this.ShowDialog();
+            DialogResult result = this.ShowDialog();
 
             // Build return values.
+            // Those values are used to acquire another access token.
 
             AccessToken = _tokenResponse;
-            Resource = _resource;
 
             if (radioButton_WebApp.Checked)
             {
+                Resource = _resource;
                 ClientID = textBox_WebAppClientID.Text;
                 ClientSecret = textBox_WebAppClientSecret.Text;
+                Scopes = "";
+                RedirectUri = "";
+                UseV2Endpoint = false;
+            }
+            else if (radioButton_NativeApp.Checked)
+            {
+                Resource = _resource;
+                ClientID = "";
+                ClientSecret = "";
+                Scopes = "";
+                RedirectUri = "";
+                UseV2Endpoint = false;
+            }
+            else if (radioButton_V2MobileApp.Checked)
+            {
+                Resource = "";
+                ClientID = textBox_V2MobileAppClientID.Text;
+                ClientSecret = "";
+                Scopes = textBox_V2MobileAppScopes.Text;
+                RedirectUri = textBox_V2MobileAppRedirectUri.Text;
+                UseV2Endpoint = true;
+            }
+            else if (radioButton_V2WebApp.Checked)
+            {
+                Resource = "";
+                ClientID = textBox_V2WebAppClientID.Text;
+                ClientSecret = textBox_V2WebAppClientSecret.Text;
+                Scopes = textBox_V2WebAppScopes.Text;
+                RedirectUri = textBox_V2WebAppRedirectUri.Text;
+                UseV2Endpoint = true;
             }
             else
             {
+                Resource = "";
                 ClientID = "";
                 ClientSecret = "";
+                Scopes = "";
+                RedirectUri = "";
+                UseV2Endpoint = false;
             }
 
-            return reult;
+            return result;
         }
 
         private void radioButton_WebApp_CheckedChanged(object sender, EventArgs e)
@@ -56,6 +91,8 @@ namespace Office365APIEditor
             groupBox_WebApp.Enabled = true;
             groupBox_NativeApp.Enabled = false;
             groupBox_BasicAuth.Enabled = false;
+            groupBox_V2MobileApp.Enabled = false;
+            groupBox_V2WebApp.Enabled = false;
         }
 
         private void radioButton_NativeApp_CheckedChanged(object sender, EventArgs e)
@@ -63,6 +100,8 @@ namespace Office365APIEditor
             groupBox_NativeApp.Enabled = true;
             groupBox_WebApp.Enabled = false;
             groupBox_BasicAuth.Enabled = false;
+            groupBox_V2WebApp.Enabled = false;
+            groupBox_V2MobileApp.Enabled = false;
         }
 
         private void radioButton_BasicAuth_CheckedChanged(object sender, EventArgs e)
@@ -70,8 +109,28 @@ namespace Office365APIEditor
             groupBox_BasicAuth.Enabled = true;
             groupBox_NativeApp.Enabled = false;
             groupBox_WebApp.Enabled = false;
+            groupBox_V2WebApp.Enabled = false;
+            groupBox_V2MobileApp.Enabled = false;
         }
         
+        private void radioButton_V2WebApp_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox_WebApp.Enabled = false;
+            groupBox_NativeApp.Enabled = false;
+            groupBox_BasicAuth.Enabled = false;
+            groupBox_V2MobileApp.Enabled = false;
+            groupBox_V2WebApp.Enabled = true;
+        }
+
+        private void radioButton_V2MobileApp_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox_V2MobileApp.Enabled = true;
+            groupBox_BasicAuth.Enabled = false;
+            groupBox_NativeApp.Enabled = false;
+            groupBox_V2WebApp.Enabled = false;
+            groupBox_WebApp.Enabled = false;
+        }
+
         private void button_NativeAppAcquireAccessToken_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.None;
@@ -108,7 +167,7 @@ namespace Office365APIEditor
                 return;
             }
 
-            string authorizationCode = AcquireAuthorizationCode();
+            string authorizationCode = AcquireWebAppAuthorizationCode();
 
             if (authorizationCode == "")
             {
@@ -229,12 +288,109 @@ namespace Office365APIEditor
             }
         }
 
-        private string AcquireAuthorizationCode()
+        private bool CheckV2MobileAppParam()
+        {
+            // Check the form for v2 mobile app.
+
+            if (textBox_V2MobileAppClientID.Text == "")
+            {
+                MessageBox.Show("Enter the Client ID.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_V2MobileAppScopes.Text == "")
+            {
+                MessageBox.Show("Enter the scopes.", "Office365APIEditor");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private bool CheckV2WebAppParam()
+        {
+            // Check the form for v2 web app.
+
+            if (textBox_V2WebAppClientID.Text == "")
+            {
+                MessageBox.Show("Enter the Client ID.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_V2WebAppRedirectUri.Text == "")
+            {
+                MessageBox.Show("Enter the Redirect URL.", "Office365APIEditor");
+                return false;
+            }
+            else if (!IsValidUrl(textBox_V2WebAppRedirectUri.Text))
+            {
+                MessageBox.Show("Format of Redirect URL is invalid.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_V2WebAppScopes.Text == "")
+            {
+                MessageBox.Show("Enter the scopes.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_V2WebAppClientSecret.Text == "")
+            {
+                MessageBox.Show("Enter the Client Secret.", "Office365APIEditor");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private string AcquireWebAppAuthorizationCode()
         {
             string Code = "";
 
             _resource = GetResourceNameForWebApp();
             GetCodeForm getCodeForm = new GetCodeForm(textBox_WebAppClientID.Text, textBox_WebAppRedirectUri.Text, GetResourceURL(_resource));
+
+            if (getCodeForm.ShowDialog(out Code) == DialogResult.OK)
+            {
+                if (Code == "")
+                {
+                    MessageBox.Show("Getting Authorization Code was failed.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("authentication_canceled: User canceled authentication", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Code;
+        }
+
+        private string AcquireV2MobileAppAuthorizationCode()
+        {
+            string Code = "";
+
+            GetCodeForm getCodeForm = new GetCodeForm(textBox_V2MobileAppClientID.Text, textBox_V2MobileAppRedirectUri.Text, textBox_V2MobileAppScopes.Text, true);
+
+            if (getCodeForm.ShowDialog(out Code) == DialogResult.OK)
+            {
+                if (Code == "")
+                {
+                    MessageBox.Show("Getting Authorization Code was failed.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("authentication_canceled: User canceled authentication", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Code;
+        }
+
+        private string AcquireV2WebAppAuthorizationCode()
+        {
+            string Code = "";
+
+            GetCodeForm getCodeForm = new GetCodeForm(textBox_V2WebAppClientID.Text, textBox_V2WebAppRedirectUri.Text, textBox_V2WebAppScopes.Text, true);
 
             if (getCodeForm.ShowDialog(out Code) == DialogResult.OK)
             {
@@ -357,7 +513,116 @@ namespace Office365APIEditor
                 return ConvertAuthenticationResultToTokenResponse(authenticationResult);
             }
         }
+
+        private TokenResponse AcquireAccessTokenOfV2MobileApp(string AuthorizationCode)
+        {
+            TokenResponse result = null;
+            string accessToken = "";
+
+            // Build a POST body.
+            string postBody = "";
+            Hashtable tempTable = new Hashtable();
+
+            tempTable["grant_type"] = "authorization_code";
+            tempTable["code"] = AuthorizationCode;
+            tempTable["redirect_uri"] = textBox_V2MobileAppRedirectUri.Text;
+            tempTable["client_id"] = textBox_V2MobileAppClientID.Text;
+            tempTable["scope"] = textBox_V2MobileAppScopes.Text;
+
+            foreach (string key in tempTable.Keys)
+            {
+                postBody += String.Format("{0}={1}&", key, tempTable[key]);
+            }
+            byte[] postDataBytes = Encoding.ASCII.GetBytes(postBody);
+
+            System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.microsoftonline.com/common/oauth2/v2.0/token");
+
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = postDataBytes.Length;
+
+            try
+            {
+                // Get a RequestStream to POST a data.
+                using (Stream reqestStream = request.GetRequestStream())
+                {
+                    reqestStream.Write(postDataBytes, 0, postDataBytes.Length);
+                }
+
+                System.Net.WebResponse response = request.GetResponse();
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.Default);
+                    string jsonResponse = reader.ReadToEnd();
+
+                    // Deserialize and get an Access Token.
+                    result = Deserialize<TokenResponse>(jsonResponse);
+                    accessToken = result.access_token;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\r\n\r\n" + ex.StackTrace, "Office365APIEditor");
+            }
+
+            return result;
+        }
         
+        private TokenResponse AcquireAccessTokenOfV2WebApp(string AuthorizationCode)
+        {
+            TokenResponse result = null;
+            string accessToken = "";
+
+            // Build a POST body.
+            string postBody = "";
+            Hashtable tempTable = new Hashtable();
+
+            tempTable["grant_type"] = "authorization_code";
+            tempTable["code"] = AuthorizationCode;
+            tempTable["redirect_uri"] = textBox_V2WebAppRedirectUri.Text;
+            tempTable["client_id"] = textBox_V2WebAppClientID.Text;
+            tempTable["scope"] = textBox_V2WebAppScopes.Text;
+            tempTable["client_secret"] = textBox_V2WebAppClientSecret.Text;
+
+            foreach (string key in tempTable.Keys)
+            {
+                postBody += String.Format("{0}={1}&", key, tempTable[key]);
+            }
+            byte[] postDataBytes = Encoding.ASCII.GetBytes(postBody);
+
+            System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.microsoftonline.com/common/oauth2/v2.0/token");
+
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = postDataBytes.Length;
+
+            try
+            {
+                // Get a RequestStream to POST a data.
+                using (Stream reqestStream = request.GetRequestStream())
+                {
+                    reqestStream.Write(postDataBytes, 0, postDataBytes.Length);
+                }
+
+                System.Net.WebResponse response = request.GetResponse();
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.Default);
+                    string jsonResponse = reader.ReadToEnd();
+
+                    // Deserialize and get an Access Token.
+                    result = Deserialize<TokenResponse>(jsonResponse);
+                    accessToken = result.access_token;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\r\n\r\n" + ex.StackTrace, "Office365APIEditor");
+            }
+
+            return result;
+        }
+
         private string GetResourceNameForWebApp()
         {
             if (radioButton_WebAppExoResource.Checked)
@@ -445,6 +710,122 @@ namespace Office365APIEditor
         {
             // Save settings.
             Properties.Settings.Default.Save();
+        }
+
+        private void button_V2MobileAppAcquireAccessToken_Click(object sender, EventArgs e)
+        {
+            // The best way to acquire an access token by v2 endpoint is using the Microsoft Authentication Library (MSAL).
+            // But AuthenticationResult of MSAL doesn't contain refresh tokne.
+            // So we can't use MSAL now.
+
+            this.DialogResult = DialogResult.None;
+            _tokenResponse = null;
+
+            if (CheckV2MobileAppParam() == false)
+            {
+                return;
+            }
+
+            string authorizationCode = AcquireV2MobileAppAuthorizationCode();
+
+            if (authorizationCode == "")
+            {
+                return;
+            }
+
+            _tokenResponse = AcquireAccessTokenOfV2MobileApp(authorizationCode);
+
+            if (_tokenResponse != null)
+            {
+                SaveSettings();
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Acquiring Access Token was failed.", "Office365APIEditor");
+            }
+        }
+
+        private void button_V2MobileAppScopeEditor_Click(object sender, EventArgs e)
+        {
+            string scopes = "";
+            string[] selectedScopes;
+
+            if (textBox_V2MobileAppScopes.Text == "")
+            {
+                selectedScopes = null;
+            }
+            else
+            {
+                selectedScopes = textBox_V2MobileAppScopes.Text.Split(' ');
+            }
+
+            ScopeEditorForm scopeEditor = new ScopeEditorForm(selectedScopes);
+
+            if (scopeEditor.ShowDialog(out scopes) == DialogResult.OK)
+            {
+                textBox_V2MobileAppScopes.Text = scopes;
+            }
+        }
+
+        private void button_V2WebAppScopeEditor_Click(object sender, EventArgs e)
+        {
+            string scopes = "";
+            string[] selectedScopes;
+
+            if (textBox_V2WebAppScopes.Text == "")
+            {
+                selectedScopes = null;
+            }
+            else
+            {
+                selectedScopes = textBox_V2WebAppScopes.Text.Split(' ');
+            }
+
+            ScopeEditorForm scopeEditor = new ScopeEditorForm(selectedScopes);
+
+            if (scopeEditor.ShowDialog(out scopes) == DialogResult.OK)
+            {
+                textBox_V2WebAppScopes.Text = scopes;
+            }
+        }
+
+        private void button_V2WebAppAcquireAccessToken_Click(object sender, EventArgs e)
+        {
+            // The best way to acquire an access token by v2 endpoint is using the Microsoft Authentication Library (MSAL).
+            // But AuthenticationResult of MSAL doesn't contain refresh tokne.
+            // So we can't use MSAL now.
+
+            this.DialogResult = DialogResult.None;
+            _tokenResponse = null;
+
+            if (CheckV2WebAppParam() == false)
+            {
+                return;
+            }
+
+            string authorizationCode = AcquireV2WebAppAuthorizationCode();
+
+            if (authorizationCode == "")
+            {
+                return;
+            }
+
+            _tokenResponse = AcquireAccessTokenOfV2WebApp(authorizationCode);
+
+            if (_tokenResponse != null)
+            {
+                SaveSettings();
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Acquiring Access Token was failed.", "Office365APIEditor");
+            }
         }
     }
 }

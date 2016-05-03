@@ -28,11 +28,18 @@ namespace Office365APIEditor
             // Decode headers.
             textBox_Header.Text = RequestForm.parseJsonResponse(Encoding.UTF8.GetString(ConvertFromBase64String(tokenParts[0])));
 
-            // Decode claims.
-            textBox_Claim.Text = RequestForm.parseJsonResponse(Encoding.UTF8.GetString(ConvertFromBase64String(tokenParts[1])));
+            if (tokenParts.Length == 1)
+            {
+                MessageBox.Show("You are using Token ID.", "Office365APIEditor");
+            }
+            else
+            {
+                // Decode claims.
+                textBox_Claim.Text = RequestForm.parseJsonResponse(Encoding.UTF8.GetString(ConvertFromBase64String(tokenParts[1])));
 
-            // Decode signature.
-            textBox_Signature.Text = BitConverter.ToString(ConvertFromBase64String(tokenParts[2]));
+                // Decode signature.
+                textBox_Signature.Text = BitConverter.ToString(ConvertFromBase64String(tokenParts[2]));
+            }
         }
 
         private byte[] ConvertFromBase64String(string Data)

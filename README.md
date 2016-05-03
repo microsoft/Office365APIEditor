@@ -17,13 +17,17 @@ You can use OAuth or Basic authentication as authentication mechanisms.
 ## Prerequisites
 
 You need the following to work with Office365APIEditor:
-- Subscription of Office 365 and a user account.
+- A subscription of Office 365 and a user account, or a Microsoft Account.
 - Version of the .NET Framework starting with the .NET Framework 4.5.
 
-And you need the following to use OAuth.
+And you need the following to use OAuth with V1 endpoint.
 
-- Subscriotion of Microsoft Azure which manages Azure Active Directory of your Office 365 tennant.
-- Application which was registered in Azure Active Directory.
+- A subscriotion of Microsoft Azure which manages Azure Active Directory of your Office 365 tennant.
+- An application which was registered in Azure Active Directory.
+
+You need the following to use OAuth with V2 endpoint.
+
+- An application which was registered in the [Application Registration Portal](https://apps.dev.microsoft.com/).
 
 ## Feedback
 

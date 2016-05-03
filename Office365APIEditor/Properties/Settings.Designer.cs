@@ -118,5 +118,136 @@ namespace Office365APIEditor.Properties {
                 this["BasicAuthSmtpAddress"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>offline_access</string>
+  <string>openid</string>
+  <string>profile</string>
+  <string>email</string>
+  <string>https://outlook.office.com/mail.read</string>
+  <string>https://outlook.office.com/mail.readwrite</string>
+  <string>https://outlook.office.com/mail.send</string>
+  <string>https://outlook.office.com/contacts.read</string>
+  <string>https://outlook.office.com/contacts.readwrite</string>
+  <string>https://outlook.office.com/calendars.read</string>
+  <string>https://outlook.office.com/calendars.readwrite</string>
+  <string>https://graph.microsoft.com/mail.read</string>
+  <string>https://graph.microsoft.com/mail.readwrite</string>
+  <string>https://graph.microsoft.com/mail.send</string>
+  <string>https://graph.microsoft.com/contacts.read</string>
+  <string>https://graph.microsoft.com/contacts.readwrite</string>
+  <string>https://graph.microsoft.com/calendars.read</string>
+  <string>https://graph.microsoft.com/calendars.readwrite</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection PredefinedScopes {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["PredefinedScopes"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>offline_access</string>
+  <string>https://graph.microsoft.com/mail.read</string>
+  <string>https://graph.microsoft.com/mail.readwrite</string>
+  <string>https://graph.microsoft.com/mail.send</string>
+  <string>https://graph.microsoft.com/contacts.read</string>
+  <string>https://graph.microsoft.com/contacts.readwrite</string>
+  <string>https://graph.microsoft.com/calendars.read</string>
+  <string>https://graph.microsoft.com/calendars.readwrite</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection DefaultScopes {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["DefaultScopes"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection CustomDefinedScopes {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["CustomDefinedScopes"]));
+            }
+            set {
+                this["CustomDefinedScopes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2WebAppClientID {
+            get {
+                return ((string)(this["LastV2WebAppClientID"]));
+            }
+            set {
+                this["LastV2WebAppClientID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2WebAppRedirectUri {
+            get {
+                return ((string)(this["LastV2WebAppRedirectUri"]));
+            }
+            set {
+                this["LastV2WebAppRedirectUri"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2WebAppScopes {
+            get {
+                return ((string)(this["LastV2WebAppScopes"]));
+            }
+            set {
+                this["LastV2WebAppScopes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2WebAppClientSecret {
+            get {
+                return ((string)(this["LastV2WebAppClientSecret"]));
+            }
+            set {
+                this["LastV2WebAppClientSecret"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2MobileAppClientID {
+            get {
+                return ((string)(this["LastV2MobileAppClientID"]));
+            }
+            set {
+                this["LastV2MobileAppClientID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2MobileAppScopes {
+            get {
+                return ((string)(this["LastV2MobileAppScopes"]));
+            }
+            set {
+                this["LastV2MobileAppScopes"] = value;
+            }
+        }
     }
 }

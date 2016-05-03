@@ -18,6 +18,9 @@ namespace Office365APIEditor
         string _resource = "";
         string _clientID = "";
         string _clientSecret = "";
+        string _scopes;
+        string _redirectUri = "";
+        bool _useV2Endpoint = false;
 
         string originalResponseHeaders = "";
         string originalJsonResponse = "";
@@ -35,7 +38,7 @@ namespace Office365APIEditor
             // First of all, we have to get an access token.
 
             StartForm startForm = new StartForm();
-            if (startForm.ShowDialog(out _tokenResponse, out _resource, out _clientID, out _clientSecret) == DialogResult.OK)
+            if (startForm.ShowDialog(out _tokenResponse, out _resource, out _clientID, out _clientSecret, out _scopes, out _redirectUri, out _useV2Endpoint) == DialogResult.OK)
             {
                 if (_tokenResponse.access_token.StartsWith("USEBASICBASIC"))
                 {
@@ -47,15 +50,27 @@ namespace Office365APIEditor
                     button_ViewTokenInfo.Enabled = false;
                     button_RefreshToken.Enabled = false;
                 }
-                else
+                else if (_useV2Endpoint == false)
                 {
                     // OAuth
 
                     useBasicAuth = false;
                     textBox_BasicAuthSMTPAddress.Enabled = false;
-                    textBox_BasicAuthSMTPAddress.Text = "OAuth (" + _resource + ")";
+                    textBox_BasicAuthSMTPAddress.Text = "OAuth (V1 Endpoint)";
                     textBox_BasicAuthPassword.Enabled = false;
-                    textBox_BasicAuthPassword.Text = "OAuth (" + _resource + ")";
+                    textBox_BasicAuthPassword.Text = "OAuth (V1 Endpoint)";
+                    textBox_BasicAuthPassword.UseSystemPasswordChar = false;
+                    button_ViewTokenInfo.Enabled = true;
+                }
+                else
+                {
+                    // OAuth (V2 Endpoint)
+
+                    useBasicAuth = false;
+                    textBox_BasicAuthSMTPAddress.Enabled = false;
+                    textBox_BasicAuthSMTPAddress.Text = "OAuth (V2 Endpoint)";
+                    textBox_BasicAuthPassword.Enabled = false;
+                    textBox_BasicAuthPassword.Text = "OAuth (V2 Endpoint)";
                     textBox_BasicAuthPassword.UseSystemPasswordChar = false;
                     button_ViewTokenInfo.Enabled = true;
                 }
@@ -229,7 +244,7 @@ namespace Office365APIEditor
             decodedJsonResponse = "";
             indentedAndDecodedJsonResponse = "";
 
-            string resourceURL = StartForm.GetResourceURL(_resource);
+            string endPoint = "https://login.microsoftonline.com/common/oauth2/";
 
             // Build a POST body.
             string postBody = "";
@@ -237,23 +252,42 @@ namespace Office365APIEditor
 
             tempTable["grant_type"] = "refresh_token";
             tempTable["refresh_token"] = _tokenResponse.refresh_token;
-            tempTable["resource"] = System.Web.HttpUtility.UrlEncode(resourceURL);
 
-            if (_clientID != "")
+            if (_useV2Endpoint == false)
             {
-                // If _clientID has value, we're working with web app.
-                // So we have to add Client ID and Client Secret.
-                tempTable["client_id"] = _clientID;
-                tempTable["client_secret"] = _clientSecret;
+                string resourceURL = StartForm.GetResourceURL(_resource);
+                tempTable["resource"] = System.Web.HttpUtility.UrlEncode(resourceURL);
+
+                if (_clientID != "")
+                {
+                    // If _clientID has value, we're working with web app.
+                    // So we have to add Client ID and Client Secret.
+                    tempTable["client_id"] = _clientID;
+                    tempTable["client_secret"] = _clientSecret;
+                }
             }
-            
+            else
+            {
+                endPoint += "v2.0/";
+                tempTable["scope"] = _scopes;
+                tempTable["client_id"] = _clientID;
+                tempTable["redirect_uri"] = _redirectUri;
+
+                if (_clientID != "")
+                {
+                    // If _clientID has value, we're working with web app.
+                    // So we have to add Client Secret.
+                    tempTable["client_secret"] = _clientSecret;
+                }
+            }
+                        
             foreach (string key in tempTable.Keys)
             {
                 postBody += String.Format("{0}={1}&", key, tempTable[key]);
             }
             byte[] postDataBytes = Encoding.ASCII.GetBytes(postBody);
             
-            System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.windows.net/common/oauth2/token/");
+            System.Net.WebRequest request = System.Net.WebRequest.Create(endPoint + "token/");
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = postDataBytes.Length;

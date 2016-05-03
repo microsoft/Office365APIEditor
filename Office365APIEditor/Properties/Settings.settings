@@ -26,5 +26,62 @@
     <Setting Name="BasicAuthSmtpAddress" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="PredefinedScopes" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;offline_access&lt;/string&gt;
+  &lt;string&gt;openid&lt;/string&gt;
+  &lt;string&gt;profile&lt;/string&gt;
+  &lt;string&gt;email&lt;/string&gt;
+  &lt;string&gt;https://outlook.office.com/mail.read&lt;/string&gt;
+  &lt;string&gt;https://outlook.office.com/mail.readwrite&lt;/string&gt;
+  &lt;string&gt;https://outlook.office.com/mail.send&lt;/string&gt;
+  &lt;string&gt;https://outlook.office.com/contacts.read&lt;/string&gt;
+  &lt;string&gt;https://outlook.office.com/contacts.readwrite&lt;/string&gt;
+  &lt;string&gt;https://outlook.office.com/calendars.read&lt;/string&gt;
+  &lt;string&gt;https://outlook.office.com/calendars.readwrite&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/mail.read&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/mail.readwrite&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/mail.send&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/contacts.read&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/contacts.readwrite&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/calendars.read&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/calendars.readwrite&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="DefaultScopes" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;offline_access&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/mail.read&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/mail.readwrite&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/mail.send&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/contacts.read&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/contacts.readwrite&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/calendars.read&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/calendars.readwrite&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="CustomDefinedScopes" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastV2WebAppClientID" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastV2WebAppRedirectUri" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastV2WebAppScopes" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastV2WebAppClientSecret" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastV2MobileAppClientID" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastV2MobileAppScopes" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
