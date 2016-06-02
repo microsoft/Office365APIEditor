@@ -14,6 +14,8 @@ You can test Office 365 API. We support following endpoints.
 
 You can use OAuth or Basic authentication as authentication mechanisms.
 
+You can display items in your mailbox which hosted by Exchange Online or Outlook.com.
+
 ## Prerequisites
 
 You need the following to work with Office365APIEditor:

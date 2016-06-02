@@ -1,0 +1,2 @@
+﻿Microsoft.OData.Client
+http://go.microsoft.com/?linkid=9809688

@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -74,6 +75,9 @@ namespace Office365APIEditor
                     textBox_BasicAuthPassword.UseSystemPasswordChar = false;
                     button_ViewTokenInfo.Enabled = true;
                 }
+
+                // Select the Body page.
+                tabControl_HeadersAndBody.SelectTab(1);
             }
             else
             {
@@ -159,6 +163,12 @@ namespace Office365APIEditor
                 // Request is DELETE.
                 request.Method = "DELETE";
             }
+
+            // Add headers
+            foreach (string header in textBox_RequestHeaders.Lines)
+            {
+                request.Headers.Add(header);
+            }
             
             try
             {
@@ -188,7 +198,14 @@ namespace Office365APIEditor
             }
             catch (System.Net.WebException ex)
             {
-                textBox_Result.Text = ex.Message + "\r\n\r\nResponse Headers : \r\n" + ex.Response.Headers.ToString();
+                string jsonResponse = "";
+                using (Stream responseStream = ex.Response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.Default);
+                    jsonResponse = reader.ReadToEnd();
+                }
+
+                textBox_Result.Text = ex.Message + "\r\n\r\nResponse Headers : \r\n" + ex.Response.Headers.ToString() + "\r\n\r\nResponse Body : \r\n" + jsonResponse;
             }
             catch (Exception ex)
             {
@@ -395,54 +412,18 @@ namespace Office365APIEditor
 
         public static string parseJsonResponse(string Data)
         {
-            TextElementEnumerator textEnum = StringInfo.GetTextElementEnumerator(Data);
-            StringBuilder parsedData = new StringBuilder();
+            string tabString = "\t";
 
-            Int32 indentCount = 0;
+            int indentCount = 0;
+            int quoteCount = 0;
+            var result = from c in Data
+                         let quotes = (c == '"') ? quoteCount++ : quoteCount
+                         let lineBreak = (c == ',' && quotes % 2 == 0) ? c + Environment.NewLine + string.Concat(Enumerable.Repeat(tabString, indentCount)) : null
+                         let openChar = (c == '{' || c == '[') ? c + Environment.NewLine + string.Concat(Enumerable.Repeat(tabString, ++indentCount)) : c.ToString()
+                         let closeChar = (c == '}' || c == ']') ? Environment.NewLine + string.Concat(Enumerable.Repeat(tabString, --indentCount)) + c : c.ToString()
+                         select (lineBreak == null) ? (openChar.Length > 1) ? openChar : closeChar : lineBreak;
 
-            while (true)
-            {
-                if (textEnum.MoveNext() == false)
-                {
-                    break;
-                }
-
-                if (textEnum.Current.ToString() == ",")
-                {
-                    // If ',' appreared, add new line.
-                    parsedData.Append(textEnum.Current + "\r\n" + CreateTabString(indentCount));
-                }
-                else if (textEnum.Current.ToString() == "{")
-                {
-                    // If '{' appreared, add new new line and increment indentCount by 1.
-                    indentCount += 1;
-                    parsedData.Append(textEnum.Current + "\r\n" + CreateTabString(indentCount));
-                }
-                else if (textEnum.Current.ToString() == "}")
-                {
-                    // If '}' appreared, decrement indentCount by 1.
-                    indentCount -= 1;
-                    parsedData.Append(textEnum.Current);
-                }
-                else
-                {
-                    parsedData.Append(textEnum.Current);
-                }
-            }
-
-            return parsedData.ToString();
-        }
-
-        private static string CreateTabString(Int32 Length)
-        {
-            StringBuilder result = new StringBuilder();
-
-            for (int i = 0; i < Length; i++)
-            {
-                result.Append("\t");
-            }
-
-            return result.ToString();
+            return string.Concat(result);
         }
 
         public static string DecodeJsonResponse(string jsonResponse)
