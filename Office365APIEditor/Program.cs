@@ -73,7 +73,7 @@ namespace Office365APIEditor
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.InnerException.Message);
             }
         }
 

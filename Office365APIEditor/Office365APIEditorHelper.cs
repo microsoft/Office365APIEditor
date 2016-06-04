@@ -15,6 +15,7 @@ namespace Office365APIEditor
     {
         public string ID;
         public FolderContentType Type;
+        public bool Expanded;
     }
 
     public enum FolderContentType

@@ -32,6 +32,9 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridView_ItemList = new System.Windows.Forms.DataGridView();
             this.dataGridView_ItemProps = new System.Windows.Forms.DataGridView();
+            this.Property = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -62,6 +65,7 @@
             // 
             this.dataGridView_ItemList.AllowUserToAddRows = false;
             this.dataGridView_ItemList.AllowUserToDeleteRows = false;
+            this.dataGridView_ItemList.AllowUserToOrderColumns = true;
             this.dataGridView_ItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_ItemList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_ItemList.Location = new System.Drawing.Point(0, 0);
@@ -69,15 +73,43 @@
             this.dataGridView_ItemList.ReadOnly = true;
             this.dataGridView_ItemList.Size = new System.Drawing.Size(881, 225);
             this.dataGridView_ItemList.TabIndex = 0;
+            this.dataGridView_ItemList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ItemList_CellClick);
+            this.dataGridView_ItemList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ItemList_CellDoubleClick);
             // 
             // dataGridView_ItemProps
             // 
+            this.dataGridView_ItemProps.AllowUserToAddRows = false;
+            this.dataGridView_ItemProps.AllowUserToDeleteRows = false;
+            this.dataGridView_ItemProps.AllowUserToOrderColumns = true;
             this.dataGridView_ItemProps.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_ItemProps.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Property,
+            this.Value,
+            this.Type});
             this.dataGridView_ItemProps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_ItemProps.Location = new System.Drawing.Point(0, 0);
             this.dataGridView_ItemProps.Name = "dataGridView_ItemProps";
+            this.dataGridView_ItemProps.ReadOnly = true;
             this.dataGridView_ItemProps.Size = new System.Drawing.Size(881, 262);
             this.dataGridView_ItemProps.TabIndex = 0;
+            // 
+            // Property
+            // 
+            this.Property.HeaderText = "Property";
+            this.Property.Name = "Property";
+            this.Property.ReadOnly = true;
+            // 
+            // Value
+            // 
+            this.Value.HeaderText = "Value";
+            this.Value.Name = "Value";
+            this.Value.ReadOnly = true;
+            // 
+            // Type
+            // 
+            this.Type.HeaderText = "Type";
+            this.Type.Name = "Type";
+            this.Type.ReadOnly = true;
             // 
             // FolderViewerForm
             // 
@@ -104,5 +136,8 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView dataGridView_ItemList;
         private System.Windows.Forms.DataGridView dataGridView_ItemProps;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Property;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Value;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Type;
     }
 }

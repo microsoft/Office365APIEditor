@@ -23,11 +23,11 @@ namespace Office365APIEditor
         string topOfInformationStoreId;
         string msgFolderRootId;
 
-        TreeNode inboxNode;
-        TreeNode topOfInformationStoreNode;
         TreeNode msgFolderRootNode;
 
         bool doubleClicked = false;
+
+        bool expandingNodeHasDummyNode = false;
 
         public MailboxViewerForm()
         {
@@ -62,11 +62,10 @@ namespace Office365APIEditor
                 client.Context.SendingRequest2 += new EventHandler<SendingRequest2EventArgs>(
                     (eventSender, eventArgs) => InsertXAnchorMailboxHeader(eventSender, eventArgs, email));
 
-                // Get MailFolders
-                GetMailFolders();
+                // フォルダー階層を動的に取得するパターン。
 
-                // Get ContactFolders
-                GetContactFolders();
+                // Get the root folder.
+                GetRootFolder();
 
                 // Get CalendarFolders (Calendars)
                 GetCalendarFolders();
@@ -82,8 +81,10 @@ namespace Office365APIEditor
             e.RequestMessage.SetHeader("X-AnchorMailbox", email);
         }
 
-        private void GetMailFolders()
+        private void GetRootFolder()
         {
+            // https://outlook.office.com/api/v1.0/me/RootFolder/?$select=ParentFolderId
+
             // Get the folder ID of the parent folder of parent folder of Inbox.
             // It's MsgFolderRoot.
 
@@ -101,8 +102,9 @@ namespace Office365APIEditor
             msgFolderRootId = msgFolderRoot.Id;
 
             TreeNode node = new TreeNode("MsgFolderRoot");
-            node.Tag = new FolderInfo() { ID = msgFolderRoot.Id, Type = FolderContentType.Message };
-            node.ContextMenuStrip = contextMenuStrip_FolderTreeNode;
+            node.Tag = new FolderInfo() { ID = msgFolderRoot.Id, Type = FolderContentType.Message, Expanded = false };
+            node.ContextMenuStrip = contextMenuStrip_FolderTreeNode;        
+            node.Nodes.Add(new TreeNode()); // Add a dummy node.
             
             msgFolderRootNode = node;
 
@@ -114,18 +116,15 @@ namespace Office365APIEditor
             {
                 treeView_Mailbox.Nodes.Add(node);
             }
-
-            GetChildMailFolders(msgFolderRoot.ParentFolderId, node);
         }
 
-        private void GetChildMailFolders(string FolderId, TreeNode FolderNode)
+        private async void GetChildMailFolders(string FolderId, TreeNode FolderNode)
         {
-            var childMailFolderResults = client.Me.MailFolders[FolderId].ChildFolders
+            var childMailFolderResults = await client.Me.MailFolders[FolderId].ChildFolders
                 .OrderBy(m => m.DisplayName)
                 .Take(50)
                 .Select(m => new { m.Id, m.DisplayName, m.ChildFolderCount })
-                .ExecuteAsync()
-                .Result;
+                .ExecuteAsync();
 
             bool morePages = false;
 
@@ -134,37 +133,42 @@ namespace Office365APIEditor
                 foreach (var folder in childMailFolderResults.CurrentPage)
                 {
                     TreeNode node = new TreeNode(folder.DisplayName);
-                    node.Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Message };
+                    node.Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Message, Expanded = false };
                     node.ContextMenuStrip = contextMenuStrip_FolderTreeNode;
 
-                    if (folder.Id == topOfInformationStoreId)
+                    if (folder.ChildFolderCount >= 1)
                     {
-                        topOfInformationStoreNode = node;
+                        node.Nodes.Add(new TreeNode()); // Add a dummy node.
                     }
-                    else if (folder.Id == inboxId)
-                    {
-                        inboxNode = node;
-                    }
-
+                                        
                     if (treeView_Mailbox.InvokeRequired)
                     {
-                        treeView_Mailbox.Invoke(new MethodInvoker(delegate { FolderNode.Nodes.Add(node); }));
+                        treeView_Mailbox.Invoke(new MethodInvoker(delegate {
+                            FolderNode.Nodes.Add(node);
+                            if (expandingNodeHasDummyNode)
+                            {
+                                // Remove a dummy node.
+                                FolderNode.Nodes[0].Remove();
+                                expandingNodeHasDummyNode = false;
+                            }
+                        }));
                     }
                     else
                     {
                         FolderNode.Nodes.Add(node);
-                    }
-
-                    if (folder.ChildFolderCount >= 1)
-                    {
-                        GetChildMailFolders(folder.Id, node);
+                        if (expandingNodeHasDummyNode)
+                        {
+                            // Remove a dummy node.
+                            FolderNode.Nodes[0].Remove();
+                            expandingNodeHasDummyNode = false;
+                        }
                     }
                 }
 
                 if (childMailFolderResults.MorePagesAvailable)
                 {
                     morePages = true;
-                    childMailFolderResults = childMailFolderResults.GetNextPageAsync().Result;
+                    childMailFolderResults = await childMailFolderResults.GetNextPageAsync();
                 }
                 else
                 {
@@ -172,32 +176,28 @@ namespace Office365APIEditor
                 }
             } while (morePages);
         }
-
-        private void GetContactFolders()
+        
+        private async void GetChildContactFolders(string FolderId, TreeNode FolderNode)
         {
-            // ContactFolders does not contain the user's default contact folder.
-            // ContactFolders contains only child folders of default contact folder.
-            // So we have to execute a workaround to get default contact folder.
+            FolderInfo folderInfo = (FolderInfo)FolderNode.Tag;
 
-            // This workaround has a problem too.
-            // We can't get contact folders which are child folders of non-contact folders.
-
-            GetChildContactFolders(topOfInformationStoreId, topOfInformationStoreNode);
-        }
-
-        private void GetChildContactFolders(string FolderId, TreeNode FolderNode)
-        {
-            var childContactFolderResults = client.Me.ContactFolders[FolderId].ChildFolders
+            var childContactFolderResults = await client.Me.ContactFolders[FolderId].ChildFolders
                 .OrderBy(f => f.DisplayName)
                 .Take(50)
                 .Select(f => new { f.Id, f.DisplayName })
-                .ExecuteAsync()
-                .Result;
+                .ExecuteAsync();
 
             bool morePages = false;
 
             if (childContactFolderResults.CurrentPage.Count == 0)
             {
+                if (expandingNodeHasDummyNode)
+                {
+                    // Remove a dummy node.
+                    FolderNode.Nodes[0].Remove();
+                    expandingNodeHasDummyNode = false;
+                }
+
                 return;
             }
 
@@ -206,25 +206,38 @@ namespace Office365APIEditor
                 foreach (var folder in childContactFolderResults.CurrentPage)
                 {
                     TreeNode node = new TreeNode(folder.DisplayName);
-                    node.Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Contact };
+                    node.Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Contact, Expanded = false };
                     node.ContextMenuStrip = contextMenuStrip_FolderTreeNode;
+                    node.Nodes.Add(new TreeNode()); // Add a dummy node.
 
                     if (treeView_Mailbox.InvokeRequired)
                     {
-                        treeView_Mailbox.Invoke(new MethodInvoker(delegate { FolderNode.Nodes.Add(node); }));
+                        treeView_Mailbox.Invoke(new MethodInvoker(delegate {
+                            FolderNode.Nodes.Add(node);
+                            if (expandingNodeHasDummyNode)
+                            {
+                                // Remove a dummy node.
+                                FolderNode.Nodes[0].Remove();
+                                expandingNodeHasDummyNode = false;
+                            }
+                        }));
                     }
                     else
                     {
                         FolderNode.Nodes.Add(node);
+                        if (expandingNodeHasDummyNode)
+                        {
+                            // Remove a dummy node.
+                            FolderNode.Nodes[0].Remove();
+                            expandingNodeHasDummyNode = false;
+                        }
                     }
-
-                    GetChildContactFolders(folder.Id, node);
                 }
 
                 if (childContactFolderResults.MorePagesAvailable)
                 {
                     morePages = true;
-                    childContactFolderResults = childContactFolderResults.GetNextPageAsync().Result;
+                    childContactFolderResults = await childContactFolderResults.GetNextPageAsync();
                 }
                 else
                 {
@@ -583,9 +596,29 @@ namespace Office365APIEditor
 
         private void treeView_Mailbox_BeforeExpand(object sender, TreeViewCancelEventArgs e)
         {
-            // Disable expanding after double clock.
-            e.Cancel = doubleClicked;
-            doubleClicked = false;
+            if (doubleClicked)
+            {
+                // Disable expanding after double clock.
+                e.Cancel = true;
+                doubleClicked = false;
+
+                return;
+            }
+            
+            // Get child folders.
+
+            FolderInfo folderInfo = (FolderInfo)e.Node.Tag;            
+
+            if (folderInfo.Type != FolderContentType.Calendar && folderInfo.Type != FolderContentType.DummyCalendarRoot && folderInfo.Expanded == false)
+            {
+                expandingNodeHasDummyNode = true;
+
+                GetChildMailFolders(folderInfo.ID, e.Node);
+                GetChildContactFolders(folderInfo.ID, e.Node);
+
+                folderInfo.Expanded = true;
+                e.Node.Tag = folderInfo;
+            }
         }
 
         private void OpenFolder(TreeNode SelectedNode)

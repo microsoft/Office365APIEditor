@@ -48,7 +48,7 @@ namespace Office365APIEditor
             {
                 case FolderContentType.Message:
                     // Add columns.
-                    PrepareMessageItemColumns();
+                    PrepareMessageItemListColumns();
 
                     // Get items.
                     if (await GetMessageItems() == false)
@@ -76,7 +76,7 @@ namespace Office365APIEditor
                                 }
                             }
 
-                            PrepareContactItemColumns();
+                            PrepareContactItemListColumns();
                             GetContactItems();
                         }
                     }
@@ -84,7 +84,7 @@ namespace Office365APIEditor
                     break;
                 case FolderContentType.Contact:
                     // Add columns.
-                    PrepareContactItemColumns();
+                    PrepareContactItemListColumns();
                     
                     // Get items.
                     GetContactItems();
@@ -92,7 +92,7 @@ namespace Office365APIEditor
                     break;
                 case FolderContentType.Calendar:
                     // Add columns.
-                    PrepareCalendarItemColumns();
+                    PrepareCalendarItemListColumns();
 
                     GetCalendarItems();
 
@@ -103,7 +103,7 @@ namespace Office365APIEditor
             }
         }
 
-        private void PrepareMessageItemColumns()
+        private void PrepareMessageItemListColumns()
         {
             if (dataGridView_ItemList.InvokeRequired)
             {
@@ -128,7 +128,7 @@ namespace Office365APIEditor
             }
         }
 
-        private void PrepareContactItemColumns()
+        private void PrepareContactItemListColumns()
         {
             if (dataGridView_ItemList.InvokeRequired)
             {
@@ -145,7 +145,7 @@ namespace Office365APIEditor
             }
         }
 
-        private void PrepareCalendarItemColumns()
+        private void PrepareCalendarItemListColumns()
         {
             if (dataGridView_ItemList.InvokeRequired)
             {
@@ -501,6 +501,120 @@ namespace Office365APIEditor
             }
 
             return result.ToString().Trim(' ', ';');
+        }
+
+        private async void dataGridView_ItemList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Get the item ID of clicked row.
+            string id = dataGridView_ItemList.Rows[e.RowIndex].Tag.ToString();
+
+            client = await GetOutlookServiceClient();
+
+            var results = await client.Me.Messages[id].ExecuteAsync();
+            
+            // Create columns
+            dataGridView_ItemProps.Rows.Clear();
+
+            try
+            {
+
+                foreach (var prop in results.GetType().GetProperties())
+                {
+                    DataGridViewRow propRow = new DataGridViewRow();
+
+                    string propName = prop.Name;
+                    string propValue = "";
+                    string propType = "";
+                    
+                    if (prop.GetIndexParameters().Length == 0)
+                    {
+                        try
+                        {
+                            var tempValue = prop.GetValue(results);
+                            propType = tempValue.GetType().ToString();
+
+                            if (tempValue is DateTimeOffset)
+                            {
+                                DateTimeOffset dateTimeOffsetValue = (DateTimeOffset)tempValue;
+                                propValue = dateTimeOffsetValue.DateTime.ToString("yyyy/MM/dd HH:mm:ss");
+                            }
+                            else if (tempValue is ItemBody)
+                            {
+                                ItemBody itemBodyValue = (ItemBody)tempValue;
+                                propValue = itemBodyValue.Content;
+                            }
+                            else if (tempValue is Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<Recipient>)
+                            {
+                                Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<Recipient> recipientValue = (Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<Recipient>)tempValue;
+
+                                foreach (Recipient recipient in recipientValue)
+                                {
+                                    propValue += recipient.EmailAddress.Name + "<" + recipient.EmailAddress.Address + ">; ";
+                                }
+
+                                propValue = propValue.TrimEnd(new char[] { ';', ' ' });
+                            }
+                            else if (tempValue is Microsoft.OData.ProxyExtensions.EntityCollectionImpl<Attachment>)
+                            {
+                                // To get the list of attachments, we have to send a request again.
+                                // We don't do that and prepare an attachment view.
+
+                                continue;
+                            }
+                            else if (tempValue is Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<string>)
+                            {
+                                Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<string> stringValue = (Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<string>)tempValue;
+
+                                foreach (string value in stringValue)
+                                {
+                                    propValue += value + "; ";
+                                }
+
+                                propValue = propValue.TrimEnd(new char[] { ';', ' ' });
+                            }
+                            else
+                            {
+                                propValue = tempValue.ToString();
+                            }
+                        }
+                        catch
+                        {
+                            propValue = "";
+                        }                       
+                    }
+                    else
+                    {
+                        propValue = "indexed";
+                    }
+
+                    propRow.CreateCells(dataGridView_ItemProps, new object[] { propName, propValue, propType });
+
+                    if (dataGridView_ItemProps.InvokeRequired)
+                    {
+                        dataGridView_ItemProps.Invoke(new MethodInvoker(delegate
+                        {
+                            dataGridView_ItemProps.Rows.Add(propRow);
+                        }));
+                    }
+                    else
+                    {
+                        dataGridView_ItemProps.Rows.Add(propRow);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void dataGridView_ItemList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Get the item ID of clicked row.
+            string id = dataGridView_ItemList.Rows[e.RowIndex].Tag.ToString();
+
+            MessageBox.Show(e.RowIndex.ToString(id) + " d");
         }
     }
 }
