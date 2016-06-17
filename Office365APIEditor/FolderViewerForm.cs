@@ -23,6 +23,8 @@ namespace Office365APIEditor
         AuthenticationResult ar;
         string email;
 
+        string currentId = "";
+
         public FolderViewerForm(PublicClientApplication PCA, string UserEmailAddress, FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
         {
             InitializeComponent();
@@ -508,29 +510,79 @@ namespace Office365APIEditor
             // Get the item ID of clicked row.
             string id = dataGridView_ItemList.Rows[e.RowIndex].Tag.ToString();
 
+            if (currentId == id)
+            {
+                return;
+            }
+            else
+            {
+                currentId = id;
+            }
+
             client = await GetOutlookServiceClient();
 
-            var results = await client.Me.Messages[id].ExecuteAsync();
-            
-            // Create columns
+            // Reset rows.
             dataGridView_ItemProps.Rows.Clear();
 
+            switch (targetFolder.Type)
+            {
+                case FolderContentType.Message:
+                    GetMessageItemDetail(id);
+                    break;
+                case FolderContentType.Contact:
+                    GetContactItemDetail(id);
+                    break;
+                case FolderContentType.Calendar:
+                    GetCalendarItemDetail(id);
+                    break;
+                case FolderContentType.DummyCalendarRoot:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private async void GetMessageItemDetail(string ID)
+        {
+            // Get details of the item.
+            var results = await client.Me.Messages[ID].ExecuteAsync();
+
+            CreatePropTable(results);
+        }
+
+        private async void GetContactItemDetail(string ID)
+        {
+            // Get details of the contact item.
+            var results = await client.Me.Contacts[ID].ExecuteAsync();
+
+            CreatePropTable(results);
+        }
+
+        private async void GetCalendarItemDetail(string ID)
+        {
+            // Get details of the contact item.
+            var results = await client.Me.Events[ID].ExecuteAsync();
+
+            CreatePropTable(results);
+        }
+
+        private void CreatePropTable(object itemResult)
+        {
             try
             {
-
-                foreach (var prop in results.GetType().GetProperties())
+                foreach (var prop in itemResult.GetType().GetProperties())
                 {
                     DataGridViewRow propRow = new DataGridViewRow();
 
                     string propName = prop.Name;
                     string propValue = "";
                     string propType = "";
-                    
+
                     if (prop.GetIndexParameters().Length == 0)
                     {
                         try
                         {
-                            var tempValue = prop.GetValue(results);
+                            var tempValue = prop.GetValue(itemResult);
                             propType = tempValue.GetType().ToString();
 
                             if (tempValue is DateTimeOffset)
@@ -572,6 +624,65 @@ namespace Office365APIEditor
 
                                 propValue = propValue.TrimEnd(new char[] { ';', ' ' });
                             }
+                            else if (tempValue is Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<EmailAddress>)
+                            {
+                                Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<EmailAddress> emailAddressValue = (Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<EmailAddress>)tempValue;
+
+                                foreach (EmailAddress emailAddress in emailAddressValue)
+                                {
+                                    propValue += emailAddress.Name + "<" + emailAddress.Address + ">; ";
+                                }
+
+                                propValue = propValue.TrimEnd(new char[] { ';', ' ' });
+                            }
+                            else if (tempValue is PhysicalAddress)
+                            {
+                                PhysicalAddress physicalAddressValue = (PhysicalAddress)tempValue;
+                                propValue = physicalAddressValue.PostalCode + " " + physicalAddressValue.Street + " " + physicalAddressValue.City + " " + physicalAddressValue.State + " " + physicalAddressValue.CountryOrRegion;
+                            }
+                            else if (tempValue is ResponseStatus)
+                            {
+                                ResponseStatus responseStatusValue = (ResponseStatus)tempValue;
+                                
+                                if (responseStatusValue.Time.HasValue)
+                                {
+                                    propValue = responseStatusValue.Time.Value.DateTime.ToString("yyyy/MM/dd HH:mm:ss") + " ";
+                                }
+
+                                propValue += responseStatusValue.Response.ToString();
+                            }
+                            else if (tempValue is DateTimeTimeZone)
+                            {
+                                DateTimeTimeZone dateTimeTimeZoneValue = (DateTimeTimeZone)tempValue;
+                                propValue = dateTimeTimeZoneValue.TimeZone + " " + dateTimeTimeZoneValue.DateTime;
+                            }
+                            else if (tempValue is Location)
+                            {
+                                Location locationValue = (Location)tempValue;
+                                propValue = locationValue.DisplayName;
+                            }
+                            else if (tempValue is Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<Attendee>)
+                            {
+                                Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<Attendee> attendeeValue = (Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<Attendee>)tempValue;
+
+                                foreach (Recipient attendee in attendeeValue)
+                                {
+                                    propValue += attendee.EmailAddress.Name + "<" + attendee.EmailAddress.Address + ">; ";
+                                }
+
+                                propValue = propValue.TrimEnd(new char[] { ';', ' ' });
+                            }
+                            else if (tempValue is Recipient)
+                            {
+                                Recipient recipientValue = (Recipient)tempValue;
+                                propValue = recipientValue.EmailAddress.Name + "<" + recipientValue.EmailAddress.Address + ">";
+                            }
+                            else if (tempValue is Microsoft.OData.ProxyExtensions.EntityCollectionImpl<Event>)
+                            {
+                                // I'm not sure what this prop is.
+                                // This prop has a Nested structure.
+                                continue;
+                            }
                             else
                             {
                                 propValue = tempValue.ToString();
@@ -580,7 +691,7 @@ namespace Office365APIEditor
                         catch
                         {
                             propValue = "";
-                        }                       
+                        }
                     }
                     else
                     {
@@ -604,9 +715,8 @@ namespace Office365APIEditor
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Office365APIEditor");
             }
-
         }
 
         private void dataGridView_ItemList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
