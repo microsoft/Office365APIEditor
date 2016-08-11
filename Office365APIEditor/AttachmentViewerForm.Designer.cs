@@ -1,6 +1,6 @@
 ﻿namespace Office365APIEditor
 {
-    partial class FolderViewerForm
+    partial class AttachmentViewerForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,22 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FolderViewerForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.dataGridView_ItemList = new System.Windows.Forms.DataGridView();
+            this.dataGridView_AttachmentList = new System.Windows.Forms.DataGridView();
             this.dataGridView_ItemProps = new System.Windows.Forms.DataGridView();
             this.Property = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip_ItemList = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip_AttachmentList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItem_DisplayAttachments = new System.Windows.Forms.ToolStripMenuItem();
+            this.NameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ItemList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_AttachmentList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ItemProps)).BeginInit();
-            this.contextMenuStrip_ItemList.SuspendLayout();
+            this.contextMenuStrip_AttachmentList.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -56,31 +58,32 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridView_ItemList);
+            this.splitContainer1.Panel1.Controls.Add(this.dataGridView_AttachmentList);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView_ItemProps);
             this.splitContainer1.Size = new System.Drawing.Size(881, 491);
             this.splitContainer1.SplitterDistance = 225;
-            this.splitContainer1.TabIndex = 0;
+            this.splitContainer1.TabIndex = 1;
             // 
-            // dataGridView_ItemList
+            // dataGridView_AttachmentList
             // 
-            this.dataGridView_ItemList.AllowUserToAddRows = false;
-            this.dataGridView_ItemList.AllowUserToDeleteRows = false;
-            this.dataGridView_ItemList.AllowUserToOrderColumns = true;
-            this.dataGridView_ItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_ItemList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView_ItemList.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView_ItemList.MultiSelect = false;
-            this.dataGridView_ItemList.Name = "dataGridView_ItemList";
-            this.dataGridView_ItemList.ReadOnly = true;
-            this.dataGridView_ItemList.Size = new System.Drawing.Size(881, 225);
-            this.dataGridView_ItemList.TabIndex = 0;
-            this.dataGridView_ItemList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ItemList_CellClick);
-            this.dataGridView_ItemList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ItemList_CellDoubleClick);
-            this.dataGridView_ItemList.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_ItemList_CellMouseClick);
+            this.dataGridView_AttachmentList.AllowUserToAddRows = false;
+            this.dataGridView_AttachmentList.AllowUserToDeleteRows = false;
+            this.dataGridView_AttachmentList.AllowUserToOrderColumns = true;
+            this.dataGridView_AttachmentList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_AttachmentList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.NameCol,
+            this.ID,
+            this.ContentType});
+            this.dataGridView_AttachmentList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView_AttachmentList.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView_AttachmentList.MultiSelect = false;
+            this.dataGridView_AttachmentList.Name = "dataGridView_AttachmentList";
+            this.dataGridView_AttachmentList.ReadOnly = true;
+            this.dataGridView_AttachmentList.Size = new System.Drawing.Size(881, 225);
+            this.dataGridView_AttachmentList.TabIndex = 0;
             // 
             // dataGridView_ItemProps
             // 
@@ -117,38 +120,53 @@
             this.Type.Name = "Type";
             this.Type.ReadOnly = true;
             // 
-            // contextMenuStrip_ItemList
+            // contextMenuStrip_AttachmentList
             // 
-            this.contextMenuStrip_ItemList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextMenuStrip_AttachmentList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_DisplayAttachments});
-            this.contextMenuStrip_ItemList.Name = "contextMenuStrip_ItemList";
-            this.contextMenuStrip_ItemList.Size = new System.Drawing.Size(193, 48);
-            this.contextMenuStrip_ItemList.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_ItemList_Opening);
+            this.contextMenuStrip_AttachmentList.Name = "contextMenuStrip_ItemList";
+            this.contextMenuStrip_AttachmentList.Size = new System.Drawing.Size(193, 26);
             // 
             // ToolStripMenuItem_DisplayAttachments
             // 
             this.ToolStripMenuItem_DisplayAttachments.Name = "ToolStripMenuItem_DisplayAttachments";
             this.ToolStripMenuItem_DisplayAttachments.Size = new System.Drawing.Size(192, 22);
             this.ToolStripMenuItem_DisplayAttachments.Text = "Display Attachments...";
-            this.ToolStripMenuItem_DisplayAttachments.Click += new System.EventHandler(this.ToolStripMenuItem_DisplayAttachments_Click);
             // 
-            // FolderViewerForm
+            // NameCol
+            // 
+            this.NameCol.HeaderText = "Name";
+            this.NameCol.Name = "NameCol";
+            this.NameCol.ReadOnly = true;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // ContentType
+            // 
+            this.ContentType.HeaderText = "ContentType";
+            this.ContentType.Name = "ContentType";
+            this.ContentType.ReadOnly = true;
+            // 
+            // AttachmentViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(881, 491);
             this.Controls.Add(this.splitContainer1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FolderViewerForm";
-            this.Text = "FolderViewerForm";
-            this.Load += new System.EventHandler(this.FolderViewerForm_Load);
+            this.Name = "AttachmentViewerForm";
+            this.Text = "AttachmentViewerForm";
+            this.Load += new System.EventHandler(this.AttachmentViewerForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ItemList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_AttachmentList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ItemProps)).EndInit();
-            this.contextMenuStrip_ItemList.ResumeLayout(false);
+            this.contextMenuStrip_AttachmentList.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -156,12 +174,15 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.DataGridView dataGridView_ItemList;
+        private System.Windows.Forms.DataGridView dataGridView_AttachmentList;
         private System.Windows.Forms.DataGridView dataGridView_ItemProps;
         private System.Windows.Forms.DataGridViewTextBoxColumn Property;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_ItemList;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_AttachmentList;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DisplayAttachments;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ContentType;
     }
 }

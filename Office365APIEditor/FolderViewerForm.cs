@@ -305,6 +305,7 @@ namespace Office365APIEditor
                         DataGridViewRow itemRow = new DataGridViewRow();
                         itemRow.Tag = item.Id;
                         itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, sender, recipients, receivedDateTime, createdDateTime, sentDateTime });
+                        itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
 
                         if (dataGridView_ItemList.InvokeRequired)
                         {
@@ -388,6 +389,7 @@ namespace Office365APIEditor
                         DataGridViewRow itemRow = new DataGridViewRow();
                         itemRow.Tag = item.Id;
                         itemRow.CreateCells(dataGridView_ItemList, new object[] { displayName, createdDateTime });
+                        itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
 
                         if (dataGridView_ItemList.InvokeRequired)
                         {
@@ -452,6 +454,7 @@ namespace Office365APIEditor
                         DataGridViewRow itemRow = new DataGridViewRow();
                         itemRow.Tag = item.Id;
                         itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, organizer, attendees, start, end, isAllDay, createdDateTime });
+                        itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
 
                         if (dataGridView_ItemList.InvokeRequired)
                         {
@@ -503,6 +506,12 @@ namespace Office365APIEditor
             }
 
             return result.ToString().Trim(' ', ';');
+        }
+
+        private void dataGridView_ItemList_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            // Select the row for the context menu.
+            dataGridView_ItemList.Rows[e.RowIndex].Selected = true;
         }
 
         private async void dataGridView_ItemList_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -721,10 +730,25 @@ namespace Office365APIEditor
 
         private void dataGridView_ItemList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Get the item ID of clicked row.
-            string id = dataGridView_ItemList.Rows[e.RowIndex].Tag.ToString();
-
-            MessageBox.Show(e.RowIndex.ToString(id) + " d");
+            // Do nothing.
         }
+
+        private void contextMenuStrip_ItemList_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = (dataGridView_ItemList.SelectedRows.Count == 0);
+        }
+
+        private void ToolStripMenuItem_DisplayAttachments_Click(object sender, EventArgs e)
+        {
+            if (dataGridView_ItemList.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            AttachmentViewerForm attachmentViewer = new AttachmentViewerForm(pca, email, targetFolder, dataGridView_ItemList.SelectedRows[0].Tag.ToString(), dataGridView_ItemList.SelectedRows[0].Cells[0].Value.ToString());
+            attachmentViewer.Show();
+        }
+
+
     }
 }

@@ -131,6 +131,12 @@
     <Compile Include="AcquireViewerTokenForm.Designer.cs">
       <DependentUpon>AcquireViewerTokenForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AttachmentViewerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AttachmentViewerForm.Designer.cs">
+      <DependentUpon>AttachmentViewerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DetailedTokenViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,6 +198,9 @@
     </Compile>
     <EmbeddedResource Include="AcquireViewerTokenForm.resx">
       <DependentUpon>AcquireViewerTokenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AttachmentViewerForm.resx">
+      <DependentUpon>AttachmentViewerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DetailedTokenViewer.resx">
       <DependentUpon>DetailedTokenViewer.cs</DependentUpon>
