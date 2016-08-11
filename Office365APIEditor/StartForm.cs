@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Xml;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Office365APIEditor
 {
@@ -93,6 +94,7 @@ namespace Office365APIEditor
             groupBox_BasicAuth.Enabled = false;
             groupBox_V2MobileApp.Enabled = false;
             groupBox_V2WebApp.Enabled = false;
+            groupBox_WebAppAppOnly.Enabled = false;
         }
 
         private void radioButton_NativeApp_CheckedChanged(object sender, EventArgs e)
@@ -102,6 +104,7 @@ namespace Office365APIEditor
             groupBox_BasicAuth.Enabled = false;
             groupBox_V2WebApp.Enabled = false;
             groupBox_V2MobileApp.Enabled = false;
+            groupBox_WebAppAppOnly.Enabled = false;
         }
 
         private void radioButton_BasicAuth_CheckedChanged(object sender, EventArgs e)
@@ -111,6 +114,7 @@ namespace Office365APIEditor
             groupBox_WebApp.Enabled = false;
             groupBox_V2WebApp.Enabled = false;
             groupBox_V2MobileApp.Enabled = false;
+            groupBox_WebAppAppOnly.Enabled = false;
         }
         
         private void radioButton_V2WebApp_CheckedChanged(object sender, EventArgs e)
@@ -120,6 +124,7 @@ namespace Office365APIEditor
             groupBox_BasicAuth.Enabled = false;
             groupBox_V2MobileApp.Enabled = false;
             groupBox_V2WebApp.Enabled = true;
+            groupBox_WebAppAppOnly.Enabled = false;
         }
 
         private void radioButton_V2MobileApp_CheckedChanged(object sender, EventArgs e)
@@ -129,6 +134,17 @@ namespace Office365APIEditor
             groupBox_NativeApp.Enabled = false;
             groupBox_V2WebApp.Enabled = false;
             groupBox_WebApp.Enabled = false;
+            groupBox_WebAppAppOnly.Enabled = false;
+        }
+
+        private void radioButton_WebAppAppOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox_V2MobileApp.Enabled = false;
+            groupBox_BasicAuth.Enabled = false;
+            groupBox_NativeApp.Enabled = false;
+            groupBox_V2WebApp.Enabled = false;
+            groupBox_WebApp.Enabled = false;
+            groupBox_WebAppAppOnly.Enabled = true;
         }
 
         private void button_NativeAppAcquireAccessToken_Click(object sender, EventArgs e)
@@ -188,7 +204,32 @@ namespace Office365APIEditor
                 MessageBox.Show("Acquiring Access Token was failed.", "Office365APIEditor");
             }
         }
-        
+
+        private void button_WebAppAppOnlyAcquireAccessToken_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.None;
+            _tokenResponse = null;
+
+            if (CheckWebAppAppOnlyParam() == false)
+            {
+                return;
+            }
+
+            _tokenResponse = AcquireAccessTokenOfWebAppAppOnly();
+
+            if (_tokenResponse != null)
+            {
+                SaveSettings();
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Acquiring Access Token was failed.", "Office365APIEditor");
+            }
+        }
+
         private void button_BasicAuthGoNext_Click(object sender, EventArgs e)
         {
             SaveSettings();
@@ -198,7 +239,7 @@ namespace Office365APIEditor
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
-        
+
         private void button_Cancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
@@ -335,6 +376,36 @@ namespace Office365APIEditor
             else if (textBox_V2WebAppClientSecret.Text == "")
             {
                 MessageBox.Show("Enter the Client Secret.", "Office365APIEditor");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private bool CheckWebAppAppOnlyParam()
+        {
+            // Check the form for web app (App Only).
+
+            if (textBox_WebAppAppOnlyTenantName.Text == "")
+            {
+                MessageBox.Show("Enter the Tenant Name.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_WebAppAppOnlyClientID.Text == "")
+            {
+                MessageBox.Show("Enter the Client ID.", "Office365APIEditor");
+                return false;
+            }
+            else if (!File.Exists(textBox_WebAppAppOnlyCertPath.Text))
+            {
+                MessageBox.Show("The certificate path is invalid.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_WebAppAppOnlyCertPass.Text == "")
+            {
+                MessageBox.Show("Enter the scopes.", "Office365APIEditor");
                 return false;
             }
             else
@@ -623,6 +694,52 @@ namespace Office365APIEditor
             return result;
         }
 
+        private TokenResponse AcquireAccessTokenOfWebAppAppOnly()
+        {
+            TokenResponse result = null;
+
+            FileStream certFile = File.OpenRead(textBox_WebAppAppOnlyCertPath.Text);
+            byte[] certBytes = new byte[certFile.Length];
+            certFile.Read(certBytes, 0, (int)certFile.Length);
+            var cert = new X509Certificate2(certBytes, textBox_WebAppAppOnlyCertPass.Text, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet);
+
+            _resource = GetResourceNameForWebAppAppOnly();
+            string resourceName = GetResourceURL(_resource);
+
+            ClientAssertionCertificate cac = new ClientAssertionCertificate(textBox_WebAppAppOnlyClientID.Text, cert);
+            AuthenticationContext authenticationContext = new AuthenticationContext("https://login.microsoftonline.com/" + textBox_WebAppAppOnlyTenantName.Text, false);
+            
+            AuthenticationResult authenticationResult = null;
+            
+            string errorMessage = null;
+            try
+            {
+                authenticationResult = authenticationContext.AcquireToken(resourceName, cac);
+            }
+            catch (AdalException ex)
+            {
+                errorMessage = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    errorMessage += "\nInnerException : " + ex.InnerException.Message;
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                errorMessage = ex.Message;
+            }
+
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                MessageBox.Show(errorMessage, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            else
+            {
+                return ConvertAuthenticationResultToTokenResponse(authenticationResult);
+            }
+        }
+
         private string GetResourceNameForWebApp()
         {
             if (radioButton_WebAppExoResource.Checked)
@@ -646,6 +763,22 @@ namespace Office365APIEditor
                 return "Exchange Online";
             }
             else if (radioButton_NativeAppGraphResource.Checked)
+            {
+                return "Microsoft Graph";
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        private string GetResourceNameForWebAppAppOnly()
+        {
+            if (radioButton_WebAppAppOnlyExoResource.Checked)
+            {
+                return "Exchange Online";
+            }
+            else if (radioButton_WebAppAppOnlyGraphResource.Checked)
             {
                 return "Microsoft Graph";
             }
@@ -825,6 +958,16 @@ namespace Office365APIEditor
             else
             {
                 MessageBox.Show("Acquiring Access Token was failed.", "Office365APIEditor");
+            }
+        }
+
+        private void button_WebAppAppOnlySelectSert_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.None;
+
+            if (openFileDialog_PFX.ShowDialog() == DialogResult.OK)
+            {
+                textBox_WebAppAppOnlyCertPath.Text = openFileDialog_PFX.FileName;
             }
         }
     }

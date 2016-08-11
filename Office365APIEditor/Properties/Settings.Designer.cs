@@ -273,5 +273,53 @@ namespace Office365APIEditor.Properties {
                 this["LastMailboxViewerClientID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastWebAppAppOnlyTenantName {
+            get {
+                return ((string)(this["LastWebAppAppOnlyTenantName"]));
+            }
+            set {
+                this["LastWebAppAppOnlyTenantName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastWebAppAppOnlyClientID {
+            get {
+                return ((string)(this["LastWebAppAppOnlyClientID"]));
+            }
+            set {
+                this["LastWebAppAppOnlyClientID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastWebAppAppOnlyCertPath {
+            get {
+                return ((string)(this["LastWebAppAppOnlyCertPath"]));
+            }
+            set {
+                this["LastWebAppAppOnlyCertPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastWebAppAppOnlyCertPass {
+            get {
+                return ((string)(this["LastWebAppAppOnlyCertPass"]));
+            }
+            set {
+                this["LastWebAppAppOnlyCertPass"] = value;
+            }
+        }
     }
 }

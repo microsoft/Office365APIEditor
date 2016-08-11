@@ -76,6 +76,11 @@ namespace Office365APIEditor
                     button_ViewTokenInfo.Enabled = true;
                 }
 
+                if (string.IsNullOrEmpty(_tokenResponse.refresh_token))
+                {
+                    button_RefreshToken.Enabled = false;
+                }
+
                 // Select the Body page.
                 tabControl_HeadersAndBody.SelectTab(1);
             }
