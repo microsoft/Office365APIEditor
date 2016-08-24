@@ -484,37 +484,25 @@ namespace Office365APIEditor
             string accessToken = "";
 
             // Build a POST body.
-            string postBody = "";
-            Hashtable tempTable = new Hashtable();
+            string postBody = "grant_type=authorization_code" +
+                "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(textBox_WebAppRedirectUri.Text) +
+                "&client_id=" + textBox_WebAppClientID.Text +
+                "&client_secret=" + System.Web.HttpUtility.UrlEncode(textBox_WebAppClientSecret.Text) +
+                "&code=" + AuthorizationCode +
+                "&resource=" + System.Web.HttpUtility.UrlEncode(GetResourceURL(GetResourceNameForWebApp()));
 
-            tempTable["grant_type"] = "authorization_code";
-            tempTable["code"] = AuthorizationCode;
-            tempTable["redirect_uri"] = textBox_WebAppRedirectUri.Text;
-            tempTable["client_id"] = textBox_WebAppClientID.Text;
-            tempTable["client_secret"] = textBox_WebAppClientSecret.Text;
-
-            foreach (string key in tempTable.Keys)
-            {
-                postBody += String.Format("{0}={1}&", key, tempTable[key]);
-            }
-            byte[] postDataBytes = Encoding.ASCII.GetBytes(postBody);
-
-            // This URL is old.
-            // System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.windows.net/common/oauth2/token/");
-
-            // So, use new one. (access point is same.)
             System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.microsoftonline.com/common/oauth2/token");
 
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = postDataBytes.Length;
 
             try
             {
-                // Get a RequestStream to POST a data.
-                using (Stream reqestStream = request.GetRequestStream())
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
-                    reqestStream.Write(postDataBytes, 0, postDataBytes.Length);
+                    streamWriter.Write(postBody);
+                    streamWriter.Flush();
+                    streamWriter.Close();
                 }
 
                 System.Net.WebResponse response = request.GetResponse();
@@ -591,33 +579,24 @@ namespace Office365APIEditor
             string accessToken = "";
 
             // Build a POST body.
-            string postBody = "";
-            Hashtable tempTable = new Hashtable();
-
-            tempTable["grant_type"] = "authorization_code";
-            tempTable["code"] = AuthorizationCode;
-            tempTable["redirect_uri"] = textBox_V2MobileAppRedirectUri.Text;
-            tempTable["client_id"] = textBox_V2MobileAppClientID.Text;
-            tempTable["scope"] = textBox_V2MobileAppScopes.Text;
-
-            foreach (string key in tempTable.Keys)
-            {
-                postBody += String.Format("{0}={1}&", key, tempTable[key]);
-            }
-            byte[] postDataBytes = Encoding.ASCII.GetBytes(postBody);
+            string postBody = "grant_type=authorization_code" +
+                "&redirect_uri=" + textBox_V2MobileAppRedirectUri.Text +
+                "&client_id=" + textBox_V2MobileAppClientID.Text +
+                "&code=" + AuthorizationCode +
+                "&scope=" + textBox_V2MobileAppScopes.Text;
 
             System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.microsoftonline.com/common/oauth2/v2.0/token");
 
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = postDataBytes.Length;
 
             try
             {
-                // Get a RequestStream to POST a data.
-                using (Stream reqestStream = request.GetRequestStream())
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
-                    reqestStream.Write(postDataBytes, 0, postDataBytes.Length);
+                    streamWriter.Write(postBody);
+                    streamWriter.Flush();
+                    streamWriter.Close();
                 }
 
                 System.Net.WebResponse response = request.GetResponse();
@@ -645,34 +624,25 @@ namespace Office365APIEditor
             string accessToken = "";
 
             // Build a POST body.
-            string postBody = "";
-            Hashtable tempTable = new Hashtable();
-
-            tempTable["grant_type"] = "authorization_code";
-            tempTable["code"] = AuthorizationCode;
-            tempTable["redirect_uri"] = textBox_V2WebAppRedirectUri.Text;
-            tempTable["client_id"] = textBox_V2WebAppClientID.Text;
-            tempTable["scope"] = textBox_V2WebAppScopes.Text;
-            tempTable["client_secret"] = textBox_V2WebAppClientSecret.Text;
-
-            foreach (string key in tempTable.Keys)
-            {
-                postBody += String.Format("{0}={1}&", key, tempTable[key]);
-            }
-            byte[] postDataBytes = Encoding.ASCII.GetBytes(postBody);
+            string postBody = "grant_type=authorization_code" +
+                "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(textBox_V2WebAppRedirectUri.Text) +
+                "&client_id=" + textBox_V2WebAppClientID.Text +
+                "&client_secret=" + System.Web.HttpUtility.UrlEncode(textBox_V2WebAppClientSecret.Text) +
+                "&code=" + AuthorizationCode +
+                "&scope=" + textBox_V2WebAppScopes.Text;
 
             System.Net.WebRequest request = System.Net.WebRequest.Create("https://login.microsoftonline.com/common/oauth2/v2.0/token");
 
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = postDataBytes.Length;
 
             try
             {
-                // Get a RequestStream to POST a data.
-                using (Stream reqestStream = request.GetRequestStream())
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
-                    reqestStream.Write(postDataBytes, 0, postDataBytes.Length);
+                    streamWriter.Write(postBody);
+                    streamWriter.Flush();
+                    streamWriter.Close();
                 }
 
                 System.Net.WebResponse response = request.GetResponse();

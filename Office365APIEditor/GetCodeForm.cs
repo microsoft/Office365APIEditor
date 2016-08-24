@@ -32,7 +32,11 @@ namespace Office365APIEditor
             }
             else
             {
-                authenticationUrl = endPoint + "/authorize?response_type=code&client_id=" + ClientID + "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) + "&resource=" + System.Web.HttpUtility.UrlEncode(ResourceOrScopeUri) + "&prompt=login";
+// authenticationUrl = endPoint + "/authorize?response_type=code&client_id=" + ClientID + "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) + "&resource=" + System.Web.HttpUtility.UrlEncode(ResourceOrScopeUri) + "&prompt=login";
+                authenticationUrl = endPoint + "/authorize?response_type=code&" +
+                    "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) +
+                    "&client_id=" + ClientID + 
+                    "&prompt=login";
             }
 
             webBrowser1.DocumentTitleChanged += new EventHandler(webBrowser1_DocumentTitleChanged);
