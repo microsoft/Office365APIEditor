@@ -31,7 +31,7 @@ You need the following to use OAuth with V2 endpoint.
 
 - An application which was registered in the [Application Registration Portal](https://apps.dev.microsoft.com/).
 
-If you have not registered your application, follow the [tutorial](https://github.com/Microsoft/Office365APIEditor/tutorial1.md).
+If you have not registered your application, follow the [tutorial](/tutorial1.md).
 
 ## Feedback
 
