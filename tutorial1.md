@@ -9,7 +9,7 @@ Once you registered an application by following this tutorial, you can use it as
 
 3. In [DIRECTORY] tab, Click the name of your organization.
 
-4. In [APPLICATION] tab, click [ADD] at the bottom.
+4. In [APPLICATIONS] tab, click [ADD] at the bottom.
 
 5. Click [Add an application my organization is developing].
 
@@ -17,17 +17,17 @@ Once you registered an application by following this tutorial, you can use it as
 
 7. Select [WEB APPLICATION AND/OR WEB API] and go to the next page.
 
-8. Enter the sing-in URL of your application in [SIGN-ON URL] box. (e.g. http&#58;<span></span>//localhost/MyWebApp)
+8. Enter the sing-in URL of your application in [SIGN-ON URL] box. (e.g. http&#58;<span></span>//localhost/MyWebApp <- this is really something you can use)
 
-9. Enter the APP ID URI of your application in [APP ID URI] box (e.g. http&#58;//contoso.onmicrosoft.com/MyWebApp)
+9. Enter the APP ID URI of your application in [APP ID URI] box (e.g. http&#58;<span></span>//contoso.onmicrosoft.com/MyWebApp <- this is really something you can use)
 
 10. Click [Complete].
 
 11. In [COFIGURE] tab, go to [Keys] section and select the duration of the key. (e.g. 2 years)
 
 12. Go to [permissions to other applications] section and add the necessary permissions for your application.
-If your application has to read the messages in users mailbox using Office 365 API, you have to add the [Read user mail] permission under [Delegated Permissions] of [Office 365 Exchange Online].
-If your application has to read the messages in users mailbox using Graph API, you have to add the [Read user mail] permission under [Delegated Permissions] of [Microsoft Graph].
+If your application has to read the messages in users mailbox using Office 365 API (outlook.office.com), you have to add the [Read user mail] permission under [Delegated Permissions] of [Office 365 Exchange Online].
+If your application has to read the messages in users mailbox using Graph API (graph.microsoft.com), you have to add the [Read user mail] permission under [Delegated Permissions] of [Microsoft Graph].
 
 13. Click [SAVE] at the bottom.
 
