@@ -1,6 +1,6 @@
 # Office365APIEditor
 
-You can test Office 365 API easily.
+You can test Office 365 API and Microsoft Graph easily.
 
 ## Download options
 
@@ -8,11 +8,11 @@ Download Office365APIEditor from [releases](https://github.com/Microsoft/Office3
 
 ## Features
 
-You can test Office 365 API. We support following endpoints.
-- outlook.office.com and outlook.office365.com (Exchange Online)
+You can test Office 365 API and Microsoft Graph. We support following endpoints.
+- outlook.office.com and outlook.office365.com (Office 365 API - Exchange Online)
 - graph.microsoft.com (Microsoft Graph)
 
-You can use OAuth or Basic authentication as authentication mechanisms.
+You can use OAuth or Basic authentication as authentication mechanisms. (Only outlook.office365.com endpoint supports Basic authentication)
 
 You can display items in your mailbox which hosted by Exchange Online or Outlook.com.
 
