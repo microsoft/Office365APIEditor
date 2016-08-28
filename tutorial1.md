@@ -5,9 +5,9 @@ Once you registered an application by following this tutorial, you can use it as
 
 1. Go to https://manage.windowsazure.com/ and sign in using your administrator account of Microsoft Azure.
 
-2. Click [Active Directory] in the left pane.
+2. Click [Active Directory] in the left panel.
 
-3. In [DIRECTORY] tab, Click the name of your organization.
+3. In [DIRECTORY] tab, select the name of your organization.
 
 4. In [APPLICATIONS] tab, click [ADD] at the bottom.
 
