@@ -14,18 +14,18 @@ You can test Office 365 API and Microsoft Graph. We support following endpoints.
 
 You can use OAuth or Basic authentication as authentication mechanisms. (Only outlook.office365.com endpoint supports Basic authentication)
 
-You can display items in your mailbox which hosted by Exchange Online or Outlook.com.
+You can display items in your mailbox which are hosted by Exchange Online or Outlook.com.
 
 ## Prerequisites
 
 You need the following to work with Office365APIEditor:
-- A subscription of Office 365 and a user account, or a Microsoft Account.
-- Version of the .NET Framework starting with the .NET Framework 4.5.
+- A subscription to Office 365 and an user account, or a Microsoft Account.
+- Version of the .NET Framework. Minimal requirement is .NET Framework 4.5.
 
-And you need the following to use OAuth with V1 endpoint. You can test the App Only Token as well.
+And you need the following to use OAuth with V1 endpoint. You can also use the App Only Token.
 
-- A subscriotion of Microsoft Azure which manages Azure Active Directory of your Office 365 tennant.
-- An application which was registered in Azure Active Directory ('Web Application' of 'Native Application').
+- A subscriotion to Microsoft Azure which manages Azure Active Directory of your Office 365 tennant.
+- An application which was registered in Azure Active Directory ('Web Application' or 'Native Application').
 
 You need the following to use OAuth with V2 endpoint.
 
@@ -35,7 +35,7 @@ If you have not registered your application, follow the [tutorial](/tutorial1.md
 
 ## Feedback
 
-If you have any feedback, please post to the [Issues](https://github.com/Microsoft/Office365APIEditor/issues) list.
+If you have any feedback, please post on the [Issues](https://github.com/Microsoft/Office365APIEditor/issues) list.
 
 ---
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
