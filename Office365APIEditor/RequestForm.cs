@@ -41,6 +41,12 @@ namespace Office365APIEditor
             StartForm startForm = new StartForm();
             if (startForm.ShowDialog(out _tokenResponse, out _resource, out _clientID, out _clientSecret, out _scopes, out _redirectUri, out _useV2Endpoint) == DialogResult.OK)
             {
+                if (_tokenResponse.access_token == null && _tokenResponse.id_token != null)
+                {
+                    // Using OpenID Connect
+                    _tokenResponse.access_token = _tokenResponse.id_token;
+                }
+
                 if (_tokenResponse.access_token.StartsWith("USEBASICBASIC"))
                 {
                     // Basic auth
@@ -346,6 +352,12 @@ namespace Office365APIEditor
 
                 // Deserialize and get Access Token.
                 _tokenResponse = StartForm.Deserialize<TokenResponse>(jsonResponse);
+
+                if (_tokenResponse.access_token == null && _tokenResponse.id_token != null)
+                {
+                    // Using OpenID Connect
+                    _tokenResponse.access_token = _tokenResponse.id_token;
+                }
             }
             catch (System.Net.WebException ex)
             {
