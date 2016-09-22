@@ -112,6 +112,9 @@
             this.radioButton_WebAppAppOnly = new System.Windows.Forms.RadioButton();
             this.openFileDialog_PFX = new System.Windows.Forms.OpenFileDialog();
             this.linkLabel_WebApp = new System.Windows.Forms.LinkLabel();
+            this.linkLabel_NativeApp = new System.Windows.Forms.LinkLabel();
+            this.linkLabel_WebAppAppOnly = new System.Windows.Forms.LinkLabel();
+            this.label37 = new System.Windows.Forms.Label();
             this.groupBox_NativeApp.SuspendLayout();
             this.groupBox_WebApp.SuspendLayout();
             this.groupBox_BasicAuth.SuspendLayout();
@@ -123,7 +126,7 @@
             // button_Cancel
             // 
             this.button_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_Cancel.Location = new System.Drawing.Point(779, 684);
+            this.button_Cancel.Location = new System.Drawing.Point(779, 703);
             this.button_Cancel.Name = "button_Cancel";
             this.button_Cancel.Size = new System.Drawing.Size(75, 23);
             this.button_Cancel.TabIndex = 44;
@@ -144,6 +147,7 @@
             // 
             // groupBox_NativeApp
             // 
+            this.groupBox_NativeApp.Controls.Add(this.linkLabel_NativeApp);
             this.groupBox_NativeApp.Controls.Add(this.label20);
             this.groupBox_NativeApp.Controls.Add(this.label19);
             this.groupBox_NativeApp.Controls.Add(this.label18);
@@ -785,6 +789,8 @@
             // 
             // groupBox_WebAppAppOnly
             // 
+            this.groupBox_WebAppAppOnly.Controls.Add(this.linkLabel_WebAppAppOnly);
+            this.groupBox_WebAppAppOnly.Controls.Add(this.label37);
             this.groupBox_WebAppAppOnly.Controls.Add(this.button_WebAppAppOnlySelectSert);
             this.groupBox_WebAppAppOnly.Controls.Add(this.label36);
             this.groupBox_WebAppAppOnly.Controls.Add(this.textBox_WebAppAppOnlyCertPath);
@@ -803,7 +809,7 @@
             this.groupBox_WebAppAppOnly.Enabled = false;
             this.groupBox_WebAppAppOnly.Location = new System.Drawing.Point(26, 502);
             this.groupBox_WebAppAppOnly.Name = "groupBox_WebAppAppOnly";
-            this.groupBox_WebAppAppOnly.Size = new System.Drawing.Size(400, 207);
+            this.groupBox_WebAppAppOnly.Size = new System.Drawing.Size(400, 224);
             this.groupBox_WebAppAppOnly.TabIndex = 17;
             this.groupBox_WebAppAppOnly.TabStop = false;
             this.groupBox_WebAppAppOnly.Text = "Web application (Use App Only Token) settings";
@@ -811,7 +817,7 @@
             // button_WebAppAppOnlySelectSert
             // 
             this.button_WebAppAppOnlySelectSert.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_WebAppAppOnlySelectSert.Location = new System.Drawing.Point(317, 69);
+            this.button_WebAppAppOnlySelectSert.Location = new System.Drawing.Point(317, 83);
             this.button_WebAppAppOnlySelectSert.Name = "button_WebAppAppOnlySelectSert";
             this.button_WebAppAppOnlySelectSert.Size = new System.Drawing.Size(77, 23);
             this.button_WebAppAppOnlySelectSert.TabIndex = 21;
@@ -822,7 +828,7 @@
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(14, 74);
+            this.label36.Location = new System.Drawing.Point(14, 88);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(79, 13);
             this.label36.TabIndex = 48;
@@ -831,7 +837,7 @@
             // textBox_WebAppAppOnlyCertPath
             // 
             this.textBox_WebAppAppOnlyCertPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyCertPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_WebAppAppOnlyCertPath.Location = new System.Drawing.Point(99, 71);
+            this.textBox_WebAppAppOnlyCertPath.Location = new System.Drawing.Point(99, 85);
             this.textBox_WebAppAppOnlyCertPath.Name = "textBox_WebAppAppOnlyCertPath";
             this.textBox_WebAppAppOnlyCertPath.Size = new System.Drawing.Size(212, 20);
             this.textBox_WebAppAppOnlyCertPath.TabIndex = 20;
@@ -840,7 +846,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(164, 147);
+            this.label17.Location = new System.Drawing.Point(164, 161);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(10, 13);
             this.label17.TabIndex = 45;
@@ -849,7 +855,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 159);
+            this.label21.Location = new System.Drawing.Point(6, 173);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(155, 13);
             this.label21.TabIndex = 46;
@@ -858,7 +864,7 @@
             // radioButton_WebAppAppOnlyGraphResource
             // 
             this.radioButton_WebAppAppOnlyGraphResource.AutoSize = true;
-            this.radioButton_WebAppAppOnlyGraphResource.Location = new System.Drawing.Point(211, 127);
+            this.radioButton_WebAppAppOnlyGraphResource.Location = new System.Drawing.Point(211, 141);
             this.radioButton_WebAppAppOnlyGraphResource.Name = "radioButton_WebAppAppOnlyGraphResource";
             this.radioButton_WebAppAppOnlyGraphResource.Size = new System.Drawing.Size(100, 17);
             this.radioButton_WebAppAppOnlyGraphResource.TabIndex = 24;
@@ -868,7 +874,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(4, 104);
+            this.label32.Location = new System.Drawing.Point(4, 118);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(89, 13);
             this.label32.TabIndex = 44;
@@ -877,7 +883,7 @@
             // textBox_WebAppAppOnlyCertPass
             // 
             this.textBox_WebAppAppOnlyCertPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyCertPass", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_WebAppAppOnlyCertPass.Location = new System.Drawing.Point(99, 101);
+            this.textBox_WebAppAppOnlyCertPass.Location = new System.Drawing.Point(99, 115);
             this.textBox_WebAppAppOnlyCertPass.Name = "textBox_WebAppAppOnlyCertPass";
             this.textBox_WebAppAppOnlyCertPass.PasswordChar = '*';
             this.textBox_WebAppAppOnlyCertPass.Size = new System.Drawing.Size(295, 20);
@@ -887,7 +893,7 @@
             // button_WebAppAppOnlyAcquireAccessToken
             // 
             this.button_WebAppAppOnlyAcquireAccessToken.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_WebAppAppOnlyAcquireAccessToken.Location = new System.Drawing.Point(9, 175);
+            this.button_WebAppAppOnlyAcquireAccessToken.Location = new System.Drawing.Point(9, 189);
             this.button_WebAppAppOnlyAcquireAccessToken.Name = "button_WebAppAppOnlyAcquireAccessToken";
             this.button_WebAppAppOnlyAcquireAccessToken.Size = new System.Drawing.Size(130, 23);
             this.button_WebAppAppOnlyAcquireAccessToken.TabIndex = 25;
@@ -898,7 +904,7 @@
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(46, 48);
+            this.label33.Location = new System.Drawing.Point(46, 62);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(47, 13);
             this.label33.TabIndex = 43;
@@ -907,7 +913,7 @@
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(21, 22);
+            this.label34.Location = new System.Drawing.Point(21, 36);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(72, 13);
             this.label34.TabIndex = 42;
@@ -916,7 +922,7 @@
             // textBox_WebAppAppOnlyClientID
             // 
             this.textBox_WebAppAppOnlyClientID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_WebAppAppOnlyClientID.Location = new System.Drawing.Point(99, 45);
+            this.textBox_WebAppAppOnlyClientID.Location = new System.Drawing.Point(99, 59);
             this.textBox_WebAppAppOnlyClientID.Name = "textBox_WebAppAppOnlyClientID";
             this.textBox_WebAppAppOnlyClientID.Size = new System.Drawing.Size(295, 20);
             this.textBox_WebAppAppOnlyClientID.TabIndex = 19;
@@ -925,7 +931,7 @@
             // textBox_WebAppAppOnlyTenantName
             // 
             this.textBox_WebAppAppOnlyTenantName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyTenantName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_WebAppAppOnlyTenantName.Location = new System.Drawing.Point(99, 19);
+            this.textBox_WebAppAppOnlyTenantName.Location = new System.Drawing.Point(99, 33);
             this.textBox_WebAppAppOnlyTenantName.Name = "textBox_WebAppAppOnlyTenantName";
             this.textBox_WebAppAppOnlyTenantName.Size = new System.Drawing.Size(295, 20);
             this.textBox_WebAppAppOnlyTenantName.TabIndex = 18;
@@ -935,7 +941,7 @@
             // 
             this.radioButton_WebAppAppOnlyExoResource.AutoSize = true;
             this.radioButton_WebAppAppOnlyExoResource.Checked = true;
-            this.radioButton_WebAppAppOnlyExoResource.Location = new System.Drawing.Point(99, 127);
+            this.radioButton_WebAppAppOnlyExoResource.Location = new System.Drawing.Point(99, 141);
             this.radioButton_WebAppAppOnlyExoResource.Name = "radioButton_WebAppAppOnlyExoResource";
             this.radioButton_WebAppAppOnlyExoResource.Size = new System.Drawing.Size(106, 17);
             this.radioButton_WebAppAppOnlyExoResource.TabIndex = 23;
@@ -946,7 +952,7 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(40, 129);
+            this.label35.Location = new System.Drawing.Point(40, 143);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(53, 13);
             this.label35.TabIndex = 41;
@@ -978,12 +984,43 @@
             this.linkLabel_WebApp.Text = "How to register applications.";
             this.linkLabel_WebApp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_WebApp_LinkClicked);
             // 
+            // linkLabel_NativeApp
+            // 
+            this.linkLabel_NativeApp.AutoSize = true;
+            this.linkLabel_NativeApp.Location = new System.Drawing.Point(133, 14);
+            this.linkLabel_NativeApp.Name = "linkLabel_NativeApp";
+            this.linkLabel_NativeApp.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_NativeApp.TabIndex = 35;
+            this.linkLabel_NativeApp.TabStop = true;
+            this.linkLabel_NativeApp.Text = "How to register applications.";
+            this.linkLabel_NativeApp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_NativeApp_LinkClicked);
+            // 
+            // linkLabel_WebAppAppOnly
+            // 
+            this.linkLabel_WebAppAppOnly.AutoSize = true;
+            this.linkLabel_WebAppAppOnly.Location = new System.Drawing.Point(133, 17);
+            this.linkLabel_WebAppAppOnly.Name = "linkLabel_WebAppAppOnly";
+            this.linkLabel_WebAppAppOnly.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_WebAppAppOnly.TabIndex = 36;
+            this.linkLabel_WebAppAppOnly.TabStop = true;
+            this.linkLabel_WebAppAppOnly.Text = "How to register applications.";
+            this.linkLabel_WebAppAppOnly.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_WebAppAppOnly_LinkClicked);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(6, 17);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(121, 13);
+            this.label37.TabIndex = 36;
+            this.label37.Text = "Step 1 : Fill out the form.";
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_Cancel;
-            this.ClientSize = new System.Drawing.Size(866, 719);
+            this.ClientSize = new System.Drawing.Size(866, 738);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox_WebAppAppOnly);
             this.Controls.Add(this.radioButton_WebAppAppOnly);
@@ -1108,5 +1145,8 @@
         private System.Windows.Forms.TextBox textBox_WebAppAppOnlyCertPath;
         private System.Windows.Forms.OpenFileDialog openFileDialog_PFX;
         private System.Windows.Forms.LinkLabel linkLabel_WebApp;
+        private System.Windows.Forms.LinkLabel linkLabel_NativeApp;
+        private System.Windows.Forms.LinkLabel linkLabel_WebAppAppOnly;
+        private System.Windows.Forms.Label label37;
     }
 }
