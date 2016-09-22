@@ -940,5 +940,10 @@ namespace Office365APIEditor
                 textBox_WebAppAppOnlyCertPath.Text = openFileDialog_PFX.FileName;
             }
         }
+
+        private void linkLabel_WebApp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V1_Web_application.md");
+        }
     }
 }

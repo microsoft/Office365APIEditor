@@ -111,6 +111,7 @@
             this.label35 = new System.Windows.Forms.Label();
             this.radioButton_WebAppAppOnly = new System.Windows.Forms.RadioButton();
             this.openFileDialog_PFX = new System.Windows.Forms.OpenFileDialog();
+            this.linkLabel_WebApp = new System.Windows.Forms.LinkLabel();
             this.groupBox_NativeApp.SuspendLayout();
             this.groupBox_WebApp.SuspendLayout();
             this.groupBox_BasicAuth.SuspendLayout();
@@ -278,6 +279,7 @@
             // 
             // groupBox_WebApp
             // 
+            this.groupBox_WebApp.Controls.Add(this.linkLabel_WebApp);
             this.groupBox_WebApp.Controls.Add(this.button_WebAppAcquireAccessToken);
             this.groupBox_WebApp.Controls.Add(this.label16);
             this.groupBox_WebApp.Controls.Add(this.label9);
@@ -965,6 +967,17 @@
             // 
             this.openFileDialog_PFX.Filter = "Personal Information Exchange (*.pfx)|*.pfx";
             // 
+            // linkLabel_WebApp
+            // 
+            this.linkLabel_WebApp.AutoSize = true;
+            this.linkLabel_WebApp.Location = new System.Drawing.Point(133, 16);
+            this.linkLabel_WebApp.Name = "linkLabel_WebApp";
+            this.linkLabel_WebApp.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_WebApp.TabIndex = 34;
+            this.linkLabel_WebApp.TabStop = true;
+            this.linkLabel_WebApp.Text = "How to register applications.";
+            this.linkLabel_WebApp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_WebApp_LinkClicked);
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1094,5 +1107,6 @@
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.TextBox textBox_WebAppAppOnlyCertPath;
         private System.Windows.Forms.OpenFileDialog openFileDialog_PFX;
+        private System.Windows.Forms.LinkLabel linkLabel_WebApp;
     }
 }

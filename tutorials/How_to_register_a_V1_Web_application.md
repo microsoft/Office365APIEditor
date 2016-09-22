@@ -1,6 +1,6 @@
-# How to register applications for OAuth
+# How to register a V1 Web application
 
-This tutorial introduces how to register the application using Microsoft Azure portal. You can use [Office 365 App Registration Tool](http://dev.office.com/app-registration) and [Application Registration Portal](https://apps.dev.microsoft.com) as well.
+This tutorial introduces how to register the application using Microsoft Azure portal.
 Once you registered an application by following this tutorial, you can use it as a "Web application" in Office365APIEditor.
 
 1. Go to https://manage.windowsazure.com/ and sign in using your administrator account of Microsoft Azure.
@@ -17,9 +17,9 @@ Once you registered an application by following this tutorial, you can use it as
 
 7. Select [WEB APPLICATION AND/OR WEB API] and go to the next page.
 
-8. Enter the sing-in URL of your application in [SIGN-ON URL] box. (e.g. http&#58;<span></span>//localhost/MyWebApp <- this is really something you can use)
+8. Enter the sing-in URL of your application in [SIGN-ON URL] box. (e.g. http&#58;<span></span>//localhost/MyWebApp <- Whatever is fine.)
 
-9. Enter the APP ID URI of your application in [APP ID URI] box (e.g. http&#58;<span></span>//contoso.onmicrosoft.com/MyWebApp <- this is really something you can use)
+9. Enter the APP ID URI of your application in [APP ID URI] box (e.g. http&#58;<span></span>//contoso.onmicrosoft.com/MyWebApp <- Whatever is fine.)
 
 10. Click [Complete].
 

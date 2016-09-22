@@ -31,7 +31,7 @@ You need the following to use OAuth with V2 endpoint.
 
 - An application which was registered in the [Application Registration Portal](https://apps.dev.microsoft.com/).
 
-If you have not registered your application, follow the [tutorial](/tutorial1.md).
+If you have not registered your application, follow the [tutorial](/tutorials/How_to_register_a_V1_Web_application.md).
 
 ## Feedback
 
