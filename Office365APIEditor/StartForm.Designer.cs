@@ -32,6 +32,7 @@
             this.button_Cancel = new System.Windows.Forms.Button();
             this.button_NativeAppAcquireAccessToken = new System.Windows.Forms.Button();
             this.groupBox_NativeApp = new System.Windows.Forms.GroupBox();
+            this.linkLabel_NativeApp = new System.Windows.Forms.LinkLabel();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -45,6 +46,7 @@
             this.radioButton_NativeAppExoResource = new System.Windows.Forms.RadioButton();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox_WebApp = new System.Windows.Forms.GroupBox();
+            this.linkLabel_WebApp = new System.Windows.Forms.LinkLabel();
             this.button_WebAppAcquireAccessToken = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -94,6 +96,9 @@
             this.radioButton_V2WebApp = new System.Windows.Forms.RadioButton();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox_WebAppAppOnly = new System.Windows.Forms.GroupBox();
+            this.radioButton_WebAppAppOnlyManagementResource = new System.Windows.Forms.RadioButton();
+            this.linkLabel_WebAppAppOnly = new System.Windows.Forms.LinkLabel();
+            this.label37 = new System.Windows.Forms.Label();
             this.button_WebAppAppOnlySelectSert = new System.Windows.Forms.Button();
             this.label36 = new System.Windows.Forms.Label();
             this.textBox_WebAppAppOnlyCertPath = new System.Windows.Forms.TextBox();
@@ -111,10 +116,6 @@
             this.label35 = new System.Windows.Forms.Label();
             this.radioButton_WebAppAppOnly = new System.Windows.Forms.RadioButton();
             this.openFileDialog_PFX = new System.Windows.Forms.OpenFileDialog();
-            this.linkLabel_WebApp = new System.Windows.Forms.LinkLabel();
-            this.linkLabel_NativeApp = new System.Windows.Forms.LinkLabel();
-            this.linkLabel_WebAppAppOnly = new System.Windows.Forms.LinkLabel();
-            this.label37 = new System.Windows.Forms.Label();
             this.groupBox_NativeApp.SuspendLayout();
             this.groupBox_WebApp.SuspendLayout();
             this.groupBox_BasicAuth.SuspendLayout();
@@ -168,6 +169,17 @@
             this.groupBox_NativeApp.TabIndex = 9;
             this.groupBox_NativeApp.TabStop = false;
             this.groupBox_NativeApp.Text = "Native application settings";
+            // 
+            // linkLabel_NativeApp
+            // 
+            this.linkLabel_NativeApp.AutoSize = true;
+            this.linkLabel_NativeApp.Location = new System.Drawing.Point(133, 14);
+            this.linkLabel_NativeApp.Name = "linkLabel_NativeApp";
+            this.linkLabel_NativeApp.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_NativeApp.TabIndex = 35;
+            this.linkLabel_NativeApp.TabStop = true;
+            this.linkLabel_NativeApp.Text = "How to register applications.";
+            this.linkLabel_NativeApp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_NativeApp_LinkClicked);
             // 
             // label20
             // 
@@ -304,6 +316,17 @@
             this.groupBox_WebApp.TabStop = false;
             this.groupBox_WebApp.Text = "Web application settings";
             // 
+            // linkLabel_WebApp
+            // 
+            this.linkLabel_WebApp.AutoSize = true;
+            this.linkLabel_WebApp.Location = new System.Drawing.Point(133, 16);
+            this.linkLabel_WebApp.Name = "linkLabel_WebApp";
+            this.linkLabel_WebApp.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_WebApp.TabIndex = 34;
+            this.linkLabel_WebApp.TabStop = true;
+            this.linkLabel_WebApp.Text = "How to register applications.";
+            this.linkLabel_WebApp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_WebApp_LinkClicked);
+            // 
             // button_WebAppAcquireAccessToken
             // 
             this.button_WebAppAcquireAccessToken.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -332,6 +355,7 @@
             this.label9.Size = new System.Drawing.Size(121, 13);
             this.label9.TabIndex = 31;
             this.label9.Text = "Step 1 : Fill out the form.";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // radioButton_WebAppGraphResource
             // 
@@ -342,6 +366,7 @@
             this.radioButton_WebAppGraphResource.TabIndex = 5;
             this.radioButton_WebAppGraphResource.Text = "Microsoft Graph";
             this.radioButton_WebAppGraphResource.UseVisualStyleBackColor = true;
+            this.radioButton_WebAppGraphResource.CheckedChanged += new System.EventHandler(this.radioButton_WebAppGraphResource_CheckedChanged);
             // 
             // label6
             // 
@@ -360,6 +385,7 @@
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 16;
             this.label2.Text = "Client ID";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBox_WebAppClientSecret
             // 
@@ -369,6 +395,7 @@
             this.textBox_WebAppClientSecret.Size = new System.Drawing.Size(295, 20);
             this.textBox_WebAppClientSecret.TabIndex = 6;
             this.textBox_WebAppClientSecret.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppClientSecret;
+            this.textBox_WebAppClientSecret.TextChanged += new System.EventHandler(this.textBox_WebAppClientSecret_TextChanged);
             // 
             // label10
             // 
@@ -378,6 +405,7 @@
             this.label10.Size = new System.Drawing.Size(72, 13);
             this.label10.TabIndex = 15;
             this.label10.Text = "Redirect URL";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // label5
             // 
@@ -387,6 +415,7 @@
             this.label5.Size = new System.Drawing.Size(67, 13);
             this.label5.TabIndex = 20;
             this.label5.Text = "Client Secret";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label4
             // 
@@ -396,6 +425,7 @@
             this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 14;
             this.label4.Text = "Resource";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // radioButton_WebAppExoResource
             // 
@@ -408,6 +438,7 @@
             this.radioButton_WebAppExoResource.TabStop = true;
             this.radioButton_WebAppExoResource.Text = "Exchange Online";
             this.radioButton_WebAppExoResource.UseVisualStyleBackColor = true;
+            this.radioButton_WebAppExoResource.CheckedChanged += new System.EventHandler(this.radioButton_WebAppExoResource_CheckedChanged);
             // 
             // textBox_WebAppClientID
             // 
@@ -417,6 +448,7 @@
             this.textBox_WebAppClientID.Size = new System.Drawing.Size(295, 20);
             this.textBox_WebAppClientID.TabIndex = 2;
             this.textBox_WebAppClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppClientID;
+            this.textBox_WebAppClientID.TextChanged += new System.EventHandler(this.textBox_WebAppClientID_TextChanged);
             // 
             // textBox_WebAppRedirectUri
             // 
@@ -426,6 +458,7 @@
             this.textBox_WebAppRedirectUri.Size = new System.Drawing.Size(295, 20);
             this.textBox_WebAppRedirectUri.TabIndex = 3;
             this.textBox_WebAppRedirectUri.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppRedirectURL;
+            this.textBox_WebAppRedirectUri.TextChanged += new System.EventHandler(this.textBox_WebAppRedirectUri_TextChanged);
             // 
             // radioButton_NativeApp
             // 
@@ -789,6 +822,7 @@
             // 
             // groupBox_WebAppAppOnly
             // 
+            this.groupBox_WebAppAppOnly.Controls.Add(this.radioButton_WebAppAppOnlyManagementResource);
             this.groupBox_WebAppAppOnly.Controls.Add(this.linkLabel_WebAppAppOnly);
             this.groupBox_WebAppAppOnly.Controls.Add(this.label37);
             this.groupBox_WebAppAppOnly.Controls.Add(this.button_WebAppAppOnlySelectSert);
@@ -813,6 +847,36 @@
             this.groupBox_WebAppAppOnly.TabIndex = 17;
             this.groupBox_WebAppAppOnly.TabStop = false;
             this.groupBox_WebAppAppOnly.Text = "Web application (Use App Only Token) settings";
+            // 
+            // radioButton_WebAppAppOnlyManagementResource
+            // 
+            this.radioButton_WebAppAppOnlyManagementResource.AutoSize = true;
+            this.radioButton_WebAppAppOnlyManagementResource.Location = new System.Drawing.Point(211, 159);
+            this.radioButton_WebAppAppOnlyManagementResource.Name = "radioButton_WebAppAppOnlyManagementResource";
+            this.radioButton_WebAppAppOnlyManagementResource.Size = new System.Drawing.Size(159, 17);
+            this.radioButton_WebAppAppOnlyManagementResource.TabIndex = 49;
+            this.radioButton_WebAppAppOnlyManagementResource.Text = "Office 365 Management API";
+            this.radioButton_WebAppAppOnlyManagementResource.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel_WebAppAppOnly
+            // 
+            this.linkLabel_WebAppAppOnly.AutoSize = true;
+            this.linkLabel_WebAppAppOnly.Location = new System.Drawing.Point(133, 17);
+            this.linkLabel_WebAppAppOnly.Name = "linkLabel_WebAppAppOnly";
+            this.linkLabel_WebAppAppOnly.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_WebAppAppOnly.TabIndex = 36;
+            this.linkLabel_WebAppAppOnly.TabStop = true;
+            this.linkLabel_WebAppAppOnly.Text = "How to register applications.";
+            this.linkLabel_WebAppAppOnly.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_WebAppAppOnly_LinkClicked);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(6, 17);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(121, 13);
+            this.label37.TabIndex = 36;
+            this.label37.Text = "Step 1 : Fill out the form.";
             // 
             // button_WebAppAppOnlySelectSert
             // 
@@ -973,48 +1037,6 @@
             // 
             this.openFileDialog_PFX.Filter = "Personal Information Exchange (*.pfx)|*.pfx";
             // 
-            // linkLabel_WebApp
-            // 
-            this.linkLabel_WebApp.AutoSize = true;
-            this.linkLabel_WebApp.Location = new System.Drawing.Point(133, 16);
-            this.linkLabel_WebApp.Name = "linkLabel_WebApp";
-            this.linkLabel_WebApp.Size = new System.Drawing.Size(140, 13);
-            this.linkLabel_WebApp.TabIndex = 34;
-            this.linkLabel_WebApp.TabStop = true;
-            this.linkLabel_WebApp.Text = "How to register applications.";
-            this.linkLabel_WebApp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_WebApp_LinkClicked);
-            // 
-            // linkLabel_NativeApp
-            // 
-            this.linkLabel_NativeApp.AutoSize = true;
-            this.linkLabel_NativeApp.Location = new System.Drawing.Point(133, 14);
-            this.linkLabel_NativeApp.Name = "linkLabel_NativeApp";
-            this.linkLabel_NativeApp.Size = new System.Drawing.Size(140, 13);
-            this.linkLabel_NativeApp.TabIndex = 35;
-            this.linkLabel_NativeApp.TabStop = true;
-            this.linkLabel_NativeApp.Text = "How to register applications.";
-            this.linkLabel_NativeApp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_NativeApp_LinkClicked);
-            // 
-            // linkLabel_WebAppAppOnly
-            // 
-            this.linkLabel_WebAppAppOnly.AutoSize = true;
-            this.linkLabel_WebAppAppOnly.Location = new System.Drawing.Point(133, 17);
-            this.linkLabel_WebAppAppOnly.Name = "linkLabel_WebAppAppOnly";
-            this.linkLabel_WebAppAppOnly.Size = new System.Drawing.Size(140, 13);
-            this.linkLabel_WebAppAppOnly.TabIndex = 36;
-            this.linkLabel_WebAppAppOnly.TabStop = true;
-            this.linkLabel_WebAppAppOnly.Text = "How to register applications.";
-            this.linkLabel_WebAppAppOnly.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_WebAppAppOnly_LinkClicked);
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(6, 17);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(121, 13);
-            this.label37.TabIndex = 36;
-            this.label37.Text = "Step 1 : Fill out the form.";
-            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1148,5 +1170,6 @@
         private System.Windows.Forms.LinkLabel linkLabel_NativeApp;
         private System.Windows.Forms.LinkLabel linkLabel_WebAppAppOnly;
         private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.RadioButton radioButton_WebAppAppOnlyManagementResource;
     }
 }

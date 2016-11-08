@@ -14,6 +14,8 @@ namespace Office365APIEditor
 {
     public partial class RequestForm : Form
     {
+        ClientInformation clientInfo;
+
         bool useBasicAuth = false;
         TokenResponse _tokenResponse = null;
         string _resource = "";
@@ -36,64 +38,9 @@ namespace Office365APIEditor
 
         private void RequestForm_Load(object sender, EventArgs e)
         {
-            // First of all, we have to get an access token.
-
-            StartForm startForm = new StartForm();
-            if (startForm.ShowDialog(out _tokenResponse, out _resource, out _clientID, out _clientSecret, out _scopes, out _redirectUri, out _useV2Endpoint) == DialogResult.OK)
-            {
-                if (_tokenResponse.access_token == null && _tokenResponse.id_token != null)
-                {
-                    // Using OpenID Connect
-                    _tokenResponse.access_token = _tokenResponse.id_token;
-                }
-
-                if (_tokenResponse.access_token.StartsWith("USEBASICBASIC"))
-                {
-                    // Basic auth
-
-                    useBasicAuth = true;
-                    textBox_BasicAuthSMTPAddress.Enabled = true;
-                    textBox_BasicAuthPassword.Enabled = true;
-                    button_ViewTokenInfo.Enabled = false;
-                    button_RefreshToken.Enabled = false;
-                }
-                else if (_useV2Endpoint == false)
-                {
-                    // OAuth
-
-                    useBasicAuth = false;
-                    textBox_BasicAuthSMTPAddress.Enabled = false;
-                    textBox_BasicAuthSMTPAddress.Text = "OAuth (V1 Endpoint)";
-                    textBox_BasicAuthPassword.Enabled = false;
-                    textBox_BasicAuthPassword.Text = "OAuth (V1 Endpoint)";
-                    textBox_BasicAuthPassword.UseSystemPasswordChar = false;
-                    button_ViewTokenInfo.Enabled = true;
-                }
-                else
-                {
-                    // OAuth (V2 Endpoint)
-
-                    useBasicAuth = false;
-                    textBox_BasicAuthSMTPAddress.Enabled = false;
-                    textBox_BasicAuthSMTPAddress.Text = "OAuth (V2 Endpoint)";
-                    textBox_BasicAuthPassword.Enabled = false;
-                    textBox_BasicAuthPassword.Text = "OAuth (V2 Endpoint)";
-                    textBox_BasicAuthPassword.UseSystemPasswordChar = false;
-                    button_ViewTokenInfo.Enabled = true;
-                }
-
-                if (string.IsNullOrEmpty(_tokenResponse.refresh_token))
-                {
-                    button_RefreshToken.Enabled = false;
-                }
-
-                // Select the Body page.
-                tabControl_HeadersAndBody.SelectTab(1);
-            }
-            else
-            {
-                this.Close();
-            }
+            button_RefreshToken.Enabled = false;
+            button_Run.Enabled = false;
+            button_ViewTokenInfo.Enabled = false;
         }
 
         private void button_Run_Click(object sender, EventArgs e)
@@ -180,7 +127,7 @@ namespace Office365APIEditor
             {
                 request.Headers.Add(header);
             }
-            
+
             try
             {
                 // Change cursor.
@@ -308,13 +255,13 @@ namespace Office365APIEditor
                     tempTable["client_secret"] = _clientSecret;
                 }
             }
-                        
+
             foreach (string key in tempTable.Keys)
             {
                 postBody += String.Format("{0}={1}&", key, tempTable[key]);
             }
             byte[] postDataBytes = Encoding.ASCII.GetBytes(postBody);
-            
+
             System.Net.WebRequest request = System.Net.WebRequest.Create(endPoint + "token/");
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
@@ -334,7 +281,7 @@ namespace Office365APIEditor
                 string jsonResponse = "";
 
                 System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse();
-                
+
                 using (Stream responseStream = response.GetResponseStream())
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.Default);
@@ -477,5 +424,195 @@ namespace Office365APIEditor
 
             return Regex.Unescape(result);
         }
+
+        private void newAccessTokenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClientInformation newClientInfo;
+
+            AccessTokenWizard accessTokenWizard = new AccessTokenWizard();
+            if (accessTokenWizard.ShowDialog(out newClientInfo) == DialogResult.OK)
+            {
+                // Override current info.
+                clientInfo = newClientInfo;
+
+                if (clientInfo.AuthType == AuthEndpoints.Basic)
+                {
+                    // Basic auth
+
+                    useBasicAuth = true;
+                    textBox_BasicAuthSMTPAddress.Enabled = true;
+                    textBox_BasicAuthSMTPAddress.Text = "";
+                    textBox_BasicAuthPassword.Enabled = true;
+                    textBox_BasicAuthPassword.Text = "";
+                    textBox_BasicAuthPassword.UseSystemPasswordChar = true;
+                }
+                else if (clientInfo.AuthType == AuthEndpoints.OAuthV1)
+                {
+                    // OAuth V1
+
+                    useBasicAuth = false;
+                    textBox_BasicAuthSMTPAddress.Enabled = false;
+                    textBox_BasicAuthSMTPAddress.Text = "OAuth (V1 Endpoint)";
+                    textBox_BasicAuthPassword.Enabled = false;
+                    textBox_BasicAuthPassword.Text = "OAuth (V1 Endpoint)";
+                    textBox_BasicAuthPassword.UseSystemPasswordChar = false;
+                }
+                else
+                {
+                    // OAuth V2
+
+                    useBasicAuth = false;
+                    textBox_BasicAuthSMTPAddress.Enabled = false;
+                    textBox_BasicAuthSMTPAddress.Text = "OAuth (V2 Endpoint)";
+                    textBox_BasicAuthPassword.Enabled = false;
+                    textBox_BasicAuthPassword.Text = "OAuth (V2 Endpoint)";
+                    textBox_BasicAuthPassword.UseSystemPasswordChar = false;
+                }
+
+
+
+                _tokenResponse = clientInfo.Token;
+                _resource = clientInfo.ResourceUri;
+                _clientID = clientInfo.ClientID;
+                _clientSecret = clientInfo.ClientSecret;
+                _scopes = clientInfo.Scopes;
+                _redirectUri = clientInfo.RedirectUri;
+                _useV2Endpoint = (clientInfo.AuthType == AuthEndpoints.OAuthV2);
+
+                button_ViewTokenInfo.Enabled = !string.IsNullOrEmpty(clientInfo.Token.access_token);
+                button_RefreshToken.Enabled = !string.IsNullOrEmpty(clientInfo.Token.refresh_token);
+                button_Run.Enabled = true;
+
+                // Select the Body page.
+                tabControl_HeadersAndBody.SelectTab(1);
+            }
+
+            //AcquireAccessToken();
+        }
+
+        private void AcquireAccessToken()
+        {
+            // get an access token.
+
+            StartForm startForm = new StartForm();
+            if (startForm.ShowDialog(out _tokenResponse, out _resource, out _clientID, out _clientSecret, out _scopes, out _redirectUri, out _useV2Endpoint) == DialogResult.OK)
+            {
+                if (_tokenResponse.access_token == null && _tokenResponse.id_token != null)
+                {
+                    // Using OpenID Connect
+                    _tokenResponse.access_token = _tokenResponse.id_token;
+                }
+
+                if (_tokenResponse.access_token.StartsWith("USEBASICBASIC"))
+                {
+                    // Basic auth
+
+                    useBasicAuth = true;
+                    textBox_BasicAuthSMTPAddress.Enabled = true;
+                    textBox_BasicAuthPassword.Enabled = true;
+                    button_ViewTokenInfo.Enabled = false;
+                    button_RefreshToken.Enabled = false;
+                }
+                else if (_useV2Endpoint == false)
+                {
+                    // OAuth
+
+                    useBasicAuth = false;
+                    textBox_BasicAuthSMTPAddress.Enabled = false;
+                    textBox_BasicAuthSMTPAddress.Text = "OAuth (V1 Endpoint)";
+                    textBox_BasicAuthPassword.Enabled = false;
+                    textBox_BasicAuthPassword.Text = "OAuth (V1 Endpoint)";
+                    textBox_BasicAuthPassword.UseSystemPasswordChar = false;
+                    button_ViewTokenInfo.Enabled = true;
+                }
+                else
+                {
+                    // OAuth (V2 Endpoint)
+
+                    useBasicAuth = false;
+                    textBox_BasicAuthSMTPAddress.Enabled = false;
+                    textBox_BasicAuthSMTPAddress.Text = "OAuth (V2 Endpoint)";
+                    textBox_BasicAuthPassword.Enabled = false;
+                    textBox_BasicAuthPassword.Text = "OAuth (V2 Endpoint)";
+                    textBox_BasicAuthPassword.UseSystemPasswordChar = false;
+                    button_ViewTokenInfo.Enabled = true;
+                }
+
+                if (string.IsNullOrEmpty(_tokenResponse.refresh_token))
+                {
+                    button_RefreshToken.Enabled = false;
+                }
+
+                // Select the Body page.
+                tabControl_HeadersAndBody.SelectTab(1);
+            }
+        }
+
+        private bool AcquireAccessToken2()
+        {
+            // get an access token.
+
+            StartForm startForm = new StartForm();
+            if (startForm.ShowDialog(out clientInfo) == DialogResult.OK)
+            {
+                if (clientInfo.Token.access_token.StartsWith("USEBASICBASIC"))
+                {
+                    // Basic auth
+
+                    useBasicAuth = true;
+                    textBox_BasicAuthSMTPAddress.Enabled = true;
+                    textBox_BasicAuthPassword.Enabled = true;
+                    button_ViewTokenInfo.Enabled = false;
+                    button_RefreshToken.Enabled = false;
+                }
+                else if (clientInfo.AuthType == AuthEndpoints.OAuthV1)
+                {
+                    // OAuth
+
+                    useBasicAuth = false;
+                    textBox_BasicAuthSMTPAddress.Enabled = false;
+                    textBox_BasicAuthSMTPAddress.Text = "OAuth (V1 Endpoint)";
+                    textBox_BasicAuthPassword.Enabled = false;
+                    textBox_BasicAuthPassword.Text = "OAuth (V1 Endpoint)";
+                    textBox_BasicAuthPassword.UseSystemPasswordChar = false;
+                    button_ViewTokenInfo.Enabled = true;
+                }
+                else
+                {
+                    // OAuth (V2 Endpoint)
+
+                    useBasicAuth = false;
+                    textBox_BasicAuthSMTPAddress.Enabled = false;
+                    textBox_BasicAuthSMTPAddress.Text = "OAuth (V2 Endpoint)";
+                    textBox_BasicAuthPassword.Enabled = false;
+                    textBox_BasicAuthPassword.Text = "OAuth (V2 Endpoint)";
+                    textBox_BasicAuthPassword.UseSystemPasswordChar = false;
+                    button_ViewTokenInfo.Enabled = true;
+                }
+
+                if (string.IsNullOrEmpty(clientInfo.Token.refresh_token))
+                {
+                    button_RefreshToken.Enabled = false;
+                }
+
+                _tokenResponse = clientInfo.Token;
+                _resource = clientInfo.ResourceUri;
+                _clientID = clientInfo.ClientID;
+                _clientSecret = clientInfo.ClientSecret;
+                _scopes = clientInfo.Scopes;
+                _redirectUri = clientInfo.RedirectUri;
+                _useV2Endpoint = (clientInfo.AuthType == AuthEndpoints.OAuthV2);
+
+                // Select the Body page.
+                tabControl_HeadersAndBody.SelectTab(1);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

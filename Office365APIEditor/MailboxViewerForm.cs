@@ -36,13 +36,17 @@ namespace Office365APIEditor
 
         private void MailboxViewerForm_Load(object sender, System.EventArgs e)
         {
+            closeSessionToolStripMenuItem.Enabled = false;
+        }
+
+        private bool Prepare()
+        {
             // Use MSAL and acquire access token.
 
             AcquireViewerTokenForm acuireViewerTokenForm = new AcquireViewerTokenForm();
             if (acuireViewerTokenForm.ShowDialog(out pca, out ar) != DialogResult.OK)
             {
-                Close();
-                return;
+                return false;
             }
 
             string token = ar.Token;
@@ -58,21 +62,23 @@ namespace Office365APIEditor
                             return token;
                         });
                     });
-                
+
                 client.Context.SendingRequest2 += new EventHandler<SendingRequest2EventArgs>(
                     (eventSender, eventArgs) => InsertXAnchorMailboxHeader(eventSender, eventArgs, email));
 
-                // フォルダー階層を動的に取得するパターン。
-
                 // Get the root folder.
                 GetRootFolder();
-
+                
                 // Get CalendarFolders (Calendars)
                 GetCalendarFolders();
+
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(string.Format("ERROR retrieving folders: {0}", ex.Message, "Office365APIEditor"));
+
+                return false;
             }
         }
 
@@ -81,7 +87,7 @@ namespace Office365APIEditor
             e.RequestMessage.SetHeader("X-AnchorMailbox", email);
         }
 
-        private void GetRootFolder()
+        private async void GetRootFolder()
         {
             // https://outlook.office.com/api/v1.0/me/RootFolder/?$select=ParentFolderId
 
@@ -92,20 +98,20 @@ namespace Office365APIEditor
             // Following operation is available with v1.0 only.
             // https://outlook.office.com/api/v1.0/me/RootFolder
 
-            var inbox = client.Me.MailFolders["Inbox"].ExecuteAsync().Result; // Inbox
+            var inbox = await client.Me.MailFolders["Inbox"].ExecuteAsync(); // Inbox
             inboxId = inbox.Id;
 
-            var topOfInformationStore = client.Me.MailFolders[inbox.ParentFolderId].ExecuteAsync().Result; // Top of information store
+            var topOfInformationStore = await client.Me.MailFolders[inbox.ParentFolderId].ExecuteAsync(); // Top of information store
             topOfInformationStoreId = topOfInformationStore.Id;
 
-            var msgFolderRoot = client.Me.MailFolders[topOfInformationStore.ParentFolderId].ExecuteAsync().Result; // MsgFolderRoot
+            var msgFolderRoot = await client.Me.MailFolders[topOfInformationStore.ParentFolderId].ExecuteAsync(); // MsgFolderRoot
             msgFolderRootId = msgFolderRoot.Id;
 
             TreeNode node = new TreeNode("MsgFolderRoot");
             node.Tag = new FolderInfo() { ID = msgFolderRoot.Id, Type = FolderContentType.Message, Expanded = false };
-            node.ContextMenuStrip = contextMenuStrip_FolderTreeNode;        
+            node.ContextMenuStrip = contextMenuStrip_FolderTreeNode;
             node.Nodes.Add(new TreeNode()); // Add a dummy node.
-            
+
             msgFolderRootNode = node;
 
             if (treeView_Mailbox.InvokeRequired)
@@ -246,7 +252,7 @@ namespace Office365APIEditor
             } while (morePages);
         }
 
-        private void GetCalendarFolders()
+        private async void GetCalendarFolders()
         {
             // Calendar object has no ParentID or ChildFolders.
             // So we use DummyCalendarRoot node as a parent folder of calendar folders.
@@ -266,12 +272,11 @@ namespace Office365APIEditor
                 treeView_Mailbox.Nodes.Add(dummyCalendarRootNode);
             }
 
-            var calendarFolderResults = client.Me.Calendars
+            var calendarFolderResults = await client.Me.Calendars
                 .OrderBy(c => c.Name)
                 .Take(50)
                 .Select(c => new { c.Id, c.Name })
-                .ExecuteAsync()
-                .Result;
+                .ExecuteAsync();
 
             bool morePages = false;
 
@@ -626,6 +631,38 @@ namespace Office365APIEditor
             // Open selected folder.
             FolderViewerForm folderViewerForm = new FolderViewerForm(pca, email, (FolderInfo)SelectedNode.Tag, SelectedNode.Text);
             folderViewerForm.Show();
+        }
+
+        private void newSessionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Prepare())
+            {
+                // New session stated
+                newSessionToolStripMenuItem.Enabled = false;
+                closeSessionToolStripMenuItem.Enabled = true;
+            }
+        }
+
+        private void newEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RequestForm requestForm = new RequestForm();
+            requestForm.Show();
+        }
+
+        private void closeSessionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CloseCurrentSession();
+
+            newSessionToolStripMenuItem.Enabled = true;
+            closeSessionToolStripMenuItem.Enabled = false;
+        }
+
+        private void CloseCurrentSession()
+        {
+            client = null;
+            dataGridView_FolderProps.Rows.Clear();
+            dataGridView_FolderProps.Columns.Clear();
+            treeView_Mailbox.Nodes.Clear();
         }
     }
 }

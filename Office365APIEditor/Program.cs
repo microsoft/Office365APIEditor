@@ -6,33 +6,14 @@ using System.Windows.Forms;
 
 namespace Office365APIEditor
 {
+
     class MyApplicationContext : ApplicationContext
     {
         public MyApplicationContext()
         {
-            string mode = "";
-
-            ModeSelectionForm modeSelectionForm = new ModeSelectionForm();
-            modeSelectionForm.ShowDialog(out mode);
-            
-            if (mode == "Editor")
-            {
-                RequestForm requestForm = new RequestForm();
-
-                requestForm.FormClosed += new FormClosedEventHandler(OnFormClosed);
-                requestForm.Show();
-            }
-            else if (mode == "MailboxViewer")
-            {
-                MailboxViewerForm mailboxViewerForm = new MailboxViewerForm();
-
-                mailboxViewerForm.FormClosed += new FormClosedEventHandler(OnFormClosed);
-                mailboxViewerForm.Show();
-            }
-            else
-            {
-                Environment.Exit(0);
-            }
+            MailboxViewerForm mailboxViewerForm = new MailboxViewerForm();
+            mailboxViewerForm.FormClosed += new FormClosedEventHandler(OnFormClosed);
+            mailboxViewerForm.Show();
         }
 
         private void OnFormClosed(object sender, FormClosedEventArgs e)
@@ -77,5 +58,5 @@ namespace Office365APIEditor
             }
         }
 
-     }
+    }
 }

@@ -87,6 +87,112 @@ namespace Office365APIEditor
             return result;
         }
 
+        public DialogResult ShowDialog(out ClientInformation ClientInfo)
+        {
+            DialogResult dialogResult = this.ShowDialog();
+
+            // Build return values.
+            // Those values are used to acquire another access token.
+
+            TokenResponse AccessToken;
+            string Resource;
+            string ClientID;
+            string ClientSecret;
+            string Scopes;
+            string RedirectUri;
+            bool UseV2Endpoint;
+
+            AuthEndpoints authEndpoint = new AuthEndpoints();
+
+            if (_tokenResponse.access_token == null && _tokenResponse.id_token != null)
+            {
+                // Using OpenID Connect
+                _tokenResponse.access_token = _tokenResponse.id_token;
+            }
+
+            AccessToken = _tokenResponse;
+
+            if (radioButton_WebApp.Checked)
+            {
+                Resource = _resource;
+                ClientID = textBox_WebAppClientID.Text;
+                ClientSecret = textBox_WebAppClientSecret.Text;
+                Scopes = "";
+                RedirectUri = "";
+                UseV2Endpoint = false;
+
+                authEndpoint = AuthEndpoints.OAuthV1;
+            }
+            else if (radioButton_NativeApp.Checked)
+            {
+                Resource = _resource;
+                ClientID = "";
+                ClientSecret = "";
+                Scopes = "";
+                RedirectUri = "";
+                UseV2Endpoint = false;
+
+                authEndpoint = AuthEndpoints.OAuthV1;
+            }
+            else if (radioButton_V2MobileApp.Checked)
+            {
+                Resource = "";
+                ClientID = textBox_V2MobileAppClientID.Text;
+                ClientSecret = "";
+                Scopes = textBox_V2MobileAppScopes.Text;
+                RedirectUri = textBox_V2MobileAppRedirectUri.Text;
+                UseV2Endpoint = true;
+
+                authEndpoint = AuthEndpoints.OAuthV2;
+            }
+            else if (radioButton_V2WebApp.Checked)
+            {
+                Resource = "";
+                ClientID = textBox_V2WebAppClientID.Text;
+                ClientSecret = textBox_V2WebAppClientSecret.Text;
+                Scopes = textBox_V2WebAppScopes.Text;
+                RedirectUri = textBox_V2WebAppRedirectUri.Text;
+                UseV2Endpoint = true;
+
+                authEndpoint = AuthEndpoints.OAuthV2;
+            }
+            else
+            {
+                Resource = "";
+                ClientID = "";
+                ClientSecret = "";
+                Scopes = "";
+                RedirectUri = "";
+                UseV2Endpoint = false;
+
+                authEndpoint = AuthEndpoints.Basic;
+            }
+
+            Resources resource = new Resources();
+
+            if (Resource == "Exchange Online")
+            {
+                resource = Resources.Outlook;
+            }
+            else if (Resource == "Microsoft Graph")
+            {
+                resource = Resources.Graph;
+            }
+            else if (Resource == "Office 365 Management API")
+            {
+                resource = Resources.Management;
+            }
+            else
+            {
+                resource = Resources.None;
+            }
+
+            ClientInformation result = new ClientInformation(AccessToken, authEndpoint, resource, ClientID, ClientSecret, Scopes, RedirectUri);
+
+            ClientInfo = result;
+            return dialogResult;
+        }
+
         private void radioButton_WebApp_CheckedChanged(object sender, EventArgs e)
         {
             groupBox_WebApp.Enabled = true;
@@ -544,10 +650,20 @@ namespace Office365APIEditor
             try
             {
                 // Show a Sign-in page of Office365.
-                authenticationResult = authenticationContext.AcquireToken(resourceName, clientId, redirectUri, PromptBehavior.Always);
-
+                authenticationResult = authenticationContext.AcquireTokenAsync(resourceName, clientId, redirectUri, new PlatformParameters(PromptBehavior.Always)).Result;
+                
                 // If we use hardcoded user credential, use this method.
                 // authenticationResult = authenticationContext.AcquireToken(resourceName, clientId, new UserCredential("SMTP Address", "password"));
+            }
+            catch (AggregateException ex)
+            {
+                errorMessage = ex.Message;
+
+                if (ex.InnerException.Message == "User canceled authentication")
+                {
+                    errorMessage = "User canceled authentication";
+                }
+
             }
             catch (AdalException ex)
             {
@@ -561,10 +677,18 @@ namespace Office365APIEditor
             {
                 errorMessage = ex.Message;
             }
+            catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+            }
 
             if (!string.IsNullOrEmpty(errorMessage))
             {
-                MessageBox.Show(errorMessage, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (errorMessage != "User canceled authentication")
+                {
+                    MessageBox.Show(errorMessage, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
                 return null;
             }
             else
@@ -684,7 +808,7 @@ namespace Office365APIEditor
             string errorMessage = null;
             try
             {
-                authenticationResult = authenticationContext.AcquireToken(resourceName, cac);
+                authenticationResult = authenticationContext.AcquireTokenAsync(resourceName, cac).Result;
             }
             catch (AdalException ex)
             {
@@ -752,6 +876,10 @@ namespace Office365APIEditor
             {
                 return "Microsoft Graph";
             }
+            else if (radioButton_WebAppAppOnlyManagementResource.Checked)
+            {
+                return "Office 365 Management API";
+            }
             else
             {
                 return "";
@@ -766,6 +894,8 @@ namespace Office365APIEditor
                     return "https://outlook.office.com/";
                 case "Microsoft Graph":
                     return "https://graph.microsoft.com/";
+                case "Office 365 Management API":
+                    return "https://manage.office.com";
                 default:
                     return "";
             }
@@ -804,7 +934,7 @@ namespace Office365APIEditor
                 not_before = "",
                 resource = "",
                 access_token = value.AccessToken,
-                refresh_token = value.RefreshToken,
+                //refresh_token = value.RefreshToken,
                 id_token = value.IdToken
             };
         }
@@ -954,6 +1084,56 @@ namespace Office365APIEditor
         private void linkLabel_WebAppAppOnly_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V1_Web_application_for_App_Only_Token.md");
+        }
+
+        private void radioButton_WebAppGraphResource_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox_WebAppClientSecret_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton_WebAppExoResource_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox_WebAppClientID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox_WebAppRedirectUri_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

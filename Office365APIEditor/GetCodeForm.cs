@@ -15,7 +15,7 @@ namespace Office365APIEditor
         // Return value
         private string _acquiredCode = "";
 
-        public GetCodeForm(string ClientID, string RedirectUri, string ResourceOrScopeUri, bool IsV2 = false)
+        public GetCodeForm(string ClientID, string RedirectUri, string ResourceOrScopeUri, bool IsV2 = false, string TenantName = "")
         {
             InitializeComponent();
 
@@ -23,7 +23,16 @@ namespace Office365APIEditor
 
             // Build an URL of sign-in page.
 
-            string endPoint = "https://login.microsoftonline.com/common/oauth2";
+            string endPoint = "https://login.microsoftonline.com/";
+
+            if (TenantName == "")
+            {
+                endPoint += "common/oauth2";
+            }
+            else
+            {
+                endPoint += TenantName.Replace("@", ".") + "/oauth2";
+            }
 
             if (IsV2 == true)
             {
@@ -32,8 +41,9 @@ namespace Office365APIEditor
             }
             else
             {
-// authenticationUrl = endPoint + "/authorize?response_type=code&client_id=" + ClientID + "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) + "&resource=" + System.Web.HttpUtility.UrlEncode(ResourceOrScopeUri) + "&prompt=login";
-                authenticationUrl = endPoint + "/authorize?response_type=code&" +
+                authenticationUrl = endPoint + "/authorize?" +
+                    "resource=" + System.Web.HttpUtility.UrlEncode(ResourceOrScopeUri) +
+                    "&response_type=code" +
                     "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) +
                     "&client_id=" + ClientID + 
                     "&prompt=login";
