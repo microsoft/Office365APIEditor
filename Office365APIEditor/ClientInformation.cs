@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright (c) Microsoft. All rights reserved. 
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
 namespace Office365APIEditor
 {
@@ -33,6 +30,17 @@ namespace Office365APIEditor
             {
                 return Util.ConvertResourceEnumToUri(Resource);
             }
+        }
+
+        public void ReplaceToken(TokenResponse newToken)
+        {
+            if (newToken.access_token == null && newToken.id_token != null)
+            {
+                // Using OpenID Connect
+                newToken.access_token = newToken.id_token;
+            }
+
+            Token = newToken;
         }
     }
 

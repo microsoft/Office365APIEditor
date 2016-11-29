@@ -101,5 +101,11 @@
     <Setting Name="LastWebAppAppOnlyCertPass" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="LogFolderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LogFileStyle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Static</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

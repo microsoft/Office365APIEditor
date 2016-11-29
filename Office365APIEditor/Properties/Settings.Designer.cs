@@ -321,5 +321,29 @@ namespace Office365APIEditor.Properties {
                 this["LastWebAppAppOnlyCertPass"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LogFolderPath {
+            get {
+                return ((string)(this["LogFolderPath"]));
+            }
+            set {
+                this["LogFolderPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Static")]
+        public string LogFileStyle {
+            get {
+                return ((string)(this["LogFileStyle"]));
+            }
+            set {
+                this["LogFileStyle"] = value;
+            }
+        }
     }
 }

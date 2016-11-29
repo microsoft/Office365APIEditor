@@ -165,6 +165,12 @@
     <Compile Include="GetCodeForm.Designer.cs">
       <DependentUpon>GetCodeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoggingOption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoggingOption.Designer.cs">
+      <DependentUpon>LoggingOption.cs</DependentUpon>
+    </Compile>
     <Compile Include="MailboxViewerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +230,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GetCodeForm.resx">
       <DependentUpon>GetCodeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoggingOption.resx">
+      <DependentUpon>LoggingOption.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MailboxViewerForm.resx">
       <DependentUpon>MailboxViewerForm.cs</DependentUpon>

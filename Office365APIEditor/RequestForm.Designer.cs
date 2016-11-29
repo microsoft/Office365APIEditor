@@ -59,6 +59,9 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newAccessTokenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.checkBox_Logging = new System.Windows.Forms.CheckBox();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loggingOptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl_HeadersAndBody.SuspendLayout();
             this.tabPage_Headers.SuspendLayout();
             this.tabPage_Body.SuspendLayout();
@@ -337,7 +340,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.toolsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(820, 24);
@@ -370,6 +374,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.checkBox_Logging);
             this.splitContainer1.Panel1.Controls.Add(this.button_ViewTokenInfo);
             this.splitContainer1.Panel1.Controls.Add(this.tabControl_HeadersAndBody);
             this.splitContainer1.Panel1.Controls.Add(this.textBox_Request);
@@ -399,6 +404,32 @@
             this.splitContainer1.Size = new System.Drawing.Size(820, 497);
             this.splitContainer1.SplitterDistance = 203;
             this.splitContainer1.TabIndex = 43;
+            // 
+            // checkBox_Logging
+            // 
+            this.checkBox_Logging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox_Logging.AutoSize = true;
+            this.checkBox_Logging.Location = new System.Drawing.Point(701, 154);
+            this.checkBox_Logging.Name = "checkBox_Logging";
+            this.checkBox_Logging.Size = new System.Drawing.Size(64, 17);
+            this.checkBox_Logging.TabIndex = 42;
+            this.checkBox_Logging.Text = "Logging";
+            this.checkBox_Logging.UseVisualStyleBackColor = true;
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loggingOptionToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Text = "&Tools";
+            // 
+            // loggingOptionToolStripMenuItem
+            // 
+            this.loggingOptionToolStripMenuItem.Name = "loggingOptionToolStripMenuItem";
+            this.loggingOptionToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.loggingOptionToolStripMenuItem.Text = "&Logging Option...";
+            this.loggingOptionToolStripMenuItem.Click += new System.EventHandler(this.loggingOptionToolStripMenuItem_Click);
             // 
             // RequestForm
             // 
@@ -463,5 +494,8 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newAccessTokenToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.CheckBox checkBox_Logging;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loggingOptionToolStripMenuItem;
     }
 }

@@ -1,13 +1,10 @@
-﻿using Microsoft.Identity.Client;
+﻿// Copyright (c) Microsoft. All rights reserved. 
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
+
+using Microsoft.Identity.Client;
 using Microsoft.OData.Client;
 using Microsoft.Office365.OutlookServices;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 

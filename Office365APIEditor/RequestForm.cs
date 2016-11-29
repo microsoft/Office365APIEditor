@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections;
-using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -15,15 +15,6 @@ namespace Office365APIEditor
     public partial class RequestForm : Form
     {
         ClientInformation clientInfo;
-
-        bool useBasicAuth = false;
-        TokenResponse _tokenResponse = null;
-        string _resource = "";
-        string _clientID = "";
-        string _clientSecret = "";
-        string _scopes;
-        string _redirectUri = "";
-        bool _useV2Endpoint = false;
 
         string originalResponseHeaders = "";
         string originalJsonResponse = "";
@@ -43,7 +34,7 @@ namespace Office365APIEditor
             button_ViewTokenInfo.Enabled = false;
         }
 
-        private void button_Run_Click(object sender, EventArgs e)
+        private async void button_Run_Click(object sender, EventArgs e)
         {
             originalResponseHeaders = "";
             originalJsonResponse = "";
@@ -51,10 +42,10 @@ namespace Office365APIEditor
             decodedJsonResponse = "";
             indentedAndDecodedJsonResponse = "";
 
-            System.Net.WebRequest request = System.Net.WebRequest.Create(textBox_Request.Text);
+            WebRequest request = WebRequest.Create(textBox_Request.Text);
             request.ContentType = "application/json";
 
-            if (useBasicAuth == true)
+            if (clientInfo.AuthType == AuthEndpoints.Basic)
             {
                 // Basic authentication
 
@@ -78,7 +69,7 @@ namespace Office365APIEditor
             else
             {
                 // OAuth authentication
-                request.Headers.Add("Authorization:Bearer " + _tokenResponse.access_token);
+                request.Headers.Add("Authorization:Bearer " + clientInfo.Token.access_token);
             }
 
             if (radioButton_GET.Checked)
@@ -131,16 +122,29 @@ namespace Office365APIEditor
             try
             {
                 // Change cursor.
-                this.Cursor = Cursors.WaitCursor;
+                Application.UseWaitCursor = true;
+
+                // Logging
+                if (checkBox_Logging.Checked)
+                {
+                    WriteRequestLog(request, textBox_RequestBody.Text);
+                }
 
                 // Get a response and response stream.
-                System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse();
+                // System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse();
+                var response = (HttpWebResponse)await request.GetResponseAsync();
 
                 string jsonResponse = "";
                 using (Stream responseStream = response.GetResponseStream())
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.Default);
                     jsonResponse = reader.ReadToEnd();
+                }
+
+                // Logging
+                if (checkBox_Logging.Checked)
+                {
+                    WriteResponseLog(response, jsonResponse);
                 }
 
                 // Display the results.
@@ -154,7 +158,7 @@ namespace Office365APIEditor
                 // Save application setting.
                 Properties.Settings.Default.Save();
             }
-            catch (System.Net.WebException ex)
+            catch (WebException ex)
             {
                 string jsonResponse = "";
                 using (Stream responseStream = ex.Response.GetResponseStream())
@@ -163,16 +167,28 @@ namespace Office365APIEditor
                     jsonResponse = reader.ReadToEnd();
                 }
 
+                // Logging
+                if (checkBox_Logging.Checked)
+                {
+                    WriteResponseLog((HttpWebResponse)ex.Response, jsonResponse);
+                }
+
                 textBox_Result.Text = ex.Message + "\r\n\r\nResponse Headers : \r\n" + ex.Response.Headers.ToString() + "\r\n\r\nResponse Body : \r\n" + jsonResponse;
             }
             catch (Exception ex)
             {
+                // Logging
+                if (checkBox_Logging.Checked)
+                {
+                    WriteCustomLog("Response", ex.Message);
+                }
+
                 textBox_Result.Text = ex.Message;
             }
             finally
             {
                 // Change cursor.
-                this.Cursor = Cursors.Default;
+                Application.UseWaitCursor = false;
             }
         }
 
@@ -205,11 +221,11 @@ namespace Office365APIEditor
 
         private void button_ViewTokenInfo_Click(object sender, EventArgs e)
         {
-            TokenViewer tokenViewer = new TokenViewer(_tokenResponse);
+            TokenViewer tokenViewer = new TokenViewer(clientInfo.Token);
             tokenViewer.ShowDialog();
         }
 
-        private void button_RefreshToken_Click(object sender, EventArgs e)
+        private async void button_RefreshToken_Click(object sender, EventArgs e)
         {
             // Request another access token with refresh token.
 
@@ -226,33 +242,33 @@ namespace Office365APIEditor
             Hashtable tempTable = new Hashtable();
 
             tempTable["grant_type"] = "refresh_token";
-            tempTable["refresh_token"] = _tokenResponse.refresh_token;
+            tempTable["refresh_token"] = clientInfo.Token.refresh_token;
 
-            if (_useV2Endpoint == false)
+            if (clientInfo.AuthType == AuthEndpoints.OAuthV1)
             {
-                string resourceURL = StartForm.GetResourceURL(_resource);
+                string resourceURL = StartForm.GetResourceURL(clientInfo.ResourceUri);
                 tempTable["resource"] = System.Web.HttpUtility.UrlEncode(resourceURL);
 
-                if (_clientID != "")
+                if (clientInfo.ClientID != "")
                 {
                     // If _clientID has value, we're working with web app.
                     // So we have to add Client ID and Client Secret.
-                    tempTable["client_id"] = _clientID;
-                    tempTable["client_secret"] = _clientSecret;
+                    tempTable["client_id"] = clientInfo.ClientID;
+                    tempTable["client_secret"] = clientInfo.ClientSecret;
                 }
             }
             else
             {
                 endPoint += "v2.0/";
-                tempTable["scope"] = _scopes;
-                tempTable["client_id"] = _clientID;
-                tempTable["redirect_uri"] = _redirectUri;
+                tempTable["scope"] = clientInfo.Scopes;
+                tempTable["client_id"] = clientInfo.ClientID;
+                tempTable["redirect_uri"] = clientInfo.ResourceUri;
 
-                if (_clientID != "")
+                if (clientInfo.ClientID != "")
                 {
                     // If _clientID has value, we're working with web app.
                     // So we have to add Client Secret.
-                    tempTable["client_secret"] = _clientSecret;
+                    tempTable["client_secret"] = clientInfo.ClientSecret;
                 }
             }
 
@@ -262,7 +278,7 @@ namespace Office365APIEditor
             }
             byte[] postDataBytes = Encoding.ASCII.GetBytes(postBody);
 
-            System.Net.WebRequest request = System.Net.WebRequest.Create(endPoint + "token/");
+            WebRequest request = WebRequest.Create(endPoint + "token/");
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = postDataBytes.Length;
@@ -270,22 +286,35 @@ namespace Office365APIEditor
             try
             {
                 // Change a cursor.
-                this.Cursor = Cursors.WaitCursor;
+                Application.UseWaitCursor = true;
 
                 // Get a RequestStream to POST a data.
                 using (Stream reqStream = request.GetRequestStream())
                 {
                     reqStream.Write(postDataBytes, 0, postDataBytes.Length);
                 }
+                
+                // Logging
+                if (checkBox_Logging.Checked)
+                {
+                    WriteRequestLog(request, postBody);
+                }
 
                 string jsonResponse = "";
 
-                System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse();
+                // System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse();
+                var response = (HttpWebResponse)await request.GetResponseAsync();
 
                 using (Stream responseStream = response.GetResponseStream())
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.Default);
                     jsonResponse = reader.ReadToEnd();
+                }
+
+                // Logging
+                if (checkBox_Logging.Checked)
+                {
+                    WriteResponseLog(response, jsonResponse);
                 }
 
                 // Display the results.
@@ -298,26 +327,39 @@ namespace Office365APIEditor
                 textBox_Result.Text = originalResponseHeaders + shapeJsonResponseIfNeeded(originalJsonResponse);
 
                 // Deserialize and get Access Token.
-                _tokenResponse = StartForm.Deserialize<TokenResponse>(jsonResponse);
-
-                if (_tokenResponse.access_token == null && _tokenResponse.id_token != null)
-                {
-                    // Using OpenID Connect
-                    _tokenResponse.access_token = _tokenResponse.id_token;
-                }
+                clientInfo.ReplaceToken(StartForm.Deserialize<TokenResponse>(jsonResponse));
             }
-            catch (System.Net.WebException ex)
+            catch (WebException ex)
             {
-                textBox_Result.Text = ex.Message + "\r\n\r\nResponse Headers : \r\n" + ex.Response.Headers.ToString();
+                string jsonResponse = "";
+                using (Stream responseStream = ex.Response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.Default);
+                    jsonResponse = reader.ReadToEnd();
+                }
+
+                // Logging
+                if (checkBox_Logging.Checked)
+                {
+                    WriteResponseLog((HttpWebResponse)ex.Response, jsonResponse);
+                }
+
+                textBox_Result.Text = ex.Message + "\r\n\r\nResponse Headers : \r\n" + ex.Response.Headers.ToString() + "\r\n\r\nResponse Body : \r\n" + jsonResponse;
             }
             catch (Exception ex)
             {
+                // Logging
+                if (checkBox_Logging.Checked)
+                {
+                    WriteCustomLog("Response", ex.Message);
+                }
+
                 textBox_Result.Text = ex.Message;
             }
             finally
             {
                 // Change cursor.
-                this.Cursor = Cursors.Default;
+                Application.UseWaitCursor = false;
             }
         }
 
@@ -425,6 +467,95 @@ namespace Office365APIEditor
             return Regex.Unescape(result);
         }
 
+        private void WriteRequestLog(WebRequest RequestToLog, string Body)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Request");
+            sb.AppendLine("DateTime : " + DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+            sb.AppendLine("Method : " + RequestToLog.Method);
+            sb.AppendLine("URL : " + RequestToLog.RequestUri.ToString());
+            sb.AppendLine("Header : ");
+            foreach (var header in RequestToLog.Headers.AllKeys)
+            {
+                sb.AppendLine("  " + header + " : " + RequestToLog.Headers.Get(header));
+            }
+
+            if (RequestToLog.Method == "POST" || RequestToLog.Method == "PATCH")
+            {
+                sb.AppendLine("Body : ");
+                sb.AppendLine("  " + Body.Replace(Environment.NewLine, Environment.NewLine + "  "));
+            }
+
+            WriteLog(sb);
+        }
+
+        private void WriteResponseLog(HttpWebResponse ResponseToLog, string ResponseBody)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Response");
+            sb.AppendLine("DateTime : " + DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+            sb.AppendLine("StatusCode : " + ResponseToLog.StatusCode.ToString());
+            sb.AppendLine("Header : ");
+            foreach (var header in ResponseToLog.Headers.AllKeys)
+            {
+                sb.AppendLine("  " + header + " : " + ResponseToLog.Headers.Get(header));
+            }
+
+            sb.AppendLine("Body : ");
+            sb.AppendLine("  " + ResponseBody.Replace(Environment.NewLine, Environment.NewLine + "  "));
+
+            WriteLog(sb);
+        }
+
+        private void WriteCustomLog(string Title, string Message)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(Title);
+            sb.AppendLine("DateTime : " + DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+            sb.AppendLine(Message);
+
+            WriteLog(sb);
+        }
+
+        private void WriteLog(StringBuilder Message)
+        {
+            Message.AppendLine("");
+
+            string logFilePath = "";
+
+            if (!Directory.Exists(Properties.Settings.Default.LogFolderPath))
+            {
+                // Specified log folder path is not exsisting.
+                MessageBox.Show("The Specified log folder path is not exsisting.", "Office365APIEditor");
+                return;
+            }
+
+            if (Properties.Settings.Default.LogFileStyle == "Static")
+            {
+                logFilePath = Path.Combine(Properties.Settings.Default.LogFolderPath, "Office365APIEditor.log");
+            }
+            else if (Properties.Settings.Default.LogFileStyle == "DateTime")
+            {
+                logFilePath = Path.Combine(Properties.Settings.Default.LogFolderPath, DateTime.UtcNow.ToString("yyyyMMdd") + ".log");
+            }
+            else
+            {
+                logFilePath = Path.Combine(Properties.Settings.Default.LogFolderPath, "Office365APIEditor.log");
+            }
+
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(logFilePath, true, Encoding.Default))
+                {
+                    sw.Write(Message.ToString());
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Failed to write the log.\r\n\r\n" + ex.Message, "Office365APIEditor");
+            }
+        }
+
         private void newAccessTokenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ClientInformation newClientInfo;
@@ -439,7 +570,6 @@ namespace Office365APIEditor
                 {
                     // Basic auth
 
-                    useBasicAuth = true;
                     textBox_BasicAuthSMTPAddress.Enabled = true;
                     textBox_BasicAuthSMTPAddress.Text = "";
                     textBox_BasicAuthPassword.Enabled = true;
@@ -450,7 +580,6 @@ namespace Office365APIEditor
                 {
                     // OAuth V1
 
-                    useBasicAuth = false;
                     textBox_BasicAuthSMTPAddress.Enabled = false;
                     textBox_BasicAuthSMTPAddress.Text = "OAuth (V1 Endpoint)";
                     textBox_BasicAuthPassword.Enabled = false;
@@ -461,23 +590,12 @@ namespace Office365APIEditor
                 {
                     // OAuth V2
 
-                    useBasicAuth = false;
                     textBox_BasicAuthSMTPAddress.Enabled = false;
                     textBox_BasicAuthSMTPAddress.Text = "OAuth (V2 Endpoint)";
                     textBox_BasicAuthPassword.Enabled = false;
                     textBox_BasicAuthPassword.Text = "OAuth (V2 Endpoint)";
                     textBox_BasicAuthPassword.UseSystemPasswordChar = false;
                 }
-
-
-
-                _tokenResponse = clientInfo.Token;
-                _resource = clientInfo.ResourceUri;
-                _clientID = clientInfo.ClientID;
-                _clientSecret = clientInfo.ClientSecret;
-                _scopes = clientInfo.Scopes;
-                _redirectUri = clientInfo.RedirectUri;
-                _useV2Endpoint = (clientInfo.AuthType == AuthEndpoints.OAuthV2);
 
                 button_ViewTokenInfo.Enabled = !string.IsNullOrEmpty(clientInfo.Token.access_token);
                 button_RefreshToken.Enabled = !string.IsNullOrEmpty(clientInfo.Token.refresh_token);
@@ -486,133 +604,13 @@ namespace Office365APIEditor
                 // Select the Body page.
                 tabControl_HeadersAndBody.SelectTab(1);
             }
-
-            //AcquireAccessToken();
         }
 
-        private void AcquireAccessToken()
+        private void loggingOptionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // get an access token.
-
-            StartForm startForm = new StartForm();
-            if (startForm.ShowDialog(out _tokenResponse, out _resource, out _clientID, out _clientSecret, out _scopes, out _redirectUri, out _useV2Endpoint) == DialogResult.OK)
-            {
-                if (_tokenResponse.access_token == null && _tokenResponse.id_token != null)
-                {
-                    // Using OpenID Connect
-                    _tokenResponse.access_token = _tokenResponse.id_token;
-                }
-
-                if (_tokenResponse.access_token.StartsWith("USEBASICBASIC"))
-                {
-                    // Basic auth
-
-                    useBasicAuth = true;
-                    textBox_BasicAuthSMTPAddress.Enabled = true;
-                    textBox_BasicAuthPassword.Enabled = true;
-                    button_ViewTokenInfo.Enabled = false;
-                    button_RefreshToken.Enabled = false;
-                }
-                else if (_useV2Endpoint == false)
-                {
-                    // OAuth
-
-                    useBasicAuth = false;
-                    textBox_BasicAuthSMTPAddress.Enabled = false;
-                    textBox_BasicAuthSMTPAddress.Text = "OAuth (V1 Endpoint)";
-                    textBox_BasicAuthPassword.Enabled = false;
-                    textBox_BasicAuthPassword.Text = "OAuth (V1 Endpoint)";
-                    textBox_BasicAuthPassword.UseSystemPasswordChar = false;
-                    button_ViewTokenInfo.Enabled = true;
-                }
-                else
-                {
-                    // OAuth (V2 Endpoint)
-
-                    useBasicAuth = false;
-                    textBox_BasicAuthSMTPAddress.Enabled = false;
-                    textBox_BasicAuthSMTPAddress.Text = "OAuth (V2 Endpoint)";
-                    textBox_BasicAuthPassword.Enabled = false;
-                    textBox_BasicAuthPassword.Text = "OAuth (V2 Endpoint)";
-                    textBox_BasicAuthPassword.UseSystemPasswordChar = false;
-                    button_ViewTokenInfo.Enabled = true;
-                }
-
-                if (string.IsNullOrEmpty(_tokenResponse.refresh_token))
-                {
-                    button_RefreshToken.Enabled = false;
-                }
-
-                // Select the Body page.
-                tabControl_HeadersAndBody.SelectTab(1);
-            }
+            // Open the LoggingOptionWindow
+            LoggingOption loggingOption = new LoggingOption();
+            loggingOption.ShowDialog();
         }
-
-        private bool AcquireAccessToken2()
-        {
-            // get an access token.
-
-            StartForm startForm = new StartForm();
-            if (startForm.ShowDialog(out clientInfo) == DialogResult.OK)
-            {
-                if (clientInfo.Token.access_token.StartsWith("USEBASICBASIC"))
-                {
-                    // Basic auth
-
-                    useBasicAuth = true;
-                    textBox_BasicAuthSMTPAddress.Enabled = true;
-                    textBox_BasicAuthPassword.Enabled = true;
-                    button_ViewTokenInfo.Enabled = false;
-                    button_RefreshToken.Enabled = false;
-                }
-                else if (clientInfo.AuthType == AuthEndpoints.OAuthV1)
-                {
-                    // OAuth
-
-                    useBasicAuth = false;
-                    textBox_BasicAuthSMTPAddress.Enabled = false;
-                    textBox_BasicAuthSMTPAddress.Text = "OAuth (V1 Endpoint)";
-                    textBox_BasicAuthPassword.Enabled = false;
-                    textBox_BasicAuthPassword.Text = "OAuth (V1 Endpoint)";
-                    textBox_BasicAuthPassword.UseSystemPasswordChar = false;
-                    button_ViewTokenInfo.Enabled = true;
-                }
-                else
-                {
-                    // OAuth (V2 Endpoint)
-
-                    useBasicAuth = false;
-                    textBox_BasicAuthSMTPAddress.Enabled = false;
-                    textBox_BasicAuthSMTPAddress.Text = "OAuth (V2 Endpoint)";
-                    textBox_BasicAuthPassword.Enabled = false;
-                    textBox_BasicAuthPassword.Text = "OAuth (V2 Endpoint)";
-                    textBox_BasicAuthPassword.UseSystemPasswordChar = false;
-                    button_ViewTokenInfo.Enabled = true;
-                }
-
-                if (string.IsNullOrEmpty(clientInfo.Token.refresh_token))
-                {
-                    button_RefreshToken.Enabled = false;
-                }
-
-                _tokenResponse = clientInfo.Token;
-                _resource = clientInfo.ResourceUri;
-                _clientID = clientInfo.ClientID;
-                _clientSecret = clientInfo.ClientSecret;
-                _scopes = clientInfo.Scopes;
-                _redirectUri = clientInfo.RedirectUri;
-                _useV2Endpoint = (clientInfo.AuthType == AuthEndpoints.OAuthV2);
-
-                // Select the Body page.
-                tabControl_HeadersAndBody.SelectTab(1);
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
     }
 }
