@@ -31,9 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RequestForm));
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox_Result = new System.Windows.Forms.TextBox();
+            this.textBox_ResponseBody = new System.Windows.Forms.TextBox();
             this.button_Run = new System.Windows.Forms.Button();
-            this.textBox_Request = new System.Windows.Forms.TextBox();
             this.textBox_BasicAuthSMTPAddress = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -52,17 +51,23 @@
             this.label7 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.textBox_RequestHeaders = new System.Windows.Forms.TextBox();
-            this.tabControl_HeadersAndBody = new System.Windows.Forms.TabControl();
+            this.tabControl_Request = new System.Windows.Forms.TabControl();
             this.tabPage_Headers = new System.Windows.Forms.TabPage();
             this.tabPage_Body = new System.Windows.Forms.TabPage();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newAccessTokenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.checkBox_Logging = new System.Windows.Forms.CheckBox();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loggingOptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControl_HeadersAndBody.SuspendLayout();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.checkBox_Logging = new System.Windows.Forms.CheckBox();
+            this.textBox_Request = new System.Windows.Forms.TextBox();
+            this.label_StatusCode = new System.Windows.Forms.Label();
+            this.tabControl_Response = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox_ResponseHeaders = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabControl_Request.SuspendLayout();
             this.tabPage_Headers.SuspendLayout();
             this.tabPage_Body.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -70,6 +75,9 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.tabControl_Response.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -81,18 +89,15 @@
             this.label1.TabIndex = 23;
             this.label1.Text = "Response :";
             // 
-            // textBox_Result
+            // textBox_ResponseBody
             // 
-            this.textBox_Result.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_Result.Location = new System.Drawing.Point(23, 30);
-            this.textBox_Result.Multiline = true;
-            this.textBox_Result.Name = "textBox_Result";
-            this.textBox_Result.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_Result.Size = new System.Drawing.Size(785, 248);
-            this.textBox_Result.TabIndex = 7;
-            this.textBox_Result.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Result_KeyDown);
+            this.textBox_ResponseBody.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_ResponseBody.Location = new System.Drawing.Point(3, 3);
+            this.textBox_ResponseBody.Multiline = true;
+            this.textBox_ResponseBody.Name = "textBox_ResponseBody";
+            this.textBox_ResponseBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox_ResponseBody.Size = new System.Drawing.Size(782, 216);
+            this.textBox_ResponseBody.TabIndex = 7;
             // 
             // button_Run
             // 
@@ -104,20 +109,6 @@
             this.button_Run.Text = "Run";
             this.button_Run.UseVisualStyleBackColor = true;
             this.button_Run.Click += new System.EventHandler(this.button_Run_Click);
-            // 
-            // textBox_Request
-            // 
-            this.textBox_Request.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_Request.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastRequest", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_Request.Location = new System.Drawing.Point(103, 31);
-            this.textBox_Request.Multiline = true;
-            this.textBox_Request.Name = "textBox_Request";
-            this.textBox_Request.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_Request.Size = new System.Drawing.Size(587, 36);
-            this.textBox_Request.TabIndex = 3;
-            this.textBox_Request.Text = global::Office365APIEditor.Properties.Settings.Default.LastRequest;
-            this.textBox_Request.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Request_KeyDown);
             // 
             // textBox_BasicAuthSMTPAddress
             // 
@@ -195,7 +186,6 @@
             this.textBox_RequestBody.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_RequestBody.Size = new System.Drawing.Size(573, 66);
             this.textBox_RequestBody.TabIndex = 4;
-            this.textBox_RequestBody.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_RequestBody_KeyDown);
             // 
             // radioButton_PATCH
             // 
@@ -285,7 +275,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(591, 8);
+            this.label7.Location = new System.Drawing.Point(579, 8);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 13);
             this.label7.TabIndex = 38;
@@ -302,18 +292,18 @@
             this.textBox_RequestHeaders.Size = new System.Drawing.Size(573, 66);
             this.textBox_RequestHeaders.TabIndex = 40;
             // 
-            // tabControl_HeadersAndBody
+            // tabControl_Request
             // 
-            this.tabControl_HeadersAndBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabControl_Request.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl_HeadersAndBody.Controls.Add(this.tabPage_Headers);
-            this.tabControl_HeadersAndBody.Controls.Add(this.tabPage_Body);
-            this.tabControl_HeadersAndBody.Location = new System.Drawing.Point(103, 73);
-            this.tabControl_HeadersAndBody.Name = "tabControl_HeadersAndBody";
-            this.tabControl_HeadersAndBody.SelectedIndex = 0;
-            this.tabControl_HeadersAndBody.Size = new System.Drawing.Size(587, 98);
-            this.tabControl_HeadersAndBody.TabIndex = 41;
+            this.tabControl_Request.Controls.Add(this.tabPage_Headers);
+            this.tabControl_Request.Controls.Add(this.tabPage_Body);
+            this.tabControl_Request.Location = new System.Drawing.Point(103, 73);
+            this.tabControl_Request.Name = "tabControl_Request";
+            this.tabControl_Request.SelectedIndex = 0;
+            this.tabControl_Request.Size = new System.Drawing.Size(587, 98);
+            this.tabControl_Request.TabIndex = 41;
             // 
             // tabPage_Headers
             // 
@@ -363,6 +353,21 @@
             this.newAccessTokenToolStripMenuItem.Text = "New Access Token...";
             this.newAccessTokenToolStripMenuItem.Click += new System.EventHandler(this.newAccessTokenToolStripMenuItem_Click);
             // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loggingOptionToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Text = "&Tools";
+            // 
+            // loggingOptionToolStripMenuItem
+            // 
+            this.loggingOptionToolStripMenuItem.Name = "loggingOptionToolStripMenuItem";
+            this.loggingOptionToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.loggingOptionToolStripMenuItem.Text = "&Logging Option...";
+            this.loggingOptionToolStripMenuItem.Click += new System.EventHandler(this.loggingOptionToolStripMenuItem_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.BackColor = System.Drawing.SystemColors.Highlight;
@@ -376,7 +381,7 @@
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
             this.splitContainer1.Panel1.Controls.Add(this.checkBox_Logging);
             this.splitContainer1.Panel1.Controls.Add(this.button_ViewTokenInfo);
-            this.splitContainer1.Panel1.Controls.Add(this.tabControl_HeadersAndBody);
+            this.splitContainer1.Panel1.Controls.Add(this.tabControl_Request);
             this.splitContainer1.Panel1.Controls.Add(this.textBox_Request);
             this.splitContainer1.Panel1.Controls.Add(this.button_Run);
             this.splitContainer1.Panel1.Controls.Add(this.label6);
@@ -395,9 +400,10 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.label_StatusCode);
+            this.splitContainer1.Panel2.Controls.Add(this.tabControl_Response);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Controls.Add(this.label7);
-            this.splitContainer1.Panel2.Controls.Add(this.textBox_Result);
             this.splitContainer1.Panel2.Controls.Add(this.checkBox_Indent);
             this.splitContainer1.Panel2.Controls.Add(this.checkBox_Decode);
             this.splitContainer1.Panel2MinSize = 75;
@@ -416,20 +422,71 @@
             this.checkBox_Logging.Text = "Logging";
             this.checkBox_Logging.UseVisualStyleBackColor = true;
             // 
-            // toolsToolStripMenuItem
+            // textBox_Request
             // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loggingOptionToolStripMenuItem});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.toolsToolStripMenuItem.Text = "&Tools";
+            this.textBox_Request.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_Request.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastRequest", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Request.Location = new System.Drawing.Point(103, 31);
+            this.textBox_Request.Multiline = true;
+            this.textBox_Request.Name = "textBox_Request";
+            this.textBox_Request.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox_Request.Size = new System.Drawing.Size(587, 36);
+            this.textBox_Request.TabIndex = 3;
+            this.textBox_Request.Text = global::Office365APIEditor.Properties.Settings.Default.LastRequest;
             // 
-            // loggingOptionToolStripMenuItem
+            // label_StatusCode
             // 
-            this.loggingOptionToolStripMenuItem.Name = "loggingOptionToolStripMenuItem";
-            this.loggingOptionToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.loggingOptionToolStripMenuItem.Text = "&Logging Option...";
-            this.loggingOptionToolStripMenuItem.Click += new System.EventHandler(this.loggingOptionToolStripMenuItem_Click);
+            this.label_StatusCode.AutoSize = true;
+            this.label_StatusCode.Location = new System.Drawing.Point(91, 8);
+            this.label_StatusCode.Name = "label_StatusCode";
+            this.label_StatusCode.Size = new System.Drawing.Size(0, 13);
+            this.label_StatusCode.TabIndex = 40;
+            // 
+            // tabControl_Response
+            // 
+            this.tabControl_Response.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl_Response.Controls.Add(this.tabPage1);
+            this.tabControl_Response.Controls.Add(this.tabPage2);
+            this.tabControl_Response.Location = new System.Drawing.Point(12, 30);
+            this.tabControl_Response.Name = "tabControl_Response";
+            this.tabControl_Response.SelectedIndex = 0;
+            this.tabControl_Response.Size = new System.Drawing.Size(796, 248);
+            this.tabControl_Response.TabIndex = 39;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.textBox_ResponseHeaders);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(788, 222);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Headers";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // textBox_ResponseHeaders
+            // 
+            this.textBox_ResponseHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_ResponseHeaders.Location = new System.Drawing.Point(3, 3);
+            this.textBox_ResponseHeaders.Multiline = true;
+            this.textBox_ResponseHeaders.Name = "textBox_ResponseHeaders";
+            this.textBox_ResponseHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox_ResponseHeaders.Size = new System.Drawing.Size(782, 216);
+            this.textBox_ResponseHeaders.TabIndex = 8;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.textBox_ResponseBody);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(788, 222);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Body";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // RequestForm
             // 
@@ -445,7 +502,7 @@
             this.Name = "RequestForm";
             this.Text = "Office365APIEditor - Editor";
             this.Load += new System.EventHandler(this.RequestForm_Load);
-            this.tabControl_HeadersAndBody.ResumeLayout(false);
+            this.tabControl_Request.ResumeLayout(false);
             this.tabPage_Headers.ResumeLayout(false);
             this.tabPage_Headers.PerformLayout();
             this.tabPage_Body.ResumeLayout(false);
@@ -458,6 +515,11 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.tabControl_Response.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -466,7 +528,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox_Result;
+        private System.Windows.Forms.TextBox textBox_ResponseBody;
         private System.Windows.Forms.Button button_Run;
         private System.Windows.Forms.TextBox textBox_Request;
         private System.Windows.Forms.TextBox textBox_BasicAuthSMTPAddress;
@@ -487,7 +549,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TextBox textBox_RequestHeaders;
-        private System.Windows.Forms.TabControl tabControl_HeadersAndBody;
+        private System.Windows.Forms.TabControl tabControl_Request;
         private System.Windows.Forms.TabPage tabPage_Headers;
         private System.Windows.Forms.TabPage tabPage_Body;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -497,5 +559,10 @@
         private System.Windows.Forms.CheckBox checkBox_Logging;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loggingOptionToolStripMenuItem;
+        private System.Windows.Forms.TabControl tabControl_Response;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label label_StatusCode;
+        private System.Windows.Forms.TextBox textBox_ResponseHeaders;
     }
 }

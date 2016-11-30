@@ -32,6 +32,24 @@ namespace Office365APIEditor
             button_RefreshToken.Enabled = false;
             button_Run.Enabled = false;
             button_ViewTokenInfo.Enabled = false;
+
+            AddKeyDownEvent(this);
+        }
+
+        private void AddKeyDownEvent(Control control)
+        {
+            foreach (Control item in control.Controls)
+            {
+                if (item is TextBox)
+                {
+                    TextBox textBoxControl = item as TextBox;
+                    textBoxControl.KeyDown += TextBoxControl_KeyDown;
+                    System.Diagnostics.Debug.WriteLine(textBoxControl.Name);
+                }
+
+                AddKeyDownEvent(item);
+                
+            }
         }
 
         private async void button_Run_Click(object sender, EventArgs e)
@@ -148,12 +166,7 @@ namespace Office365APIEditor
                 }
 
                 // Display the results.
-                originalResponseHeaders = "StatusCode : " + response.StatusCode.ToString() + "\r\n\r\n";
-                originalResponseHeaders += "Response Header : \r\n" + response.Headers.ToString() + "\r\n\r\n";
-
-                // Shape the JSON data.
-                originalJsonResponse = jsonResponse;
-                textBox_Result.Text = originalResponseHeaders + shapeJsonResponseIfNeeded(originalJsonResponse);
+                DisplayResponse(response.StatusCode.ToString(), response.Headers, jsonResponse);
 
                 // Save application setting.
                 Properties.Settings.Default.Save();
@@ -173,7 +186,7 @@ namespace Office365APIEditor
                     WriteResponseLog((HttpWebResponse)ex.Response, jsonResponse);
                 }
 
-                textBox_Result.Text = ex.Message + "\r\n\r\nResponse Headers : \r\n" + ex.Response.Headers.ToString() + "\r\n\r\nResponse Body : \r\n" + jsonResponse;
+                DisplayResponse(((HttpWebResponse)ex.Response).StatusCode.ToString(), ex.Response.Headers, jsonResponse);
             }
             catch (Exception ex)
             {
@@ -183,7 +196,7 @@ namespace Office365APIEditor
                     WriteCustomLog("Response", ex.Message);
                 }
 
-                textBox_Result.Text = ex.Message;
+                DisplayResponse("Error", null, ex.Message);
             }
             finally
             {
@@ -192,30 +205,12 @@ namespace Office365APIEditor
             }
         }
 
-        private void textBox_Request_KeyDown(object sender, KeyEventArgs e)
+        private void TextBoxControl_KeyDown(object sender, KeyEventArgs e)
         {
             // Enable 'Ctrl + A'
             if (e.Control && e.KeyCode == Keys.A)
             {
-                textBox_Request.SelectAll();
-            }
-        }
-
-        private void textBox_RequestBody_KeyDown(object sender, KeyEventArgs e)
-        {
-            // Enable 'Ctrl + A'
-            if (e.Control && e.KeyCode == Keys.A)
-            {
-                textBox_RequestBody.SelectAll();
-            }
-        }
-
-        private void textBox_Result_KeyDown(object sender, KeyEventArgs e)
-        {
-            // Enable 'Ctrl + A'
-            if (e.Control && e.KeyCode == Keys.A)
-            {
-                textBox_Result.SelectAll();
+                (sender as TextBox).SelectAll();
             }
         }
 
@@ -318,13 +313,7 @@ namespace Office365APIEditor
                 }
 
                 // Display the results.
-                originalResponseHeaders = "StatusCode : " + response.StatusCode.ToString() + "\r\n\r\n";
-                originalResponseHeaders += "Response Header : \r\n" + response.Headers.ToString() + "\r\n\r\n";
-
-                originalJsonResponse = jsonResponse;
-
-                // Parse the JSON data.
-                textBox_Result.Text = originalResponseHeaders + shapeJsonResponseIfNeeded(originalJsonResponse);
+                DisplayResponse(response.StatusCode.ToString(), response.Headers, jsonResponse);
 
                 // Deserialize and get Access Token.
                 clientInfo.ReplaceToken(StartForm.Deserialize<TokenResponse>(jsonResponse));
@@ -344,7 +333,7 @@ namespace Office365APIEditor
                     WriteResponseLog((HttpWebResponse)ex.Response, jsonResponse);
                 }
 
-                textBox_Result.Text = ex.Message + "\r\n\r\nResponse Headers : \r\n" + ex.Response.Headers.ToString() + "\r\n\r\nResponse Body : \r\n" + jsonResponse;
+                DisplayResponse(((HttpWebResponse)ex.Response).StatusCode.ToString(), ex.Response.Headers, jsonResponse);
             }
             catch (Exception ex)
             {
@@ -354,7 +343,7 @@ namespace Office365APIEditor
                     WriteCustomLog("Response", ex.Message);
                 }
 
-                textBox_Result.Text = ex.Message;
+                DisplayResponse("Error", null, ex.Message);
             }
             finally
             {
@@ -367,7 +356,7 @@ namespace Office365APIEditor
         {
             if (originalJsonResponse != "")
             {
-                textBox_Result.Text = originalResponseHeaders + shapeJsonResponseIfNeeded(originalJsonResponse);
+                textBox_ResponseBody.Text = shapeJsonResponseIfNeeded(originalJsonResponse);
             }
         }
 
@@ -375,8 +364,34 @@ namespace Office365APIEditor
         {
             if (originalJsonResponse != "")
             {
-                textBox_Result.Text = originalResponseHeaders + shapeJsonResponseIfNeeded(originalJsonResponse);
+                textBox_ResponseBody.Text = shapeJsonResponseIfNeeded(originalJsonResponse);
             }
+        }
+
+        public void DisplayResponse(string StatusCode, WebHeaderCollection Headers, string JsonResponse)
+        {
+            // Status code
+            label_StatusCode.Text = StatusCode;
+
+            // Header
+            if (Headers == null)
+            {
+                originalResponseHeaders = "";
+                textBox_ResponseHeaders.Text = originalResponseHeaders;
+            }
+            else
+            {
+                originalResponseHeaders = Headers.ToString();
+                textBox_ResponseHeaders.Text = originalResponseHeaders;
+            }
+
+            // Body
+            originalJsonResponse = JsonResponse;
+            textBox_ResponseBody.Text = shapeJsonResponseIfNeeded(originalJsonResponse);
+
+            // Show Body tab
+            tabControl_Response.SelectTab(1);
+            textBox_ResponseBody.Select(0, 0);
         }
 
         public string shapeJsonResponseIfNeeded(string Data)
@@ -602,7 +617,7 @@ namespace Office365APIEditor
                 button_Run.Enabled = true;
 
                 // Select the Body page.
-                tabControl_HeadersAndBody.SelectTab(1);
+                tabControl_Request.SelectTab(1);
             }
         }
 
