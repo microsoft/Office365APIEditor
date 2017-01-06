@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Office365APIEditor
@@ -39,6 +40,40 @@ namespace Office365APIEditor
                     Properties.Settings.Default.NeedUpgrade = false;
                     Properties.Settings.Default.Save();
                 }
+            }
+
+            // Check the command line switches.
+            string[] switches = Environment.GetCommandLineArgs();
+            foreach (string command in switches)
+            {
+                if (command.ToLower() == ("/NoSetting").ToLower())
+                {
+                    // Reset all settings.
+                    Properties.Settings.Default.Reset();
+                    Properties.Settings.Default.Save();
+                }
+                else if(command.ToLower() == ("/NoHistory").ToLower())
+                {
+                    // Remove Run History file.
+                    if (File.Exists(Path.Combine(Application.StartupPath, "RunHistory.xml")))
+                    {
+                        try
+                        {
+                            File.Delete(Path.Combine(Application.StartupPath, "RunHistory.xml"));
+                        }
+                        catch(Exception ex)
+                        {
+                            MessageBox.Show(ex.Message.ToString(), "Office365APIEditor");
+                        }
+                    }
+                }
+            }
+
+            // Set default log folder path.
+            if (!Directory.Exists(Properties.Settings.Default.LogFolderPath))
+            {
+                Properties.Settings.Default.LogFolderPath = Application.StartupPath;
+                Properties.Settings.Default.Save();
             }
 
             // Create the MyApplicationContext, that derives from ApplicationContext,

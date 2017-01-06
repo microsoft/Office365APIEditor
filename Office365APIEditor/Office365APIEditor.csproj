@@ -192,6 +192,8 @@
     <Compile Include="RequestForm.Designer.cs">
       <DependentUpon>RequestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="RunHistory.cs" />
+    <Compile Include="RunInformation.cs" />
     <Compile Include="ScopeEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>

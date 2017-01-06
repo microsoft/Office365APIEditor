@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -16,11 +17,14 @@ namespace Office365APIEditor
     {
         ClientInformation clientInfo;
 
-        string originalResponseHeaders = "";
         string originalJsonResponse = "";
         string indentedJsonResponse = "";
         string decodedJsonResponse = "";
         string indentedAndDecodedJsonResponse = "";
+
+        RunHistory runHistory = new RunHistory();
+
+        int hoveredIndex = -1;
 
         public RequestForm()
         {
@@ -33,7 +37,40 @@ namespace Office365APIEditor
             button_Run.Enabled = false;
             button_ViewTokenInfo.Enabled = false;
 
+            // Enable Ctrl+A short cut key for all textbox.
             AddKeyDownEvent(this);
+            
+            // Load Run History
+            try
+            {
+                string runHistoryFilePath = Path.Combine(Application.StartupPath, "RunHistory.xml");
+                if (File.Exists(runHistoryFilePath))
+                {
+                    using (FileStream stream = new FileStream(runHistoryFilePath, FileMode.Open))
+                    {
+                        System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(RunHistory));
+                        runHistory = (RunHistory)serializer.Deserialize(stream);
+                    }
+                }
+                else
+                {
+                    runHistory.RunInfo = new System.Collections.Generic.List<RunInformation>();
+                }
+            }
+            catch(Exception ex)
+            {
+                runHistory.RunInfo = new System.Collections.Generic.List<RunInformation>();
+
+                MessageBox.Show("The run history file could not be loaded." + Environment.NewLine + Environment.NewLine + ex.Message, "Office365APIEditor");
+            }
+
+            listBox_RunHistory.DrawMode = DrawMode.OwnerDrawFixed;
+            listBox_RunHistory.ItemHeight = 80;
+
+            for (int i = runHistory.RunInfo.Count -1 ; i >= 0 ; i--)
+            {
+                listBox_RunHistory.Items.Add(runHistory.RunInfo[i]);
+            }
         }
 
         private void AddKeyDownEvent(Control control)
@@ -48,17 +85,41 @@ namespace Office365APIEditor
                 }
 
                 AddKeyDownEvent(item);
-                
             }
+        }
+
+        private void RequestForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MailboxViewerForm parent = (MailboxViewerForm)this.Owner;
+            parent.requestFormOpened = false;
         }
 
         private async void button_Run_Click(object sender, EventArgs e)
         {
-            originalResponseHeaders = "";
+            Uri requestUri;
+
             originalJsonResponse = "";
             indentedJsonResponse = "";
             decodedJsonResponse = "";
             indentedAndDecodedJsonResponse = "";
+
+            string originalRequestHeaders = textBox_RequestHeaders.Text;
+            string originalRequestBody = "";
+
+            try
+            {
+                requestUri = new Uri(textBox_Request.Text);
+            }
+            catch
+            {
+                requestUri = null;
+            }
+            
+            if (requestUri == null)
+            {
+                MessageBox.Show("The supplied URI could not be correctly parsed.", "Office365APIEditor");
+                return;
+            }
 
             WebRequest request = WebRequest.Create(textBox_Request.Text);
             request.ContentType = "application/json";
@@ -103,9 +164,9 @@ namespace Office365APIEditor
                 // Build a body.
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
-                    string body = textBox_RequestBody.Text;
+                    originalRequestBody = textBox_RequestBody.Text;
 
-                    streamWriter.Write(body);
+                    streamWriter.Write(originalRequestBody);
                     streamWriter.Flush();
                     streamWriter.Close();
                 }
@@ -118,9 +179,9 @@ namespace Office365APIEditor
                 // Build a body.
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
-                    string body = textBox_RequestBody.Text;
+                    originalRequestBody = textBox_RequestBody.Text;
 
-                    streamWriter.Write(body);
+                    streamWriter.Write(originalRequestBody);
                     streamWriter.Flush();
                     streamWriter.Close();
                 }
@@ -145,11 +206,10 @@ namespace Office365APIEditor
                 // Logging
                 if (checkBox_Logging.Checked)
                 {
-                    WriteRequestLog(request, textBox_RequestBody.Text);
+                    WriteRequestLog(request, originalRequestBody);
                 }
 
                 // Get a response and response stream.
-                // System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse();
                 var response = (HttpWebResponse)await request.GetResponseAsync();
 
                 string jsonResponse = "";
@@ -167,6 +227,9 @@ namespace Office365APIEditor
 
                 // Display the results.
                 DisplayResponse(response.StatusCode.ToString(), response.Headers, jsonResponse);
+
+                // Add Run History
+                AddRunHistory(request, originalRequestHeaders, originalRequestBody, response, jsonResponse);
 
                 // Save application setting.
                 Properties.Settings.Default.Save();
@@ -187,6 +250,9 @@ namespace Office365APIEditor
                 }
 
                 DisplayResponse(((HttpWebResponse)ex.Response).StatusCode.ToString(), ex.Response.Headers, jsonResponse);
+
+                // Add Run History
+                AddRunHistory(request, originalRequestHeaders, originalRequestBody, (HttpWebResponse)ex.Response, jsonResponse);
             }
             catch (Exception ex)
             {
@@ -197,6 +263,9 @@ namespace Office365APIEditor
                 }
 
                 DisplayResponse("Error", null, ex.Message);
+
+                // Add Run History
+                AddRunHistory(request, originalRequestHeaders, originalRequestBody, null, ex.Message);
             }
             finally
             {
@@ -224,7 +293,6 @@ namespace Office365APIEditor
         {
             // Request another access token with refresh token.
 
-            originalResponseHeaders = "";
             originalJsonResponse = "";
             indentedJsonResponse = "";
             decodedJsonResponse = "";
@@ -297,7 +365,6 @@ namespace Office365APIEditor
 
                 string jsonResponse = "";
 
-                // System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse();
                 var response = (HttpWebResponse)await request.GetResponseAsync();
 
                 using (Stream responseStream = response.GetResponseStream())
@@ -356,7 +423,7 @@ namespace Office365APIEditor
         {
             if (originalJsonResponse != "")
             {
-                textBox_ResponseBody.Text = shapeJsonResponseIfNeeded(originalJsonResponse);
+                textBox_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
             }
         }
 
@@ -364,7 +431,7 @@ namespace Office365APIEditor
         {
             if (originalJsonResponse != "")
             {
-                textBox_ResponseBody.Text = shapeJsonResponseIfNeeded(originalJsonResponse);
+                textBox_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
             }
         }
 
@@ -376,25 +443,23 @@ namespace Office365APIEditor
             // Header
             if (Headers == null)
             {
-                originalResponseHeaders = "";
-                textBox_ResponseHeaders.Text = originalResponseHeaders;
+                textBox_ResponseHeaders.Text = "";
             }
             else
             {
-                originalResponseHeaders = Headers.ToString();
-                textBox_ResponseHeaders.Text = originalResponseHeaders;
+                textBox_ResponseHeaders.Text = Headers.ToString();
             }
 
             // Body
             originalJsonResponse = JsonResponse;
-            textBox_ResponseBody.Text = shapeJsonResponseIfNeeded(originalJsonResponse);
+            textBox_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
 
             // Show Body tab
             tabControl_Response.SelectTab(1);
             textBox_ResponseBody.Select(0, 0);
         }
 
-        public string shapeJsonResponseIfNeeded(string Data)
+        public string ShapeJsonResponseIfNeeded(string Data)
         {
             // Check the status of checkbox and shape the JSON Response.
 
@@ -538,6 +603,8 @@ namespace Office365APIEditor
 
             string logFilePath = "";
 
+            string settingLofFilePath = Properties.Settings.Default.LogFolderPath;
+
             if (!Directory.Exists(Properties.Settings.Default.LogFolderPath))
             {
                 // Specified log folder path is not exsisting.
@@ -568,6 +635,78 @@ namespace Office365APIEditor
             catch(Exception ex)
             {
                 MessageBox.Show("Failed to write the log.\r\n\r\n" + ex.Message, "Office365APIEditor");
+            }
+        }
+
+        private void AddRunHistory(WebRequest Request, string RequestHeader, string RequestBody, HttpWebResponse Response, string JsonResponse)
+        {
+            int maxHistoryCount = 30;
+
+            // Keep only 30 history.
+            while (runHistory.RunInfo.Count >= maxHistoryCount)
+            {
+                runHistory.RunInfo.RemoveAt(0);
+            }
+
+            string statusCode;
+            string headers;
+
+            if (Response == null)
+            {
+                statusCode = "Error";
+                headers = "";
+            }
+            else
+            {
+                statusCode = Response.StatusCode.ToString();
+                headers = Response.Headers.ToString();
+            }
+
+            RunInformation newRunInfo = new RunInformation
+            {
+                ExecutionID = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff"),
+                RequestUrl = Request.RequestUri.ToString(),
+                RequestMethod = Request.Method,
+                RequestHeader = RequestHeader,
+                RequestCompleteHeader = Request.Headers.ToString(),
+                RequestBody = RequestBody,
+                ResponseStatusCode = statusCode,
+                ResponseHeader = headers,
+                ResponseBody = JsonResponse
+            };
+
+            // Add new history.
+            runHistory.RunInfo.Add(newRunInfo);
+
+            // Update the listbox.
+
+            listBox_RunHistory.Items.Clear();
+
+            for (int i = runHistory.RunInfo.Count - 1; i >= 0; i--)
+            {
+                listBox_RunHistory.Items.Add(runHistory.RunInfo[i]);
+            }
+
+            // Save the file.
+
+            try
+            {
+                FileStream stream = new FileStream(Path.Combine(Application.StartupPath, "RunHistory.xml"), FileMode.Create);
+
+                using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
+                {
+                    // Serialize
+                    System.Xml.Serialization.XmlSerializerNamespaces nameSpace = new System.Xml.Serialization.XmlSerializerNamespaces();
+                    nameSpace.Add(string.Empty, string.Empty);
+                    System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(RunHistory));
+                    serializer.Serialize(writer, runHistory, nameSpace);
+
+                    writer.Flush();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("The run history file could not be saved." + Environment.NewLine + Environment.NewLine + ex.Message, "Office365APIEditor");
             }
         }
 
@@ -626,6 +765,148 @@ namespace Office365APIEditor
             // Open the LoggingOptionWindow
             LoggingOption loggingOption = new LoggingOption();
             loggingOption.ShowDialog();
+        }
+
+        private void listBox_RunHistory_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // Draw the listbox manually.
+
+            if (e.Index < 0)
+            {
+                return;
+            }
+
+            Brush brush;
+
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                // Drawing a selected item.
+                e = new DrawItemEventArgs(e.Graphics, e.Font, e.Bounds, e.Index, e.State ^ DrawItemState.Selected, e.ForeColor, SystemColors.Control);
+                brush = Brushes.Black;
+            }
+            else
+            {
+                brush = Brushes.Gray;
+            }
+
+            e.DrawBackground();
+
+            // Item to be drawed.
+            var item = listBox_RunHistory.Items[e.Index] as RunInformation;
+
+            var regularFont = new Font("Microsoft Sans Serif", 10f, FontStyle.Regular);
+            var boldFont = new Font("Microsoft Sans Serif", 10f, FontStyle.Bold);
+
+            // Recrangle for current item.
+            RectangleF rectItemBorder = new RectangleF(e.Bounds.Left + 3, e.Bounds.Top + 5, e.Bounds.Width - 6, e.Bounds.Height -10);
+            
+            // Height for 3 lines.
+            float heightforThreeLine = e.Graphics.MeasureString("1" + Environment.NewLine + "2" + Environment.NewLine + "3", regularFont, e.Bounds.Width - 6).Height;
+
+            // Recrangle for request URL of current item.
+            RectangleF rectRequestUrlBorder = new RectangleF(e.Bounds.Left + 3, e.Bounds.Top + 5, e.Bounds.Width - 6, heightforThreeLine);
+
+            // Draw
+            e.Graphics.DrawString(item.RequestUrl, regularFont, Brushes.Black, rectRequestUrlBorder);
+            e.Graphics.DrawString("Result : " + item.ResponseStatusCode, boldFont, brush, e.Bounds.Left + 3, e.Bounds.Top + 5 + heightforThreeLine);
+            e.Graphics.DrawRectangle(Pens.Black, Rectangle.Round(rectItemBorder));
+        }
+
+        private void listBox_RunHistory_Resize(object sender, EventArgs e)
+        {
+            listBox_RunHistory.Refresh();
+        }
+
+        private void listBox_RunHistory_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Show tooltip on the ListBox.
+
+            int newHoveredIndex = listBox_RunHistory.IndexFromPoint(e.Location);
+
+            if (hoveredIndex != newHoveredIndex)
+            {
+                hoveredIndex = newHoveredIndex;
+
+                if (hoveredIndex > -1)
+                {
+                    var selectedRunInfo = listBox_RunHistory.Items[hoveredIndex] as RunInformation;
+
+                    toolTip1.Active = false;
+                    toolTip1.SetToolTip(listBox_RunHistory, selectedRunInfo.RequestUrl);
+                    toolTip1.Active = true;
+                }
+            }
+        }
+
+        private void listBox_RunHistory_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Show the context menu if selected item is clicked by the right button.
+
+            if (e.Button != MouseButtons.Right)
+            {
+                return;
+            }
+
+            int clickedIndex = listBox_RunHistory.IndexFromPoint(e.Location);
+            if (clickedIndex != ListBox.NoMatches && listBox_RunHistory.SelectedIndex == clickedIndex)
+            {
+                contextMenuStrip_RunHistory.Show(Cursor.Position);
+                contextMenuStrip_RunHistory.Visible = true;
+            }
+            else
+            {
+                contextMenuStrip_RunHistory.Visible = false;
+            }
+        }
+
+        private void listBox_RunHistory_DoubleClick(object sender, EventArgs e)
+        {
+            var selectedRunInfo = listBox_RunHistory.SelectedItem as RunInformation;
+
+            ShowRunHistoryInMainPanel(selectedRunInfo);
+        }
+
+        private void showDetailsInMainPanelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selectedRunInfo = listBox_RunHistory.SelectedItem as RunInformation;
+
+            ShowRunHistoryInMainPanel(selectedRunInfo);
+        }
+
+        private void ShowRunHistoryInMainPanel(RunInformation runInfo)
+        {
+            // Show the details of selected run history.
+
+            textBox_Request.Text = runInfo.RequestUrl;
+            textBox_RequestHeaders.Text = runInfo.RequestHeader;
+            textBox_RequestBody.Text = runInfo.RequestBody;
+
+            switch (runInfo.RequestMethod.ToUpper())
+            {
+                case "GET":
+                    radioButton_GET.Select();
+                    break;
+                case "POST":
+                    radioButton_POST.Select();
+                    break;
+                case "PATCH":
+                    radioButton_PATCH.Select();
+                    break;
+                case "DELETE":
+                    radioButton_DELETE.Select();
+                    break;
+                default:
+                    break;
+            }
+
+            label_StatusCode.Text = runInfo.ResponseStatusCode;
+            textBox_ResponseHeaders.Text = runInfo.ResponseHeader.Replace("\n", Environment.NewLine);
+
+            originalJsonResponse = runInfo.ResponseBody;
+            indentedJsonResponse = "";
+            decodedJsonResponse = "";
+            indentedAndDecodedJsonResponse = "";
+            textBox_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
         }
     }
 }

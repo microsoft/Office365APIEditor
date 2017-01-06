@@ -34,6 +34,13 @@ You need the following to use OAuth with V2 endpoint.
 
 If you have not registered your application, follow the [tutorial](/tutorials/How_to_register_a_V1_Web_application.md).
 
+## Command-line switches
+
+| Switch     | Description                              |
+|:-----------|:-----------------------------------------|
+| /NoSetting | Remove all user settings.                |
+| /NoHistory | Remove all request and response history. |
+
 ## Feedback
 
 If you have any feedback, please post on the [Issues](https://github.com/Microsoft/Office365APIEditor/issues) list.

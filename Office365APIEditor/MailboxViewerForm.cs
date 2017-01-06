@@ -29,6 +29,8 @@ namespace Office365APIEditor
 
         bool expandingNodeHasDummyNode = false;
 
+        public bool requestFormOpened = false;
+
         public MailboxViewerForm()
         {
             InitializeComponent();
@@ -645,8 +647,17 @@ namespace Office365APIEditor
 
         private void newEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RequestForm requestForm = new RequestForm();
-            requestForm.Show();
+            if (requestFormOpened)
+            {
+                MessageBox.Show("Editor window is already opened.", "Office365APIEditor");
+            }
+            else
+            {
+                requestFormOpened = true;
+                RequestForm requestForm = new RequestForm();
+                requestForm.Owner = this;
+                requestForm.Show();
+            }
         }
 
         private void closeSessionToolStripMenuItem_Click(object sender, EventArgs e)
