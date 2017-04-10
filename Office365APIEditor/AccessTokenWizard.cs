@@ -239,7 +239,7 @@ namespace Office365APIEditor
                             SaveSettings();
 
                             // Create a return value and close this window.
-                            clientInfo = new ClientInformation(tokenResponse, AuthEndpoints.OAuthV1, Util.ConvertResourceNameToResourceEnum(comboBox_Page03_Resource.SelectedText), textBox_Page03_ClientID.Text, textBox_Page03_ClientSecret.Text, "", textBox_Page03_RedirectUri.Text);
+                            clientInfo = new ClientInformation(tokenResponse, AuthEndpoints.OAuthV1, Util.ConvertResourceNameToResourceEnum(comboBox_Page03_Resource.SelectedItem.ToString()), textBox_Page03_ClientID.Text, textBox_Page03_ClientSecret.Text, "", textBox_Page03_RedirectUri.Text);
                             DialogResult = DialogResult.OK;
                             Close();
                         }
@@ -266,7 +266,7 @@ namespace Office365APIEditor
                             SaveSettings();
 
                             // Create a return value and close this window.
-                            clientInfo = new ClientInformation(tokenResponse, AuthEndpoints.OAuthV1, Util.ConvertResourceNameToResourceEnum(comboBox_Page04_Resource.SelectedText), textBox_Page04_ClientID.Text, "", "", textBox_Page04_RedirectUri.Text);
+                            clientInfo = new ClientInformation(tokenResponse, AuthEndpoints.OAuthV1, Util.ConvertResourceNameToResourceEnum(comboBox_Page04_Resource.SelectedItem.ToString()), textBox_Page04_ClientID.Text, "", "", textBox_Page04_RedirectUri.Text);
                             DialogResult = DialogResult.OK;
                             Close();
                         }
@@ -656,10 +656,6 @@ namespace Office365APIEditor
                 {
                     MessageBox.Show("Getting Authorization Code was failed.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            else
-            {
-                MessageBox.Show("authentication_canceled: User canceled authentication", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return Code;

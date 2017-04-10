@@ -369,8 +369,8 @@ namespace Office365APIEditor
 
             if (clientInfo.AuthType == AuthEndpoints.OAuthV1)
             {
-                string resourceURL = StartForm.GetResourceURL(clientInfo.ResourceUri);
-                tempTable["resource"] = System.Web.HttpUtility.UrlEncode(resourceURL);
+                //string resourceURL = StartForm.GetResourceURL(clientInfo.ResourceUri);
+                tempTable["resource"] = System.Web.HttpUtility.UrlEncode(clientInfo.ResourceUri);
 
                 if (clientInfo.ClientID != "")
                 {
@@ -385,7 +385,7 @@ namespace Office365APIEditor
                 endPoint += "v2.0/";
                 tempTable["scope"] = clientInfo.Scopes;
                 tempTable["client_id"] = clientInfo.ClientID;
-                tempTable["redirect_uri"] = clientInfo.ResourceUri;
+                tempTable["redirect_uri"] = System.Web.HttpUtility.UrlEncode(clientInfo.RedirectUri);
 
                 if (clientInfo.ClientID != "")
                 {
@@ -443,7 +443,7 @@ namespace Office365APIEditor
                 DisplayResponse(CreateStatusCodeString(response), response.Headers, jsonResponse);
 
                 // Deserialize and get Access Token.
-                clientInfo.ReplaceToken(StartForm.Deserialize<TokenResponse>(jsonResponse));
+                clientInfo.ReplaceToken(AccessTokenWizard.Deserialize<TokenResponse>(jsonResponse));
             }
             catch (WebException ex)
             {

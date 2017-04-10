@@ -37,7 +37,13 @@ namespace Office365APIEditor
             if (IsV2 == true)
             {
                 endPoint += "/v2.0";
-                authenticationUrl = endPoint + "/authorize?response_type=code&client_id=" + ClientID + "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) + "&scope=" + System.Web.HttpUtility.UrlEncode(ResourceOrScopeUri) + "&response_mode=query&prompt =login";
+                authenticationUrl = endPoint + "/authorize?" +
+                    "response_type=code" +
+                    "&client_id=" + ClientID +
+                    "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) +
+                    "&scope=" + System.Web.HttpUtility.UrlEncode(ResourceOrScopeUri) +
+                    "&response_mode=query" + 
+                    "&prompt=login";
             }
             else
             {
