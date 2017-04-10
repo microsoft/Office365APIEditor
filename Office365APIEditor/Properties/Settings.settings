@@ -107,5 +107,8 @@
     <Setting Name="LogFileStyle" Type="System.String" Scope="User">
       <Value Profile="(Default)">Static</Value>
     </Setting>
+    <Setting Name="AllowAutoRedirect" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

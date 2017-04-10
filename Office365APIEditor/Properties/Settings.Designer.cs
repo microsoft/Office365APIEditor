@@ -345,5 +345,17 @@ namespace Office365APIEditor.Properties {
                 this["LogFileStyle"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AllowAutoRedirect {
+            get {
+                return ((bool)(this["AllowAutoRedirect"]));
+            }
+            set {
+                this["AllowAutoRedirect"] = value;
+            }
+        }
     }
 }

@@ -13,6 +13,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Office365APIEditor
 {
+    [Obsolete]
     public partial class StartForm : Form
     {
         // Return values

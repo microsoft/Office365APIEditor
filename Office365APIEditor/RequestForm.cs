@@ -120,7 +120,8 @@ namespace Office365APIEditor
                 return;
             }
 
-            WebRequest request = WebRequest.Create(textBox_Request.Text);
+            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(textBox_Request.Text);
+            request.AllowAutoRedirect = Properties.Settings.Default.AllowAutoRedirect;
             request.ContentType = "application/json";
             // ((HttpWebRequest)request).Accept = "application/json;odata.metadata=full;odata.streaming=true";
             // TODO: implement "Accept Header Editor"
@@ -256,7 +257,7 @@ namespace Office365APIEditor
                 string jsonResponse = "";
                 using (Stream responseStream = response.GetResponseStream())
                 {
-                    StreamReader reader = new StreamReader(responseStream, Encoding.Default);
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
                     jsonResponse = reader.ReadToEnd();
                 }
 
@@ -267,7 +268,7 @@ namespace Office365APIEditor
                 }
 
                 // Display the results.
-                DisplayResponse(response.StatusCode.ToString(), response.Headers, jsonResponse);
+                DisplayResponse(CreateStatusCodeString(response), response.Headers, jsonResponse);
 
                 // Add Run History
                 AddRunHistory(request, originalRequestHeaders, originalRequestBody, response, jsonResponse);
@@ -299,13 +300,15 @@ namespace Office365APIEditor
                         jsonResponse = reader.ReadToEnd();
                     }
 
+                    HttpWebResponse response = (HttpWebResponse)ex.Response;
+
                     // Logging
                     if (checkBox_Logging.Checked)
                     {
-                        WriteResponseLog((HttpWebResponse)ex.Response, jsonResponse);
+                        WriteResponseLog(response, jsonResponse);
                     }
 
-                    DisplayResponse(((HttpWebResponse)ex.Response).StatusCode.ToString(), ex.Response.Headers, jsonResponse);
+                    DisplayResponse(CreateStatusCodeString(response), ex.Response.Headers, jsonResponse);
 
                     // Add Run History
                     AddRunHistory(request, originalRequestHeaders, originalRequestBody, (HttpWebResponse)ex.Response, jsonResponse);
@@ -437,7 +440,7 @@ namespace Office365APIEditor
                 }
 
                 // Display the results.
-                DisplayResponse(response.StatusCode.ToString(), response.Headers, jsonResponse);
+                DisplayResponse(CreateStatusCodeString(response), response.Headers, jsonResponse);
 
                 // Deserialize and get Access Token.
                 clientInfo.ReplaceToken(StartForm.Deserialize<TokenResponse>(jsonResponse));
@@ -463,13 +466,15 @@ namespace Office365APIEditor
                         jsonResponse = reader.ReadToEnd();
                     }
 
+                    HttpWebResponse response = (HttpWebResponse)ex.Response;
+
                     // Logging
                     if (checkBox_Logging.Checked)
                     {
                         WriteResponseLog((HttpWebResponse)ex.Response, jsonResponse);
                     }
 
-                    DisplayResponse(((HttpWebResponse)ex.Response).StatusCode.ToString(), ex.Response.Headers, jsonResponse);
+                    DisplayResponse(CreateStatusCodeString(response), ex.Response.Headers, jsonResponse);
                 }
             }
             catch (Exception ex)
@@ -503,6 +508,11 @@ namespace Office365APIEditor
             {
                 textBox_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
             }
+        }
+
+        private string CreateStatusCodeString(HttpWebResponse response)
+        {
+            return (int)response.StatusCode + " - " + response.StatusDescription;
         }
 
         public void DisplayResponse(string StatusCode, WebHeaderCollection Headers, string JsonResponse)
@@ -644,7 +654,7 @@ namespace Office365APIEditor
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Response");
             sb.AppendLine("DateTime : " + DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
-            sb.AppendLine("StatusCode : " + ResponseToLog.StatusCode.ToString());
+            sb.AppendLine("StatusCode : " + CreateStatusCodeString(ResponseToLog));
             sb.AppendLine("Header : ");
             foreach (var header in ResponseToLog.Headers.AllKeys)
             {
@@ -830,11 +840,11 @@ namespace Office365APIEditor
             }
         }
 
-        private void loggingOptionToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OptionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Open the LoggingOptionWindow
-            LoggingOption loggingOption = new LoggingOption();
-            loggingOption.ShowDialog();
+            // Open the Option window
+            RequestFormOptionForm optionForm = new RequestFormOptionForm();
+            optionForm.ShowDialog();
         }
 
         private void listBox_RunHistory_DrawItem(object sender, DrawItemEventArgs e)

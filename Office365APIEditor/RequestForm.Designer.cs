@@ -37,7 +37,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newAccessTokenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loggingOptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.listBox_RunHistory = new System.Windows.Forms.ListBox();
             this.label_Line = new System.Windows.Forms.Label();
@@ -58,7 +58,6 @@
             this.HeaderValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage_Body = new System.Windows.Forms.TabPage();
             this.textBox_RequestBody = new System.Windows.Forms.TextBox();
-            this.textBox_Request = new System.Windows.Forms.TextBox();
             this.button_Run = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -73,6 +72,7 @@
             this.radioButton_POST = new System.Windows.Forms.RadioButton();
             this.contextMenuStrip_RunHistory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showDetailsInMainPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox_Request = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -147,17 +147,17 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loggingOptionToolStripMenuItem});
+            this.optionToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
-            // loggingOptionToolStripMenuItem
+            // optionToolStripMenuItem
             // 
-            this.loggingOptionToolStripMenuItem.Name = "loggingOptionToolStripMenuItem";
-            this.loggingOptionToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.loggingOptionToolStripMenuItem.Text = "&Logging Option...";
-            this.loggingOptionToolStripMenuItem.Click += new System.EventHandler(this.loggingOptionToolStripMenuItem_Click);
+            this.optionToolStripMenuItem.Name = "optionToolStripMenuItem";
+            this.optionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionToolStripMenuItem.Text = "&Option...";
+            this.optionToolStripMenuItem.Click += new System.EventHandler(this.OptionToolStripMenuItem_Click);
             // 
             // splitContainer2
             // 
@@ -402,19 +402,6 @@
             this.textBox_RequestBody.Size = new System.Drawing.Size(554, 96);
             this.textBox_RequestBody.TabIndex = 4;
             // 
-            // textBox_Request
-            // 
-            this.textBox_Request.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_Request.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastRequest", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_Request.Location = new System.Drawing.Point(101, 40);
-            this.textBox_Request.Multiline = true;
-            this.textBox_Request.Name = "textBox_Request";
-            this.textBox_Request.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_Request.Size = new System.Drawing.Size(587, 36);
-            this.textBox_Request.TabIndex = 45;
-            this.textBox_Request.Text = global::Office365APIEditor.Properties.Settings.Default.LastRequest;
-            // 
             // button_Run
             // 
             this.button_Run.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -544,6 +531,19 @@
             this.showDetailsInMainPanelToolStripMenuItem.Text = "Show details in main panel";
             this.showDetailsInMainPanelToolStripMenuItem.Click += new System.EventHandler(this.showDetailsInMainPanelToolStripMenuItem_Click);
             // 
+            // textBox_Request
+            // 
+            this.textBox_Request.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_Request.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastRequest", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Request.Location = new System.Drawing.Point(101, 40);
+            this.textBox_Request.Multiline = true;
+            this.textBox_Request.Name = "textBox_Request";
+            this.textBox_Request.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox_Request.Size = new System.Drawing.Size(587, 36);
+            this.textBox_Request.TabIndex = 45;
+            this.textBox_Request.Text = global::Office365APIEditor.Properties.Settings.Default.LastRequest;
+            // 
             // RequestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -553,7 +553,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(836, 560);
+            this.MinimumSize = new System.Drawing.Size(1036, 560);
             this.Name = "RequestForm";
             this.Text = "Office365APIEditor - Editor";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RequestForm_FormClosed);
@@ -587,7 +587,7 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newAccessTokenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loggingOptionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem optionToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ListBox listBox_RunHistory;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_RunHistory;

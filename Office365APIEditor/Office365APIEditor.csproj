@@ -192,6 +192,12 @@
     <Compile Include="RequestForm.Designer.cs">
       <DependentUpon>RequestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="RequestFormOptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RequestFormOptionForm.Designer.cs">
+      <DependentUpon>RequestFormOptionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RunHistory.cs" />
     <Compile Include="RunInformation.cs" />
     <Compile Include="ScopeEditorForm.cs">
@@ -254,6 +260,9 @@
     </Compile>
     <EmbeddedResource Include="RequestForm.resx">
       <DependentUpon>RequestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RequestFormOptionForm.resx">
+      <DependentUpon>RequestFormOptionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ScopeEditorForm.resx">
       <DependentUpon>ScopeEditorForm.cs</DependentUpon>

@@ -6,15 +6,14 @@ using System.Windows.Forms;
 
 namespace Office365APIEditor
 {
-    [Obsolete]
-    public partial class LoggingOption : Form
+    public partial class RequestFormOptionForm : Form
     {
-        public LoggingOption()
+        public RequestFormOptionForm()
         {
             InitializeComponent();
         }
-        
-        private void LoggingOption_Load(object sender, EventArgs e)
+
+        private void RequestFormOptionForm_Load(object sender, EventArgs e)
         {
             // Load saved settings.
 
@@ -26,7 +25,7 @@ namespace Office365APIEditor
             {
                 textBox_LogFolderPath.Text = Application.StartupPath;
             }
-            
+
 
             if (Properties.Settings.Default.LogFileStyle == "Static")
             {
@@ -40,9 +39,11 @@ namespace Office365APIEditor
             {
                 radioButton_Static.Checked = true;
             }
+
+            checkBox_AllowAutoRedirect.Checked = Properties.Settings.Default.AllowAutoRedirect;
         }
 
-        private void button_Browse_Click(object sender, EventArgs e)
+        private void button_LogFolderPathBrowse_Click(object sender, EventArgs e)
         {
             if (System.IO.Directory.Exists(textBox_LogFolderPath.Text))
             {
@@ -58,7 +59,7 @@ namespace Office365APIEditor
                 textBox_LogFolderPath.Text = folderBrowserDialog1.SelectedPath;
             }
         }
-        
+
         private void button_OK_Click(object sender, EventArgs e)
         {
             if (System.IO.Directory.Exists(textBox_LogFolderPath.Text))
@@ -73,6 +74,9 @@ namespace Office365APIEditor
                 {
                     Properties.Settings.Default.LogFileStyle = "DateTime";
                 }
+
+                Properties.Settings.Default.AllowAutoRedirect = checkBox_AllowAutoRedirect.Checked;
+                Properties.Settings.Default.Save();
 
                 DialogResult = DialogResult.OK;
                 Close();
