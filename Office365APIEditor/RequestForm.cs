@@ -103,7 +103,6 @@ namespace Office365APIEditor
             decodedJsonResponse = "";
             indentedAndDecodedJsonResponse = "";
 
-            string originalRequestHeaders = textBox_RequestHeaders.Text;
             string originalRequestBody = "";
 
             try
@@ -123,6 +122,8 @@ namespace Office365APIEditor
 
             WebRequest request = WebRequest.Create(textBox_Request.Text);
             request.ContentType = "application/json";
+            // ((HttpWebRequest)request).Accept = "application/json;odata.metadata=full;odata.streaming=true";
+            // TODO: implement "Accept Header Editor"
 
             if (clientInfo.AuthType == AuthEndpoints.Basic)
             {
@@ -193,9 +194,49 @@ namespace Office365APIEditor
             }
 
             // Add headers
-            foreach (string header in textBox_RequestHeaders.Lines)
+
+            string originalRequestHeaders = "";
+
+            foreach (DataGridViewRow item in dataGridView_RequestHeader.Rows)
             {
-                request.Headers.Add(header);
+                string headerName = "";
+                string headerValue = "";
+
+                if (item.Cells[0].Value != null)
+                {
+                    headerName = item.Cells[0].Value.ToString();
+                }
+
+                if (item.Cells[1].Value != null)
+                {
+                    headerValue = item.Cells[1].Value.ToString();
+                }
+
+                if (headerName == "")
+                {
+                    if (headerValue == "")
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid header name.", "Office365APIEditor");
+                        return;
+                    }
+                }
+
+                string header = headerName + ": " + headerValue;
+                originalRequestHeaders += header + Environment.NewLine;
+
+                try
+                {
+                    request.Headers.Add(header);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Office365APIEditor");
+                    return;
+                }
             }
 
             try
@@ -236,23 +277,39 @@ namespace Office365APIEditor
             }
             catch (WebException ex)
             {
-                string jsonResponse = "";
-                using (Stream responseStream = ex.Response.GetResponseStream())
+                if (ex.Response == null)
                 {
-                    StreamReader reader = new StreamReader(responseStream, Encoding.Default);
-                    jsonResponse = reader.ReadToEnd();
-                }
+                    // Logging
+                    if (checkBox_Logging.Checked)
+                    {
+                        WriteCustomLog("Response", ex.Message);
+                    }
 
-                // Logging
-                if (checkBox_Logging.Checked)
+                    DisplayResponse("Error", null, ex.Message);
+
+                    // Add Run History
+                    AddRunHistory(request, originalRequestHeaders, originalRequestBody, null, ex.Message);
+                }
+                else
                 {
-                    WriteResponseLog((HttpWebResponse)ex.Response, jsonResponse);
+                    string jsonResponse = "";
+                    using (Stream responseStream = ex.Response.GetResponseStream())
+                    {
+                        StreamReader reader = new StreamReader(responseStream, Encoding.Default);
+                        jsonResponse = reader.ReadToEnd();
+                    }
+
+                    // Logging
+                    if (checkBox_Logging.Checked)
+                    {
+                        WriteResponseLog((HttpWebResponse)ex.Response, jsonResponse);
+                    }
+
+                    DisplayResponse(((HttpWebResponse)ex.Response).StatusCode.ToString(), ex.Response.Headers, jsonResponse);
+
+                    // Add Run History
+                    AddRunHistory(request, originalRequestHeaders, originalRequestBody, (HttpWebResponse)ex.Response, jsonResponse);
                 }
-
-                DisplayResponse(((HttpWebResponse)ex.Response).StatusCode.ToString(), ex.Response.Headers, jsonResponse);
-
-                // Add Run History
-                AddRunHistory(request, originalRequestHeaders, originalRequestBody, (HttpWebResponse)ex.Response, jsonResponse);
             }
             catch (Exception ex)
             {
@@ -387,20 +444,33 @@ namespace Office365APIEditor
             }
             catch (WebException ex)
             {
-                string jsonResponse = "";
-                using (Stream responseStream = ex.Response.GetResponseStream())
+                if (ex.Response == null)
                 {
-                    StreamReader reader = new StreamReader(responseStream, Encoding.Default);
-                    jsonResponse = reader.ReadToEnd();
-                }
+                    // Logging
+                    if (checkBox_Logging.Checked)
+                    {
+                        WriteCustomLog("Response", ex.Message);
+                    }
 
-                // Logging
-                if (checkBox_Logging.Checked)
+                    DisplayResponse("Error", null, ex.Message);
+                }
+                else
                 {
-                    WriteResponseLog((HttpWebResponse)ex.Response, jsonResponse);
-                }
+                    string jsonResponse = "";
+                    using (Stream responseStream = ex.Response.GetResponseStream())
+                    {
+                        StreamReader reader = new StreamReader(responseStream, Encoding.Default);
+                        jsonResponse = reader.ReadToEnd();
+                    }
 
-                DisplayResponse(((HttpWebResponse)ex.Response).StatusCode.ToString(), ex.Response.Headers, jsonResponse);
+                    // Logging
+                    if (checkBox_Logging.Checked)
+                    {
+                        WriteResponseLog((HttpWebResponse)ex.Response, jsonResponse);
+                    }
+
+                    DisplayResponse(((HttpWebResponse)ex.Response).StatusCode.ToString(), ex.Response.Headers, jsonResponse);
+                }
             }
             catch (Exception ex)
             {
@@ -878,7 +948,49 @@ namespace Office365APIEditor
             // Show the details of selected run history.
 
             textBox_Request.Text = runInfo.RequestUrl;
-            textBox_RequestHeaders.Text = runInfo.RequestHeader;
+
+            dataGridView_RequestHeader.Rows.Clear();
+
+            string[] headers = runInfo.RequestHeader.Replace("\r", "").Split('\n');
+
+            foreach (string header in headers)
+            {
+                if (header == "")
+                {
+                    continue;
+                }
+
+                string[] delimiter = { ": " };
+                string[] headerParts = header.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
+
+                string headerName = "";
+                string headerValue = "";
+
+                if (headerParts.Length == 0)
+                {
+                    // invalid format
+                    continue;
+                }
+                else if (headerParts.Length == 1)
+                {
+                    // header value is missing.
+                    headerName = headerParts[0];
+                }
+                else if (headerParts.Length == 2)
+                {
+                    headerName = headerParts[0];
+                    headerValue = headerParts[1];
+                }
+                else
+                {
+                    // Header value contains ": " .
+                    headerName = headerParts[0];
+                    headerValue = header.Remove(0, headerName.Length + 2);
+                }
+
+                dataGridView_RequestHeader.Rows.Add(headerName, headerValue);
+            }
+
             textBox_RequestBody.Text = runInfo.RequestBody;
 
             switch (runInfo.RequestMethod.ToUpper())

@@ -53,7 +53,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tabControl_Request = new System.Windows.Forms.TabControl();
             this.tabPage_Headers = new System.Windows.Forms.TabPage();
-            this.textBox_RequestHeaders = new System.Windows.Forms.TextBox();
+            this.dataGridView_RequestHeader = new System.Windows.Forms.DataGridView();
+            this.HeaderNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HeaderValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage_Body = new System.Windows.Forms.TabPage();
             this.textBox_RequestBody = new System.Windows.Forms.TextBox();
             this.textBox_Request = new System.Windows.Forms.TextBox();
@@ -81,6 +83,7 @@
             this.tabPage2.SuspendLayout();
             this.tabControl_Request.SuspendLayout();
             this.tabPage_Headers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RequestHeader)).BeginInit();
             this.tabPage_Body.SuspendLayout();
             this.contextMenuStrip_RunHistory.SuspendLayout();
             this.SuspendLayout();
@@ -91,7 +94,7 @@
             this.checkBox_Indent.AutoSize = true;
             this.checkBox_Indent.Checked = true;
             this.checkBox_Indent.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_Indent.Location = new System.Drawing.Point(669, 220);
+            this.checkBox_Indent.Location = new System.Drawing.Point(669, 235);
             this.checkBox_Indent.Name = "checkBox_Indent";
             this.checkBox_Indent.Size = new System.Drawing.Size(56, 17);
             this.checkBox_Indent.TabIndex = 58;
@@ -106,7 +109,7 @@
             this.checkBox_Decode.AutoSize = true;
             this.checkBox_Decode.Checked = true;
             this.checkBox_Decode.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_Decode.Location = new System.Drawing.Point(737, 220);
+            this.checkBox_Decode.Location = new System.Drawing.Point(737, 235);
             this.checkBox_Decode.Name = "checkBox_Decode";
             this.checkBox_Decode.Size = new System.Drawing.Size(64, 17);
             this.checkBox_Decode.TabIndex = 57;
@@ -219,7 +222,7 @@
             this.label_Line.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label_Line.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label_Line.Location = new System.Drawing.Point(20, 209);
+            this.label_Line.Location = new System.Drawing.Point(20, 224);
             this.label_Line.Name = "label_Line";
             this.label_Line.Size = new System.Drawing.Size(780, 2);
             this.label_Line.TabIndex = 65;
@@ -227,7 +230,7 @@
             // label_StatusCode
             // 
             this.label_StatusCode.AutoSize = true;
-            this.label_StatusCode.Location = new System.Drawing.Point(78, 221);
+            this.label_StatusCode.Location = new System.Drawing.Point(84, 236);
             this.label_StatusCode.Name = "label_StatusCode";
             this.label_StatusCode.Size = new System.Drawing.Size(0, 13);
             this.label_StatusCode.TabIndex = 62;
@@ -236,7 +239,7 @@
             // 
             this.checkBox_Logging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_Logging.AutoSize = true;
-            this.checkBox_Logging.Location = new System.Drawing.Point(694, 160);
+            this.checkBox_Logging.Location = new System.Drawing.Point(694, 175);
             this.checkBox_Logging.Name = "checkBox_Logging";
             this.checkBox_Logging.Size = new System.Drawing.Size(64, 17);
             this.checkBox_Logging.TabIndex = 64;
@@ -250,10 +253,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl_Response.Controls.Add(this.tabPage1);
             this.tabControl_Response.Controls.Add(this.tabPage2);
-            this.tabControl_Response.Location = new System.Drawing.Point(22, 244);
+            this.tabControl_Response.Location = new System.Drawing.Point(22, 259);
             this.tabControl_Response.Name = "tabControl_Response";
             this.tabControl_Response.SelectedIndex = 0;
-            this.tabControl_Response.Size = new System.Drawing.Size(779, 241);
+            this.tabControl_Response.Size = new System.Drawing.Size(779, 226);
             this.tabControl_Response.TabIndex = 61;
             // 
             // tabPage1
@@ -262,7 +265,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(771, 215);
+            this.tabPage1.Size = new System.Drawing.Size(771, 200);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Headers";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -274,7 +277,7 @@
             this.textBox_ResponseHeaders.Multiline = true;
             this.textBox_ResponseHeaders.Name = "textBox_ResponseHeaders";
             this.textBox_ResponseHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_ResponseHeaders.Size = new System.Drawing.Size(765, 209);
+            this.textBox_ResponseHeaders.Size = new System.Drawing.Size(765, 194);
             this.textBox_ResponseHeaders.TabIndex = 8;
             // 
             // tabPage2
@@ -283,7 +286,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(771, 215);
+            this.tabPage2.Size = new System.Drawing.Size(771, 200);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Body";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -295,7 +298,7 @@
             this.textBox_ResponseBody.Multiline = true;
             this.textBox_ResponseBody.Name = "textBox_ResponseBody";
             this.textBox_ResponseBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_ResponseBody.Size = new System.Drawing.Size(765, 209);
+            this.textBox_ResponseBody.Size = new System.Drawing.Size(765, 194);
             this.textBox_ResponseBody.TabIndex = 7;
             // 
             // button_ViewTokenInfo
@@ -312,7 +315,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 221);
+            this.label1.Location = new System.Drawing.Point(17, 236);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 50;
@@ -322,7 +325,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(569, 220);
+            this.label7.Location = new System.Drawing.Point(569, 236);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 13);
             this.label7.TabIndex = 60;
@@ -330,45 +333,60 @@
             // 
             // tabControl_Request
             // 
+            this.tabControl_Request.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.tabControl_Request.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl_Request.Controls.Add(this.tabPage_Headers);
             this.tabControl_Request.Controls.Add(this.tabPage_Body);
             this.tabControl_Request.Location = new System.Drawing.Point(101, 82);
+            this.tabControl_Request.Multiline = true;
             this.tabControl_Request.Name = "tabControl_Request";
             this.tabControl_Request.SelectedIndex = 0;
-            this.tabControl_Request.Size = new System.Drawing.Size(587, 95);
+            this.tabControl_Request.Size = new System.Drawing.Size(587, 110);
             this.tabControl_Request.TabIndex = 63;
             // 
             // tabPage_Headers
             // 
-            this.tabPage_Headers.Controls.Add(this.textBox_RequestHeaders);
-            this.tabPage_Headers.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_Headers.Controls.Add(this.dataGridView_RequestHeader);
+            this.tabPage_Headers.Location = new System.Drawing.Point(23, 4);
             this.tabPage_Headers.Name = "tabPage_Headers";
             this.tabPage_Headers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Headers.Size = new System.Drawing.Size(579, 69);
+            this.tabPage_Headers.Size = new System.Drawing.Size(560, 102);
             this.tabPage_Headers.TabIndex = 0;
             this.tabPage_Headers.Text = "Headers";
             this.tabPage_Headers.UseVisualStyleBackColor = true;
             // 
-            // textBox_RequestHeaders
+            // dataGridView_RequestHeader
             // 
-            this.textBox_RequestHeaders.AcceptsReturn = true;
-            this.textBox_RequestHeaders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_RequestHeaders.Location = new System.Drawing.Point(3, 3);
-            this.textBox_RequestHeaders.Multiline = true;
-            this.textBox_RequestHeaders.Name = "textBox_RequestHeaders";
-            this.textBox_RequestHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_RequestHeaders.Size = new System.Drawing.Size(573, 63);
-            this.textBox_RequestHeaders.TabIndex = 40;
+            this.dataGridView_RequestHeader.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_RequestHeader.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.HeaderNameCol,
+            this.HeaderValueCol});
+            this.dataGridView_RequestHeader.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView_RequestHeader.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView_RequestHeader.Name = "dataGridView_RequestHeader";
+            this.dataGridView_RequestHeader.Size = new System.Drawing.Size(554, 96);
+            this.dataGridView_RequestHeader.TabIndex = 45;
+            // 
+            // HeaderNameCol
+            // 
+            this.HeaderNameCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.HeaderNameCol.HeaderText = "Name";
+            this.HeaderNameCol.Name = "HeaderNameCol";
+            // 
+            // HeaderValueCol
+            // 
+            this.HeaderValueCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.HeaderValueCol.HeaderText = "Value";
+            this.HeaderValueCol.Name = "HeaderValueCol";
             // 
             // tabPage_Body
             // 
             this.tabPage_Body.Controls.Add(this.textBox_RequestBody);
-            this.tabPage_Body.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_Body.Location = new System.Drawing.Point(23, 4);
             this.tabPage_Body.Name = "tabPage_Body";
             this.tabPage_Body.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Body.Size = new System.Drawing.Size(579, 69);
+            this.tabPage_Body.Size = new System.Drawing.Size(560, 102);
             this.tabPage_Body.TabIndex = 1;
             this.tabPage_Body.Text = "Body";
             this.tabPage_Body.UseVisualStyleBackColor = true;
@@ -381,7 +399,7 @@
             this.textBox_RequestBody.Multiline = true;
             this.textBox_RequestBody.Name = "textBox_RequestBody";
             this.textBox_RequestBody.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_RequestBody.Size = new System.Drawing.Size(573, 63);
+            this.textBox_RequestBody.Size = new System.Drawing.Size(554, 96);
             this.textBox_RequestBody.TabIndex = 4;
             // 
             // textBox_Request
@@ -400,7 +418,7 @@
             // button_Run
             // 
             this.button_Run.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Run.Location = new System.Drawing.Point(694, 180);
+            this.button_Run.Location = new System.Drawing.Point(694, 195);
             this.button_Run.Name = "button_Run";
             this.button_Run.Size = new System.Drawing.Size(107, 23);
             this.button_Run.TabIndex = 47;
@@ -411,7 +429,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(52, 185);
+            this.label6.Location = new System.Drawing.Point(52, 200);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 13);
             this.label6.TabIndex = 59;
@@ -473,7 +491,7 @@
             // radioButton_DELETE
             // 
             this.radioButton_DELETE.AutoSize = true;
-            this.radioButton_DELETE.Location = new System.Drawing.Point(281, 183);
+            this.radioButton_DELETE.Location = new System.Drawing.Point(281, 198);
             this.radioButton_DELETE.Name = "radioButton_DELETE";
             this.radioButton_DELETE.Size = new System.Drawing.Size(67, 17);
             this.radioButton_DELETE.TabIndex = 56;
@@ -484,7 +502,7 @@
             // 
             this.radioButton_GET.AutoSize = true;
             this.radioButton_GET.Checked = true;
-            this.radioButton_GET.Location = new System.Drawing.Point(101, 183);
+            this.radioButton_GET.Location = new System.Drawing.Point(101, 198);
             this.radioButton_GET.Name = "radioButton_GET";
             this.radioButton_GET.Size = new System.Drawing.Size(47, 17);
             this.radioButton_GET.TabIndex = 46;
@@ -495,7 +513,7 @@
             // radioButton_PATCH
             // 
             this.radioButton_PATCH.AutoSize = true;
-            this.radioButton_PATCH.Location = new System.Drawing.Point(214, 183);
+            this.radioButton_PATCH.Location = new System.Drawing.Point(214, 198);
             this.radioButton_PATCH.Name = "radioButton_PATCH";
             this.radioButton_PATCH.Size = new System.Drawing.Size(61, 17);
             this.radioButton_PATCH.TabIndex = 55;
@@ -505,7 +523,7 @@
             // radioButton_POST
             // 
             this.radioButton_POST.AutoSize = true;
-            this.radioButton_POST.Location = new System.Drawing.Point(154, 183);
+            this.radioButton_POST.Location = new System.Drawing.Point(154, 198);
             this.radioButton_POST.Name = "radioButton_POST";
             this.radioButton_POST.Size = new System.Drawing.Size(54, 17);
             this.radioButton_POST.TabIndex = 54;
@@ -554,7 +572,7 @@
             this.tabPage2.PerformLayout();
             this.tabControl_Request.ResumeLayout(false);
             this.tabPage_Headers.ResumeLayout(false);
-            this.tabPage_Headers.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RequestHeader)).EndInit();
             this.tabPage_Body.ResumeLayout(false);
             this.tabPage_Body.PerformLayout();
             this.contextMenuStrip_RunHistory.ResumeLayout(false);
@@ -586,7 +604,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabControl tabControl_Request;
         private System.Windows.Forms.TabPage tabPage_Headers;
-        private System.Windows.Forms.TextBox textBox_RequestHeaders;
         private System.Windows.Forms.TabPage tabPage_Body;
         private System.Windows.Forms.TextBox textBox_RequestBody;
         private System.Windows.Forms.CheckBox checkBox_Indent;
@@ -605,5 +622,8 @@
         private System.Windows.Forms.RadioButton radioButton_PATCH;
         private System.Windows.Forms.RadioButton radioButton_POST;
         private System.Windows.Forms.Label label_Line;
+        private System.Windows.Forms.DataGridView dataGridView_RequestHeader;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HeaderNameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn HeaderValueCol;
     }
 }
