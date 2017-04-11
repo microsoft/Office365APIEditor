@@ -110,7 +110,7 @@ namespace Office365APIEditor
             msgFolderRootId = msgFolderRoot.Id;
 
             TreeNode node = new TreeNode("MsgFolderRoot");
-            node.Tag = new FolderInfo() { ID = msgFolderRoot.Id, Type = FolderContentType.Message, Expanded = false };
+            node.Tag = new FolderInfo() { ID = msgFolderRoot.Id, Type = FolderContentType.MsgFolderRoot, Expanded = false };
             node.ContextMenuStrip = contextMenuStrip_FolderTreeNode;
             node.Nodes.Add(new TreeNode()); // Add a dummy node.
 
@@ -392,6 +392,7 @@ namespace Office365APIEditor
             switch (info.Type)
             {
                 case FolderContentType.Message:
+                case FolderContentType.MsgFolderRoot:
                     GetMessageFolderProps(info.ID, treeView_Mailbox.SelectedNode.Text);
                     break;
                 case FolderContentType.Contact:

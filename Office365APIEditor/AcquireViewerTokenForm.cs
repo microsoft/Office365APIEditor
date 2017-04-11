@@ -54,7 +54,11 @@ namespace Office365APIEditor
             catch (Exception ex)
             {
                 Cursor = Cursors.Default;
-                MessageBox.Show(ex.Message, "Office365APIEditor");
+
+                if (ex.Message != "User canceled authentication")
+                {
+                    MessageBox.Show(ex.Message, "Office365APIEditor");
+                }
             }
         }
 

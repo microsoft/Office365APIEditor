@@ -23,6 +23,7 @@ namespace Office365APIEditor
         Message,
         Contact,
         Calendar,
-        DummyCalendarRoot
+        DummyCalendarRoot,
+        MsgFolderRoot
     }
 }
