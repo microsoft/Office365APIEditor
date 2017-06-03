@@ -39,6 +39,13 @@ namespace Office365APIEditor
         private void MailboxViewerForm_Load(object sender, System.EventArgs e)
         {
             closeSessionToolStripMenuItem.Enabled = false;
+
+            // Change window title
+            string windowTitle = "Office365APIEditor - " + Application.ProductVersion;
+#if DEBUG
+            windowTitle += " [DEBUG]";
+#endif
+            Text = windowTitle + " - Mailbox Viewer";
         }
 
         private bool Prepare()
@@ -64,7 +71,7 @@ namespace Office365APIEditor
                             return token;
                         });
                     });
-
+                
                 client.Context.SendingRequest2 += new EventHandler<SendingRequest2EventArgs>(
                     (eventSender, eventArgs) => InsertXAnchorMailboxHeader(eventSender, eventArgs, email));
 
@@ -102,7 +109,7 @@ namespace Office365APIEditor
 
             var inbox = await client.Me.MailFolders["Inbox"].ExecuteAsync(); // Inbox
             inboxId = inbox.Id;
-
+            
             var topOfInformationStore = await client.Me.MailFolders[inbox.ParentFolderId].ExecuteAsync(); // Top of information store
             topOfInformationStoreId = topOfInformationStore.Id;
 
