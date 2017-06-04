@@ -23,11 +23,21 @@ namespace Office365APIEditor
             string[] tokenParts = _token.Split('.');
 
             // Decode headers.
-            textBox_Header.Text = RequestForm.parseJsonResponse(Encoding.UTF8.GetString(ConvertFromBase64String(tokenParts[0])));
+            try
+            {
+                textBox_Header.Text = RequestForm.parseJsonResponse(Encoding.UTF8.GetString(ConvertFromBase64String(tokenParts[0])));
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Enter a valid Access Token. Or you are using Token ID.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Close();
+                return;
+            }            
 
             if (tokenParts.Length == 1)
             {
-                MessageBox.Show("You are using Token ID.", "Office365APIEditor");
+                MessageBox.Show("Enter a valid Access Token. Or you are using Token ID.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Close();
             }
             else
             {

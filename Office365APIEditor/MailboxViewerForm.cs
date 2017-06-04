@@ -683,5 +683,12 @@ namespace Office365APIEditor
             dataGridView_FolderProps.Columns.Clear();
             treeView_Mailbox.Nodes.Clear();
         }
+
+        private void accessTokenViewerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TokenViewer tokenView = new TokenViewer();
+            tokenView.Owner = this;
+            tokenView.Show();
+        }
     }
 }

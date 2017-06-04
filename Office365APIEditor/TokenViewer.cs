@@ -11,6 +11,11 @@ namespace Office365APIEditor
         string rawAccessToken = "";
         string rawRefreshToken = "";
 
+        public TokenViewer()
+        {
+            InitializeComponent();
+        }
+
         public TokenViewer(TokenResponse Token)
         {
             InitializeComponent();
@@ -23,13 +28,35 @@ namespace Office365APIEditor
         {
             textBox_AccessToken.Text = rawAccessToken;
             textBox_RefreshToken.Text = rawRefreshToken;
+
+            if (rawAccessToken == "")
+            {
+                textBox_AccessToken.ReadOnly = false;
+                textBox_AccessToken.Text = "Enter Access Token and click [Detail]";
+            }
         }
 
         private void button_AccessTokenDetail_Click(object sender, EventArgs e)
         {
-            DetailedTokenViewer viewer = new DetailedTokenViewer(rawAccessToken);
+            if (rawAccessToken == "")
+            {
+                try
+                {
+                    DetailedTokenViewer viewer = new DetailedTokenViewer(textBox_AccessToken.Text);
 
-            viewer.ShowDialog();
+                    viewer.ShowDialog();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Enter a valid Access Token.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                DetailedTokenViewer viewer = new DetailedTokenViewer(rawAccessToken);
+
+                viewer.ShowDialog();
+            }
 
             DialogResult = DialogResult.None;
         }
