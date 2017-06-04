@@ -357,5 +357,41 @@ namespace Office365APIEditor.Properties {
                 this["AllowAutoRedirect"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastWebAppAppOnlyByKeyTenantName {
+            get {
+                return ((string)(this["LastWebAppAppOnlyByKeyTenantName"]));
+            }
+            set {
+                this["LastWebAppAppOnlyByKeyTenantName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastWebAppAppOnlyByKeyClientID {
+            get {
+                return ((string)(this["LastWebAppAppOnlyByKeyClientID"]));
+            }
+            set {
+                this["LastWebAppAppOnlyByKeyClientID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastWebAppAppOnlyByKeyClientSecret {
+            get {
+                return ((string)(this["LastWebAppAppOnlyByKeyClientSecret"]));
+            }
+            set {
+                this["LastWebAppAppOnlyByKeyClientSecret"] = value;
+            }
+        }
     }
 }

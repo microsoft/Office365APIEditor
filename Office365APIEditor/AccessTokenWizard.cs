@@ -30,10 +30,11 @@ namespace Office365APIEditor
             Page02_AppRegistrationPortalAppSelection = 2,
             Page03_V1WebAppOptionForm = 3,
             Page04_V1NativeAppOptionForm = 4,
-            Page05_V1AppOnlyOptionForm = 5,
+            Page05_V1AppOnlyByCertOptionForm = 5,
             Page06_V2WebAppOptionForm = 6,
             Page07_V2MobileAppOptionForm = 7,
-            Page08_ConfirmationForm = 8
+            Page08_V1AppOnlyByKeyOptionForm = 8,
+            Page09_V1AdminConsentOptionForm = 9
         }
 
         public AccessTokenWizard()
@@ -54,12 +55,14 @@ namespace Office365APIEditor
             Pages.Add(panel_Page05);
             Pages.Add(panel_Page06);
             Pages.Add(panel_Page07);
-                        
+            Pages.Add(panel_Page08);
+            Pages.Add(panel_Page09);
+
             previousPages = new List<PageIndex>();
             currentPageIndex = PageIndex.None;
-                        
+
             // Initialize UI.
-            
+
             Pages.ForEach(p => p.Enabled = false);
 
             // Go to the first page.
@@ -72,11 +75,15 @@ namespace Office365APIEditor
                 comboBox_Page03_Resource.Items.Add(item);
                 comboBox_Page04_Resource.Items.Add(item);
                 comboBox_Page05_Resource.Items.Add(item);
+                comboBox_Page08_Resource.Items.Add(item);
+                comboBox_Page09_Resource.Items.Add(item);
             }
 
-            comboBox_Page03_Resource.SelectedIndex = 0;
-            comboBox_Page04_Resource.SelectedIndex = 0;
-            comboBox_Page05_Resource.SelectedIndex = 0;
+            comboBox_Page03_Resource.SelectedIndex = 1;
+            comboBox_Page04_Resource.SelectedIndex = 1;
+            comboBox_Page05_Resource.SelectedIndex = 1;
+            comboBox_Page08_Resource.SelectedIndex = 1;
+            comboBox_Page09_Resource.SelectedIndex = 1;
 
             Size = new Size(433, 256);
         }
@@ -98,7 +105,7 @@ namespace Office365APIEditor
         {
             previousPages.Add(currentPageIndex);
             currentPageIndex = PageIndexToShow;
-            
+
             Pages[(int)currentPageIndex].Top = 12;
             Pages[(int)currentPageIndex].Left = 12;
             Pages[(int)currentPageIndex].Enabled = true;
@@ -113,7 +120,7 @@ namespace Office365APIEditor
                 {
 
                 }
-            }            
+            }
 
             if (previousPages.Count != 1)
             {
@@ -195,11 +202,23 @@ namespace Office365APIEditor
                         // Go to the next page.
                         ShowPage(PageIndex.Page04_V1NativeAppOptionForm);
                     }
+                    else if (radioButton_Page01_V1AppOnlyByCert.Checked)
+                    {
+                        // V1 endpoint Web App (App Only Token by certificate)
+                        // Go to the next page.
+                        ShowPage(PageIndex.Page05_V1AppOnlyByCertOptionForm);
+                    }
+                    else if (radioButton_Page01_V1AppOnlyByKey.Checked)
+                    {
+                        // V1 endpoint Web App (App Only Token by Key)
+                        // Go to the next page.
+                        ShowPage(PageIndex.Page08_V1AppOnlyByKeyOptionForm);
+                    }
                     else
                     {
-                        // V1 endpoint Web App (App Only Token)
+                        // V1 endpoint Admin Consent
                         // Go to the next page.
-                        ShowPage(PageIndex.Page05_V1AppOnlyOptionForm);
+                        ShowPage(PageIndex.Page09_V1AdminConsentOptionForm);
                     }
 
                     break;
@@ -253,7 +272,7 @@ namespace Office365APIEditor
                     if (ValidateV1NativeAppParam())
                     {
                         string authorizationCode = AcquireV1NativeAppAuthorizationCode();
-                        
+
                         if (authorizationCode == "")
                         {
                             return;
@@ -274,12 +293,12 @@ namespace Office365APIEditor
 
                     break;
 
-                case PageIndex.Page05_V1AppOnlyOptionForm:
-                    // Option form for V1 auth endpoint Web App App only token
+                case PageIndex.Page05_V1AppOnlyByCertOptionForm:
+                    // Option form for V1 auth endpoint Web App App only token by certificate
 
-                    if (ValidateV1WebAppAppOnlyParam())
+                    if (ValidateV1WebAppAppOnlyByCertParam())
                     {
-                        TokenResponse tokenResponse = AcquireV1WebAppAppOnlyAccessToken();
+                        TokenResponse tokenResponse = AcquireV1WebAppAppOnlyAccessTokenByCert();
 
                         if (tokenResponse != null)
                         {
@@ -346,6 +365,44 @@ namespace Office365APIEditor
                     }
 
                     break;
+
+                case PageIndex.Page08_V1AppOnlyByKeyOptionForm:
+                    // Option form for V1 auth endpoint Web App App only token by Key
+
+                    if (ValidateV1WebAppAppOnlyByKeyParam())
+                    {
+                        TokenResponse tokenResponse = AcquireV1WebAppAppOnlyAccessTokenByKey();
+
+                        if (tokenResponse != null)
+                        {
+                            SaveSettings();
+
+                            // Create a return value and close this window.
+                            clientInfo = new ClientInformation(tokenResponse, AuthEndpoints.OAuthV1, Util.ConvertResourceNameToResourceEnum(comboBox_Page08_Resource.SelectedText), textBox_Page08_ClientID.Text, "", "", "");
+                            DialogResult = DialogResult.OK;
+                            Close();
+                        }
+                    }
+
+                    break;
+
+                case PageIndex.Page09_V1AdminConsentOptionForm:
+                    // Option form for V1 Admin Consent
+
+                    if (ValidateV1AdminConsentParam())
+                    {
+                        string authorizationCode = AcquireV1AdminConsentAuthorizationCode();
+
+                        if (authorizationCode == "")
+                        {
+                            return;
+                        }
+
+                        SaveSettings();
+                        MessageBox.Show("Admin Consent completed.", "Office365APIEditor");
+                    }
+                    break;
+
                 case PageIndex.None:
                 default:
                     break;
@@ -424,7 +481,7 @@ namespace Office365APIEditor
         #endregion
 
         #region Code for V1 auth endpoint Native App
-        
+
         private bool ValidateV1NativeAppParam()
         {
             // Check the form for native app.
@@ -498,7 +555,7 @@ namespace Office365APIEditor
 
         #endregion
 
-        #region Code For V1 auth endpoint App Only Token
+        #region Code For V1 auth endpoint App Only Token by cert
 
         private void button_Page05_SelectCert_Click(object sender, EventArgs e)
         {
@@ -510,9 +567,9 @@ namespace Office365APIEditor
             }
         }
 
-        private bool ValidateV1WebAppAppOnlyParam()
+        private bool ValidateV1WebAppAppOnlyByCertParam()
         {
-            // Check the form for web app (App Only).
+            // Check the form for web app (App Only by certificate).
 
             if (textBox_Page05_TenantName.Text == "")
             {
@@ -540,47 +597,135 @@ namespace Office365APIEditor
             }
         }
 
-        private TokenResponse AcquireV1WebAppAppOnlyAccessToken()
+        private TokenResponse AcquireV1WebAppAppOnlyAccessTokenByCert()
         {
-            FileStream certFile = File.OpenRead(textBox_Page05_CertPath.Text);
-            byte[] certBytes = new byte[certFile.Length];
-            certFile.Read(certBytes, 0, (int)certFile.Length);
-            var cert = new X509Certificate2(certBytes, textBox_Page05_CertPass.Text, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet);
-
-            string resource = Util.ConvertResourceNameToUri(comboBox_Page05_Resource.SelectedItem.ToString());
-
-            ClientAssertionCertificate cac = new ClientAssertionCertificate(textBox_Page05_ClientID.Text, cert);
-            AuthenticationContext authenticationContext = new AuthenticationContext("https://login.microsoftonline.com/" + textBox_Page05_TenantName.Text, false);
-
-            AuthenticationResult authenticationResult = null;
-
-            string errorMessage = null;
             try
             {
-                authenticationResult = authenticationContext.AcquireTokenAsync(resource, cac).Result;
-            }
-            catch (AdalException ex)
-            {
-                errorMessage = ex.Message;
-                if (ex.InnerException != null)
-                {
-                    errorMessage += "\nInnerException : " + ex.InnerException.Message;
-                }
-            }
-            catch (ArgumentException ex)
-            {
-                errorMessage = ex.Message;
-            }
+                FileStream certFile = File.OpenRead(textBox_Page05_CertPath.Text);
+                byte[] certBytes = new byte[certFile.Length];
+                certFile.Read(certBytes, 0, (int)certFile.Length);
+                var cert = new X509Certificate2(certBytes, textBox_Page05_CertPass.Text, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet);
 
-            if (!string.IsNullOrEmpty(errorMessage))
+                string resource = Util.ConvertResourceNameToUri(comboBox_Page05_Resource.SelectedItem.ToString());
+
+                ClientAssertionCertificate cac = new ClientAssertionCertificate(textBox_Page05_ClientID.Text, cert);
+                AuthenticationContext authenticationContext = new AuthenticationContext("https://login.microsoftonline.com/" + textBox_Page05_TenantName.Text, false);
+
+                AuthenticationResult authenticationResult = null;
+
+                string errorMessage = null;
+                try
+                {
+                    authenticationResult = authenticationContext.AcquireTokenAsync(resource, cac).Result;
+                }
+                catch (AdalException ex)
+                {
+                    errorMessage = ex.Message;
+                    if (ex.InnerException != null)
+                    {
+                        errorMessage += "\nInnerException : " + ex.InnerException.Message;
+                    }
+                }
+                catch (ArgumentException ex)
+                {
+                    errorMessage = ex.Message;
+                }
+
+                if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    MessageBox.Show(errorMessage, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+                else
+                {
+                    return Util.ConvertAuthenticationResultToTokenResponse(authenticationResult);
+                }
+
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show(errorMessage, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
+            }
+        }
+
+        #endregion
+
+        #region Code For V1 auth endpoint App Only Token by Key
+
+        private bool ValidateV1WebAppAppOnlyByKeyParam()
+        {
+            // Check the form for web app (App Only by certificate).
+
+            if (textBox_Page08_TenantName.Text == "")
+            {
+                MessageBox.Show("Enter the Tenant Name.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_Page08_ClientID.Text == "")
+            {
+                MessageBox.Show("Enter the Client ID.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_Page08_ClientSecret.Text == "")
+            {
+                MessageBox.Show("Enter the Client Secret.", "Office365APIEditor");
+                return false;
             }
             else
             {
-                return Util.ConvertAuthenticationResultToTokenResponse(authenticationResult);
+                return true;
             }
+        }
+
+        private TokenResponse AcquireV1WebAppAppOnlyAccessTokenByKey()
+        {
+            // Build a POST body.
+            string postBody = "grant_type=client_credentials" +
+                "&resource=" + System.Web.HttpUtility.UrlEncode(Util.ConvertResourceNameToUri(comboBox_Page08_Resource.SelectedItem.ToString())) +
+                "&client_id=" + textBox_Page08_ClientID.Text +
+                "&client_secret=" + System.Web.HttpUtility.UrlEncode(textBox_Page08_ClientSecret.Text);
+
+            return AcquireAccessToken(postBody, "https://login.microsoftonline.com/" + textBox_Page08_TenantName.Text + "/oauth2/token");
+        }
+
+        #endregion
+
+        #region Code for V1 Admin Consent
+
+        private bool ValidateV1AdminConsentParam()
+        {
+            if (textBox_Page09_ClientID.Text == "")
+            {
+                MessageBox.Show("Enter the Client ID.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_Page09_RedirectUri.Text == "")
+            {
+                MessageBox.Show("Enter the Redirect URL", "Office365APIEditor");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private string AcquireV1AdminConsentAuthorizationCode()
+        {
+            string Code = "";
+
+            GetCodeForm getCodeForm = new GetCodeForm(textBox_Page09_ClientID.Text, textBox_Page09_RedirectUri.Text, Util.ConvertResourceNameToUri(comboBox_Page09_Resource.SelectedItem.ToString()), false, true);
+
+            if (getCodeForm.ShowDialog(out Code) == DialogResult.OK)
+            {
+                if (Code == "")
+                {
+                    MessageBox.Show("Getting Authorization Code was failed.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            return Code;
         }
 
         #endregion
@@ -769,9 +914,14 @@ namespace Office365APIEditor
             System.Diagnostics.Process.Start("https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V1_Native_application.md");
         }
 
-        private void linkLabel_linkLabel_Page05_WebAppAppOnly_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabel_Page05_WebAppAppOnly_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V1_Web_application_for_App_Only_Token.md");
+        }
+
+        private void linkLabel_Page08_WebAppAppOnlyByKey_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V1_Web_application_for_App_Only_Token_Key_Auth.md");
         }
 
         private TokenResponse AcquireAccessToken(string PostBody, string EndPointUrl)
@@ -837,7 +987,5 @@ namespace Office365APIEditor
             // Save settings.
             Properties.Settings.Default.Save();
         }
-
-
     }
 }

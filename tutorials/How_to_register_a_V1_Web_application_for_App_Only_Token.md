@@ -1,7 +1,7 @@
 # How to register a V1 Web application for App Only Token
 
 This tutorial introduces how to register the application using Microsoft Azure portal.
-Once you registered an application by following this tutorial, you can use it as a "Web application (Use App Only Token)" in Office365APIEditor.
+Once you registered an application by following this tutorial, you can use it as a "Web app / API (Use App Only Token by certificate)" in Office365APIEditor.
 
 1. Go to https://manage.windowsazure.com/ and sign in using your administrator account of Microsoft Azure.
 

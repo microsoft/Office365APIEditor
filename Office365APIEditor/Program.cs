@@ -89,7 +89,15 @@ namespace Office365APIEditor
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.InnerException.Message);
+                if (ex.InnerException == null)
+                {
+                    MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    MessageBox.Show(ex.InnerException.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                
             }
         }
 

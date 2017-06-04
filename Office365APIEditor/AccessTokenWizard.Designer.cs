@@ -38,6 +38,9 @@
             this.button_Next = new System.Windows.Forms.Button();
             this.button_Cancel = new System.Windows.Forms.Button();
             this.panel_Page01 = new System.Windows.Forms.Panel();
+            this.radioButton_Page01_V1AdminConsent = new System.Windows.Forms.RadioButton();
+            this.radioButton_Page01_V1AppOnlyByKey = new System.Windows.Forms.RadioButton();
+            this.radioButton_Page01_V1AppOnlyByCert = new System.Windows.Forms.RadioButton();
             this.radioButton_Page01_V1Native = new System.Windows.Forms.RadioButton();
             this.radioButton_Page01_V1Web = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
@@ -68,27 +71,9 @@
             this.textBox_Page04_TenantName = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.panel_Page05 = new System.Windows.Forms.Panel();
-            this.panel_Page06 = new System.Windows.Forms.Panel();
-            this.panel_Page07 = new System.Windows.Forms.Panel();
-            this.panel_Page08 = new System.Windows.Forms.Panel();
-            this.textBox_Page06_ClientSecret = new System.Windows.Forms.TextBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.button_Page06_ScopeEditor = new System.Windows.Forms.Button();
-            this.textBox_Page06_Scopes = new System.Windows.Forms.TextBox();
-            this.textBox_Page06_ClientID = new System.Windows.Forms.TextBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.textBox_Page06_RedirectUri = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.button_Page07_ScopeEditor = new System.Windows.Forms.Button();
-            this.textBox_Page07_Scopes = new System.Windows.Forms.TextBox();
-            this.textBox_Page07_ClientID = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.textBox_Page07_RedirectUri = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
+            this.linkLabel_linkLabel_Page05_WebAppAppOnly = new System.Windows.Forms.LinkLabel();
+            this.comboBox_Page05_Resource = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.button_Page05_SelectCert = new System.Windows.Forms.Button();
             this.label36 = new System.Windows.Forms.Label();
             this.textBox_Page05_CertPath = new System.Windows.Forms.TextBox();
@@ -99,11 +84,46 @@
             this.textBox_Page05_ClientID = new System.Windows.Forms.TextBox();
             this.textBox_Page05_TenantName = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.comboBox_Page05_Resource = new System.Windows.Forms.ComboBox();
+            this.panel_Page06 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBox_Page06_ClientSecret = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.button_Page06_ScopeEditor = new System.Windows.Forms.Button();
+            this.textBox_Page06_Scopes = new System.Windows.Forms.TextBox();
+            this.textBox_Page06_ClientID = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.textBox_Page06_RedirectUri = new System.Windows.Forms.TextBox();
+            this.panel_Page07 = new System.Windows.Forms.Panel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.button_Page07_ScopeEditor = new System.Windows.Forms.Button();
+            this.textBox_Page07_Scopes = new System.Windows.Forms.TextBox();
+            this.textBox_Page07_ClientID = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.textBox_Page07_RedirectUri = new System.Windows.Forms.TextBox();
+            this.panel_Page08 = new System.Windows.Forms.Panel();
+            this.linkLabel_Page08_WebAppAppOnlyByKey = new System.Windows.Forms.LinkLabel();
+            this.comboBox_Page08_Resource = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.textBox_Page08_ClientSecret = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.textBox_Page08_TenantName = new System.Windows.Forms.TextBox();
+            this.textBox_Page08_ClientID = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.openFileDialog_PFX = new System.Windows.Forms.OpenFileDialog();
-            this.radioButton_Page01_V1AppOnly = new System.Windows.Forms.RadioButton();
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly = new System.Windows.Forms.LinkLabel();
+            this.panel_Page09 = new System.Windows.Forms.Panel();
+            this.comboBox_Page09_Resource = new System.Windows.Forms.ComboBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.textBox_Page09_ClientID = new System.Windows.Forms.TextBox();
+            this.textBox_Page09_RedirectUri = new System.Windows.Forms.TextBox();
+            this.label38 = new System.Windows.Forms.Label();
             this.panel_Page00.SuspendLayout();
             this.panel_Page01.SuspendLayout();
             this.panel_Page03.SuspendLayout();
@@ -112,6 +132,8 @@
             this.panel_Page05.SuspendLayout();
             this.panel_Page06.SuspendLayout();
             this.panel_Page07.SuspendLayout();
+            this.panel_Page08.SuspendLayout();
+            this.panel_Page09.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_Page00
@@ -142,11 +164,11 @@
             this.radioButton_Page00_AppRegistrationPortal.AutoSize = true;
             this.radioButton_Page00_AppRegistrationPortal.Location = new System.Drawing.Point(18, 86);
             this.radioButton_Page00_AppRegistrationPortal.Name = "radioButton_Page00_AppRegistrationPortal";
-            this.radioButton_Page00_AppRegistrationPortal.Size = new System.Drawing.Size(265, 43);
+            this.radioButton_Page00_AppRegistrationPortal.Size = new System.Drawing.Size(305, 43);
             this.radioButton_Page00_AppRegistrationPortal.TabIndex = 2;
             this.radioButton_Page00_AppRegistrationPortal.TabStop = true;
-            this.radioButton_Page00_AppRegistrationPortal.Text = "App Registration Portal\r\nhttps://apps.dev.microsoft.com/\r\nOffice365APIEditor will" +
-    " use the v2.0 auth endpoint.";
+            this.radioButton_Page00_AppRegistrationPortal.Text = "v2.0 Endpoint\r\nIf you registered your application in App Registration Portal, \r\ns" +
+    "elect this option.";
             this.radioButton_Page00_AppRegistrationPortal.UseVisualStyleBackColor = true;
             // 
             // radioButton_Page00_MicrosoftAzurePortal
@@ -155,11 +177,11 @@
             this.radioButton_Page00_MicrosoftAzurePortal.Checked = true;
             this.radioButton_Page00_MicrosoftAzurePortal.Location = new System.Drawing.Point(18, 37);
             this.radioButton_Page00_MicrosoftAzurePortal.Name = "radioButton_Page00_MicrosoftAzurePortal";
-            this.radioButton_Page00_MicrosoftAzurePortal.Size = new System.Drawing.Size(265, 43);
+            this.radioButton_Page00_MicrosoftAzurePortal.Size = new System.Drawing.Size(300, 43);
             this.radioButton_Page00_MicrosoftAzurePortal.TabIndex = 1;
             this.radioButton_Page00_MicrosoftAzurePortal.TabStop = true;
-            this.radioButton_Page00_MicrosoftAzurePortal.Text = "Microsoft Azure Portal\r\nhttps://manage.windowsazure.com/\r\nOffice365APIEditor will" +
-    " use the v1.0 auth endpoint.";
+            this.radioButton_Page00_MicrosoftAzurePortal.Text = "v1.0 Endpoint\r\nIf you registered your application in Microsoft Azure Portal, \r\nse" +
+    "lect this option.";
             this.radioButton_Page00_MicrosoftAzurePortal.UseVisualStyleBackColor = true;
             // 
             // label1
@@ -167,9 +189,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(15, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(339, 13);
+            this.label1.Size = new System.Drawing.Size(176, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Which portal site did you use at the time of the application registration?";
+            this.label1.Text = "Which OAuth endpoint do you use?";
             // 
             // button_Back
             // 
@@ -204,7 +226,9 @@
             // 
             // panel_Page01
             // 
-            this.panel_Page01.Controls.Add(this.radioButton_Page01_V1AppOnly);
+            this.panel_Page01.Controls.Add(this.radioButton_Page01_V1AdminConsent);
+            this.panel_Page01.Controls.Add(this.radioButton_Page01_V1AppOnlyByKey);
+            this.panel_Page01.Controls.Add(this.radioButton_Page01_V1AppOnlyByCert);
             this.panel_Page01.Controls.Add(this.radioButton_Page01_V1Native);
             this.panel_Page01.Controls.Add(this.radioButton_Page01_V1Web);
             this.panel_Page01.Controls.Add(this.label2);
@@ -214,15 +238,48 @@
             this.panel_Page01.TabIndex = 4;
             this.panel_Page01.Tag = "radioButton_Page01_V1Web";
             // 
+            // radioButton_Page01_V1AdminConsent
+            // 
+            this.radioButton_Page01_V1AdminConsent.AutoSize = true;
+            this.radioButton_Page01_V1AdminConsent.Location = new System.Drawing.Point(18, 129);
+            this.radioButton_Page01_V1AdminConsent.Name = "radioButton_Page01_V1AdminConsent";
+            this.radioButton_Page01_V1AdminConsent.Size = new System.Drawing.Size(352, 17);
+            this.radioButton_Page01_V1AdminConsent.TabIndex = 5;
+            this.radioButton_Page01_V1AdminConsent.TabStop = true;
+            this.radioButton_Page01_V1AdminConsent.Text = "I need to complete ADMIN CONSENT before acquiring access token";
+            this.radioButton_Page01_V1AdminConsent.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_Page01_V1AppOnlyByKey
+            // 
+            this.radioButton_Page01_V1AppOnlyByKey.AutoSize = true;
+            this.radioButton_Page01_V1AppOnlyByKey.Location = new System.Drawing.Point(18, 106);
+            this.radioButton_Page01_V1AppOnlyByKey.Name = "radioButton_Page01_V1AppOnlyByKey";
+            this.radioButton_Page01_V1AppOnlyByKey.Size = new System.Drawing.Size(239, 17);
+            this.radioButton_Page01_V1AppOnlyByKey.TabIndex = 4;
+            this.radioButton_Page01_V1AppOnlyByKey.TabStop = true;
+            this.radioButton_Page01_V1AppOnlyByKey.Text = "Web app / API (Use App Only Token by key)";
+            this.radioButton_Page01_V1AppOnlyByKey.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_Page01_V1AppOnlyByCert
+            // 
+            this.radioButton_Page01_V1AppOnlyByCert.AutoSize = true;
+            this.radioButton_Page01_V1AppOnlyByCert.Location = new System.Drawing.Point(18, 83);
+            this.radioButton_Page01_V1AppOnlyByCert.Name = "radioButton_Page01_V1AppOnlyByCert";
+            this.radioButton_Page01_V1AppOnlyByCert.Size = new System.Drawing.Size(268, 17);
+            this.radioButton_Page01_V1AppOnlyByCert.TabIndex = 3;
+            this.radioButton_Page01_V1AppOnlyByCert.TabStop = true;
+            this.radioButton_Page01_V1AppOnlyByCert.Text = "Web app / API (Use App Only Token by certificate)";
+            this.radioButton_Page01_V1AppOnlyByCert.UseVisualStyleBackColor = true;
+            // 
             // radioButton_Page01_V1Native
             // 
             this.radioButton_Page01_V1Native.AutoSize = true;
             this.radioButton_Page01_V1Native.Location = new System.Drawing.Point(18, 60);
             this.radioButton_Page01_V1Native.Name = "radioButton_Page01_V1Native";
-            this.radioButton_Page01_V1Native.Size = new System.Drawing.Size(138, 17);
+            this.radioButton_Page01_V1Native.Size = new System.Drawing.Size(77, 17);
             this.radioButton_Page01_V1Native.TabIndex = 2;
             this.radioButton_Page01_V1Native.TabStop = true;
-            this.radioButton_Page01_V1Native.Text = "Native client application";
+            this.radioButton_Page01_V1Native.Text = "Native app";
             this.radioButton_Page01_V1Native.UseVisualStyleBackColor = true;
             // 
             // radioButton_Page01_V1Web
@@ -231,10 +288,10 @@
             this.radioButton_Page01_V1Web.Checked = true;
             this.radioButton_Page01_V1Web.Location = new System.Drawing.Point(18, 37);
             this.radioButton_Page01_V1Web.Name = "radioButton_Page01_V1Web";
-            this.radioButton_Page01_V1Web.Size = new System.Drawing.Size(160, 17);
+            this.radioButton_Page01_V1Web.Size = new System.Drawing.Size(97, 17);
             this.radioButton_Page01_V1Web.TabIndex = 1;
             this.radioButton_Page01_V1Web.TabStop = true;
-            this.radioButton_Page01_V1Web.Text = "Web application or Web API";
+            this.radioButton_Page01_V1Web.Text = "Web app / API";
             this.radioButton_Page01_V1Web.UseVisualStyleBackColor = true;
             // 
             // label2
@@ -268,7 +325,7 @@
             // 
             this.comboBox_Page03_Resource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Page03_Resource.FormattingEnabled = true;
-            this.comboBox_Page03_Resource.Location = new System.Drawing.Point(102, 88);
+            this.comboBox_Page03_Resource.Location = new System.Drawing.Point(102, 84);
             this.comboBox_Page03_Resource.Name = "comboBox_Page03_Resource";
             this.comboBox_Page03_Resource.Size = new System.Drawing.Size(295, 21);
             this.comboBox_Page03_Resource.TabIndex = 4;
@@ -286,17 +343,18 @@
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(49, 39);
+            this.label4.Location = new System.Drawing.Point(23, 35);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 13);
+            this.label4.Size = new System.Drawing.Size(73, 13);
             this.label4.TabIndex = 42;
-            this.label4.Text = "Client ID";
+            this.label4.Text = "Application ID";
             // 
             // textBox_Page03_ClientSecret
             // 
             this.textBox_Page03_ClientSecret.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppClientSecret", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_Page03_ClientSecret.Location = new System.Drawing.Point(102, 115);
+            this.textBox_Page03_ClientSecret.Location = new System.Drawing.Point(102, 110);
             this.textBox_Page03_ClientSecret.Name = "textBox_Page03_ClientSecret";
             this.textBox_Page03_ClientSecret.Size = new System.Drawing.Size(295, 20);
             this.textBox_Page03_ClientSecret.TabIndex = 5;
@@ -304,26 +362,29 @@
             // 
             // label10
             // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(24, 65);
+            this.label10.Location = new System.Drawing.Point(37, 61);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 13);
+            this.label10.Size = new System.Drawing.Size(59, 13);
             this.label10.TabIndex = 41;
-            this.label10.Text = "Redirect URL";
+            this.label10.Text = "Reply URL";
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(29, 118);
+            this.label5.Location = new System.Drawing.Point(71, 113);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 13);
+            this.label5.Size = new System.Drawing.Size(25, 13);
             this.label5.TabIndex = 43;
-            this.label5.Text = "Client Secret";
+            this.label5.Text = "Key";
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(43, 91);
+            this.label6.Location = new System.Drawing.Point(43, 87);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 13);
             this.label6.TabIndex = 40;
@@ -332,7 +393,7 @@
             // textBox_Page03_ClientID
             // 
             this.textBox_Page03_ClientID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_Page03_ClientID.Location = new System.Drawing.Point(102, 36);
+            this.textBox_Page03_ClientID.Location = new System.Drawing.Point(102, 32);
             this.textBox_Page03_ClientID.Name = "textBox_Page03_ClientID";
             this.textBox_Page03_ClientID.Size = new System.Drawing.Size(295, 20);
             this.textBox_Page03_ClientID.TabIndex = 2;
@@ -341,7 +402,7 @@
             // textBox_Page03_RedirectUri
             // 
             this.textBox_Page03_RedirectUri.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppRedirectURL", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_Page03_RedirectUri.Location = new System.Drawing.Point(102, 62);
+            this.textBox_Page03_RedirectUri.Location = new System.Drawing.Point(102, 58);
             this.textBox_Page03_RedirectUri.Name = "textBox_Page03_RedirectUri";
             this.textBox_Page03_RedirectUri.Size = new System.Drawing.Size(295, 20);
             this.textBox_Page03_RedirectUri.TabIndex = 3;
@@ -374,7 +435,7 @@
             this.radioButton_Page02_V2Mobile.Name = "radioButton_Page02_V2Mobile";
             this.radioButton_Page02_V2Mobile.Size = new System.Drawing.Size(110, 17);
             this.radioButton_Page02_V2Mobile.TabIndex = 2;
-            this.radioButton_Page02_V2Mobile.Text = "Mobile application";
+            this.radioButton_Page02_V2Mobile.Text = "Native application";
             this.radioButton_Page02_V2Mobile.UseVisualStyleBackColor = true;
             // 
             // radioButton_Page02_V2Web
@@ -447,12 +508,13 @@
             // 
             // label13
             // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(24, 87);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(72, 13);
+            this.label13.Size = new System.Drawing.Size(69, 13);
             this.label13.TabIndex = 44;
-            this.label13.Text = "Redirect URL";
+            this.label13.Text = "Redirect URI";
             // 
             // textBox_Page04_RedirectUri
             // 
@@ -465,15 +527,17 @@
             // 
             // label12
             // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(49, 61);
+            this.label12.Location = new System.Drawing.Point(23, 61);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(47, 13);
+            this.label12.Size = new System.Drawing.Size(73, 13);
             this.label12.TabIndex = 43;
-            this.label12.Text = "Client ID";
+            this.label12.Text = "Application ID";
             // 
             // label11
             // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(24, 35);
             this.label11.Name = "label11";
@@ -501,6 +565,7 @@
             // 
             // label14
             // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(43, 113);
             this.label14.Name = "label14";
@@ -529,6 +594,134 @@
             this.panel_Page05.TabIndex = 8;
             this.panel_Page05.Tag = "textBox_Page05_TenantName";
             // 
+            // linkLabel_linkLabel_Page05_WebAppAppOnly
+            // 
+            this.linkLabel_linkLabel_Page05_WebAppAppOnly.AutoSize = true;
+            this.linkLabel_linkLabel_Page05_WebAppAppOnly.Location = new System.Drawing.Point(102, 10);
+            this.linkLabel_linkLabel_Page05_WebAppAppOnly.Name = "linkLabel_linkLabel_Page05_WebAppAppOnly";
+            this.linkLabel_linkLabel_Page05_WebAppAppOnly.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_linkLabel_Page05_WebAppAppOnly.TabIndex = 1;
+            this.linkLabel_linkLabel_Page05_WebAppAppOnly.TabStop = true;
+            this.linkLabel_linkLabel_Page05_WebAppAppOnly.Text = "How to register applications.";
+            this.linkLabel_linkLabel_Page05_WebAppAppOnly.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Page05_WebAppAppOnly_LinkClicked);
+            // 
+            // comboBox_Page05_Resource
+            // 
+            this.comboBox_Page05_Resource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_Page05_Resource.FormattingEnabled = true;
+            this.comboBox_Page05_Resource.Location = new System.Drawing.Point(102, 136);
+            this.comboBox_Page05_Resource.Name = "comboBox_Page05_Resource";
+            this.comboBox_Page05_Resource.Size = new System.Drawing.Size(295, 21);
+            this.comboBox_Page05_Resource.TabIndex = 7;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(15, 10);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(81, 13);
+            this.label16.TabIndex = 59;
+            this.label16.Text = "Fill out the form.";
+            // 
+            // button_Page05_SelectCert
+            // 
+            this.button_Page05_SelectCert.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button_Page05_SelectCert.Location = new System.Drawing.Point(320, 82);
+            this.button_Page05_SelectCert.Name = "button_Page05_SelectCert";
+            this.button_Page05_SelectCert.Size = new System.Drawing.Size(77, 23);
+            this.button_Page05_SelectCert.TabIndex = 5;
+            this.button_Page05_SelectCert.Text = "Browse...";
+            this.button_Page05_SelectCert.UseVisualStyleBackColor = true;
+            this.button_Page05_SelectCert.Click += new System.EventHandler(this.button_Page05_SelectCert_Click);
+            // 
+            // label36
+            // 
+            this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(17, 87);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(79, 13);
+            this.label36.TabIndex = 58;
+            this.label36.Text = "Certificate Path";
+            // 
+            // textBox_Page05_CertPath
+            // 
+            this.textBox_Page05_CertPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyCertPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Page05_CertPath.Location = new System.Drawing.Point(102, 84);
+            this.textBox_Page05_CertPath.Name = "textBox_Page05_CertPath";
+            this.textBox_Page05_CertPath.Size = new System.Drawing.Size(212, 20);
+            this.textBox_Page05_CertPath.TabIndex = 4;
+            this.textBox_Page05_CertPath.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyCertPath;
+            // 
+            // label32
+            // 
+            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(7, 113);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(89, 13);
+            this.label32.TabIndex = 57;
+            this.label32.Text = "Password for cert";
+            // 
+            // textBox_Page05_CertPass
+            // 
+            this.textBox_Page05_CertPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyCertPass", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Page05_CertPass.Location = new System.Drawing.Point(102, 110);
+            this.textBox_Page05_CertPass.Name = "textBox_Page05_CertPass";
+            this.textBox_Page05_CertPass.PasswordChar = '*';
+            this.textBox_Page05_CertPass.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page05_CertPass.TabIndex = 6;
+            this.textBox_Page05_CertPass.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyCertPass;
+            // 
+            // label33
+            // 
+            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(23, 61);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(73, 13);
+            this.label33.TabIndex = 56;
+            this.label33.Text = "Application ID";
+            // 
+            // label34
+            // 
+            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(24, 35);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(72, 13);
+            this.label34.TabIndex = 55;
+            this.label34.Text = "Tenant Name";
+            // 
+            // textBox_Page05_ClientID
+            // 
+            this.textBox_Page05_ClientID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Page05_ClientID.Location = new System.Drawing.Point(102, 58);
+            this.textBox_Page05_ClientID.Name = "textBox_Page05_ClientID";
+            this.textBox_Page05_ClientID.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page05_ClientID.TabIndex = 3;
+            this.textBox_Page05_ClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyClientID;
+            // 
+            // textBox_Page05_TenantName
+            // 
+            this.textBox_Page05_TenantName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyTenantName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Page05_TenantName.Location = new System.Drawing.Point(102, 32);
+            this.textBox_Page05_TenantName.Name = "textBox_Page05_TenantName";
+            this.textBox_Page05_TenantName.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page05_TenantName.TabIndex = 2;
+            this.textBox_Page05_TenantName.Tag = "";
+            this.textBox_Page05_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyTenantName;
+            // 
+            // label35
+            // 
+            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(43, 139);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(53, 13);
+            this.label35.TabIndex = 54;
+            this.label35.Text = "Resource";
+            // 
             // panel_Page06
             // 
             this.panel_Page06.Controls.Add(this.label9);
@@ -546,27 +739,14 @@
             this.panel_Page06.Size = new System.Drawing.Size(400, 170);
             this.panel_Page06.TabIndex = 8;
             // 
-            // panel_Page07
+            // label9
             // 
-            this.panel_Page07.Controls.Add(this.label15);
-            this.panel_Page07.Controls.Add(this.button_Page07_ScopeEditor);
-            this.panel_Page07.Controls.Add(this.textBox_Page07_Scopes);
-            this.panel_Page07.Controls.Add(this.textBox_Page07_ClientID);
-            this.panel_Page07.Controls.Add(this.label22);
-            this.panel_Page07.Controls.Add(this.label23);
-            this.panel_Page07.Controls.Add(this.label25);
-            this.panel_Page07.Controls.Add(this.textBox_Page07_RedirectUri);
-            this.panel_Page07.Location = new System.Drawing.Point(429, 415);
-            this.panel_Page07.Name = "panel_Page07";
-            this.panel_Page07.Size = new System.Drawing.Size(400, 170);
-            this.panel_Page07.TabIndex = 8;
-            // 
-            // panel_Page08
-            // 
-            this.panel_Page08.Location = new System.Drawing.Point(835, 415);
-            this.panel_Page08.Name = "panel_Page08";
-            this.panel_Page08.Size = new System.Drawing.Size(400, 170);
-            this.panel_Page08.TabIndex = 8;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(15, 10);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(81, 13);
+            this.label9.TabIndex = 47;
+            this.label9.Text = "Fill out the form.";
             // 
             // textBox_Page06_ClientSecret
             // 
@@ -579,12 +759,13 @@
             // 
             // label26
             // 
+            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(29, 147);
+            this.label26.Location = new System.Drawing.Point(43, 147);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(67, 13);
+            this.label26.Size = new System.Drawing.Size(53, 13);
             this.label26.TabIndex = 45;
-            this.label26.Text = "Client Secret";
+            this.label26.Text = "Password";
             // 
             // button_Page06_ScopeEditor
             // 
@@ -616,15 +797,17 @@
             // 
             // label29
             // 
+            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(49, 39);
+            this.label29.Location = new System.Drawing.Point(23, 39);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(47, 13);
+            this.label29.Size = new System.Drawing.Size(73, 13);
             this.label29.TabIndex = 38;
-            this.label29.Text = "Client ID";
+            this.label29.Text = "Application ID";
             // 
             // label30
             // 
+            this.label30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label30.AutoSize = true;
             this.label30.Location = new System.Drawing.Point(24, 65);
             this.label30.Name = "label30";
@@ -634,6 +817,7 @@
             // 
             // label31
             // 
+            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label31.AutoSize = true;
             this.label31.Location = new System.Drawing.Point(53, 92);
             this.label31.Name = "label31";
@@ -650,14 +834,29 @@
             this.textBox_Page06_RedirectUri.TabIndex = 2;
             this.textBox_Page06_RedirectUri.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2WebAppRedirectUri;
             // 
-            // label9
+            // panel_Page07
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 10);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(81, 13);
-            this.label9.TabIndex = 47;
-            this.label9.Text = "Fill out the form.";
+            this.panel_Page07.Controls.Add(this.label15);
+            this.panel_Page07.Controls.Add(this.button_Page07_ScopeEditor);
+            this.panel_Page07.Controls.Add(this.textBox_Page07_Scopes);
+            this.panel_Page07.Controls.Add(this.textBox_Page07_ClientID);
+            this.panel_Page07.Controls.Add(this.label22);
+            this.panel_Page07.Controls.Add(this.label23);
+            this.panel_Page07.Controls.Add(this.label25);
+            this.panel_Page07.Controls.Add(this.textBox_Page07_RedirectUri);
+            this.panel_Page07.Location = new System.Drawing.Point(429, 415);
+            this.panel_Page07.Name = "panel_Page07";
+            this.panel_Page07.Size = new System.Drawing.Size(400, 170);
+            this.panel_Page07.TabIndex = 8;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(15, 10);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(81, 13);
+            this.label15.TabIndex = 48;
+            this.label15.Text = "Fill out the form.";
             // 
             // button_Page07_ScopeEditor
             // 
@@ -689,24 +888,27 @@
             // 
             // label22
             // 
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(49, 39);
+            this.label22.Location = new System.Drawing.Point(23, 39);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(47, 13);
+            this.label22.Size = new System.Drawing.Size(73, 13);
             this.label22.TabIndex = 42;
-            this.label22.Text = "Client ID";
+            this.label22.Text = "Application ID";
             // 
             // label23
             // 
+            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(24, 65);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(72, 13);
+            this.label23.Size = new System.Drawing.Size(69, 13);
             this.label23.TabIndex = 41;
-            this.label23.Text = "Redirect URL";
+            this.label23.Text = "Redirect URI";
             // 
             // label25
             // 
+            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label25.AutoSize = true;
             this.label25.Location = new System.Drawing.Point(53, 91);
             this.label25.Name = "label25";
@@ -723,152 +925,199 @@
             this.textBox_Page07_RedirectUri.TabIndex = 2;
             this.textBox_Page07_RedirectUri.Text = "urn:ietf:wg:oauth:2.0:oob";
             // 
-            // label15
+            // panel_Page08
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(15, 10);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(81, 13);
-            this.label15.TabIndex = 48;
-            this.label15.Text = "Fill out the form.";
+            this.panel_Page08.Controls.Add(this.linkLabel_Page08_WebAppAppOnlyByKey);
+            this.panel_Page08.Controls.Add(this.comboBox_Page08_Resource);
+            this.panel_Page08.Controls.Add(this.label17);
+            this.panel_Page08.Controls.Add(this.textBox_Page08_ClientSecret);
+            this.panel_Page08.Controls.Add(this.label18);
+            this.panel_Page08.Controls.Add(this.label19);
+            this.panel_Page08.Controls.Add(this.label20);
+            this.panel_Page08.Controls.Add(this.textBox_Page08_TenantName);
+            this.panel_Page08.Controls.Add(this.textBox_Page08_ClientID);
+            this.panel_Page08.Controls.Add(this.label21);
+            this.panel_Page08.Location = new System.Drawing.Point(835, 415);
+            this.panel_Page08.Name = "panel_Page08";
+            this.panel_Page08.Size = new System.Drawing.Size(400, 170);
+            this.panel_Page08.TabIndex = 8;
             // 
-            // button_Page05_SelectCert
+            // linkLabel_Page08_WebAppAppOnlyByKey
             // 
-            this.button_Page05_SelectCert.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_Page05_SelectCert.Location = new System.Drawing.Point(320, 82);
-            this.button_Page05_SelectCert.Name = "button_Page05_SelectCert";
-            this.button_Page05_SelectCert.Size = new System.Drawing.Size(77, 23);
-            this.button_Page05_SelectCert.TabIndex = 5;
-            this.button_Page05_SelectCert.Text = "Browse...";
-            this.button_Page05_SelectCert.UseVisualStyleBackColor = true;
-            this.button_Page05_SelectCert.Click += new System.EventHandler(this.button_Page05_SelectCert_Click);
+            this.linkLabel_Page08_WebAppAppOnlyByKey.AutoSize = true;
+            this.linkLabel_Page08_WebAppAppOnlyByKey.Location = new System.Drawing.Point(102, 10);
+            this.linkLabel_Page08_WebAppAppOnlyByKey.Name = "linkLabel_Page08_WebAppAppOnlyByKey";
+            this.linkLabel_Page08_WebAppAppOnlyByKey.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_Page08_WebAppAppOnlyByKey.TabIndex = 43;
+            this.linkLabel_Page08_WebAppAppOnlyByKey.TabStop = true;
+            this.linkLabel_Page08_WebAppAppOnlyByKey.Text = "How to register applications.";
+            this.linkLabel_Page08_WebAppAppOnlyByKey.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Page08_WebAppAppOnlyByKey_LinkClicked);
             // 
-            // label36
+            // comboBox_Page08_Resource
             // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(17, 87);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(79, 13);
-            this.label36.TabIndex = 58;
-            this.label36.Text = "Certificate Path";
+            this.comboBox_Page08_Resource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_Page08_Resource.FormattingEnabled = true;
+            this.comboBox_Page08_Resource.Location = new System.Drawing.Point(102, 88);
+            this.comboBox_Page08_Resource.Name = "comboBox_Page08_Resource";
+            this.comboBox_Page08_Resource.Size = new System.Drawing.Size(295, 21);
+            this.comboBox_Page08_Resource.TabIndex = 48;
             // 
-            // textBox_Page05_CertPath
+            // label17
             // 
-            this.textBox_Page05_CertPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyCertPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_Page05_CertPath.Location = new System.Drawing.Point(102, 84);
-            this.textBox_Page05_CertPath.Name = "textBox_Page05_CertPath";
-            this.textBox_Page05_CertPath.Size = new System.Drawing.Size(212, 20);
-            this.textBox_Page05_CertPath.TabIndex = 4;
-            this.textBox_Page05_CertPath.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyCertPath;
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(24, 39);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(72, 13);
+            this.label17.TabIndex = 52;
+            this.label17.Text = "Tenant Name";
             // 
-            // label32
+            // textBox_Page08_ClientSecret
             // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(7, 113);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(89, 13);
-            this.label32.TabIndex = 57;
-            this.label32.Text = "Password for cert";
+            this.textBox_Page08_ClientSecret.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyByKeyClientSecret", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Page08_ClientSecret.Location = new System.Drawing.Point(102, 115);
+            this.textBox_Page08_ClientSecret.Name = "textBox_Page08_ClientSecret";
+            this.textBox_Page08_ClientSecret.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page08_ClientSecret.TabIndex = 49;
+            this.textBox_Page08_ClientSecret.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyByKeyClientSecret;
             // 
-            // textBox_Page05_CertPass
+            // label18
             // 
-            this.textBox_Page05_CertPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyCertPass", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_Page05_CertPass.Location = new System.Drawing.Point(102, 110);
-            this.textBox_Page05_CertPass.Name = "textBox_Page05_CertPass";
-            this.textBox_Page05_CertPass.PasswordChar = '*';
-            this.textBox_Page05_CertPass.Size = new System.Drawing.Size(295, 20);
-            this.textBox_Page05_CertPass.TabIndex = 6;
-            this.textBox_Page05_CertPass.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyCertPass;
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(23, 65);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(73, 13);
+            this.label18.TabIndex = 51;
+            this.label18.Text = "Application ID";
             // 
-            // label33
+            // label19
             // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(49, 61);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(47, 13);
-            this.label33.TabIndex = 56;
-            this.label33.Text = "Client ID";
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(71, 118);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(25, 13);
+            this.label19.TabIndex = 53;
+            this.label19.Text = "Key";
             // 
-            // label34
+            // label20
             // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(24, 35);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(72, 13);
-            this.label34.TabIndex = 55;
-            this.label34.Text = "Tenant Name";
+            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(43, 91);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(53, 13);
+            this.label20.TabIndex = 50;
+            this.label20.Text = "Resource";
             // 
-            // textBox_Page05_ClientID
+            // textBox_Page08_TenantName
             // 
-            this.textBox_Page05_ClientID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_Page05_ClientID.Location = new System.Drawing.Point(102, 58);
-            this.textBox_Page05_ClientID.Name = "textBox_Page05_ClientID";
-            this.textBox_Page05_ClientID.Size = new System.Drawing.Size(295, 20);
-            this.textBox_Page05_ClientID.TabIndex = 3;
-            this.textBox_Page05_ClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyClientID;
+            this.textBox_Page08_TenantName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyByKeyTenantName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Page08_TenantName.Location = new System.Drawing.Point(102, 36);
+            this.textBox_Page08_TenantName.Name = "textBox_Page08_TenantName";
+            this.textBox_Page08_TenantName.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page08_TenantName.TabIndex = 46;
+            this.textBox_Page08_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyByKeyTenantName;
             // 
-            // textBox_Page05_TenantName
+            // textBox_Page08_ClientID
             // 
-            this.textBox_Page05_TenantName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyTenantName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_Page05_TenantName.Location = new System.Drawing.Point(102, 32);
-            this.textBox_Page05_TenantName.Name = "textBox_Page05_TenantName";
-            this.textBox_Page05_TenantName.Size = new System.Drawing.Size(295, 20);
-            this.textBox_Page05_TenantName.TabIndex = 2;
-            this.textBox_Page05_TenantName.Tag = "";
-            this.textBox_Page05_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyTenantName;
+            this.textBox_Page08_ClientID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyByKeyClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Page08_ClientID.Location = new System.Drawing.Point(102, 62);
+            this.textBox_Page08_ClientID.Name = "textBox_Page08_ClientID";
+            this.textBox_Page08_ClientID.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page08_ClientID.TabIndex = 47;
+            this.textBox_Page08_ClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyByKeyClientID;
             // 
-            // label35
+            // label21
             // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(43, 139);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(53, 13);
-            this.label35.TabIndex = 54;
-            this.label35.Text = "Resource";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(15, 10);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(81, 13);
-            this.label16.TabIndex = 59;
-            this.label16.Text = "Fill out the form.";
-            // 
-            // comboBox_Page05_Resource
-            // 
-            this.comboBox_Page05_Resource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_Page05_Resource.FormattingEnabled = true;
-            this.comboBox_Page05_Resource.Location = new System.Drawing.Point(102, 136);
-            this.comboBox_Page05_Resource.Name = "comboBox_Page05_Resource";
-            this.comboBox_Page05_Resource.Size = new System.Drawing.Size(295, 21);
-            this.comboBox_Page05_Resource.TabIndex = 7;
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(15, 10);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(81, 13);
+            this.label21.TabIndex = 44;
+            this.label21.Text = "Fill out the form.";
             // 
             // openFileDialog_PFX
             // 
             this.openFileDialog_PFX.Filter = "Personal Information Exchange (*.pfx)|*.pfx";
             // 
-            // radioButton_Page01_V1AppOnly
+            // panel_Page09
             // 
-            this.radioButton_Page01_V1AppOnly.AutoSize = true;
-            this.radioButton_Page01_V1AppOnly.Location = new System.Drawing.Point(18, 83);
-            this.radioButton_Page01_V1AppOnly.Name = "radioButton_Page01_V1AppOnly";
-            this.radioButton_Page01_V1AppOnly.Size = new System.Drawing.Size(268, 17);
-            this.radioButton_Page01_V1AppOnly.TabIndex = 3;
-            this.radioButton_Page01_V1AppOnly.TabStop = true;
-            this.radioButton_Page01_V1AppOnly.Text = "Web application or Web API (Use App Only Token)";
-            this.radioButton_Page01_V1AppOnly.UseVisualStyleBackColor = true;
+            this.panel_Page09.Controls.Add(this.comboBox_Page09_Resource);
+            this.panel_Page09.Controls.Add(this.label24);
+            this.panel_Page09.Controls.Add(this.label27);
+            this.panel_Page09.Controls.Add(this.label37);
+            this.panel_Page09.Controls.Add(this.textBox_Page09_ClientID);
+            this.panel_Page09.Controls.Add(this.textBox_Page09_RedirectUri);
+            this.panel_Page09.Controls.Add(this.label38);
+            this.panel_Page09.Location = new System.Drawing.Point(12, 591);
+            this.panel_Page09.Name = "panel_Page09";
+            this.panel_Page09.Size = new System.Drawing.Size(400, 170);
+            this.panel_Page09.TabIndex = 44;
+            this.panel_Page09.Tag = "textBox_Page03_ClientID";
             // 
-            // linkLabel_linkLabel_Page05_WebAppAppOnly
+            // comboBox_Page09_Resource
             // 
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.AutoSize = true;
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.Location = new System.Drawing.Point(102, 10);
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.Name = "linkLabel_linkLabel_Page05_WebAppAppOnly";
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.Size = new System.Drawing.Size(140, 13);
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.TabIndex = 1;
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.TabStop = true;
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.Text = "How to register applications.";
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_linkLabel_Page05_WebAppAppOnly_LinkClicked);
+            this.comboBox_Page09_Resource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_Page09_Resource.FormattingEnabled = true;
+            this.comboBox_Page09_Resource.Location = new System.Drawing.Point(102, 84);
+            this.comboBox_Page09_Resource.Name = "comboBox_Page09_Resource";
+            this.comboBox_Page09_Resource.Size = new System.Drawing.Size(295, 21);
+            this.comboBox_Page09_Resource.TabIndex = 4;
+            // 
+            // label24
+            // 
+            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(23, 35);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(73, 13);
+            this.label24.TabIndex = 42;
+            this.label24.Text = "Application ID";
+            // 
+            // label27
+            // 
+            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(37, 61);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(59, 13);
+            this.label27.TabIndex = 41;
+            this.label27.Text = "Reply URL";
+            // 
+            // label37
+            // 
+            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(43, 87);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(53, 13);
+            this.label37.TabIndex = 40;
+            this.label37.Text = "Resource";
+            // 
+            // textBox_Page09_ClientID
+            // 
+            this.textBox_Page09_ClientID.Location = new System.Drawing.Point(102, 32);
+            this.textBox_Page09_ClientID.Name = "textBox_Page09_ClientID";
+            this.textBox_Page09_ClientID.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page09_ClientID.TabIndex = 2;
+            // 
+            // textBox_Page09_RedirectUri
+            // 
+            this.textBox_Page09_RedirectUri.Location = new System.Drawing.Point(102, 58);
+            this.textBox_Page09_RedirectUri.Name = "textBox_Page09_RedirectUri";
+            this.textBox_Page09_RedirectUri.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page09_RedirectUri.TabIndex = 3;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(15, 10);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(81, 13);
+            this.label38.TabIndex = 0;
+            this.label38.Text = "Fill out the form.";
             // 
             // AccessTokenWizard
             // 
@@ -876,7 +1125,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_Cancel;
-            this.ClientSize = new System.Drawing.Size(1243, 690);
+            this.ClientSize = new System.Drawing.Size(1243, 873);
+            this.Controls.Add(this.panel_Page09);
             this.Controls.Add(this.panel_Page08);
             this.Controls.Add(this.panel_Page07);
             this.Controls.Add(this.panel_Page06);
@@ -912,6 +1162,10 @@
             this.panel_Page06.PerformLayout();
             this.panel_Page07.ResumeLayout(false);
             this.panel_Page07.PerformLayout();
+            this.panel_Page08.ResumeLayout(false);
+            this.panel_Page08.PerformLayout();
+            this.panel_Page09.ResumeLayout(false);
+            this.panel_Page09.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -991,7 +1245,27 @@
         private System.Windows.Forms.TextBox textBox_Page05_TenantName;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.OpenFileDialog openFileDialog_PFX;
-        private System.Windows.Forms.RadioButton radioButton_Page01_V1AppOnly;
+        private System.Windows.Forms.RadioButton radioButton_Page01_V1AppOnlyByCert;
         private System.Windows.Forms.LinkLabel linkLabel_linkLabel_Page05_WebAppAppOnly;
+        private System.Windows.Forms.RadioButton radioButton_Page01_V1AppOnlyByKey;
+        private System.Windows.Forms.ComboBox comboBox_Page08_Resource;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox textBox_Page08_ClientSecret;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox textBox_Page08_TenantName;
+        private System.Windows.Forms.TextBox textBox_Page08_ClientID;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.RadioButton radioButton_Page01_V1AdminConsent;
+        private System.Windows.Forms.Panel panel_Page09;
+        private System.Windows.Forms.ComboBox comboBox_Page09_Resource;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.TextBox textBox_Page09_ClientID;
+        private System.Windows.Forms.TextBox textBox_Page09_RedirectUri;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.LinkLabel linkLabel_Page08_WebAppAppOnlyByKey;
     }
 }

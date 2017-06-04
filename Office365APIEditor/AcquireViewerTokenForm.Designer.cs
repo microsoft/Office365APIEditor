@@ -39,7 +39,7 @@
             // textBox_ClientID
             // 
             this.textBox_ClientID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastMailboxViewerClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_ClientID.Location = new System.Drawing.Point(74, 38);
+            this.textBox_ClientID.Location = new System.Drawing.Point(109, 38);
             this.textBox_ClientID.Name = "textBox_ClientID";
             this.textBox_ClientID.Size = new System.Drawing.Size(224, 20);
             this.textBox_ClientID.TabIndex = 1;
@@ -70,11 +70,11 @@
             this.linkLabel_Portal.AutoSize = true;
             this.linkLabel_Portal.Location = new System.Drawing.Point(12, 9);
             this.linkLabel_Portal.Name = "linkLabel_Portal";
-            this.linkLabel_Portal.Size = new System.Drawing.Size(530, 13);
+            this.linkLabel_Portal.Size = new System.Drawing.Size(555, 13);
             this.linkLabel_Portal.TabIndex = 4;
             this.linkLabel_Portal.TabStop = true;
-            this.linkLabel_Portal.Text = "Enter the Client ID of your application which registered in Application Registrat" +
-    "ion Portal as a mobile application.";
+            this.linkLabel_Portal.Text = "Enter the Application ID of your application which registered in Application Regi" +
+    "stration Portal as a native application.";
             this.linkLabel_Portal.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Portal_LinkClicked);
             // 
             // label1
@@ -82,9 +82,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.Size = new System.Drawing.Size(82, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Client ID : ";
+            this.label1.Text = "Application ID : ";
             // 
             // AcquireViewerTokenForm
             // 
@@ -103,7 +103,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AcquireViewerTokenForm";
-            this.Text = "Client ID Setting";
+            this.Text = "Application ID Setting";
             this.Load += new System.EventHandler(this.AcquireViewerTokenForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
