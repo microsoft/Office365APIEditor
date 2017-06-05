@@ -344,12 +344,12 @@
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 35);
+            this.label4.Location = new System.Drawing.Point(3, 35);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 13);
+            this.label4.Size = new System.Drawing.Size(93, 13);
             this.label4.TabIndex = 42;
             this.label4.Text = "Application ID";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBox_Page03_ClientSecret
             // 
@@ -363,32 +363,32 @@
             // label10
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(37, 61);
+            this.label10.Location = new System.Drawing.Point(3, 61);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(59, 13);
+            this.label10.Size = new System.Drawing.Size(93, 13);
             this.label10.TabIndex = 41;
             this.label10.Text = "Reply URL";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(71, 113);
+            this.label5.Location = new System.Drawing.Point(3, 113);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(25, 13);
+            this.label5.Size = new System.Drawing.Size(93, 13);
             this.label5.TabIndex = 43;
             this.label5.Text = "Key";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label6
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(43, 87);
+            this.label6.Location = new System.Drawing.Point(3, 87);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 13);
+            this.label6.Size = new System.Drawing.Size(93, 13);
             this.label6.TabIndex = 40;
             this.label6.Text = "Resource";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBox_Page03_ClientID
             // 
@@ -509,12 +509,12 @@
             // label13
             // 
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(24, 87);
+            this.label13.Location = new System.Drawing.Point(3, 87);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(69, 13);
+            this.label13.Size = new System.Drawing.Size(93, 13);
             this.label13.TabIndex = 44;
             this.label13.Text = "Redirect URI";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBox_Page04_RedirectUri
             // 
@@ -528,22 +528,22 @@
             // label12
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(23, 61);
+            this.label12.Location = new System.Drawing.Point(3, 61);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(73, 13);
+            this.label12.Size = new System.Drawing.Size(93, 13);
             this.label12.TabIndex = 43;
             this.label12.Text = "Application ID";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label11
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(24, 35);
+            this.label11.Location = new System.Drawing.Point(3, 35);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(72, 13);
+            this.label11.Size = new System.Drawing.Size(93, 13);
             this.label11.TabIndex = 42;
             this.label11.Text = "Tenant Name";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBox_Page04_ClientID
             // 
@@ -566,12 +566,12 @@
             // label14
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(43, 113);
+            this.label14.Location = new System.Drawing.Point(3, 113);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(53, 13);
+            this.label14.Size = new System.Drawing.Size(93, 13);
             this.label14.TabIndex = 41;
             this.label14.Text = "Resource";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // panel_Page05
             // 
@@ -637,12 +637,12 @@
             // label36
             // 
             this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(17, 87);
+            this.label36.Location = new System.Drawing.Point(3, 87);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(79, 13);
+            this.label36.Size = new System.Drawing.Size(93, 13);
             this.label36.TabIndex = 58;
             this.label36.Text = "Certificate Path";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBox_Page05_CertPath
             // 
@@ -656,12 +656,12 @@
             // label32
             // 
             this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(7, 113);
+            this.label32.Location = new System.Drawing.Point(3, 113);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(89, 13);
+            this.label32.Size = new System.Drawing.Size(93, 13);
             this.label32.TabIndex = 57;
             this.label32.Text = "Password for cert";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBox_Page05_CertPass
             // 
@@ -676,22 +676,22 @@
             // label33
             // 
             this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(23, 61);
+            this.label33.Location = new System.Drawing.Point(3, 61);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(73, 13);
+            this.label33.Size = new System.Drawing.Size(93, 13);
             this.label33.TabIndex = 56;
             this.label33.Text = "Application ID";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label34
             // 
             this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(24, 35);
+            this.label34.Location = new System.Drawing.Point(3, 35);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(72, 13);
+            this.label34.Size = new System.Drawing.Size(93, 13);
             this.label34.TabIndex = 55;
             this.label34.Text = "Tenant Name";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBox_Page05_ClientID
             // 
@@ -715,12 +715,12 @@
             // label35
             // 
             this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(43, 139);
+            this.label35.Location = new System.Drawing.Point(3, 139);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(53, 13);
+            this.label35.Size = new System.Drawing.Size(93, 13);
             this.label35.TabIndex = 54;
             this.label35.Text = "Resource";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // panel_Page06
             // 
@@ -760,12 +760,12 @@
             // label26
             // 
             this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(43, 147);
+            this.label26.Location = new System.Drawing.Point(3, 147);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(53, 13);
+            this.label26.Size = new System.Drawing.Size(93, 13);
             this.label26.TabIndex = 45;
             this.label26.Text = "Password";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // button_Page06_ScopeEditor
             // 
@@ -798,32 +798,32 @@
             // label29
             // 
             this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(23, 39);
+            this.label29.Location = new System.Drawing.Point(3, 39);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(73, 13);
+            this.label29.Size = new System.Drawing.Size(93, 13);
             this.label29.TabIndex = 38;
             this.label29.Text = "Application ID";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label30
             // 
             this.label30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(24, 65);
+            this.label30.Location = new System.Drawing.Point(3, 65);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(72, 13);
+            this.label30.Size = new System.Drawing.Size(93, 13);
             this.label30.TabIndex = 37;
             this.label30.Text = "Redirect URL";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label31
             // 
             this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(53, 92);
+            this.label31.Location = new System.Drawing.Point(3, 92);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(43, 13);
+            this.label31.Size = new System.Drawing.Size(93, 13);
             this.label31.TabIndex = 36;
             this.label31.Text = "Scopes";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBox_Page06_RedirectUri
             // 
@@ -889,32 +889,32 @@
             // label22
             // 
             this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(23, 39);
+            this.label22.Location = new System.Drawing.Point(3, 39);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(73, 13);
+            this.label22.Size = new System.Drawing.Size(93, 13);
             this.label22.TabIndex = 42;
             this.label22.Text = "Application ID";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label23
             // 
             this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(24, 65);
+            this.label23.Location = new System.Drawing.Point(3, 65);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(69, 13);
+            this.label23.Size = new System.Drawing.Size(93, 13);
             this.label23.TabIndex = 41;
             this.label23.Text = "Redirect URI";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label25
             // 
             this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(53, 91);
+            this.label25.Location = new System.Drawing.Point(3, 91);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(43, 13);
+            this.label25.Size = new System.Drawing.Size(93, 13);
             this.label25.TabIndex = 40;
             this.label25.Text = "Scopes";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBox_Page07_RedirectUri
             // 
@@ -965,12 +965,12 @@
             // label17
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(24, 39);
+            this.label17.Location = new System.Drawing.Point(3, 39);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(72, 13);
+            this.label17.Size = new System.Drawing.Size(93, 13);
             this.label17.TabIndex = 52;
             this.label17.Text = "Tenant Name";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBox_Page08_ClientSecret
             // 
@@ -984,32 +984,32 @@
             // label18
             // 
             this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(23, 65);
+            this.label18.Location = new System.Drawing.Point(3, 65);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(73, 13);
+            this.label18.Size = new System.Drawing.Size(93, 13);
             this.label18.TabIndex = 51;
             this.label18.Text = "Application ID";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label19
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(71, 118);
+            this.label19.Location = new System.Drawing.Point(3, 118);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(25, 13);
+            this.label19.Size = new System.Drawing.Size(93, 13);
             this.label19.TabIndex = 53;
             this.label19.Text = "Key";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label20
             // 
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(43, 91);
+            this.label20.Location = new System.Drawing.Point(3, 91);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(53, 13);
+            this.label20.Size = new System.Drawing.Size(93, 13);
             this.label20.TabIndex = 50;
             this.label20.Text = "Resource";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBox_Page08_TenantName
             // 
@@ -1069,32 +1069,32 @@
             // label24
             // 
             this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(23, 35);
+            this.label24.Location = new System.Drawing.Point(3, 35);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(73, 13);
+            this.label24.Size = new System.Drawing.Size(93, 13);
             this.label24.TabIndex = 42;
             this.label24.Text = "Application ID";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label27
             // 
             this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(37, 61);
+            this.label27.Location = new System.Drawing.Point(3, 61);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(59, 13);
+            this.label27.Size = new System.Drawing.Size(93, 13);
             this.label27.TabIndex = 41;
             this.label27.Text = "Reply URL";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label37
             // 
             this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(43, 87);
+            this.label37.Location = new System.Drawing.Point(3, 87);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(53, 13);
+            this.label37.Size = new System.Drawing.Size(93, 13);
             this.label37.TabIndex = 40;
             this.label37.Text = "Resource";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBox_Page09_ClientID
             // 
