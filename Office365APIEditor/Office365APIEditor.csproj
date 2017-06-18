@@ -153,6 +153,7 @@
     <Compile Include="DetailedTokenViewer.Designer.cs">
       <DependentUpon>DetailedTokenViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="DynamicJson.cs" />
     <Compile Include="FolderViewerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -293,6 +294,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="image.ico" />
+    <Content Include="Licenses\DynamicJson.txt" />
     <Content Include="Licenses\Microsoft.Identity.Client.txt" />
     <Content Include="Licenses\Microsoft.IdentityModel.Clients.ActiveDirectory.txt" />
     <Content Include="Licenses\Microsoft.OData.Client.txt" />

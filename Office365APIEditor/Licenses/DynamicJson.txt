@@ -1,0 +1,2 @@
+﻿DynamicJson
+http://dynamicjson.codeplex.com/license

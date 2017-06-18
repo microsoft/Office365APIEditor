@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
+using Codeplex.Data;
 using Microsoft.Identity.Client;
 using Microsoft.OData.Client;
 using Microsoft.Office365.OutlookServices;
@@ -20,7 +21,6 @@ namespace Office365APIEditor
 
         OutlookServicesClient client;
 
-        AuthenticationResult ar;
         string email;
 
         string currentId = "";
@@ -46,8 +46,8 @@ namespace Office365APIEditor
                 Text = FolderContentType.Message.ToString() + " items in " + targetFolderDisplayName;
             }
             
-            client = await GetOutlookServiceClient();
-            
+            client = await Util.GetOutlookServiceClient(pca, email);
+
             if (client == null)
             {
                 MessageBox.Show("Authentication failure.", "Office365APIEditor");
@@ -187,45 +187,6 @@ namespace Office365APIEditor
                 dataGridView_ItemList.Columns.Add("IsAllDay", "IsAllDay");
                 dataGridView_ItemList.Columns.Add("CreatedDateTime", "CreatedDateTime");
             }
-        }
-
-        private async Task<OutlookServicesClient> GetOutlookServiceClient()
-        {
-            // Acquire access token again.
-            try
-            {
-                ar = await pca.AcquireTokenSilentAsync(Office365APIEditorHelper.MailboxViewerScopes());
-            }
-            catch
-            {
-                try
-                {
-                    ar = await pca.AcquireTokenAsync(Office365APIEditorHelper.MailboxViewerScopes(), email, UiOptions.ForceLogin, "");
-                }
-                catch (Exception ex)
-                {
-                    Cursor = Cursors.Default;
-                    MessageBox.Show(ex.Message, "Office365APIEditor");
-
-                    return null;
-                }
-            }
-
-            string token = ar.Token;
-
-            OutlookServicesClient newClient = new OutlookServicesClient(new Uri("https://outlook.office.com/api/v2.0"),
-                () =>
-                {
-                    return Task.Run(() =>
-                    {
-                        return token;
-                    });
-                });
-
-            newClient.Context.SendingRequest2 += new EventHandler<SendingRequest2EventArgs>(
-                (eventSender, eventArgs) => InsertHeaders(eventSender, eventArgs, email));
-            
-            return newClient;
         }
 
         private void InsertHeaders(object sender, SendingRequest2EventArgs e, string email)
@@ -608,7 +569,7 @@ namespace Office365APIEditor
             dataGridView_ItemList.Rows[e.RowIndex].Selected = true;
         }
 
-        private async void dataGridView_ItemList_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView_ItemList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Get the item ID of clicked row.
             string id = dataGridView_ItemList.Rows[e.RowIndex].Tag.ToString();
@@ -622,10 +583,15 @@ namespace Office365APIEditor
                 currentId = id;
             }
 
-            client = await GetOutlookServiceClient();
+            // We don't need to get new OutlookServiceClient because we don't use that.
+            // client = await GetOutlookServiceClient();
 
             // Reset rows.
             dataGridView_ItemProps.Rows.Clear();
+            foreach (DataGridViewColumn col in dataGridView_ItemProps.Columns)
+            {
+                col.HeaderCell.SortGlyphDirection = SortOrder.None;
+            }
 
             switch (targetFolder.Type)
             {
@@ -646,163 +612,59 @@ namespace Office365APIEditor
             }
         }
 
-        private async void GetMessageItemDetail(string ID)
+        private void GetMessageItemDetail(string ID)
         {
-            // Get details of the item.
-            var results = await client.Me.Messages[ID].ExecuteAsync();
-
-            CreatePropTable(results);
+            // Get details of the message item.
+            GetItemDetail(new Uri("https://outlook.office.com/api/v2.0/me/messages/" + ID));
         }
 
-        private async void GetContactItemDetail(string ID)
+        private void GetContactItemDetail(string ID)
         {
             // Get details of the contact item.
-            var results = await client.Me.Contacts[ID].ExecuteAsync();
-
-            CreatePropTable(results);
+            GetItemDetail(new Uri("https://outlook.office.com/api/v2.0/me/contacts/" + ID));
         }
 
-        private async void GetCalendarItemDetail(string ID)
+        private void GetCalendarItemDetail(string ID)
         {
             // Get details of the contact item.
-            var results = await client.Me.Events[ID].ExecuteAsync();
-
-            CreatePropTable(results);
+            GetItemDetail(new Uri("https://outlook.office.com/api/v2.0/me/events/" + ID));
         }
 
-        private void CreatePropTable(object itemResult)
+        private async void GetItemDetail(Uri URL)
         {
+            // We know that we can use OutlookServicesClient but this library doesn't include InferenceClassification and other new props.
+
             try
             {
-                foreach (var prop in itemResult.GetType().GetProperties())
+                string accessToken = await Util.GetAccessToken(pca, email);
+                string result = await Util.SendGetRequestAsync(URL, accessToken, email);
+                var jsonResult = DynamicJson.Parse(result);
+
+                CreatePropTable2(jsonResult);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Office365APIEditor");
+            }
+        }
+
+        private void CreatePropTable2(dynamic itemResult)
+        {
+            DynamicJson dynamicJsonObject = itemResult;
+            
+            try
+            {
+                foreach (KeyValuePair<string, object> item in itemResult)
                 {
+                    if (!dynamicJsonObject.IsDefined(item.Key))
+                    {
+                        // Exclude non dynamic props.
+                        continue;
+                    }
+
                     DataGridViewRow propRow = new DataGridViewRow();
 
-                    string propName = prop.Name;
-                    string propValue = "";
-                    string propType = "";
-
-                    if (prop.GetIndexParameters().Length == 0)
-                    {
-                        try
-                        {
-                            var tempValue = prop.GetValue(itemResult);
-                            propType = tempValue.GetType().ToString();
-
-                            if (tempValue is DateTimeOffset)
-                            {
-                                DateTimeOffset dateTimeOffsetValue = (DateTimeOffset)tempValue;
-                                propValue = dateTimeOffsetValue.DateTime.ToString("yyyy/MM/dd HH:mm:ss");
-                            }
-                            else if (tempValue is ItemBody)
-                            {
-                                ItemBody itemBodyValue = (ItemBody)tempValue;
-                                propValue = itemBodyValue.Content;
-                            }
-                            else if (tempValue is Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<Recipient>)
-                            {
-                                Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<Recipient> recipientValue = (Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<Recipient>)tempValue;
-
-                                foreach (Recipient recipient in recipientValue)
-                                {
-                                    propValue += recipient.EmailAddress.Name + "<" + recipient.EmailAddress.Address + ">; ";
-                                }
-
-                                propValue = propValue.TrimEnd(new char[] { ';', ' ' });
-                            }
-                            else if (tempValue is Microsoft.OData.ProxyExtensions.EntityCollectionImpl<Attachment>)
-                            {
-                                // To get the list of attachments, we have to send a request again.
-                                // We don't do that and prepare an attachment view.
-
-                                continue;
-                            }
-                            else if (tempValue is Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<string>)
-                            {
-                                Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<string> stringValue = (Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<string>)tempValue;
-
-                                foreach (string value in stringValue)
-                                {
-                                    propValue += value + "; ";
-                                }
-
-                                propValue = propValue.TrimEnd(new char[] { ';', ' ' });
-                            }
-                            else if (tempValue is Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<EmailAddress>)
-                            {
-                                Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<EmailAddress> emailAddressValue = (Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<EmailAddress>)tempValue;
-
-                                foreach (EmailAddress emailAddress in emailAddressValue)
-                                {
-                                    propValue += emailAddress.Name + "<" + emailAddress.Address + ">; ";
-                                }
-
-                                propValue = propValue.TrimEnd(new char[] { ';', ' ' });
-                            }
-                            else if (tempValue is PhysicalAddress)
-                            {
-                                PhysicalAddress physicalAddressValue = (PhysicalAddress)tempValue;
-                                propValue = physicalAddressValue.PostalCode + " " + physicalAddressValue.Street + " " + physicalAddressValue.City + " " + physicalAddressValue.State + " " + physicalAddressValue.CountryOrRegion;
-                            }
-                            else if (tempValue is ResponseStatus)
-                            {
-                                ResponseStatus responseStatusValue = (ResponseStatus)tempValue;
-                                
-                                if (responseStatusValue.Time.HasValue)
-                                {
-                                    propValue = responseStatusValue.Time.Value.DateTime.ToString("yyyy/MM/dd HH:mm:ss") + " ";
-                                }
-
-                                propValue += responseStatusValue.Response.ToString();
-                            }
-                            else if (tempValue is DateTimeTimeZone)
-                            {
-                                DateTimeTimeZone dateTimeTimeZoneValue = (DateTimeTimeZone)tempValue;
-                                propValue = dateTimeTimeZoneValue.TimeZone + " " + dateTimeTimeZoneValue.DateTime;
-                            }
-                            else if (tempValue is Location)
-                            {
-                                Location locationValue = (Location)tempValue;
-                                propValue = locationValue.DisplayName;
-                            }
-                            else if (tempValue is Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<Attendee>)
-                            {
-                                Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<Attendee> attendeeValue = (Microsoft.OData.ProxyExtensions.NonEntityTypeCollectionImpl<Attendee>)tempValue;
-
-                                foreach (Recipient attendee in attendeeValue)
-                                {
-                                    propValue += attendee.EmailAddress.Name + "<" + attendee.EmailAddress.Address + ">; ";
-                                }
-
-                                propValue = propValue.TrimEnd(new char[] { ';', ' ' });
-                            }
-                            else if (tempValue is Recipient)
-                            {
-                                Recipient recipientValue = (Recipient)tempValue;
-                                propValue = recipientValue.EmailAddress.Name + "<" + recipientValue.EmailAddress.Address + ">";
-                            }
-                            else if (tempValue is Microsoft.OData.ProxyExtensions.EntityCollectionImpl<Event>)
-                            {
-                                // I'm not sure what this prop is.
-                                // This prop has a Nested structure.
-                                continue;
-                            }
-                            else
-                            {
-                                propValue = tempValue.ToString();
-                            }
-                        }
-                        catch
-                        {
-                            propValue = "";
-                        }
-                    }
-                    else
-                    {
-                        propValue = "indexed";
-                    }
-
-                    propRow.CreateCells(dataGridView_ItemProps, new object[] { propName, propValue, propType });
+                    propRow.CreateCells(dataGridView_ItemProps, new object[] { item.Key, item.Value, "Dynamic" });
 
                     if (dataGridView_ItemProps.InvokeRequired)
                     {

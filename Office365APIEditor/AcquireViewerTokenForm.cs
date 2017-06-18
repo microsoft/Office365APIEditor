@@ -37,10 +37,9 @@ namespace Office365APIEditor
 
             Cursor = Cursors.WaitCursor;
 
-            string[] scopes = new string[] { "offline_access https://outlook.office.com/mail.read https://outlook.office.com/contacts.read https://outlook.office.com/calendars.read" };
+            string[] scopes = Office365APIEditorHelper.MailboxViewerScopes();
 
             _pca = new PublicClientApplication(textBox_ClientID.Text);
-            
 
             try
             {

@@ -326,49 +326,10 @@ namespace Office365APIEditor
             } while (morePages);
         }
 
-        private async Task<OutlookServicesClient> GetOutlookServiceClient()
-        {
-            // Acquire access token again.
-            try
-            {
-                ar = await pca.AcquireTokenSilentAsync(Office365APIEditorHelper.MailboxViewerScopes());
-            }
-            catch
-            {
-                try
-                {
-                    ar = await pca.AcquireTokenAsync(Office365APIEditorHelper.MailboxViewerScopes(), email, UiOptions.ForceLogin, "");
-                }
-                catch (Exception ex)
-                {
-                    Cursor = Cursors.Default;
-                    MessageBox.Show(ex.Message, "Office365APIEditor");
-
-                    return null;
-                }
-            }
-
-            string token = ar.Token;
-            
-            OutlookServicesClient newClient = new OutlookServicesClient(new Uri("https://outlook.office.com/api/v2.0"),
-                () =>
-                {
-                    return Task.Run(() =>
-                    {
-                        return token;
-                    });
-                });
-
-            newClient.Context.SendingRequest2 += new EventHandler<SendingRequest2EventArgs>(
-                (eventSender, eventArgs) => InsertXAnchorMailboxHeader(eventSender, eventArgs, email));
-
-            return newClient;
-        }
-
         private async void treeView_Mailbox_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // Get new OutlookServiceClient.
-            client = await GetOutlookServiceClient();
+            client = await Util.GetOutlookServiceClient(pca, email);
             if (client == null)
             {
                 MessageBox.Show("Acquiring access token failed.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
