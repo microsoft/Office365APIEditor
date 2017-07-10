@@ -156,15 +156,15 @@
             // newEditorToolStripMenuItem
             // 
             this.newEditorToolStripMenuItem.Name = "newEditorToolStripMenuItem";
-            this.newEditorToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.newEditorToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.newEditorToolStripMenuItem.Text = "New &Editor...";
             this.newEditorToolStripMenuItem.Click += new System.EventHandler(this.newEditorToolStripMenuItem_Click);
             // 
             // accessTokenViewerToolStripMenuItem
             // 
             this.accessTokenViewerToolStripMenuItem.Name = "accessTokenViewerToolStripMenuItem";
-            this.accessTokenViewerToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.accessTokenViewerToolStripMenuItem.Text = "&Access Token Viewer...";
+            this.accessTokenViewerToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.accessTokenViewerToolStripMenuItem.Text = "&Generic Token Viewer...";
             this.accessTokenViewerToolStripMenuItem.Click += new System.EventHandler(this.accessTokenViewerToolStripMenuItem_Click);
             // 
             // MailboxViewerForm
