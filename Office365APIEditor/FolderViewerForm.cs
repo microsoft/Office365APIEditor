@@ -706,6 +706,20 @@ namespace Office365APIEditor
             attachmentViewer.Show();
         }
 
+        private void dataGridView_ItemProps_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Get the value of double-clicked row.
+            object name = dataGridView_ItemProps.Rows[e.RowIndex].Cells[0].Value;
+            string nameString = (name == null) ? "" : name.ToString();
 
+            object value = dataGridView_ItemProps.Rows[e.RowIndex].Cells[1].Value;
+            string valueString = (value == null) ? "" : value.ToString();
+            
+
+            PropertyViewerForm propertyViewer = new PropertyViewerForm(nameString, valueString);
+            propertyViewer.Owner = this;
+            propertyViewer.Show();
+
+        }
     }
 }

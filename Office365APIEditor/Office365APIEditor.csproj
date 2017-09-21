@@ -187,6 +187,12 @@
     <Compile Include="Office365APIEditorHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyViewerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PropertyViewerForm.Designer.cs">
+      <DependentUpon>PropertyViewerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RequestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -259,6 +265,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="PropertyViewerForm.resx">
+      <DependentUpon>PropertyViewerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RequestForm.resx">
       <DependentUpon>RequestForm.cs</DependentUpon>
     </EmbeddedResource>

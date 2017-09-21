@@ -98,6 +98,7 @@
             this.dataGridView_ItemProps.ReadOnly = true;
             this.dataGridView_ItemProps.Size = new System.Drawing.Size(881, 262);
             this.dataGridView_ItemProps.TabIndex = 0;
+            this.dataGridView_ItemProps.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ItemProps_CellDoubleClick);
             // 
             // Property
             // 
@@ -122,7 +123,7 @@
             this.contextMenuStrip_ItemList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_DisplayAttachments});
             this.contextMenuStrip_ItemList.Name = "contextMenuStrip_ItemList";
-            this.contextMenuStrip_ItemList.Size = new System.Drawing.Size(193, 48);
+            this.contextMenuStrip_ItemList.Size = new System.Drawing.Size(193, 26);
             this.contextMenuStrip_ItemList.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_ItemList_Opening);
             // 
             // ToolStripMenuItem_DisplayAttachments
