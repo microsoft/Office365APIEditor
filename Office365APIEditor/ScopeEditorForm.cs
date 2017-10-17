@@ -33,6 +33,9 @@ namespace Office365APIEditor
         {
             changingAllStatus = true;
 
+            // To sort scopes alphabetically, use Sorted prop.
+            checkedListBox_Scopes.Sorted = true;
+
             foreach (string scope in Properties.Settings.Default.PredefinedScopes)
             {
                 checkedListBox_Scopes.Items.Add(scope);
@@ -87,9 +90,23 @@ namespace Office365APIEditor
 
         private void AddScope()
         {
-            checkedListBox_Scopes.Items.Add(textBox_NewScope.Text);
+            if (textBox_NewScope.Text == "")
+            {
+                MessageBox.Show("Enter the name of scope.", "Office365APIEditor");
+                checkedListBox_Scopes.SelectedItem = textBox_NewScope.Text;
 
-            int newScopeIndex = checkedListBox_Scopes.Items.Count - 1;
+                return;
+            }
+
+            if (checkedListBox_Scopes.Items.Contains(textBox_NewScope.Text))
+            {
+                MessageBox.Show("The specified scope is already exist.", "Office365APIEditor");
+                checkedListBox_Scopes.SelectedItem = textBox_NewScope.Text;
+
+                return;
+            }
+
+            int newScopeIndex = checkedListBox_Scopes.Items.Add(textBox_NewScope.Text);
 
             checkedListBox_Scopes.SelectedIndex = newScopeIndex ;
             checkedListBox_Scopes.SetItemChecked(newScopeIndex, true);
@@ -145,6 +162,8 @@ namespace Office365APIEditor
                     checkedListBox_Scopes.SetItemChecked(i, false);
                 }
             }
+
+            textBox_ScopePreview.Text = "";
 
             foreach (string scope in Properties.Settings.Default.DefaultScopes)
             {
