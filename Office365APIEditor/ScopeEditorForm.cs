@@ -38,24 +38,30 @@ namespace Office365APIEditor
 
             foreach (string scope in Properties.Settings.Default.PredefinedScopes)
             {
-                checkedListBox_Scopes.Items.Add(scope);
-
                 if (initialCheckedScopes.Contains(scope))
                 {
-                    checkedListBox_Scopes.SetItemChecked(checkedListBox_Scopes.Items.Count - 1, true);
+                    checkedListBox_Scopes.Items.Add(scope, true);
+                    //checkedListBox_Scopes.SetItemChecked(checkedListBox_Scopes.Items.Count - 1, true);
                     textBox_ScopePreview.Text += scope + " ";
+                }
+                else
+                {
+                    checkedListBox_Scopes.Items.Add(scope, false);
                 }
             }
 
             if (Properties.Settings.Default.CustomDefinedScopes != null && Properties.Settings.Default.CustomDefinedScopes.Count >= 1)
                 foreach (string scope in Properties.Settings.Default.CustomDefinedScopes)
                 {
-                    checkedListBox_Scopes.Items.Add(scope);
-
                     if (initialCheckedScopes.Contains(scope))
                     {
-                        checkedListBox_Scopes.SetItemChecked(checkedListBox_Scopes.Items.Count - 1, true);
+                        checkedListBox_Scopes.Items.Add(scope, true);
+                        // checkedListBox_Scopes.SetItemChecked(checkedListBox_Scopes.Items.Count - 1, true);
                         textBox_ScopePreview.Text += scope + " ";
+                    }
+                    else
+                    {
+                        checkedListBox_Scopes.Items.Add(scope, false);
                     }
                 }
 

@@ -131,16 +131,28 @@ namespace Office365APIEditor
         {
             // Check whether the URL is RedirectUrl.
 
-            if ((e.Url.AbsoluteUri.ToLower().StartsWith(redirectUrl.ToLower())) && (e.Url.AbsoluteUri.Contains("code")))
+            if (e.Url.AbsoluteUri.ToLower().StartsWith(redirectUrl.ToLower()))
             {
-                // Get the Authorization Code from a query string.
+                if (e.Url.AbsoluteUri.Contains("code"))
+                {
+                    // Get the Authorization Code from a query string.
 
-                var queryString = e.Url.AbsoluteUri.Substring(e.Url.AbsoluteUri.IndexOf("?"));
-                NameValueCollection temp = System.Web.HttpUtility.ParseQueryString(queryString);
-                _acquiredCode = temp["code"];
+                    var queryString = e.Url.AbsoluteUri.Substring(e.Url.AbsoluteUri.IndexOf("?"));
+                    NameValueCollection temp = System.Web.HttpUtility.ParseQueryString(queryString);
+                    _acquiredCode = temp["code"];
 
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    // Redirected to redirectUrl but we couldn't get the Authorization Code.
+
+                    MessageBox.Show("Redirected to the following URL." + Environment.NewLine + Environment.NewLine + System.Web.HttpUtility.UrlDecode(e.Url.AbsoluteUri), "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    this.DialogResult = DialogResult.No;
+                    this.Close();
+                }
             }
 
             // If we couldn't get the Authorization Code, do nothing.
