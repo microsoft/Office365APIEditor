@@ -353,6 +353,7 @@ namespace Office365APIEditor
         private void button_ViewTokenInfo_Click(object sender, EventArgs e)
         {
             TokenViewer tokenViewer = new TokenViewer(clientInfo.Token);
+            tokenViewer.Owner = this;
             tokenViewer.ShowDialog();
         }
 

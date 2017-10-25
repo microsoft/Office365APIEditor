@@ -138,10 +138,10 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button_Close);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(630, 430);
             this.Name = "TokenViewer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Token Viewer";
             this.Load += new System.EventHandler(this.TokenViewer_Load);
             this.tabControl1.ResumeLayout(false);

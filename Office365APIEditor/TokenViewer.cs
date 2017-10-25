@@ -34,6 +34,10 @@ namespace Office365APIEditor
                 textBox_AccessToken.ReadOnly = false;
                 textBox_AccessToken.Text = "Enter Access Token and click [Detail]";
             }
+
+            Location = new System.Drawing.Point(
+                Owner.Location.X + (Owner.Width - this.Width) / 2,
+                Owner.Location.Y + (Owner.Height - this.Height) / 2);
         }
 
         private void button_AccessTokenDetail_Click(object sender, EventArgs e)
