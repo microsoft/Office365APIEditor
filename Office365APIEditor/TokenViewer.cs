@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
 using System;
+using System.Management.Automation.Runspaces;
 using System.Text;
 using System.Windows.Forms;
 
@@ -9,6 +10,8 @@ namespace Office365APIEditor
 {
     public partial class TokenViewer : Form
     {
+        bool genericMode = false;
+        
         string rawIdToken = "";
         string rawAccessToken = "";
         string rawRefreshToken = "";
@@ -16,11 +19,15 @@ namespace Office365APIEditor
         public TokenViewer()
         {
             InitializeComponent();
+
+            genericMode = true;
         }
 
         public TokenViewer(TokenResponse Token)
         {
             InitializeComponent();
+
+            genericMode = false;
 
             rawIdToken = Token.id_token;
             rawAccessToken = Token.access_token;
@@ -33,7 +40,7 @@ namespace Office365APIEditor
             textBox_AccessToken.Text = rawAccessToken;
             textBox_RefreshToken.Text = rawRefreshToken;
 
-            if (rawAccessToken == "" || rawIdToken == "")
+            if (rawAccessToken == "" && rawIdToken == "")
             {
                 textBox_IdToken.ReadOnly = false;
                 textBox_IdToken.Text = "Enter the ID Token and click [Detail]";
@@ -41,6 +48,8 @@ namespace Office365APIEditor
                 textBox_AccessToken.ReadOnly = false;
                 textBox_AccessToken.Text = "Enter the Access Token and click [Detail]";
             }
+
+            button_Import.Enabled = genericMode;
 
             Location = new System.Drawing.Point(
                 Owner.Location.X + (Owner.Width - this.Width) / 2,
@@ -52,8 +61,8 @@ namespace Office365APIEditor
             // 1. Try to decode the ID Token and the Access Token.
             // 2. Select a token and open a detail window.
 
-            string idToken = (rawIdToken != "") ? rawIdToken : textBox_IdToken.Text;
-            string accessToken = (rawAccessToken != "") ? rawAccessToken : textBox_AccessToken.Text;
+            string idToken = (rawIdToken != "" && rawIdToken != null) ? rawIdToken : textBox_IdToken.Text;
+            string accessToken = (rawAccessToken != "" && rawAccessToken != null) ? rawAccessToken : textBox_AccessToken.Text;
 
             Tuple<bool, string, string, string> decodedIdToken = TryDecodeToken(idToken);
             Tuple<bool, string, string, string> decodedAccessToken = TryDecodeToken(accessToken);
@@ -162,15 +171,15 @@ namespace Office365APIEditor
             string decodedSignature = "";
             bool result = false;
 
-            string[] tokenParts = Token.Split('.');
-
-            if (tokenParts.Length < 2)
-            {
-                return new Tuple<bool, string, string, string>(false, "", "", "");
-            }
-
             try
             {
+                string[] tokenParts = Token.Split('.');
+
+                if (tokenParts.Length < 2)
+                {
+                    return new Tuple<bool, string, string, string>(false, "", "", "");
+                }
+
                 decodedHeader = RequestForm.parseJsonResponse(Encoding.UTF8.GetString(ConvertFromBase64String(tokenParts[0])));
                 decodedClaim = RequestForm.parseJsonResponse(Encoding.UTF8.GetString(ConvertFromBase64String(tokenParts[1])));
                 decodedSignature = BitConverter.ToString(ConvertFromBase64String(tokenParts[2]));
@@ -205,6 +214,129 @@ namespace Office365APIEditor
             }
 
             return Convert.FromBase64String(temp);
+        }
+
+        private void button_Export_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            string idToken = (rawIdToken != "" && rawIdToken != null) ? rawIdToken : textBox_IdToken.Text;
+            string accessToken = (rawAccessToken != "" && rawAccessToken != null) ? rawAccessToken : textBox_AccessToken.Text;
+
+            Tuple<bool, string, string, string> decodedIdToken = TryDecodeToken(idToken);
+            Tuple<bool, string, string, string> decodedAccessToken = TryDecodeToken(accessToken);
+
+            RawAndDecodedTokenInfo exportData = new RawAndDecodedTokenInfo
+            {
+                RawIdToken = rawIdToken,
+                RawAccessToken = rawAccessToken,
+                RawRefreshToken = rawRefreshToken,
+                DecodedIdTokenHeader = decodedIdToken.Item2,
+                DecodedIdTokenClaim = decodedIdToken.Item3,
+                DecodedIdTokenSignature = decodedIdToken.Item4,
+                DecodedAccessTokenHeader = decodedAccessToken.Item2,
+                DecodedAccessTokenClaim = decodedAccessToken.Item3,
+                DecodedAccessTokenSignature = decodedAccessToken.Item4
+            };
+
+            var runspace = RunspaceFactory.CreateRunspace();
+            var pipeline = runspace.CreatePipeline();
+
+            try
+            {
+                pipeline.Commands.Add(
+                    new Command("Export-CliXml")
+                    {
+                        Parameters = {
+                            new CommandParameter("InputObject", exportData),
+                            new CommandParameter("Path", saveFileDialog1.FileName)
+                        }
+                    }
+                );
+
+                runspace.Open();
+                var psObjects = pipeline.Invoke();
+                runspace.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                runspace.Dispose();
+            }
+        }
+
+        private void button_Import_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+
+            var runspace = RunspaceFactory.CreateRunspace();
+            var pipeline = runspace.CreatePipeline();
+
+            try
+            {
+                pipeline.Commands.Add(
+                    new Command("Import-CliXml")
+                    {
+                        Parameters = {
+                            new CommandParameter("Path", openFileDialog1.FileName)
+                        }
+                    }
+                );
+
+                runspace.Open();
+                var psObjects = pipeline.Invoke();
+                runspace.Close();
+
+                if (psObjects == null || psObjects.Count != 1)
+                {
+                    MessageBox.Show("Invalid XML Format.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    try
+                    {
+                        dynamic importData = psObjects[0];
+                        textBox_IdToken.Text = importData.RawIdToken;
+                        textBox_AccessToken.Text = importData.RawAccessToken;
+                        textBox_RefreshToken.Text = importData.RawRefreshToken;
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                runspace.Dispose();
+            }
+        }
+
+        internal struct RawAndDecodedTokenInfo
+        {
+            public string RawIdToken;
+            public string RawAccessToken;
+            public string RawRefreshToken;
+            public string DecodedIdTokenHeader;
+            public string DecodedIdTokenClaim;
+            public string DecodedIdTokenSignature;
+            public string DecodedAccessTokenHeader;
+            public string DecodedAccessTokenClaim;
+            public string DecodedAccessTokenSignature;
         }
     }
 }
