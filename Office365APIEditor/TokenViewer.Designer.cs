@@ -36,9 +36,12 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.textBox_RefreshToken = new System.Windows.Forms.TextBox();
             this.button_Close = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.textBox_IdToken = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -46,6 +49,7 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -56,7 +60,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button_AccessTokenDetail);
             this.tabPage1.Controls.Add(this.textBox_AccessToken);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -70,7 +73,7 @@
             // 
             this.button_AccessTokenDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_AccessTokenDetail.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_AccessTokenDetail.Location = new System.Drawing.Point(523, 295);
+            this.button_AccessTokenDetail.Location = new System.Drawing.Point(446, 356);
             this.button_AccessTokenDetail.Name = "button_AccessTokenDetail";
             this.button_AccessTokenDetail.Size = new System.Drawing.Size(75, 23);
             this.button_AccessTokenDetail.TabIndex = 5;
@@ -129,12 +132,38 @@
             this.button_Close.UseVisualStyleBackColor = true;
             this.button_Close.Click += new System.EventHandler(this.button_Close_Click);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.textBox_IdToken);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(610, 324);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "ID Token";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // textBox_IdToken
+            // 
+            this.textBox_IdToken.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_IdToken.Location = new System.Drawing.Point(8, 6);
+            this.textBox_IdToken.Multiline = true;
+            this.textBox_IdToken.Name = "textBox_IdToken";
+            this.textBox_IdToken.ReadOnly = true;
+            this.textBox_IdToken.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox_IdToken.Size = new System.Drawing.Size(596, 283);
+            this.textBox_IdToken.TabIndex = 5;
+            this.textBox_IdToken.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_IdToken_KeyDown);
+            // 
             // TokenViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_Close;
             this.ClientSize = new System.Drawing.Size(614, 391);
+            this.Controls.Add(this.button_AccessTokenDetail);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.button_Close);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -149,6 +178,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -162,5 +193,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox textBox_RefreshToken;
         private System.Windows.Forms.Button button_Close;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TextBox textBox_IdToken;
     }
 }
