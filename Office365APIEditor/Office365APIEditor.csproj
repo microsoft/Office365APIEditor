@@ -306,6 +306,7 @@
     <Content Include="Licenses\Microsoft.OData.ProxyExtensions.txt" />
     <Content Include="Licenses\Microsoft.Office365.OutlookServices-V2.0.txt" />
     <Content Include="Licenses\Microsoft.Spatial.txt" />
+    <Content Include="Licenses\System.Management.Automation.dll.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
