@@ -948,6 +948,17 @@ namespace Office365APIEditor
                     result = Deserialize<TokenResponse>(jsonResponse);
                 }
             }
+            catch (System.Net.WebException ex)
+            {
+                System.Net.WebResponse response = ex.Response;
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.Default);
+                    string jsonResponse = reader.ReadToEnd();
+
+                    MessageBox.Show(ex.Message + "\r\n\r\n" + ex.StackTrace + "\r\n\r\n" + jsonResponse, "Office365APIEditor");
+                }
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\r\n\r\n" + ex.StackTrace, "Office365APIEditor");
