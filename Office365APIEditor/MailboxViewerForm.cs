@@ -17,7 +17,8 @@ namespace Office365APIEditor
         AuthenticationResult ar;
         OutlookServicesClient client;
 
-        string email;
+        // Current user's info.
+        Microsoft.Identity.Client.IUser currentUser;
 
         string inboxId;
         string topOfInformationStoreId;
@@ -58,8 +59,8 @@ namespace Office365APIEditor
                 return false;
             }
 
-            string token = ar.Token;
-            email = ar.User.DisplayableId; // DisplayableId is UPN format.
+            string token = ar.AccessToken;
+            currentUser = ar.User;
 
             try
             {
@@ -73,7 +74,7 @@ namespace Office365APIEditor
                     });
                 
                 client.Context.SendingRequest2 += new EventHandler<SendingRequest2EventArgs>(
-                    (eventSender, eventArgs) => InsertXAnchorMailboxHeader(eventSender, eventArgs, email));
+                    (eventSender, eventArgs) => InsertXAnchorMailboxHeader(eventSender, eventArgs, currentUser.DisplayableId));
 
                 // Get the root folder.
                 GetRootFolder();
@@ -329,7 +330,7 @@ namespace Office365APIEditor
         private async void treeView_Mailbox_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // Get new OutlookServiceClient.
-            client = await Util.GetOutlookServiceClient(pca, email);
+            client = await Util.GetOutlookServiceClient(pca, currentUser);
             if (client == null)
             {
                 MessageBox.Show("Acquiring access token failed.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -600,7 +601,7 @@ namespace Office365APIEditor
         private void OpenFolder(TreeNode SelectedNode)
         {
             // Open selected folder.
-            FolderViewerForm folderViewerForm = new FolderViewerForm(pca, email, (FolderInfo)SelectedNode.Tag, SelectedNode.Text);
+            FolderViewerForm folderViewerForm = new FolderViewerForm(pca, currentUser, (FolderInfo)SelectedNode.Tag, SelectedNode.Text);
             folderViewerForm.Show();
         }
 

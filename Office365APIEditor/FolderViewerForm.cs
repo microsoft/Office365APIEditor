@@ -21,16 +21,16 @@ namespace Office365APIEditor
 
         OutlookServicesClient client;
 
-        string email;
+        Microsoft.Identity.Client.IUser currentUser;
 
         string currentId = "";
 
-        public FolderViewerForm(PublicClientApplication PCA, string UserEmailAddress, FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
+        public FolderViewerForm(PublicClientApplication PCA, Microsoft.Identity.Client.IUser CurrentUser, FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
         {
             InitializeComponent();
             
             pca = PCA;
-            email = UserEmailAddress;
+            currentUser = CurrentUser;
             targetFolder = TargetFolderInfo;
             targetFolderDisplayName = TargetFolderDisplayName;
         }
@@ -46,7 +46,7 @@ namespace Office365APIEditor
                 Text = FolderContentType.Message.ToString() + " items in " + targetFolderDisplayName;
             }
             
-            client = await Util.GetOutlookServiceClient(pca, email);
+            client = await Util.GetOutlookServiceClient(pca, currentUser);
 
             if (client == null)
             {
@@ -65,6 +65,8 @@ namespace Office365APIEditor
                         if (MessageBox.Show("TotalItemCount of this folder is not 0 but getting items of this folder was failed.\r\nDo you want to retry getting items as Contact item?", "Office365APIEditor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
                             // Retry as Contact item.
+
+                            targetFolder.Type = FolderContentType.Contact;
 
                             // Reset DataGrid.
                             if (dataGridView_ItemList.InvokeRequired)
@@ -636,8 +638,8 @@ namespace Office365APIEditor
 
             try
             {
-                string accessToken = await Util.GetAccessToken(pca, email);
-                string result = await Util.SendGetRequestAsync(URL, accessToken, email);
+                string accessToken = await Util.GetAccessToken(pca, currentUser);
+                string result = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
                 var jsonResult = DynamicJson.Parse(result);
 
                 CreatePropTable2(jsonResult);
@@ -702,7 +704,7 @@ namespace Office365APIEditor
                 return;
             }
 
-            AttachmentViewerForm attachmentViewer = new AttachmentViewerForm(pca, email, targetFolder, dataGridView_ItemList.SelectedRows[0].Tag.ToString(), dataGridView_ItemList.SelectedRows[0].Cells[0].Value.ToString());
+            AttachmentViewerForm attachmentViewer = new AttachmentViewerForm(pca, currentUser, targetFolder, dataGridView_ItemList.SelectedRows[0].Tag.ToString(), dataGridView_ItemList.SelectedRows[0].Cells[0].Value.ToString());
             attachmentViewer.Show();
         }
 

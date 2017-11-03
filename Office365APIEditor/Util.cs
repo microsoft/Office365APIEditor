@@ -136,22 +136,22 @@ namespace Office365APIEditor
             }
         }
 
-        public static async Task<string> GetAccessToken(PublicClientApplication pca, string email)
+        public static async Task<string> GetAccessToken(PublicClientApplication pca, Microsoft.Identity.Client.IUser CurrentUser)
         {
             // Acquire access token.
             // This method is designed for GetOutlookServiceClient(), so if you need new OutlookServiceClient and new Access Token, you should use GetOutlookServiceClient().
 
             Microsoft.Identity.Client.AuthenticationResult ar;
-
+            
             try
             {
-                ar = await pca.AcquireTokenSilentAsync(Office365APIEditorHelper.MailboxViewerScopes(), email);
+                ar = await pca.AcquireTokenSilentAsync(Office365APIEditorHelper.MailboxViewerScopes(), CurrentUser);
             }
-            catch (Exception ex1)
+            catch (Exception extemp)
             {
                 try
                 {
-                    ar = await pca.AcquireTokenAsync(Office365APIEditorHelper.MailboxViewerScopes(), email, UiOptions.ForceLogin, "");
+                    ar = await pca.AcquireTokenAsync(Office365APIEditorHelper.MailboxViewerScopes(), CurrentUser, UIBehavior.ForceLogin, "");
                 }
                 catch (Exception ex)
                 {
@@ -159,14 +159,14 @@ namespace Office365APIEditor
                 }
             }
 
-            return ar.Token;
+            return ar.AccessToken;
         }
 
-        public static async Task<OutlookServicesClient> GetOutlookServiceClient(PublicClientApplication pca, string email)
+        public static async Task<OutlookServicesClient> GetOutlookServiceClient(PublicClientApplication pca, Microsoft.Identity.Client.IUser CurrentUser)
         {
             // Acquire access token again.
 
-            string token = await Util.GetAccessToken(pca, email);
+            string token = await Util.GetAccessToken(pca, CurrentUser);
 
             OutlookServicesClient newClient = new OutlookServicesClient(new Uri("https://outlook.office.com/api/v2.0"),
                 () =>
@@ -178,7 +178,7 @@ namespace Office365APIEditor
                 });
 
             newClient.Context.SendingRequest2 += new EventHandler<SendingRequest2EventArgs>(
-                (eventSender, eventArgs) => InsertHeaders(eventSender, eventArgs, email));
+                (eventSender, eventArgs) => InsertHeaders(eventSender, eventArgs, CurrentUser.DisplayableId));
 
             return newClient;
         }

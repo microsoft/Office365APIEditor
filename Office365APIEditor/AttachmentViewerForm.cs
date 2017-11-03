@@ -19,15 +19,14 @@ namespace Office365APIEditor
 
         OutlookServicesClient client;
 
-        AuthenticationResult ar;
-        string email;
+        Microsoft.Identity.Client.IUser currentUser;
 
-        public AttachmentViewerForm(PublicClientApplication PCA, string UserEmailAddress, FolderInfo TargetFolderInfo, string TargetItemID, string TargetItemSubject)
+        public AttachmentViewerForm(PublicClientApplication PCA, Microsoft.Identity.Client.IUser CurrentUser, FolderInfo TargetFolderInfo, string TargetItemID, string TargetItemSubject)
         {
             InitializeComponent();
 
             pca = PCA;
-            email = UserEmailAddress;
+            currentUser = CurrentUser;
             targetFolder = TargetFolderInfo;
             targetItemId = TargetItemID;
             targetItemSubject = TargetItemSubject;
@@ -37,7 +36,7 @@ namespace Office365APIEditor
         {
             Text = "Attachments for '" + targetItemSubject + "'";
 
-            client = await Util.GetOutlookServiceClient(pca, email);
+            client = await Util.GetOutlookServiceClient(pca, currentUser);
 
             if (client == null)
             {

@@ -43,7 +43,7 @@ namespace Office365APIEditor
 
             try
             {
-                _ar = await _pca.AcquireTokenAsync(scopes, "", UiOptions.ForceLogin, "");
+                _ar = await _pca.AcquireTokenAsync(scopes, "", UIBehavior.ForceLogin, "");
 
                 Properties.Settings.Default.Save();
                 DialogResult = DialogResult.OK;
