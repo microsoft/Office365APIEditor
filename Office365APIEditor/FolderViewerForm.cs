@@ -567,12 +567,24 @@ namespace Office365APIEditor
 
         private void dataGridView_ItemList_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                // A header was double clicked.
+                return;
+            }
+
             // Select the row for the context menu.
             dataGridView_ItemList.Rows[e.RowIndex].Selected = true;
         }
 
         private void dataGridView_ItemList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                // A header was double clicked.
+                return;
+            }
+
             // Get the item ID of clicked row.
             string id = dataGridView_ItemList.Rows[e.RowIndex].Tag.ToString();
 
@@ -666,7 +678,9 @@ namespace Office365APIEditor
 
                     DataGridViewRow propRow = new DataGridViewRow();
 
-                    propRow.CreateCells(dataGridView_ItemProps, new object[] { item.Key, item.Value, "Dynamic" });
+                    string valueString = (item.Value == null) ? "" : item.Value.ToString();
+
+                    propRow.CreateCells(dataGridView_ItemProps, new object[] { item.Key, valueString, "Dynamic" });
 
                     if (dataGridView_ItemProps.InvokeRequired)
                     {
@@ -710,6 +724,12 @@ namespace Office365APIEditor
 
         private void dataGridView_ItemProps_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                // A header was double clicked.
+                return;
+            }
+
             // Get the value of double-clicked row.
             object name = dataGridView_ItemProps.Rows[e.RowIndex].Cells[0].Value;
             string nameString = (name == null) ? "" : name.ToString();

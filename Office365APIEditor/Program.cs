@@ -98,6 +98,24 @@ namespace Office365APIEditor
                     MessageBox.Show(ex.InnerException.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 
+                // Write error log.
+                try
+                {
+                    string filePath = Path.Combine(Application.StartupPath, "Error.txt");
+
+                    using (StreamWriter writer = new StreamWriter(filePath, true))
+                    {
+                        writer.WriteLine(
+                            "Date :" + DateTime.UtcNow.ToString("yyyy/MM/dd HH:mm:ss") + Environment.NewLine +
+                            "Message :" + ex.Message + Environment.NewLine + 
+                            "StackTrace :" + ex.StackTrace + Environment.NewLine + 
+                            "-----------------------------------------------------------------------------" + Environment.NewLine
+                            );
+                    }
+                }
+                catch
+                {
+                }
             }
         }
 
