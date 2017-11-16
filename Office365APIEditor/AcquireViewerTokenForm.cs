@@ -3,6 +3,7 @@
 
 using Microsoft.Identity.Client;
 using System;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Office365APIEditor
@@ -31,7 +32,7 @@ namespace Office365APIEditor
         {
             if (textBox_ClientID.Text == "")
             {
-                MessageBox.Show("Enter the Client ID.", "Office365APIEditor");
+                MessageBox.Show("Enter the Application ID.", "Office365APIEditor");
                 return;
             }
 
@@ -41,9 +42,25 @@ namespace Office365APIEditor
 
             _pca = new PublicClientApplication(textBox_ClientID.Text);
 
+            StringBuilder stringBuilder = new StringBuilder();
+
             try
-            {
+            {                
+                stringBuilder.AppendLine("MSAL - AcquireTokenAsync");
+                stringBuilder.AppendLine("Application ID : " + textBox_ClientID.Text);
+                stringBuilder.AppendLine("Scope : " + string.Join(",", scopes));
+
                 _ar = await _pca.AcquireTokenAsync(scopes, "", UIBehavior.ForceLogin, "");
+
+                stringBuilder.AppendLine("Result : Success");
+                stringBuilder.AppendLine("AccessToken : " + ((_ar.AccessToken == null) ? "" : _ar.AccessToken));
+                stringBuilder.AppendLine("ExpiresOn : " + _ar.ExpiresOn.ToString());
+                stringBuilder.AppendLine("IdToken : " + ((_ar.IdToken == null) ? "" : _ar.IdToken));
+                stringBuilder.AppendLine("Scope : " + string.Join(",", _ar.Scopes));
+                stringBuilder.AppendLine("UniqueId : " + ((_ar.UniqueId == null) ? "" : _ar.UniqueId));
+                stringBuilder.AppendLine("DisplayableId : " + ((_ar.User.DisplayableId == null) ? "" : _ar.User.DisplayableId));
+                stringBuilder.AppendLine("Identifier : " + ((_ar.User.Identifier == null) ? "" : _ar.User.Identifier));
+                stringBuilder.AppendLine("Name : " + ((_ar.User.Name == null) ? "" : _ar.User.Name));
 
                 Properties.Settings.Default.Save();
                 DialogResult = DialogResult.OK;
@@ -52,6 +69,8 @@ namespace Office365APIEditor
             }
             catch (Exception ex)
             {
+                stringBuilder.AppendLine("Result : Fail");
+                stringBuilder.AppendLine("Message : " + ex.Message);
                 Cursor = Cursors.Default;
 
                 if (ex.Message != "User canceled authentication")
@@ -59,6 +78,8 @@ namespace Office365APIEditor
                     MessageBox.Show(ex.Message, "Office365APIEditor");
                 }
             }
+
+            Util.WriteCustomLog("AcquireViewerTokenForm", stringBuilder.ToString());
         }
 
         private void AcquireViewerTokenForm_Load(object sender, EventArgs e)

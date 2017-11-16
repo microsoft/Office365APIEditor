@@ -1,9 +1,7 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
-using Codeplex.Data;
 using Microsoft.Identity.Client;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.OData.Client;
 using Microsoft.Office365.OutlookServices;
 using System;
@@ -101,6 +99,58 @@ namespace Office365APIEditor
                 // refresh_token = value.RefreshToken,
                 id_token = value.IdToken
             };
+        }
+        
+        public static bool WriteCustomLog(string Title, string Message)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(Title);
+            sb.AppendLine("DateTime : " + DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+            sb.AppendLine(Message);
+
+            return WriteLog(sb);
+        }
+
+        public static bool WriteLog(StringBuilder Message)
+        {
+            Message.AppendLine("");
+
+            string logFilePath = "";
+
+            string settingLofFilePath = Properties.Settings.Default.LogFolderPath;
+
+            if (!Directory.Exists(Properties.Settings.Default.LogFolderPath))
+            {
+                // Specified log folder path is not exsisting.
+                return false;
+            }
+
+            if (Properties.Settings.Default.LogFileStyle == "Static")
+            {
+                logFilePath = Path.Combine(Properties.Settings.Default.LogFolderPath, "Office365APIEditor.log");
+            }
+            else if (Properties.Settings.Default.LogFileStyle == "DateTime")
+            {
+                logFilePath = Path.Combine(Properties.Settings.Default.LogFolderPath, DateTime.UtcNow.ToString("yyyyMMdd") + ".log");
+            }
+            else
+            {
+                logFilePath = Path.Combine(Properties.Settings.Default.LogFolderPath, "Office365APIEditor.log");
+            }
+
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(logFilePath, true, Encoding.UTF8))
+                {
+                    sw.Write(Message.ToString());
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public static async Task<string> SendGetRequestAsync(Uri URL, string AccessToken, string MailAddress)

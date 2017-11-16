@@ -290,7 +290,7 @@ namespace Office365APIEditor
                     // Logging
                     if (checkBox_Logging.Checked)
                     {
-                        WriteCustomLog("Response", ex.Message);
+                        Util.WriteCustomLog("Response", ex.Message);
                     }
 
                     DisplayResponse("Error", null, ex.Message);
@@ -326,7 +326,7 @@ namespace Office365APIEditor
                 // Logging
                 if (checkBox_Logging.Checked)
                 {
-                    WriteCustomLog("Response", ex.Message);
+                    Util.WriteCustomLog("Response", ex.Message);
                 }
 
                 DisplayResponse("Error", null, ex.Message);
@@ -460,7 +460,7 @@ namespace Office365APIEditor
                     // Logging
                     if (checkBox_Logging.Checked)
                     {
-                        WriteCustomLog("Response", ex.Message);
+                        Util.WriteCustomLog("Response", ex.Message);
                     }
 
                     DisplayResponse("Error", null, ex.Message);
@@ -490,7 +490,7 @@ namespace Office365APIEditor
                 // Logging
                 if (checkBox_Logging.Checked)
                 {
-                    WriteCustomLog("Response", ex.Message);
+                    Util.WriteCustomLog("Response", ex.Message);
                 }
 
                 DisplayResponse("Error", null, ex.Message);
@@ -654,7 +654,7 @@ namespace Office365APIEditor
                 sb.AppendLine("  " + Body.Replace(Environment.NewLine, Environment.NewLine + "  "));
             }
 
-            WriteLog(sb);
+            Util.WriteLog(sb);
         }
 
         private void WriteResponseLog(HttpWebResponse ResponseToLog, string ResponseBody)
@@ -672,60 +672,9 @@ namespace Office365APIEditor
             sb.AppendLine("Body : ");
             sb.AppendLine("  " + ResponseBody.Replace(Environment.NewLine, Environment.NewLine + "  "));
 
-            WriteLog(sb);
+            Util.WriteLog(sb);
         }
-
-        private void WriteCustomLog(string Title, string Message)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine(Title);
-            sb.AppendLine("DateTime : " + DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
-            sb.AppendLine(Message);
-
-            WriteLog(sb);
-        }
-
-        private void WriteLog(StringBuilder Message)
-        {
-            Message.AppendLine("");
-
-            string logFilePath = "";
-
-            string settingLofFilePath = Properties.Settings.Default.LogFolderPath;
-
-            if (!Directory.Exists(Properties.Settings.Default.LogFolderPath))
-            {
-                // Specified log folder path is not exsisting.
-                MessageBox.Show("The Specified log folder path is not exsisting.", "Office365APIEditor");
-                return;
-            }
-
-            if (Properties.Settings.Default.LogFileStyle == "Static")
-            {
-                logFilePath = Path.Combine(Properties.Settings.Default.LogFolderPath, "Office365APIEditor.log");
-            }
-            else if (Properties.Settings.Default.LogFileStyle == "DateTime")
-            {
-                logFilePath = Path.Combine(Properties.Settings.Default.LogFolderPath, DateTime.UtcNow.ToString("yyyyMMdd") + ".log");
-            }
-            else
-            {
-                logFilePath = Path.Combine(Properties.Settings.Default.LogFolderPath, "Office365APIEditor.log");
-            }
-
-            try
-            {
-                using (StreamWriter sw = new StreamWriter(logFilePath, true, Encoding.Default))
-                {
-                    sw.Write(Message.ToString());
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Failed to write the log.\r\n\r\n" + ex.Message, "Office365APIEditor");
-            }
-        }
-
+        
         private void AddRunHistory(WebRequest Request, string RequestHeader, string RequestBody, HttpWebResponse Response, string JsonResponse)
         {
             int maxHistoryCount = 30;

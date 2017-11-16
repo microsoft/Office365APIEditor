@@ -7,7 +7,8 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.OData.Client;
-using System.Drawing;
+using System.IO;
+using System.Text;
 
 namespace Office365APIEditor
 {
@@ -108,6 +109,11 @@ namespace Office365APIEditor
             // Following operation is available with v1.0 only.
             // https://outlook.office.com/api/v1.0/me/RootFolder
 
+            client.Context.BuildingRequest += new EventHandler<BuildingRequestEventArgs>(
+                (eventSender, eventArgs) => RequestLogger(eventSender, eventArgs));
+            client.Context.ReceivingResponse += new EventHandler<ReceivingResponseEventArgs>(
+                (eventSender, eventArgs) => RequestLogger(eventSender, eventArgs));
+
             var inbox = await client.Me.MailFolders["Inbox"].ExecuteAsync(); // Inbox
             inboxId = inbox.Id;
             
@@ -132,6 +138,16 @@ namespace Office365APIEditor
             {
                 treeView_Mailbox.Nodes.Add(node);
             }
+        }
+
+        private void RequestLogger(object eventSender, ReceivingResponseEventArgs eventArgs)
+        {
+            eventArgs.ResponseMessage.ToString();
+        }
+
+        private void RequestLogger(object eventSender, BuildingRequestEventArgs eventArgs)
+        {
+            eventArgs.ToString();
         }
 
         private async void GetChildMailFolders(string FolderId, TreeNode FolderNode)

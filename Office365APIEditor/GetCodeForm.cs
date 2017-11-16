@@ -140,7 +140,7 @@ namespace Office365APIEditor
                     var queryString = e.Url.AbsoluteUri.Substring(e.Url.AbsoluteUri.IndexOf("?"));
                     NameValueCollection temp = System.Web.HttpUtility.ParseQueryString(queryString);
                     _acquiredCode = temp["code"];
-
+                    
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
