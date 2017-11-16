@@ -146,12 +146,15 @@ namespace Office365APIEditor
                 }
                 else
                 {
-                    // Redirected to redirectUrl but we couldn't get the Authorization Code.
+                    if (_acquiredCode == "")
+                    {
+                        // Redirected to redirectUrl but we couldn't get the Authorization Code.
 
-                    MessageBox.Show("Redirected to the following URL." + Environment.NewLine + Environment.NewLine + System.Web.HttpUtility.UrlDecode(e.Url.AbsoluteUri), "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Redirected to the following URL." + Environment.NewLine + Environment.NewLine + System.Web.HttpUtility.UrlDecode(e.Url.AbsoluteUri), "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    this.DialogResult = DialogResult.No;
-                    this.Close();
+                        this.DialogResult = DialogResult.No;
+                        this.Close();
+                    }
                 }
             }
 
