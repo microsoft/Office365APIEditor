@@ -385,7 +385,7 @@ namespace Office365APIEditor
                     // If _clientID has value, we're working with web app.
                     // So we have to add Client ID and Client Secret.
                     tempTable["client_id"] = clientInfo.ClientID;
-                    tempTable["client_secret"] = clientInfo.ClientSecret;
+                    tempTable["client_secret"] = System.Web.HttpUtility.UrlEncode(clientInfo.ClientSecret);
                 }
             }
             else
