@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -261,24 +262,75 @@ namespace Office365APIEditor
                 // Get a response and response stream.
                 var response = (HttpWebResponse)await request.GetResponseAsync();
 
-                string jsonResponse = "";
-                using (Stream responseStream = response.GetResponseStream())
+                if (response.ContentType.Contains("image/jpeg"))
                 {
-                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-                    jsonResponse = reader.ReadToEnd();
-                }
+                    // Response data is photo.
 
-                // Logging
-                if (checkBox_Logging.Checked)
+                    List<byte> byteList = new List<byte>();
+
+                    using (Stream responseStream = response.GetResponseStream())
+                    {
+                        for (; ; )
+                        {
+                            // read 1 byte from the stream
+                            int data = responseStream.ReadByte();
+
+                            if (data == -1)
+                            {
+                                // there is no data to read
+                                break;
+                            }
+
+                            byteList.Add((byte)data);                            
+                        }
+                    }
+
+                    byte[] binaryResponse = byteList.ToArray();
+                    string base64Response = Convert.ToBase64String(binaryResponse);
+
+                    // Create new bitmap object to display the response
+                    MemoryStream memoryStream = new MemoryStream();
+                    byte[] pictureData = binaryResponse;
+                    memoryStream.Write(pictureData, 0, Convert.ToInt32(pictureData.Length));
+                    Bitmap bitmapResponse = new Bitmap(memoryStream, false);
+                    memoryStream.Dispose();
+
+                    // Logging
+                    if (checkBox_Logging.Checked)
+                    {
+                        WriteResponseLog(response, base64Response);
+                    }
+
+                    // Display the results.
+                    DisplayResponse(CreateStatusCodeString(response), response.Headers, base64Response);
+                    pictureBox_Photo.Image = bitmapResponse;
+
+                    // Add Run History
+                    AddRunHistory(request, originalRequestHeaders, originalRequestBody, response, base64Response);
+                }
+                else
                 {
-                    WriteResponseLog(response, jsonResponse);
+                    // Response data is json.
+
+                    string jsonResponse = "";
+                    using (Stream responseStream = response.GetResponseStream())
+                    {
+                        StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                        jsonResponse = reader.ReadToEnd();
+                    }
+
+                    // Logging
+                    if (checkBox_Logging.Checked)
+                    {
+                        WriteResponseLog(response, jsonResponse);
+                    }
+
+                    // Display the results.
+                    DisplayResponse(CreateStatusCodeString(response), response.Headers, jsonResponse);
+
+                    // Add Run History
+                    AddRunHistory(request, originalRequestHeaders, originalRequestBody, response, jsonResponse);
                 }
-
-                // Display the results.
-                DisplayResponse(CreateStatusCodeString(response), response.Headers, jsonResponse);
-
-                // Add Run History
-                AddRunHistory(request, originalRequestHeaders, originalRequestBody, response, jsonResponse);
 
                 // Save application setting.
                 Properties.Settings.Default.Save();
@@ -528,6 +580,8 @@ namespace Office365APIEditor
             // Status code
             label_StatusCode.Text = StatusCode;
 
+            bool isImage = false;
+
             // Header
             if (Headers == null)
             {
@@ -536,15 +590,35 @@ namespace Office365APIEditor
             else
             {
                 textBox_ResponseHeaders.Text = Headers.ToString();
+
+                try
+                {
+                    string contentType = Headers.GetValues("Content-Type")[0];
+                    if (contentType == "image/jpeg")
+                    {
+                        isImage = true;
+                    }
+                }
+                catch { }
             }
 
             // Body
             originalJsonResponse = JsonResponse;
             textBox_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
 
-            // Show Body tab
-            tabControl_Response.SelectTab(1);
-            textBox_ResponseBody.Select(0, 0);
+            // Show the picturebox in Preview tab if response is image.
+            pictureBox_Photo.Visible = isImage;
+
+            // Show appropriate tab
+            if (isImage)
+            {
+                tabControl_Response.SelectTab(2);
+            }
+            else
+            {
+                tabControl_Response.SelectTab(1);
+                textBox_ResponseBody.Select(0, 0);
+            }
         }
 
         public string ShapeJsonResponseIfNeeded(string Data)
@@ -981,11 +1055,41 @@ namespace Office365APIEditor
             label_StatusCode.Text = runInfo.ResponseStatusCode;
             textBox_ResponseHeaders.Text = runInfo.ResponseHeader.Replace("\n", Environment.NewLine);
 
+            bool isImage = false;
+
+            if (textBox_ResponseHeaders.Text.Contains("Content-Type: image/jpeg"))
+            {
+                isImage = true;
+            }
+
             originalJsonResponse = runInfo.ResponseBody;
             indentedJsonResponse = "";
             decodedJsonResponse = "";
             indentedAndDecodedJsonResponse = "";
             textBox_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
+
+            if (isImage) {
+                // Create new bitmap object to display the response
+                byte[] binaryResponse = Convert.FromBase64String(originalJsonResponse);                
+                MemoryStream memoryStream = new MemoryStream();
+                byte[] pictureData = binaryResponse;
+                memoryStream.Write(pictureData, 0, Convert.ToInt32(pictureData.Length));
+                Bitmap bitmapResponse = new Bitmap(memoryStream, false);
+                memoryStream.Dispose();
+                pictureBox_Photo.Image = bitmapResponse;
+
+                // Show Preview tab
+                tabControl_Response.SelectTab(2);
+            }
+            else
+            {
+                // Show Body tab
+                tabControl_Response.SelectTab(1);
+                textBox_ResponseBody.Select(0, 0);
+            }
+
+            // Show the picturebox in preview tab if response is image.
+            pictureBox_Photo.Visible = isImage;
         }
     }
 }

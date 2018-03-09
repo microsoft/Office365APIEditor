@@ -58,6 +58,7 @@
             this.HeaderValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage_Body = new System.Windows.Forms.TabPage();
             this.textBox_RequestBody = new System.Windows.Forms.TextBox();
+            this.textBox_Request = new System.Windows.Forms.TextBox();
             this.button_Run = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -72,7 +73,8 @@
             this.radioButton_POST = new System.Windows.Forms.RadioButton();
             this.contextMenuStrip_RunHistory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showDetailsInMainPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox_Request = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pictureBox_Photo = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -86,6 +88,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RequestHeader)).BeginInit();
             this.tabPage_Body.SuspendLayout();
             this.contextMenuStrip_RunHistory.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Photo)).BeginInit();
             this.SuspendLayout();
             // 
             // checkBox_Indent
@@ -155,7 +159,7 @@
             // optionToolStripMenuItem
             // 
             this.optionToolStripMenuItem.Name = "optionToolStripMenuItem";
-            this.optionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.optionToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.optionToolStripMenuItem.Text = "&Option...";
             this.optionToolStripMenuItem.Click += new System.EventHandler(this.OptionToolStripMenuItem_Click);
             // 
@@ -253,6 +257,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl_Response.Controls.Add(this.tabPage1);
             this.tabControl_Response.Controls.Add(this.tabPage2);
+            this.tabControl_Response.Controls.Add(this.tabPage3);
             this.tabControl_Response.Location = new System.Drawing.Point(22, 259);
             this.tabControl_Response.Name = "tabControl_Response";
             this.tabControl_Response.SelectedIndex = 0;
@@ -402,6 +407,19 @@
             this.textBox_RequestBody.Size = new System.Drawing.Size(554, 96);
             this.textBox_RequestBody.TabIndex = 4;
             // 
+            // textBox_Request
+            // 
+            this.textBox_Request.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_Request.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastRequest", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Request.Location = new System.Drawing.Point(101, 40);
+            this.textBox_Request.Multiline = true;
+            this.textBox_Request.Name = "textBox_Request";
+            this.textBox_Request.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox_Request.Size = new System.Drawing.Size(587, 36);
+            this.textBox_Request.TabIndex = 45;
+            this.textBox_Request.Text = global::Office365APIEditor.Properties.Settings.Default.LastRequest;
+            // 
             // button_Run
             // 
             this.button_Run.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -531,18 +549,26 @@
             this.showDetailsInMainPanelToolStripMenuItem.Text = "Show details in main panel";
             this.showDetailsInMainPanelToolStripMenuItem.Click += new System.EventHandler(this.showDetailsInMainPanelToolStripMenuItem_Click);
             // 
-            // textBox_Request
+            // tabPage3
             // 
-            this.textBox_Request.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_Request.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastRequest", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_Request.Location = new System.Drawing.Point(101, 40);
-            this.textBox_Request.Multiline = true;
-            this.textBox_Request.Name = "textBox_Request";
-            this.textBox_Request.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_Request.Size = new System.Drawing.Size(587, 36);
-            this.textBox_Request.TabIndex = 45;
-            this.textBox_Request.Text = global::Office365APIEditor.Properties.Settings.Default.LastRequest;
+            this.tabPage3.Controls.Add(this.pictureBox_Photo);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(771, 200);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Preview";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox_Photo
+            // 
+            this.pictureBox_Photo.Location = new System.Drawing.Point(6, 6);
+            this.pictureBox_Photo.Name = "pictureBox_Photo";
+            this.pictureBox_Photo.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox_Photo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox_Photo.TabIndex = 9;
+            this.pictureBox_Photo.TabStop = false;
+            this.pictureBox_Photo.Visible = false;
             // 
             // RequestForm
             // 
@@ -576,6 +602,9 @@
             this.tabPage_Body.ResumeLayout(false);
             this.tabPage_Body.PerformLayout();
             this.contextMenuStrip_RunHistory.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Photo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -625,5 +654,7 @@
         private System.Windows.Forms.DataGridView dataGridView_RequestHeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn HeaderNameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn HeaderValueCol;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.PictureBox pictureBox_Photo;
     }
 }
