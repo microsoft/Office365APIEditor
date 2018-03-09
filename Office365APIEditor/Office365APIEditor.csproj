@@ -168,12 +168,6 @@
     <Compile Include="MailboxViewerForm.Designer.cs">
       <DependentUpon>MailboxViewerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModeSelectionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ModeSelectionForm.Designer.cs">
-      <DependentUpon>ModeSelectionForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Office365APIEditorHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -204,12 +198,6 @@
       <DependentUpon>ScopeEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="StartForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StartForm.Designer.cs">
-      <DependentUpon>StartForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="TokenResponse.cs" />
     <Compile Include="TokenViewer.cs">
       <SubType>Form</SubType>
@@ -242,9 +230,6 @@
     <EmbeddedResource Include="MailboxViewerForm.resx">
       <DependentUpon>MailboxViewerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModeSelectionForm.resx">
-      <DependentUpon>ModeSelectionForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -266,9 +251,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ScopeEditorForm.resx">
       <DependentUpon>ScopeEditorForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StartForm.resx">
-      <DependentUpon>StartForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TokenViewer.resx">
       <DependentUpon>TokenViewer.cs</DependentUpon>
