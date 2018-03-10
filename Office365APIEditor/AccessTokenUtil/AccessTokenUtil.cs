@@ -4,11 +4,46 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Office365APIEditor.AccessTokenUtil
 {
     public class AccessTokenUtil
     {
+        protected AcquireAuthorizationCodeResult AcquireAuthorizationCode(GetCodeForm AuthorizationCodeRequester)
+        {
+            if (AuthorizationCodeRequester.ShowDialog(out string Code) == DialogResult.OK)
+            {
+                if (Code != "")
+                {
+                    return new AcquireAuthorizationCodeResult()
+                    {
+                        Success = InteractiveResult.Success,
+                        AuthorizationCode = Code,
+                        ErrorMessage = ""
+                    };
+                }
+                else
+                {
+                    return new AcquireAuthorizationCodeResult()
+                    {
+                        Success = InteractiveResult.Fail,
+                        AuthorizationCode = "",
+                        ErrorMessage = "Getting Authorization Code was failed."
+                    };
+                }
+            }
+            else
+            {
+                return new AcquireAuthorizationCodeResult()
+                {
+                    Success = InteractiveResult.Cancel,
+                    AuthorizationCode = "",
+                    ErrorMessage = "The user canceled the authentication window."
+                };
+            }
+        }
+
         protected AcquireAccessTokenResult AcquireAccessToken(string PostBody, string EndPointUrl)
         {
             InteractiveResult result = InteractiveResult.Fail;

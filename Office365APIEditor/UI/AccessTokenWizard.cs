@@ -164,6 +164,9 @@ namespace Office365APIEditor
 
         private void button_Next_Click(object sender, EventArgs e)
         {
+            ValidateResult validateResult;
+            AcquireAccessTokenResult acquireAccessTokenResult;
+
             switch (currentPageIndex)
             {
                 case PageIndex.Page00_PortalSelection:
@@ -253,11 +256,11 @@ namespace Office365APIEditor
                         ClientSecret = textBox_Page03_ClientSecret.Text
                     };
 
-                    ValidateResult validateResult = v1WebAppUtil.Validate();
+                    validateResult = v1WebAppUtil.Validate();
 
                     if (validateResult.IsValid)
                     {
-                        AcquireAccessTokenResult acquireAccessTokenResult = v1WebAppUtil.AcquireAccessToken();
+                        acquireAccessTokenResult = v1WebAppUtil.AcquireAccessToken();
 
                         if (acquireAccessTokenResult.Success == InteractiveResult.Fail)
                         {
@@ -284,24 +287,38 @@ namespace Office365APIEditor
                     else
                     {
                         MessageBox.Show(string.Join(Environment.NewLine, validateResult.ErrorMessage), "Office365APIEditor");
-                    }
-                    
+                    }                    
 
                     break;
 
                 case PageIndex.Page04_V1NativeAppOptionForm:
                     // Option form for V1 auth endpoint Native App
 
-                    if (ValidateV1NativeAppParam())
+                    V1NativeAppUtil v1NativeAppUtil = new V1NativeAppUtil()
                     {
-                        string authorizationCode = AcquireV1NativeAppAuthorizationCode();
+                        TenantName = textBox_Page04_TenantName.Text,
+                        ClientID = textBox_Page04_ClientID.Text,
+                        RedirectUri = textBox_Page04_RedirectUri.Text,
+                        Resource = Util.ConvertResourceNameToResourceEnum(comboBox_Page04_Resource.SelectedItem.ToString())
+                    };
 
-                        if (authorizationCode == "")
+                    validateResult = v1NativeAppUtil.Validate();
+
+                    if (validateResult.IsValid)
+                    {
+                        acquireAccessTokenResult = v1NativeAppUtil.AcquireAccessToken();
+
+                        if (acquireAccessTokenResult.Success == InteractiveResult.Fail)
+                        {
+                            MessageBox.Show(acquireAccessTokenResult.ErrorMessage, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        else if (acquireAccessTokenResult.Success == InteractiveResult.Cancel)
                         {
                             return;
                         }
 
-                        TokenResponse tokenResponse = AcquireV1NativeAppAccessToken(authorizationCode);
+                        TokenResponse tokenResponse = acquireAccessTokenResult.Token;
 
                         if (tokenResponse != null)
                         {
@@ -313,6 +330,10 @@ namespace Office365APIEditor
                             Close();
                         }
                     }
+                    else
+                    {
+                        MessageBox.Show(string.Join(Environment.NewLine, validateResult.ErrorMessage), "Office365APIEditor");
+                    }                    
 
                     break;
 
@@ -438,81 +459,6 @@ namespace Office365APIEditor
         {
             DialogResult = DialogResult.Cancel;
         }
-
-        #region Code for V1 auth endpoint Native App
-
-        private bool ValidateV1NativeAppParam()
-        {
-            // Check the form for native app.
-
-            if (textBox_Page04_TenantName.Text == "")
-            {
-                MessageBox.Show("Enter the Tenant Name.", "Office365APIEditor");
-                return false;
-            }
-            else if (!textBox_Page04_TenantName.Text.EndsWith(".onmicrosoft.com"))
-            {
-                MessageBox.Show("Format of Tenant Name is invalid.\ne.g. contoso.onmicrosoft.com", "Office365APIEditor");
-                return false;
-            }
-            else if (!Util.IsValidUrl("https://login.windows.net/" + textBox_Page04_TenantName.Text))
-            {
-                MessageBox.Show("Format of Tenant Name is invalid.\ne.g. contoso.onmicrosoft.com", "Office365APIEditor");
-                return false;
-            }
-            else if (textBox_Page04_ClientID.Text == "")
-            {
-                MessageBox.Show("Enter the Client ID.", "Office365APIEditor");
-                return false;
-            }
-            else if (textBox_Page04_RedirectUri.Text == "")
-            {
-                MessageBox.Show("Enter the Redirect URL.", "Office365APIEditor");
-                return false;
-            }
-            else if (!Util.IsValidUrl(textBox_Page04_RedirectUri.Text))
-            {
-                MessageBox.Show("Format of Redirect URL is invalid.", "Office365APIEditor");
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        private string AcquireV1NativeAppAuthorizationCode()
-        {
-            string Code = "";
-
-            GetCodeForm getCodeForm = new GetCodeForm(textBox_Page04_ClientID.Text, textBox_Page04_RedirectUri.Text, Util.ConvertResourceNameToUri(comboBox_Page04_Resource.SelectedItem.ToString()));
-
-            if (getCodeForm.ShowDialog(out Code) == DialogResult.OK)
-            {
-                if (Code == "")
-                {
-                    MessageBox.Show("Getting Authorization Code was failed.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-
-            return Code;
-        }
-
-        private TokenResponse AcquireV1NativeAppAccessToken(string AuthorizationCode)
-        {
-            // Build a POST body.
-            string postBody = "grant_type=authorization_code" +
-                "&Resource=" + System.Web.HttpUtility.UrlEncode(Util.ConvertResourceNameToUri(comboBox_Page04_Resource.SelectedItem.ToString())) +
-                "&client_id=" + textBox_Page04_ClientID.Text +
-                "&code=" + AuthorizationCode +
-                "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(textBox_Page04_RedirectUri.Text);
-
-            string endPoint = "https://login.microsoftonline.com/" + textBox_Page04_TenantName.Text.Replace("@", ".") + "/oauth2/token";
-
-            return AcquireAccessToken(postBody, endPoint);
-        }
-
-        #endregion
 
         #region Code For V1 auth endpoint App Only Token by cert
 

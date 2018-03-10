@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Office365APIEditor.AccessTokenUtil
 {
-    class V1WebAppUtil : AccessTokenUtil
+    class V1NativeAppUtil : AccessTokenUtil
     {
+        public string TenantName { get; set; }
         public string ClientID { get; set; }
         public string RedirectUri { get; set; }
         public Resources Resource { get; set; }
-        public string ClientSecret { get; set; }
 
-        public V1WebAppUtil()
+        public V1NativeAppUtil()
         {
         }
 
@@ -22,6 +22,19 @@ namespace Office365APIEditor.AccessTokenUtil
 
             bool result = false;
             List<string> errorList = new List<string>();
+
+            if (TenantName == "")
+            {
+                errorList.Add("Enter the Tenant Name.");
+            }
+            else if (!TenantName.EndsWith(".onmicrosoft.com"))
+            {
+                errorList.Add("Format of Tenant Name is invalid.\ne.g. contoso.onmicrosoft.com");
+            }
+            else if (!Util.IsValidUrl("https://login.windows.net/" + TenantName))
+            {
+                errorList.Add("Format of Tenant Name is invalid.\ne.g. contoso.onmicrosoft.com");
+            }
 
             if (ClientID == "")
             {
@@ -35,11 +48,6 @@ namespace Office365APIEditor.AccessTokenUtil
             else if (!Util.IsValidUrl(RedirectUri))
             {
                 errorList.Add("Format of Redirect URL is invalid.");
-            }
-
-            if (ClientSecret == "")
-            {
-                errorList.Add("Enter the Client Secret.");
             }
 
             if (errorList.Count == 0)
@@ -91,13 +99,14 @@ namespace Office365APIEditor.AccessTokenUtil
         {
             // Build a POST body.
             string postBody = "grant_type=authorization_code" +
-                "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) +
+                "&Resource=" + System.Web.HttpUtility.UrlEncode(Util.ConvertResourceEnumToUri(Resource)) +
                 "&client_id=" + ClientID +
-                "&client_secret=" + System.Web.HttpUtility.UrlEncode(ClientSecret) +
                 "&code=" + AuthorizationCode +
-                "&resource=" + System.Web.HttpUtility.UrlEncode(Util.ConvertResourceEnumToUri(Resource));
+                "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri);
 
-            return AcquireAccessToken(postBody, "https://login.microsoftonline.com/common/oauth2/token");
+            string endPoint = "https://login.microsoftonline.com/" + TenantName.Replace("@", ".") + "/oauth2/token";
+
+            return AcquireAccessToken(postBody, endPoint);
         }
     }
 }
