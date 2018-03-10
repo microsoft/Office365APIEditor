@@ -8,8 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Office365APIEditor
 {
@@ -84,6 +86,26 @@ namespace Office365APIEditor
             return ConvertResourceNameToUri(ConvertResourceEnumToResourceName(Resource));
         }
 
+        public static T Deserialize<T>(string json)
+        {
+            T result;
+
+            using (var memoryStream = new MemoryStream())
+            {
+                byte[] jsonByteArray = Encoding.UTF8.GetBytes(json);
+
+                memoryStream.Write(jsonByteArray, 0, jsonByteArray.Length);
+                memoryStream.Seek(0, SeekOrigin.Begin);
+
+                using (var jsonReader = JsonReaderWriterFactory.CreateJsonReader(memoryStream, Encoding.UTF8, XmlDictionaryReaderQuotas.Max, null))
+                {
+                    var serializer = new DataContractJsonSerializer(typeof(T));
+                    result = (T)serializer.ReadObject(jsonReader);
+                }
+            }
+
+            return result;
+        }
         public static TokenResponse ConvertAuthenticationResultToTokenResponse(Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationResult value)
         {
             return new TokenResponse
