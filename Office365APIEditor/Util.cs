@@ -17,8 +17,7 @@ namespace Office365APIEditor
     {
         public static bool IsValidUrl(string StringUri)
         {
-            Uri temp;
-            return Uri.TryCreate(StringUri, UriKind.Absolute, out temp);
+            return Uri.TryCreate(StringUri, UriKind.Absolute, out Uri temp);
         }
 
         public static List<string> ResourceNames
@@ -195,13 +194,13 @@ namespace Office365APIEditor
             
             try
             {
-                ar = await pca.AcquireTokenSilentAsync(Office365APIEditorHelper.MailboxViewerScopes(), CurrentUser);
+                ar = await pca.AcquireTokenSilentAsync(Util.MailboxViewerScopes(), CurrentUser);
             }
             catch (Exception extemp)
             {
                 try
                 {
-                    ar = await pca.AcquireTokenAsync(Office365APIEditorHelper.MailboxViewerScopes(), CurrentUser, UIBehavior.ForceLogin, "");
+                    ar = await pca.AcquireTokenAsync(Util.MailboxViewerScopes(), CurrentUser, UIBehavior.ForceLogin, "");
                 }
                 catch (Exception ex)
                 {
@@ -238,6 +237,11 @@ namespace Office365APIEditor
             e.RequestMessage.SetHeader("X-AnchorMailbox", email);
             e.RequestMessage.SetHeader("Prefer", "outlook.timezone=\"" + System.TimeZoneInfo.Local.Id + "\"");
         }
+
+        public static string[] MailboxViewerScopes()
+        {
+            return new string[] { "offline_access https://outlook.office.com/mail.read https://outlook.office.com/contacts.read https://outlook.office.com/calendars.read" };
+        }
     }
 
     public enum Resources
@@ -246,5 +250,21 @@ namespace Office365APIEditor
         Outlook,
         Graph,
         Management
+    }
+
+    public struct FolderInfo
+    {
+        public string ID;
+        public FolderContentType Type;
+        public bool Expanded;
+    }
+
+    public enum FolderContentType
+    {
+        Message,
+        Contact,
+        Calendar,
+        DummyCalendarRoot,
+        MsgFolderRoot
     }
 }

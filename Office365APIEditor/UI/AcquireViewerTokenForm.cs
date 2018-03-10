@@ -38,7 +38,7 @@ namespace Office365APIEditor
 
             Cursor = Cursors.WaitCursor;
 
-            string[] scopes = Office365APIEditorHelper.MailboxViewerScopes();
+            string[] scopes = Util.MailboxViewerScopes();
 
             _pca = new PublicClientApplication(textBox_ClientID.Text);
 
