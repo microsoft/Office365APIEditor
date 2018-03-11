@@ -359,16 +359,31 @@ namespace Office365APIEditor
                 case PageIndex.Page06_V2WebAppOptionForm:
                     // Option form for V2 auth endpoint Web App
 
-                    if (ValidateV2WebAppParam())
+                    V2WebAppUtil v2WebAppUtil = new V2WebAppUtil()
                     {
-                        string authorizationCode = AcquireV2WebAppAuthorizationCode();
+                        ClientID = textBox_Page06_ClientID.Text,
+                        RedirectUri = textBox_Page06_RedirectUri.Text,
+                        Scopes = textBox_Page06_Scopes.Text,
+                        ClientSecret = textBox_Page06_ClientSecret.Text
+                    };
 
-                        if (authorizationCode == "")
+                    validateResult = v2WebAppUtil.Validate();
+
+                    if (validateResult.IsValid)
+                    {
+                        acquireAccessTokenResult = v2WebAppUtil.AcquireAccessToken();
+
+                        if (acquireAccessTokenResult.Success == InteractiveResult.Fail)
+                        {
+                            MessageBox.Show(acquireAccessTokenResult.ErrorMessage, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        else if (acquireAccessTokenResult.Success == InteractiveResult.Cancel)
                         {
                             return;
                         }
 
-                        TokenResponse tokenResponse = AcquireV2WebAppAccessToken(authorizationCode);
+                        TokenResponse tokenResponse = acquireAccessTokenResult.Token;
 
                         if (tokenResponse != null)
                         {
@@ -379,6 +394,10 @@ namespace Office365APIEditor
                             DialogResult = DialogResult.OK;
                             Close();
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show(string.Join(Environment.NewLine, validateResult.ErrorMessage), "Office365APIEditor");
                     }
 
                     break;
@@ -657,73 +676,6 @@ namespace Office365APIEditor
             {
                 textBox_Page06_Scopes.Text = scopes;
             }
-        }
-
-        private bool ValidateV2WebAppParam()
-        {
-            // Check the form for v2 web app.
-
-            if (textBox_Page06_ClientID.Text == "")
-            {
-                MessageBox.Show("Enter the Client ID.", "Office365APIEditor");
-                return false;
-            }
-            else if (textBox_Page06_RedirectUri.Text == "")
-            {
-                MessageBox.Show("Enter the Redirect URL.", "Office365APIEditor");
-                return false;
-            }
-            else if (!Util.IsValidUrl(textBox_Page06_RedirectUri.Text))
-            {
-                MessageBox.Show("Format of Redirect URL is invalid.", "Office365APIEditor");
-                return false;
-            }
-            else if (textBox_Page06_Scopes.Text == "")
-            {
-                MessageBox.Show("Enter the scopes.", "Office365APIEditor");
-                return false;
-            }
-            else if (textBox_Page06_ClientSecret.Text == "")
-            {
-                MessageBox.Show("Enter the Client Secret.", "Office365APIEditor");
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        private string AcquireV2WebAppAuthorizationCode()
-        {
-            string Code = "";
-
-            GetCodeForm getCodeForm = new GetCodeForm(textBox_Page06_ClientID.Text, textBox_Page06_RedirectUri.Text, textBox_Page06_Scopes.Text, true);
-
-            if (getCodeForm.ShowDialog(out Code) == DialogResult.OK)
-            {
-                if (Code == "")
-                {
-                    MessageBox.Show("Getting Authorization Code was failed.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-
-            return Code;
-        }
-
-        private TokenResponse AcquireV2WebAppAccessToken(string AuthorizationCode)
-        {
-            // Build a POST body.
-            string postBody = "grant_type=authorization_code" +
-                "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(textBox_Page06_RedirectUri.Text) +
-                "&client_id=" + textBox_Page06_ClientID.Text +
-                "&client_secret=" + System.Web.HttpUtility.UrlEncode(textBox_Page06_ClientSecret.Text) +
-                "&code=" + AuthorizationCode +
-                "&scope=" + textBox_Page06_Scopes.Text;
-
-            string endPoint = "https://login.microsoftonline.com/common/oauth2/v2.0/token";
-
-            return AcquireAccessToken(postBody, endPoint);
         }
 
         #endregion

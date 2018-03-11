@@ -121,6 +121,7 @@
     <Compile Include="AccessTokenUtil\AccessTokenUtil.cs" />
     <Compile Include="AccessTokenUtil\V1NativeAppUtil.cs" />
     <Compile Include="AccessTokenUtil\V1WebAppUtil.cs" />
+    <Compile Include="AccessTokenUtil\V2WebAppUtil.cs" />
     <Compile Include="UI\AccessTokenWizard.cs">
       <SubType>Form</SubType>
     </Compile>
