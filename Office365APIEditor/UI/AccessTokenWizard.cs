@@ -405,16 +405,30 @@ namespace Office365APIEditor
                 case PageIndex.Page07_V2MobileAppOptionForm:
                     // Option form for V2 auth endpoint Web App
 
-                    if (ValidateV2MobileAppParam())
+                    V2MobileAppUtil v2MobileAppUtil = new V2MobileAppUtil()
                     {
-                        string authorizationCode = AcquireV2MobileAppAuthorizationCode();
+                        ClientID = textBox_Page07_ClientID.Text,
+                        RedirectUri = textBox_Page07_RedirectUri.Text,
+                        Scopes = textBox_Page07_Scopes.Text
+                    };
 
-                        if (authorizationCode == "")
+                    validateResult = v2MobileAppUtil.Validate();
+
+                    if (validateResult.IsValid)
+                    {
+                        acquireAccessTokenResult = v2MobileAppUtil.AcquireAccessToken();
+
+                        if (acquireAccessTokenResult.Success == InteractiveResult.Fail)
+                        {
+                            MessageBox.Show(acquireAccessTokenResult.ErrorMessage, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        else if (acquireAccessTokenResult.Success == InteractiveResult.Cancel)
                         {
                             return;
                         }
 
-                        TokenResponse tokenResponse = AcquireV2MobileAppAccessToken(authorizationCode);
+                        TokenResponse tokenResponse = acquireAccessTokenResult.Token;
 
                         if (tokenResponse != null)
                         {
@@ -425,6 +439,10 @@ namespace Office365APIEditor
                             DialogResult = DialogResult.OK;
                             Close();
                         }
+                    }
+                    else
+                    {
+                        MessageBox.Show(string.Join(Environment.NewLine, validateResult.ErrorMessage), "Office365APIEditor");
                     }
 
                     break;
