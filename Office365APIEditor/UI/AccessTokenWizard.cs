@@ -35,7 +35,9 @@ namespace Office365APIEditor
             Page06_V2WebAppOptionForm = 6,
             Page07_V2MobileAppOptionForm = 7,
             Page08_V1AppOnlyByKeyOptionForm = 8,
-            Page09_V1AdminConsentOptionForm = 9
+            Page09_V1AdminConsentOptionForm = 9,
+            Page10_BuiltInAppOrBasicAuthSelection = 10,
+            Page11_BuiltInAppOptionForm = 11
         }
 
         public AccessTokenWizard()
@@ -58,7 +60,9 @@ namespace Office365APIEditor
                 panel_Page06,
                 panel_Page07,
                 panel_Page08,
-                panel_Page09
+                panel_Page09,
+                panel_Page10,
+                panel_Page11
             };
 
             previousPages = new List<PageIndex>();
@@ -186,10 +190,10 @@ namespace Office365APIEditor
                     }
                     else
                     {
+                        // The user has no application
+                        // Go to the next page.
                         // Create a return value and close this window.
-                        clientInfo = new ClientInformation(new TokenResponse(), AuthEndpoints.Basic, Resources.None, "", "", "", "");
-                        DialogResult = DialogResult.OK;
-                        Close();
+                        ShowPage(PageIndex.Page10_BuiltInAppOrBasicAuthSelection);
                     }
 
                     break;
@@ -484,6 +488,69 @@ namespace Office365APIEditor
                     }
                     break;
 
+                case PageIndex.Page10_BuiltInAppOrBasicAuthSelection:
+                    // Mode selection page for built-in app or basic auth.
+
+                    if (radioButton_Page10_BuiltInApp.Checked)
+                    {
+                        // Built-in app
+                        // Go to the next page.
+                        ShowPage(PageIndex.Page11_BuiltInAppOptionForm);
+                    }
+                    else
+                    {
+                        // Basic auth
+                        clientInfo = new ClientInformation(new TokenResponse(), AuthEndpoints.Basic, Resources.None, "", "", "", "");
+                        DialogResult = DialogResult.OK;
+                        Close();
+                    }
+                    break;
+
+                case PageIndex.Page11_BuiltInAppOptionForm:
+                    // Option form for the built-in app.
+                    
+                    V2MobileAppUtil builtInAppUtil = new V2MobileAppUtil()
+                    {
+                        ClientID = Properties.Settings.Default.BuiltInAppClientId,
+                        RedirectUri = Properties.Settings.Default.BuiltInAppRedirectUri,
+                        Scopes = textBox_Page11_Scopes.Text
+                    };
+
+                    validateResult = builtInAppUtil.Validate();
+
+                    if (validateResult.IsValid)
+                    {
+                        acquireAccessTokenResult = builtInAppUtil.AcquireAccessToken();
+
+                        if (acquireAccessTokenResult.Success == InteractiveResult.Fail)
+                        {
+                            MessageBox.Show(acquireAccessTokenResult.ErrorMessage, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        else if (acquireAccessTokenResult.Success == InteractiveResult.Cancel)
+                        {
+                            return;
+                        }
+
+                        TokenResponse tokenResponse = acquireAccessTokenResult.Token;
+
+                        if (tokenResponse != null)
+                        {
+                            SaveSettings();
+
+                            // Create a return value and close this window.
+                            clientInfo = new ClientInformation(tokenResponse, AuthEndpoints.OAuthV2, Resources.None, Properties.Settings.Default.BuiltInAppClientId, "", textBox_Page11_Scopes.Text, Properties.Settings.Default.BuiltInAppRedirectUri);
+                            DialogResult = DialogResult.OK;
+                            Close();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(string.Join(Environment.NewLine, validateResult.ErrorMessage), "Office365APIEditor");
+                    }
+
+                    break;
+
                 case PageIndex.None:
                 default:
                     break;
@@ -655,11 +722,10 @@ namespace Office365APIEditor
 
         private string AcquireV1AdminConsentAuthorizationCode()
         {
-            string Code = "";
 
             GetCodeForm getCodeForm = new GetCodeForm(textBox_Page09_ClientID.Text, textBox_Page09_RedirectUri.Text, Util.ConvertResourceNameToUri(comboBox_Page09_Resource.SelectedItem.ToString()), false, true);
 
-            if (getCodeForm.ShowDialog(out Code) == DialogResult.OK)
+            if (getCodeForm.ShowDialog(out string Code) == DialogResult.OK)
             {
                 if (Code == "")
                 {
@@ -676,7 +742,6 @@ namespace Office365APIEditor
 
         private void button_Page06_ScopeEditor_Click(object sender, EventArgs e)
         {
-            string scopes = "";
             string[] selectedScopes;
 
             if (textBox_Page06_Scopes.Text == "")
@@ -690,7 +755,7 @@ namespace Office365APIEditor
 
             ScopeEditorForm scopeEditor = new ScopeEditorForm(selectedScopes);
 
-            if (scopeEditor.ShowDialog(out scopes) == DialogResult.OK)
+            if (scopeEditor.ShowDialog(out string scopes) == DialogResult.OK)
             {
                 textBox_Page06_Scopes.Text = scopes;
             }
@@ -702,7 +767,6 @@ namespace Office365APIEditor
 
         private void button_Page07_ScopeEditor_Click(object sender, EventArgs e)
         {
-            string scopes = "";
             string[] selectedScopes;
 
             if (textBox_Page07_Scopes.Text == "")
@@ -716,61 +780,35 @@ namespace Office365APIEditor
 
             ScopeEditorForm scopeEditor = new ScopeEditorForm(selectedScopes);
 
-            if (scopeEditor.ShowDialog(out scopes) == DialogResult.OK)
+            if (scopeEditor.ShowDialog(out string scopes) == DialogResult.OK)
             {
                 textBox_Page07_Scopes.Text = scopes;
             }
         }
 
-        private bool ValidateV2MobileAppParam()
-        {
-            // Check the form for v2 mobile app.
+        #endregion
 
-            if (textBox_Page07_ClientID.Text == "")
+        #region Code for built-in App
+
+        private void button_Page11_ScopeEditor_Click(object sender, EventArgs e)
+        {
+            string[] selectedScopes;
+
+            if (textBox_Page11_Scopes.Text == "")
             {
-                MessageBox.Show("Enter the Client ID.", "Office365APIEditor");
-                return false;
-            }
-            else if (textBox_Page07_Scopes.Text == "")
-            {
-                MessageBox.Show("Enter the scopes.", "Office365APIEditor");
-                return false;
+                selectedScopes = null;
             }
             else
             {
-                return true;
+                selectedScopes = textBox_Page11_Scopes.Text.Split(' ');
             }
-        }
 
-        private string AcquireV2MobileAppAuthorizationCode()
-        {
-            string Code = "";
+            ScopeEditorForm scopeEditor = new ScopeEditorForm(selectedScopes);
 
-            GetCodeForm getCodeForm = new GetCodeForm(textBox_Page07_ClientID.Text, textBox_Page07_RedirectUri.Text, textBox_Page07_Scopes.Text, true);
-
-            if (getCodeForm.ShowDialog(out Code) == DialogResult.OK)
+            if (scopeEditor.ShowDialog(out string scopes) == DialogResult.OK)
             {
-                if (Code == "")
-                {
-                    MessageBox.Show("Getting Authorization Code was failed.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                textBox_Page11_Scopes.Text = scopes;
             }
-
-            return Code;
-        }
-
-        private TokenResponse AcquireV2MobileAppAccessToken(string AuthorizationCode)
-        {
-            // Build a POST body.
-            string postBody = "grant_type=authorization_code" +
-                "&redirect_uri=" + textBox_Page07_RedirectUri.Text +
-                "&client_id=" + textBox_Page07_ClientID.Text +
-                "&code=" + AuthorizationCode +
-                "&scope=" + textBox_Page07_Scopes.Text;
-
-            string endPoint = "https://login.microsoftonline.com/common/oauth2/v2.0/token";
-
-            return AcquireAccessToken(postBody, endPoint);
         }
 
         #endregion

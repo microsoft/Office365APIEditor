@@ -12,7 +12,7 @@ namespace Office365APIEditor.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.6.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -391,6 +391,42 @@ namespace Office365APIEditor.Properties {
             }
             set {
                 this["LastWebAppAppOnlyByKeyClientSecret"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastBuiltInAppScopes {
+            get {
+                return ((string)(this["LastBuiltInAppScopes"]));
+            }
+            set {
+                this["LastBuiltInAppScopes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("389b1b32-b5d5-43b2-bddc-84ce938d6737")]
+        public string BuiltInAppClientId {
+            get {
+                return ((string)(this["BuiltInAppClientId"]));
+            }
+            set {
+                this["BuiltInAppClientId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("urn:ietf:wg:oauth:2.0:oob")]
+        public string BuiltInAppRedirectUri {
+            get {
+                return ((string)(this["BuiltInAppRedirectUri"]));
+            }
+            set {
+                this["BuiltInAppRedirectUri"] = value;
             }
         }
     }

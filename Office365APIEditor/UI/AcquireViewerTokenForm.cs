@@ -36,18 +36,40 @@ namespace Office365APIEditor
                 return;
             }
 
+            await AcquireAccessTokenAsync(textBox_ClientID.Text);
+        }
+
+        private void AcquireViewerTokenForm_Load(object sender, EventArgs e)
+        {
+            linkLabel_Portal.Text = "Enter the Application ID of your application registered in Application Registration Portal as a mobile (native) application.";
+            int startIndex = linkLabel_Portal.Text.IndexOf("Application Registration Portal", 0, linkLabel_Portal.Text.Length);
+            linkLabel_Portal.Links.Add(startIndex, ("Application Registration Portal").Length, "https://apps.dev.microsoft.com/");
+        }
+
+        private void linkLabel_Portal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
+        }
+
+        private async void button_UseBuiltInApp_ClickAsync(object sender, EventArgs e)
+        {
+            await AcquireAccessTokenAsync(Properties.Settings.Default.BuiltInAppClientId);
+        }
+
+        private async System.Threading.Tasks.Task AcquireAccessTokenAsync(string ClientId)
+        {
             Cursor = Cursors.WaitCursor;
 
             string[] scopes = Util.MailboxViewerScopes();
 
-            _pca = new PublicClientApplication(textBox_ClientID.Text);
+            _pca = new PublicClientApplication(ClientId);
 
             StringBuilder stringBuilder = new StringBuilder();
 
             try
-            {                
+            {
                 stringBuilder.AppendLine("MSAL - AcquireTokenAsync");
-                stringBuilder.AppendLine("Application ID : " + textBox_ClientID.Text);
+                stringBuilder.AppendLine("Application ID : " + ClientId);
                 stringBuilder.AppendLine("Scope : " + string.Join(",", scopes));
 
                 _ar = await _pca.AcquireTokenAsync(scopes, "", UIBehavior.ForceLogin, "");
@@ -80,18 +102,6 @@ namespace Office365APIEditor
             }
 
             Util.WriteCustomLog("AcquireViewerTokenForm", stringBuilder.ToString());
-        }
-
-        private void AcquireViewerTokenForm_Load(object sender, EventArgs e)
-        {
-            linkLabel_Portal.Text = "Enter the Application ID of your application which registered in Application Registration Portal as a native application.";
-            int startIndex = linkLabel_Portal.Text.IndexOf("Application Registration Portal", 0, linkLabel_Portal.Text.Length);
-            linkLabel_Portal.Links.Add(startIndex, ("Application Registration Portal").Length, "https://apps.dev.microsoft.com/");
-        }
-
-        private void linkLabel_Portal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
         }
     }
 }

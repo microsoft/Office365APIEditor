@@ -218,7 +218,7 @@ namespace Office365APIEditor
             {
                 ar = await pca.AcquireTokenSilentAsync(Util.MailboxViewerScopes(), CurrentUser);
             }
-            catch (Exception extemp)
+            catch (Exception)
             {
                 try
                 {

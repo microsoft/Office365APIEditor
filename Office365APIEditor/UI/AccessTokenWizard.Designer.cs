@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccessTokenWizard));
             this.panel_Page00 = new System.Windows.Forms.Panel();
-            this.radioButton_Page00_BasicAuth = new System.Windows.Forms.RadioButton();
+            this.radioButton_Page00_BuiltInAppOrBasicAuth = new System.Windows.Forms.RadioButton();
             this.radioButton_Page00_AppRegistrationPortal = new System.Windows.Forms.RadioButton();
             this.radioButton_Page00_MicrosoftAzurePortal = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
@@ -124,6 +124,15 @@
             this.textBox_Page09_ClientID = new System.Windows.Forms.TextBox();
             this.textBox_Page09_RedirectUri = new System.Windows.Forms.TextBox();
             this.label38 = new System.Windows.Forms.Label();
+            this.panel_Page10 = new System.Windows.Forms.Panel();
+            this.radioButton_Page10_BasicAuth = new System.Windows.Forms.RadioButton();
+            this.radioButton_Page10_BuiltInApp = new System.Windows.Forms.RadioButton();
+            this.label28 = new System.Windows.Forms.Label();
+            this.panel_Page11 = new System.Windows.Forms.Panel();
+            this.label39 = new System.Windows.Forms.Label();
+            this.button_Page11_ScopeEditor = new System.Windows.Forms.Button();
+            this.textBox_Page11_Scopes = new System.Windows.Forms.TextBox();
+            this.label42 = new System.Windows.Forms.Label();
             this.panel_Page00.SuspendLayout();
             this.panel_Page01.SuspendLayout();
             this.panel_Page03.SuspendLayout();
@@ -134,11 +143,13 @@
             this.panel_Page07.SuspendLayout();
             this.panel_Page08.SuspendLayout();
             this.panel_Page09.SuspendLayout();
+            this.panel_Page10.SuspendLayout();
+            this.panel_Page11.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_Page00
             // 
-            this.panel_Page00.Controls.Add(this.radioButton_Page00_BasicAuth);
+            this.panel_Page00.Controls.Add(this.radioButton_Page00_BuiltInAppOrBasicAuth);
             this.panel_Page00.Controls.Add(this.radioButton_Page00_AppRegistrationPortal);
             this.panel_Page00.Controls.Add(this.radioButton_Page00_MicrosoftAzurePortal);
             this.panel_Page00.Controls.Add(this.label1);
@@ -148,16 +159,17 @@
             this.panel_Page00.TabIndex = 0;
             this.panel_Page00.Tag = "radioButton_Page00_MicrosoftAzurePortal";
             // 
-            // radioButton_Page00_BasicAuth
+            // radioButton_Page00_BuiltInAppOrBasicAuth
             // 
-            this.radioButton_Page00_BasicAuth.AutoSize = true;
-            this.radioButton_Page00_BasicAuth.Location = new System.Drawing.Point(18, 135);
-            this.radioButton_Page00_BasicAuth.Name = "radioButton_Page00_BasicAuth";
-            this.radioButton_Page00_BasicAuth.Size = new System.Drawing.Size(207, 30);
-            this.radioButton_Page00_BasicAuth.TabIndex = 3;
-            this.radioButton_Page00_BasicAuth.TabStop = true;
-            this.radioButton_Page00_BasicAuth.Text = "I have not registered the application.\r\nOffice365APIEditor will use basic auth.";
-            this.radioButton_Page00_BasicAuth.UseVisualStyleBackColor = true;
+            this.radioButton_Page00_BuiltInAppOrBasicAuth.AutoSize = true;
+            this.radioButton_Page00_BuiltInAppOrBasicAuth.Location = new System.Drawing.Point(18, 135);
+            this.radioButton_Page00_BuiltInAppOrBasicAuth.Name = "radioButton_Page00_BuiltInAppOrBasicAuth";
+            this.radioButton_Page00_BuiltInAppOrBasicAuth.Size = new System.Drawing.Size(324, 30);
+            this.radioButton_Page00_BuiltInAppOrBasicAuth.TabIndex = 3;
+            this.radioButton_Page00_BuiltInAppOrBasicAuth.TabStop = true;
+            this.radioButton_Page00_BuiltInAppOrBasicAuth.Text = "I have not registered the application.\r\nOffice365APIEditor will use the built-in " +
+    "application or basic auth.";
+            this.radioButton_Page00_BuiltInAppOrBasicAuth.UseVisualStyleBackColor = true;
             // 
             // radioButton_Page00_AppRegistrationPortal
             // 
@@ -1119,6 +1131,97 @@
             this.label38.TabIndex = 0;
             this.label38.Text = "Fill out the form.";
             // 
+            // panel_Page10
+            // 
+            this.panel_Page10.Controls.Add(this.radioButton_Page10_BasicAuth);
+            this.panel_Page10.Controls.Add(this.radioButton_Page10_BuiltInApp);
+            this.panel_Page10.Controls.Add(this.label28);
+            this.panel_Page10.Location = new System.Drawing.Point(429, 591);
+            this.panel_Page10.Name = "panel_Page10";
+            this.panel_Page10.Size = new System.Drawing.Size(400, 170);
+            this.panel_Page10.TabIndex = 103;
+            this.panel_Page10.Tag = "radioButton_Page02_V2Web";
+            // 
+            // radioButton_Page10_BasicAuth
+            // 
+            this.radioButton_Page10_BasicAuth.AutoSize = true;
+            this.radioButton_Page10_BasicAuth.Location = new System.Drawing.Point(18, 60);
+            this.radioButton_Page10_BasicAuth.Name = "radioButton_Page10_BasicAuth";
+            this.radioButton_Page10_BasicAuth.Size = new System.Drawing.Size(75, 17);
+            this.radioButton_Page10_BasicAuth.TabIndex = 2;
+            this.radioButton_Page10_BasicAuth.Text = "Basic auth";
+            this.radioButton_Page10_BasicAuth.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_Page10_BuiltInApp
+            // 
+            this.radioButton_Page10_BuiltInApp.AutoSize = true;
+            this.radioButton_Page10_BuiltInApp.Checked = true;
+            this.radioButton_Page10_BuiltInApp.Location = new System.Drawing.Point(18, 37);
+            this.radioButton_Page10_BuiltInApp.Name = "radioButton_Page10_BuiltInApp";
+            this.radioButton_Page10_BuiltInApp.Size = new System.Drawing.Size(202, 17);
+            this.radioButton_Page10_BuiltInApp.TabIndex = 1;
+            this.radioButton_Page10_BuiltInApp.TabStop = true;
+            this.radioButton_Page10_BuiltInApp.Text = "Office365APIEditor built-in application";
+            this.radioButton_Page10_BuiltInApp.UseVisualStyleBackColor = true;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(15, 10);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(137, 13);
+            this.label28.TabIndex = 0;
+            this.label28.Text = "Which do you want to use?";
+            // 
+            // panel_Page11
+            // 
+            this.panel_Page11.Controls.Add(this.label39);
+            this.panel_Page11.Controls.Add(this.button_Page11_ScopeEditor);
+            this.panel_Page11.Controls.Add(this.textBox_Page11_Scopes);
+            this.panel_Page11.Controls.Add(this.label42);
+            this.panel_Page11.Location = new System.Drawing.Point(835, 591);
+            this.panel_Page11.Name = "panel_Page11";
+            this.panel_Page11.Size = new System.Drawing.Size(400, 170);
+            this.panel_Page11.TabIndex = 49;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(15, 10);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(235, 13);
+            this.label39.TabIndex = 48;
+            this.label39.Text = "Select scopes you need for the Microsoft Graph.";
+            // 
+            // button_Page11_ScopeEditor
+            // 
+            this.button_Page11_ScopeEditor.Location = new System.Drawing.Point(102, 56);
+            this.button_Page11_ScopeEditor.Name = "button_Page11_ScopeEditor";
+            this.button_Page11_ScopeEditor.Size = new System.Drawing.Size(96, 23);
+            this.button_Page11_ScopeEditor.TabIndex = 4;
+            this.button_Page11_ScopeEditor.Text = "Scope editor...";
+            this.button_Page11_ScopeEditor.UseVisualStyleBackColor = true;
+            this.button_Page11_ScopeEditor.Click += new System.EventHandler(this.button_Page11_ScopeEditor_Click);
+            // 
+            // textBox_Page11_Scopes
+            // 
+            this.textBox_Page11_Scopes.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastBuiltInAppScopes", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Page11_Scopes.Location = new System.Drawing.Point(102, 32);
+            this.textBox_Page11_Scopes.Name = "textBox_Page11_Scopes";
+            this.textBox_Page11_Scopes.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page11_Scopes.TabIndex = 3;
+            this.textBox_Page11_Scopes.Text = global::Office365APIEditor.Properties.Settings.Default.LastBuiltInAppScopes;
+            // 
+            // label42
+            // 
+            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label42.Location = new System.Drawing.Point(3, 35);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(93, 13);
+            this.label42.TabIndex = 40;
+            this.label42.Text = "Scopes";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // AccessTokenWizard
             // 
             this.AcceptButton = this.button_Next;
@@ -1126,6 +1229,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_Cancel;
             this.ClientSize = new System.Drawing.Size(1243, 873);
+            this.Controls.Add(this.panel_Page11);
+            this.Controls.Add(this.panel_Page10);
             this.Controls.Add(this.panel_Page09);
             this.Controls.Add(this.panel_Page08);
             this.Controls.Add(this.panel_Page07);
@@ -1166,6 +1271,10 @@
             this.panel_Page08.PerformLayout();
             this.panel_Page09.ResumeLayout(false);
             this.panel_Page09.PerformLayout();
+            this.panel_Page10.ResumeLayout(false);
+            this.panel_Page10.PerformLayout();
+            this.panel_Page11.ResumeLayout(false);
+            this.panel_Page11.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1173,7 +1282,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel_Page00;
-        private System.Windows.Forms.RadioButton radioButton_Page00_BasicAuth;
+        private System.Windows.Forms.RadioButton radioButton_Page00_BuiltInAppOrBasicAuth;
         private System.Windows.Forms.RadioButton radioButton_Page00_AppRegistrationPortal;
         private System.Windows.Forms.RadioButton radioButton_Page00_MicrosoftAzurePortal;
         private System.Windows.Forms.Label label1;
@@ -1267,5 +1376,14 @@
         private System.Windows.Forms.TextBox textBox_Page09_RedirectUri;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.LinkLabel linkLabel_Page08_WebAppAppOnlyByKey;
+        private System.Windows.Forms.Panel panel_Page10;
+        private System.Windows.Forms.RadioButton radioButton_Page10_BasicAuth;
+        private System.Windows.Forms.RadioButton radioButton_Page10_BuiltInApp;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Panel panel_Page11;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Button button_Page11_ScopeEditor;
+        private System.Windows.Forms.TextBox textBox_Page11_Scopes;
+        private System.Windows.Forms.Label label42;
     }
 }

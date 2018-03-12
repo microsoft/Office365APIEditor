@@ -278,6 +278,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon.png" />
     <Content Include="image.ico" />
     <Content Include="Licenses\DynamicJson.txt" />
     <Content Include="Licenses\Microsoft.Identity.Client.txt" />

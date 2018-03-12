@@ -119,5 +119,14 @@
     <Setting Name="LastWebAppAppOnlyByKeyClientSecret" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="LastBuiltInAppScopes" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BuiltInAppClientId" Type="System.String" Scope="User">
+      <Value Profile="(Default)">389b1b32-b5d5-43b2-bddc-84ce938d6737</Value>
+    </Setting>
+    <Setting Name="BuiltInAppRedirectUri" Type="System.String" Scope="User">
+      <Value Profile="(Default)">urn:ietf:wg:oauth:2.0:oob</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

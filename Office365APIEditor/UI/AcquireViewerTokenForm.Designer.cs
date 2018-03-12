@@ -34,6 +34,7 @@
             this.button1_Cancel = new System.Windows.Forms.Button();
             this.linkLabel_Portal = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
+            this.button_UseBuiltInApp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox_ClientID
@@ -70,11 +71,11 @@
             this.linkLabel_Portal.AutoSize = true;
             this.linkLabel_Portal.Location = new System.Drawing.Point(12, 9);
             this.linkLabel_Portal.Name = "linkLabel_Portal";
-            this.linkLabel_Portal.Size = new System.Drawing.Size(555, 13);
+            this.linkLabel_Portal.Size = new System.Drawing.Size(563, 13);
             this.linkLabel_Portal.TabIndex = 4;
             this.linkLabel_Portal.TabStop = true;
-            this.linkLabel_Portal.Text = "Enter the Application ID of your application which registered in Application Regi" +
-    "stration Portal as a native application.";
+            this.linkLabel_Portal.Text = "Enter the Application ID of your application registered in Application Registrati" +
+    "on Portal as a mobile (native) application.";
             this.linkLabel_Portal.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Portal_LinkClicked);
             // 
             // label1
@@ -86,6 +87,16 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Application ID : ";
             // 
+            // button_UseBuiltInApp
+            // 
+            this.button_UseBuiltInApp.Location = new System.Drawing.Point(15, 66);
+            this.button_UseBuiltInApp.Name = "button_UseBuiltInApp";
+            this.button_UseBuiltInApp.Size = new System.Drawing.Size(171, 23);
+            this.button_UseBuiltInApp.TabIndex = 6;
+            this.button_UseBuiltInApp.Text = "Use the built-in application";
+            this.button_UseBuiltInApp.UseVisualStyleBackColor = true;
+            this.button_UseBuiltInApp.Click += new System.EventHandler(this.button_UseBuiltInApp_ClickAsync);
+            // 
             // AcquireViewerTokenForm
             // 
             this.AcceptButton = this.button_AcquireAccessToken;
@@ -93,6 +104,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button1_Cancel;
             this.ClientSize = new System.Drawing.Size(603, 101);
+            this.Controls.Add(this.button_UseBuiltInApp);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.linkLabel_Portal);
             this.Controls.Add(this.button1_Cancel);
@@ -116,5 +128,6 @@
         private System.Windows.Forms.Button button1_Cancel;
         private System.Windows.Forms.LinkLabel linkLabel_Portal;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button_UseBuiltInApp;
     }
 }
