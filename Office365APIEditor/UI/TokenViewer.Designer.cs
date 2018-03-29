@@ -174,6 +174,7 @@
             // 
             // saveFileDialog1
             // 
+            this.saveFileDialog1.FileName = "AccessToken.xml";
             this.saveFileDialog1.Filter = "XML (*.xml)|*.xml";
             // 
             // button_Import
