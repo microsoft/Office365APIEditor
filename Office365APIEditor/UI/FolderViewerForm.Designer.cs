@@ -142,6 +142,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FolderViewerForm";
             this.Text = "FolderViewerForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FolderViewerForm_FormClosing);
             this.Load += new System.EventHandler(this.FolderViewerForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

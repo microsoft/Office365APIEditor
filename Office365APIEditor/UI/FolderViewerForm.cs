@@ -25,6 +25,8 @@ namespace Office365APIEditor
 
         string currentId = "";
 
+        private bool isFormClosing = false;
+
         public FolderViewerForm(PublicClientApplication PCA, Microsoft.Identity.Client.IUser CurrentUser, FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
         {
             InitializeComponent();
@@ -120,6 +122,12 @@ namespace Office365APIEditor
                 default:
                     break;
             }
+        }
+
+        private void FolderViewerForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Change the flag to avoid unnecessary error message.
+            isFormClosing = true;
         }
 
         private void PrepareMessageItemListColumns()
@@ -260,9 +268,9 @@ namespace Office365APIEditor
             }
             catch (InvalidOperationException ex)
             {
-                if (ex.Message == "No row can be added to a DataGridView control that does not have columns. Columns must be added first.")
+                if (isFormClosing)
                 {
-                    // Because we added columns first, it seems that this window was closed.
+                    // It seems that this window was closed.
                     // Do nothing.
                 }
                 else
@@ -398,9 +406,9 @@ namespace Office365APIEditor
             }
             catch (InvalidOperationException ex)
             {
-                if (ex.Message == "No row can be added to a DataGridView control that does not have columns. Columns must be added first.")
+                if (isFormClosing)
                 {
-                    // Because we added columns first, it seems that this window was closed.
+                    // It seems that this window was closed.
                     // Do nothing.
                 }
                 else
