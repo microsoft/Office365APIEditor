@@ -23,16 +23,16 @@ You need the following to work with Office365APIEditor:
 - A subscription to Office 365 and an user account, or a Microsoft Account.
 - Version of the .NET Framework. Minimal requirement is .NET Framework 4.5.
 
-And you need the following to use OAuth with V1 endpoint. You can also use the App Only Token.
+You don't have to register your application in the Azure Active Directory or [Application Registration Portal](https://apps.dev.microsoft.com/) if you want to use the built-in application. If you want to use your own application and OAuth V1 endpoint, you need the following. You can use the App Only Token as well.
 
 - A subscriotion to Microsoft Azure which manages Azure Active Directory of your Office 365 tennant.
 - An application which was registered in Azure Active Directory ('Web Application' or 'Native Application').
 
-You need the following to use OAuth with V2 endpoint.
+We have some [tutorials](https://github.com/Microsoft/Office365APIEditor/tree/master/tutorials) explaining how to register your application in the Azure Active Directory.
+
+If you want to use your own application and OAuth V2 endpoint, you need the following.
 
 - An application which was registered in the [Application Registration Portal](https://apps.dev.microsoft.com/).
-
-If you have not registered your application, follow the [tutorial](/tutorials/How_to_register_a_V1_Web_application.md).
 
 ## Command-line switches
 
