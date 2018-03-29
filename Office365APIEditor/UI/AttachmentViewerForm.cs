@@ -2,10 +2,8 @@
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
 using Microsoft.Identity.Client;
-using Microsoft.OData.Client;
 using Microsoft.Office365.OutlookServices;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Office365APIEditor
@@ -71,9 +69,11 @@ namespace Office365APIEditor
                                 string name = attachment.Name;
                                 string id = attachment.Id;
                                 string contentType = attachment.ContentType;
-                                
-                                DataGridViewRow itemRow = new DataGridViewRow();
-                                itemRow.Tag = attachment.Id;
+
+                                DataGridViewRow itemRow = new DataGridViewRow
+                                {
+                                    Tag = attachment.Id
+                                };
                                 itemRow.CreateCells(dataGridView_AttachmentList, new object[] { name, id, contentType });
                                 // itemRow.ContextMenuStrip = contextMenuStrip_AttachmentList;
 

@@ -404,8 +404,10 @@ namespace Office365APIEditor
 
         private void button_ViewTokenInfo_Click(object sender, EventArgs e)
         {
-            TokenViewer tokenViewer = new TokenViewer(clientInfo.Token);
-            tokenViewer.Owner = this;
+            TokenViewer tokenViewer = new TokenViewer(clientInfo.Token)
+            {
+                Owner = this
+            };
             tokenViewer.ShowDialog();
         }
 
@@ -422,10 +424,11 @@ namespace Office365APIEditor
 
             // Build a POST body.
             string postBody = "";
-            Hashtable tempTable = new Hashtable();
-
-            tempTable["grant_type"] = "refresh_token";
-            tempTable["refresh_token"] = clientInfo.Token.refresh_token;
+            Hashtable tempTable = new Hashtable
+            {
+                ["grant_type"] = "refresh_token",
+                ["refresh_token"] = clientInfo.Token.refresh_token
+            };
 
             if (clientInfo.AuthType == AuthEndpoints.OAuthV1)
             {
@@ -664,12 +667,15 @@ namespace Office365APIEditor
 
             int indentCount = 0;
             int quoteCount = 0;
+            
+#pragma warning disable IDE0029 // Use coalesce expression
             var result = from c in Data
                          let quotes = (c == '"') ? quoteCount++ : quoteCount
                          let lineBreak = (c == ',' && quotes % 2 == 0) ? c + Environment.NewLine + string.Concat(Enumerable.Repeat(tabString, indentCount)) : null
                          let openChar = (c == '{' || c == '[') ? c + Environment.NewLine + string.Concat(Enumerable.Repeat(tabString, ++indentCount)) : c.ToString()
                          let closeChar = (c == '}' || c == ']') ? Environment.NewLine + string.Concat(Enumerable.Repeat(tabString, --indentCount)) + c : c.ToString()
                          select (lineBreak == null) ? (openChar.Length > 1) ? openChar : closeChar : lineBreak;
+#pragma warning restore IDE0029 // Use coalesce expression
 
             return string.Concat(result);
         }
@@ -823,10 +829,8 @@ namespace Office365APIEditor
 
         private void newAccessTokenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ClientInformation newClientInfo;
-
             AccessTokenWizard accessTokenWizard = new AccessTokenWizard();
-            if (accessTokenWizard.ShowDialog(out newClientInfo) == DialogResult.OK)
+            if (accessTokenWizard.ShowDialog(out ClientInformation newClientInfo) == DialogResult.OK)
             {
                 // Override current info.
                 clientInfo = newClientInfo;

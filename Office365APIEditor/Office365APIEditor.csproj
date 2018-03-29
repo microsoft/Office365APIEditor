@@ -123,6 +123,7 @@
     <Compile Include="AccessTokenUtil\V1WebAppUtil.cs" />
     <Compile Include="AccessTokenUtil\V2MobileAppUtil.cs" />
     <Compile Include="AccessTokenUtil\V2WebAppUtil.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="UI\AccessTokenWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,12 +161,6 @@
     </Compile>
     <Compile Include="UI\GetCodeForm.Designer.cs">
       <DependentUpon>GetCodeForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\LoggingOption.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\LoggingOption.Designer.cs">
-      <DependentUpon>LoggingOption.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\MailboxViewerForm.cs">
       <SubType>Form</SubType>
@@ -227,9 +222,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\GetCodeForm.resx">
       <DependentUpon>GetCodeForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\LoggingOption.resx">
-      <DependentUpon>LoggingOption.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MailboxViewerForm.resx">
       <DependentUpon>MailboxViewerForm.cs</DependentUpon>

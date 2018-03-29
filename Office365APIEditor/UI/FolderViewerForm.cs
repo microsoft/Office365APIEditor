@@ -222,12 +222,14 @@ namespace Office365APIEditor
                         string receivedDateTime = (item.ReceivedDateTime != null) ? item.ReceivedDateTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "";
                         string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
                         string sentDateTime = (item.SentDateTime != null) ? item.SentDateTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "";
-                        string subject = (item.Subject != null) ? item.Subject : "";
+                        string subject = item.Subject ?? "";
                         string sender = ""; // (item.Sender != null && item.Sender.EmailAddress != null && item.Sender.EmailAddress.Address != null) ? item.Sender.EmailAddress.Address : "";
                         string recipients = (item.ToRecipients != null) ? ConvertRecipientsListToString(item.ToRecipients) : "";
 
-                        DataGridViewRow itemRow = new DataGridViewRow();
-                        itemRow.Tag = item.Id;
+                        DataGridViewRow itemRow = new DataGridViewRow
+                        {
+                            Tag = item.Id
+                        };
                         itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, sender, recipients, receivedDateTime, createdDateTime, sentDateTime });
                         itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
 
@@ -355,12 +357,14 @@ namespace Office365APIEditor
                         string receivedDateTime = (item.ReceivedDateTime != null) ? item.ReceivedDateTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "";
                         string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
                         string sentDateTime = (item.SentDateTime != null) ? item.SentDateTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "";
-                        string subject = (item.Subject != null) ? item.Subject : "";
+                        string subject = item.Subject ?? "";
                         string sender = (item.Sender != null && item.Sender.EmailAddress != null && item.Sender.EmailAddress.Address != null) ? item.Sender.EmailAddress.Address : "";
                         string recipients = (item.ToRecipients != null) ? ConvertRecipientsListToString(item.ToRecipients) : "";
 
-                        DataGridViewRow itemRow = new DataGridViewRow();
-                        itemRow.Tag = item.Id;
+                        DataGridViewRow itemRow = new DataGridViewRow
+                        {
+                            Tag = item.Id
+                        };
                         itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, sender, recipients, receivedDateTime, createdDateTime, sentDateTime });
                         itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
 
@@ -440,11 +444,13 @@ namespace Office365APIEditor
                     {
                         // Add new row.
 
-                        string displayName = (item.DisplayName != null) ? item.DisplayName : "";
+                        string displayName = item.DisplayName ?? "";
                         string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
 
-                        DataGridViewRow itemRow = new DataGridViewRow();
-                        itemRow.Tag = item.Id;
+                        DataGridViewRow itemRow = new DataGridViewRow
+                        {
+                            Tag = item.Id
+                        };
                         itemRow.CreateCells(dataGridView_ItemList, new object[] { displayName, createdDateTime });
                         itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
 
@@ -500,7 +506,7 @@ namespace Office365APIEditor
                     {
                         // Add new row.
 
-                        string subject = (item.Subject != null) ? item.Subject : "";
+                        string subject = item.Subject ?? "";
                         string organizer = (item.Organizer != null && item.Organizer.EmailAddress != null && item.Organizer.EmailAddress.Address != null) ? item.Organizer.EmailAddress.Address : "";
                         string attendees = (item.Attendees != null) ? ConvertAttendeesListToString(item.Attendees) : "";
                         string start = (item.Start != null) ? item.Start.DateTime : "";
@@ -508,8 +514,10 @@ namespace Office365APIEditor
                         string isAllDay = (item.IsAllDay != null) ? item.IsAllDay.ToString() : "";
                         string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
 
-                        DataGridViewRow itemRow = new DataGridViewRow();
-                        itemRow.Tag = item.Id;
+                        DataGridViewRow itemRow = new DataGridViewRow
+                        {
+                            Tag = item.Id
+                        };
                         itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, organizer, attendees, start, end, isAllDay, createdDateTime });
                         itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
 
@@ -736,10 +744,12 @@ namespace Office365APIEditor
 
             object value = dataGridView_ItemProps.Rows[e.RowIndex].Cells[1].Value;
             string valueString = (value == null) ? "" : value.ToString();
-            
 
-            PropertyViewerForm propertyViewer = new PropertyViewerForm(nameString, valueString);
-            propertyViewer.Owner = this;
+
+            PropertyViewerForm propertyViewer = new PropertyViewerForm(nameString, valueString)
+            {
+                Owner = this
+            };
             propertyViewer.Show();
 
         }

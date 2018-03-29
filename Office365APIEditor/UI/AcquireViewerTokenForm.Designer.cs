@@ -48,7 +48,7 @@
             // 
             // button_AcquireAccessToken
             // 
-            this.button_AcquireAccessToken.Location = new System.Drawing.Point(435, 66);
+            this.button_AcquireAccessToken.Location = new System.Drawing.Point(489, 66);
             this.button_AcquireAccessToken.Name = "button_AcquireAccessToken";
             this.button_AcquireAccessToken.Size = new System.Drawing.Size(75, 23);
             this.button_AcquireAccessToken.TabIndex = 2;
@@ -59,7 +59,7 @@
             // button1_Cancel
             // 
             this.button1_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1_Cancel.Location = new System.Drawing.Point(516, 66);
+            this.button1_Cancel.Location = new System.Drawing.Point(570, 66);
             this.button1_Cancel.Name = "button1_Cancel";
             this.button1_Cancel.Size = new System.Drawing.Size(75, 23);
             this.button1_Cancel.TabIndex = 3;
@@ -103,7 +103,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button1_Cancel;
-            this.ClientSize = new System.Drawing.Size(603, 101);
+            this.ClientSize = new System.Drawing.Size(657, 101);
             this.Controls.Add(this.button_UseBuiltInApp);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.linkLabel_Portal);

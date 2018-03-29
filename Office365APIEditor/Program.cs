@@ -8,7 +8,6 @@ using System.Windows.Forms;
 
 namespace Office365APIEditor
 {
-
     class MyApplicationContext : ApplicationContext
     {
         public MyApplicationContext()

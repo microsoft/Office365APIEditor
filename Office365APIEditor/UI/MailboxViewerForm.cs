@@ -7,8 +7,6 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.OData.Client;
-using System.IO;
-using System.Text;
 
 namespace Office365APIEditor
 {
@@ -123,9 +121,11 @@ namespace Office365APIEditor
             var msgFolderRoot = await client.Me.MailFolders[topOfInformationStore.ParentFolderId].ExecuteAsync(); // MsgFolderRoot
             msgFolderRootId = msgFolderRoot.Id;
 
-            TreeNode node = new TreeNode("MsgFolderRoot");
-            node.Tag = new FolderInfo() { ID = msgFolderRoot.Id, Type = FolderContentType.MsgFolderRoot, Expanded = false };
-            node.ContextMenuStrip = contextMenuStrip_FolderTreeNode;
+            TreeNode node = new TreeNode("MsgFolderRoot")
+            {
+                Tag = new FolderInfo() { ID = msgFolderRoot.Id, Type = FolderContentType.MsgFolderRoot, Expanded = false },
+                ContextMenuStrip = contextMenuStrip_FolderTreeNode
+            };
             node.Nodes.Add(new TreeNode()); // Add a dummy node.
 
             msgFolderRootNode = node;
@@ -164,9 +164,11 @@ namespace Office365APIEditor
             {
                 foreach (var folder in childMailFolderResults.CurrentPage)
                 {
-                    TreeNode node = new TreeNode(folder.DisplayName);
-                    node.Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Message, Expanded = false };
-                    node.ContextMenuStrip = contextMenuStrip_FolderTreeNode;
+                    TreeNode node = new TreeNode(folder.DisplayName)
+                    {
+                        Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Message, Expanded = false },
+                        ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                    };
 
                     if (folder.ChildFolderCount >= 1)
                     {
@@ -237,9 +239,11 @@ namespace Office365APIEditor
             {
                 foreach (var folder in childContactFolderResults.CurrentPage)
                 {
-                    TreeNode node = new TreeNode(folder.DisplayName);
-                    node.Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Contact, Expanded = false };
-                    node.ContextMenuStrip = contextMenuStrip_FolderTreeNode;
+                    TreeNode node = new TreeNode(folder.DisplayName)
+                    {
+                        Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Contact, Expanded = false },
+                        ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                    };
                     node.Nodes.Add(new TreeNode()); // Add a dummy node.
 
                     if (treeView_Mailbox.InvokeRequired)
@@ -285,9 +289,11 @@ namespace Office365APIEditor
             // We can get all calendar folders in user's mailbox at once.
 
             // Make a dummy node.
-            TreeNode dummyCalendarRootNode = new TreeNode("Calendar Folders (Dummy Folder)");
-            dummyCalendarRootNode.Tag = new FolderInfo() { ID = "", Type = FolderContentType.DummyCalendarRoot };
-            dummyCalendarRootNode.ContextMenuStrip = null;
+            TreeNode dummyCalendarRootNode = new TreeNode("Calendar Folders (Dummy Folder)")
+            {
+                Tag = new FolderInfo() { ID = "", Type = FolderContentType.DummyCalendarRoot },
+                ContextMenuStrip = null
+            };
 
             if (treeView_Mailbox.InvokeRequired)
             {
@@ -312,9 +318,11 @@ namespace Office365APIEditor
                 {
                     foreach (var folder in calendarFolderResults.CurrentPage)
                     {
-                        TreeNode node = new TreeNode(folder.Name);
-                        node.Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Calendar };
-                        node.ContextMenuStrip = contextMenuStrip_FolderTreeNode;
+                        TreeNode node = new TreeNode(folder.Name)
+                        {
+                            Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Calendar },
+                            ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                        };
 
                         if (treeView_Mailbox.InvokeRequired)
                         {
@@ -640,8 +648,10 @@ namespace Office365APIEditor
             else
             {
                 requestFormOpened = true;
-                RequestForm requestForm = new RequestForm();
-                requestForm.Owner = this;
+                RequestForm requestForm = new RequestForm
+                {
+                    Owner = this
+                };
                 requestForm.Show();
             }
         }
@@ -664,8 +674,10 @@ namespace Office365APIEditor
 
         private void accessTokenViewerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TokenViewer tokenView = new TokenViewer();
-            tokenView.Owner = this;
+            TokenViewer tokenView = new TokenViewer
+            {
+                Owner = this
+            };
             tokenView.Show();
         }
     }

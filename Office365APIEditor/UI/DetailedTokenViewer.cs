@@ -163,9 +163,8 @@ namespace Office365APIEditor
         private string CalculateDate(string Seconds)
         {
             DateTime baseDate = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            long secondsAfterBase;
 
-            if (long.TryParse(Seconds, out secondsAfterBase))
+            if (long.TryParse(Seconds, out long secondsAfterBase))
             {
                 return baseDate.AddSeconds(secondsAfterBase).ToString("yyyy/MM/dd HH:mm:ss") + " (UTC)";
             }
