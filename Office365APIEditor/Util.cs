@@ -17,6 +17,31 @@ namespace Office365APIEditor
 {
     public static class Util
     {
+        // DefaultApplicationPath is used as the default log path.
+        public static string DefaultApplicationPath
+        {
+            get
+            {
+                if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+                {
+                    // ClickOnce scenario
+
+                    string result = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Office365APIEditor");
+                    
+                    if (!Directory.Exists(result))
+                    {
+                        Directory.CreateDirectory(result);
+                    }
+
+                    return result;
+                }
+                else
+                {
+                    return System.Windows.Forms.Application.StartupPath;
+                }
+            }
+        }
+
         public static bool IsValidUrl(string StringUri)
         {
             return Uri.TryCreate(StringUri, UriKind.Absolute, out Uri temp);

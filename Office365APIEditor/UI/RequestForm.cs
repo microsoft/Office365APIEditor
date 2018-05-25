@@ -52,7 +52,7 @@ namespace Office365APIEditor
             // Load Run History
             try
             {
-                string runHistoryFilePath = Path.Combine(Application.StartupPath, "RunHistory.xml");
+                string runHistoryFilePath = Path.Combine(Util.DefaultApplicationPath, "RunHistory.xml");
                 if (File.Exists(runHistoryFilePath))
                 {
                     using (FileStream stream = new FileStream(runHistoryFilePath, FileMode.Open))
@@ -877,7 +877,7 @@ namespace Office365APIEditor
 
             try
             {
-                FileStream stream = new FileStream(Path.Combine(Application.StartupPath, "RunHistory.xml"), FileMode.Create);
+                FileStream stream = new FileStream(Path.Combine(Util.DefaultApplicationPath, "RunHistory.xml"), FileMode.Create);
 
                 using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
                 {

@@ -23,7 +23,7 @@ namespace Office365APIEditor
             }
             else
             {
-                textBox_LogFolderPath.Text = Application.StartupPath;
+                textBox_LogFolderPath.Text = Util.DefaultApplicationPath;
             }
 
 
@@ -51,7 +51,7 @@ namespace Office365APIEditor
             }
             else
             {
-                folderBrowserDialog1.SelectedPath = Application.StartupPath;
+                folderBrowserDialog1.SelectedPath = Util.DefaultApplicationPath;
             }
 
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)

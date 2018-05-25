@@ -70,11 +70,11 @@ namespace Office365APIEditor
                 {
                     // Remove Run History file.
                     startupLog.AppendLine("The history file will be delete.");
-                    if (File.Exists(Path.Combine(Application.StartupPath, "RunHistory.xml")))
+                    if (File.Exists(Path.Combine(Util.DefaultApplicationPath, "RunHistory.xml")))
                     {
                         try
                         {
-                            File.Delete(Path.Combine(Application.StartupPath, "RunHistory.xml"));
+                            File.Delete(Path.Combine(Util.DefaultApplicationPath, "RunHistory.xml"));
                             startupLog.AppendLine("The history file was deleted.");
                         }
                         catch(Exception ex)
@@ -95,7 +95,7 @@ namespace Office365APIEditor
             if (!Directory.Exists(Properties.Settings.Default.LogFolderPath))
             {
                 startupLog.AppendLine("The log folder does not exist and will be reset.");
-                Properties.Settings.Default.LogFolderPath = Application.StartupPath;
+                Properties.Settings.Default.LogFolderPath = Util.DefaultApplicationPath;
                 Properties.Settings.Default.Save();
                 startupLog.AppendLine("New log folder : "+ Properties.Settings.Default.LogFolderPath);
                 startupLog.AppendLine("Setting was saved.");
@@ -120,7 +120,7 @@ namespace Office365APIEditor
                 // Write error log.
                 try
                 {
-                    string filePath = Path.Combine(Application.StartupPath, "Error.txt");
+                    string filePath = Path.Combine(Util.DefaultApplicationPath, "Error.txt");
 
                     using (StreamWriter writer = new StreamWriter(filePath, true))
                     {
