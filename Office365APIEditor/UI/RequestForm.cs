@@ -673,8 +673,9 @@ namespace Office365APIEditor
             // Show the picturebox in Preview tab if response is image.
             pictureBox_Photo.Visible = isImage;
 
-            // Show the CSV DataGridView tab if response is CSV.
+            // Show the CSV DataGridView and Link if response is CSV.
             dataGridView_CSV.Visible = isCSV;
+            linkLabel_SaveCsvResponse.Visible = isCSV;
 
             // Show appropriate tab
             if (isImage)
@@ -1198,8 +1199,43 @@ namespace Office365APIEditor
             // Show the picturebox in preview tab if response is image.
             pictureBox_Photo.Visible = isImage;
 
-            // Show the DataGridView in CSV tab if response is CSV.
+            // Show the DataGridView and Link in CSV tab if response is CSV.
             dataGridView_CSV.Visible = isCsv;
+            linkLabel_SaveCsvResponse.Visible = isCsv;
+        }
+
+        private void linkLabel_SaveCsvResponse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string fileName = "";
+
+            var contentDispositionHeader = Regex.Match(textBox_ResponseHeaders.Text, "attachment; filename=\".*\\.csv\"", RegexOptions.None);
+
+            if (contentDispositionHeader.Success == true)
+            {
+                fileName = contentDispositionHeader.Value.Substring(contentDispositionHeader.Value.IndexOf('"')).Trim('"');
+            }
+            else
+            {
+                fileName = "CsvResponse.csv";
+            }
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.FileName = fileName;
+            saveFileDialog.Filter = "CSV (*.csv)|*.csv|All Files (*.*)|*.*";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                fileName = saveFileDialog.FileName;
+
+                using (Stream csvStream = saveFileDialog.OpenFile())
+                {
+                    using (StreamWriter streamWriter = new StreamWriter(csvStream))
+                    {
+                        streamWriter.Write(originalJsonResponse);
+                    }
+                }
+            }
         }
     }
 }
