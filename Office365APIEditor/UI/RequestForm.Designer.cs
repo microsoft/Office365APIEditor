@@ -48,6 +48,8 @@
             this.textBox_ResponseHeaders = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.textBox_ResponseBody = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.pictureBox_Photo = new System.Windows.Forms.PictureBox();
             this.button_ViewTokenInfo = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -73,8 +75,8 @@
             this.radioButton_POST = new System.Windows.Forms.RadioButton();
             this.contextMenuStrip_RunHistory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showDetailsInMainPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.pictureBox_Photo = new System.Windows.Forms.PictureBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dataGridView_CSV = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -83,13 +85,15 @@
             this.tabControl_Response.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Photo)).BeginInit();
             this.tabControl_Request.SuspendLayout();
             this.tabPage_Headers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RequestHeader)).BeginInit();
             this.tabPage_Body.SuspendLayout();
             this.contextMenuStrip_RunHistory.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Photo)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_CSV)).BeginInit();
             this.SuspendLayout();
             // 
             // checkBox_Indent
@@ -258,6 +262,7 @@
             this.tabControl_Response.Controls.Add(this.tabPage1);
             this.tabControl_Response.Controls.Add(this.tabPage2);
             this.tabControl_Response.Controls.Add(this.tabPage3);
+            this.tabControl_Response.Controls.Add(this.tabPage4);
             this.tabControl_Response.Location = new System.Drawing.Point(22, 259);
             this.tabControl_Response.Name = "tabControl_Response";
             this.tabControl_Response.SelectedIndex = 0;
@@ -305,6 +310,27 @@
             this.textBox_ResponseBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox_ResponseBody.Size = new System.Drawing.Size(765, 194);
             this.textBox_ResponseBody.TabIndex = 7;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.pictureBox_Photo);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(771, 200);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Preview";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox_Photo
+            // 
+            this.pictureBox_Photo.Location = new System.Drawing.Point(6, 6);
+            this.pictureBox_Photo.Name = "pictureBox_Photo";
+            this.pictureBox_Photo.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox_Photo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox_Photo.TabIndex = 9;
+            this.pictureBox_Photo.TabStop = false;
+            this.pictureBox_Photo.Visible = false;
             // 
             // button_ViewTokenInfo
             // 
@@ -549,26 +575,28 @@
             this.showDetailsInMainPanelToolStripMenuItem.Text = "Show details in main panel";
             this.showDetailsInMainPanelToolStripMenuItem.Click += new System.EventHandler(this.showDetailsInMainPanelToolStripMenuItem_Click);
             // 
-            // tabPage3
+            // tabPage4
             // 
-            this.tabPage3.Controls.Add(this.pictureBox_Photo);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(771, 200);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Preview";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage4.Controls.Add(this.dataGridView_CSV);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(771, 200);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "CSV";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // pictureBox_Photo
+            // dataGridView_CSV
             // 
-            this.pictureBox_Photo.Location = new System.Drawing.Point(6, 6);
-            this.pictureBox_Photo.Name = "pictureBox_Photo";
-            this.pictureBox_Photo.Size = new System.Drawing.Size(128, 128);
-            this.pictureBox_Photo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox_Photo.TabIndex = 9;
-            this.pictureBox_Photo.TabStop = false;
-            this.pictureBox_Photo.Visible = false;
+            this.dataGridView_CSV.AllowUserToAddRows = false;
+            this.dataGridView_CSV.AllowUserToDeleteRows = false;
+            this.dataGridView_CSV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_CSV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView_CSV.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView_CSV.Name = "dataGridView_CSV";
+            this.dataGridView_CSV.ReadOnly = true;
+            this.dataGridView_CSV.Size = new System.Drawing.Size(765, 194);
+            this.dataGridView_CSV.TabIndex = 0;
             // 
             // RequestForm
             // 
@@ -596,15 +624,17 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Photo)).EndInit();
             this.tabControl_Request.ResumeLayout(false);
             this.tabPage_Headers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RequestHeader)).EndInit();
             this.tabPage_Body.ResumeLayout(false);
             this.tabPage_Body.PerformLayout();
             this.contextMenuStrip_RunHistory.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Photo)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_CSV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -656,5 +686,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn HeaderValueCol;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.PictureBox pictureBox_Photo;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.DataGridView dataGridView_CSV;
     }
 }

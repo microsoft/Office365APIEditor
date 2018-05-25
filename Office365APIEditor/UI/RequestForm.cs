@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -262,7 +263,11 @@ namespace Office365APIEditor
                 // Get a response and response stream.
                 var response = (HttpWebResponse)await request.GetResponseAsync();
 
-                if (response.ContentType.Contains("image/jpeg"))
+                bool isImageResponse = response.ContentType.Contains("image/jpeg");
+                string contentDisposition = response.Headers.Get("content-disposition");
+                bool isCsvResponse = (contentDisposition != null && Regex.IsMatch(contentDisposition, "^attachment; filename=\".*\\.csv\"$"));
+
+                if (isImageResponse)
                 {
                     // Response data is photo.
 
@@ -307,6 +312,55 @@ namespace Office365APIEditor
 
                     // Add Run History
                     AddRunHistory(request, originalRequestHeaders, originalRequestBody, response, base64Response);
+                }
+                else if (isCsvResponse)
+                {
+                    // Response data is CSV.
+
+                    string csvResponse = "";
+                    using (Stream responseStream = response.GetResponseStream())
+                    {
+                        StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                        csvResponse = reader.ReadToEnd();
+                    }
+
+                    // Create DataTable
+
+                    StringReader stringReader = new StringReader(csvResponse);
+                    string line = stringReader.ReadLine();
+
+                    DataTable dataTable = new DataTable();
+                    DataRow dataRow;
+
+                    if (line != "")
+                    {
+                        // Create headers.
+                        foreach (var column in line.Split(','))
+                        {
+                            dataTable.Columns.Add(column);
+                        }
+
+                        // Add rows.
+                        while ((line = stringReader.ReadLine()) != null)
+                        {
+                            dataRow = dataTable.NewRow();
+                            dataRow.ItemArray = line.Split(',');
+                            dataTable.Rows.Add(dataRow);
+                        }
+                    }
+                    
+                    // Logging
+                    if (checkBox_Logging.Checked)
+                    {
+                        WriteResponseLog(response, csvResponse);
+                    }
+
+                    // Display the results.
+                    DisplayResponse(CreateStatusCodeString(response), response.Headers, csvResponse);
+                    dataGridView_CSV.DataSource = dataTable;
+
+                    // Add Run History
+                    AddRunHistory(request, originalRequestHeaders, originalRequestBody, response, csvResponse);
                 }
                 else
                 {
@@ -584,6 +638,7 @@ namespace Office365APIEditor
             label_StatusCode.Text = StatusCode;
 
             bool isImage = false;
+            bool isCSV = false;
 
             // Header
             if (Headers == null)
@@ -601,6 +656,12 @@ namespace Office365APIEditor
                     {
                         isImage = true;
                     }
+
+                    string contentDisposition = Headers.GetValues("content-disposition")[0];
+                    if (Regex.IsMatch(contentDisposition, "^attachment; filename=\".*\\.csv\"$"))
+                    {
+                        isCSV = true;
+                    }
                 }
                 catch { }
             }
@@ -612,10 +673,17 @@ namespace Office365APIEditor
             // Show the picturebox in Preview tab if response is image.
             pictureBox_Photo.Visible = isImage;
 
+            // Show the CSV DataGridView tab if response is CSV.
+            dataGridView_CSV.Visible = isCSV;
+
             // Show appropriate tab
             if (isImage)
             {
                 tabControl_Response.SelectTab(2);
+            }
+            else if (isCSV)
+            {
+                tabControl_Response.SelectTab(3);
             }
             else
             {
@@ -1060,11 +1128,14 @@ namespace Office365APIEditor
             textBox_ResponseHeaders.Text = runInfo.ResponseHeader.Replace("\n", Environment.NewLine);
 
             bool isImage = false;
+            bool isCsv = false;
 
             if (textBox_ResponseHeaders.Text.Contains("Content-Type: image/jpeg"))
             {
                 isImage = true;
             }
+
+            isCsv = Regex.Match(textBox_ResponseHeaders.Text, "attachment; filename=\".*\\.csv\"", RegexOptions.None).Success;
 
             originalJsonResponse = runInfo.ResponseBody;
             indentedJsonResponse = "";
@@ -1085,6 +1156,38 @@ namespace Office365APIEditor
                 // Show Preview tab
                 tabControl_Response.SelectTab(2);
             }
+            else if (isCsv)
+            {
+                // Create DataTable
+
+                StringReader stringReader = new StringReader(originalJsonResponse);
+                string line = stringReader.ReadLine();
+
+                DataTable dataTable = new DataTable();
+                DataRow dataRow;
+
+                if (line != "")
+                {
+                    // Create headers.
+                    foreach (var column in line.Split(','))
+                    {
+                        dataTable.Columns.Add(column);
+                    }
+
+                    // Add rows.
+                    while ((line = stringReader.ReadLine()) != null)
+                    {
+                        dataRow = dataTable.NewRow();
+                        dataRow.ItemArray = line.Split(',');
+                        dataTable.Rows.Add(dataRow);
+                    }
+                }
+
+                dataGridView_CSV.DataSource = dataTable;
+
+                // Show CSV tab
+                tabControl_Response.SelectTab(3);
+            }
             else
             {
                 // Show Body tab
@@ -1094,6 +1197,9 @@ namespace Office365APIEditor
 
             // Show the picturebox in preview tab if response is image.
             pictureBox_Photo.Visible = isImage;
+
+            // Show the DataGridView in CSV tab if response is CSV.
+            dataGridView_CSV.Visible = isCsv;
         }
     }
 }
