@@ -3,6 +3,7 @@
 
 using System;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Windows.Forms;
 
@@ -50,10 +51,11 @@ namespace Office365APIEditor.AccessTokenUtil
             TokenResponse token = null;
             string errorMessage = "";
 
-            System.Net.WebRequest request = System.Net.WebRequest.Create(EndPointUrl);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(EndPointUrl);
 
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
+            request.UserAgent = Util.CustomUserAgent;
 
             try
             {
@@ -64,7 +66,7 @@ namespace Office365APIEditor.AccessTokenUtil
                     streamWriter.Close();
                 }
 
-                System.Net.WebResponse response = request.GetResponse();
+                WebResponse response = request.GetResponse();
                 using (Stream responseStream = response.GetResponseStream())
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.Default);
@@ -74,9 +76,9 @@ namespace Office365APIEditor.AccessTokenUtil
                     token = Util.Deserialize<TokenResponse>(jsonResponse);
                 }
             }
-            catch (System.Net.WebException ex)
+            catch (WebException ex)
             {
-                System.Net.WebResponse response = ex.Response;
+                WebResponse response = ex.Response;
                 using (Stream responseStream = response.GetResponseStream())
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.Default);

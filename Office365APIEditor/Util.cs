@@ -289,6 +289,28 @@ namespace Office365APIEditor
         {
             return new string[] { "offline_access https://outlook.office.com/mail.read https://outlook.office.com/contacts.read https://outlook.office.com/calendars.read" };
         }
+
+        public static string CustomUserAgent
+        {
+            get
+            {
+                // Custom UserAgent is a preview feature.
+                // We don't change all of UserAgent because we don't want to use urlmon.dll or ActiveX to change UserAgent of WebBrowser control.
+
+                if (Properties.Settings.Default.CustomUserAgentMode == 0)
+                {
+                    return "";
+                }
+                else if (Properties.Settings.Default.CustomUserAgentMode == 1)
+                {
+                    return Properties.Settings.Default.CustomUserAgent;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
     }
 
     public enum Resources

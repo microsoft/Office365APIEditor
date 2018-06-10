@@ -39,7 +39,14 @@
             this.textBox_LogFolderPath = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox_AllowAutoRedirect = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox_CustomUserAgent = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBox_CustomUserAgentStyle = new System.Windows.Forms.ComboBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button_LogFolderPathBrowse
@@ -64,7 +71,7 @@
             // button_Cancel
             // 
             this.button_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_Cancel.Location = new System.Drawing.Point(333, 154);
+            this.button_Cancel.Location = new System.Drawing.Point(333, 258);
             this.button_Cancel.Name = "button_Cancel";
             this.button_Cancel.Size = new System.Drawing.Size(75, 23);
             this.button_Cancel.TabIndex = 20;
@@ -73,7 +80,7 @@
             // 
             // button_OK
             // 
-            this.button_OK.Location = new System.Drawing.Point(252, 154);
+            this.button_OK.Location = new System.Drawing.Point(252, 258);
             this.button_OK.Name = "button_OK";
             this.button_OK.Size = new System.Drawing.Size(75, 23);
             this.button_OK.TabIndex = 19;
@@ -131,13 +138,72 @@
             this.checkBox_AllowAutoRedirect.Text = "Allow auto redirect";
             this.checkBox_AllowAutoRedirect.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 49);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 13);
+            this.label2.TabIndex = 69;
+            this.label2.Text = "UserAgent value : ";
+            // 
+            // textBox_CustomUserAgent
+            // 
+            this.textBox_CustomUserAgent.Location = new System.Drawing.Point(107, 46);
+            this.textBox_CustomUserAgent.Name = "textBox_CustomUserAgent";
+            this.textBox_CustomUserAgent.Size = new System.Drawing.Size(275, 20);
+            this.textBox_CustomUserAgent.TabIndex = 70;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 22);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(39, 13);
+            this.label3.TabIndex = 71;
+            this.label3.Text = "Style : ";
+            // 
+            // comboBox_CustomUserAgentStyle
+            // 
+            this.comboBox_CustomUserAgentStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_CustomUserAgentStyle.FormattingEnabled = true;
+            this.comboBox_CustomUserAgentStyle.Location = new System.Drawing.Point(107, 19);
+            this.comboBox_CustomUserAgentStyle.Name = "comboBox_CustomUserAgentStyle";
+            this.comboBox_CustomUserAgentStyle.Size = new System.Drawing.Size(275, 21);
+            this.comboBox_CustomUserAgentStyle.TabIndex = 72;
+            this.comboBox_CustomUserAgentStyle.SelectedIndexChanged += new System.EventHandler(this.comboBox_CustomUserAgentStyle_SelectedIndexChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.comboBox_CustomUserAgentStyle);
+            this.groupBox2.Controls.Add(this.textBox_CustomUserAgent);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Location = new System.Drawing.Point(15, 151);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(393, 101);
+            this.groupBox2.TabIndex = 73;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "UserAgent format";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 78);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(132, 13);
+            this.label4.TabIndex = 73;
+            this.label4.Text = "* This is a preview feature.";
+            // 
             // RequestFormOptionForm
             // 
             this.AcceptButton = this.button_OK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_Cancel;
-            this.ClientSize = new System.Drawing.Size(414, 190);
+            this.ClientSize = new System.Drawing.Size(414, 291);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.checkBox_AllowAutoRedirect);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBox_LogFolderPath);
@@ -154,6 +220,8 @@
             this.Load += new System.EventHandler(this.RequestFormOptionForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,5 +239,11 @@
         private System.Windows.Forms.TextBox textBox_LogFolderPath;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox checkBox_AllowAutoRedirect;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox_CustomUserAgent;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBox_CustomUserAgentStyle;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label4;
     }
 }

@@ -429,5 +429,29 @@ namespace Office365APIEditor.Properties {
                 this["BuiltInAppRedirectUri"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Office365APIEditor")]
+        public string CustomUserAgent {
+            get {
+                return ((string)(this["CustomUserAgent"]));
+            }
+            set {
+                this["CustomUserAgent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CustomUserAgentMode {
+            get {
+                return ((int)(this["CustomUserAgentMode"]));
+            }
+            set {
+                this["CustomUserAgentMode"] = value;
+            }
+        }
     }
 }

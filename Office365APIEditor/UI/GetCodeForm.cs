@@ -18,46 +18,6 @@ namespace Office365APIEditor
         public GetCodeForm(string ClientID, string RedirectUri, string ResourceOrScopeUri, bool IsV2 = false, string TenantName = "")
         {
             InternalInitialization(ClientID, RedirectUri, ResourceOrScopeUri, IsV2, TenantName, false);
-
-            //InitializeComponent();
-
-            //redirectUrl = RedirectUri;
-
-            //// Build an URL of sign-in page.
-
-            //string endPoint = "https://login.microsoftonline.com/";
-
-            //if (TenantName == "")
-            //{
-            //    endPoint += "common/oauth2";
-            //}
-            //else
-            //{
-            //    endPoint += TenantName.Replace("@", ".") + "/oauth2";
-            //}
-
-            //if (IsV2 == true)
-            //{
-            //    endPoint += "/v2.0";
-            //    authenticationUrl = endPoint + "/authorize?" +
-            //        "response_type=code" +
-            //        "&client_id=" + ClientID +
-            //        "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) +
-            //        "&scope=" + System.Web.HttpUtility.UrlEncode(ResourceOrScopeUri) +
-            //        "&response_mode=query" + 
-            //        "&prompt=login";
-            //}
-            //else
-            //{
-            //    authenticationUrl = endPoint + "/authorize?" +
-            //        "resource=" + System.Web.HttpUtility.UrlEncode(ResourceOrScopeUri) +
-            //        "&response_type=code" +
-            //        "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) +
-            //        "&client_id=" + ClientID + 
-            //        "&prompt=login";
-            //}
-
-            //webBrowser1.DocumentTitleChanged += new EventHandler(webBrowser1_DocumentTitleChanged);
         }
 
         public GetCodeForm(string ClientID, string RedirectUri, string ResourceOrScopeUri, bool IsV2, bool AdminConsent)

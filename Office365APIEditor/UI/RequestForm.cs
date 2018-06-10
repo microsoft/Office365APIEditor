@@ -131,6 +131,7 @@ namespace Office365APIEditor
 
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(textBox_Request.Text);
             request.AllowAutoRedirect = Properties.Settings.Default.AllowAutoRedirect;
+            request.UserAgent = Util.CustomUserAgent;
             request.ContentType = "application/json";
             // ((HttpWebRequest)request).Accept = "application/json;odata.metadata=full;odata.streaming=true";
             // TODO: implement "Accept Header Editor"
@@ -518,10 +519,11 @@ namespace Office365APIEditor
             }
             byte[] postDataBytes = Encoding.ASCII.GetBytes(postBody);
 
-            WebRequest request = WebRequest.Create(endPoint + "token/");
+            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(endPoint + "token/");
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = postDataBytes.Length;
+            request.UserAgent = Util.CustomUserAgent;
 
             try
             {

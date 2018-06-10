@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -837,10 +838,11 @@ namespace Office365APIEditor
         {
             TokenResponse result = null;
 
-            System.Net.WebRequest request = System.Net.WebRequest.Create(EndPointUrl);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(EndPointUrl);
 
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
+            request.UserAgent = Util.CustomUserAgent;
 
             try
             {
@@ -851,7 +853,7 @@ namespace Office365APIEditor
                     streamWriter.Close();
                 }
 
-                System.Net.WebResponse response = request.GetResponse();
+                WebResponse response = request.GetResponse();
                 using (Stream responseStream = response.GetResponseStream())
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.Default);
@@ -861,9 +863,9 @@ namespace Office365APIEditor
                     result = Deserialize<TokenResponse>(jsonResponse);
                 }
             }
-            catch (System.Net.WebException ex)
+            catch (WebException ex)
             {
-                System.Net.WebResponse response = ex.Response;
+                WebResponse response = ex.Response;
                 using (Stream responseStream = response.GetResponseStream())
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.Default);
@@ -878,7 +880,6 @@ namespace Office365APIEditor
             }
 
             return result;
-
         }
 
         public static T Deserialize<T>(string json)

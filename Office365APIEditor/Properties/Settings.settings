@@ -128,5 +128,11 @@
     <Setting Name="BuiltInAppRedirectUri" Type="System.String" Scope="User">
       <Value Profile="(Default)">urn:ietf:wg:oauth:2.0:oob</Value>
     </Setting>
+    <Setting Name="CustomUserAgent" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Office365APIEditor</Value>
+    </Setting>
+    <Setting Name="CustomUserAgentMode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

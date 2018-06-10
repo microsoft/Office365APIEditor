@@ -111,7 +111,7 @@ namespace Office365APIEditor
                 (eventSender, eventArgs) => RequestLogger(eventSender, eventArgs));
             client.Context.ReceivingResponse += new EventHandler<ReceivingResponseEventArgs>(
                 (eventSender, eventArgs) => RequestLogger(eventSender, eventArgs));
-
+            
             var inbox = await client.Me.MailFolders["Inbox"].ExecuteAsync(); // Inbox
             inboxId = inbox.Id;
             

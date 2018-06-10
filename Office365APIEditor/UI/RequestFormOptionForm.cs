@@ -41,6 +41,32 @@ namespace Office365APIEditor
             }
 
             checkBox_AllowAutoRedirect.Checked = Properties.Settings.Default.AllowAutoRedirect;
+
+            comboBox_CustomUserAgentStyle.Items.Add("Use system default UserAgent");
+            comboBox_CustomUserAgentStyle.Items.Add("Use custom UserAgent");
+            //comboBox_CustomUserAgentStyle.Items.Add("Add custom UserAgent value as prefix");
+            //comboBox_CustomUserAgentStyle.Items.Add("Add custom UserAgent value as suffix");
+            
+            if (Properties.Settings.Default.CustomUserAgentMode == 0)
+            {
+                comboBox_CustomUserAgentStyle.SelectedIndex = 0;
+                textBox_CustomUserAgent.Enabled = false;
+            }
+            else
+            {
+                if (Properties.Settings.Default.CustomUserAgentMode >= comboBox_CustomUserAgentStyle.Items.Count)
+                {
+                    comboBox_CustomUserAgentStyle.SelectedIndex = 0;
+                    textBox_CustomUserAgent.Enabled = false;
+                }
+                else
+                {
+                    comboBox_CustomUserAgentStyle.SelectedIndex = Properties.Settings.Default.CustomUserAgentMode;
+                    textBox_CustomUserAgent.Enabled = true;
+                }
+            }
+
+            textBox_CustomUserAgent.Text = Properties.Settings.Default.CustomUserAgent;
         }
 
         private void button_LogFolderPathBrowse_Click(object sender, EventArgs e)
@@ -60,9 +86,39 @@ namespace Office365APIEditor
             }
         }
 
+        private void comboBox_CustomUserAgentStyle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBox_CustomUserAgent.Enabled = (comboBox_CustomUserAgentStyle.SelectedIndex != 0);
+        }
+
+        private bool ValidateValues()
+        {
+            // Check all settings before closing this window.
+
+            bool result = false;
+
+            if (System.IO.Directory.Exists(textBox_LogFolderPath.Text))
+            {
+                if (textBox_CustomUserAgent.Enabled == true && string.IsNullOrEmpty(textBox_CustomUserAgent.Text))
+                {
+                    MessageBox.Show("Enter the UserAgnet.", "Office365APIEditor");
+                }
+                else
+                {
+                    result = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show("The specified log folder path is not existing.", "Office365APIEditor");
+            }
+
+            return result;
+        }
+
         private void button_OK_Click(object sender, EventArgs e)
         {
-            if (System.IO.Directory.Exists(textBox_LogFolderPath.Text))
+            if (ValidateValues() == true)
             {
                 // Save settings.
                 Properties.Settings.Default.LogFolderPath = textBox_LogFolderPath.Text;
@@ -76,14 +132,17 @@ namespace Office365APIEditor
                 }
 
                 Properties.Settings.Default.AllowAutoRedirect = checkBox_AllowAutoRedirect.Checked;
+
+                Properties.Settings.Default.CustomUserAgentMode = comboBox_CustomUserAgentStyle.SelectedIndex;
+                if (comboBox_CustomUserAgentStyle.SelectedIndex != 0)
+                {
+                    Properties.Settings.Default.CustomUserAgent = textBox_CustomUserAgent.Text;
+                }
+
                 Properties.Settings.Default.Save();
 
                 DialogResult = DialogResult.OK;
                 Close();
-            }
-            else
-            {
-                MessageBox.Show("The specified log folder path is not existing.", "Office365APIEditor");
             }
         }
     }
