@@ -70,13 +70,13 @@ namespace Office365APIEditor.ViewerHelper
             }
         }
 
-        public async Task<List<ICalendar>> GetCalendarFoldersAsync()
+        public async Task<List<Calendar>> GetCalendarFoldersAsync()
         {
             // Get all calendar folders in the mailbox.
 
             client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
 
-            List<ICalendar> result = new List<ICalendar>();
+            List<Calendar> result = new List<Calendar>();
 
             try
             {
@@ -109,6 +109,94 @@ namespace Office365APIEditor.ViewerHelper
                 return result;
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<List<MailFolder>> GetAllChildMailFolderAsync(string FolderId)
+        {
+            // Get all MailFolders in the specified folder.
+
+            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
+
+            List<MailFolder> result = new List<MailFolder>();
+
+            try
+            {
+                var childMailFolderResults = await client.Me.MailFolders[FolderId].ChildFolders
+                    .OrderBy(m => m.DisplayName)
+                    .Take(100)
+                    .Select(m => new { m.Id, m.DisplayName, m.ChildFolderCount })
+                    .ExecuteAsync();
+
+                bool morePages = false;
+
+                do
+                {
+                    foreach (var folder in childMailFolderResults.CurrentPage)
+                    {
+                        result.Add(new MailFolder() { Id = folder.Id, DisplayName = folder.DisplayName, ChildFolderCount = folder.ChildFolderCount });
+                    }
+
+                    if (childMailFolderResults.MorePagesAvailable)
+                    {
+                        morePages = true;
+                        childMailFolderResults = await childMailFolderResults.GetNextPageAsync();
+                    }
+                    else
+                    {
+                        morePages = false;
+                    }
+                } while (morePages);
+
+                return result;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<List<ContactFolder>> GetAllChildContactFolderAsync(string FolderId)
+        {
+            // Get all contact folders in the specified folder.
+
+            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
+
+            List<ContactFolder> result = new List<ContactFolder>();
+
+            try
+            {
+                var childContactFolderResults = await client.Me.ContactFolders[FolderId].ChildFolders
+                    .OrderBy(f => f.DisplayName)
+                    .Take(100)
+                    .Select(f => new { f.Id, f.DisplayName })
+                    .ExecuteAsync();
+
+                bool morePages = false;
+
+                do
+                {
+                    foreach (var folder in childContactFolderResults.CurrentPage)
+                    {
+                        result.Add(new ContactFolder() { Id = folder.Id, DisplayName = folder.DisplayName });
+                    }
+
+                    if (childContactFolderResults.MorePagesAvailable)
+                    {
+                        morePages = true;
+                        childContactFolderResults = await childContactFolderResults.GetNextPageAsync();
+                    }
+                    else
+                    {
+                        morePages = false;
+                    }
+                } while (morePages);
+
+                return result;
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }

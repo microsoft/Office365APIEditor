@@ -118,45 +118,28 @@ namespace Office365APIEditor
             }
         }
 
-        private async void GetChildMailFolders(string FolderId, TreeNode FolderNode)
+        private async void PrepareChildMailFolders(string FolderId, TreeNode FolderNode)
         {
-            var childMailFolderResults = await client.Me.MailFolders[FolderId].ChildFolders
-                .OrderBy(m => m.DisplayName)
-                .Take(50)
-                .Select(m => new { m.Id, m.DisplayName, m.ChildFolderCount })
-                .ExecuteAsync();
+            // Get all child MailFolder of specified folder, and add them to the tree.
 
-            bool morePages = false;
+            var childMailFolders = await viewerHelper.GetAllChildMailFolderAsync(FolderId);
 
-            do
+            foreach (var folder in childMailFolders)
             {
-                foreach (var folder in childMailFolderResults.CurrentPage)
+                TreeNode node = new TreeNode(folder.DisplayName)
                 {
-                    TreeNode node = new TreeNode(folder.DisplayName)
-                    {
-                        Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Message, Expanded = false },
-                        ContextMenuStrip = contextMenuStrip_FolderTreeNode
-                    };
+                    Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Message, Expanded = false },
+                    ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                };
 
-                    if (folder.ChildFolderCount >= 1)
-                    {
-                        node.Nodes.Add(new TreeNode()); // Add a dummy node.
-                    }
-                                        
-                    if (treeView_Mailbox.InvokeRequired)
-                    {
-                        treeView_Mailbox.Invoke(new MethodInvoker(delegate {
-                            FolderNode.Nodes.Add(node);
-                            if (expandingNodeHasDummyNode)
-                            {
-                                // Remove a dummy node.
-                                FolderNode.Nodes[0].Remove();
-                                expandingNodeHasDummyNode = false;
-                            }
-                        }));
-                    }
-                    else
-                    {
+                if (folder.ChildFolderCount >= 1)
+                {
+                    node.Nodes.Add(new TreeNode()); // Add a dummy node.
+                }
+
+                if (treeView_Mailbox.InvokeRequired)
+                {
+                    treeView_Mailbox.Invoke(new MethodInvoker(delegate {
                         FolderNode.Nodes.Add(node);
                         if (expandingNodeHasDummyNode)
                         {
@@ -164,34 +147,28 @@ namespace Office365APIEditor
                             FolderNode.Nodes[0].Remove();
                             expandingNodeHasDummyNode = false;
                         }
-                    }
-                }
-
-                if (childMailFolderResults.MorePagesAvailable)
-                {
-                    morePages = true;
-                    childMailFolderResults = await childMailFolderResults.GetNextPageAsync();
+                    }));
                 }
                 else
                 {
-                    morePages = false;
+                    FolderNode.Nodes.Add(node);
+                    if (expandingNodeHasDummyNode)
+                    {
+                        // Remove a dummy node.
+                        FolderNode.Nodes[0].Remove();
+                        expandingNodeHasDummyNode = false;
+                    }
                 }
-            } while (morePages);
+            }
         }
         
-        private async void GetChildContactFolders(string FolderId, TreeNode FolderNode)
+        private async void PrepareChildContactFolders(string FolderId, TreeNode FolderNode)
         {
-            FolderInfo folderInfo = (FolderInfo)FolderNode.Tag;
+            // Get all child contact folders of specified folder, and add them to the tree.
 
-            var childContactFolderResults = await client.Me.ContactFolders[FolderId].ChildFolders
-                .OrderBy(f => f.DisplayName)
-                .Take(50)
-                .Select(f => new { f.Id, f.DisplayName })
-                .ExecuteAsync();
+            var childContactFolders = await viewerHelper.GetAllChildContactFolderAsync(FolderId);
 
-            bool morePages = false;
-
-            if (childContactFolderResults.CurrentPage.Count == 0)
+            if (childContactFolders.Count == 0)
             {
                 if (expandingNodeHasDummyNode)
                 {
@@ -203,31 +180,18 @@ namespace Office365APIEditor
                 return;
             }
 
-            do
+            foreach (var folder in childContactFolders)
             {
-                foreach (var folder in childContactFolderResults.CurrentPage)
+                TreeNode node = new TreeNode(folder.DisplayName)
                 {
-                    TreeNode node = new TreeNode(folder.DisplayName)
-                    {
-                        Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Contact, Expanded = false },
-                        ContextMenuStrip = contextMenuStrip_FolderTreeNode
-                    };
-                    node.Nodes.Add(new TreeNode()); // Add a dummy node.
+                    Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Contact, Expanded = false },
+                    ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                };
+                node.Nodes.Add(new TreeNode()); // Add a dummy node.
 
-                    if (treeView_Mailbox.InvokeRequired)
-                    {
-                        treeView_Mailbox.Invoke(new MethodInvoker(delegate {
-                            FolderNode.Nodes.Add(node);
-                            if (expandingNodeHasDummyNode)
-                            {
-                                // Remove a dummy node.
-                                FolderNode.Nodes[0].Remove();
-                                expandingNodeHasDummyNode = false;
-                            }
-                        }));
-                    }
-                    else
-                    {
+                if (treeView_Mailbox.InvokeRequired)
+                {
+                    treeView_Mailbox.Invoke(new MethodInvoker(delegate {
                         FolderNode.Nodes.Add(node);
                         if (expandingNodeHasDummyNode)
                         {
@@ -235,19 +199,19 @@ namespace Office365APIEditor
                             FolderNode.Nodes[0].Remove();
                             expandingNodeHasDummyNode = false;
                         }
-                    }
-                }
-
-                if (childContactFolderResults.MorePagesAvailable)
-                {
-                    morePages = true;
-                    childContactFolderResults = await childContactFolderResults.GetNextPageAsync();
+                    }));
                 }
                 else
                 {
-                    morePages = false;
+                    FolderNode.Nodes.Add(node);
+                    if (expandingNodeHasDummyNode)
+                    {
+                        // Remove a dummy node.
+                        FolderNode.Nodes[0].Remove();
+                        expandingNodeHasDummyNode = false;
+                    }
                 }
-            } while (morePages);
+            }
         }
 
         private async void PrepareCalendarFolders()
@@ -563,8 +527,8 @@ namespace Office365APIEditor
             {
                 expandingNodeHasDummyNode = true;
 
-                GetChildMailFolders(folderInfo.ID, e.Node);
-                GetChildContactFolders(folderInfo.ID, e.Node);
+                PrepareChildMailFolders(folderInfo.ID, e.Node);
+                PrepareChildContactFolders(folderInfo.ID, e.Node);
 
                 folderInfo.Expanded = true;
                 e.Node.Tag = folderInfo;
