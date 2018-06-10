@@ -232,7 +232,7 @@ namespace Office365APIEditor
             }
         }
 
-        public static async Task<string> GetAccessToken(PublicClientApplication pca, Microsoft.Identity.Client.IUser CurrentUser)
+        public static async Task<string> GetAccessTokenAsync(PublicClientApplication pca, Microsoft.Identity.Client.IUser CurrentUser)
         {
             // Acquire access token.
             // This method is designed for GetOutlookServiceClient(), so if you need new OutlookServiceClient and new Access Token, you should use GetOutlookServiceClient().
@@ -258,11 +258,11 @@ namespace Office365APIEditor
             return ar.AccessToken;
         }
 
-        public static async Task<OutlookServicesClient> GetOutlookServiceClient(PublicClientApplication pca, Microsoft.Identity.Client.IUser CurrentUser)
+        public static async Task<OutlookServicesClient> GetOutlookServiceClientAsync(PublicClientApplication pca, Microsoft.Identity.Client.IUser CurrentUser)
         {
             // Acquire access token again.
 
-            string token = await Util.GetAccessToken(pca, CurrentUser);
+            string token = await Util.GetAccessTokenAsync(pca, CurrentUser);
 
             OutlookServicesClient newClient = new OutlookServicesClient(new Uri("https://outlook.office.com/api/v2.0"),
                 () =>
@@ -279,7 +279,7 @@ namespace Office365APIEditor
             return newClient;
         }
 
-        private static void InsertHeaders(object sender, SendingRequest2EventArgs e, string email)
+        public static void InsertHeaders(object sender, SendingRequest2EventArgs e, string email)
         {
             e.RequestMessage.SetHeader("X-AnchorMailbox", email);
             e.RequestMessage.SetHeader("Prefer", "outlook.timezone=\"" + System.TimeZoneInfo.Local.Id + "\"");

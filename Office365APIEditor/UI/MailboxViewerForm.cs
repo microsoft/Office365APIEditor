@@ -73,7 +73,7 @@ namespace Office365APIEditor
                     });
                 
                 client.Context.SendingRequest2 += new EventHandler<SendingRequest2EventArgs>(
-                    (eventSender, eventArgs) => InsertXAnchorMailboxHeader(eventSender, eventArgs, currentUser.DisplayableId));
+                    (eventSender, eventArgs) => Util.InsertHeaders(eventSender, eventArgs, currentUser.DisplayableId));
 
                 // Get the root folder.
                 GetRootFolder();
@@ -89,11 +89,6 @@ namespace Office365APIEditor
 
                 return false;
             }
-        }
-
-        private void InsertXAnchorMailboxHeader(object sender, SendingRequest2EventArgs e, string email)
-        {
-            e.RequestMessage.SetHeader("X-AnchorMailbox", email);
         }
 
         private async void GetRootFolder()
@@ -354,7 +349,7 @@ namespace Office365APIEditor
         private async void treeView_Mailbox_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // Get new OutlookServiceClient.
-            client = await Util.GetOutlookServiceClient(pca, currentUser);
+            client = await Util.GetOutlookServiceClientAsync(pca, currentUser);
             if (client == null)
             {
                 MessageBox.Show("Acquiring access token failed.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);

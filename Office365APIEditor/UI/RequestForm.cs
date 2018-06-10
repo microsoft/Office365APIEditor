@@ -1221,10 +1221,11 @@ namespace Office365APIEditor
                 fileName = "CsvResponse.csv";
             }
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-
-            saveFileDialog.FileName = fileName;
-            saveFileDialog.Filter = "CSV (*.csv)|*.csv|All Files (*.*)|*.*";
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                FileName = fileName,
+                Filter = "CSV (*.csv)|*.csv|All Files (*.*)|*.*"
+            };
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {

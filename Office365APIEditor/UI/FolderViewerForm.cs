@@ -48,7 +48,7 @@ namespace Office365APIEditor
                 Text = FolderContentType.Message.ToString() + " items in " + targetFolderDisplayName;
             }
             
-            client = await Util.GetOutlookServiceClient(pca, currentUser);
+            client = await Util.GetOutlookServiceClientAsync(pca, currentUser);
 
             if (client == null)
             {
@@ -62,7 +62,7 @@ namespace Office365APIEditor
                     PrepareMessageItemListColumns();
 
                     // Get items.
-                    if (await GetMessageItems() == false)
+                    if (await GetMessageItemsAsync() == false)
                     {
                         if (MessageBox.Show("TotalItemCount of this folder is not 0 but getting items of this folder was failed.\r\nDo you want to retry getting items as Contact item?", "Office365APIEditor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
@@ -285,13 +285,13 @@ namespace Office365APIEditor
             }
         }
 
-        private async Task<bool> GetMessageItems()
+        private async Task<bool> GetMessageItemsAsync()
         {
-            return await GetMessageItems(targetFolder.ID);
+            return await GetMessageItemsAsync(targetFolder.ID);
         }
 
         // GetMessageItems for the non-root folders.
-        private async Task<bool> GetMessageItems(string TargetFolderID)
+        private async Task<bool> GetMessageItemsAsync(string TargetFolderID)
         {
             // Return false if TotalItemCount is not 0 and we could not get items.
             bool succeed = false;
@@ -666,7 +666,7 @@ namespace Office365APIEditor
 
             try
             {
-                string accessToken = await Util.GetAccessToken(pca, currentUser);
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
                 string result = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
                 var jsonResult = DynamicJson.Parse(result);
 

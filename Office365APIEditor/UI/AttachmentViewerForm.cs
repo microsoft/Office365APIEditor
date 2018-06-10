@@ -34,7 +34,7 @@ namespace Office365APIEditor
         {
             Text = "Attachments for '" + targetItemSubject + "'";
 
-            client = await Util.GetOutlookServiceClient(pca, currentUser);
+            client = await Util.GetOutlookServiceClientAsync(pca, currentUser);
 
             if (client == null)
             {
