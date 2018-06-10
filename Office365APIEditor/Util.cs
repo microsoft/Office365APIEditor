@@ -258,7 +258,7 @@ namespace Office365APIEditor
             return ar.AccessToken;
         }
 
-        public static async Task<OutlookServicesClient> GetOutlookServiceClientAsync(PublicClientApplication pca, Microsoft.Identity.Client.IUser CurrentUser)
+        public static async Task<OutlookServicesClient> GetOutlookServicesClientAsync(PublicClientApplication pca, Microsoft.Identity.Client.IUser CurrentUser)
         {
             // Acquire access token again.
 

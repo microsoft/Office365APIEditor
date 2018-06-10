@@ -15,15 +15,10 @@ namespace Office365APIEditor
         PublicClientApplication pca;
         AuthenticationResult ar;
         OutlookServicesClient client;
+        ViewerHelper.ViewerHelper viewerHelper;
 
         // Current user's info.
         Microsoft.Identity.Client.IUser currentUser;
-
-        string inboxId;
-        string topOfInformationStoreId;
-        string msgFolderRootId;
-
-        TreeNode msgFolderRootNode;
 
         bool doubleClicked = false;
 
@@ -75,11 +70,13 @@ namespace Office365APIEditor
                 client.Context.SendingRequest2 += new EventHandler<SendingRequest2EventArgs>(
                     (eventSender, eventArgs) => Util.InsertHeaders(eventSender, eventArgs, currentUser.DisplayableId));
 
+                viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
+
                 // Get the root folder.
-                GetRootFolder();
+                PrepareMsgFolderRoot();
                 
                 // Get CalendarFolders (Calendars)
-                GetCalendarFolders();
+                PrepareCalendarFolders();
 
                 return true;
             }
@@ -91,58 +88,34 @@ namespace Office365APIEditor
             }
         }
 
-        private async void GetRootFolder()
+        private async void PrepareMsgFolderRoot()
         {
-            // https://outlook.office.com/api/v1.0/me/RootFolder/?$select=ParentFolderId
+            // Get MsgFolderRoot and add it to the tree.
 
-            // Get the folder ID of the parent folder of parent folder of Inbox.
-            // It's MsgFolderRoot.
-
-            // We can't get the Top of Information Store folder directly.
-            // Following operation is available with v1.0 only.
-            // https://outlook.office.com/api/v1.0/me/RootFolder
-
-            client.Context.BuildingRequest += new EventHandler<BuildingRequestEventArgs>(
-                (eventSender, eventArgs) => RequestLogger(eventSender, eventArgs));
-            client.Context.ReceivingResponse += new EventHandler<ReceivingResponseEventArgs>(
-                (eventSender, eventArgs) => RequestLogger(eventSender, eventArgs));
-            
-            var inbox = await client.Me.MailFolders["Inbox"].ExecuteAsync(); // Inbox
-            inboxId = inbox.Id;
-            
-            var topOfInformationStore = await client.Me.MailFolders[inbox.ParentFolderId].ExecuteAsync(); // Top of information store
-            topOfInformationStoreId = topOfInformationStore.Id;
-
-            var msgFolderRoot = await client.Me.MailFolders[topOfInformationStore.ParentFolderId].ExecuteAsync(); // MsgFolderRoot
-            msgFolderRootId = msgFolderRoot.Id;
-
-            TreeNode node = new TreeNode("MsgFolderRoot")
+            try
             {
-                Tag = new FolderInfo() { ID = msgFolderRoot.Id, Type = FolderContentType.MsgFolderRoot, Expanded = false },
-                ContextMenuStrip = contextMenuStrip_FolderTreeNode
-            };
-            node.Nodes.Add(new TreeNode()); // Add a dummy node.
+                var msgFolderRoot = await viewerHelper.GetMsgFolderRootAsync();
 
-            msgFolderRootNode = node;
+                TreeNode node = new TreeNode("MsgFolderRoot")
+                {
+                    Tag = new FolderInfo() { ID = msgFolderRoot.Id, Type = FolderContentType.MsgFolderRoot, Expanded = false },
+                    ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                };
+                node.Nodes.Add(new TreeNode()); // Add a dummy node.
 
-            if (treeView_Mailbox.InvokeRequired)
-            {
-                treeView_Mailbox.Invoke(new MethodInvoker(delegate { treeView_Mailbox.Nodes.Add(node); }));
+                if (treeView_Mailbox.InvokeRequired)
+                {
+                    treeView_Mailbox.Invoke(new MethodInvoker(delegate { treeView_Mailbox.Nodes.Add(node); }));
+                }
+                else
+                {
+                    treeView_Mailbox.Nodes.Add(node);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                treeView_Mailbox.Nodes.Add(node);
+                MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void RequestLogger(object eventSender, ReceivingResponseEventArgs eventArgs)
-        {
-            eventArgs.ResponseMessage.ToString();
-        }
-
-        private void RequestLogger(object eventSender, BuildingRequestEventArgs eventArgs)
-        {
-            eventArgs.ToString();
         }
 
         private async void GetChildMailFolders(string FolderId, TreeNode FolderNode)
@@ -277,7 +250,7 @@ namespace Office365APIEditor
             } while (morePages);
         }
 
-        private async void GetCalendarFolders()
+        private async void PrepareCalendarFolders()
         {
             // Calendar object has no ParentID or ChildFolders.
             // So we use DummyCalendarRoot node as a parent folder of calendar folders.
@@ -299,57 +272,38 @@ namespace Office365APIEditor
                 treeView_Mailbox.Nodes.Add(dummyCalendarRootNode);
             }
 
-            var calendarFolderResults = await client.Me.Calendars
-                .OrderBy(c => c.Name)
-                .Take(50)
-                .Select(c => new { c.Id, c.Name })
-                .ExecuteAsync();
-
-            bool morePages = false;
-
-            do
+            try
             {
-                try
+                var calendars = await viewerHelper.GetCalendarFoldersAsync();
+
+                foreach (var calendar in calendars)
                 {
-                    foreach (var folder in calendarFolderResults.CurrentPage)
+                    TreeNode node = new TreeNode(calendar.Name)
                     {
-                        TreeNode node = new TreeNode(folder.Name)
-                        {
-                            Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Calendar },
-                            ContextMenuStrip = contextMenuStrip_FolderTreeNode
-                        };
+                        Tag = new FolderInfo() { ID = calendar.Id, Type = FolderContentType.Calendar },
+                        ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                    };
 
-                        if (treeView_Mailbox.InvokeRequired)
-                        {
-                            treeView_Mailbox.Invoke(new MethodInvoker(delegate { dummyCalendarRootNode.Nodes.Add(node); }));
-                        }
-                        else
-                        {
-                            dummyCalendarRootNode.Nodes.Add(node);
-                        }
-                    }
-
-                    if (calendarFolderResults.MorePagesAvailable)
+                    if (treeView_Mailbox.InvokeRequired)
                     {
-                        morePages = true;
-                        calendarFolderResults = calendarFolderResults.GetNextPageAsync().Result;
+                        treeView_Mailbox.Invoke(new MethodInvoker(delegate { dummyCalendarRootNode.Nodes.Add(node); }));
                     }
                     else
                     {
-                        morePages = false;
+                        dummyCalendarRootNode.Nodes.Add(node);
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            } while (morePages);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void treeView_Mailbox_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // Get new OutlookServiceClient.
-            client = await Util.GetOutlookServiceClientAsync(pca, currentUser);
+            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
             if (client == null)
             {
                 MessageBox.Show("Acquiring access token failed.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);

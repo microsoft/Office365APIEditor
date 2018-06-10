@@ -225,6 +225,7 @@
       <DependentUpon>TokenViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
+    <Compile Include="ViewerHelper\ViewerHelper.cs" />
     <EmbeddedResource Include="UI\AccessTokenWizard.resx">
       <DependentUpon>AccessTokenWizard.cs</DependentUpon>
     </EmbeddedResource>

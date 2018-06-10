@@ -92,4 +92,6 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.MailboxViewerForm.GetCalendarFolderProps(System.String,System.String)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.RequestForm.button_RefreshToken_Click(System.Object,System.EventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.RequestForm.linkLabel_SaveCsvResponse_LinkClicked(System.Object,System.Windows.Forms.LinkLabelLinkClickedEventArgs)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.MailboxViewerForm.PrepareMsgFolderRoot")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.MailboxViewerForm.PrepareCalendarFolders")]
 
