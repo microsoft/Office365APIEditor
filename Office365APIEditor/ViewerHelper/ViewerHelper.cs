@@ -83,6 +83,7 @@ namespace Office365APIEditor.ViewerHelper
                 var calendarFolderResults = await client.Me.Calendars
                 .OrderBy(c => c.Name)
                 .Take(100)
+                .Select(c => new { c.Id, c.Name })
                 .ExecuteAsync();
 
                 bool morePages = false;
@@ -91,7 +92,7 @@ namespace Office365APIEditor.ViewerHelper
                 {
                     foreach (var folder in calendarFolderResults.CurrentPage)
                     {
-                        result.Add(folder);
+                        result.Add(new Calendar() { Id = folder.Id, Name = folder.Name });
                     }
 
                     if (calendarFolderResults.MorePagesAvailable)
