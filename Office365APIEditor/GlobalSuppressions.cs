@@ -96,4 +96,6 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.MailboxViewerForm.PrepareCalendarFolders")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.MailboxViewerForm.PrepareChildMailFolders(System.String,System.Windows.Forms.TreeNode)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.MailboxViewerForm.PrepareChildContactFolders(System.String,System.Windows.Forms.TreeNode)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.MailboxViewerForm.GetCalendarFolderProps(System.String)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.MailboxViewerForm.GetContactFolderProps(System.String)")]
 

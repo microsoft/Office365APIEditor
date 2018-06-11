@@ -264,15 +264,9 @@ namespace Office365APIEditor
             }
         }
 
-        private async void treeView_Mailbox_AfterSelect(object sender, TreeViewEventArgs e)
+        private void treeView_Mailbox_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            // Get new OutlookServiceClient.
-            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
-            if (client == null)
-            {
-                MessageBox.Show("Acquiring access token failed.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            // Show information of selected folder.
 
             // Reset DataGrid.
             for (int i = dataGridView_FolderProps.Rows.Count - 1; i >= 0; i--)
@@ -302,10 +296,10 @@ namespace Office365APIEditor
                     GetMessageFolderProps(info.ID, treeView_Mailbox.SelectedNode.Text);
                     break;
                 case FolderContentType.Contact:
-                    GetContactFolderProps(info.ID, treeView_Mailbox.SelectedNode.Text);
+                    GetContactFolderProps(info.ID);
                     break;
                 case FolderContentType.Calendar:
-                    GetCalendarFolderProps(info.ID, treeView_Mailbox.SelectedNode.Text);
+                    GetCalendarFolderProps(info.ID);
                     break;
                 default:
                     break;
@@ -315,38 +309,11 @@ namespace Office365APIEditor
         private async void GetMessageFolderProps(string FolderId, string FolderDisplayName)
         {
             // Get the folder.
-            IMailFolder mailFolderResults = new MailFolder();
+            IMailFolder mailFolderResult = new MailFolder();
 
             try
             {
-                mailFolderResults = await client.Me.MailFolders[FolderId].ExecuteAsync();
-            }
-            catch (Microsoft.OData.Core.ODataErrorException ex)
-            {
-                // We know that we can't get RSS Feeds folder.
-                // But we can get the folder using DisplayName Filter.
-
-                if (ex.Error.ErrorCode == "ErrorItemNotFound")
-                {
-                    var tempResults = await client.Me.MailFolders
-                        .Where(m => m.DisplayName == FolderDisplayName)
-                        .Take(2)
-                        .ExecuteAsync();
-
-                    if (tempResults.CurrentPage.Count != 1)
-                    {
-                        // We have to get a unique folder.
-                        MessageBox.Show(ex.Message, "Office365APIEditor");
-                        return;
-                    }
-
-                    mailFolderResults = tempResults.CurrentPage[0];
-                }
-                else
-                {
-                    MessageBox.Show(ex.Error.ErrorCode);
-                    return;
-                }
+                mailFolderResult = await viewerHelper.GetMailFolderAsync(FolderId, FolderDisplayName);
             }
             catch (Exception ex)
             {
@@ -362,38 +329,38 @@ namespace Office365APIEditor
             // Add rows.
 
             DataGridViewRow propChildFolderCount = new DataGridViewRow();
-            propChildFolderCount.CreateCells(dataGridView_FolderProps, new object[] { "ChildFolderCount", mailFolderResults.ChildFolderCount.Value, mailFolderResults.ChildFolderCount.GetType().ToString() });
+            propChildFolderCount.CreateCells(dataGridView_FolderProps, new object[] { "ChildFolderCount", mailFolderResult.ChildFolderCount.Value, mailFolderResult.ChildFolderCount.GetType().ToString() });
             dataGridView_FolderProps.Rows.Add(propChildFolderCount);
 
             DataGridViewRow propDisplayName = new DataGridViewRow();
-            propDisplayName.CreateCells(dataGridView_FolderProps, new object[] { "DisplayName", mailFolderResults.DisplayName, mailFolderResults.DisplayName.GetType().ToString() });
+            propDisplayName.CreateCells(dataGridView_FolderProps, new object[] { "DisplayName", mailFolderResult.DisplayName, mailFolderResult.DisplayName.GetType().ToString() });
             dataGridView_FolderProps.Rows.Add(propDisplayName);
 
             DataGridViewRow propId = new DataGridViewRow();
-            propId.CreateCells(dataGridView_FolderProps, new object[] { "Id", mailFolderResults.Id, mailFolderResults.Id.GetType().ToString() });
+            propId.CreateCells(dataGridView_FolderProps, new object[] { "Id", mailFolderResult.Id, mailFolderResult.Id.GetType().ToString() });
             dataGridView_FolderProps.Rows.Add(propId);
 
             DataGridViewRow propParentFolderId = new DataGridViewRow();
-            propParentFolderId.CreateCells(dataGridView_FolderProps, new object[] { "ParentFolderId", mailFolderResults.ParentFolderId, mailFolderResults.ParentFolderId.GetType().ToString() });
+            propParentFolderId.CreateCells(dataGridView_FolderProps, new object[] { "ParentFolderId", mailFolderResult.ParentFolderId, mailFolderResult.ParentFolderId.GetType().ToString() });
             dataGridView_FolderProps.Rows.Add(propParentFolderId);
 
             DataGridViewRow propTotalItemCount = new DataGridViewRow();
-            propTotalItemCount.CreateCells(dataGridView_FolderProps, new object[] { "TotalItemCount", mailFolderResults.TotalItemCount, mailFolderResults.TotalItemCount.GetType().ToString() });
+            propTotalItemCount.CreateCells(dataGridView_FolderProps, new object[] { "TotalItemCount", mailFolderResult.TotalItemCount, mailFolderResult.TotalItemCount.GetType().ToString() });
             dataGridView_FolderProps.Rows.Add(propTotalItemCount);
 
             DataGridViewRow propUnreadItemCount = new DataGridViewRow();
-            propUnreadItemCount.CreateCells(dataGridView_FolderProps, new object[] { "UnreadItemCount", mailFolderResults.UnreadItemCount, mailFolderResults.UnreadItemCount.GetType().ToString() });
+            propUnreadItemCount.CreateCells(dataGridView_FolderProps, new object[] { "UnreadItemCount", mailFolderResult.UnreadItemCount, mailFolderResult.UnreadItemCount.GetType().ToString() });
             dataGridView_FolderProps.Rows.Add(propUnreadItemCount);
         }
 
-        private async void GetContactFolderProps(string FolderId, string FolderDisplayName)
+        private async void GetContactFolderProps(string FolderId)
         {
             // Get the folder.
-            IContactFolder contactFolderResults = new ContactFolder();
+            IContactFolder contactFolderResult = new ContactFolder();
 
             try
             {
-                contactFolderResults = await client.Me.ContactFolders[FolderId].ExecuteAsync();
+                contactFolderResult = await viewerHelper.GetContactFolderAsync(FolderId);
             }
             catch (Exception ex)
             {
@@ -410,26 +377,26 @@ namespace Office365APIEditor
             // Add rows.
 
             DataGridViewRow propDisplayName = new DataGridViewRow();
-            propDisplayName.CreateCells(dataGridView_FolderProps, new object[] { "DisplayName", contactFolderResults.DisplayName, contactFolderResults.DisplayName.GetType().ToString() });
+            propDisplayName.CreateCells(dataGridView_FolderProps, new object[] { "DisplayName", contactFolderResult.DisplayName, contactFolderResult.DisplayName.GetType().ToString() });
             dataGridView_FolderProps.Rows.Add(propDisplayName);
 
             DataGridViewRow propId = new DataGridViewRow();
-            propId.CreateCells(dataGridView_FolderProps, new object[] { "Id", contactFolderResults.Id, contactFolderResults.Id.GetType().ToString() });
+            propId.CreateCells(dataGridView_FolderProps, new object[] { "Id", contactFolderResult.Id, contactFolderResult.Id.GetType().ToString() });
             dataGridView_FolderProps.Rows.Add(propId);
 
             DataGridViewRow propParentFolderId = new DataGridViewRow();
-            propParentFolderId.CreateCells(dataGridView_FolderProps, new object[] { "ParentFolderId", contactFolderResults.ParentFolderId, contactFolderResults.ParentFolderId.GetType().ToString() });
+            propParentFolderId.CreateCells(dataGridView_FolderProps, new object[] { "ParentFolderId", contactFolderResult.ParentFolderId, contactFolderResult.ParentFolderId.GetType().ToString() });
             dataGridView_FolderProps.Rows.Add(propParentFolderId);
         }
 
-        private async void GetCalendarFolderProps(string FolderId, string FolderDisplayName)
+        private async void GetCalendarFolderProps(string FolderId)
         {
             // Get the folder.
             ICalendar calendarFolderResults = new Calendar();
 
             try
             {
-                calendarFolderResults = await client.Me.Calendars[FolderId].ExecuteAsync();
+                calendarFolderResults = await viewerHelper.GetCalendarAsync(FolderId);
             }
             catch (Exception ex)
             {
@@ -580,6 +547,7 @@ namespace Office365APIEditor
         private void CloseCurrentSession()
         {
             client = null;
+            viewerHelper = null;
             dataGridView_FolderProps.Rows.Clear();
             dataGridView_FolderProps.Columns.Clear();
             treeView_Mailbox.Nodes.Clear();

@@ -3,13 +3,9 @@
 
 using Microsoft.Identity.Client;
 using Microsoft.OData.Client;
-using Microsoft.OData.ProxyExtensions;
 using Microsoft.Office365.OutlookServices;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Office365APIEditor.ViewerHelper
@@ -200,6 +196,91 @@ namespace Office365APIEditor.ViewerHelper
             {
                 throw ex;
             }
+        }
+
+        public async Task<IMailFolder> GetMailFolderAsync(string FolderId, string FolderDisplayName)
+        {
+            // Get the specified MailFolder
+
+            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
+
+            IMailFolder mailFolderResult;
+
+            try
+            {
+                mailFolderResult = await client.Me.MailFolders[FolderId].ExecuteAsync();
+            }
+            catch (Microsoft.OData.Core.ODataErrorException ex)
+            {
+                // We know that we can't get RSS Feeds folder.
+                // But we can get the folder using DisplayName Filter.
+
+                if (ex.Error.ErrorCode == "ErrorItemNotFound")
+                {
+                    var tempResults = await client.Me.MailFolders
+                        .Where(m => m.DisplayName == FolderDisplayName)
+                        .Take(2)
+                        .ExecuteAsync();
+
+                    if (tempResults.CurrentPage.Count != 1)
+                    {
+                        // We have to get a unique folder.
+                        throw ex;
+                    }
+
+                    mailFolderResult = tempResults.CurrentPage[0];
+                }
+                else
+                {
+                    throw ex;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return mailFolderResult;
+        }
+
+        public async Task<IContactFolder> GetContactFolderAsync(string FolderId)
+        {
+            // Get the specified ContactFolder
+
+            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
+
+            IContactFolder contactFolderResult;
+
+            try
+            {
+                contactFolderResult = await client.Me.ContactFolders[FolderId].ExecuteAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return contactFolderResult;
+        }
+
+        public async Task<ICalendar> GetCalendarAsync(string FolderId)
+        {
+            // Get the specified Calendar
+
+            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
+
+            ICalendar calendarResult;
+
+            try
+            {
+                calendarResult = await client.Me.Calendars[FolderId].ExecuteAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return calendarResult;
         }
     }
 }
