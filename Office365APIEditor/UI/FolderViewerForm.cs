@@ -3,12 +3,11 @@
 
 using Codeplex.Data;
 using Microsoft.Identity.Client;
-using Microsoft.OData.Client;
 using Microsoft.Office365.OutlookServices;
+using Office365APIEditor.ViewerHelper;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Office365APIEditor
@@ -19,13 +18,12 @@ namespace Office365APIEditor
         FolderInfo targetFolder;
         string targetFolderDisplayName;
 
-        OutlookServicesClient client;
-
         Microsoft.Identity.Client.IUser currentUser;
 
         string currentId = "";
 
         private bool isFormClosing = false;
+        private ViewerHelper.ViewerHelper viewerHelper;
 
         public FolderViewerForm(PublicClientApplication PCA, Microsoft.Identity.Client.IUser CurrentUser, FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
         {
@@ -39,6 +37,8 @@ namespace Office365APIEditor
 
         private async void FolderViewerForm_Load(object sender, System.EventArgs e)
         {
+            toolStripStatusLabel_Status.Text = "Loading all items...";
+
             if (targetFolder.Type != FolderContentType.MsgFolderRoot)
             {
                 Text = targetFolder.Type.ToString() + " items in " + targetFolderDisplayName;
@@ -47,13 +47,8 @@ namespace Office365APIEditor
             {
                 Text = FolderContentType.Message.ToString() + " items in " + targetFolderDisplayName;
             }
-            
-            client = Util.GetOutlookServicesClient(pca, currentUser);
 
-            if (client == null)
-            {
-                MessageBox.Show("Authentication failure.", "Office365APIEditor");
-            }
+            viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
 
             switch (targetFolder.Type)
             {
@@ -62,13 +57,23 @@ namespace Office365APIEditor
                     PrepareMessageItemListColumns();
 
                     // Get items.
-                    if (await GetMessageItemsAsync() == false)
+                    List<MessageSummary> messages = await viewerHelper.GetMessageSummaryAsync(targetFolder.ID);
+
+                    if (messages.Count != 0)
                     {
-                        if (MessageBox.Show("TotalItemCount of this folder is not 0 but getting items of this folder was failed.\r\nDo you want to retry getting items as Contact item?", "Office365APIEditor", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        ShowMessages(messages);
+                    }
+                    else
+                    {
+                        var mailFolder = await viewerHelper.GetMailFolderAsync(targetFolder.ID, targetFolderDisplayName);
+                        
+                        if (mailFolder.TotalItemCount != 0 && MessageBox.Show("TotalItemCount of this folder is not 0 but getting items of this folder was failed.\r\nDo you want to retry getting items as Contact item?", "Office365APIEditor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
                             // Retry as Contact item.
 
                             targetFolder.Type = FolderContentType.Contact;
+
+                            Text = FolderContentType.Contact.ToString() + " items in " + targetFolderDisplayName;
 
                             // Reset DataGrid.
                             if (dataGridView_ItemList.InvokeRequired)
@@ -89,8 +94,12 @@ namespace Office365APIEditor
                                 }
                             }
 
+                            // Add columns.
                             PrepareContactItemListColumns();
-                            GetContactItems();
+
+                            // Get items.
+                            List<ContactSummary> contactsInMailFolder = await viewerHelper.GetContactSummaryAsync(targetFolder.ID);
+                            ShowContacts(contactsInMailFolder);
                         }
                     }
 
@@ -98,16 +107,19 @@ namespace Office365APIEditor
                 case FolderContentType.Contact:
                     // Add columns.
                     PrepareContactItemListColumns();
-                    
+
                     // Get items.
-                    GetContactItems();
+                    List<ContactSummary> contacts = await viewerHelper.GetContactSummaryAsync(targetFolder.ID);
+                    ShowContacts(contacts);
 
                     break;
                 case FolderContentType.Calendar:
                     // Add columns.
                     PrepareCalendarItemListColumns();
 
-                    GetCalendarItems();
+                    // Get items.
+                    List<EventSummary> events = await viewerHelper.GetEventSummaryAsync(targetFolder.ID);
+                    ShowEvents(events);
 
                     break;
                 case FolderContentType.MsgFolderRoot:
@@ -115,13 +127,20 @@ namespace Office365APIEditor
                     PrepareMessageItemListColumns();
 
                     // Get items.
-                    GetMessageItemsInMsgFolderRoot();
+                    List<MessageSummary> messagesInMsgFolderRoot = await viewerHelper.GetMessageSummaryAsync(targetFolder.ID);
+
+                    if (messagesInMsgFolderRoot.Count != 0)
+                    {
+                        ShowMessages(messagesInMsgFolderRoot);
+                    }
 
                     break;
                 case FolderContentType.DummyCalendarRoot:
                 default:
                     break;
             }
+
+            toolStripStatusLabel_Status.Text = "Loaded all items.";
         }
 
         private void FolderViewerForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -198,73 +217,39 @@ namespace Office365APIEditor
                 dataGridView_ItemList.Columns.Add("CreatedDateTime", "CreatedDateTime");
             }
         }
-
-        private void InsertHeaders(object sender, SendingRequest2EventArgs e, string email)
+        
+        private void ShowMessages(List<MessageSummary> messages)
         {
-            e.RequestMessage.SetHeader("X-AnchorMailbox", email);
-            e.RequestMessage.SetHeader("Prefer", "outlook.timezone=\"" + System.TimeZoneInfo.Local.Id + "\"");
-        }
-
-        // GetMessageItems for MsgFolderRoot
-        private async void GetMessageItemsInMsgFolderRoot()
-        {
-            // I don't know why but items in MsgFolderRoot doesn't have Sender prop.
-
-            string TargetFolderID = targetFolder.ID;
+            // Show all messages in List.
 
             try
             {
-                var results = await client.Me.MailFolders[TargetFolderID].Messages
-                    .OrderByDescending(m => m.ReceivedDateTime)
-                    .Take(50)
-                    .Select(m => new { m.Id, m.Subject, /*m.Sender, */m.ToRecipients, m.ReceivedDateTime, m.CreatedDateTime, m.SentDateTime })
-                    .ExecuteAsync();
-
-                bool morePages = false;
-
-                do
+                foreach (var item in messages)
                 {
-                    foreach (var item in results.CurrentPage)
+                    // Add new row.
+                    string receivedDateTime = (item.ReceivedDateTime != null) ? item.ReceivedDateTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "";
+                    string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
+                    string sentDateTime = (item.SentDateTime != null) ? item.SentDateTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "";
+                    string subject = item.Subject ?? "";
+                    string sender = (item.Sender != null && item.Sender.EmailAddress != null && item.Sender.EmailAddress.Address != null) ? item.Sender.EmailAddress.Address : "";
+                    string recipients = (item.ToRecipients != null) ? ConvertRecipientsListToString(item.ToRecipients) : "";
+
+                    DataGridViewRow itemRow = new DataGridViewRow
                     {
-                        // Add new row.
-                        string receivedDateTime = (item.ReceivedDateTime != null) ? item.ReceivedDateTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "";
-                        string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
-                        string sentDateTime = (item.SentDateTime != null) ? item.SentDateTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "";
-                        string subject = item.Subject ?? "";
-                        string sender = ""; // (item.Sender != null && item.Sender.EmailAddress != null && item.Sender.EmailAddress.Address != null) ? item.Sender.EmailAddress.Address : "";
-                        string recipients = (item.ToRecipients != null) ? ConvertRecipientsListToString(item.ToRecipients) : "";
+                        Tag = item.Id
+                    };
+                    itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, sender, recipients, receivedDateTime, createdDateTime, sentDateTime });
+                    itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
 
-                        DataGridViewRow itemRow = new DataGridViewRow
-                        {
-                            Tag = item.Id
-                        };
-                        itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, sender, recipients, receivedDateTime, createdDateTime, sentDateTime });
-                        itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
-
-                        if (dataGridView_ItemList.InvokeRequired)
-                        {
-                            dataGridView_ItemList.Invoke(new MethodInvoker(delegate { dataGridView_ItemList.Rows.Add(itemRow); }));
-                        }
-                        else
-                        {
-                            dataGridView_ItemList.Rows.Add(itemRow);
-                        }
-                    }
-
-                    if (results.MorePagesAvailable)
+                    if (dataGridView_ItemList.InvokeRequired)
                     {
-                        morePages = true;
-                        results = await results.GetNextPageAsync();
+                        dataGridView_ItemList.Invoke(new MethodInvoker(delegate { dataGridView_ItemList.Rows.Add(itemRow); }));
                     }
                     else
                     {
-                        morePages = false;
+                        dataGridView_ItemList.Rows.Add(itemRow);
                     }
-                } while (morePages);
-            }
-            catch (DataServiceClientException ex)
-            {
-                MessageBox.Show(ex.Message, "Office365APIEditor");
+                }
             }
             catch (InvalidOperationException ex)
             {
@@ -281,128 +266,38 @@ namespace Office365APIEditor
             catch (Exception ex)
             {
                 MessageBox.Show(ex.GetType().FullName + "\r\n" + ex.Message, "Office365APIEditor");
-                // TODO: 途中で画面を閉じて Row を追加できない場合。
             }
         }
 
-        private async Task<bool> GetMessageItemsAsync()
+        private void ShowContacts(List<ContactSummary> contacts)
         {
-            return await GetMessageItemsAsync(targetFolder.ID);
-        }
-
-        // GetMessageItems for the non-root folders.
-        private async Task<bool> GetMessageItemsAsync(string TargetFolderID)
-        {
-            // Return false if TotalItemCount is not 0 and we could not get items.
-            bool succeed = false;
+            // Show all contacts in List.
 
             try
             {
-                var results = await client.Me.MailFolders[TargetFolderID].Messages
-                    .OrderByDescending(m => m.ReceivedDateTime)
-                    .Take(50)
-                    .Select(m => new { m.Id, m.Subject, m.Sender, m.ToRecipients, m.ReceivedDateTime, m.CreatedDateTime, m.SentDateTime })
-                    .ExecuteAsync();
-
-                if (results.CurrentPage.Count == 0)
+                foreach (var item in contacts)
                 {
-                    // No items in this folder.
+                    // Add new row.
 
-                    // Check whether TotalItemCount is 0.
+                    string displayName = item.DisplayName ?? "";
+                    string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
 
-                    IMailFolder mailFolderResults = new MailFolder();
-
-                    try
+                    DataGridViewRow itemRow = new DataGridViewRow
                     {
-                        mailFolderResults = await client.Me.MailFolders[TargetFolderID].ExecuteAsync();
-                    }
-                    catch (Microsoft.OData.Core.ODataErrorException ex)
+                        Tag = item.Id
+                    };
+                    itemRow.CreateCells(dataGridView_ItemList, new object[] { displayName, createdDateTime });
+                    itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
+
+                    if (dataGridView_ItemList.InvokeRequired)
                     {
-                        // We know that we can't get RSS Feeds folder.
-                        // But we can get the folder using DisplayName Filter.
-
-                        if (ex.Error.ErrorCode == "ErrorItemNotFound")
-                        {
-                            var tempResults = await client.Me.MailFolders
-                                .Where(m => m.DisplayName == targetFolderDisplayName)
-                                .Take(2)
-                                .ExecuteAsync();
-
-                            if (tempResults.CurrentPage.Count != 1)
-                            {
-                                // We have to get a unique folder.
-                                MessageBox.Show(ex.Message, "Office365APIEditor");
-                                return true;
-                            }
-
-                            mailFolderResults = tempResults.CurrentPage[0];
-                        }
-                        else
-                        {
-                            MessageBox.Show(ex.Error.ErrorCode);
-                            return true;
-                        }
-                    }
-
-                    if (mailFolderResults.TotalItemCount == 0)
-                    {
-                        return true;
+                        dataGridView_ItemList.Invoke(new MethodInvoker(delegate { dataGridView_ItemList.Rows.Add(itemRow); }));
                     }
                     else
                     {
-                        // TotalItemCount is not 0 but we could not get items.
-                        return false;
+                        dataGridView_ItemList.Rows.Add(itemRow);
                     }
                 }
-
-                bool morePages = false;
-
-                do
-                {
-                    foreach (var item in results.CurrentPage)
-                    {
-                        // Add new row.
-                        string receivedDateTime = (item.ReceivedDateTime != null) ? item.ReceivedDateTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "";
-                        string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
-                        string sentDateTime = (item.SentDateTime != null) ? item.SentDateTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "";
-                        string subject = item.Subject ?? "";
-                        string sender = (item.Sender != null && item.Sender.EmailAddress != null && item.Sender.EmailAddress.Address != null) ? item.Sender.EmailAddress.Address : "";
-                        string recipients = (item.ToRecipients != null) ? ConvertRecipientsListToString(item.ToRecipients) : "";
-
-                        DataGridViewRow itemRow = new DataGridViewRow
-                        {
-                            Tag = item.Id
-                        };
-                        itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, sender, recipients, receivedDateTime, createdDateTime, sentDateTime });
-                        itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
-
-                        if (dataGridView_ItemList.InvokeRequired)
-                        {
-                            dataGridView_ItemList.Invoke(new MethodInvoker(delegate { dataGridView_ItemList.Rows.Add(itemRow); }));
-                        }
-                        else
-                        {
-                            dataGridView_ItemList.Rows.Add(itemRow);
-                        }
-                    }
-
-                    if (results.MorePagesAvailable)
-                    {
-                        morePages = true;
-                        results = await results.GetNextPageAsync();
-                    }
-                    else
-                    {
-                        morePages = false;
-                    }
-                } while (morePages);
-
-                succeed = true;
-            }
-            catch (DataServiceClientException ex)
-            {
-                MessageBox.Show(ex.Message, "Office365APIEditor");
-                succeed = true;
             }
             catch (InvalidOperationException ex)
             {
@@ -415,145 +310,63 @@ namespace Office365APIEditor
                 {
                     MessageBox.Show(ex.Message, "Office365APIEditor");
                 }
-                
-                succeed = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.GetType().FullName + "\r\n" + ex.Message, "Office365APIEditor");
-                succeed = true;
-
-                // TODO: 途中で画面を閉じて Row を追加できない場合。
-            }
-
-            return succeed;
-        }
-        private async void GetContactItems()
-        {
-            try
-            {
-                var results = await client.Me.ContactFolders[targetFolder.ID].Contacts
-                    .OrderByDescending(c => c.CreatedDateTime)
-                    .Take(50)
-                    .Select(c => new { c.Id, c.DisplayName, c.CreatedDateTime })
-                    .ExecuteAsync();
-
-                if (results.CurrentPage.Count == 0)
-                {
-                    // No items in this folder.
-                    return;
-                }
-
-                bool morePages = false;
-                
-                do
-                {
-                    foreach (var item in results.CurrentPage)
-                    {
-                        // Add new row.
-
-                        string displayName = item.DisplayName ?? "";
-                        string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
-
-                        DataGridViewRow itemRow = new DataGridViewRow
-                        {
-                            Tag = item.Id
-                        };
-                        itemRow.CreateCells(dataGridView_ItemList, new object[] { displayName, createdDateTime });
-                        itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
-
-                        if (dataGridView_ItemList.InvokeRequired)
-                        {
-                            dataGridView_ItemList.Invoke(new MethodInvoker(delegate { dataGridView_ItemList.Rows.Add(itemRow); }));
-                        }
-                        else
-                        {
-                            dataGridView_ItemList.Rows.Add(itemRow);
-                        }
-                    }
-
-                    if (results.MorePagesAvailable)
-                    {
-                        morePages = true;
-                        results = await results.GetNextPageAsync();
-                    }
-                    else
-                    {
-                        morePages = false;
-                    }
-                } while (morePages);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Office365APIEditor");
-                return;
             }
         }
 
-        private async void GetCalendarItems()
+        private void ShowEvents(List<EventSummary> events)
         {
+            // Show all events in List.
+
             try
             {
-                var results = await client.Me.Calendars[targetFolder.ID].Events
-                    .OrderByDescending(e => e.CreatedDateTime)
-                    .Take(50)
-                    .Select(e => new { e.Id, e.Subject, e.Organizer, e.Attendees, e.Start, e.End, e.IsAllDay, e.CreatedDateTime})
-                    .ExecuteAsync();
-
-                if (results.CurrentPage.Count == 0)
+                foreach (var item in events)
                 {
-                    // No items in this folder.
-                    return;
-                }
+                    // Add new row.
 
-                bool morePages = false;
+                    string subject = item.Subject ?? "";
+                    string organizer = (item.Organizer != null && item.Organizer.EmailAddress != null && item.Organizer.EmailAddress.Address != null) ? item.Organizer.EmailAddress.Address : "";
+                    string attendees = (item.Attendees != null) ? ConvertAttendeesListToString(item.Attendees) : "";
+                    string start = (item.Start != null) ? item.Start.DateTime : "";
+                    string end = (item.End != null) ? item.End.DateTime : "";
+                    string isAllDay = (item.IsAllDay != null) ? item.IsAllDay.ToString() : "";
+                    string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
 
-                do
-                {
-                    foreach (var item in results.CurrentPage)
+                    DataGridViewRow itemRow = new DataGridViewRow
                     {
-                        // Add new row.
+                        Tag = item.Id
+                    };
+                    itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, organizer, attendees, start, end, isAllDay, createdDateTime });
+                    itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
 
-                        string subject = item.Subject ?? "";
-                        string organizer = (item.Organizer != null && item.Organizer.EmailAddress != null && item.Organizer.EmailAddress.Address != null) ? item.Organizer.EmailAddress.Address : "";
-                        string attendees = (item.Attendees != null) ? ConvertAttendeesListToString(item.Attendees) : "";
-                        string start = (item.Start != null) ? item.Start.DateTime : "";
-                        string end = (item.End != null) ? item.End.DateTime : "";
-                        string isAllDay = (item.IsAllDay != null) ? item.IsAllDay.ToString() : "";
-                        string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
-
-                        DataGridViewRow itemRow = new DataGridViewRow
-                        {
-                            Tag = item.Id
-                        };
-                        itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, organizer, attendees, start, end, isAllDay, createdDateTime });
-                        itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
-
-                        if (dataGridView_ItemList.InvokeRequired)
-                        {
-                            dataGridView_ItemList.Invoke(new MethodInvoker(delegate { dataGridView_ItemList.Rows.Add(itemRow); }));
-                        }
-                        else
-                        {
-                            dataGridView_ItemList.Rows.Add(itemRow);
-                        }
-                    }
-
-                    if (results.MorePagesAvailable)
+                    if (dataGridView_ItemList.InvokeRequired)
                     {
-                        morePages = true;
-                        results = await results.GetNextPageAsync();
+                        dataGridView_ItemList.Invoke(new MethodInvoker(delegate { dataGridView_ItemList.Rows.Add(itemRow); }));
                     }
                     else
                     {
-                        morePages = false;
+                        dataGridView_ItemList.Rows.Add(itemRow);
                     }
-                } while (morePages);
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                if (isFormClosing)
+                {
+                    // It seems that this window was closed.
+                    // Do nothing.
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "Office365APIEditor");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Office365APIEditor");
-                return;
+                MessageBox.Show(ex.GetType().FullName + "\r\n" + ex.Message, "Office365APIEditor");
             }
         }
 

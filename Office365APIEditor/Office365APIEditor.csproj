@@ -118,6 +118,9 @@
     <Reference Include="Microsoft.Spatial, Version=6.18.0.10905, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Spatial.6.18.0\lib\portable-net45+win+wpa81\Microsoft.Spatial.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
@@ -225,6 +228,10 @@
       <DependentUpon>TokenViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
+    <Compile Include="ViewerHelper\ContactSummary.cs" />
+    <Compile Include="ViewerHelper\EventSummary.cs" />
+    <Compile Include="ViewerHelper\MessageSummary.cs" />
+    <Compile Include="ViewerHelper\PagedResponse.cs" />
     <Compile Include="ViewerHelper\ViewerHelper.cs" />
     <EmbeddedResource Include="UI\AccessTokenWizard.resx">
       <DependentUpon>AccessTokenWizard.cs</DependentUpon>
@@ -304,6 +311,7 @@
     <Content Include="Licenses\Microsoft.OData.ProxyExtensions.txt" />
     <Content Include="Licenses\Microsoft.Office365.OutlookServices-V2.0.txt" />
     <Content Include="Licenses\Microsoft.Spatial.txt" />
+    <Content Include="Licenses\Newtonsoft.Json.txt" />
     <Content Include="Licenses\System.Management.Automation.dll.txt" />
   </ItemGroup>
   <ItemGroup>

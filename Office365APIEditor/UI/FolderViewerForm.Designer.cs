@@ -38,6 +38,8 @@
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip_ItemList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItem_DisplayAttachments = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel_Status = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -45,6 +47,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ItemList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ItemProps)).BeginInit();
             this.contextMenuStrip_ItemList.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -61,8 +64,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView_ItemProps);
-            this.splitContainer1.Size = new System.Drawing.Size(881, 491);
-            this.splitContainer1.SplitterDistance = 225;
+            this.splitContainer1.Size = new System.Drawing.Size(881, 463);
+            this.splitContainer1.SplitterDistance = 212;
             this.splitContainer1.TabIndex = 0;
             // 
             // dataGridView_ItemList
@@ -76,7 +79,7 @@
             this.dataGridView_ItemList.MultiSelect = false;
             this.dataGridView_ItemList.Name = "dataGridView_ItemList";
             this.dataGridView_ItemList.ReadOnly = true;
-            this.dataGridView_ItemList.Size = new System.Drawing.Size(881, 225);
+            this.dataGridView_ItemList.Size = new System.Drawing.Size(881, 212);
             this.dataGridView_ItemList.TabIndex = 0;
             this.dataGridView_ItemList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ItemList_CellClick);
             this.dataGridView_ItemList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ItemList_CellDoubleClick);
@@ -96,7 +99,7 @@
             this.dataGridView_ItemProps.Location = new System.Drawing.Point(0, 0);
             this.dataGridView_ItemProps.Name = "dataGridView_ItemProps";
             this.dataGridView_ItemProps.ReadOnly = true;
-            this.dataGridView_ItemProps.Size = new System.Drawing.Size(881, 262);
+            this.dataGridView_ItemProps.Size = new System.Drawing.Size(881, 247);
             this.dataGridView_ItemProps.TabIndex = 0;
             this.dataGridView_ItemProps.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ItemProps_CellDoubleClick);
             // 
@@ -120,18 +123,35 @@
             // 
             // contextMenuStrip_ItemList
             // 
+            this.contextMenuStrip_ItemList.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip_ItemList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_DisplayAttachments});
             this.contextMenuStrip_ItemList.Name = "contextMenuStrip_ItemList";
-            this.contextMenuStrip_ItemList.Size = new System.Drawing.Size(193, 26);
+            this.contextMenuStrip_ItemList.Size = new System.Drawing.Size(260, 34);
             this.contextMenuStrip_ItemList.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_ItemList_Opening);
             // 
             // ToolStripMenuItem_DisplayAttachments
             // 
             this.ToolStripMenuItem_DisplayAttachments.Name = "ToolStripMenuItem_DisplayAttachments";
-            this.ToolStripMenuItem_DisplayAttachments.Size = new System.Drawing.Size(192, 22);
+            this.ToolStripMenuItem_DisplayAttachments.Size = new System.Drawing.Size(259, 30);
             this.ToolStripMenuItem_DisplayAttachments.Text = "Display Attachments...";
             this.ToolStripMenuItem_DisplayAttachments.Click += new System.EventHandler(this.ToolStripMenuItem_DisplayAttachments_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel_Status});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 463);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(881, 28);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel_Status
+            // 
+            this.toolStripStatusLabel_Status.Name = "toolStripStatusLabel_Status";
+            this.toolStripStatusLabel_Status.Size = new System.Drawing.Size(0, 23);
             // 
             // FolderViewerForm
             // 
@@ -139,6 +159,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(881, 491);
             this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FolderViewerForm";
             this.Text = "FolderViewerForm";
@@ -151,7 +172,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ItemList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ItemProps)).EndInit();
             this.contextMenuStrip_ItemList.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -165,5 +189,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_ItemList;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DisplayAttachments;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_Status;
     }
 }

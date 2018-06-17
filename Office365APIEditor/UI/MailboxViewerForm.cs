@@ -4,9 +4,7 @@
 using Microsoft.Identity.Client;
 using Microsoft.Office365.OutlookServices;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.OData.Client;
 
 namespace Office365APIEditor
 {
