@@ -14,7 +14,6 @@ namespace Office365APIEditor
     {
         PublicClientApplication pca;
         AuthenticationResult ar;
-        OutlookServicesClient client;
         ViewerHelper.ViewerHelper viewerHelper;
 
         // Current user's info.
@@ -58,18 +57,6 @@ namespace Office365APIEditor
 
             try
             {
-                client = new OutlookServicesClient(new Uri("https://outlook.office.com/api/v2.0"),
-                    () =>
-                    {
-                        return Task.Run(() =>
-                        {
-                            return token;
-                        });
-                    });
-                
-                client.Context.SendingRequest2 += new EventHandler<SendingRequest2EventArgs>(
-                    (eventSender, eventArgs) => Util.InsertHeaders(eventSender, eventArgs, currentUser.DisplayableId));
-
                 viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
 
                 // Get the root folder.
@@ -546,7 +533,6 @@ namespace Office365APIEditor
 
         private void CloseCurrentSession()
         {
-            client = null;
             viewerHelper = null;
             dataGridView_FolderProps.Rows.Clear();
             dataGridView_FolderProps.Columns.Clear();

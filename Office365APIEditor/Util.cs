@@ -237,17 +237,17 @@ namespace Office365APIEditor
             // Acquire access token.
             // This method is designed for GetOutlookServiceClient(), so if you need new OutlookServiceClient and new Access Token, you should use GetOutlookServiceClient().
 
-            Microsoft.Identity.Client.AuthenticationResult ar;
-            
+            AuthenticationResult ar;
+
             try
             {
-                ar = await pca.AcquireTokenSilentAsync(Util.MailboxViewerScopes(), CurrentUser);
+                ar = await pca.AcquireTokenSilentAsync(MailboxViewerScopes(), CurrentUser);
             }
             catch (Exception)
             {
                 try
                 {
-                    ar = await pca.AcquireTokenAsync(Util.MailboxViewerScopes(), CurrentUser, UIBehavior.ForceLogin, "");
+                    ar = await pca.AcquireTokenAsync(MailboxViewerScopes(), CurrentUser, UIBehavior.ForceLogin, "");
                 }
                 catch (Exception ex)
                 {
@@ -258,18 +258,17 @@ namespace Office365APIEditor
             return ar.AccessToken;
         }
 
-        public static async Task<OutlookServicesClient> GetOutlookServicesClientAsync(PublicClientApplication pca, Microsoft.Identity.Client.IUser CurrentUser)
+        public static OutlookServicesClient GetOutlookServicesClient(PublicClientApplication pca, Microsoft.Identity.Client.IUser CurrentUser)
         {
             // Acquire access token again.
-
-            string token = await Util.GetAccessTokenAsync(pca, CurrentUser);
 
             OutlookServicesClient newClient = new OutlookServicesClient(new Uri("https://outlook.office.com/api/v2.0"),
                 () =>
                 {
-                    return Task.Run(() =>
+                    return Task.Run(async () =>
                     {
-                        return token;
+                        string accessToken = await GetAccessTokenAsync(pca, CurrentUser);
+                        return accessToken;
                     });
                 });
 

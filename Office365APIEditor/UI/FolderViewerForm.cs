@@ -48,7 +48,7 @@ namespace Office365APIEditor
                 Text = FolderContentType.Message.ToString() + " items in " + targetFolderDisplayName;
             }
             
-            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
+            client = Util.GetOutlookServicesClient(pca, currentUser);
 
             if (client == null)
             {

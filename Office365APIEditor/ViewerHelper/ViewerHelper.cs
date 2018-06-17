@@ -50,7 +50,7 @@ namespace Office365APIEditor.ViewerHelper
             // Following operation is available with v1.0 only.
             // https://outlook.office.com/api/v1.0/me/RootFolder
 
-            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
+            client = Util.GetOutlookServicesClient(pca, currentUser);
 
             try
             {
@@ -70,7 +70,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get all calendar folders in the mailbox.
 
-            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
+            client = Util.GetOutlookServicesClient(pca, currentUser);
 
             List<Calendar> result = new List<Calendar>();
 
@@ -114,7 +114,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get all MailFolders in the specified folder.
 
-            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
+            client = Util.GetOutlookServicesClient(pca, currentUser);
 
             List<MailFolder> result = new List<MailFolder>();
 
@@ -158,7 +158,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get all contact folders in the specified folder.
 
-            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
+            client = Util.GetOutlookServicesClient(pca, currentUser);
 
             List<ContactFolder> result = new List<ContactFolder>();
 
@@ -202,7 +202,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get the specified MailFolder
 
-            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
+            client = Util.GetOutlookServicesClient(pca, currentUser);
 
             IMailFolder mailFolderResult;
 
@@ -247,7 +247,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get the specified ContactFolder
 
-            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
+            client = Util.GetOutlookServicesClient(pca, currentUser);
 
             IContactFolder contactFolderResult;
 
@@ -267,7 +267,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get the specified Calendar
 
-            client = await Util.GetOutlookServicesClientAsync(pca, currentUser);
+            client = Util.GetOutlookServicesClient(pca, currentUser);
 
             ICalendar calendarResult;
 
