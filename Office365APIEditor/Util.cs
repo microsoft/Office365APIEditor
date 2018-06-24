@@ -208,7 +208,7 @@ namespace Office365APIEditor
             request.Headers.Add("Authorization:Bearer " + AccessToken);
 
             request.Headers.Add("X-AnchorMailbox:" + MailAddress);
-            request.Headers.Add("Prefer", "outlook.timezone=\"" + System.TimeZoneInfo.Local.Id + "\"");
+            request.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
 
             request.Method = "GET";
 

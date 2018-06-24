@@ -228,6 +228,7 @@
       <DependentUpon>TokenViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
+    <Compile Include="ViewerHelper\AttachmentSummary.cs" />
     <Compile Include="ViewerHelper\ContactSummary.cs" />
     <Compile Include="ViewerHelper\EventSummary.cs" />
     <Compile Include="ViewerHelper\MessageSummary.cs" />

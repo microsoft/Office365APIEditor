@@ -351,8 +351,8 @@ namespace Office365APIEditor.ViewerHelper
                 // Convert JSON response.
 
                 var jsonResponse = (JObject)JsonConvert.DeserializeObject(stringResponse);
-
                 var messages = (JArray)jsonResponse.GetValue("value");
+
                 foreach (var item in messages)
                 {
                     string id = item.Value<string>("Id");
@@ -566,6 +566,164 @@ namespace Office365APIEditor.ViewerHelper
             {
                 return null;
             }
+        }
+
+        public async Task<List<AttachmentSummary>> GetAttachmentsAsync(FolderContentType folderContentType, string itemId)
+        {
+            // Get all attachments of the specified item.
+            // The property of the item to get is very limited.
+
+            client = Util.GetOutlookServicesClient(pca, currentUser);
+
+            List<AttachmentSummary> result = new List<AttachmentSummary>();
+
+            switch (folderContentType)
+            {
+                case FolderContentType.Message:
+                case FolderContentType.MsgFolderRoot:
+                    try
+                    {
+                        var internalResult = await client.Me.Messages[itemId].Attachments
+                            .OrderBy(a => a.Name)
+                            .Take(500)
+                            .Select(a => new { a.Id, a.Name, a.ContentType })
+                            .ExecuteAsync();
+
+                        if (internalResult.CurrentPage.Count == 0)
+                        {
+                            // No attachments for this item.
+                            return result;
+                        }
+
+                        bool morePages = false;
+
+                        do
+                        {
+                            foreach (var attachment in internalResult.CurrentPage)
+                            {
+                                result.Add(new AttachmentSummary()
+                                {
+                                    Id = attachment.Id,
+                                    Name = attachment.Name,
+                                    ContentType = attachment.ContentType
+                                });
+                            }
+
+                            if (internalResult.MorePagesAvailable)
+                            {
+                                morePages = true;
+                                internalResult = await internalResult.GetNextPageAsync();
+                            }
+                            else
+                            {
+                                morePages = false;
+                            }
+                        } while (morePages);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    break;
+                case FolderContentType.Contact:
+                    // In the implementation of OutlookServicesClient, contact item does not have attachment.
+
+                    break;
+                case FolderContentType.Calendar:
+                    try
+                    {
+                        var internalResult = await client.Me.Events[itemId].Attachments
+                            .OrderBy(a => a.Name)
+                            .Take(500)
+                            .Select(a => new { a.Id, a.Name, a.ContentType })
+                            .ExecuteAsync();
+
+                        if (internalResult.CurrentPage.Count == 0)
+                        {
+                            // No attachments for this item.
+                            return result;
+                        }
+
+                        bool morePages = false;
+
+                        do
+                        {
+                            foreach (var attachment in internalResult.CurrentPage)
+                            {
+                                result.Add(new AttachmentSummary()
+                                {
+                                    Id = attachment.Id,
+                                    Name = attachment.Name,
+                                    ContentType = attachment.ContentType
+                                });
+                            }
+
+                            if (internalResult.MorePagesAvailable)
+                            {
+                                morePages = true;
+                                internalResult = await internalResult.GetNextPageAsync();
+                            }
+                            else
+                            {
+                                morePages = false;
+                            }
+                        } while (morePages);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    break;
+                case FolderContentType.DummyCalendarRoot:
+                    break;
+                default:
+                    break;
+            }
+
+            return result;
+        }
+
+        public async Task<Dictionary<string, string>> GetAttachmentAsync(FolderContentType folderContentType, string itemId, string attachmentId)
+        {
+            // Get the specified item.
+
+            Uri URL;
+
+            switch (folderContentType)
+            {
+                case FolderContentType.Message:
+                case FolderContentType.MsgFolderRoot:
+                    URL = new Uri("https://outlook.office.com/api/v2.0/me/messages/" + itemId + "/attachments/" + attachmentId);
+                    break;
+                case FolderContentType.Calendar:
+                    URL = new Uri("https://outlook.office.com/api/v2.0/me/events/" + itemId + "/attachments/" + attachmentId);
+                    break;
+                default:
+                    throw new Exception("FolderContentType must be Message, MsgFolderRoot or Calendar.");
+            }
+
+            string stringResponse = "";
+
+            try
+            {
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            var jsonResponse = (JObject)JsonConvert.DeserializeObject(stringResponse);
+
+            Dictionary<string, string> result = new Dictionary<string, string>();
+
+            foreach (var item in jsonResponse)
+            {
+                result.Add(item.Key, item.Value.Value<string>());
+            }
+
+            return result;
         }
     }
 }

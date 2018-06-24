@@ -483,7 +483,7 @@ namespace Office365APIEditor
                 string result = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
                 var jsonResult = DynamicJson.Parse(result);
 
-                CreatePropTable2(jsonResult);
+                CreatePropTable(jsonResult);
             }
             catch (Exception ex)
             {
@@ -491,7 +491,7 @@ namespace Office365APIEditor
             }
         }
 
-        private void CreatePropTable2(dynamic itemResult)
+        private void CreatePropTable(dynamic itemResult)
         {
             DynamicJson dynamicJsonObject = itemResult;
             

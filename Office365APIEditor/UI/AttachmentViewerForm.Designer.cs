@@ -31,15 +31,15 @@
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridView_AttachmentList = new System.Windows.Forms.DataGridView();
+            this.NameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ContentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView_ItemProps = new System.Windows.Forms.DataGridView();
             this.Property = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip_AttachmentList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItem_DisplayAttachments = new System.Windows.Forms.ToolStripMenuItem();
-            this.NameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -84,6 +84,27 @@
             this.dataGridView_AttachmentList.ReadOnly = true;
             this.dataGridView_AttachmentList.Size = new System.Drawing.Size(881, 225);
             this.dataGridView_AttachmentList.TabIndex = 0;
+            this.dataGridView_AttachmentList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_AttachmentList_CellClick);
+            this.dataGridView_AttachmentList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_AttachmentList_CellDoubleClick);
+            this.dataGridView_AttachmentList.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_AttachmentList_CellMouseClick);
+            // 
+            // NameCol
+            // 
+            this.NameCol.HeaderText = "Name";
+            this.NameCol.Name = "NameCol";
+            this.NameCol.ReadOnly = true;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // ContentType
+            // 
+            this.ContentType.HeaderText = "ContentType";
+            this.ContentType.Name = "ContentType";
+            this.ContentType.ReadOnly = true;
             // 
             // dataGridView_ItemProps
             // 
@@ -132,24 +153,6 @@
             this.ToolStripMenuItem_DisplayAttachments.Name = "ToolStripMenuItem_DisplayAttachments";
             this.ToolStripMenuItem_DisplayAttachments.Size = new System.Drawing.Size(192, 22);
             this.ToolStripMenuItem_DisplayAttachments.Text = "Display Attachments...";
-            // 
-            // NameCol
-            // 
-            this.NameCol.HeaderText = "Name";
-            this.NameCol.Name = "NameCol";
-            this.NameCol.ReadOnly = true;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // ContentType
-            // 
-            this.ContentType.HeaderText = "ContentType";
-            this.ContentType.Name = "ContentType";
-            this.ContentType.ReadOnly = true;
             // 
             // AttachmentViewerForm
             // 
