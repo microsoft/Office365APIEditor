@@ -130,6 +130,7 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -221,6 +222,12 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="TokenResponse.cs" />
+    <Compile Include="UI\SendMailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SendMailForm.Designer.cs">
+      <DependentUpon>SendMailForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\TokenViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,6 +239,7 @@
     <Compile Include="ViewerHelper\ContactSummary.cs" />
     <Compile Include="ViewerHelper\EventSummary.cs" />
     <Compile Include="ViewerHelper\MessageSummary.cs" />
+    <Compile Include="ViewerHelper\NewEmailMessage.cs" />
     <Compile Include="ViewerHelper\PagedResponse.cs" />
     <Compile Include="ViewerHelper\ViewerHelper.cs" />
     <EmbeddedResource Include="UI\AccessTokenWizard.resx">
@@ -276,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ScopeEditorForm.resx">
       <DependentUpon>ScopeEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SendMailForm.resx">
+      <DependentUpon>SendMailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TokenViewer.resx">
       <DependentUpon>TokenViewer.cs</DependentUpon>

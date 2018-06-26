@@ -42,6 +42,8 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accessTokenViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -114,6 +116,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.windowToolStripMenuItem,
             this.toolsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -133,14 +136,14 @@
             // newSessionToolStripMenuItem
             // 
             this.newSessionToolStripMenuItem.Name = "newSessionToolStripMenuItem";
-            this.newSessionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newSessionToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.newSessionToolStripMenuItem.Text = "&New Session...";
             this.newSessionToolStripMenuItem.Click += new System.EventHandler(this.newSessionToolStripMenuItem_Click);
             // 
             // closeSessionToolStripMenuItem
             // 
             this.closeSessionToolStripMenuItem.Name = "closeSessionToolStripMenuItem";
-            this.closeSessionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.closeSessionToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.closeSessionToolStripMenuItem.Text = "&Close Session";
             this.closeSessionToolStripMenuItem.Click += new System.EventHandler(this.closeSessionToolStripMenuItem_Click);
             // 
@@ -166,6 +169,21 @@
             this.accessTokenViewerToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.accessTokenViewerToolStripMenuItem.Text = "&Generic Token Viewer...";
             this.accessTokenViewerToolStripMenuItem.Click += new System.EventHandler(this.accessTokenViewerToolStripMenuItem_Click);
+            // 
+            // windowToolStripMenuItem
+            // 
+            this.windowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newMessageToolStripMenuItem});
+            this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
+            this.windowToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.windowToolStripMenuItem.Text = "&Window";
+            // 
+            // newMessageToolStripMenuItem
+            // 
+            this.newMessageToolStripMenuItem.Name = "newMessageToolStripMenuItem";
+            this.newMessageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newMessageToolStripMenuItem.Text = "&New Message";
+            this.newMessageToolStripMenuItem.Click += new System.EventHandler(this.NewMessageToolStripMenuItem_Click);
             // 
             // MailboxViewerForm
             // 
@@ -205,5 +223,7 @@
         private System.Windows.Forms.ToolStripMenuItem newEditorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeSessionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem accessTokenViewerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem windowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newMessageToolStripMenuItem;
     }
 }

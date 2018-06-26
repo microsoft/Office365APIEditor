@@ -232,6 +232,49 @@ namespace Office365APIEditor
             }
         }
 
+        public static async Task<string> SendPostRequestAsync(Uri URL, string AccessToken, string MailAddress, string PostData)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
+            request.AllowAutoRedirect = true;
+            request.ContentType = "application/json";
+
+            request.Headers.Add("Authorization:Bearer " + AccessToken);
+
+            request.Headers.Add("X-AnchorMailbox:" + MailAddress);
+            request.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+
+            request.Method = "POST";
+
+            // Build a body.
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                string originalRequestBody = PostData;
+
+                streamWriter.Write(originalRequestBody);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+
+            try
+            {
+                // Get a response and response stream.
+                var response = (HttpWebResponse)await request.GetResponseAsync();
+
+                string jsonResponse = "";
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    jsonResponse = reader.ReadToEnd();
+                }
+
+                return jsonResponse;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static async Task<string> GetAccessTokenAsync(PublicClientApplication pca, Microsoft.Identity.Client.IUser CurrentUser)
         {
             // Acquire access token.
@@ -287,6 +330,12 @@ namespace Office365APIEditor
         public static string[] MailboxViewerScopes()
         {
             return new string[] { "offline_access https://outlook.office.com/mail.read https://outlook.office.com/contacts.read https://outlook.office.com/calendars.read" };
+        }
+
+        public static string EscapeForJson(string originalString)
+        {
+            string quotedString = System.Web.Helpers.Json.Encode(originalString);
+            return quotedString.Substring(1, quotedString.Length - 2);
         }
 
         public static string CustomUserAgent

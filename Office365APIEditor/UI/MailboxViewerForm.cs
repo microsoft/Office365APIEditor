@@ -3,6 +3,7 @@
 
 using Microsoft.Identity.Client;
 using Microsoft.Office365.OutlookServices;
+using Office365APIEditor.UI;
 using System;
 using System.Windows.Forms;
 
@@ -31,6 +32,7 @@ namespace Office365APIEditor
         private void MailboxViewerForm_Load(object sender, System.EventArgs e)
         {
             closeSessionToolStripMenuItem.Enabled = false;
+            windowToolStripMenuItem.Visible = false;
 
             // Change window title
             string windowTitle = "Office365APIEditor - " + Application.ProductVersion;
@@ -501,6 +503,7 @@ namespace Office365APIEditor
                 // New session stated
                 newSessionToolStripMenuItem.Enabled = false;
                 closeSessionToolStripMenuItem.Enabled = true;
+                windowToolStripMenuItem.Visible = true;
             }
         }
 
@@ -527,6 +530,7 @@ namespace Office365APIEditor
 
             newSessionToolStripMenuItem.Enabled = true;
             closeSessionToolStripMenuItem.Enabled = false;
+            windowToolStripMenuItem.Visible = false;
         }
 
         private void CloseCurrentSession()
@@ -544,6 +548,21 @@ namespace Office365APIEditor
                 Owner = this
             };
             tokenView.Show();
+        }
+
+        private void NewMessageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (treeView_Mailbox.SelectedNode != null)
+            {
+                TreeNode selectedNode = treeView_Mailbox.SelectedNode;
+                SendMailForm sendMailForm = new SendMailForm(pca, currentUser, (FolderInfo)selectedNode.Tag, selectedNode.Text);
+                sendMailForm.Show();
+            }
+            else
+            {
+                SendMailForm sendMailForm = new SendMailForm(pca, currentUser);
+                sendMailForm.Show();
+            }
         }
     }
 }

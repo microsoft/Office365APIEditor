@@ -104,3 +104,5 @@
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.AttachmentViewerForm.dataGridView_AttachmentList_CellDoubleClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.AttachmentViewerForm.dataGridView_AttachmentList_CellMouseClick(System.Object,System.Windows.Forms.DataGridViewCellMouseEventArgs)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.UI.SendMailForm.Button_Send_ClickAsync(System.Object,System.EventArgs)")]
+

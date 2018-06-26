@@ -725,5 +725,116 @@ namespace Office365APIEditor.ViewerHelper
 
             return result;
         }
+
+        public async Task SendMailAsync(NewEmailMessage newItem, bool saveToSentItems) {
+            // Send a mail.
+            // SendMailAsync method of NuGet version OutlookServicesClient is not working, so we don't use that.
+            
+            Uri URL = new Uri("https://outlook.office.com/api/v2.0/Me/SendMail");
+
+            string postData = @"{
+    ""Message"": {
+        ""ReplyTo"": [],
+        ""ToRecipients"": [{ToRecipients}],
+        ""CcRecipients"": [{CcRecipients}],
+        ""BccRecipients"": [{BccRecipients}],
+        ""Subject"": ""{Subject}"",
+        ""Body"": {
+            ""ContentType"": ""{ContentType}"",
+            ""Content"": ""{Content}""
+        },
+        ""Importance"": ""{Importance}"",
+        ""IsDeliveryReceiptRequested"": {IsDeliveryReceiptRequested},
+        ""IsReadReceiptRequested"": {IsReadReceiptRequested},
+        ""Categories"": []
+    },
+    ""SaveToSentItems"": true
+}";
+
+            string emailAddress = @"{
+            ""EmailAddress"": {
+                ""Address"": ""{address}"",
+                ""Name"": ""{displayName}""
+            }
+        }";
+
+            if (newItem.ToRecipients != null && newItem.ToRecipients.Count != 0)
+            {
+                List<string> recipientList = new List<string>();
+                foreach (var recipient in newItem.ToRecipients)
+                {
+                    string newResipient = emailAddress.Replace("{address}", recipient.Address).Replace("{displayName}", Util.EscapeForJson(recipient.DisplayName));
+                    recipientList.Add(newResipient);
+                }
+
+                string recipients = string.Join(", ", recipientList);
+
+                postData = postData.Replace("{ToRecipients}", recipients);
+            }
+            else
+            {
+                postData = postData.Replace("{ToRecipients}", "");
+            }
+
+            if (newItem.CcRecipients != null && newItem.CcRecipients.Count != 0)
+            {
+                List<string> recipientList = new List<string>();
+                foreach (var recipient in newItem.CcRecipients)
+                {
+                    string newResipient = emailAddress.Replace("{address}", recipient.Address).Replace("{displayName}", Util.EscapeForJson(recipient.DisplayName));
+                    recipientList.Add(newResipient);
+                }
+
+                string recipients = string.Join(", ", recipientList);
+
+                postData = postData.Replace("{CcRecipients}", recipients);
+            }
+            else
+            {
+                postData = postData.Replace("{CcRecipients}", "");
+            }
+
+            if (newItem.BccRecipients != null && newItem.BccRecipients.Count != 0)
+            {
+                List<string> recipientList = new List<string>();
+                foreach (var recipient in newItem.BccRecipients)
+                {
+                    string newResipient = emailAddress.Replace("{address}", recipient.Address).Replace("{displayName}", Util.EscapeForJson(recipient.DisplayName));
+                    recipientList.Add(newResipient);
+                }
+
+                string recipients = string.Join(", ", recipientList);
+
+                postData = postData.Replace("{BccRecipients}", recipients);
+            }
+            else
+            {
+                postData = postData.Replace("{BccRecipients}", "");
+            }
+
+            postData = postData.Replace("{Subject}", Util.EscapeForJson(newItem.Subject));
+            
+            postData = postData.Replace("{ContentType}", newItem.BodyType.ToString());
+
+            postData = postData.Replace("{Content}", Util.EscapeForJson(newItem.Body));
+
+            postData = postData.Replace("{Importance}", newItem.Importance.ToString());
+
+            postData = postData.Replace("{IsDeliveryReceiptRequested}", newItem.RequestDeliveryReceipt.ToString().ToLower());
+
+            postData = postData.Replace("{IsReadReceiptRequested}", newItem.RequestReadReceipt.ToString().ToLower());
+
+            postData = postData.Replace("{SaveToSentItems}", newItem.SaveToSentItems.ToString().ToLower());
+
+            try
+            {
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.DisplayableId, postData);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
