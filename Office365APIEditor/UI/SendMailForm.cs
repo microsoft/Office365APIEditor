@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Identity.Client;
 using Office365APIEditor.ViewerHelper;
+using Office365APIEditor.ViewerHelper.Attachments;
 
 namespace Office365APIEditor.UI
 {
@@ -20,6 +22,8 @@ namespace Office365APIEditor.UI
 
         IUser currentUser;
         private ViewerHelper.ViewerHelper viewerHelper;
+
+        List<FileAttachment> attachments;
 
         public SendMailForm()
         {
@@ -48,6 +52,8 @@ namespace Office365APIEditor.UI
 
         private void SendMailForm_Load(object sender, EventArgs e)
         {
+            attachments = new List<FileAttachment>();
+
             comboBox_Importance.SelectedIndex = 1;
             comboBox_BodyType.SelectedIndex = 0;
         }
@@ -110,6 +116,7 @@ namespace Office365APIEditor.UI
             newItem.Importance = (Importance)comboBox_Importance.SelectedIndex;
             newItem.RequestDeliveryReceipt = checkBox_RequestDeliveryReceipt.Checked;
             newItem.RequestReadReceipt = checkBox_RequestReadReceipt.Checked;
+            newItem.Attachments = attachments;
             newItem.SaveToSentItems = checkBox_SaveToSentItems.Checked;
 
             try
@@ -140,6 +147,18 @@ namespace Office365APIEditor.UI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button_Attachments_Click(object sender, EventArgs e)
+        {
+            NewAttachmentForm newAttachmentForm = new NewAttachmentForm(attachments);
+
+            List<FileAttachment> newAttachments;
+
+            if (newAttachmentForm.ShowDialog(out newAttachments) == DialogResult.OK)
+            {
+                attachments = newAttachments;
             }
         }
     }

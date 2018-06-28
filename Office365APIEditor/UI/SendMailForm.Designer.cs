@@ -143,8 +143,9 @@
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 177);
+            this.label5.Location = new System.Drawing.Point(12, 425);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 13);
             this.label5.TabIndex = 10;
@@ -152,26 +153,27 @@
             // 
             // comboBox_BodyType
             // 
+            this.comboBox_BodyType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBox_BodyType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_BodyType.FormattingEnabled = true;
             this.comboBox_BodyType.Items.AddRange(new object[] {
             "Text",
             "HTML"});
-            this.comboBox_BodyType.Location = new System.Drawing.Point(76, 174);
+            this.comboBox_BodyType.Location = new System.Drawing.Point(76, 422);
             this.comboBox_BodyType.Name = "comboBox_BodyType";
             this.comboBox_BodyType.Size = new System.Drawing.Size(92, 21);
-            this.comboBox_BodyType.TabIndex = 4;
+            this.comboBox_BodyType.TabIndex = 5;
             // 
             // textBox_Body
             // 
             this.textBox_Body.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_Body.Location = new System.Drawing.Point(15, 207);
+            this.textBox_Body.Location = new System.Drawing.Point(15, 174);
             this.textBox_Body.Multiline = true;
             this.textBox_Body.Name = "textBox_Body";
-            this.textBox_Body.Size = new System.Drawing.Size(773, 231);
-            this.textBox_Body.TabIndex = 6;
+            this.textBox_Body.Size = new System.Drawing.Size(773, 240);
+            this.textBox_Body.TabIndex = 4;
             // 
             // checkBox_SaveToSentItems
             // 
@@ -187,12 +189,14 @@
             // 
             // button_Attachments
             // 
-            this.button_Attachments.Location = new System.Drawing.Point(303, 178);
+            this.button_Attachments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button_Attachments.Location = new System.Drawing.Point(303, 420);
             this.button_Attachments.Name = "button_Attachments";
             this.button_Attachments.Size = new System.Drawing.Size(97, 23);
-            this.button_Attachments.TabIndex = 5;
+            this.button_Attachments.TabIndex = 6;
             this.button_Attachments.Text = "Attachments...";
             this.button_Attachments.UseVisualStyleBackColor = true;
+            this.button_Attachments.Click += new System.EventHandler(this.button_Attachments_Click);
             // 
             // label6
             // 

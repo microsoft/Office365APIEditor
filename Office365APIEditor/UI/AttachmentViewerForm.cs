@@ -3,6 +3,7 @@
 
 using Microsoft.Identity.Client;
 using Office365APIEditor.ViewerHelper;
+using Office365APIEditor.ViewerHelper.Attachments;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

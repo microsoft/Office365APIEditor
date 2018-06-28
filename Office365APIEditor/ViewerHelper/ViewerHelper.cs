@@ -6,6 +6,7 @@ using Microsoft.OData.Client;
 using Microsoft.Office365.OutlookServices;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Office365APIEditor.ViewerHelper.Attachments;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -746,16 +747,23 @@ namespace Office365APIEditor.ViewerHelper
         ""Importance"": ""{Importance}"",
         ""IsDeliveryReceiptRequested"": {IsDeliveryReceiptRequested},
         ""IsReadReceiptRequested"": {IsReadReceiptRequested},
-        ""Categories"": []
+        ""Categories"": [],
+        ""Attachments"": [{Attachments}]
     },
     ""SaveToSentItems"": true
 }";
 
-            string emailAddress = @"{
+            string emailAddressTemplate = @"{
             ""EmailAddress"": {
-                ""Address"": ""{address}"",
-                ""Name"": ""{displayName}""
+                ""Address"": ""{Address}"",
+                ""Name"": ""{DisplayName}""
             }
+        }";
+
+            string attachmentTemplate = @"{
+            ""@odata.type"": ""#Microsoft.OutlookServices.FileAttachment"",
+            ""Name"": ""{FileName}"",
+            ""ContentBytes"": ""{ContentBytes}""
         }";
 
             if (newItem.ToRecipients != null && newItem.ToRecipients.Count != 0)
@@ -763,7 +771,7 @@ namespace Office365APIEditor.ViewerHelper
                 List<string> recipientList = new List<string>();
                 foreach (var recipient in newItem.ToRecipients)
                 {
-                    string newResipient = emailAddress.Replace("{address}", recipient.Address).Replace("{displayName}", Util.EscapeForJson(recipient.DisplayName));
+                    string newResipient = emailAddressTemplate.Replace("{Address}", recipient.Address).Replace("{DisplayName}", Util.EscapeForJson(recipient.DisplayName));
                     recipientList.Add(newResipient);
                 }
 
@@ -781,7 +789,7 @@ namespace Office365APIEditor.ViewerHelper
                 List<string> recipientList = new List<string>();
                 foreach (var recipient in newItem.CcRecipients)
                 {
-                    string newResipient = emailAddress.Replace("{address}", recipient.Address).Replace("{displayName}", Util.EscapeForJson(recipient.DisplayName));
+                    string newResipient = emailAddressTemplate.Replace("{Address}", recipient.Address).Replace("{DisplayName}", Util.EscapeForJson(recipient.DisplayName));
                     recipientList.Add(newResipient);
                 }
 
@@ -799,7 +807,7 @@ namespace Office365APIEditor.ViewerHelper
                 List<string> recipientList = new List<string>();
                 foreach (var recipient in newItem.BccRecipients)
                 {
-                    string newResipient = emailAddress.Replace("{address}", recipient.Address).Replace("{displayName}", Util.EscapeForJson(recipient.DisplayName));
+                    string newResipient = emailAddressTemplate.Replace("{Address}", recipient.Address).Replace("{DisplayName}", Util.EscapeForJson(recipient.DisplayName));
                     recipientList.Add(newResipient);
                 }
 
@@ -823,6 +831,24 @@ namespace Office365APIEditor.ViewerHelper
             postData = postData.Replace("{IsDeliveryReceiptRequested}", newItem.RequestDeliveryReceipt.ToString().ToLower());
 
             postData = postData.Replace("{IsReadReceiptRequested}", newItem.RequestReadReceipt.ToString().ToLower());
+
+            if (newItem.Attachments != null && newItem.Attachments.Count != 0)
+            {
+                List<string> attachmentList = new List<string>();
+                foreach (var attachment in newItem.Attachments)
+                {
+                    string newAttachment = attachmentTemplate.Replace("{FileName}", attachment.Name).Replace("{ContentBytes}", attachment.ContentBytes);
+                    attachmentList.Add(newAttachment);
+                }
+
+                string attachments = string.Join(", ", attachmentList);
+
+                postData = postData.Replace("{Attachments}", attachments);
+            }
+            else
+            {
+                postData = postData.Replace("{Attachments}", "");
+            }
 
             postData = postData.Replace("{SaveToSentItems}", newItem.SaveToSentItems.ToString().ToLower());
 

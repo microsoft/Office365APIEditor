@@ -194,6 +194,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\NewAttachmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\NewAttachmentForm.Designer.cs">
+      <DependentUpon>NewAttachmentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\PropertyViewerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,7 +241,8 @@
       <DependentUpon>TokenViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
-    <Compile Include="ViewerHelper\AttachmentSummary.cs" />
+    <Compile Include="ViewerHelper\Attachments\AttachmentSummary.cs" />
+    <Compile Include="ViewerHelper\Attachments\FileAttachment.cs" />
     <Compile Include="ViewerHelper\ContactSummary.cs" />
     <Compile Include="ViewerHelper\EventSummary.cs" />
     <Compile Include="ViewerHelper\MessageSummary.cs" />
@@ -244,6 +251,7 @@
     <Compile Include="ViewerHelper\ViewerHelper.cs" />
     <EmbeddedResource Include="UI\AccessTokenWizard.resx">
       <DependentUpon>AccessTokenWizard.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\AcquireViewerTokenForm.resx">
       <DependentUpon>AcquireViewerTokenForm.cs</DependentUpon>
@@ -273,6 +281,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\NewAttachmentForm.resx">
+      <DependentUpon>NewAttachmentForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\PropertyViewerForm.resx">
       <DependentUpon>PropertyViewerForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -290,6 +302,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TokenViewer.resx">
       <DependentUpon>TokenViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Office365APIEditor_TemporaryKey.pfx" />
     <None Include="packages.config">
