@@ -41,10 +41,10 @@
             this.closeSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.focusedInboxOverridesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accessTokenViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.focusedInboxOverridesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -137,14 +137,14 @@
             // newSessionToolStripMenuItem
             // 
             this.newSessionToolStripMenuItem.Name = "newSessionToolStripMenuItem";
-            this.newSessionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newSessionToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.newSessionToolStripMenuItem.Text = "&New Session...";
             this.newSessionToolStripMenuItem.Click += new System.EventHandler(this.newSessionToolStripMenuItem_Click);
             // 
             // closeSessionToolStripMenuItem
             // 
             this.closeSessionToolStripMenuItem.Name = "closeSessionToolStripMenuItem";
-            this.closeSessionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeSessionToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.closeSessionToolStripMenuItem.Text = "&Close Session";
             this.closeSessionToolStripMenuItem.Click += new System.EventHandler(this.closeSessionToolStripMenuItem_Click);
             // 
@@ -163,6 +163,13 @@
             this.newMessageToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.newMessageToolStripMenuItem.Text = "&New Message...";
             this.newMessageToolStripMenuItem.Click += new System.EventHandler(this.NewMessageToolStripMenuItem_Click);
+            // 
+            // focusedInboxOverridesToolStripMenuItem
+            // 
+            this.focusedInboxOverridesToolStripMenuItem.Name = "focusedInboxOverridesToolStripMenuItem";
+            this.focusedInboxOverridesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.focusedInboxOverridesToolStripMenuItem.Text = "&Focused Inbox Overrides...";
+            this.focusedInboxOverridesToolStripMenuItem.Click += new System.EventHandler(this.FocusedInboxOverridesToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -187,13 +194,6 @@
             this.accessTokenViewerToolStripMenuItem.Text = "&Generic Token Viewer...";
             this.accessTokenViewerToolStripMenuItem.Click += new System.EventHandler(this.accessTokenViewerToolStripMenuItem_Click);
             // 
-            // focusedInboxOverridesToolStripMenuItem
-            // 
-            this.focusedInboxOverridesToolStripMenuItem.Name = "focusedInboxOverridesToolStripMenuItem";
-            this.focusedInboxOverridesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.focusedInboxOverridesToolStripMenuItem.Text = "&Focused Inbox Overrides...";
-            this.focusedInboxOverridesToolStripMenuItem.Click += new System.EventHandler(this.FocusedInboxOverridesToolStripMenuItem_Click);
-            // 
             // MailboxViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -204,6 +204,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MailboxViewerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Office365APIEditor - Mailbox Viewer";
             this.Load += new System.EventHandler(this.MailboxViewerForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

@@ -115,6 +115,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AcquireViewerTokenForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Application ID Setting";
             this.Load += new System.EventHandler(this.AcquireViewerTokenForm_Load);
             this.ResumeLayout(false);

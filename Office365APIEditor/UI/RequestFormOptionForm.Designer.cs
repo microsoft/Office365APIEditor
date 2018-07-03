@@ -216,6 +216,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RequestFormOptionForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Options";
             this.Load += new System.EventHandler(this.RequestFormOptionForm_Load);
             this.groupBox1.ResumeLayout(false);

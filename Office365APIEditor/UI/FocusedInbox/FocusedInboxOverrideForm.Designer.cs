@@ -151,6 +151,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(731, 357);
             this.Name = "FocusedInboxOverrideForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Focused Inbox Override Settings";
             this.Load += new System.EventHandler(this.FocusedInboxOverrideForm_LoadAsync);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_FocusedInboxOverrides)).EndInit();

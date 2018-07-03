@@ -51,6 +51,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.pictureBox_Photo = new System.Windows.Forms.PictureBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.linkLabel_SaveCsvResponse = new System.Windows.Forms.LinkLabel();
             this.dataGridView_CSV = new System.Windows.Forms.DataGridView();
             this.button_ViewTokenInfo = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -77,7 +78,6 @@
             this.radioButton_POST = new System.Windows.Forms.RadioButton();
             this.contextMenuStrip_RunHistory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showDetailsInMainPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.linkLabel_SaveCsvResponse = new System.Windows.Forms.LinkLabel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -347,6 +347,18 @@
             this.tabPage4.Text = "CSV";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // linkLabel_SaveCsvResponse
+            // 
+            this.linkLabel_SaveCsvResponse.AutoSize = true;
+            this.linkLabel_SaveCsvResponse.Location = new System.Drawing.Point(7, 7);
+            this.linkLabel_SaveCsvResponse.Name = "linkLabel_SaveCsvResponse";
+            this.linkLabel_SaveCsvResponse.Size = new System.Drawing.Size(91, 13);
+            this.linkLabel_SaveCsvResponse.TabIndex = 1;
+            this.linkLabel_SaveCsvResponse.TabStop = true;
+            this.linkLabel_SaveCsvResponse.Text = "Save this CSV file";
+            this.linkLabel_SaveCsvResponse.Visible = false;
+            this.linkLabel_SaveCsvResponse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_SaveCsvResponse_LinkClicked);
+            // 
             // dataGridView_CSV
             // 
             this.dataGridView_CSV.AllowUserToAddRows = false;
@@ -605,18 +617,6 @@
             this.showDetailsInMainPanelToolStripMenuItem.Text = "Show details in main panel";
             this.showDetailsInMainPanelToolStripMenuItem.Click += new System.EventHandler(this.showDetailsInMainPanelToolStripMenuItem_Click);
             // 
-            // linkLabel_SaveCsvResponse
-            // 
-            this.linkLabel_SaveCsvResponse.AutoSize = true;
-            this.linkLabel_SaveCsvResponse.Location = new System.Drawing.Point(7, 7);
-            this.linkLabel_SaveCsvResponse.Name = "linkLabel_SaveCsvResponse";
-            this.linkLabel_SaveCsvResponse.Size = new System.Drawing.Size(91, 13);
-            this.linkLabel_SaveCsvResponse.TabIndex = 1;
-            this.linkLabel_SaveCsvResponse.TabStop = true;
-            this.linkLabel_SaveCsvResponse.Text = "Save this CSV file";
-            this.linkLabel_SaveCsvResponse.Visible = false;
-            this.linkLabel_SaveCsvResponse.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_SaveCsvResponse_LinkClicked);
-            // 
             // RequestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -628,6 +628,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(1036, 560);
             this.Name = "RequestForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Office365APIEditor - Editor";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RequestForm_FormClosed);
             this.Load += new System.EventHandler(this.RequestForm_Load);

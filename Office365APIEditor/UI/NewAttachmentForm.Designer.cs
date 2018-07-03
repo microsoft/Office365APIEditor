@@ -107,6 +107,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "NewAttachmentForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Attachments";
             this.Load += new System.EventHandler(this.NewAttachmentForm_Load);
             this.ResumeLayout(false);

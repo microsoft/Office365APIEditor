@@ -266,6 +266,7 @@
             this.Controls.Add(this.button_Send);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SendMailForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "New Mail";
             this.Load += new System.EventHandler(this.SendMailForm_Load);
             this.ResumeLayout(false);

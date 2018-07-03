@@ -161,6 +161,7 @@
             this.ClientSize = new System.Drawing.Size(881, 491);
             this.Controls.Add(this.splitContainer1);
             this.Name = "AttachmentViewerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AttachmentViewerForm";
             this.Load += new System.EventHandler(this.AttachmentViewerForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);

@@ -133,6 +133,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewFocusedInboxOverrideForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "New Override";
             this.Load += new System.EventHandler(this.NewFocusedInboxOverrideForm_Load);
             this.ResumeLayout(false);

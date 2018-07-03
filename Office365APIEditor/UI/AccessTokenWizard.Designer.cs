@@ -1249,6 +1249,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AccessTokenWizard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Office365APIEditor - Access Token Wizard";
             this.Load += new System.EventHandler(this.AccessTokenWizard_Load);
             this.panel_Page00.ResumeLayout(false);
