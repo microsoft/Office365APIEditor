@@ -521,7 +521,7 @@ namespace Office365APIEditor
                 {
                     Owner = this
                 };
-                requestForm.Show();
+                requestForm.Show(this);
             }
         }
 
@@ -548,7 +548,7 @@ namespace Office365APIEditor
             {
                 Owner = this
             };
-            tokenView.Show();
+            tokenView.Show(this);
         }
 
         private void NewMessageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -557,19 +557,19 @@ namespace Office365APIEditor
             {
                 TreeNode selectedNode = treeView_Mailbox.SelectedNode;
                 SendMailForm sendMailForm = new SendMailForm(pca, currentUser, (FolderInfo)selectedNode.Tag, selectedNode.Text);
-                sendMailForm.Show();
+                sendMailForm.Show(this);
             }
             else
             {
                 SendMailForm sendMailForm = new SendMailForm(pca, currentUser);
-                sendMailForm.Show();
+                sendMailForm.Show(this);
             }
         }
 
         private void FocusedInboxOverridesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FocusedInboxOverrideForm focusedInboxOverrideForm = new FocusedInboxOverrideForm(pca, currentUser);
-            focusedInboxOverrideForm.Show();
+            focusedInboxOverrideForm.Show(this);
         }
     }
 }

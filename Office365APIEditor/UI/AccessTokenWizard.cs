@@ -94,6 +94,7 @@ namespace Office365APIEditor
             comboBox_Page09_Resource.SelectedIndex = 1;
 
             Size = new Size(433, 256);
+            CenterToParent();
         }
 
         public DialogResult ShowDialog(out ClientInformation ClientInfo)
