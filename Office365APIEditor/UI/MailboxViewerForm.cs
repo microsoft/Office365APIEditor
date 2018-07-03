@@ -4,6 +4,7 @@
 using Microsoft.Identity.Client;
 using Microsoft.Office365.OutlookServices;
 using Office365APIEditor.UI;
+using Office365APIEditor.UI.FocusedInbox;
 using System;
 using System.Windows.Forms;
 
@@ -563,6 +564,12 @@ namespace Office365APIEditor
                 SendMailForm sendMailForm = new SendMailForm(pca, currentUser);
                 sendMailForm.Show();
             }
+        }
+
+        private void FocusedInboxOverridesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FocusedInboxOverrideForm focusedInboxOverrideForm = new FocusedInboxOverrideForm(pca, currentUser);
+            focusedInboxOverrideForm.Show();
         }
     }
 }

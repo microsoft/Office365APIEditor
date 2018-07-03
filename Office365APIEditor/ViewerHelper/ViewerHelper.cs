@@ -862,5 +862,110 @@ namespace Office365APIEditor.ViewerHelper
                 throw ex;
             }
         }
+
+        public async Task<List<FocusedInboxOverride>> GetFocusedInboxOverridesAsync()
+        {
+            // Get the overrides that a user has set up to always classify messages from certain senders in specific ways.
+
+            Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/InferenceClassification/Overrides");
+
+            string stringResponse = "";
+
+            try
+            {
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            // Convert JSON response.
+
+            var jsonResponse = (JObject)JsonConvert.DeserializeObject(stringResponse);
+            var messages = (JArray)jsonResponse.GetValue("value");
+
+            List<FocusedInboxOverride> result = new List<FocusedInboxOverride>();
+
+            foreach (var item in messages)
+            {
+                string id = item.Value<string>("Id");
+                string classifyAs = item.Value<string>("ClassifyAs");
+
+                JObject jObjectSender = item.Value<JObject>("SenderEmailAddress");
+                FocusedInboxOverrideSender sender = new FocusedInboxOverrideSender();
+
+                if (jObjectSender != null && jObjectSender.TryGetValue("Address", out JToken jTokenAddress))
+                {
+                    sender.Address = jTokenAddress.Value<string>();
+                }
+
+                if (jObjectSender != null && jObjectSender.TryGetValue("Name", out JToken jTokenName))
+                {
+                    sender.Name = jTokenName.Value<string>();
+                }
+
+                result.Add(new FocusedInboxOverride
+                {
+                    Id = id,
+                    ClassifyAs = (Classify)Enum.Parse(typeof(Classify), classifyAs, true),
+                    SenderEmailAddress = sender
+                });
+            }
+
+            return result;
+        }
+
+        public async Task AddOrUpdateFocusedInboxOverrideAsync(FocusedInboxOverride newOverride)
+        {
+            // Add or update a new focused inbox override setting.
+
+            // PATCH request can update only ClassifyAs, and POST request can update both ClassifyAs and display name.
+            // So, we use POST request when updating.
+
+            Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/InferenceClassification/Overrides");
+
+            string postData = @"{
+    ""ClassifyAs"": ""{Classify}"",
+    ""SenderEmailAddress"": {
+        ""Name"": ""{Name}"",
+        ""Address"": ""{Address}""
+    }
+}";
+
+            postData = postData.Replace("{Classify}", newOverride.ClassifyAs.ToString());
+
+            postData = postData.Replace("{Name}", newOverride.SenderEmailAddress.Name);
+
+            postData = postData.Replace("{Address}", newOverride.SenderEmailAddress.Address);
+
+            try
+            {
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.DisplayableId, postData);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task RemoveFocusedInboxOverrideAsync(string FocusedInboxOverrideId)
+        {
+            // Remove a focused inbox override setting.
+
+            Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/InferenceClassification/Overrides('" + FocusedInboxOverrideId + "')");
+
+            try
+            {
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                string stringResponse = await Util.SendDeleteRequestAsync(URL, accessToken, currentUser.DisplayableId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

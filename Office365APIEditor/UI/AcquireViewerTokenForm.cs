@@ -59,6 +59,7 @@ namespace Office365APIEditor
         private async System.Threading.Tasks.Task AcquireAccessTokenAsync(string ClientId)
         {
             Cursor = Cursors.WaitCursor;
+            Enabled = false;
 
             string[] scopes = Util.MailboxViewerScopes();
 
@@ -86,19 +87,22 @@ namespace Office365APIEditor
 
                 Properties.Settings.Default.Save();
                 DialogResult = DialogResult.OK;
-                Cursor = Cursors.Default;
                 Close();
             }
             catch (Exception ex)
             {
                 stringBuilder.AppendLine("Result : Fail");
                 stringBuilder.AppendLine("Message : " + ex.Message);
-                Cursor = Cursors.Default;
 
                 if (ex.Message != "User canceled authentication")
                 {
                     MessageBox.Show(ex.Message, "Office365APIEditor");
                 }
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+                Enabled = true;
             }
 
             Util.WriteCustomLog("AcquireViewerTokenForm", stringBuilder.ToString());

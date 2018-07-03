@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
 using Microsoft.Identity.Client;
-using Office365APIEditor.ViewerHelper;
 using Office365APIEditor.ViewerHelper.Attachments;
 using System;
 using System.Collections.Generic;

@@ -43,7 +43,7 @@
             this.textBox_ClientID.Location = new System.Drawing.Point(109, 38);
             this.textBox_ClientID.Name = "textBox_ClientID";
             this.textBox_ClientID.Size = new System.Drawing.Size(224, 20);
-            this.textBox_ClientID.TabIndex = 1;
+            this.textBox_ClientID.TabIndex = 0;
             this.textBox_ClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastMailboxViewerClientID;
             // 
             // button_AcquireAccessToken
@@ -92,7 +92,7 @@
             this.button_UseBuiltInApp.Location = new System.Drawing.Point(15, 66);
             this.button_UseBuiltInApp.Name = "button_UseBuiltInApp";
             this.button_UseBuiltInApp.Size = new System.Drawing.Size(171, 23);
-            this.button_UseBuiltInApp.TabIndex = 6;
+            this.button_UseBuiltInApp.TabIndex = 1;
             this.button_UseBuiltInApp.Text = "Use the built-in application";
             this.button_UseBuiltInApp.UseVisualStyleBackColor = true;
             this.button_UseBuiltInApp.Click += new System.EventHandler(this.button_UseBuiltInApp_ClickAsync);

@@ -7,6 +7,7 @@ using Microsoft.Office365.OutlookServices;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -275,6 +276,40 @@ namespace Office365APIEditor
             }
         }
 
+
+        internal static async Task<string> SendDeleteRequestAsync(Uri URL, string AccessToken, string MailAddress)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
+            request.AllowAutoRedirect = true;
+            request.ContentType = "application/json";
+
+            request.Headers.Add("Authorization:Bearer " + AccessToken);
+
+            request.Headers.Add("X-AnchorMailbox:" + MailAddress);
+            request.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+
+            request.Method = "DELETE";
+
+            try
+            {
+                // Get a response and response stream.
+                var response = (HttpWebResponse)await request.GetResponseAsync();
+
+                string jsonResponse = "";
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    jsonResponse = reader.ReadToEnd();
+                }
+
+                return jsonResponse;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static async Task<string> GetAccessTokenAsync(PublicClientApplication pca, Microsoft.Identity.Client.IUser CurrentUser)
         {
             // Acquire access token.
@@ -284,7 +319,7 @@ namespace Office365APIEditor
 
             try
             {
-                ar = await pca.AcquireTokenSilentAsync(MailboxViewerScopes(), CurrentUser);
+                ar = await pca.AcquireTokenSilentAsync(MailboxViewerScopes(), pca.Users.Where(u => u.DisplayableId == CurrentUser.DisplayableId ).First());
             }
             catch (Exception)
             {
@@ -329,7 +364,7 @@ namespace Office365APIEditor
 
         public static string[] MailboxViewerScopes()
         {
-            return new string[] { "offline_access https://outlook.office.com/mail.read https://outlook.office.com/contacts.read https://outlook.office.com/calendars.read" };
+            return new string[] { "https://outlook.office.com/Calendars.Read https://outlook.office.com/Calendars.ReadWrite https://outlook.office.com/Contacts.Read https://outlook.office.com/Contacts.ReadWrite https://outlook.office.com/Mail.Read https://outlook.office.com/Mail.ReadWrite https://outlook.office.com/Mail.Send https://outlook.office.com/User.ReadBasic.All" };
         }
 
         public static string EscapeForJson(string originalString)
