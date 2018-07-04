@@ -121,27 +121,40 @@ namespace Office365APIEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>offline_access</string>
-  <string>openid</string>
-  <string>profile</string>
-  <string>email</string>
-  <string>https://outlook.office.com/mail.read</string>
-  <string>https://outlook.office.com/mail.readwrite</string>
-  <string>https://outlook.office.com/mail.send</string>
-  <string>https://outlook.office.com/contacts.read</string>
-  <string>https://outlook.office.com/contacts.readwrite</string>
-  <string>https://outlook.office.com/calendars.read</string>
-  <string>https://outlook.office.com/calendars.readwrite</string>
-  <string>https://graph.microsoft.com/mail.read</string>
-  <string>https://graph.microsoft.com/mail.readwrite</string>
-  <string>https://graph.microsoft.com/mail.send</string>
-  <string>https://graph.microsoft.com/contacts.read</string>
-  <string>https://graph.microsoft.com/contacts.readwrite</string>
-  <string>https://graph.microsoft.com/calendars.read</string>
-  <string>https://graph.microsoft.com/calendars.readwrite</string>
-</ArrayOfString>")]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>offline_access</string>\r\n  <string>openid</string>\r\n  <string>profile</str" +
+            "ing>\r\n  <string>email</string>\r\n  <string>https://outlook.office.com/calendars.r" +
+            "ead</string>\r\n  <string>https://outlook.office.com/calendars.read.shared</string" +
+            ">\r\n  <string>https://outlook.office.com/calendars.readwrite</string>\r\n  <string>" +
+            "https://outlook.office.com/calendars.readwrite.shared</string>\r\n  <string>https:" +
+            "//outlook.office.com/contacts.read</string>\r\n  <string>https://outlook.office.co" +
+            "m/contacts.readwrite</string>\r\n  <string>https://outlook.office.com/mail.read</s" +
+            "tring>\r\n  <string>https://outlook.office.com/mail.readwrite</string>\r\n  <string>" +
+            "https://outlook.office.com/mail.send</string>\r\n  <string>https://outlook.office." +
+            "com/mailboxsettings.read</string>\r\n  <string>https://outlook.office.com/mailboxs" +
+            "ettings.readwrite</string>\r\n  <string>https://outlook.office.com/people.read</st" +
+            "ring>\r\n  <string>https://outlook.office.com/tasks.read</string>\r\n  <string>https" +
+            "://outlook.office.com/tasks.readwrite</string>\r\n  <string>https://outlook.office" +
+            ".com/user.read</string>\r\n  <string>https://outlook.office.com/user.readwrite</st" +
+            "ring>\r\n  <string>https://outlook.office.com/user.readbasic.all</string>\r\n  <stri" +
+            "ng>https://graph.microsoft.com/Calendars.Read</string>\r\n  <string>https://graph." +
+            "microsoft.com/Calendars.Read.Shared</string>\r\n  <string>https://graph.microsoft." +
+            "com/Calendars.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/Calendar" +
+            "s.ReadWrite.Shared</string>\r\n  <string>https://graph.microsoft.com/Contacts.Read" +
+            "</string>\r\n  <string>https://graph.microsoft.com/Contacts.Read.Shared</string>\r\n" +
+            "  <string>https://graph.microsoft.com/Contacts.ReadWrite</string>\r\n  <string>htt" +
+            "ps://graph.microsoft.com/Contacts.ReadWrite.Shared</string>\r\n  <string>https://g" +
+            "raph.microsoft.com/Mail.Read</string>\r\n  <string>https://graph.microsoft.com/Mai" +
+            "l.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/Mail.Read.Shared</st" +
+            "ring>\r\n  <string>https://graph.microsoft.com/Mail.ReadWrite.Shared</string>\r\n  <" +
+            "string>https://graph.microsoft.com/Mail.Send</string>\r\n  <string>https://graph.m" +
+            "icrosoft.com/Mail.Send.Shared</string>\r\n  <string>https://graph.microsoft.com/Ma" +
+            "ilboxSettings.Read</string>\r\n  <string>https://graph.microsoft.com/MailboxSettin" +
+            "gs.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/People.Read</string" +
+            ">\r\n  <string>https://graph.microsoft.com/User.Read</string>\r\n  <string>https://g" +
+            "raph.microsoft.com/User.ReadWrite</string>\r\n  <string>https://graph.microsoft.co" +
+            "m/User.ReadBasic.All</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection PredefinedScopes {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["PredefinedScopes"]));
@@ -150,17 +163,26 @@ namespace Office365APIEditor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
-<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-  <string>offline_access</string>
-  <string>https://graph.microsoft.com/mail.read</string>
-  <string>https://graph.microsoft.com/mail.readwrite</string>
-  <string>https://graph.microsoft.com/mail.send</string>
-  <string>https://graph.microsoft.com/contacts.read</string>
-  <string>https://graph.microsoft.com/contacts.readwrite</string>
-  <string>https://graph.microsoft.com/calendars.read</string>
-  <string>https://graph.microsoft.com/calendars.readwrite</string>
-</ArrayOfString>")]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>offline_access</string>\r\n  <string>https://graph.microsoft.com/Calendars.R" +
+            "ead</string>\r\n  <string>https://graph.microsoft.com/Calendars.Read.Shared</strin" +
+            "g>\r\n  <string>https://graph.microsoft.com/Calendars.ReadWrite</string>\r\n  <strin" +
+            "g>https://graph.microsoft.com/Calendars.ReadWrite.Shared</string>\r\n  <string>htt" +
+            "ps://graph.microsoft.com/Contacts.Read</string>\r\n  <string>https://graph.microso" +
+            "ft.com/Contacts.Read.Shared</string>\r\n  <string>https://graph.microsoft.com/Cont" +
+            "acts.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/Contacts.ReadWrit" +
+            "e.Shared</string>\r\n  <string>https://graph.microsoft.com/Mail.Read</string>\r\n  <" +
+            "string>https://graph.microsoft.com/Mail.ReadWrite</string>\r\n  <string>https://gr" +
+            "aph.microsoft.com/Mail.Read.Shared</string>\r\n  <string>https://graph.microsoft.c" +
+            "om/Mail.ReadWrite.Shared</string>\r\n  <string>https://graph.microsoft.com/Mail.Se" +
+            "nd</string>\r\n  <string>https://graph.microsoft.com/Mail.Send.Shared</string>\r\n  " +
+            "<string>https://graph.microsoft.com/MailboxSettings.Read</string>\r\n  <string>htt" +
+            "ps://graph.microsoft.com/MailboxSettings.ReadWrite</string>\r\n  <string>https://g" +
+            "raph.microsoft.com/People.Read</string>\r\n  <string>https://graph.microsoft.com/U" +
+            "ser.Read</string>\r\n  <string>https://graph.microsoft.com/User.ReadWrite</string>" +
+            "\r\n  <string>https://graph.microsoft.com/User.ReadBasic.All</string>\r\n</ArrayOfSt" +
+            "ring>")]
         public global::System.Collections.Specialized.StringCollection DefaultScopes {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["DefaultScopes"]));

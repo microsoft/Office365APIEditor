@@ -31,6 +31,11 @@ namespace Office365APIEditor
 
         private void ScopeEditorForm_Load(object sender, EventArgs e)
         {
+            PrepareScopes(false);
+        }
+
+        private void PrepareScopes(bool DefaultScopesOnly)
+        {
             changingAllStatus = true;
 
             // To sort scopes alphabetically, use Sorted prop.
@@ -41,7 +46,6 @@ namespace Office365APIEditor
                 if (initialCheckedScopes.Contains(scope))
                 {
                     checkedListBox_Scopes.Items.Add(scope, true);
-                    //checkedListBox_Scopes.SetItemChecked(checkedListBox_Scopes.Items.Count - 1, true);
                     textBox_ScopePreview.Text += scope + " ";
                 }
                 else
@@ -50,7 +54,8 @@ namespace Office365APIEditor
                 }
             }
 
-            if (Properties.Settings.Default.CustomDefinedScopes != null && Properties.Settings.Default.CustomDefinedScopes.Count >= 1)
+            if (DefaultScopesOnly == false && Properties.Settings.Default.CustomDefinedScopes != null && Properties.Settings.Default.CustomDefinedScopes.Count >= 1)
+            { 
                 foreach (string scope in Properties.Settings.Default.CustomDefinedScopes)
                 {
                     if (initialCheckedScopes.Contains(scope))
@@ -64,6 +69,7 @@ namespace Office365APIEditor
                         checkedListBox_Scopes.Items.Add(scope, false);
                     }
                 }
+            }
 
             textBox_ScopePreview.Text = textBox_ScopePreview.Text.TrimEnd(' ');
 
@@ -120,8 +126,6 @@ namespace Office365APIEditor
 
         private void button_RemoveScope_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.None;
-
             string selectedScope = checkedListBox_Scopes.SelectedItem.ToString();
 
             if (IsPredefinedScope(selectedScope))
@@ -219,6 +223,7 @@ namespace Office365APIEditor
                 textBox_ScopePreview.Text = textBox_ScopePreview.Text.TrimEnd(' ');
             });
         }
+
         void selectAll(bool Selected)
         {
             changingAllStatus = true;
@@ -263,6 +268,24 @@ namespace Office365APIEditor
             Properties.Settings.Default.Save();
 
             DialogResult = DialogResult.OK;
+        }
+
+        private void Button_RemoveCustomValues_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure to remove all custom scopes?", "Office365APIEditor", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                // Once remove all scopes and reload only predefined scopes.
+
+                initialCheckedScopes = textBox_ScopePreview.Text.Split(' ');
+
+                changingAllStatus = true;
+
+                checkedListBox_Scopes.Items.Clear();
+
+                PrepareScopes(true);
+
+                changingAllStatus = false;
+            }
         }
     }
 }
