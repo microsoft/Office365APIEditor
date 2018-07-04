@@ -61,8 +61,8 @@ namespace Office365APIEditor
             // 1. Try to decode the ID Token and the Access Token.
             // 2. Select a token and open a detail window.
 
-            string idToken = (rawIdToken != "" && rawIdToken != null) ? rawIdToken : textBox_IdToken.Text;
-            string accessToken = (rawAccessToken != "" && rawAccessToken != null) ? rawAccessToken : textBox_AccessToken.Text;
+            string idToken = (rawIdToken != "" && rawIdToken != null) ? rawIdToken : textBox_IdToken.Text.Trim();
+            string accessToken = (rawAccessToken != "" && rawAccessToken != null) ? rawAccessToken : textBox_AccessToken.Text.Trim();
 
             Tuple<bool, string, string, string> decodedIdToken = TryDecodeToken(idToken);
             Tuple<bool, string, string, string> decodedAccessToken = TryDecodeToken(accessToken);
