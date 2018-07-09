@@ -122,6 +122,7 @@
             this.button_Save.TabIndex = 8;
             this.button_Save.Text = "Save";
             this.button_Save.UseVisualStyleBackColor = true;
+            this.button_Save.Click += new System.EventHandler(this.Button_Save_Click);
             // 
             // label4
             // 
@@ -196,7 +197,7 @@
             this.button_Attachments.TabIndex = 6;
             this.button_Attachments.Text = "Attachments...";
             this.button_Attachments.UseVisualStyleBackColor = true;
-            this.button_Attachments.Click += new System.EventHandler(this.button_Attachments_Click);
+            this.button_Attachments.Click += new System.EventHandler(this.Button_Attachments_Click);
             // 
             // label6
             // 

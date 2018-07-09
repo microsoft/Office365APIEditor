@@ -116,4 +116,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.MailboxViewerForm.PrepareTaskFoldersAsync(System.String,System.Windows.Forms.TreeNode)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.MailboxViewerForm.GetTaskGroupPropsAsync(System.String)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.MailboxViewerForm.GetTaskFolderPropsAsync(System.String)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.UI.SendMailForm.Button_Save_Click(System.Object,System.EventArgs)")]
 

@@ -734,7 +734,47 @@ namespace Office365APIEditor.ViewerHelper
             
             Uri URL = new Uri("https://outlook.office.com/api/v2.0/Me/SendMail");
 
-            string postData = @"{
+            string postData = CreateNewItemPostData(newItem, false);
+
+            try
+            {
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.DisplayableId, postData);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task SaveDraftAsync(NewEmailMessage newItem)
+        {
+            // Save a new draft mail.
+
+            Uri URL = new Uri("https://outlook.office.com/api/v2.0/Me/messages");
+
+            string postData = CreateNewItemPostData(newItem, true);
+
+            try
+            {
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.DisplayableId, postData);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private string CreateNewItemPostData(NewEmailMessage newItem, bool isDraft)
+        {
+            // Create POST data for sending or saving new item from NewEmailMessage.
+
+            string postData = "";
+
+            if (isDraft == false)
+            {
+                postData = @"{
     ""Message"": {
         ""ReplyTo"": [],
         ""ToRecipients"": [{ToRecipients}],
@@ -753,6 +793,26 @@ namespace Office365APIEditor.ViewerHelper
     },
     ""SaveToSentItems"": true
 }";
+            }
+            else
+            {
+                 postData = @"{
+        ""ReplyTo"": [],
+        ""ToRecipients"": [{ToRecipients}],
+        ""CcRecipients"": [{CcRecipients}],
+        ""BccRecipients"": [{BccRecipients}],
+        ""Subject"": ""{Subject}"",
+        ""Body"": {
+            ""ContentType"": ""{ContentType}"",
+            ""Content"": ""{Content}""
+        },
+        ""Importance"": ""{Importance}"",
+        ""IsDeliveryReceiptRequested"": {IsDeliveryReceiptRequested},
+        ""IsReadReceiptRequested"": {IsReadReceiptRequested},
+        ""Categories"": [],
+        ""Attachments"": [{Attachments}]
+    }";
+            }
 
             string emailAddressTemplate = @"{
             ""EmailAddress"": {
@@ -822,7 +882,7 @@ namespace Office365APIEditor.ViewerHelper
             }
 
             postData = postData.Replace("{Subject}", Util.EscapeForJson(newItem.Subject));
-            
+
             postData = postData.Replace("{ContentType}", newItem.BodyType.ToString());
 
             postData = postData.Replace("{Content}", Util.EscapeForJson(newItem.Body));
@@ -853,16 +913,10 @@ namespace Office365APIEditor.ViewerHelper
 
             postData = postData.Replace("{SaveToSentItems}", newItem.SaveToSentItems.ToString().ToLower());
 
-            try
-            {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.DisplayableId, postData);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return postData;
         }
+
+
 
         public async Task<List<FocusedInboxOverride>> GetFocusedInboxOverridesAsync()
         {

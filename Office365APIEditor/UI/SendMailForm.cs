@@ -64,61 +64,18 @@ namespace Office365APIEditor.UI
 
             viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
 
-            NewEmailMessage newItem = new NewEmailMessage();
+            NewEmailMessage newItem;
 
             try
             {
-                MailAddressCollection toMailAddresses = new MailAddressCollection();
-
-                if (textBox_To.Text != "")
-                {
-                    foreach (var recipient in textBox_To.Text.Split(','))
-                    {
-                        toMailAddresses.Add(recipient);
-                    }
-                }
-                
-                newItem.ToRecipients = toMailAddresses;
-
-                MailAddressCollection ccMailAddresses = new MailAddressCollection();
-
-                if (textBox_Cc.Text != "")
-                {
-                    foreach (var recipient in textBox_Cc.Text.Split(','))
-                    {
-                        ccMailAddresses.Add(recipient);
-                    }
-                }
-
-                newItem.CcRecipients = ccMailAddresses;
-
-                MailAddressCollection bccMailAddresses = new MailAddressCollection();
-
-                if (textBox_Bcc.Text != "")
-                {
-                    foreach (var recipient in textBox_Bcc.Text.Split(','))
-                    {
-                        bccMailAddresses.Add(recipient);
-                    }
-                }
-
-                newItem.BccRecipients = bccMailAddresses;
+                newItem = CreateNewEmailMessageObject();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Invalid recipients. " + ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            newItem.Subject = textBox_Subject.Text;
-            newItem.BodyType = (BodyType)comboBox_BodyType.SelectedIndex;
-            newItem.Body = textBox_Body.Text;
-            newItem.Importance = (Importance)comboBox_Importance.SelectedIndex;
-            newItem.RequestDeliveryReceipt = checkBox_RequestDeliveryReceipt.Checked;
-            newItem.RequestReadReceipt = checkBox_RequestReadReceipt.Checked;
-            newItem.Attachments = attachments;
-            newItem.SaveToSentItems = checkBox_SaveToSentItems.Checked;
-
+            
             try
             {
                 await viewerHelper.SendMailAsync(newItem, checkBox_SaveToSentItems.Checked);
@@ -150,13 +107,119 @@ namespace Office365APIEditor.UI
             }
         }
 
-        private void button_Attachments_Click(object sender, EventArgs e)
+        private async void Button_Save_Click(object sender, EventArgs e)
+        {
+            // Save new mail.
+
+            viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
+
+            NewEmailMessage newItem;
+
+            try
+            {
+                newItem = CreateNewEmailMessageObject();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                await viewerHelper.SaveDraftAsync(newItem);
+                Close();
+            }
+            catch (WebException ex)
+            {
+                if (ex.Response == null)
+                {
+                    MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    string jsonResponse = "";
+                    using (Stream responseStream = ex.Response.GetResponseStream())
+                    {
+                        StreamReader reader = new StreamReader(responseStream, Encoding.Default);
+                        jsonResponse = reader.ReadToEnd();
+                    }
+
+                    HttpWebResponse response = (HttpWebResponse)ex.Response;
+
+                    MessageBox.Show(response.StatusCode.ToString() + Environment.NewLine + jsonResponse + Environment.NewLine, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private NewEmailMessage CreateNewEmailMessageObject()
+        {
+            NewEmailMessage newItem = new NewEmailMessage();
+
+            try
+            {
+                MailAddressCollection toMailAddresses = new MailAddressCollection();
+
+                if (textBox_To.Text != "")
+                {
+                    foreach (var recipient in textBox_To.Text.Split(','))
+                    {
+                        toMailAddresses.Add(recipient);
+                    }
+                }
+
+                newItem.ToRecipients = toMailAddresses;
+
+                MailAddressCollection ccMailAddresses = new MailAddressCollection();
+
+                if (textBox_Cc.Text != "")
+                {
+                    foreach (var recipient in textBox_Cc.Text.Split(','))
+                    {
+                        ccMailAddresses.Add(recipient);
+                    }
+                }
+
+                newItem.CcRecipients = ccMailAddresses;
+
+                MailAddressCollection bccMailAddresses = new MailAddressCollection();
+
+                if (textBox_Bcc.Text != "")
+                {
+                    foreach (var recipient in textBox_Bcc.Text.Split(','))
+                    {
+                        bccMailAddresses.Add(recipient);
+                    }
+                }
+
+                newItem.BccRecipients = bccMailAddresses;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Invalid recipients. " + ex.Message, ex);
+            }
+
+            newItem.Subject = textBox_Subject.Text;
+            newItem.BodyType = (BodyType)comboBox_BodyType.SelectedIndex;
+            newItem.Body = textBox_Body.Text;
+            newItem.Importance = (Importance)comboBox_Importance.SelectedIndex;
+            newItem.RequestDeliveryReceipt = checkBox_RequestDeliveryReceipt.Checked;
+            newItem.RequestReadReceipt = checkBox_RequestReadReceipt.Checked;
+            newItem.Attachments = attachments;
+            newItem.SaveToSentItems = checkBox_SaveToSentItems.Checked;
+
+            return newItem;
+        }
+
+        private void Button_Attachments_Click(object sender, EventArgs e)
         {
             NewAttachmentForm newAttachmentForm = new NewAttachmentForm(attachments);
-
-            List<FileAttachment> newAttachments;
-
-            if (newAttachmentForm.ShowDialog(out newAttachments) == DialogResult.OK)
+            
+            if (newAttachmentForm.ShowDialog(out List<FileAttachment> newAttachments) == DialogResult.OK)
             {
                 attachments = newAttachments;
             }
