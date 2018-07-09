@@ -7,6 +7,7 @@ using Microsoft.Office365.OutlookServices;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Office365APIEditor.ViewerHelper.Attachments;
+using Office365APIEditor.ViewerHelper.Tasks;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -961,6 +962,237 @@ namespace Office365APIEditor.ViewerHelper
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
                 string stringResponse = await Util.SendDeleteRequestAsync(URL, accessToken, currentUser.DisplayableId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<List<TaskGroup>> GetAllTaskGroupAsync()
+        {
+            // Get all TaskGroups.
+            // The property of the item to get is very limited.
+
+            Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/taskgroups?$select=Id,Name");
+
+            string stringResponse = "";
+
+            try
+            {
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            // Convert JSON response.
+
+            var jsonResponse = (JObject)JsonConvert.DeserializeObject(stringResponse);
+            var taskGroups = (JArray)jsonResponse.GetValue("value");
+
+            List<TaskGroup> result = new List<TaskGroup>();
+
+            foreach (var group in taskGroups)
+            {
+                string id = group.Value<string>("Id");
+                string name = group.Value<string>("Name");
+                
+                result.Add(new TaskGroup
+                {
+                    Id = id,
+                    Name = name,
+                });
+            }
+
+            return result;
+        }
+
+        public async Task<TaskGroup> GetTaskGroupAsync(string TaskGroupId)
+        {
+            // Get the specified TaskGroup.
+
+            Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/taskgroups/" + TaskGroupId);
+
+            string stringResponse = "";
+
+            try
+            {
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            // Convert JSON response.
+            return JsonConvert.DeserializeObject<TaskGroup>(stringResponse);
+        }
+
+        public async Task<List<TaskFolder>> GetAllTaskFoldersAsync(string TaskGroupId)
+        {
+            // Get all TaskFolder in the specified TaskGroup.
+            // The property of the item to get is very limited.
+
+            Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/taskgroups/" + TaskGroupId + "/taskfolders?$select=Id,Name");
+
+            string stringResponse = "";
+
+            try
+            {
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            // Convert JSON response.
+
+            var jsonResponse = (JObject)JsonConvert.DeserializeObject(stringResponse);
+            var taskFolders = (JArray)jsonResponse.GetValue("value");
+
+            List<TaskFolder> result = new List<TaskFolder>();
+
+            foreach (var folder in taskFolders)
+            {
+                string id = folder.Value<string>("Id");
+                string name = folder.Value<string>("Name");
+
+                result.Add(new TaskFolder
+                {
+                    Id = id,
+                    Name = name,
+                });
+            }
+
+            return result;
+        }
+
+        public async Task<TaskFolder> GetTaskFolderAsync(string TaskFolderId)
+        {
+            // Get the specified TaskFolder.
+
+            Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/taskfolders/" + TaskFolderId);
+
+            string stringResponse = "";
+
+            try
+            {
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            // Convert JSON response.
+            return JsonConvert.DeserializeObject<TaskFolder>(stringResponse);
+        }
+
+        internal async Task<List<TaskSummary>> GetTaskSummaryAsync(string FolderId)
+        {
+            // Get all task items in the specified folder.
+            // The property of the item to get is very limited.
+
+            Uri URL = new Uri(@"https://outlook.office.com/api/v2.0/me/TaskFolders/" + FolderId + "/tasks?$orderby=CreatedDateTime desc&$top=500&$select=Subject,HasAttachments,CreatedDateTime,LastModifiedDateTime,Status");
+            string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+
+            List<TaskSummary> result = new List<TaskSummary>();
+
+            PagedResponse<TaskSummary> internalResult = await InternalGetTaskSummaryAsync(URL, accessToken);
+
+            bool morePage = false;
+
+            do
+            {
+                result.AddRange(internalResult.CurrentPage);
+
+                if (internalResult.MorePage)
+                {
+                    morePage = true;
+                    internalResult = await InternalGetTaskSummaryAsync(new Uri(internalResult.NextLink), accessToken);
+                }
+                else
+                {
+                    morePage = false;
+                }
+            } while (morePage);
+
+            return result;
+        }
+
+        private async Task<PagedResponse<TaskSummary>> InternalGetTaskSummaryAsync(Uri URL, string accessToken)
+        {
+            // TODO : Implement Logging feature
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
+            request.AllowAutoRedirect = true;
+            request.ContentType = "application/json";
+            request.Headers.Add("Authorization:Bearer " + accessToken);
+            request.Headers.Add("X-AnchorMailbox:" + currentUser);
+            request.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+            request.Method = "GET";
+
+            List<TaskSummary> result = new List<TaskSummary>();
+
+            try
+            {
+                // Get a response and response stream.
+                var httpWebResponse = (HttpWebResponse)await request.GetResponseAsync();
+
+                string stringResponse = "";
+                using (Stream responseStream = httpWebResponse.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    stringResponse = reader.ReadToEnd();
+                }
+
+                // Convert JSON response.
+
+                var jsonResponse = (JObject)JsonConvert.DeserializeObject(stringResponse);
+                var messages = (JArray)jsonResponse.GetValue("value");
+
+                foreach (var item in messages)
+                {
+                    string id = item.Value<string>("Id");
+                    string subject = item.Value<string>("Subject");
+                    bool hasAttachments = item.Value<bool>("HasAttachments");
+                    DateTimeOffset? createdDateTime = ConvertDateTimeToDateTimeOffset(item.Value<DateTime>("CreatedDateTime"));
+                    DateTimeOffset? lastModifiedDateTime = ConvertDateTimeToDateTimeOffset(item.Value<DateTime>("LastModifiedDateTime"));
+                    string status = item.Value<string>("Status");
+
+                    result.Add(new TaskSummary()
+                    {
+                        Id = id,
+                        Subject = subject,
+                        HasAttachments = hasAttachments,
+                        CreatedDateTime = createdDateTime,
+                        LastModifiedDateTime = lastModifiedDateTime,
+                        Status = status
+                    });
+                }
+
+                PagedResponse<TaskSummary> pagedResponse = new PagedResponse<TaskSummary>();
+
+                var nextLink = (JValue)jsonResponse.GetValue("@odata.nextLink");
+                if (nextLink != null)
+                {
+                    pagedResponse.MorePage = true;
+                    pagedResponse.NextLink = nextLink.Value.ToString();
+                }
+                else
+                {
+                    pagedResponse.MorePage = false;
+                }
+
+                pagedResponse.CurrentPage = result;
+
+                return pagedResponse;
             }
             catch (Exception ex)
             {

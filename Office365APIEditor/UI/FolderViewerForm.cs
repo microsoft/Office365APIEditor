@@ -5,6 +5,7 @@ using Codeplex.Data;
 using Microsoft.Identity.Client;
 using Microsoft.Office365.OutlookServices;
 using Office365APIEditor.ViewerHelper;
+using Office365APIEditor.ViewerHelper.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -135,7 +136,22 @@ namespace Office365APIEditor
                     }
 
                     break;
+                case FolderContentType.Task:
+                    // Add Columns.
+                    PrepareTaskItemListColumns();
+
+                    // Get items.
+                    List<TaskSummary> tasks = await viewerHelper.GetTaskSummaryAsync(targetFolder.ID);
+
+                    if (tasks.Count != 0)
+                    {
+                        ShowTasks(tasks);
+                    }
+
+                    break;
                 case FolderContentType.DummyCalendarRoot:
+                case FolderContentType.DummyTaskGroupRoot:
+                case FolderContentType.TaskGroup:
                 default:
                     break;
             }
@@ -217,7 +233,30 @@ namespace Office365APIEditor
                 dataGridView_ItemList.Columns.Add("CreatedDateTime", "CreatedDateTime");
             }
         }
-        
+
+        private void PrepareTaskItemListColumns()
+        {
+            if (dataGridView_ItemList.InvokeRequired)
+            {
+                dataGridView_ItemList.Invoke(new MethodInvoker(delegate
+                {
+                    dataGridView_ItemList.Columns.Add("Subject", "Subject");
+                    dataGridView_ItemList.Columns.Add("HasAttachments", "HasAttachments");
+                    dataGridView_ItemList.Columns.Add("CreatedDateTime", "CreatedDateTime");
+                    dataGridView_ItemList.Columns.Add("LastModifiedDateTime", "LastModifiedDateTime");
+                    dataGridView_ItemList.Columns.Add("Status", "Status");
+                }));
+            }
+            else
+            {
+                dataGridView_ItemList.Columns.Add("Subject", "Subject");
+                dataGridView_ItemList.Columns.Add("HasAttachments", "HasAttachments");
+                dataGridView_ItemList.Columns.Add("CreatedDateTime", "CreatedDateTime");
+                dataGridView_ItemList.Columns.Add("LastModifiedDateTime", "LastModifiedDateTime");
+                dataGridView_ItemList.Columns.Add("Status", "Status");
+            }
+        }
+
         private void ShowMessages(List<MessageSummary> messages)
         {
             // Show all messages in List.
@@ -370,6 +409,56 @@ namespace Office365APIEditor
             }
         }
 
+        private void ShowTasks(List<TaskSummary> tasks)
+        {
+            // Show all tasks in List.
+
+            try
+            {
+                foreach (var item in tasks)
+                {
+                    // Add new row.
+                    string subject = item.Subject ?? "";
+                    string hasAttachments = item.HasAttachments.ToString();
+                    string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
+                    string lastModifiedDateTime = (item.LastModifiedDateTime != null) ? item.LastModifiedDateTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "";
+                    string status = item.Status ?? "";
+
+                    DataGridViewRow itemRow = new DataGridViewRow
+                    {
+                        Tag = item.Id
+                    };
+                    itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, hasAttachments, createdDateTime, lastModifiedDateTime, status });
+                    itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
+
+                    if (dataGridView_ItemList.InvokeRequired)
+                    {
+                        dataGridView_ItemList.Invoke(new MethodInvoker(delegate { dataGridView_ItemList.Rows.Add(itemRow); }));
+                    }
+                    else
+                    {
+                        dataGridView_ItemList.Rows.Add(itemRow);
+                    }
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                if (isFormClosing)
+                {
+                    // It seems that this window was closed.
+                    // Do nothing.
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "Office365APIEditor");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.GetType().FullName + "\r\n" + ex.Message, "Office365APIEditor");
+            }
+        }
+
         private string ConvertRecipientsListToString(IList<Recipient> RecipientsList)
         {
             StringBuilder result = new StringBuilder();
@@ -426,9 +515,6 @@ namespace Office365APIEditor
                 currentId = id;
             }
 
-            // We don't need to get new OutlookServiceClient because we don't use that.
-            // client = await GetOutlookServiceClient();
-
             // Reset rows.
             dataGridView_ItemProps.Rows.Clear();
             foreach (DataGridViewColumn col in dataGridView_ItemProps.Columns)
@@ -448,7 +534,12 @@ namespace Office365APIEditor
                 case FolderContentType.Calendar:
                     GetCalendarItemDetail(id);
                     break;
+                case FolderContentType.Task:
+                    GetTaskItemDetail(id);
+                    break;
                 case FolderContentType.DummyCalendarRoot:
+                case FolderContentType.DummyTaskGroupRoot:
+                case FolderContentType.TaskGroup:
                     break;
                 default:
                     break;
@@ -471,6 +562,12 @@ namespace Office365APIEditor
         {
             // Get details of the contact item.
             GetItemDetail(new Uri("https://outlook.office.com/api/v2.0/me/events/" + ID));
+        }
+
+        private void GetTaskItemDetail(string ID)
+        {
+            // Get details of the message item.
+            GetItemDetail(new Uri("https://outlook.office.com/api/v2.0/me/tasks/" + ID));
         }
 
         private async void GetItemDetail(Uri URL)
@@ -572,7 +669,6 @@ namespace Office365APIEditor
                 Owner = this
             };
             propertyViewer.Show();
-
         }
     }
 }

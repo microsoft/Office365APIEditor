@@ -132,6 +132,7 @@ namespace Office365APIEditor
 
             return result;
         }
+
         public static TokenResponse ConvertAuthenticationResultToTokenResponse(Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationResult value)
         {
             return new TokenResponse
@@ -364,7 +365,7 @@ namespace Office365APIEditor
 
         public static string[] MailboxViewerScopes()
         {
-            return new string[] { "https://outlook.office.com/Calendars.Read https://outlook.office.com/Calendars.ReadWrite https://outlook.office.com/Contacts.Read https://outlook.office.com/Contacts.ReadWrite https://outlook.office.com/Mail.Read https://outlook.office.com/Mail.ReadWrite https://outlook.office.com/Mail.Send https://outlook.office.com/User.ReadBasic.All" };
+            return new string[] { "https://outlook.office.com/Calendars.Read https://outlook.office.com/Calendars.ReadWrite https://outlook.office.com/Contacts.Read https://outlook.office.com/Contacts.ReadWrite https://outlook.office.com/Mail.Read https://outlook.office.com/Mail.ReadWrite https://outlook.office.com/tasks.read https://outlook.office.com/tasks.readwrite https://outlook.office.com/Mail.Send https://outlook.office.com/User.ReadBasic.All" };
         }
 
         public static string EscapeForJson(string originalString)
@@ -417,6 +418,9 @@ namespace Office365APIEditor
         Contact,
         Calendar,
         DummyCalendarRoot,
-        MsgFolderRoot
+        MsgFolderRoot,
+        DummyTaskGroupRoot,
+        TaskGroup,
+        Task
     }
 }

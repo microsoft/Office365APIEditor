@@ -261,6 +261,9 @@
     <Compile Include="ViewerHelper\MessageSummary.cs" />
     <Compile Include="ViewerHelper\NewEmailMessage.cs" />
     <Compile Include="ViewerHelper\PagedResponse.cs" />
+    <Compile Include="ViewerHelper\Tasks\TaskFolder.cs" />
+    <Compile Include="ViewerHelper\Tasks\TaskGroup.cs" />
+    <Compile Include="ViewerHelper\Tasks\TaskSummary.cs" />
     <Compile Include="ViewerHelper\ViewerHelper.cs" />
     <EmbeddedResource Include="UI\AccessTokenWizard.resx">
       <DependentUpon>AccessTokenWizard.cs</DependentUpon>
