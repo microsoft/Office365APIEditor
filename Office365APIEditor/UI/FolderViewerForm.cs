@@ -4,6 +4,7 @@
 using Codeplex.Data;
 using Microsoft.Identity.Client;
 using Microsoft.Office365.OutlookServices;
+using Office365APIEditor.UI;
 using Office365APIEditor.ViewerHelper;
 using Office365APIEditor.ViewerHelper.Tasks;
 using System;
@@ -40,14 +41,30 @@ namespace Office365APIEditor
         {
             toolStripStatusLabel_Status.Text = "Loading all items...";
 
-            if (targetFolder.Type != FolderContentType.MsgFolderRoot)
+            string typeForWindowTitle = "";
+
+            switch (targetFolder.Type)
             {
-                Text = targetFolder.Type.ToString() + " items in " + targetFolderDisplayName;
+                case FolderContentType.Message:
+                case FolderContentType.MsgFolderRoot:
+                case FolderContentType.Drafts:
+                    typeForWindowTitle = "Message items";
+                    break;
+                case FolderContentType.Contact:
+                    typeForWindowTitle = "Contact items";
+                    break;
+                case FolderContentType.Calendar:
+                    typeForWindowTitle = "Calendar items";
+                    break;
+                case FolderContentType.Task:
+                    typeForWindowTitle = "Task items";
+                    break;
+                default:
+                    typeForWindowTitle = "items";
+                    break;
             }
-            else
-            {
-                Text = FolderContentType.Message.ToString() + " items in " + targetFolderDisplayName;
-            }
+
+            Text = typeForWindowTitle + " in " + targetFolderDisplayName;
 
             viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
 
@@ -124,6 +141,7 @@ namespace Office365APIEditor
 
                     break;
                 case FolderContentType.MsgFolderRoot:
+                case FolderContentType.Drafts:
                     // Add columns.
                     PrepareMessageItemListColumns();
 
@@ -272,13 +290,24 @@ namespace Office365APIEditor
                     string subject = item.Subject ?? "";
                     string sender = (item.Sender != null && item.Sender.EmailAddress != null && item.Sender.EmailAddress.Address != null) ? item.Sender.EmailAddress.Address : "";
                     string recipients = (item.ToRecipients != null) ? ConvertRecipientsListToString(item.ToRecipients) : "";
+                    string isDraft = item.IsDraft.ToString();
 
                     DataGridViewRow itemRow = new DataGridViewRow
                     {
                         Tag = item.Id
                     };
                     itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, sender, recipients, receivedDateTime, createdDateTime, sentDateTime });
-                    itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
+
+                    if (item.IsDraft)
+                    {
+                        // This item is draft.
+                        itemRow.ContextMenuStrip = contextMenuStrip_ItemList_DraftItem;
+                    }
+                    else
+                    {
+                        // This item is not draft.
+                        itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
+                    }
 
                     if (dataGridView_ItemList.InvokeRequired)
                     {
@@ -526,6 +555,7 @@ namespace Office365APIEditor
             {
                 case FolderContentType.Message:
                 case FolderContentType.MsgFolderRoot:
+                case FolderContentType.Drafts:
                     GetMessageItemDetail(id);
                     break;
                 case FolderContentType.Contact:
@@ -639,6 +669,16 @@ namespace Office365APIEditor
 
         private void ToolStripMenuItem_DisplayAttachments_Click(object sender, EventArgs e)
         {
+            DisplayAttachments();
+        }
+
+        private void ToolStripMenuItem_DisplayAttachments_DraftItem_Click(object sender, EventArgs e)
+        {
+            DisplayAttachments();
+        }
+
+        private void DisplayAttachments()
+        {
             if (dataGridView_ItemList.SelectedRows.Count == 0)
             {
                 return;
@@ -669,6 +709,17 @@ namespace Office365APIEditor
                 Owner = this
             };
             propertyViewer.Show();
+        }
+
+        private void ToolStripMenuItem_Edit_DraftItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView_ItemList.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            SendMailForm sendMailForm = new SendMailForm(pca, currentUser, dataGridView_ItemList.SelectedRows[0].Tag.ToString());
+            sendMailForm.Show();
         }
     }
 }

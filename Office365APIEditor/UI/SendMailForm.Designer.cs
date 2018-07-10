@@ -269,7 +269,7 @@
             this.Name = "SendMailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "New Mail";
-            this.Load += new System.EventHandler(this.SendMailForm_Load);
+            this.Load += new System.EventHandler(this.SendMailForm_LoadAsync);
             this.ResumeLayout(false);
             this.PerformLayout();
 

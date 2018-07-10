@@ -45,6 +45,7 @@ namespace Office365APIEditor
             {
                 case FolderContentType.Message:
                 case FolderContentType.MsgFolderRoot:
+                case FolderContentType.Drafts:
                     try
                     {
                         result = await viewerHelper.GetAttachmentsAsync(FolderContentType.Message, targetItemId);

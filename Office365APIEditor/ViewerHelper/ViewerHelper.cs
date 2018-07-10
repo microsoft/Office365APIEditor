@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -66,6 +67,66 @@ namespace Office365APIEditor.ViewerHelper
                 var msgFolderRoot = await client.Me.MailFolders[topOfInformationStore.ParentFolderId].ExecuteAsync(); // MsgFolderRoot
 
                 return msgFolderRoot;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<NewEmailMessage> GetDraftMessageAsync(string draftItemId)
+        {
+            // Get the specified item as a draft item to send.
+
+            client = Util.GetOutlookServicesClient(pca, currentUser);
+
+            try
+            {
+                var draftItem = await client.Me.Messages[draftItemId].ExecuteAsync();
+
+                NewEmailMessage newEmailMessage = new NewEmailMessage();
+
+                newEmailMessage.ToRecipients = ConvertRecipientIListToMailAddressCollection(draftItem.ToRecipients);
+                newEmailMessage.CcRecipients = ConvertRecipientIListToMailAddressCollection(draftItem.CcRecipients);
+                newEmailMessage.BccRecipients = ConvertRecipientIListToMailAddressCollection(draftItem.BccRecipients);
+                newEmailMessage.Subject = draftItem.Subject ?? "";
+                newEmailMessage.BodyType = (draftItem.Body != null) ? (BodyType)Enum.ToObject(typeof(BodyType), (int)draftItem.Body.ContentType) : BodyType.Text;
+                newEmailMessage.Body = (draftItem.Body != null && draftItem.Body.Content != null) ? draftItem.Body.Content : "";
+                newEmailMessage.Importance = (Importance)Enum.ToObject(typeof(Importance), (int)draftItem.Importance);
+                newEmailMessage.RequestDeliveryReceipt = draftItem.IsDeliveryReceiptRequested ?? false;
+                newEmailMessage.RequestReadReceipt = draftItem.IsReadReceiptRequested ?? false;
+
+                return newEmailMessage;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private MailAddressCollection ConvertRecipientIListToMailAddressCollection(IList<Recipient> recipients)
+        {
+            MailAddressCollection result = new MailAddressCollection();
+
+            foreach (var recipient in recipients)
+            {
+                result.Add(new MailAddress(recipient.EmailAddress.Address, recipient.EmailAddress.Name));
+            }
+
+            return result;
+        }
+
+        public async Task<IMailFolder> GetDraftsFolderAsync()
+        {
+            // Get the folder ID of the Drafts.
+
+            client = Util.GetOutlookServicesClient(pca, currentUser);
+
+            try
+            {
+                var drafts = await client.Me.MailFolders["Drafts"].ExecuteAsync();
+                
+                return drafts;
             }
             catch (Exception ex)
             {
@@ -298,7 +359,7 @@ namespace Office365APIEditor.ViewerHelper
             // OutlookServicesClient will get an exception if message doesn't have Sender property.
             // So, we don't use OutlookServicesClient.
             
-            Uri URL = new Uri(@"https://outlook.office.com/api/v2.0/me/MailFolders/" + FolderId + "/messages?$orderby=ReceivedDateTime desc&$top=500&$select=Id,Subject,Sender,ToRecipients,ReceivedDateTime,CreatedDateTime,SentDateTime");
+            Uri URL = new Uri(@"https://outlook.office.com/api/v2.0/me/MailFolders/" + FolderId + "/messages?$orderby=ReceivedDateTime desc&$top=500&$select=Id,Subject,Sender,ToRecipients,ReceivedDateTime,CreatedDateTime,SentDateTime,IsDraft");
             string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
 
             List<MessageSummary> result = new List<MessageSummary>();
@@ -388,9 +449,10 @@ namespace Office365APIEditor.ViewerHelper
                     }                   
 
                     DateTimeOffset? receivedDateTime = ConvertDateTimeToDateTimeOffset(item.Value<DateTime>("ReceivedDateTime"));
-                    DateTimeOffset? CreatedDateTime = ConvertDateTimeToDateTimeOffset(item.Value<DateTime>("CreatedDateTime"));
-                    DateTimeOffset? SentDateTime = ConvertDateTimeToDateTimeOffset(item.Value<DateTime>("SentDateTime"));
-
+                    DateTimeOffset? createdDateTime = ConvertDateTimeToDateTimeOffset(item.Value<DateTime>("CreatedDateTime"));
+                    DateTimeOffset? sentDateTime = ConvertDateTimeToDateTimeOffset(item.Value<DateTime>("SentDateTime"));
+                    bool isDraft = item.Value<bool>("IsDraft");
+                    
                     result.Add(new MessageSummary()
                     {
                         Id = id,
@@ -398,8 +460,9 @@ namespace Office365APIEditor.ViewerHelper
                         Sender = sender,
                         ToRecipients = toRecipients,
                         ReceivedDateTime = receivedDateTime,
-                        CreatedDateTime = CreatedDateTime,
-                        SentDateTime = SentDateTime
+                        CreatedDateTime = createdDateTime,
+                        SentDateTime = sentDateTime,
+                        IsDraft = isDraft
                     });
                 }
 
@@ -583,6 +646,7 @@ namespace Office365APIEditor.ViewerHelper
             {
                 case FolderContentType.Message:
                 case FolderContentType.MsgFolderRoot:
+                case FolderContentType.Drafts:
                     try
                     {
                         var internalResult = await client.Me.Messages[itemId].Attachments
@@ -695,6 +759,7 @@ namespace Office365APIEditor.ViewerHelper
             {
                 case FolderContentType.Message:
                 case FolderContentType.MsgFolderRoot:
+                case FolderContentType.Drafts:
                     URL = new Uri("https://outlook.office.com/api/v2.0/me/messages/" + itemId + "/attachments/" + attachmentId);
                     break;
                 case FolderContentType.Calendar:
@@ -746,6 +811,25 @@ namespace Office365APIEditor.ViewerHelper
                 throw ex;
             }
         }
+        
+        public async Task SendMailAsync(string draftItemId)
+        {
+            // Send a draft mail.
+
+            Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/messages/" + draftItemId + "/send");
+
+            string postData = "";
+
+            try
+            {
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.DisplayableId, postData);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public async Task SaveDraftAsync(NewEmailMessage newItem)
         {
@@ -759,6 +843,25 @@ namespace Office365APIEditor.ViewerHelper
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
                 string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.DisplayableId, postData);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task UpdateDraftAsync(string draftItemId, NewEmailMessage newItem)
+        {
+            // Update a new draft mail.
+
+            Uri URL = new Uri("https://outlook.office.com/api/v2.0/Me/messages/" + draftItemId);
+
+            string postData = CreateNewItemPostData(newItem, true);
+
+            try
+            {
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                string stringResponse = await Util.SendPatchRequestAsync(URL, accessToken, currentUser.DisplayableId, postData);
             }
             catch (Exception ex)
             {

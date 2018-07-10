@@ -20,6 +20,8 @@ namespace Office365APIEditor
         // Current user's info.
         Microsoft.Identity.Client.IUser currentUser;
 
+        IMailFolder draftsFolder;
+
         bool doubleClicked = false;
 
         bool expandingNodeHasDummyNode = false;
@@ -61,6 +63,9 @@ namespace Office365APIEditor
             {
                 viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
 
+                // Get the Drafts folder.
+                GetDraftsFolderAsync();
+
                 // Get the root folder.
                 PrepareMsgFolderRootAsync();
                 
@@ -78,6 +83,11 @@ namespace Office365APIEditor
 
                 return false;
             }
+        }
+
+        private async void GetDraftsFolderAsync()
+        {
+            draftsFolder = await viewerHelper.GetDraftsFolderAsync();
         }
 
         private async void PrepareMsgFolderRootAsync()
@@ -118,9 +128,21 @@ namespace Office365APIEditor
 
             foreach (var folder in childMailFolders)
             {
+                FolderContentType folderContentType;
+
+                if (folder.Id == draftsFolder.Id)
+                {
+                    // This folder is the Drafts folder.
+                    folderContentType = FolderContentType.Drafts;
+                }
+                else
+                {
+                    folderContentType = FolderContentType.Message;
+                }
+
                 TreeNode node = new TreeNode(folder.DisplayName)
                 {
-                    Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Message, Expanded = false },
+                    Tag = new FolderInfo() { ID = folder.Id, Type = folderContentType, Expanded = false },
                     ContextMenuStrip = contextMenuStrip_FolderTreeNode
                 };
 
@@ -405,6 +427,7 @@ namespace Office365APIEditor
             {
                 case FolderContentType.Message:
                 case FolderContentType.MsgFolderRoot:
+                case FolderContentType.Drafts:
                     GetMessageFolderProps(info.ID, treeView_Mailbox.SelectedNode.Text);
                     break;
                 case FolderContentType.Contact:
@@ -644,7 +667,7 @@ namespace Office365APIEditor
         {
             FolderInfo info = (FolderInfo)treeView_Mailbox.SelectedNode.Tag;
 
-            if (info.Type == FolderContentType.MsgFolderRoot || info.Type == FolderContentType.Message || info.Type == FolderContentType.Contact || info.Type == FolderContentType.Calendar || info.Type == FolderContentType.Task)
+            if (info.Type == FolderContentType.MsgFolderRoot || info.Type == FolderContentType.Message || info.Type == FolderContentType.Drafts || info.Type == FolderContentType.Contact || info.Type == FolderContentType.Calendar || info.Type == FolderContentType.Task)
             {
                 // This is not a dummy node.
                 // Open selected folder.
@@ -721,7 +744,7 @@ namespace Office365APIEditor
                     folderInfo.Expanded = true;
                     e.Node.Tag = folderInfo;
                 }
-                else if (folderInfo.Type == FolderContentType.Contact || folderInfo.Type == FolderContentType.Message || folderInfo.Type == FolderContentType.MsgFolderRoot)
+                else if (folderInfo.Type == FolderContentType.Contact || folderInfo.Type == FolderContentType.Message || folderInfo.Type == FolderContentType.Drafts || folderInfo.Type == FolderContentType.MsgFolderRoot)
                 {
                     expandingNodeHasDummyNode = true;
 
@@ -746,6 +769,7 @@ namespace Office365APIEditor
             if (Prepare())
             {
                 // New session stated
+                Activate();
                 newSessionToolStripMenuItem.Enabled = false;
                 closeSessionToolStripMenuItem.Enabled = true;
                 windowToolStripMenuItem.Visible = true;

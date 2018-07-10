@@ -40,6 +40,9 @@
             this.ToolStripMenuItem_DisplayAttachments = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_Status = new System.Windows.Forms.ToolStripStatusLabel();
+            this.contextMenuStrip_ItemList_DraftItem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem_DisplayAttachments_DraftItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_Edit_DraftItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -48,6 +51,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_ItemProps)).BeginInit();
             this.contextMenuStrip_ItemList.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.contextMenuStrip_ItemList_DraftItem.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -153,6 +157,29 @@
             this.toolStripStatusLabel_Status.Name = "toolStripStatusLabel_Status";
             this.toolStripStatusLabel_Status.Size = new System.Drawing.Size(0, 17);
             // 
+            // contextMenuStrip_ItemList_DraftItem
+            // 
+            this.contextMenuStrip_ItemList_DraftItem.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip_ItemList_DraftItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_DisplayAttachments_DraftItem,
+            this.toolStripMenuItem_Edit_DraftItem});
+            this.contextMenuStrip_ItemList_DraftItem.Name = "contextMenuStrip_ItemList";
+            this.contextMenuStrip_ItemList_DraftItem.Size = new System.Drawing.Size(193, 70);
+            // 
+            // toolStripMenuItem_DisplayAttachments_DraftItem
+            // 
+            this.toolStripMenuItem_DisplayAttachments_DraftItem.Name = "toolStripMenuItem_DisplayAttachments_DraftItem";
+            this.toolStripMenuItem_DisplayAttachments_DraftItem.Size = new System.Drawing.Size(192, 22);
+            this.toolStripMenuItem_DisplayAttachments_DraftItem.Text = "Display Attachments...";
+            this.toolStripMenuItem_DisplayAttachments_DraftItem.Click += new System.EventHandler(this.ToolStripMenuItem_DisplayAttachments_DraftItem_Click);
+            // 
+            // toolStripMenuItem_Edit_DraftItem
+            // 
+            this.toolStripMenuItem_Edit_DraftItem.Name = "toolStripMenuItem_Edit_DraftItem";
+            this.toolStripMenuItem_Edit_DraftItem.Size = new System.Drawing.Size(192, 22);
+            this.toolStripMenuItem_Edit_DraftItem.Text = "Edit...";
+            this.toolStripMenuItem_Edit_DraftItem.Click += new System.EventHandler(this.ToolStripMenuItem_Edit_DraftItem_Click);
+            // 
             // FolderViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,6 +202,7 @@
             this.contextMenuStrip_ItemList.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.contextMenuStrip_ItemList_DraftItem.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,5 +220,8 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DisplayAttachments;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_Status;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_ItemList_DraftItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_DisplayAttachments_DraftItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Edit_DraftItem;
     }
 }

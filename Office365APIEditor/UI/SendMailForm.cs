@@ -19,16 +19,12 @@ namespace Office365APIEditor.UI
         PublicClientApplication pca;
         FolderInfo targetFolder;
         string targetFolderDisplayName;
+        string draftItemId;
 
         IUser currentUser;
         private ViewerHelper.ViewerHelper viewerHelper;
 
         List<FileAttachment> attachments;
-
-        public SendMailForm()
-        {
-            InitializeComponent();
-        }
 
         public SendMailForm(PublicClientApplication PCA, IUser CurrentUser)
         {
@@ -38,6 +34,18 @@ namespace Office365APIEditor.UI
             currentUser = CurrentUser;
             targetFolder = new FolderInfo();
             targetFolderDisplayName = null;
+            draftItemId = "";
+        }
+
+        public SendMailForm(PublicClientApplication PCA, IUser CurrentUser, string DraftItemId)
+        {
+            InitializeComponent();
+
+            pca = PCA;
+            currentUser = CurrentUser;
+            targetFolder = new FolderInfo();
+            targetFolderDisplayName = null;
+            draftItemId = DraftItemId;
         }
 
         public SendMailForm(PublicClientApplication PCA, IUser CurrentUser, FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
@@ -48,19 +56,214 @@ namespace Office365APIEditor.UI
             currentUser = CurrentUser;
             targetFolder = TargetFolderInfo;
             targetFolderDisplayName = TargetFolderDisplayName;
+            draftItemId = "";
         }
 
-        private void SendMailForm_Load(object sender, EventArgs e)
+        private async void SendMailForm_LoadAsync(object sender, EventArgs e)
         {
             attachments = new List<FileAttachment>();
 
             comboBox_Importance.SelectedIndex = 1;
             comboBox_BodyType.SelectedIndex = 0;
+
+            if (draftItemId != "")
+            {
+                // Editing a draft item.
+
+                button_Attachments.Enabled = false;
+
+                // When sending a draft item, it must be saved to SentItems.
+                checkBox_SaveToSentItems.Checked = true;
+                checkBox_SaveToSentItems.Enabled = false;
+
+                viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
+                var draftItem = await viewerHelper.GetDraftMessageAsync(draftItemId);
+
+                if (comboBox_Importance.InvokeRequired)
+                {
+                    comboBox_Importance.Invoke(new MethodInvoker(delegate
+                    {
+                        comboBox_Importance.SelectedIndex = (int)draftItem.Importance;
+                    }));
+                }
+                else
+                {
+                    comboBox_Importance.SelectedIndex = (int)draftItem.Importance;
+                }
+
+                if (comboBox_Importance.InvokeRequired)
+                {
+                    comboBox_Importance.Invoke(new MethodInvoker(delegate
+                    {
+                        comboBox_Importance.SelectedIndex = (int)draftItem.Importance; ;
+                    }));
+                }
+                else
+                {
+                    comboBox_Importance.SelectedIndex = (int)draftItem.Importance;
+                }
+
+                if (checkBox_RequestDeliveryReceipt.InvokeRequired)
+                {
+                    checkBox_RequestDeliveryReceipt.Invoke(new MethodInvoker(delegate
+                    {
+                        checkBox_RequestDeliveryReceipt.Checked = draftItem.RequestDeliveryReceipt; ;
+                    }));
+                }
+                else
+                {
+                    checkBox_RequestDeliveryReceipt.Checked = draftItem.RequestDeliveryReceipt;
+                }
+                
+                if (checkBox_RequestReadReceipt.InvokeRequired)
+                {
+                    checkBox_RequestReadReceipt.Invoke(new MethodInvoker(delegate
+                    {
+                        checkBox_RequestReadReceipt.Checked = draftItem.RequestReadReceipt;
+                    }));
+                }
+                else
+                {
+                    checkBox_RequestReadReceipt.Checked = draftItem.RequestReadReceipt;
+                }
+                
+                if (textBox_To.InvokeRequired)
+                {
+                    textBox_To.Invoke(new MethodInvoker(delegate
+                    {
+                        textBox_To.Text = RecipientsString(draftItem.ToRecipients);
+                    }));
+                }
+                else
+                {
+                    textBox_To.Text = RecipientsString(draftItem.ToRecipients);
+                }
+
+                if (textBox_Cc.InvokeRequired)
+                {
+                    textBox_Cc.Invoke(new MethodInvoker(delegate
+                    {
+                        textBox_Cc.Text = RecipientsString(draftItem.CcRecipients);
+                    }));
+                }
+                else
+                {
+                    textBox_Cc.Text = RecipientsString(draftItem.CcRecipients);
+                }
+
+                if (textBox_Bcc.InvokeRequired)
+                {
+                    textBox_Bcc.Invoke(new MethodInvoker(delegate
+                    {
+                        textBox_Bcc.Text = RecipientsString(draftItem.BccRecipients);
+                    }));
+                }
+                else
+                {
+                    textBox_Bcc.Text = RecipientsString(draftItem.BccRecipients);
+                }
+
+                if (textBox_Subject.InvokeRequired)
+                {
+                    textBox_Subject.Invoke(new MethodInvoker(delegate
+                    {
+                        textBox_Subject.Text = draftItem.Subject;
+                    }));
+                }
+                else
+                {
+                    textBox_Subject.Text = draftItem.Subject;
+                }
+
+                if (textBox_Body.InvokeRequired)
+                {
+                    textBox_Body.Invoke(new MethodInvoker(delegate
+                    {
+                        textBox_Body.Text = draftItem.Body;
+                    }));
+                }
+                else
+                {
+                    textBox_Body.Text = draftItem.Body;
+                }
+
+                if (comboBox_BodyType.InvokeRequired)
+                {
+                    comboBox_BodyType.Invoke(new MethodInvoker(delegate
+                    {
+                        comboBox_BodyType.SelectedIndex = (int)draftItem.BodyType;
+                    }));
+                }
+                else
+                {
+                    comboBox_BodyType.SelectedIndex = (int)draftItem.BodyType;
+                }
+
+                var attachList = await viewerHelper.GetAttachmentsAsync(FolderContentType.Message, draftItemId);
+
+                foreach (var attach in attachList)
+                {
+                    Dictionary<string, string> fullAttachInfo = await viewerHelper.GetAttachmentAsync(FolderContentType.Message, draftItemId, attach.Id);
+
+                    string tempType = "";
+                    string tempName = "";
+                    string tempContentBytes = "";
+                    
+                    foreach (KeyValuePair<string, string> item in fullAttachInfo)
+                    {
+                        if (item.Key == "@odata.type")
+                        {
+                            tempType = (item.Value == null) ? "" : item.Value.ToString();
+                        }
+                        else if (item.Key == "Name")
+                        {
+                            tempName = (item.Value == null) ? "" : item.Value.ToString();
+                        }
+                        else if (item.Key == "ContentBytes")
+                        {
+                            tempContentBytes = (item.Value == null) ? "" : item.Value.ToString();
+                        }
+                    }
+
+                    if (tempType == "#Microsoft.OutlookServices.FileAttachment")
+                    {
+                        // This is a FileAttachment
+
+                        attachments.Add(new FileAttachment(tempName, tempContentBytes));
+                    }
+                }
+
+                if (button_Attachments.InvokeRequired)
+                {
+                    button_Attachments.Invoke(new MethodInvoker(delegate
+                    {
+                        button_Attachments.Enabled = true;
+                    }));
+                }
+                else
+                {
+                    button_Attachments.Enabled = true;
+                }
+            }
+        }
+
+        private string RecipientsString(MailAddressCollection mailAddresses)
+        {
+            List<string> mails = new List<string>();
+
+            foreach (var item in mailAddresses)
+            {
+                mails.Add(item.Address);
+            }
+
+            return string.Join("; ", mails.ToArray());
         }
 
         private async void Button_Send_ClickAsync(object sender, EventArgs e)
         {
             // Send new mail.
+
+            Enabled = false;
 
             viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
 
@@ -73,12 +276,24 @@ namespace Office365APIEditor.UI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Enabled = true;
                 return;
             }
             
             try
             {
-                await viewerHelper.SendMailAsync(newItem, checkBox_SaveToSentItems.Checked);
+                if (draftItemId == "")
+                {
+                    await viewerHelper.SendMailAsync(newItem, checkBox_SaveToSentItems.Checked);
+                }
+                else
+                {
+                    // This is a draft message.
+                    // Update then send it.
+
+                    await viewerHelper.UpdateDraftAsync(draftItemId, newItem);
+                    await viewerHelper.SendMailAsync(draftItemId);
+                }
                 Close();
             }
             catch (WebException ex)
@@ -104,6 +319,10 @@ namespace Office365APIEditor.UI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Enabled = true;
             }
         }
 
@@ -111,6 +330,8 @@ namespace Office365APIEditor.UI
         {
             // Save new mail.
 
+            Enabled = false;
+
             viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
 
             NewEmailMessage newItem;
@@ -122,12 +343,22 @@ namespace Office365APIEditor.UI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Enabled = true;
                 return;
             }
 
             try
             {
-                await viewerHelper.SaveDraftAsync(newItem);
+                if (draftItemId == "")
+                {
+                    await viewerHelper.SaveDraftAsync(newItem);
+                }
+                else
+                {
+                    // This is a draft message.
+                    await viewerHelper.UpdateDraftAsync(draftItemId, newItem);
+                }
+                
                 Close();
             }
             catch (WebException ex)
@@ -153,6 +384,10 @@ namespace Office365APIEditor.UI
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Enabled = true;
             }
         }
 

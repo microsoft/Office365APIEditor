@@ -17,5 +17,6 @@ namespace Office365APIEditor.ViewerHelper
         public DateTimeOffset? ReceivedDateTime;
         public DateTimeOffset? CreatedDateTime;
         public DateTimeOffset? SentDateTime;
+        public bool IsDraft;
     }
 }

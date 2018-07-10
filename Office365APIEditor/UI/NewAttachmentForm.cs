@@ -24,7 +24,14 @@ namespace Office365APIEditor.UI
         {
             foreach (var attachment in originalAttachments)
             {
-                listBox_Attachments.Items.Add(attachment.FullPath);
+                if (attachment.FullPath == "")
+                {
+                    listBox_Attachments.Items.Add(attachment.Name);
+                }
+                else
+                {
+                    listBox_Attachments.Items.Add(attachment.FullPath);
+                }
             }
         }
 
@@ -36,7 +43,7 @@ namespace Office365APIEditor.UI
             return result;
         }
 
-        private void button_Add_Click(object sender, EventArgs e)
+        private void Button_Add_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {

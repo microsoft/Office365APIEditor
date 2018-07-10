@@ -14,6 +14,13 @@ namespace Office365APIEditor.ViewerHelper.Attachments
 
         public string ContentBytes { get; } // base64-encoded contents of the file
 
+        public FileAttachment(string Name, string ContentBytes)
+        {
+            this.Name = Name;
+            this.ContentBytes = ContentBytes;
+            FullPath = "";
+        }
+
         public FileAttachment(string FilePath)
         {
             if (File.Exists(FilePath))

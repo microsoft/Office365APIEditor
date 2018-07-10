@@ -277,7 +277,6 @@ namespace Office365APIEditor
             }
         }
 
-
         internal static async Task<string> SendDeleteRequestAsync(Uri URL, string AccessToken, string MailAddress)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
@@ -290,6 +289,49 @@ namespace Office365APIEditor
             request.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
 
             request.Method = "DELETE";
+
+            try
+            {
+                // Get a response and response stream.
+                var response = (HttpWebResponse)await request.GetResponseAsync();
+
+                string jsonResponse = "";
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    jsonResponse = reader.ReadToEnd();
+                }
+
+                return jsonResponse;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static async Task<string> SendPatchRequestAsync(Uri URL, string AccessToken, string MailAddress, string PostData)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
+            request.AllowAutoRedirect = true;
+            request.ContentType = "application/json";
+
+            request.Headers.Add("Authorization:Bearer " + AccessToken);
+
+            request.Headers.Add("X-AnchorMailbox:" + MailAddress);
+            request.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+
+            request.Method = "PATCH";
+
+            // Build a body.
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                string originalRequestBody = PostData;
+
+                streamWriter.Write(originalRequestBody);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
 
             try
             {
@@ -421,6 +463,7 @@ namespace Office365APIEditor
         MsgFolderRoot,
         DummyTaskGroupRoot,
         TaskGroup,
-        Task
+        Task,
+        Drafts
     }
 }
