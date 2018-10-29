@@ -77,7 +77,7 @@
     <StartupObject>Office365APIEditor.MyApplicationContext</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>2051721C30F7DA9DB98BD87DD8F58E1D502345F2</ManifestCertificateThumbprint>
