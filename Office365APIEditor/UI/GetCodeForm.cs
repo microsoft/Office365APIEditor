@@ -131,10 +131,23 @@ namespace Office365APIEditor
                 else
                 {
                     if (e.Url.AbsoluteUri.Contains("admin_consent=True")) {
-                        _acquiredCode = "admin_consent=True";
+                        // V2 endpoint Admin Consent scenario
 
-                        this.DialogResult = DialogResult.OK;
-                        this.Close();
+                        if (e.Url.AbsoluteUri.Contains("error="))
+                        {
+                            // Something is wrong
+                            // User might canceled.
+
+                            this.DialogResult = DialogResult.No;
+                            this.Close();
+                        }
+                        else
+                        {
+                            _acquiredCode = "admin_consent=True";
+
+                            this.DialogResult = DialogResult.OK;
+                            this.Close();
+                        }
                     }
                     else if (_acquiredCode == "")
                     {
