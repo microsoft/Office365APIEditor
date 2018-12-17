@@ -170,5 +170,14 @@
     <Setting Name="CustomUserAgentMode" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="LastV2WebAppAppOnlyByPasswordForMicrosoftGraphTenantName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientID" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientSecret" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

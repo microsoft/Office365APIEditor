@@ -22,7 +22,14 @@ namespace Office365APIEditor
 
         public GetCodeForm(string ClientID, string RedirectUri, string ResourceOrScopeUri, bool IsV2, bool AdminConsent)
         {
-            InternalInitialization(ClientID, RedirectUri, ResourceOrScopeUri, IsV2, "", AdminConsent);
+            if (IsV2 && AdminConsent)
+            {
+                InternalInitializationV2AdminConsent(ClientID, RedirectUri);
+            }
+            else
+            {
+                InternalInitialization(ClientID, RedirectUri, ResourceOrScopeUri, IsV2, "", AdminConsent);
+            }
         }
 
         private void InternalInitialization(string ClientID, string RedirectUri, string ResourceOrScopeUri, bool IsV2 = false, string TenantName = "", bool AdminConsent = false)
@@ -76,6 +83,23 @@ namespace Office365APIEditor
             webBrowser1.DocumentTitleChanged += new EventHandler(webBrowser1_DocumentTitleChanged);
         }
 
+        private void InternalInitializationV2AdminConsent(string ClientID, string RedirectUri)
+        {
+            InitializeComponent();
+
+            redirectUrl = RedirectUri;
+
+            // Build an URL of sign-in page.
+
+            string endPoint = "https://login.microsoftonline.com/";
+
+            authenticationUrl = endPoint + "common/adminconsent?" +
+                    "&client_id=" + ClientID +
+                    "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri);
+
+            webBrowser1.DocumentTitleChanged += new EventHandler(webBrowser1_DocumentTitleChanged);
+        }
+
         private void webBrowser1_DocumentTitleChanged(object sender, EventArgs e)
         {
             this.Text = webBrowser1.Document.Title;
@@ -106,7 +130,13 @@ namespace Office365APIEditor
                 }
                 else
                 {
-                    if (_acquiredCode == "")
+                    if (e.Url.AbsoluteUri.Contains("admin_consent=True")) {
+                        _acquiredCode = "admin_consent=True";
+
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    else if (_acquiredCode == "")
                     {
                         // Redirected to redirectUrl but we couldn't get the Authorization Code.
 

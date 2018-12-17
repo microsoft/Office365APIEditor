@@ -38,7 +38,9 @@ namespace Office365APIEditor
             Page08_V1AppOnlyByKeyOptionForm = 8,
             Page09_V1AdminConsentOptionForm = 9,
             Page10_BuiltInAppOrBasicAuthSelection = 10,
-            Page11_BuiltInAppOptionForm = 11
+            Page11_BuiltInAppOptionForm = 11,
+            Page12_V2AppOnlyByPasswordForMicrosoftGraphOptionForm = 12,
+            Page13_V2AdminConsentOptionForm = 13
         }
 
         public AccessTokenWizard()
@@ -63,7 +65,9 @@ namespace Office365APIEditor
                 panel_Page08,
                 panel_Page09,
                 panel_Page10,
-                panel_Page11
+                panel_Page11,
+                panel_Page12,
+                panel_Page13
             };
 
             previousPages = new List<PageIndex>();
@@ -243,11 +247,23 @@ namespace Office365APIEditor
                         // Go to the next page.
                         ShowPage(PageIndex.Page06_V2WebAppOptionForm);
                     }
-                    else
+                    else if (radioButton_Page02_V2Mobile.Checked)
                     {
                         // V2 endpoint Mobile App
                         // Go to the next page.
                         ShowPage(PageIndex.Page07_V2MobileAppOptionForm);
+                    }
+                    else if (radioButton_Page02_V2AdminConsent.Checked)
+                    {
+                        // V2 endpoint, but need admin consent
+                        // Go to the next page.
+                        ShowPage(PageIndex.Page13_V2AdminConsentOptionForm);
+                    }
+                    else if (radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.Checked)
+                    {
+                        // V2 endpoint Web App (App Only Token by password for Microsoft Graph)
+                        // Go to the next page.
+                        ShowPage(PageIndex.Page12_V2AppOnlyByPasswordForMicrosoftGraphOptionForm);
                     }
 
                     break;
@@ -553,6 +569,44 @@ namespace Office365APIEditor
 
                     break;
 
+                case PageIndex.Page12_V2AppOnlyByPasswordForMicrosoftGraphOptionForm:
+                    // Option form for V2 auth endpoint Web App App only token by password for Microsoft Graph
+
+                    if (ValidateV2WebAppAppOnlyByPasswordForMicrosoftGraphParam())
+                    {
+                        TokenResponse tokenResponse = AcquireV2WebAppAppOnlyAccessTokenByPasswordForMicrosoftGraph();
+
+                        if (tokenResponse != null)
+                        {
+                            SaveSettings();
+
+                            // Create a return value and close this window.
+                            clientInfo = new ClientInformation(tokenResponse, AuthEndpoints.OAuthV2, Resources.Graph, textBox_Page12_ClientId.Text, textBox_Page12_ClientSecret.Text, textBox_Page12_Scopes.Text, "");
+                            DialogResult = DialogResult.OK;
+                            Close();
+                        }
+                    }
+
+                    break;
+
+                case PageIndex.Page13_V2AdminConsentOptionForm:
+                    // Option form for V2 Admin Consent
+
+                    if (ValidateV2AdminConsentParam())
+                    {
+                        string authorizationCode = AcquireV2AdminConsentAuthorizationCode();
+
+                        if (authorizationCode == "")
+                        {
+                            return;
+                        }
+
+                        SaveSettings();
+                        MessageBox.Show("Admin Consent completed.", "Office365APIEditor");
+                    }
+                    
+                    break;
+
                 case PageIndex.None:
                 default:
                     break;
@@ -811,6 +865,83 @@ namespace Office365APIEditor
             {
                 textBox_Page11_Scopes.Text = scopes;
             }
+        }
+
+        #endregion
+
+        #region Code for V2 Admin Consent
+
+        private bool ValidateV2AdminConsentParam()
+        {
+            if (textBox_Page13_ClientID.Text == "")
+            {
+                MessageBox.Show("Enter the Application ID.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_Page13_RedirectUri.Text == "")
+            {
+                MessageBox.Show("Enter the Redirect URL", "Office365APIEditor");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private string AcquireV2AdminConsentAuthorizationCode()
+        {
+            GetCodeForm getCodeForm = new GetCodeForm(textBox_Page13_ClientID.Text, textBox_Page13_RedirectUri.Text, "", true, true);
+
+            if (getCodeForm.ShowDialog(out string Code) == DialogResult.OK)
+            {
+                if (Code == "")
+                {
+                    MessageBox.Show("Unexpected response.", "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            return Code;
+        }
+
+        #endregion
+
+        #region Code For V2 auth endpoint App Only Token by Password for Microsoft Graph
+
+        private bool ValidateV2WebAppAppOnlyByPasswordForMicrosoftGraphParam()
+        {
+            // Check the form for web app (App Only by password for Microsoft Graph).
+
+            if (textBox_Page12_TenantName.Text == "")
+            {
+                MessageBox.Show("Enter the Tenant Name.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_Page12_ClientId.Text == "")
+            {
+                MessageBox.Show("Enter the Application ID.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_Page12_ClientSecret.Text == "")
+            {
+                MessageBox.Show("Enter the Client Secret.", "Office365APIEditor");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private TokenResponse AcquireV2WebAppAppOnlyAccessTokenByPasswordForMicrosoftGraph()
+        {
+            // Build a POST body.
+            string postBody = "client_id=" + textBox_Page12_ClientId.Text +
+                "&scope=" + System.Web.HttpUtility.UrlEncode(textBox_Page12_Scopes.Text) +
+                "&client_secret=" + System.Web.HttpUtility.UrlEncode(textBox_Page12_ClientSecret.Text) +
+                "&grant_type=client_credentials";
+
+            return AcquireAccessToken(postBody, "https://login.microsoftonline.com/" + textBox_Page12_TenantName.Text + "/oauth2/v2.0/token");
         }
 
         #endregion

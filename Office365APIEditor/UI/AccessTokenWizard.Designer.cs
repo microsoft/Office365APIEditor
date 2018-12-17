@@ -56,6 +56,8 @@
             this.textBox_Page03_RedirectUri = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel_Page02 = new System.Windows.Forms.Panel();
+            this.radioButton_Page02_V2AdminConsent = new System.Windows.Forms.RadioButton();
+            this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph = new System.Windows.Forms.RadioButton();
             this.radioButton_Page02_V2Mobile = new System.Windows.Forms.RadioButton();
             this.radioButton_Page02_V2Web = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
@@ -133,6 +135,23 @@
             this.button_Page11_ScopeEditor = new System.Windows.Forms.Button();
             this.textBox_Page11_Scopes = new System.Windows.Forms.TextBox();
             this.label42 = new System.Windows.Forms.Label();
+            this.panel_Page12 = new System.Windows.Forms.Panel();
+            this.label40 = new System.Windows.Forms.Label();
+            this.textBox_Page12_ClientSecret = new System.Windows.Forms.TextBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.button_Page12_ScopeEditor = new System.Windows.Forms.Button();
+            this.textBox_Page12_Scopes = new System.Windows.Forms.TextBox();
+            this.textBox_Page12_TenantName = new System.Windows.Forms.TextBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.textBox_Page12_ClientId = new System.Windows.Forms.TextBox();
+            this.panel_Page13 = new System.Windows.Forms.Panel();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.textBox_Page13_RedirectUri = new System.Windows.Forms.TextBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.textBox_Page13_ClientID = new System.Windows.Forms.TextBox();
             this.panel_Page00.SuspendLayout();
             this.panel_Page01.SuspendLayout();
             this.panel_Page03.SuspendLayout();
@@ -145,6 +164,8 @@
             this.panel_Page09.SuspendLayout();
             this.panel_Page10.SuspendLayout();
             this.panel_Page11.SuspendLayout();
+            this.panel_Page12.SuspendLayout();
+            this.panel_Page13.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_Page00
@@ -431,6 +452,8 @@
             // 
             // panel_Page02
             // 
+            this.panel_Page02.Controls.Add(this.radioButton_Page02_V2AdminConsent);
+            this.panel_Page02.Controls.Add(this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph);
             this.panel_Page02.Controls.Add(this.radioButton_Page02_V2Mobile);
             this.panel_Page02.Controls.Add(this.radioButton_Page02_V2Web);
             this.panel_Page02.Controls.Add(this.label7);
@@ -439,6 +462,28 @@
             this.panel_Page02.Size = new System.Drawing.Size(400, 170);
             this.panel_Page02.TabIndex = 6;
             this.panel_Page02.Tag = "radioButton_Page02_V2Web";
+            // 
+            // radioButton_Page02_V2AdminConsent
+            // 
+            this.radioButton_Page02_V2AdminConsent.AutoSize = true;
+            this.radioButton_Page02_V2AdminConsent.Location = new System.Drawing.Point(18, 106);
+            this.radioButton_Page02_V2AdminConsent.Name = "radioButton_Page02_V2AdminConsent";
+            this.radioButton_Page02_V2AdminConsent.Size = new System.Drawing.Size(352, 17);
+            this.radioButton_Page02_V2AdminConsent.TabIndex = 6;
+            this.radioButton_Page02_V2AdminConsent.TabStop = true;
+            this.radioButton_Page02_V2AdminConsent.Text = "I need to complete ADMIN CONSENT before acquiring access token";
+            this.radioButton_Page02_V2AdminConsent.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_Page02_V2WebAppOnlyForMicrosoftGraph
+            // 
+            this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.AutoSize = true;
+            this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.Location = new System.Drawing.Point(18, 83);
+            this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.Name = "radioButton_Page02_V2WebAppOnlyForMicrosoftGraph";
+            this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.Size = new System.Drawing.Size(360, 17);
+            this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.TabIndex = 5;
+            this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.TabStop = true;
+            this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.Text = "Web app / API (Use App Only Token by password for Microsoft Graph)";
+            this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.UseVisualStyleBackColor = true;
             // 
             // radioButton_Page02_V2Mobile
             // 
@@ -750,6 +795,7 @@
             this.panel_Page06.Name = "panel_Page06";
             this.panel_Page06.Size = new System.Drawing.Size(400, 170);
             this.panel_Page06.TabIndex = 8;
+            this.panel_Page06.Tag = "textBox_Page06_ClientID";
             // 
             // label9
             // 
@@ -860,6 +906,7 @@
             this.panel_Page07.Name = "panel_Page07";
             this.panel_Page07.Size = new System.Drawing.Size(400, 170);
             this.panel_Page07.TabIndex = 8;
+            this.panel_Page07.Tag = "textBox_Page07_ClientID";
             // 
             // label15
             // 
@@ -953,6 +1000,7 @@
             this.panel_Page08.Name = "panel_Page08";
             this.panel_Page08.Size = new System.Drawing.Size(400, 170);
             this.panel_Page08.TabIndex = 8;
+            this.panel_Page08.Tag = "textBox_Page08_TenantName";
             // 
             // linkLabel_Page08_WebAppAppOnlyByKey
             // 
@@ -1067,7 +1115,7 @@
             this.panel_Page09.Name = "panel_Page09";
             this.panel_Page09.Size = new System.Drawing.Size(400, 170);
             this.panel_Page09.TabIndex = 44;
-            this.panel_Page09.Tag = "textBox_Page03_ClientID";
+            this.panel_Page09.Tag = "textBox_Page09_ClientID";
             // 
             // comboBox_Page09_Resource
             // 
@@ -1183,6 +1231,7 @@
             this.panel_Page11.Name = "panel_Page11";
             this.panel_Page11.Size = new System.Drawing.Size(400, 170);
             this.panel_Page11.TabIndex = 49;
+            this.panel_Page11.Tag = "textBox_Page11_Scopes";
             // 
             // label39
             // 
@@ -1222,13 +1271,184 @@
             this.label42.Text = "Scopes";
             this.label42.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // panel_Page12
+            // 
+            this.panel_Page12.Controls.Add(this.label40);
+            this.panel_Page12.Controls.Add(this.textBox_Page12_ClientSecret);
+            this.panel_Page12.Controls.Add(this.label41);
+            this.panel_Page12.Controls.Add(this.button_Page12_ScopeEditor);
+            this.panel_Page12.Controls.Add(this.textBox_Page12_Scopes);
+            this.panel_Page12.Controls.Add(this.textBox_Page12_TenantName);
+            this.panel_Page12.Controls.Add(this.label43);
+            this.panel_Page12.Controls.Add(this.label44);
+            this.panel_Page12.Controls.Add(this.label45);
+            this.panel_Page12.Controls.Add(this.textBox_Page12_ClientId);
+            this.panel_Page12.Location = new System.Drawing.Point(12, 767);
+            this.panel_Page12.Name = "panel_Page12";
+            this.panel_Page12.Size = new System.Drawing.Size(400, 170);
+            this.panel_Page12.TabIndex = 104;
+            this.panel_Page12.Tag = "textBox_Page12_TenantName";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(15, 10);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(81, 13);
+            this.label40.TabIndex = 47;
+            this.label40.Text = "Fill out the form.";
+            // 
+            // textBox_Page12_ClientSecret
+            // 
+            this.textBox_Page12_ClientSecret.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientSecret", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Page12_ClientSecret.Location = new System.Drawing.Point(102, 144);
+            this.textBox_Page12_ClientSecret.Name = "textBox_Page12_ClientSecret";
+            this.textBox_Page12_ClientSecret.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page12_ClientSecret.TabIndex = 5;
+            this.textBox_Page12_ClientSecret.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientSecret;
+            // 
+            // label41
+            // 
+            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label41.Location = new System.Drawing.Point(3, 147);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(93, 13);
+            this.label41.TabIndex = 45;
+            this.label41.Text = "Password";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // button_Page12_ScopeEditor
+            // 
+            this.button_Page12_ScopeEditor.Enabled = false;
+            this.button_Page12_ScopeEditor.Location = new System.Drawing.Point(102, 114);
+            this.button_Page12_ScopeEditor.Name = "button_Page12_ScopeEditor";
+            this.button_Page12_ScopeEditor.Size = new System.Drawing.Size(96, 23);
+            this.button_Page12_ScopeEditor.TabIndex = 4;
+            this.button_Page12_ScopeEditor.Text = "Scope editor...";
+            this.button_Page12_ScopeEditor.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Page12_Scopes
+            // 
+            this.textBox_Page12_Scopes.Enabled = false;
+            this.textBox_Page12_Scopes.Location = new System.Drawing.Point(102, 89);
+            this.textBox_Page12_Scopes.Name = "textBox_Page12_Scopes";
+            this.textBox_Page12_Scopes.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page12_Scopes.TabIndex = 3;
+            this.textBox_Page12_Scopes.Text = "https://graph.microsoft.com/.default";
+            // 
+            // textBox_Page12_TenantName
+            // 
+            this.textBox_Page12_TenantName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2WebAppAppOnlyByPasswordForMicrosoftGraphTenantName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Page12_TenantName.Location = new System.Drawing.Point(102, 36);
+            this.textBox_Page12_TenantName.Name = "textBox_Page12_TenantName";
+            this.textBox_Page12_TenantName.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page12_TenantName.TabIndex = 1;
+            this.textBox_Page12_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2WebAppAppOnlyByPasswordForMicrosoftGraphTenantName;
+            // 
+            // label43
+            // 
+            this.label43.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label43.Location = new System.Drawing.Point(3, 39);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(93, 13);
+            this.label43.TabIndex = 38;
+            this.label43.Text = "Tenant Name";
+            this.label43.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label44
+            // 
+            this.label44.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label44.Location = new System.Drawing.Point(3, 65);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(93, 13);
+            this.label44.TabIndex = 37;
+            this.label44.Text = "Application ID";
+            this.label44.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label45
+            // 
+            this.label45.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label45.Location = new System.Drawing.Point(3, 92);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(93, 13);
+            this.label45.TabIndex = 36;
+            this.label45.Text = "Scopes";
+            this.label45.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // textBox_Page12_ClientId
+            // 
+            this.textBox_Page12_ClientId.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Page12_ClientId.Location = new System.Drawing.Point(102, 62);
+            this.textBox_Page12_ClientId.Name = "textBox_Page12_ClientId";
+            this.textBox_Page12_ClientId.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page12_ClientId.TabIndex = 2;
+            this.textBox_Page12_ClientId.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientID;
+            // 
+            // panel_Page13
+            // 
+            this.panel_Page13.Controls.Add(this.label46);
+            this.panel_Page13.Controls.Add(this.label47);
+            this.panel_Page13.Controls.Add(this.textBox_Page13_RedirectUri);
+            this.panel_Page13.Controls.Add(this.label48);
+            this.panel_Page13.Controls.Add(this.textBox_Page13_ClientID);
+            this.panel_Page13.Location = new System.Drawing.Point(429, 767);
+            this.panel_Page13.Name = "panel_Page13";
+            this.panel_Page13.Size = new System.Drawing.Size(400, 170);
+            this.panel_Page13.TabIndex = 105;
+            this.panel_Page13.Tag = "textBox_Page13_ClientID";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(15, 10);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(81, 13);
+            this.label46.TabIndex = 47;
+            this.label46.Text = "Fill out the form.";
+            // 
+            // label47
+            // 
+            this.label47.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label47.Location = new System.Drawing.Point(3, 65);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(93, 13);
+            this.label47.TabIndex = 44;
+            this.label47.Text = "Redirect URI";
+            this.label47.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // textBox_Page13_RedirectUri
+            // 
+            this.textBox_Page13_RedirectUri.Location = new System.Drawing.Point(102, 62);
+            this.textBox_Page13_RedirectUri.Name = "textBox_Page13_RedirectUri";
+            this.textBox_Page13_RedirectUri.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page13_RedirectUri.TabIndex = 4;
+            // 
+            // label48
+            // 
+            this.label48.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label48.Location = new System.Drawing.Point(3, 39);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(93, 13);
+            this.label48.TabIndex = 43;
+            this.label48.Text = "Application ID";
+            this.label48.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // textBox_Page13_ClientID
+            // 
+            this.textBox_Page13_ClientID.Location = new System.Drawing.Point(102, 36);
+            this.textBox_Page13_ClientID.Name = "textBox_Page13_ClientID";
+            this.textBox_Page13_ClientID.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page13_ClientID.TabIndex = 3;
+            // 
             // AccessTokenWizard
             // 
             this.AcceptButton = this.button_Next;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_Cancel;
-            this.ClientSize = new System.Drawing.Size(1243, 873);
+            this.ClientSize = new System.Drawing.Size(1243, 1020);
+            this.Controls.Add(this.panel_Page13);
+            this.Controls.Add(this.panel_Page12);
             this.Controls.Add(this.panel_Page11);
             this.Controls.Add(this.panel_Page10);
             this.Controls.Add(this.panel_Page09);
@@ -1276,6 +1496,10 @@
             this.panel_Page10.PerformLayout();
             this.panel_Page11.ResumeLayout(false);
             this.panel_Page11.PerformLayout();
+            this.panel_Page12.ResumeLayout(false);
+            this.panel_Page12.PerformLayout();
+            this.panel_Page13.ResumeLayout(false);
+            this.panel_Page13.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1386,5 +1610,24 @@
         private System.Windows.Forms.Button button_Page11_ScopeEditor;
         private System.Windows.Forms.TextBox textBox_Page11_Scopes;
         private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.RadioButton radioButton_Page02_V2AdminConsent;
+        private System.Windows.Forms.RadioButton radioButton_Page02_V2WebAppOnlyForMicrosoftGraph;
+        private System.Windows.Forms.Panel panel_Page12;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.TextBox textBox_Page12_ClientSecret;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Button button_Page12_ScopeEditor;
+        private System.Windows.Forms.TextBox textBox_Page12_Scopes;
+        private System.Windows.Forms.TextBox textBox_Page12_TenantName;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.TextBox textBox_Page12_ClientId;
+        private System.Windows.Forms.Panel panel_Page13;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.TextBox textBox_Page13_RedirectUri;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.TextBox textBox_Page13_ClientID;
     }
 }

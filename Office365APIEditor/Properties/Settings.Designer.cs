@@ -12,7 +12,7 @@ namespace Office365APIEditor.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -473,6 +473,42 @@ namespace Office365APIEditor.Properties {
             }
             set {
                 this["CustomUserAgentMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2WebAppAppOnlyByPasswordForMicrosoftGraphTenantName {
+            get {
+                return ((string)(this["LastV2WebAppAppOnlyByPasswordForMicrosoftGraphTenantName"]));
+            }
+            set {
+                this["LastV2WebAppAppOnlyByPasswordForMicrosoftGraphTenantName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientID {
+            get {
+                return ((string)(this["LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientID"]));
+            }
+            set {
+                this["LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientSecret {
+            get {
+                return ((string)(this["LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientSecret"]));
+            }
+            set {
+                this["LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientSecret"] = value;
             }
         }
     }
