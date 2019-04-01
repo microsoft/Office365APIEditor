@@ -127,6 +127,9 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, PublicKeyToken=d42c48f11a620156, processorArchitecture=MSIL">
+      <HintPath>..\packages\jacobslusser.ScintillaNET.Signed.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
@@ -357,6 +360,7 @@
     <Content Include="image.ico" />
     <Content Include="Licenses\AsyncUsageAnalyzers.txt" />
     <Content Include="Licenses\DynamicJson.txt" />
+    <Content Include="Licenses\jacobslusser.ScintillaNET.Signed.txt" />
     <Content Include="Licenses\Microsoft.Identity.Client.txt" />
     <Content Include="Licenses\Microsoft.IdentityModel.Clients.ActiveDirectory.txt" />
     <Content Include="Licenses\Microsoft.OData.Client.txt" />

@@ -47,7 +47,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.textBox_ResponseHeaders = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textBox_ResponseBody = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.pictureBox_Photo = new System.Windows.Forms.PictureBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -62,7 +61,6 @@
             this.HeaderNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HeaderValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage_Body = new System.Windows.Forms.TabPage();
-            this.textBox_RequestBody = new System.Windows.Forms.TextBox();
             this.textBox_Request = new System.Windows.Forms.TextBox();
             this.button_Run = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -85,7 +83,6 @@
             this.splitContainer2.SuspendLayout();
             this.tabControl_Response.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Photo)).BeginInit();
             this.tabPage4.SuspendLayout();
@@ -93,7 +90,6 @@
             this.tabControl_Request.SuspendLayout();
             this.tabPage_Headers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RequestHeader)).BeginInit();
-            this.tabPage_Body.SuspendLayout();
             this.contextMenuStrip_RunHistory.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -294,7 +290,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.textBox_ResponseBody);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -302,17 +297,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Body";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // textBox_ResponseBody
-            // 
-            this.textBox_ResponseBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_ResponseBody.Location = new System.Drawing.Point(3, 3);
-            this.textBox_ResponseBody.Multiline = true;
-            this.textBox_ResponseBody.Name = "textBox_ResponseBody";
-            this.textBox_ResponseBody.ReadOnly = true;
-            this.textBox_ResponseBody.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_ResponseBody.Size = new System.Drawing.Size(765, 194);
-            this.textBox_ResponseBody.TabIndex = 7;
             // 
             // tabPage3
             // 
@@ -455,7 +439,6 @@
             // 
             // tabPage_Body
             // 
-            this.tabPage_Body.Controls.Add(this.textBox_RequestBody);
             this.tabPage_Body.Location = new System.Drawing.Point(23, 4);
             this.tabPage_Body.Name = "tabPage_Body";
             this.tabPage_Body.Padding = new System.Windows.Forms.Padding(3);
@@ -463,17 +446,6 @@
             this.tabPage_Body.TabIndex = 1;
             this.tabPage_Body.Text = "Body";
             this.tabPage_Body.UseVisualStyleBackColor = true;
-            // 
-            // textBox_RequestBody
-            // 
-            this.textBox_RequestBody.AcceptsReturn = true;
-            this.textBox_RequestBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_RequestBody.Location = new System.Drawing.Point(3, 3);
-            this.textBox_RequestBody.Multiline = true;
-            this.textBox_RequestBody.Name = "textBox_RequestBody";
-            this.textBox_RequestBody.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_RequestBody.Size = new System.Drawing.Size(554, 96);
-            this.textBox_RequestBody.TabIndex = 4;
             // 
             // textBox_Request
             // 
@@ -642,8 +614,6 @@
             this.tabControl_Response.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Photo)).EndInit();
@@ -653,8 +623,6 @@
             this.tabControl_Request.ResumeLayout(false);
             this.tabPage_Headers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RequestHeader)).EndInit();
-            this.tabPage_Body.ResumeLayout(false);
-            this.tabPage_Body.PerformLayout();
             this.contextMenuStrip_RunHistory.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -678,14 +646,12 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TextBox textBox_ResponseHeaders;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TextBox textBox_ResponseBody;
         private System.Windows.Forms.Button button_ViewTokenInfo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabControl tabControl_Request;
         private System.Windows.Forms.TabPage tabPage_Headers;
         private System.Windows.Forms.TabPage tabPage_Body;
-        private System.Windows.Forms.TextBox textBox_RequestBody;
         private System.Windows.Forms.CheckBox checkBox_Indent;
         private System.Windows.Forms.TextBox textBox_Request;
         private System.Windows.Forms.CheckBox checkBox_Decode;

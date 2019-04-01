@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
+using ScintillaNET;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,6 +28,10 @@ namespace Office365APIEditor
         RunHistory runHistory = new RunHistory();
 
         int hoveredIndex = -1;
+
+        // JSON style text editor
+        Scintilla scintilla_RequestBody;
+        Scintilla scintilla_ResponseBody;
 
         public RequestForm()
         {
@@ -80,6 +85,39 @@ namespace Office365APIEditor
             {
                 listBox_RunHistory.Items.Add(runHistory.RunInfo[i]);
             }
+
+            // JSON style editor setting.
+
+            // Request Body
+            scintilla_RequestBody = new Scintilla();
+            tabPage_Body.Controls.Add(scintilla_RequestBody);
+
+            scintilla_RequestBody.Dock = DockStyle.Fill;
+            InitSyntaxColoring(scintilla_RequestBody);
+            scintilla_RequestBody.ReadOnly = false;
+
+            // Response Body
+            scintilla_ResponseBody = new Scintilla();
+            tabPage2.Controls.Add(scintilla_ResponseBody);
+
+            scintilla_ResponseBody.Dock = DockStyle.Fill;
+            InitSyntaxColoring(scintilla_ResponseBody);
+            scintilla_ResponseBody.ReadOnly = true;
+        }
+
+        private void InitSyntaxColoring(Scintilla scintilla)
+        {
+            scintilla.Styles[Style.Default].Size = 12;
+            scintilla.Styles[Style.Json.Default].ForeColor = Color.Silver;
+            scintilla.Styles[Style.Json.BlockComment].ForeColor = Color.FromArgb(0, 128, 0); // Green
+            scintilla.Styles[Style.Json.LineComment].ForeColor = Color.FromArgb(0, 128, 0); // Green
+            scintilla.Styles[Style.Json.Number].ForeColor = Color.Olive;
+            scintilla.Styles[Style.Json.PropertyName].ForeColor = Color.Blue;
+            scintilla.Styles[Style.Json.String].ForeColor = Color.FromArgb(163, 21, 21); // Red
+            scintilla.Styles[Style.Json.StringEol].BackColor = Color.Pink;
+            scintilla.Styles[Style.Json.Operator].ForeColor = Color.Purple;
+            scintilla.Lexer = Lexer.Json;
+
         }
 
         private void AddKeyDownEvent(Control control)
@@ -176,7 +214,7 @@ namespace Office365APIEditor
                 // Build a body.
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
-                    originalRequestBody = textBox_RequestBody.Text;
+                    originalRequestBody = scintilla_RequestBody.Text;
 
                     streamWriter.Write(originalRequestBody);
                     streamWriter.Flush();
@@ -191,7 +229,7 @@ namespace Office365APIEditor
                 // Build a body.
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
-                    originalRequestBody = textBox_RequestBody.Text;
+                    originalRequestBody = scintilla_RequestBody.Text;
 
                     streamWriter.Write(originalRequestBody);
                     streamWriter.Flush();
@@ -617,7 +655,9 @@ namespace Office365APIEditor
         {
             if (originalJsonResponse != "")
             {
-                textBox_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
+                scintilla_ResponseBody.ReadOnly = false;
+                scintilla_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
+                scintilla_ResponseBody.ReadOnly = true;
             }
         }
 
@@ -625,7 +665,9 @@ namespace Office365APIEditor
         {
             if (originalJsonResponse != "")
             {
-                textBox_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
+                scintilla_ResponseBody.ReadOnly = false;
+                scintilla_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
+                scintilla_ResponseBody.ReadOnly = true;
             }
         }
 
@@ -670,7 +712,9 @@ namespace Office365APIEditor
 
             // Body
             originalJsonResponse = JsonResponse;
-            textBox_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
+            scintilla_ResponseBody.ReadOnly = false;
+            scintilla_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
+            scintilla_ResponseBody.ReadOnly = true;
 
             // Show the picturebox in Preview tab if response is image.
             pictureBox_Photo.Visible = isImage;
@@ -691,7 +735,7 @@ namespace Office365APIEditor
             else
             {
                 tabControl_Response.SelectTab(1);
-                textBox_ResponseBody.Select(0, 0);
+                scintilla_ResponseBody.SetEmptySelection(0);
             }
         }
 
@@ -1107,7 +1151,7 @@ namespace Office365APIEditor
                 dataGridView_RequestHeader.Rows.Add(headerName, headerValue);
             }
 
-            textBox_RequestBody.Text = runInfo.RequestBody;
+            scintilla_RequestBody.Text = runInfo.RequestBody;
 
             switch (runInfo.RequestMethod.ToUpper())
             {
@@ -1144,7 +1188,9 @@ namespace Office365APIEditor
             indentedJsonResponse = "";
             decodedJsonResponse = "";
             indentedAndDecodedJsonResponse = "";
-            textBox_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
+            scintilla_ResponseBody.ReadOnly = false;
+            scintilla_ResponseBody.Text = ShapeJsonResponseIfNeeded(originalJsonResponse);
+            scintilla_ResponseBody.ReadOnly = true;
 
             if (isImage) {
                 // Create new bitmap object to display the response
@@ -1195,7 +1241,7 @@ namespace Office365APIEditor
             {
                 // Show Body tab
                 tabControl_Response.SelectTab(1);
-                textBox_ResponseBody.Select(0, 0);
+                scintilla_ResponseBody.SetEmptySelection(0);
             }
 
             // Show the picturebox in preview tab if response is image.
