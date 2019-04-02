@@ -1,0 +1,66 @@
+﻿{
+  "displayName": "Microsoft Graph V1.0",
+  "description": "Microsoft Graph v1.0 Endpoint Sample Requests",
+  "firstLevelCategory": [
+    {
+      "displayName": "Users",
+      "secondLevelCategory": [
+        {
+          "displayName": "User",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List users",
+              "sampleRequest": [
+                {
+                  "id": "2a5e9730-33d3-45d8-b4ce-f6e8810e2ca4",
+                  "displayName": "Standard users request",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/users",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "792bc318-2580-42a4-ad64-b74500559868",
+                  "displayName": "Users request using $select",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/users?$select=displayName,givenName,postalCode",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user",
+              "sampleRequest": [
+                {
+                  "id": "e907f3c2-86d1-4b64-91cd-d82acbb32338",
+                  "displayName": "Standard users request",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/users/{id | userPrincipalName}",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "8cbf797d-2834-4e7b-936e-7b3a6550c0b4",
+                  "displayName": "Signed-in user request",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "8c40aaa4-9ad4-43f9-ba22-67964ff4ac93",
+                  "displayName": "Users request using $select",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/users/{id | userPrincipalName}?$select=displayName,givenName,postalCode",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

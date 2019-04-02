@@ -39,7 +39,11 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.tabControl_LeftNavi = new System.Windows.Forms.TabControl();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.listBox_RunHistory = new System.Windows.Forms.ListBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.treeView_Example = new System.Windows.Forms.TreeView();
             this.label_Line = new System.Windows.Forms.Label();
             this.label_StatusCode = new System.Windows.Forms.Label();
             this.checkBox_Logging = new System.Windows.Forms.CheckBox();
@@ -81,6 +85,9 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.tabControl_LeftNavi.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.tabControl_Response.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -175,7 +182,7 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer2.Panel1.Controls.Add(this.listBox_RunHistory);
+            this.splitContainer2.Panel1.Controls.Add(this.tabControl_LeftNavi);
             // 
             // splitContainer2.Panel2
             // 
@@ -208,19 +215,65 @@
             this.splitContainer2.SplitterDistance = 196;
             this.splitContainer2.TabIndex = 44;
             // 
+            // tabControl_LeftNavi
+            // 
+            this.tabControl_LeftNavi.Controls.Add(this.tabPage5);
+            this.tabControl_LeftNavi.Controls.Add(this.tabPage6);
+            this.tabControl_LeftNavi.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl_LeftNavi.Location = new System.Drawing.Point(0, 0);
+            this.tabControl_LeftNavi.Name = "tabControl_LeftNavi";
+            this.tabControl_LeftNavi.SelectedIndex = 0;
+            this.tabControl_LeftNavi.Size = new System.Drawing.Size(196, 497);
+            this.tabControl_LeftNavi.TabIndex = 1;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.listBox_RunHistory);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(188, 471);
+            this.tabPage5.TabIndex = 0;
+            this.tabPage5.Text = "History";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
             // listBox_RunHistory
             // 
             this.listBox_RunHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox_RunHistory.FormattingEnabled = true;
-            this.listBox_RunHistory.Location = new System.Drawing.Point(0, 0);
+            this.listBox_RunHistory.Location = new System.Drawing.Point(3, 3);
             this.listBox_RunHistory.Name = "listBox_RunHistory";
-            this.listBox_RunHistory.Size = new System.Drawing.Size(196, 497);
+            this.listBox_RunHistory.Size = new System.Drawing.Size(182, 465);
             this.listBox_RunHistory.TabIndex = 0;
             this.listBox_RunHistory.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox_RunHistory_DrawItem);
             this.listBox_RunHistory.DoubleClick += new System.EventHandler(this.listBox_RunHistory_DoubleClick);
             this.listBox_RunHistory.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox_RunHistory_MouseDown);
             this.listBox_RunHistory.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBox_RunHistory_MouseMove);
             this.listBox_RunHistory.Resize += new System.EventHandler(this.listBox_RunHistory_Resize);
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.treeView_Example);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(188, 471);
+            this.tabPage6.TabIndex = 1;
+            this.tabPage6.Text = "Example";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // treeView_Example
+            // 
+            this.treeView_Example.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView_Example.Location = new System.Drawing.Point(3, 3);
+            this.treeView_Example.Name = "treeView_Example";
+            this.treeView_Example.Size = new System.Drawing.Size(182, 465);
+            this.treeView_Example.TabIndex = 0;
+            this.treeView_Example.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView_Example_BeforeCollapse);
+            this.treeView_Example.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView_Example_BeforeExpand);
+            this.treeView_Example.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_Example_NodeMouseClick);
+            this.treeView_Example.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_Example_NodeMouseDoubleClick);
+            this.treeView_Example.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView_Example_MouseDown);
             // 
             // label_Line
             // 
@@ -611,6 +664,9 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.tabControl_LeftNavi.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
             this.tabControl_Response.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -676,5 +732,9 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.DataGridView dataGridView_CSV;
         private System.Windows.Forms.LinkLabel linkLabel_SaveCsvResponse;
+        private System.Windows.Forms.TabControl tabControl_LeftNavi;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TreeView treeView_Example;
     }
 }

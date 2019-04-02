@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
+using Newtonsoft.Json;
+using Office365APIEditor.ViewerHelper.SampleRequest;
 using ScintillaNET;
 using System;
 using System.Collections;
@@ -32,6 +34,9 @@ namespace Office365APIEditor
         // JSON style text editor
         Scintilla scintilla_RequestBody;
         Scintilla scintilla_ResponseBody;
+
+        // Sample request
+        List<SampleRequest> sampleRequests;
 
         public RequestForm()
         {
@@ -103,6 +108,74 @@ namespace Office365APIEditor
             scintilla_ResponseBody.Dock = DockStyle.Fill;
             InitSyntaxColoring(scintilla_ResponseBody);
             scintilla_ResponseBody.ReadOnly = true;
+
+            // Load sample request
+
+            List<SampleRequestDefinitionRoot> sampleRequestDefinitionLists = new List<SampleRequestDefinitionRoot>();
+            string sampleRequestDirectory = Path.Combine(Util.DefaultApplicationPath, "SampleRequest");
+
+            if (Directory.Exists(sampleRequestDirectory))
+            {
+                string[] definitionFiles = Directory.GetFiles(sampleRequestDirectory, "*.json", SearchOption.TopDirectoryOnly);
+
+                foreach (var definitionFilePath in definitionFiles)
+                {
+                    try
+                    {
+                        string rawJsonSampleRequest = "";
+
+                        using (StreamReader reader = new StreamReader(definitionFilePath))
+                        {
+                            rawJsonSampleRequest = reader.ReadToEnd();
+                        }
+
+                        var sampleRequest = JsonConvert.DeserializeObject<SampleRequestDefinitionRoot>(rawJsonSampleRequest);
+                        sampleRequestDefinitionLists.Add(sampleRequest);
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+
+            sampleRequests = new List<SampleRequest>();
+
+            foreach (var sampleRequest in sampleRequestDefinitionLists)
+            {
+                var rootNode = new TreeNode(sampleRequest.DisplayName);
+
+                foreach (var firstLevelCategory in sampleRequest.FirstLevelCategory)
+                {
+                    var firstLevelNode = new TreeNode(firstLevelCategory.DisplayName);
+
+                    foreach (var secondLevelCategory in firstLevelCategory.SecondLevelCategory)
+                    {
+                        var secondLevelNode = new TreeNode(secondLevelCategory.DisplayName);
+
+                        foreach (var thirdLevelCategory in secondLevelCategory.ThirdLevelCategory)
+                        {
+                            var thirdLevelNode = new TreeNode(thirdLevelCategory.DisplayName);
+
+                            foreach (var sample in thirdLevelCategory.SampleRequest)
+                            {
+                                var sampleNode = new TreeNode(sample.DisplayName) { Tag = sample.Id };
+                                thirdLevelNode.Nodes.Add(sampleNode);
+
+                                sampleRequests.Add(sample);
+                            }
+
+                            secondLevelNode.Nodes.Add(thirdLevelNode);
+                        }
+
+                        firstLevelNode.Nodes.Add(secondLevelNode);
+                    }
+
+                    rootNode.Nodes.Add(firstLevelNode);
+                }
+
+                treeView_Example.Nodes.Add(rootNode);
+            }
         }
 
         private void InitSyntaxColoring(Scintilla scintilla)
@@ -1304,6 +1377,76 @@ namespace Office365APIEditor
                     using (StreamWriter streamWriter = new StreamWriter(csvStream))
                     {
                         streamWriter.Write(originalJsonResponse);
+                    }
+                }
+            }
+        }
+
+        private void treeView_Example_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
+        {
+        }
+
+        private void treeView_Example_BeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+        }
+
+        private void treeView_Example_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                treeView_Example.SelectedNode = e.Node;
+            }
+        }
+
+        private void treeView_Example_MouseDown(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void treeView_Example_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.GetNodeCount(true) == 0)
+            {
+                // Get the sample and show it.
+
+                var sample = sampleRequests.Where(s => s.Id == e.Node.Tag.ToString()).First();
+
+                if (sample != null)
+                {
+                    textBox_Request.Text = sample.URI;
+
+                    dataGridView_RequestHeader.Rows.Clear();
+
+                    foreach (Header header in sample.Header)
+                    {
+                        if (header == null)
+                        {
+                            continue;
+                        }
+
+                        string headerName = header.Name;
+                        string headerValue = header.Value;
+
+                        dataGridView_RequestHeader.Rows.Add(headerName, headerValue);
+                    }
+
+                    scintilla_RequestBody.Text = sample.Body;
+
+                    switch (sample.Method.ToUpper())
+                    {
+                        case "GET":
+                            radioButton_GET.Select();
+                            break;
+                        case "POST":
+                            radioButton_POST.Select();
+                            break;
+                        case "PATCH":
+                            radioButton_PATCH.Select();
+                            break;
+                        case "DELETE":
+                            radioButton_DELETE.Select();
+                            break;
+                        default:
+                            break;
                     }
                 }
             }

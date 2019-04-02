@@ -270,6 +270,7 @@
     <Compile Include="ViewerHelper\MessageSummary.cs" />
     <Compile Include="ViewerHelper\NewEmailMessage.cs" />
     <Compile Include="ViewerHelper\PagedResponse.cs" />
+    <Compile Include="ViewerHelper\SampleRequest\SampleRequest.cs" />
     <Compile Include="ViewerHelper\Tasks\TaskFolder.cs" />
     <Compile Include="ViewerHelper\Tasks\TaskGroup.cs" />
     <Compile Include="ViewerHelper\Tasks\TaskSummary.cs" />
@@ -350,6 +351,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="SampleRequest\MicrosoftGraphV1.0.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
