@@ -127,8 +127,15 @@ namespace Office365APIEditor
                 if (item is TextBox)
                 {
                     TextBox textBoxControl = item as TextBox;
-                    textBoxControl.KeyDown += TextBoxControl_KeyDown;
-                    System.Diagnostics.Debug.WriteLine(textBoxControl.Name);
+
+                    if (textBoxControl == textBox_Request)
+                    {
+                        textBoxControl.KeyDown += textBox_Request_KeyDown;
+                    }
+                    else
+                    {
+                        textBoxControl.KeyDown += TextBoxControl_KeyDown;
+                    }
                 }
 
                 AddKeyDownEvent(item);
@@ -492,6 +499,21 @@ namespace Office365APIEditor
             if (e.Control && e.KeyCode == Keys.A)
             {
                 (sender as TextBox).SelectAll();
+            }
+        }
+
+        private void textBox_Request_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Enable 'Ctrl + A'
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                (sender as TextBox).SelectAll();
+            }
+
+            // Enter
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
             }
         }
 

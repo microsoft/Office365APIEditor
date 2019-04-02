@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>ftps://waws-prod-dm1-067.ftp.azurewebsites.windows.net/site/wwwroot/</PublishUrl>
+    <PublishUrl>ftp://waws-prod-dm1-067.ftp.azurewebsites.windows.net/site/wwwroot/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -25,8 +25,8 @@
     <InstallUrl>https://office365apieditor.azurewebsites.net/</InstallUrl>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>3</ApplicationRevision>
-    <ApplicationVersion>0.9.21.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>0.9.24.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -80,13 +80,13 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>2051721C30F7DA9DB98BD87DD8F58E1D502345F2</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>D9DC189D6738A6C7FD43889FDCC96BB6A996059A</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Office365APIEditor_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Office365APIEditor_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>false</GenerateManifests>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -335,6 +335,7 @@
       <DependentUpon>TokenViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Office365APIEditor_1_TemporaryKey.pfx" />
     <None Include="Office365APIEditor_TemporaryKey.pfx" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
