@@ -1412,7 +1412,7 @@ namespace Office365APIEditor
 
                 if (sample != null)
                 {
-                    textBox_Request.Text = sample.URI;
+                    textBox_Request.Text = RunBuiltInFunction(sample.URI);
 
                     dataGridView_RequestHeader.Rows.Clear();
 
@@ -1428,8 +1428,8 @@ namespace Office365APIEditor
 
                         dataGridView_RequestHeader.Rows.Add(headerName, headerValue);
                     }
-
-                    scintilla_RequestBody.Text = sample.Body;
+                    
+                    scintilla_RequestBody.Text = DecodeJsonResponse(RunBuiltInFunction(sample.Body));
 
                     switch (sample.Method.ToUpper())
                     {
@@ -1450,6 +1450,59 @@ namespace Office365APIEditor
                     }
                 }
             }
+        }
+
+        private string RunBuiltInFunction(string requestBody)
+        {
+            var result = requestBody;
+            var utcNow = DateTime.UtcNow;
+
+            if (requestBody.Contains("${DateTime1HourLater}"))
+            {
+                result = result.Replace("${DateTime1HourLater}", utcNow.AddHours(1).ToString("yyyy-MM-ddTHH:mm:ss"));
+            }
+
+            if (requestBody.Contains("${DateTime2HourLater}"))
+            {
+                result = result.Replace("${DateTime2HourLater}", utcNow.AddHours(2).ToString("yyyy-MM-ddTHH:mm:ss"));
+            }
+
+            if (requestBody.Contains("${DateTime1DayLater12}"))
+            {
+                result = result.Replace("${DateTime1DayLater12}", utcNow.AddDays(1).ToString("yyyy-MM-dd") + "T12:00:00");
+            }
+
+            if (requestBody.Contains("${DateTime1DayLater14}"))
+            {
+                result = result.Replace("${DateTime1DayLater14}", utcNow.AddDays(1).ToString("yyyy-MM-dd") + "T14:00:00");
+            }
+
+            if (requestBody.Contains("${DateTime1DayAnd1HourLater}"))
+            {
+                result = result.Replace("${DateTime1DayAnd1HourLater}", utcNow.AddDays(1).AddHours(1).ToString("yyyy-MM-ddTHH:mm:ss"));
+            }
+
+            if (requestBody.Contains("${DateTime1DayAnd2HourLater}"))
+            {
+                result = result.Replace("${DateTime1DayAnd2HourLater}", utcNow.AddDays(1).AddHours(2).ToString("yyyy-MM-ddTHH:mm:ss"));
+            }
+
+            if (requestBody.Contains("${DateTime1MonthLater12}"))
+            {
+                result = result.Replace("${DateTime1MonthLater12}", utcNow.AddMonths(1).ToString("yyyy-MM-dd") + "T12:00:00");
+            }
+
+            if (requestBody.Contains("${DateToday}"))
+            {
+                result = result.Replace("${DateToday}", utcNow.ToString("yyyy-MM-dd"));
+            }
+
+            if (requestBody.Contains("${Date3MonthLater}"))
+            {
+                result = result.Replace("${Date3MonthLater}", utcNow.AddMonths(3).ToString("yyyy-MM-dd"));
+            }
+
+            return result;
         }
     }
 }
