@@ -273,6 +273,7 @@
             this.treeView_Example.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView_Example_BeforeExpand);
             this.treeView_Example.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_Example_NodeMouseClick);
             this.treeView_Example.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_Example_NodeMouseDoubleClick);
+            this.treeView_Example.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView_Example_KeyDown);
             this.treeView_Example.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView_Example_MouseDown);
             // 
             // label_Line

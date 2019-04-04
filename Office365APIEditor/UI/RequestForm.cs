@@ -1406,50 +1406,70 @@ namespace Office365APIEditor
         {
             if (e.Node.GetNodeCount(true) == 0)
             {
-                // Get the sample and show it.
+                // Show the selected example
+                DisplayExample(e.Node.Tag.ToString());
+            }
+        }
 
-                var sample = sampleRequests.Where(s => s.Id == e.Node.Tag.ToString()).First();
-
-                if (sample != null)
+        private void treeView_Example_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (treeView_Example.SelectedNode?.GetNodeCount(true) == 0)
                 {
-                    textBox_Request.Text = RunBuiltInFunction(sample.URI);
-
-                    dataGridView_RequestHeader.Rows.Clear();
-
-                    foreach (Header header in sample.Header)
-                    {
-                        if (header == null)
-                        {
-                            continue;
-                        }
-
-                        string headerName = header.Name;
-                        string headerValue = header.Value;
-
-                        dataGridView_RequestHeader.Rows.Add(headerName, headerValue);
-                    }
-                    
-                    scintilla_RequestBody.Text = DecodeJsonResponse(RunBuiltInFunction(sample.Body));
-
-                    switch (sample.Method.ToUpper())
-                    {
-                        case "GET":
-                            radioButton_GET.Select();
-                            break;
-                        case "POST":
-                            radioButton_POST.Select();
-                            break;
-                        case "PATCH":
-                            radioButton_PATCH.Select();
-                            break;
-                        case "DELETE":
-                            radioButton_DELETE.Select();
-                            break;
-                        default:
-                            break;
-                    }
+                    // Show the selected example
+                    DisplayExample(treeView_Example.SelectedNode.Tag.ToString());
                 }
             }
+        }
+
+        private void DisplayExample(string exampleId)
+        {
+            // Get the sample and show it.
+
+            var sample = sampleRequests.Where(s => s.Id == exampleId).First();
+
+            if (sample != null)
+            {
+                textBox_Request.Text = RunBuiltInFunction(sample.URI);
+
+                dataGridView_RequestHeader.Rows.Clear();
+
+                foreach (Header header in sample.Header)
+                {
+                    if (header == null)
+                    {
+                        continue;
+                    }
+
+                    string headerName = header.Name;
+                    string headerValue = header.Value;
+
+                    dataGridView_RequestHeader.Rows.Add(headerName, headerValue);
+                }
+
+                scintilla_RequestBody.Text = DecodeJsonResponse(RunBuiltInFunction(sample.Body));
+
+                switch (sample.Method.ToUpper())
+                {
+                    case "GET":
+                        radioButton_GET.Select();
+                        break;
+                    case "POST":
+                        radioButton_POST.Select();
+                        break;
+                    case "PATCH":
+                        radioButton_PATCH.Select();
+                        break;
+                    case "DELETE":
+                        radioButton_DELETE.Select();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            treeView_Example.Focus();
         }
 
         private string RunBuiltInFunction(string requestBody)
