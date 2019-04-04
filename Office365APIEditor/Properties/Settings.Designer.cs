@@ -145,16 +145,31 @@ namespace Office365APIEditor.Properties {
             "</string>\r\n  <string>https://graph.microsoft.com/Contacts.Read.Shared</string>\r\n" +
             "  <string>https://graph.microsoft.com/Contacts.ReadWrite</string>\r\n  <string>htt" +
             "ps://graph.microsoft.com/Contacts.ReadWrite.Shared</string>\r\n  <string>https://g" +
-            "raph.microsoft.com/Mail.Read</string>\r\n  <string>https://graph.microsoft.com/Mai" +
-            "l.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/Mail.Read.Shared</st" +
-            "ring>\r\n  <string>https://graph.microsoft.com/Mail.ReadWrite.Shared</string>\r\n  <" +
-            "string>https://graph.microsoft.com/Mail.Send</string>\r\n  <string>https://graph.m" +
-            "icrosoft.com/Mail.Send.Shared</string>\r\n  <string>https://graph.microsoft.com/Ma" +
-            "ilboxSettings.Read</string>\r\n  <string>https://graph.microsoft.com/MailboxSettin" +
-            "gs.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/People.Read</string" +
-            ">\r\n  <string>https://graph.microsoft.com/User.Read</string>\r\n  <string>https://g" +
-            "raph.microsoft.com/User.ReadWrite</string>\r\n  <string>https://graph.microsoft.co" +
-            "m/User.ReadBasic.All</string>\r\n</ArrayOfString>")]
+            "raph.microsoft.com/Directory.Read.All</string>\r\n  <string>https://graph.microsof" +
+            "t.com/Directory.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Di" +
+            "rectory.AccessAsUser.All</string>\r\n  <string>https://graph.microsoft.com/Files.R" +
+            "ead</string>\r\n  <string>https://graph.microsoft.com/Files.Read.All</string>\r\n  <" +
+            "string>https://graph.microsoft.com/Files.ReadWrite</string>\r\n  <string>https://g" +
+            "raph.microsoft.com/Files.ReadWrite.All</string>\r\n  <string>https://graph.microso" +
+            "ft.com/Group.Read.All</string>\r\n  <string>https://graph.microsoft.com/Mail.Read<" +
+            "/string>\r\n  <string>https://graph.microsoft.com/Mail.ReadWrite</string>\r\n  <stri" +
+            "ng>https://graph.microsoft.com/Mail.Read.Shared</string>\r\n  <string>https://grap" +
+            "h.microsoft.com/Mail.ReadWrite.Shared</string>\r\n  <string>https://graph.microsof" +
+            "t.com/Mail.Send</string>\r\n  <string>https://graph.microsoft.com/Mail.Send.Shared" +
+            "</string>\r\n  <string>https://graph.microsoft.com/MailboxSettings.Read</string>\r\n" +
+            "  <string>https://graph.microsoft.com/MailboxSettings.ReadWrite</string>\r\n  <str" +
+            "ing>https://graph.microsoft.com/Notes.Create</string>\r\n  <string>https://graph.m" +
+            "icrosoft.com/Notes.Read</string>\r\n  <string>https://graph.microsoft.com/Notes.Re" +
+            "adWrite</string>\r\n  <string>https://graph.microsoft.com/Notes.Read.All</string>\r" +
+            "\n  <string>https://graph.microsoft.com/Notes.ReadWrite.All</string>\r\n  <string>h" +
+            "ttps://graph.microsoft.com/People.Read</string>\r\n  <string>https://graph.microso" +
+            "ft.com/Sites.Read.All</string>\r\n  <string>https://graph.microsoft.com/Sites.Read" +
+            "Write.All</string>\r\n  <string>https://graph.microsoft.com/User.Export.All</strin" +
+            "g>\r\n  <string>https://graph.microsoft.com/User.Read</string>\r\n  <string>https://" +
+            "graph.microsoft.com/User.Read.All</string>\r\n  <string>https://graph.microsoft.co" +
+            "m/User.ReadBasic.All</string>\r\n  <string>https://graph.microsoft.com/User.ReadWr" +
+            "ite</string>\r\n  <string>https://graph.microsoft.com/User.ReadWrite.All</string>\r" +
+            "\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection PredefinedScopes {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["PredefinedScopes"]));

@@ -88,6 +88,14 @@ namespace Office365APIEditor
                         startupLog.AppendLine("The history file does not exist.");
                     }
                 }
+                else if (command.ToLower() == ("/CustomDefinedScopes").ToLower())
+                {
+                    // Reset CustomDefinedScopes setting.
+                    startupLog.AppendLine("CustomDefinedScopes will be reset.");
+                    Properties.Settings.Default.CustomDefinedScopes = null;
+                    Properties.Settings.Default.Save();
+                    startupLog.AppendLine("CustomDefinedScopes setting was saved.");
+                }
             }
 
             // Set default log folder path.

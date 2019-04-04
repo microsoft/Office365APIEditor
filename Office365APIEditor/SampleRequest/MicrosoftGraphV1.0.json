@@ -597,6 +597,295 @@
               ]
             }
           ]
+        },
+        {
+          "displayName": "Mail",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List message",
+              "sampleRequest": [
+                {
+                  "id": "00dd8fdb-bc4c-4d7d-8ed9-29090088fb08",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create message",
+              "sampleRequest": [
+                {
+                  "id": "73c6b55e-eefb-4b52-bc09-8e03fa128544",
+                  "displayName": "Request 1",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages",
+                  "header": [],
+                  "body": "{\r\n    \"subject\":\"Did you see last night's game?\",\r\n    \"importance\":\"Low\",\r\n    \"body\":{\r\n        \"contentType\":\"HTML\",\r\n        \"content\":\"They were <b>awesome</b>!\"\r\n    },\r\n    \"toRecipients\":[\r\n        {\r\n            \"emailAddress\":{\r\n                \"address\":\"AdeleV@contoso.onmicrosoft.com\"\r\n            }\r\n        }\r\n    ]\r\n}"
+                },
+                {
+                  "id": "3fcf2eb7-cbfb-480a-8524-f77c784656a1",
+                  "displayName": "Request 2",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages",
+                  "header": [],
+                  "body": "{\r\n    \"subject\":\"9/8/2018: concert\",\r\n    \"body\":{\r\n        \"contentType\":\"HTML\",\r\n        \"content\":\"The group represents Washington.\"\r\n    },\r\n    \"toRecipients\":[\r\n        {\r\n            \"emailAddress\":{\r\n                \"address\":\"AlexW@contoso.OnMicrosoft.com\"\r\n            }\r\n        }\r\n    ],\r\n    \"internetMessageHeaders\":[\r\n        {\r\n            \"name\":\"x-custom-header-group-name\",\r\n            \"value\":\"Washington\"\r\n        },\r\n        {\r\n            \"name\":\"x-custom-header-group-id\",\r\n            \"value\":\"WA001\"\r\n        }\r\n    ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List Overrides",
+              "sampleRequest": [
+                {
+                  "id": "7d0471b6-1a34-48be-9b27-2c144ef39f45",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/inferenceClassification/overrides",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create Override",
+              "sampleRequest": [
+                {
+                  "id": "84b9aa95-25aa-4170-92f5-1fe54a84ec8f",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/inferenceClassification/overrides",
+                  "header": [],
+                  "body": "{\r\n  \"classifyAs\": \"focused\",\r\n  \"senderEmailAddress\": {\r\n    \"name\": \"Samantha Booth\",\r\n    \"address\": \"samanthab@adatum.onmicrosoft.com\"\r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List mail folders",
+              "sampleRequest": [
+                {
+                  "id": "64d83a9e-4013-4d21-80e7-78d71ec05a2c",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/mailFolders",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create mail folder",
+              "sampleRequest": [
+                {
+                  "id": "14a15a05-0d09-4ad6-a9b6-928fd31c5846",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/mailFolders",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"displayName-value\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Send mail",
+              "sampleRequest": [
+                {
+                  "id": "ea3a4efa-96f9-42eb-a8a1-9fbf64e325d6",
+                  "displayName": "Request 1",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/sendMail",
+                  "header": [],
+                  "body": "{\r\n  \"message\": {\r\n    \"subject\": \"Meet for lunch?\",\r\n    \"body\": {\r\n      \"contentType\": \"Text\",\r\n      \"content\": \"The new cafeteria is open.\"\r\n    },\r\n    \"toRecipients\": [\r\n      {\r\n        \"emailAddress\": {\r\n          \"address\": \"fannyd@contoso.onmicrosoft.com\"\r\n        }\r\n      }\r\n    ],\r\n    \"ccRecipients\": [\r\n      {\r\n        \"emailAddress\": {\r\n          \"address\": \"danas@contoso.onmicrosoft.com\"\r\n        }\r\n      }\r\n    ]\r\n  },\r\n  \"saveToSentItems\": \"false\"\r\n}"
+                },
+                {
+                  "id": "b2dab3fc-8eb2-4195-b7cf-b18e7dd514bd",
+                  "displayName": "Request 2",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/sendMail",
+                  "header": [],
+                  "body": "{\r\n  \"message\": {\r\n    \"subject\": \"9/9/2018: concert\",\r\n    \"body\": {\r\n      \"contentType\": \"HTML\",\r\n      \"content\": \"The group represents Nevada.\"\r\n    },\r\n    \"toRecipients\": [\r\n      {\r\n        \"emailAddress\": {\r\n          \"address\": \"AlexW@contoso.onmicrosoft.com\"\r\n        }\r\n      }\r\n    ],\r\n    \"internetMessageHeaders\":[\r\n      {\r\n        \"name\":\"x-custom-header-group-name\",\r\n        \"value\":\"Nevada\"\r\n      },\r\n      {\r\n        \"name\":\"x-custom-header-group-id\",\r\n        \"value\":\"NV001\"\r\n      }\r\n    ]\r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get mailbox settings",
+              "sampleRequest": [
+                {
+                  "id": "0930967f-1c4d-4b83-8e7b-2e8b431c1b06",
+                  "displayName": "Request 1",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/mailboxSettings",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "9ba3bae5-5fb0-40c8-ac76-6a428c392ce1",
+                  "displayName": "Request 2",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/mailboxSettings/automaticRepliesSetting",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update mailbox settings",
+              "sampleRequest": [
+                {
+                  "id": "02a2e79d-1599-4682-a868-1272847b52c3",
+                  "displayName": "Request 1",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/me/mailboxSettings",
+                  "header": [],
+                  "body": "{\r\n    \"@odata.context\": \"https://graph.microsoft.com/v1.0/$metadata#Me/mailboxSettings\",\r\n    \"automaticRepliesSetting\": {\r\n        \"status\": \"Scheduled\",\r\n        \"scheduledStartDateTime\": {\r\n          \"dateTime\": \"${DateTime1DayLater12}\",\r\n          \"timeZone\": \"UTC\"\r\n        },\r\n        \"scheduledEndDateTime\": {\r\n          \"dateTime\": \"${DateTime1MonthLater12}\",\r\n          \"timeZone\": \"UTC\"\r\n        }\r\n    }\r\n}"
+                },
+                {
+                  "id": "b0732760-96fb-401f-bb76-ea9e6ca183fc",
+                  "displayName": "Request 2",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/me/mailboxSettings",
+                  "header": [],
+                  "body": "{\r\n  \"workingHours\": {\r\n      \"endTime\" : \"18:30:00.0000000\", \r\n      \"daysOfWeek\": [ \r\n          \"Monday\", \r\n          \"Tuesday\", \r\n          \"Wednesday\", \r\n          \"Thursday\", \r\n          \"Friday\", \r\n          \"Saturday\" \r\n      ], \r\n      \"timeZone\" : { \r\n         \"@odata.type\": \"#microsoft.graph.customTimeZone\", \r\n         \"bias\":-300, \r\n         \"name\": \"Customized Time Zone\",\r\n         \"standardOffset\":{   \r\n           \"time\":\"02:00:00.0000000\", \r\n           \"dayOccurrence\":2, \r\n           \"dayOfWeek\":\"Sunday\", \r\n           \"month\":10, \r\n           \"year\":0 \r\n         }, \r\n         \"daylightOffset\":{   \r\n           \"daylightBias\":100, \r\n           \"time\":\"02:00:00.0000000\", \r\n           \"dayOccurrence\":4, \r\n           \"dayOfWeek\":\"Sunday\", \r\n           \"month\":5, \r\n           \"year\":0 \r\n         } \r\n      } \r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List rules",
+              "sampleRequest": [
+                {
+                  "id": "f7a6f54a-61ad-4f6e-836c-3af619ca6667",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messageRules",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create rule",
+              "sampleRequest": [
+                {
+                  "id": "3a0715df-a2ac-4bc8-8e7b-369f88c3124d",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messageRules",
+                  "header": [],
+                  "body": "{\r\n    \"displayName\": \"From partner\",\r\n    \"sequence\": 2,\r\n    \"isEnabled\": true,\r\n    \"conditions\": {\r\n        \"senderContains\": [\r\n          \"adele\"\r\n        ]\r\n     },\r\n     \"actions\": {\r\n        \"forwardTo\": [\r\n          {\r\n             \"emailAddress\": {\r\n                \"name\": \"Alex Wilbur\",\r\n                \"address\": \"AlexW@contoso.onmicrosoft.com\"\r\n              }\r\n           }\r\n        ],\r\n        \"stopProcessingRules\": true\r\n     }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get MailTips",
+              "sampleRequest": [
+                {
+                  "id": "66ea8b83-47c3-4841-ae82-b481ce845fee",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/getMailTips",
+                  "header": [],
+                  "body": "{\r\n    \"EmailAddresses\": [\r\n        \"danas@contoso.onmicrosoft.com\", \r\n        \"fannyd@contoso.onmicrosoft.com\"\r\n    ],\r\n    \"MailTipsOptions\": \"automaticReplies, mailboxFullStatus\"\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Notes",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List notebooks",
+              "sampleRequest": [
+                {
+                  "id": "55a7c1d5-0bfe-4f56-b587-db3a6e0e02e4",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create notebook",
+              "sampleRequest": [
+                {
+                  "id": "c8986410-915f-4782-a39b-5077dd1a49c2",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"Notebook name\"\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Outlook settings",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get language choices",
+              "sampleRequest": [
+                {
+                  "id": "aed928d6-be28-4844-bed3-7fd5efb8013d",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/outlook/supportedLanguages",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get time zone choices",
+              "sampleRequest": [
+                {
+                  "id": "49bbeb47-8ebe-421a-a2d0-117aabf1c88c",
+                  "displayName": "Request 1",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/outlook/supportedTimeZones",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "ae53ea57-206e-450e-ac34-72ed2d92c7dd",
+                  "displayName": "Request 2",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/outlook/supportedTimeZones(TimeZoneStandard=microsoft.graph.timeZoneStandard'Iana')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List categories",
+              "sampleRequest": [
+                {
+                  "id": "9e583d1c-2dca-4dfd-a7a0-8efbc29f5bad",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/outlook/masterCategories",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create category",
+              "sampleRequest": [
+                {
+                  "id": "c943896e-d671-4c39-ba48-ae63b3ec6117",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/outlook/masterCategories",
+                  "header": [],
+                  "body": "{\r\n      \"displayName\":\"Project expenses\",\r\n      \"color\":\"preset9\"\r\n}"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
