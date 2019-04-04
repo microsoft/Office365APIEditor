@@ -65,7 +65,6 @@
             this.HeaderNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HeaderValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage_Body = new System.Windows.Forms.TabPage();
-            this.textBox_Request = new System.Windows.Forms.TextBox();
             this.button_Run = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -80,6 +79,11 @@
             this.radioButton_POST = new System.Windows.Forms.RadioButton();
             this.contextMenuStrip_RunHistory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showDetailsInMainPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.radioButton_PUT = new System.Windows.Forms.RadioButton();
+            this.textBox_Request = new System.Windows.Forms.TextBox();
+            this.checkBox_SendAsBinary = new System.Windows.Forms.CheckBox();
+            this.button_CreateBinaryDataFromFile = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -187,6 +191,9 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer2.Panel2.Controls.Add(this.button_CreateBinaryDataFromFile);
+            this.splitContainer2.Panel2.Controls.Add(this.checkBox_SendAsBinary);
+            this.splitContainer2.Panel2.Controls.Add(this.radioButton_PUT);
             this.splitContainer2.Panel2.Controls.Add(this.label_Line);
             this.splitContainer2.Panel2.Controls.Add(this.label_StatusCode);
             this.splitContainer2.Panel2.Controls.Add(this.checkBox_Logging);
@@ -501,19 +508,6 @@
             this.tabPage_Body.Text = "Body";
             this.tabPage_Body.UseVisualStyleBackColor = true;
             // 
-            // textBox_Request
-            // 
-            this.textBox_Request.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_Request.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastRequest", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_Request.Location = new System.Drawing.Point(101, 40);
-            this.textBox_Request.Multiline = true;
-            this.textBox_Request.Name = "textBox_Request";
-            this.textBox_Request.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox_Request.Size = new System.Drawing.Size(587, 36);
-            this.textBox_Request.TabIndex = 45;
-            this.textBox_Request.Text = global::Office365APIEditor.Properties.Settings.Default.LastRequest;
-            // 
             // button_Run
             // 
             this.button_Run.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -643,6 +637,58 @@
             this.showDetailsInMainPanelToolStripMenuItem.Text = "Show details in main panel";
             this.showDetailsInMainPanelToolStripMenuItem.Click += new System.EventHandler(this.showDetailsInMainPanelToolStripMenuItem_Click);
             // 
+            // radioButton_PUT
+            // 
+            this.radioButton_PUT.AutoSize = true;
+            this.radioButton_PUT.Location = new System.Drawing.Point(354, 198);
+            this.radioButton_PUT.Name = "radioButton_PUT";
+            this.radioButton_PUT.Size = new System.Drawing.Size(47, 17);
+            this.radioButton_PUT.TabIndex = 66;
+            this.radioButton_PUT.Text = "PUT";
+            this.radioButton_PUT.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Request
+            // 
+            this.textBox_Request.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_Request.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastRequest", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.textBox_Request.Location = new System.Drawing.Point(101, 40);
+            this.textBox_Request.Multiline = true;
+            this.textBox_Request.Name = "textBox_Request";
+            this.textBox_Request.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox_Request.Size = new System.Drawing.Size(587, 36);
+            this.textBox_Request.TabIndex = 45;
+            this.textBox_Request.Text = global::Office365APIEditor.Properties.Settings.Default.LastRequest;
+            // 
+            // checkBox_SendAsBinary
+            // 
+            this.checkBox_SendAsBinary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox_SendAsBinary.AutoSize = true;
+            this.checkBox_SendAsBinary.Location = new System.Drawing.Point(694, 86);
+            this.checkBox_SendAsBinary.Name = "checkBox_SendAsBinary";
+            this.checkBox_SendAsBinary.Size = new System.Drawing.Size(96, 17);
+            this.checkBox_SendAsBinary.TabIndex = 67;
+            this.checkBox_SendAsBinary.Text = "Send as binary";
+            this.checkBox_SendAsBinary.UseVisualStyleBackColor = true;
+            this.checkBox_SendAsBinary.CheckedChanged += new System.EventHandler(this.checkBox_SendAsBinary_CheckedChanged);
+            // 
+            // button_CreateBinaryDataFromFile
+            // 
+            this.button_CreateBinaryDataFromFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_CreateBinaryDataFromFile.Enabled = false;
+            this.button_CreateBinaryDataFromFile.Location = new System.Drawing.Point(694, 109);
+            this.button_CreateBinaryDataFromFile.Name = "button_CreateBinaryDataFromFile";
+            this.button_CreateBinaryDataFromFile.Size = new System.Drawing.Size(107, 36);
+            this.button_CreateBinaryDataFromFile.TabIndex = 68;
+            this.button_CreateBinaryDataFromFile.Text = "Create binary data from file";
+            this.button_CreateBinaryDataFromFile.UseVisualStyleBackColor = true;
+            this.button_CreateBinaryDataFromFile.Click += new System.EventHandler(this.button_CreateBinaryDataFromFile_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "All files (*.*)|*.*";
+            // 
             // RequestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -737,5 +783,9 @@
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TreeView treeView_Example;
+        private System.Windows.Forms.RadioButton radioButton_PUT;
+        private System.Windows.Forms.Button button_CreateBinaryDataFromFile;
+        private System.Windows.Forms.CheckBox checkBox_SendAsBinary;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

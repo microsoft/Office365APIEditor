@@ -886,6 +886,97 @@
               ]
             }
           ]
+        },
+        {
+          "displayName": "Org hierarchy",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List direct reports",
+              "sampleRequest": [
+                {
+                  "id": "7803e733-167f-450b-962a-d68933e20f9d",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/directReports",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get manager",
+              "sampleRequest": [
+                {
+                  "id": "8267099b-1b00-4454-a9c0-f963612cea86",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/users/{id|userPrincipalName}/manager",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Assign manager",
+              "sampleRequest": [
+                {
+                  "id": "96cf131f-bdeb-44c4-bb4d-7a9e82489256",
+                  "displayName": "Example",
+                  "method": "PUT",
+                  "URI": "https://graph.microsoft.com/v1.0/users/{id}/manager/$ref",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.id\": \"https://graph.microsoft.com/v1.0/users/{id}\"\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Photo",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get photo",
+              "sampleRequest": [
+                {
+                  "id": "21c317c7-98b7-4c6c-8b18-5750fcea49b9",
+                  "displayName": "Request 1",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/photo/$value",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "b1f91ba8-899f-4ba4-812b-d20aad8dd2ae",
+                  "displayName": "Request 2",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/photos/48x48/$value",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "df164e6c-e8f9-4246-bf11-d4c9b92ff7c6",
+                  "displayName": "Request 3",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/photo",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update photo",
+              "sampleRequest": [
+                {
+                  "id": "f843f490-fb37-4fa2-8fa3-fa975f005ed7",
+                  "displayName": "Example",
+                  "method": "PUT",
+                  "URI": "https://graph.microsoft.com/v1.0/me/photo/$value",
+                  "header": [],
+                  "body": "Binary data for the image"
+                }
+              ]
+            }
+          ]
         }
       ]
     }

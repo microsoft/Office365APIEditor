@@ -66,6 +66,7 @@
   &lt;string&gt;https://graph.microsoft.com/Files.ReadWrite&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Files.ReadWrite.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Group.Read.All&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/Group.ReadWrite.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Mail.Read&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Mail.ReadWrite&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Mail.Read.Shared&lt;/string&gt;

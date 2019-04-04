@@ -292,13 +292,24 @@ namespace Office365APIEditor
                 request.Method = "POST";
 
                 // Build a body.
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                if (checkBox_SendAsBinary.Checked)
                 {
-                    originalRequestBody = scintilla_RequestBody.Text;
+                    using (var streamWriter = request.GetRequestStream())
+                    {
+                        var binaryData = Convert.FromBase64String(scintilla_RequestBody.Text);
+                        streamWriter.Write(binaryData, 0, binaryData.Length);
+                    }
+                }
+                else
+                {
+                    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                    {
+                        originalRequestBody = scintilla_RequestBody.Text;
 
-                    streamWriter.Write(originalRequestBody);
-                    streamWriter.Flush();
-                    streamWriter.Close();
+                        streamWriter.Write(originalRequestBody);
+                        streamWriter.Flush();
+                        streamWriter.Close();
+                    }
                 }
             }
             else if (radioButton_PATCH.Checked)
@@ -307,19 +318,56 @@ namespace Office365APIEditor
                 request.Method = "PATCH";
 
                 // Build a body.
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                if (checkBox_SendAsBinary.Checked)
                 {
-                    originalRequestBody = scintilla_RequestBody.Text;
+                    using (var streamWriter = request.GetRequestStream())
+                    {
+                        var binaryData = Convert.FromBase64String(scintilla_RequestBody.Text);
+                        streamWriter.Write(binaryData, 0, binaryData.Length);
+                    }
+                }
+                else
+                {
+                    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                    {
+                        originalRequestBody = scintilla_RequestBody.Text;
 
-                    streamWriter.Write(originalRequestBody);
-                    streamWriter.Flush();
-                    streamWriter.Close();
+                        streamWriter.Write(originalRequestBody);
+                        streamWriter.Flush();
+                        streamWriter.Close();
+                    }
                 }
             }
-            else
+            else if (radioButton_DELETE.Checked)
             {
                 // Request is DELETE.
                 request.Method = "DELETE";
+            }
+            else
+            {
+                // Request is PUT
+                request.Method = "PUT";
+
+                // Build a body.
+                if (checkBox_SendAsBinary.Checked)
+                {
+                    using (var streamWriter = request.GetRequestStream())
+                    {
+                        var binaryData = Convert.FromBase64String(scintilla_RequestBody.Text);
+                        streamWriter.Write(binaryData, 0, binaryData.Length);
+                    }
+                }
+                else
+                {
+                    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                    {
+                        originalRequestBody = scintilla_RequestBody.Text;
+
+                        streamWriter.Write(originalRequestBody);
+                        streamWriter.Flush();
+                        streamWriter.Close();
+                    }
+                }
             }
 
             // Add headers
@@ -938,7 +986,7 @@ namespace Office365APIEditor
                 sb.AppendLine("  " + header + " : " + RequestToLog.Headers.Get(header));
             }
 
-            if (RequestToLog.Method == "POST" || RequestToLog.Method == "PATCH")
+            if (RequestToLog.Method == "POST" || RequestToLog.Method == "PATCH" || RequestToLog.Method == "PUT")
             {
                 sb.AppendLine("Body : ");
                 sb.AppendLine("  " + Body.Replace(Environment.NewLine, Environment.NewLine + "  "));
@@ -1262,6 +1310,9 @@ namespace Office365APIEditor
                 case "DELETE":
                     radioButton_DELETE.Select();
                     break;
+                case "PUT":
+                    radioButton_PUT.Select();
+                    break;
                 default:
                     break;
             }
@@ -1449,6 +1500,7 @@ namespace Office365APIEditor
                 }
 
                 scintilla_RequestBody.Text = DecodeJsonResponse(RunBuiltInFunction(sample.Body));
+                scintilla_RequestBody.CurrentPosition = 0;
 
                 switch (sample.Method.ToUpper())
                 {
@@ -1463,6 +1515,9 @@ namespace Office365APIEditor
                         break;
                     case "DELETE":
                         radioButton_DELETE.Select();
+                        break;
+                    case "PUT":
+                        radioButton_PUT.Select();
                         break;
                     default:
                         break;
@@ -1523,6 +1578,32 @@ namespace Office365APIEditor
             }
 
             return result;
+        }
+
+        private void checkBox_SendAsBinary_CheckedChanged(object sender, EventArgs e)
+        {
+            button_CreateBinaryDataFromFile.Enabled = checkBox_SendAsBinary.Checked;
+        }
+
+        private void button_CreateBinaryDataFromFile_Click(object sender, EventArgs e)
+        {
+            // Create binary data from the selected file and convert to base64, then set it to the request body.
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream fileStream = File.OpenRead(openFileDialog1.FileName))
+                {
+                    var bs = new byte[fileStream.Length];
+                    fileStream.Read(bs, 0, (int)fileStream.Length);
+
+                    scintilla_RequestBody.Text = Convert.ToBase64String(bs);
+                }
+
+                // Show Request Body tab and focus on the textbox
+                tabControl_Request.SelectedIndex = 1;
+                scintilla_RequestBody.Focus();
+                scintilla_RequestBody.CurrentPosition = 0;
+            }
         }
     }
 }
