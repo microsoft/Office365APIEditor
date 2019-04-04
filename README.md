@@ -36,10 +36,11 @@ If you want to use your own application and OAuth V2 endpoint, you need the foll
 
 ## Command-line switches
 
-| Switch     | Description                              |
-|:-----------|:-----------------------------------------|
-| /NoSetting | Remove all user settings.                |
-| /NoHistory | Remove all request and response history. |
+| Switch     | Description                                 |
+|:-----------|:--------------------------------------------|
+| /NoSetting | Remove all user settings.                   |
+| /NoHistory | Remove all request and response history.    |
+| /CustomDefinedScopes | Remove all custom defined scopes. |
 
 ## Feedback
 
