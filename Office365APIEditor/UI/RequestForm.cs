@@ -157,12 +157,51 @@ namespace Office365APIEditor
                         {
                             var thirdLevelNode = new TreeNode(thirdLevelCategory.DisplayName);
 
-                            foreach (var sample in thirdLevelCategory.SampleRequest)
+                            if (thirdLevelCategory.SampleRequest != null)
                             {
-                                var sampleNode = new TreeNode(sample.DisplayName) { Tag = sample.Id };
-                                thirdLevelNode.Nodes.Add(sampleNode);
+                                foreach (var sample in thirdLevelCategory.SampleRequest)
+                                {
+                                    // Check whether ID is duplicated or not.
 
-                                sampleRequests.Add(sample);
+                                    if (sampleRequests.Where(s => s.Id == sample.Id).Count() != 0)
+                                    {
+                                        MessageBox.Show("A Duplicated sample request ID was found in the definition file." + Environment.NewLine + sample.Id, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                    else
+                                    {
+                                        var sampleNode = new TreeNode(sample.DisplayName) { Tag = sample.Id };
+                                        thirdLevelNode.Nodes.Add(sampleNode);
+
+                                        sampleRequests.Add(sample);
+                                    }
+                                }
+                            }
+
+                            if (thirdLevelCategory.FourthLevelCategory != null)
+                            {
+                                foreach (var fourthLevelCategory in thirdLevelCategory.FourthLevelCategory)
+                                {
+                                    var fourthLevelNode = new TreeNode(fourthLevelCategory.DisplayName);
+
+                                    foreach (var sample in fourthLevelCategory.SampleRequest)
+                                    {
+                                        // Check whether ID is duplicated or not.
+
+                                        if (sampleRequests.Where(s => s.Id == sample.Id).Count() != 0)
+                                        {
+                                            MessageBox.Show("A Duplicated sample request ID was found in the definition file." + Environment.NewLine + sample.Id, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                        }
+                                        else
+                                        {
+                                            var sampleNode = new TreeNode(sample.DisplayName) { Tag = sample.Id };
+                                            fourthLevelNode.Nodes.Add(sampleNode);
+
+                                            sampleRequests.Add(sample);
+                                        }
+                                    }
+
+                                    thirdLevelNode.Nodes.Add(fourthLevelNode);
+                                }
                             }
 
                             secondLevelNode.Nodes.Add(thirdLevelNode);
@@ -223,6 +262,11 @@ namespace Office365APIEditor
 
         private async void button_Run_Click(object sender, EventArgs e)
         {
+            await RunRequestAsync();
+        }
+
+        private async System.Threading.Tasks.Task RunRequestAsync()
+        {
             Uri requestUri;
 
             originalJsonResponse = "";
@@ -240,14 +284,14 @@ namespace Office365APIEditor
             {
                 requestUri = null;
             }
-            
+
             if (requestUri == null)
             {
                 MessageBox.Show("The supplied URI could not be correctly parsed.", "Office365APIEditor");
                 return;
             }
 
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(textBox_Request.Text);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(textBox_Request.Text);
             request.AllowAutoRedirect = Properties.Settings.Default.AllowAutoRedirect;
             request.UserAgent = Util.CustomUserAgent;
             request.ContentType = "application/json";
@@ -418,8 +462,10 @@ namespace Office365APIEditor
 
             try
             {
-                // Change cursor.
+                // Change cursor and UI.
                 Application.UseWaitCursor = true;
+                button_Run.Text = "Running...";
+                button_Run.Enabled = false;
 
                 // Logging
                 if (checkBox_Logging.Checked)
@@ -453,7 +499,7 @@ namespace Office365APIEditor
                                 break;
                             }
 
-                            byteList.Add((byte)data);                            
+                            byteList.Add((byte)data);
                         }
                     }
 
@@ -515,7 +561,7 @@ namespace Office365APIEditor
                             dataTable.Rows.Add(dataRow);
                         }
                     }
-                    
+
                     // Logging
                     if (checkBox_Logging.Checked)
                     {
@@ -609,8 +655,10 @@ namespace Office365APIEditor
             }
             finally
             {
-                // Change cursor.
+                // Change cursor and UI.
                 Application.UseWaitCursor = false;
+                button_Run.Text = "Run";
+                button_Run.Enabled = true;
             }
         }
 
@@ -623,7 +671,7 @@ namespace Office365APIEditor
             }
         }
 
-        private void textBox_Request_KeyDown(object sender, KeyEventArgs e)
+        private async void textBox_Request_KeyDown(object sender, KeyEventArgs e)
         {
             // Enable 'Ctrl + A'
             if (e.Control && e.KeyCode == Keys.A)
@@ -635,6 +683,12 @@ namespace Office365APIEditor
             if (e.KeyCode == Keys.Enter)
             {
                 e.SuppressKeyPress = true;
+
+                // Run request if it is possible.
+                if (button_Run.Enabled)
+                {
+                    await RunRequestAsync();
+                }
             }
         }
 
@@ -1603,6 +1657,14 @@ namespace Office365APIEditor
                 tabControl_Request.SelectedIndex = 1;
                 scintilla_RequestBody.Focus();
                 scintilla_RequestBody.CurrentPosition = 0;
+            }
+        }
+
+        private void tabControl_LeftNavi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl_LeftNavi.SelectedTab.Text == "Example")
+            {
+                treeView_Example.Focus();
             }
         }
     }

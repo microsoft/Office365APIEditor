@@ -7,24 +7,33 @@ namespace Office365APIEditor.ViewerHelper.SampleRequest
     {
         public string DisplayName { get; set; }
         public string Description { get; set; }
-        public Firstlevelcategory[] FirstLevelCategory { get; set; }
+        public FirstlevelCategory[] FirstLevelCategory { get; set; }
     }
 
-    public class Firstlevelcategory
+    public class FirstlevelCategory
     {
         public string DisplayName { get; set; }
-        public Secondlevelcategory[] SecondLevelCategory { get; set; }
+        public SecondlevelCategory[] SecondLevelCategory { get; set; }
     }
 
-    public class Secondlevelcategory
+    public class SecondlevelCategory
     {
         public string DisplayName { get; set; }
-        public Thirdlevelcategory[] ThirdLevelCategory { get; set; }
+        public ThirdlevelCategory[] ThirdLevelCategory { get; set; }
     }
 
-    public class Thirdlevelcategory
+    public class ThirdlevelCategory
     {
         public string DisplayName { get; set; }
+
+        public FourthLevelCategory[] FourthLevelCategory { get; set; }
+
+        public SampleRequest[] SampleRequest { get; set; }
+    }
+
+    public class FourthLevelCategory {
+        public string DisplayName { get; set; }
+
         public SampleRequest[] SampleRequest { get; set; }
     }
 

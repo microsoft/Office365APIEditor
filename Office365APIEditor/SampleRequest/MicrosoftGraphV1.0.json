@@ -977,6 +977,544 @@
               ]
             }
           ]
+        },
+        {
+          "displayName": "Planner tasks",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List tasks",
+              "sampleRequest": [
+                {
+                  "id": "8543d510-ebee-41e7-b774-87bc4100be68",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/planner/tasks",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "User settings",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get settings",
+              "sampleRequest": [
+                {
+                  "id": "a2396e68-432f-4d21-96e4-a4e1d8f75072",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/settings",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update settings",
+              "sampleRequest": [
+                {
+                  "id": "d937bedc-6778-4504-ba35-3ab2605df429",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/me/settings",
+                  "header": [],
+                  "body": "{\r\n  \"contributionToContentDiscoveryDisabled\": true\r\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Groups",
+      "secondLevelCategory": [
+        {
+          "displayName": "Group",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Add favorite",
+              "sampleRequest": [
+                {
+                  "id": "3ba6a9ec-2bb0-44d7-bdbc-bc663bfbea4b",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/addFavorite",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Add member",
+              "sampleRequest": [
+                {
+                  "id": "9411f986-fa3f-4909-a3c5-ace86d528fe5",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/members/$ref",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.id\": \"https://graph.microsoft.com/v1.0/directoryObjects/{id}\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Add owner",
+              "sampleRequest": [
+                {
+                  "id": "994f2361-2900-489f-93d0-8ca1b1d146a9",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/owners/$ref",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.id\": \"https://graph.microsoft.com/v1.0/users/{id}\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Check member groups",
+              "sampleRequest": [
+                {
+                  "id": "cce42f41-d1af-491d-8e0a-2a18278a1452",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/checkMemberGroups",
+                  "header": [],
+                  "body": "{\r\n  \"groupIds\": [\r\n    \"groupIds-value\"\r\n  ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Create group",
+              "sampleRequest": [
+                {
+                  "id": "e935f0f7-1f78-483f-ae2c-545a9b927cac",
+                  "displayName": "Request 1",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups",
+                  "header": [],
+                  "body": "{\r\n  \"description\": \"Self help community for library\",\r\n  \"displayName\": \"Library Assist\",\r\n  \"groupTypes\": [\r\n    \"Unified\"\r\n  ],\r\n  \"mailEnabled\": true,\r\n  \"mailNickname\": \"library\",\r\n  \"securityEnabled\": false\r\n}"
+                },
+                {
+                  "id": "1edb81da-ef3d-40f9-8791-3ad8c56420b0",
+                  "displayName": "Request 2",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups",
+                  "header": [],
+                  "body": "{\r\n  \"description\": \"Group with designated owner and members\",\r\n  \"displayName\": \"Operations group\",\r\n  \"groupTypes\": [\r\n    \"Unified\"\r\n  ],\r\n  \"mailEnabled\": true,\r\n  \"mailNickname\": \"operations2019\",\r\n  \"securityEnabled\": false,\r\n  \"owners@odata.bind\": [\r\n    \"https://graph.microsoft.com/v1.0/users/26be1845-4119-4801-a799-aea79d09f1a2\"\r\n  ],\r\n  \"members@odata.bind\": [\r\n    \"https://graph.microsoft.com/v1.0/users/ff7cb387-6688-423c-8188-3da9532a73cc\",\r\n    \"https://graph.microsoft.com/v1.0/users/69456242-0067-49d3-ba96-9de6f2728e14\"\r\n  ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete group",
+              "sampleRequest": [
+                {
+                  "id": "2c454401-a154-4d94-bccb-14b494438690",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get delta",
+              "sampleRequest": [
+                {
+                  "id": "c9f160d9-ef32-41be-87ba-67053c90cbf4",
+                  "displayName": "Request 1",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/delta",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "f3231ef7-9c45-4cf8-a8f8-aff24f3dd649",
+                  "displayName": "Request 2",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/delta?$select=displayName,description,mailNickname",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "ae7b55a5-0639-4304-b4d5-886fd0cb6275",
+                  "displayName": "Request 3",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/delta?$select=displayName,description,mailNickname",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "return=minimal"
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get group",
+              "sampleRequest": [
+                {
+                  "id": "929a24f2-5215-485d-926d-70706de644bb",
+                  "displayName": "Request 1",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "9487b2e0-9639-4ed0-becf-47f62e9919f5",
+                  "displayName": "Request 2",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}?$select=allowExternalSenders,autoSubscribeNewMembers,isSubscribedByMail,unseenCount",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get member groups",
+              "sampleRequest": [
+                {
+                  "id": "f40acbac-753f-4c57-92c6-904a998ede92",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/getMemberGroups",
+                  "header": [],
+                  "body": "{\r\n  \"securityEnabledOnly\": false\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get member objects",
+              "sampleRequest": [
+                {
+                  "id": "8365cd96-e741-422e-a25e-fa04e6b4096b",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/getMemberObjects",
+                  "header": [],
+                  "body": "{\r\n  \"securityEnabledOnly\": false\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List groups",
+              "sampleRequest": [
+                {
+                  "id": "aed1d208-4345-49bc-9552-cecfe31a7115",
+                  "displayName": "Request 1",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "b688f025-de29-4069-8c67-9726063c5858",
+                  "displayName": "Request 2",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups?$filter=hasMembersWithLicenseErrors+eq+true&$select=id,displayName",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List lifecycle policies",
+              "sampleRequest": [
+                {
+                  "id": "8524b504-255f-4454-b600-def9848bdef7",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/groupLifecyclePolicies",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List member of",
+              "sampleRequest": [
+                {
+                  "id": "c4288049-794f-4970-b726-5231316e8958",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/memberOf",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List members",
+              "sampleRequest": [
+                {
+                  "id": "9e1d41ad-e614-457b-aca6-285bcb8118b8",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/members",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List owners",
+              "sampleRequest": [
+                {
+                  "id": "ae4a211d-9518-463e-a845-189f13eb42f5",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/owners",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update group",
+              "sampleRequest": [
+                {
+                  "id": "96ab2fba-75ab-4919-8995-404ff12d49cd",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}",
+                  "header": [],
+                  "body": "{\r\n  \"description\": \"description-value\",\r\n  \"displayName\": \"displayName-value\",\r\n  \"groupTypes\": [\r\n    \"groupTypes-value\"\r\n  ],\r\n  \"mail\": \"mail-value\",\r\n  \"mailEnabled\": true,\r\n  \"mailNickname\": \"mailNickname-value\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Remove favorite",
+              "sampleRequest": [
+                {
+                  "id": "5e9d4050-52e4-480e-bbb3-65ec26b9192b",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/removeFavorite",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Remove member",
+              "sampleRequest": [
+                {
+                  "id": "75f3f142-7b01-4ae4-b3fe-e3947fd3c28a",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/members/{id}/$ref",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Remove owner",
+              "sampleRequest": [
+                {
+                  "id": "1a11fbdd-60e6-4731-852f-1f0fd73147db",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/owners/{id}/$ref",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Renew group",
+              "sampleRequest": [
+                {
+                  "id": "92aae238-23ba-4e20-bbca-2328d86c99b3",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/renew",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Reset unseen count",
+              "sampleRequest": [
+                {
+                  "id": "4cd9a83e-4314-441a-b13f-6736c49c8c99",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/resetUnseenCount",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Subscribe by mail",
+              "sampleRequest": [
+                {
+                  "id": "40798748-8096-4b92-b20e-494af4aab7e5",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/subscribeByMail",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Unsubscribe by mail",
+              "sampleRequest": [
+                {
+                  "id": "07707e12-684a-49b2-a225-185d4000d697",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/unsubscribeByMail",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Lifecycle policy",
+              "fourthLevelCategory": [
+                {
+                  "displayName": "List policies",
+                  "sampleRequest": [
+                    {
+                      "id": "5a9fde16-5e86-4a9b-adfa-3a50b4e9f9e7",
+                      "displayName": "Example",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Create policy",
+                  "sampleRequest": [
+                    {
+                      "id": "c8d07d36-538e-42ec-adf5-52e322613b4c",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies",
+                      "header": [],
+                      "body": "{\r\n  \"groupLifetimeInDays\": 100,\r\n  \"managedGroupTypes\": \"Selected\",\r\n  \"alternateNotificationEmails\": \"admin@contoso.com\"\r\n}"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Get policy",
+                  "sampleRequest": [
+                    {
+                      "id": "10e70cb5-3cf9-4be3-95a2-22a0460c8f66",
+                      "displayName": "Example",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies/{id}",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Update policy",
+                  "sampleRequest": [
+                    {
+                      "id": "5ba66845-704e-4090-8fad-8e85b478cd15",
+                      "displayName": "Example",
+                      "method": "PATCH",
+                      "URI": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies/{id}",
+                      "header": [],
+                      "body": "{\r\n  \"groupLifetimeInDays\": 180,\r\n  \"managedGroupTypes\": \"Selected\",\r\n  \"alternateNotificationEmails\": \"admin@contoso.com\"\r\n}"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Delete policy",
+                  "sampleRequest": [
+                    {
+                      "id": "9e7b5f5d-ebc4-4b99-90a6-b3519b7c9ba5",
+                      "displayName": "Example",
+                      "method": "DELETE",
+                      "URI": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies/{id}",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Add group",
+                  "sampleRequest": [
+                    {
+                      "id": "c3fdd4ae-7609-444e-81fe-3d54b20876c8",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies/{id}/addGroup",
+                      "header": [],
+                      "body": "{\r\n  \"groupId\": \"ffffffff-ffff-ffff-ffff-ffffffffffff\"\r\n}"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Remove group",
+                  "sampleRequest": [
+                    {
+                      "id": "7fdc168e-e633-4504-aadb-d12639cf14d9",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/v1.0/groupLifecyclePolicies/{id}/removeGroup",
+                      "header": [],
+                      "body": "{\r\n  \"groupId\": \"ffffffff-ffff-ffff-ffff-ffffffffffff\"\r\n}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Attachment",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get attachment",
+              "sampleRequest": [
+                {
+                  "id": "c79151d2-0da2-4a66-a4d7-02b6f1b70171",
+                  "displayName": "Get attachment",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts/{id}/attachments/{id}",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "9250b2fe-e45f-445d-8039-89e8be60d441",
+                  "displayName": "Expand item attachment",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts/{id}/attachments/{id}/?$expand=microsoft.graph.itemattachment/item ",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Delete attachment",
+              "sampleRequest": [
+                {
+                  "id": "db636f61-28f2-487d-8b56-2c334b8b075e",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts/{id}/attachments/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
         }
       ]
     }
