@@ -112,7 +112,7 @@ namespace Office365APIEditor
             // Load sample request
 
             List<SampleRequestDefinitionRoot> sampleRequestDefinitionLists = new List<SampleRequestDefinitionRoot>();
-            string sampleRequestDirectory = Path.Combine(Util.DefaultApplicationPath, "SampleRequest");
+            string sampleRequestDirectory = Path.Combine(Application.StartupPath, "SampleRequest");
 
             if (Directory.Exists(sampleRequestDirectory))
             {
