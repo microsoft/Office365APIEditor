@@ -1515,6 +1515,1001 @@
               ]
             }
           ]
+        },
+        {
+          "displayName": "Calendar",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List events",
+              "sampleRequest": [
+                {
+                  "id": "9b577195-90c1-46a6-ae04-ccd16d3933c4",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create event",
+              "sampleRequest": [
+                {
+                  "id": "b52e0a6e-a263-4d0b-8cd1-1bbce2c75e1e",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                    }
+                  ],
+                  "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Conf Room 1\"\r\n  },\r\n  \"attendees\": []\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get event",
+              "sampleRequest": [
+                {
+                  "id": "7c22a84b-4df4-48c7-8a3a-9b0664235dae",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update event",
+              "sampleRequest": [
+                {
+                  "id": "e7963d46-2d25-4b72-b9be-811645c4a08f",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                    }
+                  ],
+                  "body": "{\r\n  \"location\":{\r\n      \"displayName\":\"Conf Room 2\"\r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete event",
+              "sampleRequest": [
+                {
+                  "id": "4e1a349e-7e3e-45b9-852b-846b98cf835a",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List calendar view",
+              "sampleRequest": [
+                {
+                  "id": "9f1f0a0c-4cf3-4804-9c1b-69c67ee51d71",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/calendarView?startDateTime=${DateTime1DayLater12}&endDateTime=${DateTime1MonthLater12}",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\", outlook.body-content-type=\"text\""
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get delta",
+              "sampleRequest": [
+                {
+                  "id": "014c71be-8b22-40ad-bf78-b89bff74951d",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/calendarView/delta?startDateTime=${DateTime1DayLater12}&endDateTime=${DateTime1MonthLater12}",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\", odata.maxpagesize=2"
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create open extension",
+              "sampleRequest": [
+                {
+                  "id": "954bc57d-31b4-4150-b884-7cf629fe81d1",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}/extensions",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.type\" : \"microsoft.graph.openTypeExtension\",\r\n  \"extensionName\" : \"Com.Contoso.Deal\",\r\n  \"companyName\" : \"Alpine Skis\",\r\n  \"dealValue\" : 1010100,\r\n  \"expirationDate\" : \"${DateTime1MonthLater12}\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get open extension",
+              "sampleRequest": [
+                {
+                  "id": "2edba76f-fd23-4583-9b8e-12fd14f43a51",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}/extensions/{extentionName}/",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Conversation",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List conversations",
+              "sampleRequest": [
+                {
+                  "id": "cd06bc58-eff1-435b-a1d1-4774c6feb398",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/conversations",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create conversation",
+              "sampleRequest": [
+                {
+                  "id": "d8d91fc9-6261-414f-8de8-10093e00b9bf",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/conversations",
+                  "header": [],
+                  "body": "{\r\n    \"topic\":\"New locations for this quarter\",\r\n    \"threads\":[\r\n        {\r\n            \"posts\":[\r\n                {\r\n                    \"body\":{\r\n                        \"contentType\":\"html\",\r\n                        \"content\":\"What do we know so far?\"\r\n                    },\r\n                    \"newParticipants\":[\r\n                        {\r\n                            \"emailAddress\":{\r\n                                \"name\":\"Adele Vance\",\r\n                                \"address\":\"AdeleV@contoso.onmicrosoft.com\"\r\n                            }\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get group conversation",
+              "sampleRequest": [
+                {
+                  "id": "08eb9059-c893-4f8a-9dd9-8a92fabc414f",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/conversations/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            //{
+            //  "displayName": "Delete group conversation",
+            //  "sampleRequest": [
+            //    {
+            //      "id": "45506086-74ef-4302-a696-d4a6be9aff3b",
+            //      "displayName": "Example",
+            //      "method": "DELETE",
+            //      "URI": "https://graph.microsoft.com/v1.0/groups/{id}/conversations/{id}",
+            //      "header": [],
+            //      "body": ""
+            //    }
+            //  ]
+            //},
+            {
+              "displayName": "List conversation threads",
+              "sampleRequest": [
+                {
+                  "id": "828e26bf-5677-4fe1-9548-39a9275a5450",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/conversations/{id}/threads",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create conversation thread",
+              "sampleRequest": [
+                {
+                  "id": "f689bc51-8b1d-4678-97a6-e113efea6eb3",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/conversations/{id}/threads",
+                  "header": [],
+                  "body": "{\r\n  \"topic\": \"topic-value\",\r\n  \"posts\": [{\r\n      \"body\": {\r\n        \"contentType\": \"html\",\r\n        \"content\": \"this is body content\"\r\n      }\r\n  }]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List accepted senders",
+              "sampleRequest": [
+                {
+                  "id": "6b87f43f-692e-4e94-9095-35552625cb79",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/acceptedSenders",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create accepted sender",
+              "sampleRequest": [
+                {
+                  "id": "8ae96cb2-dc00-465c-96e2-2692562cef3a",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/acceptedSenders/$ref",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.id\":\"https://graph.microsoft.com/v1.0/users/alexd@contoso.com\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Remove accepted sender",
+              "sampleRequest": [
+                {
+                  "id": "da2f8550-48e7-46bd-8142-3f872c49c954",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/acceptedSenders/$ref?$id=https://graph.microsoft.com/v1.0/users/{user-id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List rejected senders",
+              "sampleRequest": [
+                {
+                  "id": "95a4a7ba-237d-4217-bd72-d8599046bd08",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/rejectedSenders",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create rejected sender",
+              "sampleRequest": [
+                {
+                  "id": "c9297ac5-7d90-478d-ac72-9ea9f92f46c9",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/rejectedSenders/$ref",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.id\":\"https://graph.microsoft.com/v1.0/users/alexd@contoso.com\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Remove rejected sender",
+              "sampleRequest": [
+                {
+                  "id": "7220b55f-0c7f-4c19-b9dc-44e61e5d99d3",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/rejectedSenders/$ref?$id=https://graph.microsoft.com/v1.0/users/{user-id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Conversation thread",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List threads",
+              "sampleRequest": [
+                {
+                  "id": "8420424f-9a73-4288-aae6-63ac78443091",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create thread",
+              "sampleRequest": [
+                {
+                  "id": "1c1ba209-611e-4e08-b34b-eeaad8702dde",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads",
+                  "header": [],
+                  "body": "{\r\n  \"topic\": \"New Conversation Thread Topic\",\r\n  \"posts\": [{\r\n    \"body\": {\r\n      \"contentType\": \"html\",\r\n      \"content\": \"this is body content\"\r\n    },\r\n    \"newParticipants\": [{\r\n      \"emailAddress\": {\r\n        \"name\": \"Alex Darrow\",\r\n        \"address\": \"alexd@contoso.com\"\r\n      }\r\n    }]\r\n  }]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get Conversation thread",
+              "sampleRequest": [
+                {
+                  "id": "c3a6ba7d-8c88-4bb3-be5a-cb9a8b67d065",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            //{
+            //  "displayName": "Update conversation thread",
+            //  "sampleRequest": [
+            //    {
+            //      "id": "76915aca-15af-4511-8741-2d984ec46a4a",
+            //      "displayName": "Example",
+            //      "method": "PATCH",
+            //      "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}",
+            //      "header": [],
+            //      "body": "{\r\n  \"topic\": \"string\"\r\n}"
+            //    }
+            //  ]
+            //},
+            {
+              "displayName": "Delete conversation thread",
+              "sampleRequest": [
+                {
+                  "id": "b3132c9d-5a51-4451-9e1d-a78496d006e3",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Reply to conversation thread",
+              "sampleRequest": [
+                {
+                  "id": "a161d481-9ce0-490b-9f77-9d981c22e20d",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/reply",
+                  "header": [],
+                  "body": "{\r\n  \"post\": {\r\n    \"body\": {\r\n      \"contentType\": \"HTML\",\r\n      \"content\": \"content-value\"\r\n    }\r\n  }\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Drive",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get drive",
+              "sampleRequest": [
+                {
+                  "id": "742208d3-233f-475e-b4df-317ee1de21b0",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{group-id}/drive",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List children",
+              "sampleRequest": [
+                {
+                  "id": "73782c32-ca4e-4296-bd75-565fa066f71e",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{group-id}/drive/items/{item-id}/children",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Extended properties",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Single-value extended property",
+              "fourthLevelCategory": [
+                {
+                  "displayName": "Create single-value property",
+                  "sampleRequest": [
+                    {
+                      "id": "d52e5bfe-ce02-4475-a17c-6722992b614d",
+                      "displayName": "Request 1",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events",
+                      "header": [],
+                      "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"attendees\": [],\r\n  \"singleValueExtendedProperties\": [\r\n     {\r\n           \"id\":\"String {66f5a359-4659-4830-9070-00040ec6ac6e} Name Fun\",\r\n           \"value\":\"Food\"\r\n     }\r\n  ]\r\n}"
+                    },
+                    {
+                      "id": "3739285d-ef60-44dd-becc-d5482ab8ce69",
+                      "displayName": "Request 2",
+                      "method": "PATCH",
+                      "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}",
+                      "header": [],
+                      "body": "{\r\n  \"singleValueExtendedProperties\": [\r\n      {\r\n         \"id\":\"String {66f5a359-4659-4830-9070-00047ec6ac6e} Name Color\",\r\n         \"value\":\"Green\"\r\n      }\r\n    ]\r\n}"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Get single-value property",
+                  "sampleRequest": [
+                    {
+                      "id": "a02f1d92-9c21-4466-b961-14ee128da61b",
+                      "displayName": "Request 1",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}?$expand=singleValueExtendedProperties($filter=id eq '{id_value}')",
+                      "header": [],
+                      "body": ""
+                    },
+                    {
+                      "id": "99226a91-713c-490b-a005-c505f83bcb54",
+                      "displayName": "Request 2",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events?$filter=singleValueExtendedProperties/Any(ep: ep/id eq '{id_value}' and ep/value eq '{property_value}')",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "displayName": "Multi-value extended property",
+              "fourthLevelCategory": [
+                {
+                  "displayName": "Create multi-value property",
+                  "sampleRequest": [
+                    {
+                      "id": "54cfe3f2-c396-452b-9269-6806209c5377",
+                      "displayName": "Request 1",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events",
+                      "header": [],
+                      "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"attendees\": [],\r\n  \"multiValueExtendedProperties\": [\r\n     {\r\n           \"id\":\"StringArray {66f5a359-4659-4830-9070-00050ec6ac6e} Name Recreation\",\r\n           \"value\":[\"Food\", \"Hiking\", \"Swimming\"]\r\n     }\r\n  ]\r\n}"
+                    },
+                    {
+                      "id": "55c8b0ee-c1c0-44e2-a651-a42bd1cea980",
+                      "displayName": "Request 2",
+                      "method": "PATCH",
+                      "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}",
+                      "header": [],
+                      "body": "{\r\n  \"multiValueExtendedProperties\": [\r\n      {\r\n         \"id\":\"StringArray {66f5a359-4659-4830-9070-00049ec6ac6e} Name Palette\",\r\n         \"value\":[\"Green\", \"Aqua\", \"Blue\"]\r\n      }\r\n    ]\r\n}"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Get multi-value property",
+                  "sampleRequest": [
+                    {
+                      "id": "0dcfa9bb-ec14-41e1-ba24-d0125a435b8b",
+                      "displayName": "Example",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}?$expand=multiValueExtendedProperties($filter=id eq '{id_value}')",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Notes",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List notebooks",
+              "sampleRequest": [
+                {
+                  "id": "68b749b8-1748-4c88-9370-572946a648a5",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/onenote/notebooks",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create notebook",
+              "sampleRequest": [
+                {
+                  "id": "a74986fb-b37f-4b31-83b1-e50d91e529a0",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/onenote/notebooks",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"Notebook name\"\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Photo",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get photo",
+              "sampleRequest": [
+                {
+                  "id": "966e5962-47de-4163-937e-de07d6d8c880",
+                  "displayName": "Request 1",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/photo/$value",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "61089c0d-a9fb-4bbd-afe8-180111d3ce6f",
+                  "displayName": "Request 2",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/photo/48x48/$value",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "cd90192b-0fca-48c5-948f-19a991f90969",
+                  "displayName": "Request 3",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/photo",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update photo",
+              "sampleRequest": [
+                {
+                  "id": "f8f2c363-5d34-41b8-a204-338015411362",
+                  "displayName": "Example",
+                  "method": "PUT",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/photo/$value",
+                  "header": [],
+                  "body": "Binary data for the image"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Plans",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List plans",
+              "sampleRequest": [
+                {
+                  "id": "ed6c1184-c40f-4e16-979f-253fb358a675",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{group-id}/planner/plans",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Post",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List posts",
+              "sampleRequest": [
+                {
+                  "id": "f9a2b61d-312e-4364-9c67-9704b9395b2d",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get post",
+              "sampleRequest": [
+                {
+                  "id": "24cc8af6-6ed8-4f02-9743-4be18051e231",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Reply post",
+              "sampleRequest": [
+                {
+                  "id": "d93a4f6e-e8ac-484d-a9ba-9f52b7274636",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts/{id}/reply",
+                  "header": [],
+                  "body": "{\r\n  \"post\": {\r\n    \"body\": {\r\n      \"contentType\": \"HTML\",\r\n      \"content\": \"Thank you for your comment.\"\r\n    }\r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Forward post",
+              "sampleRequest": [
+                {
+                  "id": "4136d3c1-d287-4746-9c7d-f832857eff35",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts/{id}/forward",
+                  "header": [],
+                  "body": "{\r\n  \"comment\": \"JFYI.\",\r\n  \"toRecipients\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"name\": \"Ashley Heywood\",\r\n        \"address\": \"aheywood@contoso.com\"\r\n      }\r\n    }\r\n  ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List attachments",
+              "sampleRequest": [
+                {
+                  "id": "e66a191f-4719-4e31-9e5d-38960f2c5f73",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts/{id}/attachments",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            //{
+            //  "displayName": "Add attachment",
+            //  "sampleRequest": [
+            //    {
+            //      "id": "60ba7fc6-727e-4c64-b277-d039975befeb",
+            //      "displayName": "Add file attachment",
+            //      "method": "GET",
+            //      "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts/{id}/attachments",
+            //      "header": [],
+            //      "body": "{\r\n  \"@odata.type\": \"#microsoft.graph.fileAttachment\",\r\n  \"name\": \"name-value\",\r\n  \"contentBytes\": \"base64-contentBytes-value\"\r\n}"
+            //    }
+            //  ]
+            //},
+            {
+              "displayName": "Create open extension",
+              "sampleRequest": [
+                {
+                  "id": "a9e74a28-70ab-4f5b-9ad0-3ecacd4c90f2",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts/{id}/reply",
+                  "header": [],
+                  "body": "{\r\n  \"post\": {\r\n    \"body\": {\r\n      \"contentType\": \"html\",\r\n      \"content\": \"<html><body><div><div><div><div>When and where? </div></div></div></div></body></html>\"\r\n    },\r\n  \"extensions\": [\r\n    {\r\n      \"@odata.type\": \"Microsoft.OutlookServices.OpenTypeExtension\",\r\n      \"extensionName\": \"Com.Contoso.HR\",\r\n      \"companyName\": \"Contoso\",\r\n      \"expirationDate\": \"${DateTime1MonthLater12}\",\r\n      \"topPicks\": [\r\n        \"Employees only\",\r\n        \"Add spouse or guest\",\r\n        \"Add family\"\r\n      ]\r\n    }\r\n  ]\r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get open extension",
+              "sampleRequest": [
+                {
+                  "id": "797d6e40-7789-4505-a416-8f61b0e6de68",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "GET https://graph.microsoft.com/v1.0/groups/{id}/threads/{id}/posts/{id}/extensions/{extensionName}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Calendar",
+      "secondLevelCategory": [
+        {
+          "displayName": "Event",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List events",
+              "sampleRequest": [
+                {
+                  "id": "b29a70c1-d0f8-41b8-a539-2a8669a37ad1",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events?$select=subject,body,bodyPreview,organizer,attendees,start,end,location",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create event",
+              "sampleRequest": [
+                {
+                  "id": "c750b0ea-7b78-41a6-9d34-ad2b67c1ced7",
+                  "displayName": "Request 1",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                    }
+                  ],
+                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Does late morning work for you?\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\":\"samanthab@contoso.onmicrosoft.com\",\r\n        \"name\": \"Samantha Booth\"\r\n      },\r\n      \"type\": \"required\"\r\n    }\r\n  ]\r\n}"
+                },
+                {
+                  "id": "b1fa349b-4b99-42a4-822d-2b1353ec952a",
+                  "displayName": "Request 2",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                    }
+                  ],
+                  "body": "{\r\n  \"subject\": \"Plan summer company picnic\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Let's kick-start this event planning!\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\": \"DanaS@contoso.onmicrosoft.com\",\r\n        \"name\": \"Dana Swope\"\r\n      },\r\n      \"type\": \"Required\"\r\n    },\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\": \"AlexW@contoso.onmicrosoft.com\",\r\n        \"name\": \"Alex Wilber\"\r\n      },\r\n      \"type\": \"Required\"\r\n    }\r\n  ],\r\n  \"location\": {\r\n    \"displayName\": \"Conf Room 3; Fourth Coffee; Home Office\",\r\n    \"locationType\": \"Default\"\r\n  },\r\n  \"locations\": [\r\n    {\r\n      \"displayName\": \"Conf Room 3\"\r\n    },\r\n    {\r\n      \"displayName\": \"Fourth Coffee\",\r\n      \"address\": {\r\n        \"street\": \"4567 Main St\",\r\n        \"city\": \"Redmond\",\r\n        \"state\": \"WA\",\r\n        \"countryOrRegion\": \"US\",\r\n        \"postalCode\": \"32008\"\r\n      },\r\n      \"coordinates\": {\r\n        \"latitude\": 47.672,\r\n        \"longitude\": -102.103\r\n      }\r\n    },\r\n    {\r\n      \"displayName\": \"Home Office\"\r\n    }\r\n  ]\r\n}"
+                },
+                {
+                  "id": "ce250db3-08ca-48a8-94ff-876f3a431eea",
+                  "displayName": "Request 3",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events",
+                  "header": [],
+                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Does noon time work for you?\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"recurrence\": {\r\n    \"pattern\": {\r\n      \"type\": \"weekly\",\r\n      \"interval\": 1,\r\n      \"daysOfWeek\": [ \"Monday\" ]\r\n    },\r\n    \"range\": {\r\n      \"type\": \"endDate\",\r\n      \"startDate\": \"${DateToday}\",\r\n      \"endDate\": \"${Date3MonthLater}\"\r\n    }\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\":\"AdeleV@contoso.onmicrosoft.com\",\r\n        \"name\": \"Adele Vance\"\r\n      },\r\n      \"type\": \"required\"\r\n    }\r\n  ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get event",
+              "sampleRequest": [
+                {
+                  "id": "058836a3-e487-48fb-9c30-14b78f75eecd",
+                  "displayName": "Request 1",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events/{id}?$select=subject,body,bodyPreview,organizer,attendees,start,end,location",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                    }
+                  ],
+                  "body": ""
+                },
+                {
+                  "id": "357f7f95-189a-47af-a1ca-a488ad1fcaa1",
+                  "displayName": "Request 2",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events/{id}?$select=subject,body,bodyPreview,organizer,attendees,start,end,location,locations",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update event",
+              "sampleRequest": [
+                {
+                  "id": "23445396-3c72-4d17-bb33-abf2b84462be",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events/{id}",
+                  "header": [],
+                  "body": "{\r\n  \"location\":{\r\n      \"displayName\":\"Conf Room 2\"\r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete event",
+              "sampleRequest": [
+                {
+                  "id": "8cefb21b-0539-4772-a90c-ef8904855002",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get delta",
+              "sampleRequest": [
+                {
+                  "id": "d7c41d15-12ff-434e-9931-29ef8f330ff7",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/calendarView/delta?startdatetime=${DateTime1DayLater12}&enddatetime=${DateTime1MonthLater12}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Accept events",
+              "sampleRequest": [
+                {
+                  "id": "5d6daea8-0b55-40ca-996b-ab22e33e9b3c",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events/{id}/accept",
+                  "header": [],
+                  "body": "{\r\n  \"comment\": \"comment-value\",\r\n  \"sendResponse\": true\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Tentatively accept",
+              "sampleRequest": [
+                {
+                  "id": "09628f95-2e08-4e90-8298-88dd558edbab",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events/{id}/tentativelyAccept",
+                  "header": [],
+                  "body": "{\r\n  \"comment\": \"comment-value\",\r\n  \"sendResponse\": true\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Decline events",
+              "sampleRequest": [
+                {
+                  "id": "f4c8faa0-6b69-4578-8af6-d6da51da327d",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events/{id}/decline",
+                  "header": [],
+                  "body": "{\r\n  \"comment\": \"comment-value\",\r\n  \"sendResponse\": true\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Dismiss reminder",
+              "sampleRequest": [
+                {
+                  "id": "10603fba-d006-4763-9c18-c67615f4767d",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events/{id}/dismissReminder",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Snooze reminder",
+              "sampleRequest": [
+                {
+                  "id": "3c3e7dfa-3c76-4aa8-a096-989a5cbb8c12",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events/{id}/snoozeReminder",
+                  "header": [],
+                  "body": "{\r\n  \"newReminderTime\": {\r\n    \"dateTime\": \"${DateTime1HourLater}\",\r\n    \"timeZone\": \"Pacific Standard Time\"\r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List event instances",
+              "sampleRequest": [
+                {
+                  "id": "1c168b4b-16b6-4d47-9360-c1b2ef9b7cbe",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events/{id}/instances?startDateTime=${DateTime1HourLater}&endDateTime=${DateTime1MonthLater12}&$select=subject,bodyPreview,seriesMasterId,type,recurrence,start,end",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List attachments",
+              "sampleRequest": [
+                {
+                  "id": "bb513c0d-b789-4c4c-9a0c-52d2dcfd5c5e",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events/{id}/attachments",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Add attachment",
+              "sampleRequest": [
+                {
+                  "id": "f7adba0c-49f4-479c-9d6c-82e1a4b6405f",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events/{id}/attachments",
+                  "header": [],
+                  "body": "{\r\n    \"@odata.type\": \"#microsoft.graph.fileAttachment\",\r\n    \"name\": \"menu.txt\",\r\n    \"contentBytes\": \"Q29mZmVl\"   \r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Create open extension",
+              "sampleRequest": [
+                {
+                  "id": "a7f29d92-d11b-4c5d-8c61-705a67185137",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                    }
+                  ],
+                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Lunch Break\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [],\r\n  \"extensions\": [\r\n    {\r\n      \"@odata.type\": \"microsoft.graph.openTypeExtension\",\r\n      \"extensionName\": \"Com.Contoso.Referral\",\r\n      \"companyName\": \"Wingtip Toys\",\r\n      \"expirationDate\": \"${DateTime1DayLater14}\",\r\n      \"dealValue\": 10000\r\n    }\r\n  ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get open extension",
+              "sampleRequest": [
+                {
+                  "id": "ee9927a7-ce61-42c2-b472-3dbb724ff8ca",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/events/{id}/extensions/{extentionName}/",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
         }
       ]
     }
