@@ -89,6 +89,7 @@
   &lt;string&gt;https://graph.microsoft.com/User.ReadBasic.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/User.ReadWrite&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/User.ReadWrite.All&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/UserActivity.ReadWrite.CreatedByApp&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="DefaultScopes" Type="System.Collections.Specialized.StringCollection" Scope="Application">

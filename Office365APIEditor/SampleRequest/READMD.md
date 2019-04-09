@@ -4,6 +4,8 @@
 
 |Function|C# Code|
 |:-------|-------|
+|${DateTime2HourBefore}|DateTime.UtcNow.AddHours(-2).ToString("yyyy-MM-ddTHH:mm:ss")|
+|${DateTime1HourBefore}|DateTime.UtcNow.AddHours(-1).ToString("yyyy-MM-ddTHH:mm:ss")|
 |${DateTime1HourLater}|DateTime.UtcNow.AddHours(1).ToString("yyyy-MM-ddTHH:mm:ss")|
 |${DateTime2HourLater}|DateTime.UtcNow.AddHours(2).ToString("yyyy-MM-ddTHH:mm:ss")|
 |${DateTime1DayLater12}|DateTime.UtcNow.AddDays(1)ToString("yyyy-MM-dd") + "T12:00:00"|

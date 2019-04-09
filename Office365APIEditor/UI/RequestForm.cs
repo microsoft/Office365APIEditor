@@ -1586,6 +1586,16 @@ namespace Office365APIEditor
             var result = requestBody;
             var utcNow = DateTime.UtcNow;
 
+            if (requestBody.Contains("${DateTime2HourBefore}"))
+            {
+                result = result.Replace("${DateTime2HourBefore}", utcNow.AddHours(-2).ToString("yyyy-MM-ddTHH:mm:ss"));
+            }
+
+            if (requestBody.Contains("${DateTime1HourBefore}"))
+            {
+                result = result.Replace("${DateTime1HourBefore}", utcNow.AddHours(-1).ToString("yyyy-MM-ddTHH:mm:ss"));
+            }
+
             if (requestBody.Contains("${DateTime1HourLater}"))
             {
                 result = result.Replace("${DateTime1HourLater}", utcNow.AddHours(1).ToString("yyyy-MM-ddTHH:mm:ss"));

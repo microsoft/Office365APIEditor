@@ -169,8 +169,9 @@ namespace Office365APIEditor.Properties {
             "g>https://graph.microsoft.com/User.Read</string>\r\n  <string>https://graph.micros" +
             "oft.com/User.Read.All</string>\r\n  <string>https://graph.microsoft.com/User.ReadB" +
             "asic.All</string>\r\n  <string>https://graph.microsoft.com/User.ReadWrite</string>" +
-            "\r\n  <string>https://graph.microsoft.com/User.ReadWrite.All</string>\r\n</ArrayOfSt" +
-            "ring>")]
+            "\r\n  <string>https://graph.microsoft.com/User.ReadWrite.All</string>\r\n  <string>h" +
+            "ttps://graph.microsoft.com/UserActivity.ReadWrite.CreatedByApp</string>\r\n</Array" +
+            "OfString>")]
         public global::System.Collections.Specialized.StringCollection PredefinedScopes {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["PredefinedScopes"]));
