@@ -3495,6 +3495,140 @@
                   "body": ""
                 }
               ]
+            },
+            {
+              "displayName": "Shared files",
+              "sampleRequest": [
+                {
+                  "id": "a792e454-bf2f-4f5b-b681-fe2f024f3049",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/sharedWithMe",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get special folder",
+              "sampleRequest": [
+                {
+                  "id": "70acb0e3-f98e-47a6-be09-3100f48614db",
+                  "displayName": "Get special folder",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/special/{special-folder-name}",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "fdd9411b-755b-4cbb-80e0-2448c2557873",
+                  "displayName": "Get Photos folder",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/special/photos",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "b163e503-5d3e-4aa7-9ac4-4bf39803c712",
+                  "displayName": "Get children of a special folder",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/special/{special-folder-name}/children",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Drive items",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List children",
+              "sampleRequest": [
+                {
+                  "id": "8dd1e8be-1519-44ea-8a1f-e8afc01de258",
+                  "displayName": "List children in the root of the current user's drive",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/root/children",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "f560fd76-7a5d-4235-9118-3c60d91f7e25",
+                  "displayName": "List children of a DriveItem with a known ID",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/drives/{drive-id}/items/{item-id}/children",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "6da253b1-73d7-4874-a560-34a22c2d6da7",
+                  "displayName": "List children of a DriveItem with a known path",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/drives/{drive-id}/root:/{path-relative-to-root}:/children",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get item",
+              "sampleRequest": [
+                {
+                  "id": "d94310c3-ab3e-4a5f-a0b8-28af991d02bf",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/root",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get thumbnails",
+              "sampleRequest": [
+                {
+                  "id": "9b440228-b365-4cd1-b4e9-83aae1b27472",
+                  "displayName": "List available thumbnails for the item",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/thumbnails",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "7a5cb358-2596-479c-b36f-722d7b7dd791",
+                  "displayName": "Get a single thumbnail",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/thumbnails/{thumb-id}/{size}",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "1b586431-8551-4b41-af2f-19b10870e1d9",
+                  "displayName": "Retrieve thumbnail binary content",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/thumbnails/{thumb-id}/{size}/content",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "473e02b5-9206-4f8f-8023-e41c536de960",
+                  "displayName": "Getting thumbnails while listing DriveItems",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/children?$expand=thumbnails",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "e68c7723-38f9-4812-8532-a22bbbc62c38",
+                  "displayName": "Requesting custom thumbnail sizes",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/thumbnails?select=c300x400_Crop",
+                  "header": [],
+                  "body": ""
+                }
+              ]
             }
           ]
         }

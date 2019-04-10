@@ -476,7 +476,7 @@ namespace Office365APIEditor
                 // Get a response and response stream.
                 var response = (HttpWebResponse)await request.GetResponseAsync();
 
-                bool isImageResponse = response.ContentType.Contains("image/jpeg");
+                bool isImageResponse = response.ContentType.Contains("image/jpeg") || response.ContentType.Contains("image/png");
                 string contentDisposition = response.Headers.Get("content-disposition");
                 bool isCsvResponse = (contentDisposition != null && Regex.IsMatch(contentDisposition, "^attachment; filename=\".*\\.csv\"$"));
 
@@ -893,7 +893,7 @@ namespace Office365APIEditor
                 try
                 {
                     string contentType = Headers.GetValues("Content-Type")[0];
-                    if (contentType == "image/jpeg")
+                    if (contentType == "image/jpeg" || contentType == "image/png")
                     {
                         isImage = true;
                     }
@@ -1377,7 +1377,7 @@ namespace Office365APIEditor
             bool isImage = false;
             bool isCsv = false;
 
-            if (textBox_ResponseHeaders.Text.Contains("Content-Type: image/jpeg"))
+            if (textBox_ResponseHeaders.Text.Contains("Content-Type: image/jpeg") || textBox_ResponseHeaders.Text.Contains("Content-Type: image/png"))
             {
                 isImage = true;
             }
