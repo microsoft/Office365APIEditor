@@ -3453,6 +3453,48 @@
                   "body": ""
                 }
               ]
+            },
+            {
+              "displayName": "List children",
+              "sampleRequest": [
+                {
+                  "id": "845ac0fd-1de7-4322-a10a-bfab9d19a9ca",
+                  "displayName": "List children in the root of the current user's drive",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/root/children",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "c66623bc-fba3-4974-902d-be03d789565b",
+                  "displayName": "List children of a DriveItem with a known ID",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/drives/{drive-id}/items/{item-id}/children",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "89f3d0b5-eb9e-4a51-86ba-c7fc448f688d",
+                  "displayName": "List children of a DriveItem with a known path",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/drives/{drive-id}/root:/{path-relative-to-root}:/children",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Recent files",
+              "sampleRequest": [
+                {
+                  "id": "346fbed6-6cc4-448d-b832-be58a995615b",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/recent",
+                  "header": [],
+                  "body": ""
+                }
+              ]
             }
           ]
         }
