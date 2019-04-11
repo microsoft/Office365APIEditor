@@ -81,10 +81,10 @@ namespace Office365APIEditor
                 stringBuilder.AppendLine("IdToken : " + (_ar.IdToken ?? ""));
                 stringBuilder.AppendLine("Scope : " + string.Join(",", _ar.Scopes));
                 stringBuilder.AppendLine("UniqueId : " + (_ar.UniqueId ?? ""));
-                stringBuilder.AppendLine("DisplayableId : " + (_ar.User.DisplayableId ?? ""));
-                stringBuilder.AppendLine("Identifier : " + (_ar.User.Identifier ?? ""));
-                stringBuilder.AppendLine("Name : " + (_ar.User.Name ?? ""));
-
+                stringBuilder.AppendLine("Username : " + (_ar.Account.Username ?? ""));
+                stringBuilder.AppendLine("Identifier : " + (_ar.Account.HomeAccountId.Identifier ?? ""));
+                stringBuilder.AppendLine("Name : " + (_ar.Account.Username ?? ""));
+                
                 Properties.Settings.Default.Save();
                 DialogResult = DialogResult.OK;
                 Close();

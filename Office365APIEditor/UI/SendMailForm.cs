@@ -21,12 +21,12 @@ namespace Office365APIEditor.UI
         string targetFolderDisplayName;
         string draftItemId;
 
-        IUser currentUser;
+        IAccount currentUser;
         private ViewerHelper.ViewerHelper viewerHelper;
 
         List<FileAttachment> attachments;
 
-        public SendMailForm(PublicClientApplication PCA, IUser CurrentUser)
+        public SendMailForm(PublicClientApplication PCA, IAccount CurrentUser)
         {
             InitializeComponent();
 
@@ -37,7 +37,7 @@ namespace Office365APIEditor.UI
             draftItemId = "";
         }
 
-        public SendMailForm(PublicClientApplication PCA, IUser CurrentUser, string DraftItemId)
+        public SendMailForm(PublicClientApplication PCA, IAccount CurrentUser, string DraftItemId)
         {
             InitializeComponent();
 
@@ -48,7 +48,7 @@ namespace Office365APIEditor.UI
             draftItemId = DraftItemId;
         }
 
-        public SendMailForm(PublicClientApplication PCA, IUser CurrentUser, FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
+        public SendMailForm(PublicClientApplication PCA, IAccount CurrentUser, FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
         {
             InitializeComponent();
 

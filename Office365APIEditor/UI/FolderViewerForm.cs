@@ -20,14 +20,14 @@ namespace Office365APIEditor
         FolderInfo targetFolder;
         string targetFolderDisplayName;
 
-        Microsoft.Identity.Client.IUser currentUser;
+        IAccount currentUser;
 
         string currentId = "";
 
         private bool isFormClosing = false;
         private ViewerHelper.ViewerHelper viewerHelper;
 
-        public FolderViewerForm(PublicClientApplication PCA, Microsoft.Identity.Client.IUser CurrentUser, FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
+        public FolderViewerForm(PublicClientApplication PCA, IAccount CurrentUser, FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
         {
             InitializeComponent();
             
@@ -607,7 +607,7 @@ namespace Office365APIEditor
             try
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string result = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
+                string result = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
                 var jsonResult = DynamicJson.Parse(result);
 
                 CreatePropTable(jsonResult);

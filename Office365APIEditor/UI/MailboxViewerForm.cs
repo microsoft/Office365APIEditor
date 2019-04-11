@@ -18,7 +18,7 @@ namespace Office365APIEditor
         ViewerHelper.ViewerHelper viewerHelper;
 
         // Current user's info.
-        Microsoft.Identity.Client.IUser currentUser;
+        IAccount currentUser;
 
         IMailFolder draftsFolder;
 
@@ -57,7 +57,7 @@ namespace Office365APIEditor
             }
 
             string token = ar.AccessToken;
-            currentUser = ar.User;
+            currentUser = ar.Account;
 
             try
             {

@@ -12,7 +12,7 @@ namespace Office365APIEditor.UI.FocusedInbox
     public partial class FocusedInboxOverrideForm : Form
     {
         PublicClientApplication pca;
-        IUser currentUser;
+        IAccount currentUser;
 
         private ViewerHelper.ViewerHelper viewerHelper;
 
@@ -21,7 +21,7 @@ namespace Office365APIEditor.UI.FocusedInbox
         private List<string> overridesToBeChanged = new List<string>();
         private List<string> overridesToBeRemoved = new List<string>();
 
-        public FocusedInboxOverrideForm(PublicClientApplication PCA, IUser CurrentUser)
+        public FocusedInboxOverrideForm(PublicClientApplication PCA, IAccount CurrentUser)
         {
             InitializeComponent();
 

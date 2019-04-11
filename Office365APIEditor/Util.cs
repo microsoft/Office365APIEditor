@@ -353,7 +353,7 @@ namespace Office365APIEditor
             }
         }
 
-        public static async Task<string> GetAccessTokenAsync(PublicClientApplication pca, Microsoft.Identity.Client.IUser CurrentUser)
+        public static async Task<string> GetAccessTokenAsync(PublicClientApplication pca, IAccount CurrentUser)
         {
             // Acquire access token.
             // This method is designed for GetOutlookServiceClient(), so if you need new OutlookServiceClient and new Access Token, you should use GetOutlookServiceClient().
@@ -362,7 +362,8 @@ namespace Office365APIEditor
 
             try
             {
-                ar = await pca.AcquireTokenSilentAsync(MailboxViewerScopes(), pca.Users.Where(u => u.DisplayableId == CurrentUser.DisplayableId ).First());
+                var user = await pca.GetAccountAsync(CurrentUser.HomeAccountId.Identifier);
+                ar = await pca.AcquireTokenSilentAsync(MailboxViewerScopes(), user);
             }
             catch (Exception)
             {
@@ -379,7 +380,7 @@ namespace Office365APIEditor
             return ar.AccessToken;
         }
 
-        public static OutlookServicesClient GetOutlookServicesClient(PublicClientApplication pca, Microsoft.Identity.Client.IUser CurrentUser)
+        public static OutlookServicesClient GetOutlookServicesClient(PublicClientApplication pca, IAccount CurrentUser)
         {
             // Acquire access token again.
 
@@ -394,7 +395,7 @@ namespace Office365APIEditor
                 });
 
             newClient.Context.SendingRequest2 += new EventHandler<SendingRequest2EventArgs>(
-                (eventSender, eventArgs) => InsertHeaders(eventSender, eventArgs, CurrentUser.DisplayableId));
+                (eventSender, eventArgs) => InsertHeaders(eventSender, eventArgs, CurrentUser.Username));
 
             return newClient;
         }

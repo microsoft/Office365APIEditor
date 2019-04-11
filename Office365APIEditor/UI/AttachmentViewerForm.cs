@@ -16,13 +16,13 @@ namespace Office365APIEditor
         string targetItemId;
         string targetItemSubject;
 
-        IUser currentUser;
+        IAccount currentUser;
 
         private ViewerHelper.ViewerHelper viewerHelper;
 
         string currentId = "";
 
-        public AttachmentViewerForm(PublicClientApplication PCA, IUser CurrentUser, FolderInfo TargetFolderInfo, string TargetItemID, string TargetItemSubject)
+        public AttachmentViewerForm(PublicClientApplication PCA, IAccount CurrentUser, FolderInfo TargetFolderInfo, string TargetItemID, string TargetItemSubject)
         {
             InitializeComponent();
 

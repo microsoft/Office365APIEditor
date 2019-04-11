@@ -21,10 +21,10 @@ namespace Office365APIEditor.ViewerHelper
     class ViewerHelper
     {
         private PublicClientApplication pca;
-        private Microsoft.Identity.Client.IUser currentUser;
+        private IAccount currentUser;
         OutlookServicesClient client;
 
-        public ViewerHelper(PublicClientApplication PCA, Microsoft.Identity.Client.IUser CurrentUser)
+        public ViewerHelper(PublicClientApplication PCA, IAccount CurrentUser)
         {
             pca = PCA;
             currentUser = CurrentUser;
@@ -774,7 +774,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
+                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
             }
             catch (Exception ex)
             {
@@ -804,7 +804,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.DisplayableId, postData);
+                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.Username, postData);
             }
             catch (Exception ex)
             {
@@ -823,7 +823,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.DisplayableId, postData);
+                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.Username, postData);
             }
             catch (Exception ex)
             {
@@ -842,7 +842,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.DisplayableId, postData);
+                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.Username, postData);
             }
             catch (Exception ex)
             {
@@ -861,7 +861,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendPatchRequestAsync(URL, accessToken, currentUser.DisplayableId, postData);
+                string stringResponse = await Util.SendPatchRequestAsync(URL, accessToken, currentUser.Username, postData);
             }
             catch (Exception ex)
             {
@@ -1032,7 +1032,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
+                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
             }
             catch (Exception ex)
             {
@@ -1101,7 +1101,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.DisplayableId, postData);
+                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.Username, postData);
             }
             catch (Exception ex)
             {
@@ -1118,7 +1118,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendDeleteRequestAsync(URL, accessToken, currentUser.DisplayableId);
+                string stringResponse = await Util.SendDeleteRequestAsync(URL, accessToken, currentUser.Username);
             }
             catch (Exception ex)
             {
@@ -1138,7 +1138,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
+                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
             }
             catch (Exception ex)
             {
@@ -1178,7 +1178,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
+                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
             }
             catch (Exception ex)
             {
@@ -1201,7 +1201,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
+                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
             }
             catch (Exception ex)
             {
@@ -1241,7 +1241,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.DisplayableId);
+                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
             }
             catch (Exception ex)
             {
