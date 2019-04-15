@@ -3629,6 +3629,373 @@
                   "body": ""
                 }
               ]
+            },
+            {
+              "displayName": "Create folder",
+              "sampleRequest": [
+                {
+                  "id": "a789f5f6-76ce-41ba-a3bc-27fae6b11d0a",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/root/children",
+                  "header": [],
+                  "body": "{\r\n  \"name\": \"New Folder\",\r\n  \"folder\": { },\r\n  \"@microsoft.graph.conflictBehavior\": \"rename\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Update item",
+              "sampleRequest": [
+                {
+                  "id": "4461474a-1a1c-45b6-842d-b8f0c286d5c9",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}",
+                  "header": [],
+                  "body": "{\r\n  \"name\": \"new-file-name.docx\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete item",
+              "sampleRequest": [
+                {
+                  "id": "98d27e80-0125-47e0-9e78-4eaa334aea85",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Move item",
+              "sampleRequest": [
+                {
+                  "id": "1b0fed9e-ea5a-4893-af4a-03799f5f9e03",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}",
+                  "header": [],
+                  "body": "{\r\n  \"parentReference\": {\r\n    \"id\": \"{new-parent-folder-id}\"\r\n  },\r\n  \"name\": \"new-item-name.txt\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Copy item",
+              "sampleRequest": [
+                {
+                  "id": "02e9b7a0-8496-4def-b30b-99189e8e301e",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/copy",
+                  "header": [],
+                  "body": "{\r\n  \"parentReference\": {\r\n    \"driveId\": \"{drive-id}\",\r\n    \"id\": \"{parent folder id}\"\r\n  },\r\n  \"name\": \"contoso plan (copy).txt\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Download file",
+              "sampleRequest": [
+                {
+                  "id": "e241b2a0-011b-44e9-9a20-2ca9652d6aec",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/content",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Convert content",
+              "sampleRequest": [
+                {
+                  "id": "fb07559f-e996-4996-a206-ec378e0abde8",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/content?format={format}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Upload",
+              "sampleRequest": [
+                {
+                  "id": "dc7e63aa-017d-4039-9cb6-0558d6f0a911",
+                  "displayName": "Upload a new file",
+                  "method": "PUT",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/root:/{folder-name}/FileB.txt:/content",
+                  "header": [
+                    {
+                      "name": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "body": "The contents of the file goes here."
+                },
+                {
+                  "id": "0f16532b-381a-412f-82dd-99ee84d9d5a5",
+                  "displayName": "Update an existing file",
+                  "method": "PUT",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/content",
+                  "header": [
+                    {
+                      "name": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "body": "The contents of the file goes here."
+                }
+              ]
+            },
+            //{
+            //  "displayName": "Resumable Upload",
+            //  "sampleRequest": [
+            //    {
+            //      "id": "",
+            //      "displayName": "",
+            //      "method": "",
+            //      "URI": "",
+            //      "header": [],
+            //      "body": ""
+            //    }
+            //  ]
+            //},
+            {
+              "displayName": "Search item",
+              "sampleRequest": [
+                {
+                  "id": "b31fa854-dffc-4a45-87c4-ca85399617af",
+                  "displayName": "Searching the current user's OneDrive",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/root/search(q='{search-query}')",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "9d15c84f-64e2-4394-ba4f-49eeb4d81202",
+                  "displayName": "Searching for items a user can access",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/search(q='{search-query}')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Track changes",
+              "sampleRequest": [
+                {
+                  "id": "9150dd2c-288f-4b9e-8dcc-178ed9fc4550",
+                  "displayName": "Initial Request",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/root/delta",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "0b2039ad-d4a1-4b01-91d9-590d02e1cac9",
+                  "displayName": "Last page in a set",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/root/delta(token='1230919asd190410jlka')",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "41ab2d12-c83c-492f-a403-327ef577f0fc",
+                  "displayName": "Retrieving the current deltaLink",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/root/delta?token=latest",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List versions",
+              "sampleRequest": [
+                {
+                  "id": "8aef2f93-ccbc-43ac-863d-0b8faa0c292a",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/versions",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Preview item",
+              "sampleRequest": [
+                {
+                  "id": "4cb12b8d-fe79-47e3-9968-9726a7696399",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/preview",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Permissions",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Create sharing link",
+              "sampleRequest": [
+                {
+                  "id": "3ac981df-8373-4f79-af1a-8c8507e2a66f",
+                  "displayName": "Creating anonymmous read-only links",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/createLink",
+                  "header": [],
+                  "body": "{\r\n  \"type\": \"view\",\r\n  \"scope\": \"anonymous\"\r\n}"
+                },
+                {
+                  "id": "dc729583-c394-452f-9fc9-5e0b7a0cf50f",
+                  "displayName": "Creating company sharable links",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/createLink",
+                  "header": [],
+                  "body": "{\r\n  \"type\": \"edit\",\r\n  \"scope\": \"organization\"\r\n}"
+                },
+                {
+                  "id": "0be9ad1d-bca4-43e6-afd3-90ee31dcb7c6",
+                  "displayName": "Creating embeddable links",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/createLink",
+                  "header": [],
+                  "body": "{\r\n  \"type\": \"embed\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Use sharing links",
+              "sampleRequest": [
+                {
+                  "id": "d3374692-d8d0-4df8-af8c-4b0a5c9f5cbd",
+                  "displayName": "Single file",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/shares/{shareIdOrUrl}/driveItem",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "353a80b8-5b34-4e4f-b52d-bc78a15a0bcb",
+                  "displayName": "Shared folder",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/shares/{shareIdOrUrl}/driveItem?$expand=children",
+                  "header": [],
+                  "body": "{\r\n  \"type\": \"edit\",\r\n  \"scope\": \"organization\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List permissions",
+              "sampleRequest": [
+                {
+                  "id": "05f542a1-6383-466a-b88f-a1ab41ca162c",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/permissions",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Add permissions",
+              "sampleRequest": [
+                {
+                  "id": "3183f866-675d-48d3-ac01-26f7b704abbd",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/invite",
+                  "header": [],
+                  "body": "{\r\n  \"recipients\": [\r\n    {\r\n      \"email\": \"ryan@contoso.com\"\r\n    }\r\n  ],\r\n  \"message\": \"Here's the file that we're collaborating on.\",\r\n  \"requireSignIn\": true,\r\n  \"sendInvitation\": true,\r\n  \"roles\": [ \"write\" ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get permission",
+              "sampleRequest": [
+                {
+                  "id": "30888e20-47b1-4e33-ab95-79beb41d0eee",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/permissions/{perm-id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update permission",
+              "sampleRequest": [
+                {
+                  "id": "b2e1bb77-52ac-45dc-9d08-7d5e572e7093",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/permissions/{perm-id}",
+                  "header": [],
+                  "body": "{\r\n  \"grantedTo\": {\r\n    \"user\": {\r\n      \"displayName\": \"Ryan Gregg\",\r\n      \"id\": \"efee1b77-fb3b-4f65-99d6-274c11914d12\"\r\n    }\r\n  },\r\n  \"id\": \"1\",\r\n  \"roles\": [ \"read\" ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete permission",
+              "sampleRequest": [
+                {
+                  "id": "1a36f3b1-252b-41f8-a39e-45e1e5ded07f",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/me/drive/items/{item-id}/permissions/{perm-id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Identity and access",
+      "secondLevelCategory": [
+        {
+          "displayName": "Contracts",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get contract",
+              "sampleRequest": [
+                {
+                  "id": "ffb7dc12-6fd3-4752-accc-8d3ffd24023a",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/contracts/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List contracts",
+              "sampleRequest": [
+                {
+                  "id": "7030e636-dc00-4212-8361-524dbf0e5d8b",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/contracts",
+                  "header": [],
+                  "body": ""
+                }
+              ]
             }
           ]
         }

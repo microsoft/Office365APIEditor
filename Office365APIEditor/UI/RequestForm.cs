@@ -446,6 +446,13 @@ namespace Office365APIEditor
                     }
                 }
 
+                if (headerName.ToLower() == "content-type")
+                {
+                    // Content-Type header should be set as property.
+                    request.ContentType = headerValue;
+                    continue;
+                }
+
                 string header = headerName + ": " + headerValue;
                 originalRequestHeaders += header + Environment.NewLine;
 
