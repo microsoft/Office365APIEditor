@@ -123,8 +123,6 @@
             // 
             this.checkBox_Decode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_Decode.AutoSize = true;
-            this.checkBox_Decode.Checked = true;
-            this.checkBox_Decode.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_Decode.Location = new System.Drawing.Point(737, 235);
             this.checkBox_Decode.Name = "checkBox_Decode";
             this.checkBox_Decode.Size = new System.Drawing.Size(64, 17);

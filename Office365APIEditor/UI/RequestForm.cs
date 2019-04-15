@@ -629,7 +629,7 @@ namespace Office365APIEditor
                     string jsonResponse = "";
                     using (Stream responseStream = ex.Response.GetResponseStream())
                     {
-                        StreamReader reader = new StreamReader(responseStream, Encoding.Default);
+                        StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
                         jsonResponse = reader.ReadToEnd();
                     }
 
@@ -982,21 +982,8 @@ namespace Office365APIEditor
 
         public static string parseJsonResponse(string Data)
         {
-            string tabString = "\t";
-
-            int indentCount = 0;
-            int quoteCount = 0;
-            
-#pragma warning disable IDE0029 // Use coalesce expression
-            var result = from c in Data
-                         let quotes = (c == '"') ? quoteCount++ : quoteCount
-                         let lineBreak = (c == ',' && quotes % 2 == 0) ? c + Environment.NewLine + string.Concat(Enumerable.Repeat(tabString, indentCount)) : null
-                         let openChar = (c == '{' || c == '[') ? c + Environment.NewLine + string.Concat(Enumerable.Repeat(tabString, ++indentCount)) : c.ToString()
-                         let closeChar = (c == '}' || c == ']') ? Environment.NewLine + string.Concat(Enumerable.Repeat(tabString, --indentCount)) + c : c.ToString()
-                         select (lineBreak == null) ? (openChar.Length > 1) ? openChar : closeChar : lineBreak;
-#pragma warning restore IDE0029 // Use coalesce expression
-
-            return string.Concat(result);
+            dynamic parsedJson = JsonConvert.DeserializeObject(Data);
+            return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
         }
 
         public static string DecodeJsonResponse(string jsonResponse)
