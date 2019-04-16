@@ -47,7 +47,6 @@
             this.button_CreateBinaryDataFromFile = new System.Windows.Forms.Button();
             this.checkBox_SendAsBinary = new System.Windows.Forms.CheckBox();
             this.radioButton_PUT = new System.Windows.Forms.RadioButton();
-            this.label_Line = new System.Windows.Forms.Label();
             this.label_StatusCode = new System.Windows.Forms.Label();
             this.checkBox_Logging = new System.Windows.Forms.CheckBox();
             this.tabControl_Response = new System.Windows.Forms.TabControl();
@@ -84,6 +83,7 @@
             this.contextMenuStrip_RunHistory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showDetailsInMainPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -102,6 +102,10 @@
             this.tabPage_Headers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RequestHeader)).BeginInit();
             this.contextMenuStrip_RunHistory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBox_Indent
@@ -110,7 +114,7 @@
             this.checkBox_Indent.AutoSize = true;
             this.checkBox_Indent.Checked = true;
             this.checkBox_Indent.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_Indent.Location = new System.Drawing.Point(669, 235);
+            this.checkBox_Indent.Location = new System.Drawing.Point(676, 3);
             this.checkBox_Indent.Name = "checkBox_Indent";
             this.checkBox_Indent.Size = new System.Drawing.Size(56, 17);
             this.checkBox_Indent.TabIndex = 58;
@@ -123,7 +127,7 @@
             // 
             this.checkBox_Decode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_Decode.AutoSize = true;
-            this.checkBox_Decode.Location = new System.Drawing.Point(737, 235);
+            this.checkBox_Decode.Location = new System.Drawing.Point(744, 3);
             this.checkBox_Decode.Name = "checkBox_Decode";
             this.checkBox_Decode.Size = new System.Drawing.Size(64, 17);
             this.checkBox_Decode.TabIndex = 57;
@@ -189,32 +193,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer2.Panel2.Controls.Add(this.button_CreateBinaryDataFromFile);
-            this.splitContainer2.Panel2.Controls.Add(this.checkBox_SendAsBinary);
-            this.splitContainer2.Panel2.Controls.Add(this.radioButton_PUT);
-            this.splitContainer2.Panel2.Controls.Add(this.label_Line);
-            this.splitContainer2.Panel2.Controls.Add(this.label_StatusCode);
-            this.splitContainer2.Panel2.Controls.Add(this.checkBox_Logging);
-            this.splitContainer2.Panel2.Controls.Add(this.tabControl_Response);
-            this.splitContainer2.Panel2.Controls.Add(this.button_ViewTokenInfo);
-            this.splitContainer2.Panel2.Controls.Add(this.label1);
-            this.splitContainer2.Panel2.Controls.Add(this.label7);
-            this.splitContainer2.Panel2.Controls.Add(this.tabControl_Request);
-            this.splitContainer2.Panel2.Controls.Add(this.checkBox_Indent);
-            this.splitContainer2.Panel2.Controls.Add(this.textBox_Request);
-            this.splitContainer2.Panel2.Controls.Add(this.checkBox_Decode);
-            this.splitContainer2.Panel2.Controls.Add(this.button_Run);
-            this.splitContainer2.Panel2.Controls.Add(this.label6);
-            this.splitContainer2.Panel2.Controls.Add(this.label3);
-            this.splitContainer2.Panel2.Controls.Add(this.textBox_BasicAuthSMTPAddress);
-            this.splitContainer2.Panel2.Controls.Add(this.label2);
-            this.splitContainer2.Panel2.Controls.Add(this.button_RefreshToken);
-            this.splitContainer2.Panel2.Controls.Add(this.textBox_BasicAuthPassword);
-            this.splitContainer2.Panel2.Controls.Add(this.label4);
-            this.splitContainer2.Panel2.Controls.Add(this.radioButton_DELETE);
-            this.splitContainer2.Panel2.Controls.Add(this.radioButton_GET);
-            this.splitContainer2.Panel2.Controls.Add(this.radioButton_PATCH);
-            this.splitContainer2.Panel2.Controls.Add(this.radioButton_POST);
+            this.splitContainer2.Panel2.Controls.Add(this.splitContainer1);
             this.splitContainer2.Panel2MinSize = 820;
             this.splitContainer2.Size = new System.Drawing.Size(1020, 497);
             this.splitContainer2.SplitterDistance = 196;
@@ -286,7 +265,7 @@
             // 
             this.button_CreateBinaryDataFromFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_CreateBinaryDataFromFile.Enabled = false;
-            this.button_CreateBinaryDataFromFile.Location = new System.Drawing.Point(694, 109);
+            this.button_CreateBinaryDataFromFile.Location = new System.Drawing.Point(701, 96);
             this.button_CreateBinaryDataFromFile.Name = "button_CreateBinaryDataFromFile";
             this.button_CreateBinaryDataFromFile.Size = new System.Drawing.Size(107, 36);
             this.button_CreateBinaryDataFromFile.TabIndex = 68;
@@ -298,7 +277,7 @@
             // 
             this.checkBox_SendAsBinary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_SendAsBinary.AutoSize = true;
-            this.checkBox_SendAsBinary.Location = new System.Drawing.Point(694, 86);
+            this.checkBox_SendAsBinary.Location = new System.Drawing.Point(701, 73);
             this.checkBox_SendAsBinary.Name = "checkBox_SendAsBinary";
             this.checkBox_SendAsBinary.Size = new System.Drawing.Size(96, 17);
             this.checkBox_SendAsBinary.TabIndex = 67;
@@ -308,37 +287,28 @@
             // 
             // radioButton_PUT
             // 
+            this.radioButton_PUT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton_PUT.AutoSize = true;
-            this.radioButton_PUT.Location = new System.Drawing.Point(354, 198);
+            this.radioButton_PUT.Location = new System.Drawing.Point(340, 190);
             this.radioButton_PUT.Name = "radioButton_PUT";
             this.radioButton_PUT.Size = new System.Drawing.Size(47, 17);
             this.radioButton_PUT.TabIndex = 66;
             this.radioButton_PUT.Text = "PUT";
             this.radioButton_PUT.UseVisualStyleBackColor = true;
             // 
-            // label_Line
-            // 
-            this.label_Line.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_Line.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label_Line.Location = new System.Drawing.Point(20, 224);
-            this.label_Line.Name = "label_Line";
-            this.label_Line.Size = new System.Drawing.Size(780, 2);
-            this.label_Line.TabIndex = 65;
-            // 
             // label_StatusCode
             // 
             this.label_StatusCode.AutoSize = true;
-            this.label_StatusCode.Location = new System.Drawing.Point(84, 236);
+            this.label_StatusCode.Location = new System.Drawing.Point(70, 0);
             this.label_StatusCode.Name = "label_StatusCode";
             this.label_StatusCode.Size = new System.Drawing.Size(0, 13);
             this.label_StatusCode.TabIndex = 62;
             // 
             // checkBox_Logging
             // 
-            this.checkBox_Logging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox_Logging.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox_Logging.AutoSize = true;
-            this.checkBox_Logging.Location = new System.Drawing.Point(694, 175);
+            this.checkBox_Logging.Location = new System.Drawing.Point(701, 167);
             this.checkBox_Logging.Name = "checkBox_Logging";
             this.checkBox_Logging.Size = new System.Drawing.Size(64, 17);
             this.checkBox_Logging.TabIndex = 64;
@@ -354,10 +324,10 @@
             this.tabControl_Response.Controls.Add(this.tabPage2);
             this.tabControl_Response.Controls.Add(this.tabPage3);
             this.tabControl_Response.Controls.Add(this.tabPage4);
-            this.tabControl_Response.Location = new System.Drawing.Point(22, 259);
+            this.tabControl_Response.Location = new System.Drawing.Point(3, 20);
             this.tabControl_Response.Name = "tabControl_Response";
             this.tabControl_Response.SelectedIndex = 0;
-            this.tabControl_Response.Size = new System.Drawing.Size(779, 226);
+            this.tabControl_Response.Size = new System.Drawing.Size(805, 254);
             this.tabControl_Response.TabIndex = 61;
             // 
             // tabPage1
@@ -366,7 +336,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(771, 200);
+            this.tabPage1.Size = new System.Drawing.Size(797, 228);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Headers";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -379,7 +349,7 @@
             this.textBox_ResponseHeaders.Name = "textBox_ResponseHeaders";
             this.textBox_ResponseHeaders.ReadOnly = true;
             this.textBox_ResponseHeaders.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_ResponseHeaders.Size = new System.Drawing.Size(765, 194);
+            this.textBox_ResponseHeaders.Size = new System.Drawing.Size(791, 222);
             this.textBox_ResponseHeaders.TabIndex = 8;
             // 
             // tabPage2
@@ -455,7 +425,7 @@
             // button_ViewTokenInfo
             // 
             this.button_ViewTokenInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_ViewTokenInfo.Location = new System.Drawing.Point(694, 12);
+            this.button_ViewTokenInfo.Location = new System.Drawing.Point(701, 3);
             this.button_ViewTokenInfo.Name = "button_ViewTokenInfo";
             this.button_ViewTokenInfo.Size = new System.Drawing.Size(107, 23);
             this.button_ViewTokenInfo.TabIndex = 48;
@@ -466,7 +436,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 236);
+            this.label1.Location = new System.Drawing.Point(3, 4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 50;
@@ -476,7 +446,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(569, 236);
+            this.label7.Location = new System.Drawing.Point(576, 4);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 13);
             this.label7.TabIndex = 60;
@@ -485,15 +455,16 @@
             // tabControl_Request
             // 
             this.tabControl_Request.Alignment = System.Windows.Forms.TabAlignment.Left;
-            this.tabControl_Request.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabControl_Request.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl_Request.Controls.Add(this.tabPage_Headers);
             this.tabControl_Request.Controls.Add(this.tabPage_Body);
-            this.tabControl_Request.Location = new System.Drawing.Point(101, 82);
+            this.tabControl_Request.Location = new System.Drawing.Point(87, 73);
             this.tabControl_Request.Multiline = true;
             this.tabControl_Request.Name = "tabControl_Request";
             this.tabControl_Request.SelectedIndex = 0;
-            this.tabControl_Request.Size = new System.Drawing.Size(587, 110);
+            this.tabControl_Request.Size = new System.Drawing.Size(587, 111);
             this.tabControl_Request.TabIndex = 63;
             // 
             // tabPage_Headers
@@ -502,7 +473,7 @@
             this.tabPage_Headers.Location = new System.Drawing.Point(23, 4);
             this.tabPage_Headers.Name = "tabPage_Headers";
             this.tabPage_Headers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Headers.Size = new System.Drawing.Size(560, 102);
+            this.tabPage_Headers.Size = new System.Drawing.Size(560, 103);
             this.tabPage_Headers.TabIndex = 0;
             this.tabPage_Headers.Text = "Headers";
             this.tabPage_Headers.UseVisualStyleBackColor = true;
@@ -516,7 +487,7 @@
             this.dataGridView_RequestHeader.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_RequestHeader.Location = new System.Drawing.Point(3, 3);
             this.dataGridView_RequestHeader.Name = "dataGridView_RequestHeader";
-            this.dataGridView_RequestHeader.Size = new System.Drawing.Size(554, 96);
+            this.dataGridView_RequestHeader.Size = new System.Drawing.Size(554, 97);
             this.dataGridView_RequestHeader.TabIndex = 45;
             // 
             // HeaderNameCol
@@ -546,7 +517,7 @@
             this.textBox_Request.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Request.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastRequest", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.textBox_Request.Location = new System.Drawing.Point(101, 40);
+            this.textBox_Request.Location = new System.Drawing.Point(87, 31);
             this.textBox_Request.Multiline = true;
             this.textBox_Request.Name = "textBox_Request";
             this.textBox_Request.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -556,8 +527,8 @@
             // 
             // button_Run
             // 
-            this.button_Run.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Run.Location = new System.Drawing.Point(694, 195);
+            this.button_Run.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_Run.Location = new System.Drawing.Point(701, 187);
             this.button_Run.Name = "button_Run";
             this.button_Run.Size = new System.Drawing.Size(107, 23);
             this.button_Run.TabIndex = 47;
@@ -567,8 +538,9 @@
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(52, 200);
+            this.label6.Location = new System.Drawing.Point(38, 192);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 13);
             this.label6.TabIndex = 59;
@@ -577,7 +549,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 17);
+            this.label3.Location = new System.Drawing.Point(3, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 13);
             this.label3.TabIndex = 51;
@@ -585,7 +557,7 @@
             // 
             // textBox_BasicAuthSMTPAddress
             // 
-            this.textBox_BasicAuthSMTPAddress.Location = new System.Drawing.Point(101, 14);
+            this.textBox_BasicAuthSMTPAddress.Location = new System.Drawing.Point(87, 5);
             this.textBox_BasicAuthSMTPAddress.Name = "textBox_BasicAuthSMTPAddress";
             this.textBox_BasicAuthSMTPAddress.Size = new System.Drawing.Size(253, 20);
             this.textBox_BasicAuthSMTPAddress.TabIndex = 43;
@@ -593,7 +565,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(376, 17);
+            this.label2.Location = new System.Drawing.Point(362, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 52;
@@ -602,7 +574,7 @@
             // button_RefreshToken
             // 
             this.button_RefreshToken.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_RefreshToken.Location = new System.Drawing.Point(694, 41);
+            this.button_RefreshToken.Location = new System.Drawing.Point(701, 32);
             this.button_RefreshToken.Name = "button_RefreshToken";
             this.button_RefreshToken.Size = new System.Drawing.Size(107, 23);
             this.button_RefreshToken.TabIndex = 49;
@@ -612,7 +584,7 @@
             // 
             // textBox_BasicAuthPassword
             // 
-            this.textBox_BasicAuthPassword.Location = new System.Drawing.Point(435, 14);
+            this.textBox_BasicAuthPassword.Location = new System.Drawing.Point(421, 5);
             this.textBox_BasicAuthPassword.Name = "textBox_BasicAuthPassword";
             this.textBox_BasicAuthPassword.Size = new System.Drawing.Size(253, 20);
             this.textBox_BasicAuthPassword.TabIndex = 44;
@@ -621,7 +593,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(48, 46);
+            this.label4.Location = new System.Drawing.Point(34, 34);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 53;
@@ -629,8 +601,9 @@
             // 
             // radioButton_DELETE
             // 
+            this.radioButton_DELETE.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton_DELETE.AutoSize = true;
-            this.radioButton_DELETE.Location = new System.Drawing.Point(281, 198);
+            this.radioButton_DELETE.Location = new System.Drawing.Point(267, 190);
             this.radioButton_DELETE.Name = "radioButton_DELETE";
             this.radioButton_DELETE.Size = new System.Drawing.Size(67, 17);
             this.radioButton_DELETE.TabIndex = 56;
@@ -639,9 +612,10 @@
             // 
             // radioButton_GET
             // 
+            this.radioButton_GET.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton_GET.AutoSize = true;
             this.radioButton_GET.Checked = true;
-            this.radioButton_GET.Location = new System.Drawing.Point(101, 198);
+            this.radioButton_GET.Location = new System.Drawing.Point(87, 190);
             this.radioButton_GET.Name = "radioButton_GET";
             this.radioButton_GET.Size = new System.Drawing.Size(47, 17);
             this.radioButton_GET.TabIndex = 46;
@@ -651,8 +625,9 @@
             // 
             // radioButton_PATCH
             // 
+            this.radioButton_PATCH.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton_PATCH.AutoSize = true;
-            this.radioButton_PATCH.Location = new System.Drawing.Point(214, 198);
+            this.radioButton_PATCH.Location = new System.Drawing.Point(200, 190);
             this.radioButton_PATCH.Name = "radioButton_PATCH";
             this.radioButton_PATCH.Size = new System.Drawing.Size(61, 17);
             this.radioButton_PATCH.TabIndex = 55;
@@ -661,8 +636,9 @@
             // 
             // radioButton_POST
             // 
+            this.radioButton_POST.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton_POST.AutoSize = true;
-            this.radioButton_POST.Location = new System.Drawing.Point(154, 198);
+            this.radioButton_POST.Location = new System.Drawing.Point(140, 190);
             this.radioButton_POST.Name = "radioButton_POST";
             this.radioButton_POST.Size = new System.Drawing.Size(54, 17);
             this.radioButton_POST.TabIndex = 54;
@@ -688,6 +664,52 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "All files (*.*)|*.*";
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BackColor = System.Drawing.SystemColors.Highlight;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.button_CreateBinaryDataFromFile);
+            this.splitContainer1.Panel1.Controls.Add(this.label3);
+            this.splitContainer1.Panel1.Controls.Add(this.checkBox_SendAsBinary);
+            this.splitContainer1.Panel1.Controls.Add(this.radioButton_POST);
+            this.splitContainer1.Panel1.Controls.Add(this.radioButton_PUT);
+            this.splitContainer1.Panel1.Controls.Add(this.radioButton_PATCH);
+            this.splitContainer1.Panel1.Controls.Add(this.radioButton_GET);
+            this.splitContainer1.Panel1.Controls.Add(this.radioButton_DELETE);
+            this.splitContainer1.Panel1.Controls.Add(this.checkBox_Logging);
+            this.splitContainer1.Panel1.Controls.Add(this.label4);
+            this.splitContainer1.Panel1.Controls.Add(this.textBox_BasicAuthPassword);
+            this.splitContainer1.Panel1.Controls.Add(this.button_ViewTokenInfo);
+            this.splitContainer1.Panel1.Controls.Add(this.button_RefreshToken);
+            this.splitContainer1.Panel1.Controls.Add(this.label2);
+            this.splitContainer1.Panel1.Controls.Add(this.textBox_BasicAuthSMTPAddress);
+            this.splitContainer1.Panel1.Controls.Add(this.tabControl_Request);
+            this.splitContainer1.Panel1.Controls.Add(this.label6);
+            this.splitContainer1.Panel1.Controls.Add(this.button_Run);
+            this.splitContainer1.Panel1.Controls.Add(this.textBox_Request);
+            this.splitContainer1.Panel1MinSize = 216;
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.label1);
+            this.splitContainer1.Panel2.Controls.Add(this.label_StatusCode);
+            this.splitContainer1.Panel2.Controls.Add(this.checkBox_Decode);
+            this.splitContainer1.Panel2.Controls.Add(this.tabControl_Response);
+            this.splitContainer1.Panel2.Controls.Add(this.checkBox_Indent);
+            this.splitContainer1.Panel2.Controls.Add(this.label7);
+            this.splitContainer1.Panel2MinSize = 80;
+            this.splitContainer1.Size = new System.Drawing.Size(820, 497);
+            this.splitContainer1.SplitterDistance = 216;
+            this.splitContainer1.TabIndex = 69;
+            // 
             // RequestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -707,7 +729,6 @@
             this.menuStrip1.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.tabControl_LeftNavi.ResumeLayout(false);
@@ -726,6 +747,12 @@
             this.tabPage_Headers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_RequestHeader)).EndInit();
             this.contextMenuStrip_RunHistory.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -769,7 +796,6 @@
         private System.Windows.Forms.RadioButton radioButton_GET;
         private System.Windows.Forms.RadioButton radioButton_PATCH;
         private System.Windows.Forms.RadioButton radioButton_POST;
-        private System.Windows.Forms.Label label_Line;
         private System.Windows.Forms.DataGridView dataGridView_RequestHeader;
         private System.Windows.Forms.DataGridViewTextBoxColumn HeaderNameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn HeaderValueCol;
@@ -786,5 +812,6 @@
         private System.Windows.Forms.Button button_CreateBinaryDataFromFile;
         private System.Windows.Forms.CheckBox checkBox_SendAsBinary;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }

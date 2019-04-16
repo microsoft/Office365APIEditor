@@ -3998,6 +3998,133 @@
               ]
             }
           ]
+        },
+        {
+          "displayName": "Data policy operation",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get data policy operation",
+              "sampleRequest": [
+                {
+                  "id": "c43c33b4-d609-4ca8-98df-642cdc51ff94",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/dataPolicyOperations/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Deleted items",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get deleted item",
+              "sampleRequest": [
+                {
+                  "id": "ec517874-ce0d-499a-9a16-483a2d067ca7",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/directory/deletedItems/{object-id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List deleted items",
+              "sampleRequest": [
+                {
+                  "id": "6a09e545-25dd-42b0-9707-33f7b5054327",
+                  "displayName": "List deleted groups",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/directory/deletedItems/microsoft.graph.group",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "66747e24-30f4-4e22-9173-4ab139274bcb",
+                  "displayName": "List deleted users",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/directory/deletedItems/microsoft.graph.user",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Permanenlty delete item",
+              "sampleRequest": [
+                {
+                  "id": "777ad8d7-6d58-4902-9ed5-71d750e2782e",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/directory/deletedItems/{object-id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Restore delete item",
+              "sampleRequest": [
+                {
+                  "id": "4b88dda6-0dec-493e-860f-069d61979f4f",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/directory/deletedItems/{object-id}/restore",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List deleted items owned by user",
+              "sampleRequest": [
+                {
+                  "id": "1830851b-4ff6-45dc-9d11-6833f4f19225",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/directory/deletedItems/getUserOwnedObjects",
+                  "header": [],
+                  "body": "{\r\n  \"userId\":\"{user-id}\",\r\n  \"type\":\"Group\"\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Device",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List devices",
+              "sampleRequest": [
+                {
+                  "id": "8c572270-9d73-402a-825b-a9fd29577453",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/devices",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create device",
+              "sampleRequest": [
+                {
+                  "id": "19edfd0b-07b6-42c1-998d-6eab35dea5ef",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/devices",
+                  "header": [],
+                  "body": "{\r\n  \"accountEnabled\":false,\r\n  \"alternativeSecurityIds\":\r\n  [\r\n    {\r\n      \"type\":2,\r\n      \"key\":\"{base64-encoded-string}\"\r\n    }\r\n  ],\r\n  \"deviceId\":\"${Guid}\",\r\n  \"displayName\":\"Test device\",\r\n  \"operatingSystem\":\"linux\",\r\n  \"operatingSystemVersion\":\"1\"\r\n}"
+                }
+              ]
+            }
+          ]
         }
       ]
     }

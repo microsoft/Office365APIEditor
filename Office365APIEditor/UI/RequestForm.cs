@@ -1635,6 +1635,11 @@ namespace Office365APIEditor
                 result = result.Replace("${Date3MonthLater}", utcNow.AddMonths(3).ToString("yyyy-MM-dd"));
             }
 
+            if (requestBody.Contains("${Guid}"))
+            {
+                result = result.Replace("${Guid}", Guid.NewGuid().ToString());
+            }
+
             return result;
         }
 

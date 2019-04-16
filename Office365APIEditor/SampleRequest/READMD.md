@@ -20,3 +20,9 @@
 |:-------|-------|
 |${DateToday}|DateTime.UtcNow.ToString("yyyy-MM-dd")|
 |${Date3MonthLater}|DateTime.UtcNow.AddMonths(3).ToString("yyyy-MM-dd")|
+
+## Other
+
+|Function|C# Code|
+|:-------|-------|
+|${Guid}|Guid.NewGuid().ToString()|
