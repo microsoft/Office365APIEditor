@@ -4123,6 +4123,276 @@
                   "body": "{\r\n  \"accountEnabled\":false,\r\n  \"alternativeSecurityIds\":\r\n  [\r\n    {\r\n      \"type\":2,\r\n      \"key\":\"{base64-encoded-string}\"\r\n    }\r\n  ],\r\n  \"deviceId\":\"${Guid}\",\r\n  \"displayName\":\"Test device\",\r\n  \"operatingSystem\":\"linux\",\r\n  \"operatingSystemVersion\":\"1\"\r\n}"
                 }
               ]
+            },
+            {
+              "displayName": "Get device",
+              "sampleRequest": [
+                {
+                  "id": "32800224-da9e-47c0-ac48-daa48bc07a19",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/devices/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update device",
+              "sampleRequest": [
+                {
+                  "id": "3e9a317f-9a65-4dc8-8f97-6b0ba21ff328",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/devices/{id}",
+                  "header": [],
+                  "body": "{\r\n  \"accountEnabled\": false\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete device",
+              "sampleRequest": [
+                {
+                  "id": "90236280-c65c-4a4d-bf06-0d3074d3488b",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/devices/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List registered owners",
+              "sampleRequest": [
+                {
+                  "id": "3ea248a0-b809-4138-87f6-ef196562f909",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/devices/{id}/registeredOwners",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List registered users",
+              "sampleRequest": [
+                {
+                  "id": "02f1e790-066b-44cb-bf86-5183daec5fa7",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/devices/{id}/registeredUsers",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            //{
+            //  "displayName": "Create registered owner",
+            //  "sampleRequest": [
+            //    {
+            //      "id": "a033c2e0-d880-4d08-9614-c1bbd31bc68c",
+            //      "displayName": "Example",
+            //      "method": "POST",
+            //      "URI": "https://graph.microsoft.com/v1.0/devices/{id}/registeredOwners",
+            //      "header": [],
+            //      "body": "{\r\n  \"directoryObject\": {\r\n  }\r\n}"
+            //    }
+            //  ]
+            //},
+            //{
+            //  "displayName": "Create registered user",
+            //  "sampleRequest": [
+            //    {
+            //      "id": "ed1088a5-0d90-4200-aca0-49d0e6f65ea1",
+            //      "displayName": "Example",
+            //      "method": "POST",
+            //      "URI": "https://graph.microsoft.com/v1.0/devices/{id}/registeredUsers",
+            //      "header": [],
+            //      "body": "{\r\n  \"directoryObject\": {\r\n  }\r\n}"
+            //    }
+            //  ]
+            //},
+            {
+              "displayName": "List device groups",
+              "sampleRequest": [
+                {
+                  "id": "ee8004dc-2dfe-4eba-8f4b-8d106782244b",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/devices/{id}/memberOf",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Directory object",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get directory object",
+              "sampleRequest": [
+                {
+                  "id": "0e257cb6-bf49-4b64-90b2-a9920481ccaf",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/directoryObjects/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Delete directory object",
+              "sampleRequest": [
+                {
+                  "id": "a56c59c6-7682-42a4-b650-c59b1a3db675",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/directoryObjects/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get member objects",
+              "sampleRequest": [
+                {
+                  "id": "79e54d02-0389-4fbd-b9b0-4f308a58ccc0",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/directoryObjects/{object-id}/getMemberObjects",
+                  "header": [],
+                  "body": "{\r\n  \"securityEnabledOnly\": true\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get member groups",
+              "sampleRequest": [
+                {
+                  "id": "6cea66d7-c068-42c0-b4c1-3fcf6825521b",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/directoryObjects/{object-id}/getMemberGroups",
+                  "header": [],
+                  "body": "{\r\n  \"securityEnabledOnly\": true\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Check member groups",
+              "sampleRequest": [
+                {
+                  "id": "e7515c3d-8554-4556-9c07-de5440a11df1",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/directoryObjects/{id}/checkMemberGroups",
+                  "header": [],
+                  "body": "{\r\n  \"groupIds\": [\r\n    \"groupIds-value\"\r\n  ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get objects by IDs",
+              "sampleRequest": [
+                {
+                  "id": "32f587da-fb7e-43d8-aeea-0687c171bc90",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/directoryObjects/getByIds",
+                  "header": [],
+                  "body": "{\r\n    \"ids\":[\"{id}\"],\r\n    \"types\":[\"user\"]\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Directory role",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List directory roles",
+              "sampleRequest": [
+                {
+                  "id": "7ea5f742-b2f9-4c52-9130-61db3ccbb02e",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/directoryRoles",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Activate directory role",
+              "sampleRequest": [
+                {
+                  "id": "fb9f76c0-b398-46f8-a3c6-82868f3772fa",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/directoryRoles",
+                  "header": [],
+                  "body": "{\r\n  \"roleTemplateId\": \"roleTemplateId-value\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get directory role",
+              "sampleRequest": [
+                {
+                  "id": "cd094882-7b73-4ccd-9ba8-961a083355e8",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/directoryRoles/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List members",
+              "sampleRequest": [
+                {
+                  "id": "80417376-6353-4eb2-be27-fdaeb5e85ff5",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/directoryRoles/{id}/members",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Add member",
+              "sampleRequest": [
+                {
+                  "id": "b3735064-5c5a-4cef-809f-5d760cffaa2a",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/directoryRoles/{id}/members/$ref",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.id\": \"https://graph.microsoft.com/v1.0/directoryObjects/{id}\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Remove member",
+              "sampleRequest": [
+                {
+                  "id": "a3dae37f-572d-40a4-9050-0403f398f84b",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/directoryRoles/{id}/members/{id}/$ref",
+                  "header": [],
+                  "body": ""
+                }
+              ]
             }
           ]
         }
