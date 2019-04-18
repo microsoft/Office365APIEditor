@@ -982,8 +982,15 @@ namespace Office365APIEditor
 
         public static string parseJsonResponse(string Data)
         {
-            dynamic parsedJson = JsonConvert.DeserializeObject(Data);
-            return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+            if (Data == "")
+            {
+                return "";
+            }
+            else
+            {
+                dynamic parsedJson = JsonConvert.DeserializeObject(Data);
+                return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+            }
         }
 
         public static string DecodeJsonResponse(string jsonResponse)

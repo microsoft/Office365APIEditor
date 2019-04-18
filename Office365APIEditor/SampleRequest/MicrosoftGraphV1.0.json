@@ -4395,6 +4395,371 @@
               ]
             }
           ]
+        },
+        {
+          "displayName": "Directory role template",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List directoryRoleTemplates",
+              "sampleRequest": [
+                {
+                  "id": "242a153a-5bab-441e-a96e-28288cdbbf74",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/directoryRoleTemplates",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get directoryRoleTemplate",
+              "sampleRequest": [
+                {
+                  "id": "f1269749-3e83-46b5-9fa7-62a803c95a32",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/directoryRoleTemplates/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Domains",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List domains",
+              "sampleRequest": [
+                {
+                  "id": "72aa5a09-f5c7-45a3-80c9-a5c3da8d9d3d",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/domains",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create domain",
+              "sampleRequest": [
+                {
+                  "id": "5164df5d-ef6d-4b9f-b7c4-07cf00b5ade2",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/domains",
+                  "header": [],
+                  "body": "{\r\n  \"id\": \"contoso.com\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete domain",
+              "sampleRequest": [
+                {
+                  "id": "fb557e43-1415-49fc-a64b-8ef8be87bf5a",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/domains/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get domain",
+              "sampleRequest": [
+                {
+                  "id": "28975d08-285c-4241-82b0-11e68c03e1f0",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/domains/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update domain",
+              "sampleRequest": [
+                {
+                  "id": "bdefa035-740d-4a91-aa92-69d90ebe6ff3",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/domains/{id}",
+                  "header": [],
+                  "body": "{\r\n  \"isDefault\": true,\r\n  \"supportedServices\": [\r\n    \"Email\",\r\n    \"OfficeCommunicationsOnline\"\r\n  ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Verify domain",
+              "sampleRequest": [
+                {
+                  "id": "b08dc3c5-eebc-4ee0-834a-dd8213db3ca3",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/domains/{domain-name}/verify",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Group setting",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Create setting",
+              "sampleRequest": [
+                {
+                  "id": "1451a2ce-58b8-4037-94f4-1f82abb693fd",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groupSettings",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"displayName-value\",\r\n  \"templateId\": \"templateId-value\",\r\n  \"values\": [\r\n    {\r\n      \"name\": \"name-value\",\r\n      \"value\": \"value-value\"\r\n    }\r\n  ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get setting",
+              "sampleRequest": [
+                {
+                  "id": "bbc71dfe-3b33-4079-bcfd-3160cf357a8a",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groupSettings/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List settings",
+              "sampleRequest": [
+                {
+                  "id": "8a760018-090a-476f-82a6-1da023d4d04c",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groupSettings",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update settings",
+              "sampleRequest": [
+                {
+                  "id": "13363818-54df-427e-bc96-4c405dd9a6ca",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/groupSettings/{id}",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"displayName-value\",\r\n  \"templateId\": \"templateId-value\",\r\n  \"values\": [\r\n    {\r\n      \"name\": \"CustomBlockedWordsList\",\r\n      \"value\": \"\"\r\n    },\r\n    {\r\n      \"name\": \"EnableMSStandardBlockedWords\",\r\n      \"value\": \"False\"\r\n    },\r\n    {\r\n      \"name\": \"ClassificationDescriptions\",\r\n      \"value\": \"\"\r\n    },\r\n    {\r\n      \"name\": \"DefaultClassification\",\r\n      \"value\": \"\"\r\n    },\r\n    {\r\n      \"name\": \"PrefixSuffixNamingRequirement\",\r\n      \"value\": \"\"\r\n    },\r\n    {\r\n      \"name\": \"AllowGuestsToBeGroupOwner\",\r\n      \"value\": \"False\"\r\n    },\r\n    {\r\n      \"name\": \"AllowGuestsToAccessGroups\",\r\n      \"value\": \"True\"\r\n    },\r\n    {\r\n      \"name\": \"GuestUsageGuidelinesUrl\",\r\n      \"value\": \"\"\r\n    },\r\n    {\r\n      \"name\": \"GroupCreationAllowedGroupId\",\r\n      \"value\": \"62e90394-69f5-4237-9190-012177145e10\"\r\n    },\r\n    {\r\n      \"name\": \"AllowToAddGuests\",\r\n      \"value\": \"True\"\r\n    },\r\n    {\r\n      \"name\": \"UsageGuidelinesUrl\",\r\n      \"value\": \"\"\r\n    },\r\n    {\r\n      \"name\": \"ClassificationList\",\r\n      \"value\": \"\"\r\n    },\r\n    {\r\n      \"name\": \"EnableGroupCreation\",\r\n      \"value\": \"True\"\r\n    }\r\n  ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete setting",
+              "sampleRequest": [
+                {
+                  "id": "e86ba7ff-7df9-40ff-afcf-bd7384b90b98",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/groupSettings/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Group setting template",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List group setting templates",
+              "sampleRequest": [
+                {
+                  "id": "869fd010-c883-41c0-b36e-cf451a4c65ff",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groupSettingTemplates",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get group setting templates",
+              "sampleRequest": [
+                {
+                  "id": "738e9083-e8e6-45a2-9f29-a99a10248378",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groupSettingTemplates/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Identity providers",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List identity providers",
+              "sampleRequest": [
+                {
+                  "id": "b53d4ee3-b9e1-4256-b51e-e4811caf6623",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/identityProviders",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create identity provider",
+              "sampleRequest": [
+                {
+                  "id": "a3ff670e-ad39-4649-b410-ab7e564f164b",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/identityProviders",
+                  "header": [],
+                  "body": "{\r\n    \"name\": \"Login with Amazon\",\r\n    \"type\": \"Amazon\",\r\n    \"clientId\": \"56433757-cadd-4135-8431-2c9e3fd68ae8\",\r\n    \"clientSecret\": \"000000000000\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get identity provider",
+              "sampleRequest": [
+                {
+                  "id": "62f4881d-3757-43aa-a703-c08a9ed12ba3",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/identityProviders/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update identity provider",
+              "sampleRequest": [
+                {
+                  "id": "3746a0db-ffd6-467b-a946-eb2601e06515",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/identityProviders/{id}",
+                  "header": [],
+                  "body": "{\r\n    \"clientSecret\": \"1111111111111\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete identity provider",
+              "sampleRequest": [
+                {
+                  "id": "1c5fa841-3d03-4afe-a32f-84cbacef47bb",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/identityProviders/Amazon-OAuth",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Invitation manager",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Create invitation",
+              "sampleRequest": [
+                {
+                  "id": "59568126-ae3f-4108-95b1-ba564355de72",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/invitations",
+                  "header": [],
+                  "body": "{\r\n  \"invitedUserEmailAddress\": \"yyy@test.com\",\r\n  \"inviteRedirectUrl\": \"https://myapp.com\"\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Organization",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get org details",
+              "sampleRequest": [
+                {
+                  "id": "b352bbee-8454-4d7a-bbc9-fb890a19e355",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/organization",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update org details",
+              "sampleRequest": [
+                {
+                  "id": "83e84d16-a6fb-4c13-9cdb-b993574d80ff",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/organization/{id}",
+                  "header": [],
+                  "body": "{\r\n  \"marketingNotificationEmails\" : [\"marketing@contoso.com\"],\r\n  \"privacyProfile\" :\r\n    {\r\n      \"contactEmail\":\"alice@contoso.com\",\r\n      \"statementUrl\":\"https://contoso.com/privacyStatement\"\r\n    },\r\n  \"securityComplianceNotificationMails\" : [\"security@contoso.com\"],\r\n  \"securityComplianceNotificationPhones\" : [\"(123) 456-7890\"],\r\n  \"technicalNotificationMails\" : [\"tech@contoso.com\"]\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Subscribed SKU",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List subscribedSkus",
+              "sampleRequest": [
+                {
+                  "id": "df5a1861-8f44-4f1e-a381-018a9ee81e3c",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/subscribedSkus",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get subscribedSkus",
+              "sampleRequest": [
+                {
+                  "id": "a8f7f054-205c-4684-80c7-0a5fd0f30a2c",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/subscribedSkus/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
         }
       ]
     }

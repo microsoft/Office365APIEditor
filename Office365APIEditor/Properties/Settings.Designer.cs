@@ -152,26 +152,28 @@ namespace Office365APIEditor.Properties {
             "string>https://graph.microsoft.com/Files.ReadWrite</string>\r\n  <string>https://g" +
             "raph.microsoft.com/Files.ReadWrite.All</string>\r\n  <string>https://graph.microso" +
             "ft.com/Group.Read.All</string>\r\n  <string>https://graph.microsoft.com/Group.Read" +
-            "Write.All</string>\r\n  <string>https://graph.microsoft.com/Mail.Read</string>\r\n  " +
-            "<string>https://graph.microsoft.com/Mail.ReadWrite</string>\r\n  <string>https://g" +
-            "raph.microsoft.com/Mail.Read.Shared</string>\r\n  <string>https://graph.microsoft." +
-            "com/Mail.ReadWrite.Shared</string>\r\n  <string>https://graph.microsoft.com/Mail.S" +
-            "end</string>\r\n  <string>https://graph.microsoft.com/Mail.Send.Shared</string>\r\n " +
-            " <string>https://graph.microsoft.com/MailboxSettings.Read</string>\r\n  <string>ht" +
-            "tps://graph.microsoft.com/MailboxSettings.ReadWrite</string>\r\n  <string>https://" +
-            "graph.microsoft.com/Notes.Create</string>\r\n  <string>https://graph.microsoft.com" +
-            "/Notes.Read</string>\r\n  <string>https://graph.microsoft.com/Notes.ReadWrite</str" +
-            "ing>\r\n  <string>https://graph.microsoft.com/Notes.Read.All</string>\r\n  <string>h" +
-            "ttps://graph.microsoft.com/Notes.ReadWrite.All</string>\r\n  <string>https://graph" +
-            ".microsoft.com/People.Read</string>\r\n  <string>https://graph.microsoft.com/Sites" +
-            ".Read.All</string>\r\n  <string>https://graph.microsoft.com/Sites.ReadWrite.All</s" +
-            "tring>\r\n  <string>https://graph.microsoft.com/User.Export.All</string>\r\n  <strin" +
-            "g>https://graph.microsoft.com/User.Read</string>\r\n  <string>https://graph.micros" +
-            "oft.com/User.Read.All</string>\r\n  <string>https://graph.microsoft.com/User.ReadB" +
-            "asic.All</string>\r\n  <string>https://graph.microsoft.com/User.ReadWrite</string>" +
-            "\r\n  <string>https://graph.microsoft.com/User.ReadWrite.All</string>\r\n  <string>h" +
-            "ttps://graph.microsoft.com/UserActivity.ReadWrite.CreatedByApp</string>\r\n</Array" +
-            "OfString>")]
+            "Write.All</string>\r\n  <string>https://graph.microsoft.com/IdentityProvider.Read." +
+            "All</string>\r\n  <string>https://graph.microsoft.com/IdentityProvider.ReadWrite.A" +
+            "ll</string>\r\n  <string>https://graph.microsoft.com/Mail.Read</string>\r\n  <string" +
+            ">https://graph.microsoft.com/Mail.ReadWrite</string>\r\n  <string>https://graph.mi" +
+            "crosoft.com/Mail.Read.Shared</string>\r\n  <string>https://graph.microsoft.com/Mai" +
+            "l.ReadWrite.Shared</string>\r\n  <string>https://graph.microsoft.com/Mail.Send</st" +
+            "ring>\r\n  <string>https://graph.microsoft.com/Mail.Send.Shared</string>\r\n  <strin" +
+            "g>https://graph.microsoft.com/MailboxSettings.Read</string>\r\n  <string>https://g" +
+            "raph.microsoft.com/MailboxSettings.ReadWrite</string>\r\n  <string>https://graph.m" +
+            "icrosoft.com/Notes.Create</string>\r\n  <string>https://graph.microsoft.com/Notes." +
+            "Read</string>\r\n  <string>https://graph.microsoft.com/Notes.ReadWrite</string>\r\n " +
+            " <string>https://graph.microsoft.com/Notes.Read.All</string>\r\n  <string>https://" +
+            "graph.microsoft.com/Notes.ReadWrite.All</string>\r\n  <string>https://graph.micros" +
+            "oft.com/People.Read</string>\r\n  <string>https://graph.microsoft.com/Sites.Read.A" +
+            "ll</string>\r\n  <string>https://graph.microsoft.com/Sites.ReadWrite.All</string>\r" +
+            "\n  <string>https://graph.microsoft.com/User.Export.All</string>\r\n  <string>https" +
+            "://graph.microsoft.com/User.Invite.All</string>\r\n  <string>https://graph.microso" +
+            "ft.com/User.Read</string>\r\n  <string>https://graph.microsoft.com/User.Read.All</" +
+            "string>\r\n  <string>https://graph.microsoft.com/User.ReadBasic.All</string>\r\n  <s" +
+            "tring>https://graph.microsoft.com/User.ReadWrite</string>\r\n  <string>https://gra" +
+            "ph.microsoft.com/User.ReadWrite.All</string>\r\n  <string>https://graph.microsoft." +
+            "com/UserActivity.ReadWrite.CreatedByApp</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection PredefinedScopes {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["PredefinedScopes"]));

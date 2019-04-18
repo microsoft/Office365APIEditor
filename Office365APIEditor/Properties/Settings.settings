@@ -67,6 +67,8 @@
   &lt;string&gt;https://graph.microsoft.com/Files.ReadWrite.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Group.Read.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Group.ReadWrite.All&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/IdentityProvider.Read.All&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/IdentityProvider.ReadWrite.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Mail.Read&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Mail.ReadWrite&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Mail.Read.Shared&lt;/string&gt;
@@ -84,6 +86,7 @@
   &lt;string&gt;https://graph.microsoft.com/Sites.Read.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Sites.ReadWrite.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/User.Export.All&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/User.Invite.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/User.Read&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/User.Read.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/User.ReadBasic.All&lt;/string&gt;
