@@ -4762,6 +4762,329 @@
           ]
         }
       ]
+    },
+    {
+      "displayName": "Mail",
+      "secondLevelCategory": [
+        {
+          "displayName": "Message",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List messages",
+              "sampleRequest": [
+                {
+                  "id": "5460f146-e8bb-4551-a2fe-8d4a11d76b8f",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages?$select=sender,subject",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create message",
+              "sampleRequest": [
+                {
+                  "id": "f26b9b54-7783-41cb-9ee7-a0091dc627e4",
+                  "displayName": "Request 1",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages",
+                  "header": [],
+                  "body": "{\r\n    \"subject\":\"Did you see last night's game?\",\r\n    \"importance\":\"Low\",\r\n    \"body\":{\r\n        \"contentType\":\"HTML\",\r\n        \"content\":\"They were <b>awesome</b>!\"\r\n    },\r\n    \"toRecipients\":[\r\n        {\r\n            \"emailAddress\":{\r\n                \"address\":\"AdeleV@contoso.onmicrosoft.com\"\r\n            }\r\n        }\r\n    ]\r\n}"
+                },
+                {
+                  "id": "4c645761-7f90-431a-9992-d5576b411f97",
+                  "displayName": "Request 2",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages",
+                  "header": [],
+                  "body": "{\r\n    \"subject\":\"9/8/2018: concert\",\r\n    \"body\":{\r\n        \"contentType\":\"HTML\",\r\n        \"content\":\"The group represents Washington.\"\r\n    },\r\n    \"toRecipients\":[\r\n        {\r\n            \"emailAddress\":{\r\n                \"address\":\"AlexW@contoso.OnMicrosoft.com\"\r\n            }\r\n        }\r\n    ],\r\n    \"internetMessageHeaders\":[\r\n        {\r\n            \"name\":\"x-custom-header-group-name\",\r\n            \"value\":\"Washington\"\r\n        },\r\n        {\r\n            \"name\":\"x-custom-header-group-id\",\r\n            \"value\":\"WA001\"\r\n        }\r\n    ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get message",
+              "sampleRequest": [
+                {
+                  "id": "763d1d2b-5273-4eaa-80ed-46126680e8a8",
+                  "displayName": "Request 1",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "8b7425d4-a79c-415a-b699-ebacf437f19e",
+                  "displayName": "Request 2",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/?$select=internetMessageHeaders",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update message",
+              "sampleRequest": [
+                {
+                  "id": "76896384-2f2a-4369-8dd7-1175a8468452",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}",
+                  "header": [],
+                  "body": "{\r\n  \"subject\": \"subject-value\",\r\n  \"body\": {\r\n    \"contentType\": \"\",\r\n    \"content\": \"content-value\"\r\n  },\r\n  \"inferenceClassification\": \"other\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete message",
+              "sampleRequest": [
+                {
+                  "id": "da9344dd-f4b7-4b8f-b251-f3064ebf32c7",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get message delta",
+              "sampleRequest": [
+                {
+                  "id": "c5305dd5-021c-48e2-9f7e-fe6ef74f7d61",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/mailFolders/{id}/messages/delta",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "odata.maxpagesize=2"
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Send messages",
+              "sampleRequest": [
+                {
+                  "id": "9cc592f9-e555-45de-a95e-938f86ec80f6",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/send",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Copy messages",
+              "sampleRequest": [
+                {
+                  "id": "331febc4-b0db-475e-8196-06d5a80d093f",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/copy",
+                  "header": [],
+                  "body": "{\r\n  \"destinationId\": \"destinationId-value\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Move messages",
+              "sampleRequest": [
+                {
+                  "id": "631b72bb-5892-4da0-a9a9-3930c21f5caf",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/move",
+                  "header": [],
+                  "body": "{\r\n  \"destinationId\": \"deleteditems\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Create reply to messages",
+              "sampleRequest": [
+                {
+                  "id": "dc447ad0-3fa4-44f1-a658-fe0e05581525",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/createReply",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Reply to messages",
+              "sampleRequest": [
+                {
+                  "id": "32856b50-6707-4528-ae4b-2b109b0a2ecf",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/reply",
+                  "header": [],
+                  "body": "{\r\n  \"comment\": \"comment-value\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Create reply all to messages",
+              "sampleRequest": [
+                {
+                  "id": "57754fa8-60cc-4cf3-b513-a8dd773051a3",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/createReplyAll",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Reply all to messages",
+              "sampleRequest": [
+                {
+                  "id": "75382e7a-910e-49be-a6f5-8d709183f8af",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/replyAll",
+                  "header": [],
+                  "body": "{\r\n  \"comment\": \"comment-value\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Create Forward message",
+              "sampleRequest": [
+                {
+                  "id": "baf57e91-34b0-445b-97b0-b5a4ffe80ae1",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/createForward",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Forward messages",
+              "sampleRequest": [
+                {
+                  "id": "b603f923-5e74-41cb-97c3-30fda08ed237",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/forward",
+                  "header": [],
+                  "body": "{\r\n  \"comment\": \"comment-value\",\r\n  \"toRecipients\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"name\": \"name-value\",\r\n        \"address\": \"address-value\"\r\n      }\r\n    }\r\n  ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Send mail",
+              "sampleRequest": [
+                {
+                  "id": "28426436-ee67-48ce-b89b-c4eb98b288e9",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/sendMail",
+                  "header": [],
+                  "body": "{\r\n  \"message\": {\r\n    \"subject\": \"Meet for lunch?\",\r\n    \"body\": {\r\n      \"contentType\": \"Text\",\r\n      \"content\": \"The new cafeteria is open.\"\r\n    },\r\n    \"toRecipients\": [\r\n      {\r\n        \"emailAddress\": {\r\n          \"address\": \"fannyd@contoso.onmicrosoft.com\"\r\n        }\r\n      }\r\n    ],\r\n    \"ccRecipients\": [\r\n      {\r\n        \"emailAddress\": {\r\n          \"address\": \"danas@contoso.onmicrosoft.com\"\r\n        }\r\n      }\r\n    ]\r\n  },\r\n  \"saveToSentItems\": \"false\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List attachments",
+              "sampleRequest": [
+                {
+                  "id": "e7320715-d675-415c-a81b-deb56b439332",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/attachments",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Add attachment",
+              "sampleRequest": [
+                {
+                  "id": "554dbde8-54cd-4d02-9025-1b0455d223c7",
+                  "displayName": "Example (file attachment)",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/attachments",
+                  "header": [],
+                  "body": "{\r\n    \"@odata.type\": \"#microsoft.graph.fileAttachment\",\r\n    \"name\": \"menu.txt\",\r\n    \"contentBytes\": \"Q29mZmVl\"   \r\n}"
+                },
+                {
+                  "id": "642444aa-ddab-4919-a4eb-a266fc105325",
+                  "displayName": "Example (item attachment)",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/attachments",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.type\": \"#microsoft.graph.itemAttachment\",\r\n  \"name\": \"Holiday event\", \r\n  \"item\": {\r\n    \"@odata.type\": \"microsoft.graph.event\",\r\n    \"subject\": \"Discuss gifts for children\",\r\n    \"body\": {\r\n      \"contentType\": \"HTML\",\r\n      \"content\": \"Let's look for funding!\"\r\n    },\r\n    \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n    },\r\n    \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n    }\r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Create open extention",
+              "sampleRequest": [
+                {
+                  "id": "3fa556a5-1585-4de8-93e7-b8736e83206f",
+                  "displayName": "Request 1",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages",
+                  "header": [],
+                  "body": "{\r\n  \"subject\": \"Annual review\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"You should be proud!\"\r\n  },\r\n  \"toRecipients\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\": \"rufus@contoso.com\"\r\n      }\r\n    }\r\n  ],\r\n  \"extensions\": [\r\n    {\r\n      \"@odata.type\": \"microsoft.graph.openTypeExtension\",\r\n      \"extensionName\": \"Com.Contoso.Referral\",\r\n      \"companyName\": \"Wingtip Toys\",\r\n      \"expirationDate\": \"${DateTime1MonthLater12}\",\r\n      \"dealValue\": 10000\r\n    }\r\n  ]\r\n}"
+                },
+                {
+                  "id": "97b0ee48-480d-4331-8553-7b2d943d9a43",
+                  "displayName": "Request 2",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/extensions",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.type\" : \"microsoft.graph.openTypeExtension\",\r\n  \"extensionName\" : \"Com.Contoso.Referral\",\r\n  \"companyName\" : \"Wingtip Toys\",\r\n  \"dealValue\" : 500050,\r\n  \"expirationDate\" : \"${DateTime1MonthLater12}\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get open extention",
+              "sampleRequest": [
+                {
+                  "id": "6d237a76-7799-46c5-9f9b-b28d592bf04b",
+                  "displayName": "Request 1",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/extensions/{extentionName}/",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "194af9b0-9532-4966-b684-54004f96a938",
+                  "displayName": "Request 2",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}?$expand=extensions($filter=id eq 'Microsoft.OutlookServices.OpenTypeExtension.{extensionName}')",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "911a8558-a7c0-4102-abe9-92dc06e6a5e6",
+                  "displayName": "Request 3",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/extensions/Microsoft.OutlookServices.OpenTypeExtension.{extensionName}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
