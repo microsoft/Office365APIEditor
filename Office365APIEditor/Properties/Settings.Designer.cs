@@ -530,5 +530,17 @@ namespace Office365APIEditor.Properties {
                 this["LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientSecret"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string NewerInstallerPath {
+            get {
+                return ((string)(this["NewerInstallerPath"]));
+            }
+            set {
+                this["NewerInstallerPath"] = value;
+            }
+        }
     }
 }

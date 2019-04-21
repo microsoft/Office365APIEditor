@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>bd974b2e-f3ce-403b-93e5-bfec04cb305c</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="xcopy /I /D /Y &quot;$(SolutionDir)Setup\$(Configuration)&quot; &quot;$(ProjectDir)wwwroot\installers&quot;&#xD;&#xA;wscript.exe &quot;$(ProjectDir)PreBuild.vbs&quot; &quot;$(ProjectDir)wwwroot\installers\Setup.msi&quot; &quot;$(ProjectDir)wwwroot\latestMsi.txt&quot;" />
+  </Target>
+
+</Project>

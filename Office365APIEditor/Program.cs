@@ -3,6 +3,7 @@
 
 using System;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Windows.Forms;
 
@@ -10,6 +11,9 @@ namespace Office365APIEditor
 {
     class MyApplicationContext : ApplicationContext
     {
+        const string LatestVersionUri = "https://office365apieditor.azurewebsites.net/latestmsi.txt";
+        const string LatestInstallerUri = "https://office365apieditor.azurewebsites.net/installers/Setup.msi";
+
         public MyApplicationContext()
         {
             MailboxViewerForm mailboxViewerForm = new MailboxViewerForm();
@@ -20,6 +24,26 @@ namespace Office365APIEditor
         private void OnFormClosed(object sender, FormClosedEventArgs e)
         {
             Util.WriteCustomLog("Office365APIEditor Closing Log", "Exit. Code 20");
+
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.NewerInstallerPath) && File.Exists(Properties.Settings.Default.NewerInstallerPath))
+            {
+                // Newer installer is available
+
+                if (MessageBox.Show("Do you want to install the latest version of Office365APIEditor?", "Office365APIEditor", MessageBoxButtons.YesNo, MessageBoxIcon.None) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        System.Diagnostics.Process msi = System.Diagnostics.Process.Start(Properties.Settings.Default.NewerInstallerPath);
+
+                        Properties.Settings.Default.NewerInstallerPath = "";
+                        Properties.Settings.Default.Save();
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+
             Environment.Exit(0);
         }
 
@@ -117,6 +141,9 @@ namespace Office365APIEditor
 
             MyApplicationContext context = new MyApplicationContext();
 
+            // Start checking the latest version, and download the latest installer if it is available
+            StartLatestVersionCheck();
+
             // Run the application with the specific context. It will exit when
             // all forms are closed.
             try
@@ -156,6 +183,74 @@ namespace Office365APIEditor
             finally
             {
                 Util.WriteCustomLog("Office365APIEditor Closing Log", "Exit. Code 10");
+            }
+        }
+
+        private static void StartLatestVersionCheck()
+        {
+            // Get the build number of the latest release using the other thread
+            // and download the latest installer if it is available
+
+            ServicePointManager.SecurityProtocol = ServicePointManager.SecurityProtocol | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
+            HttpWebRequest versionRequest = WebRequest.CreateHttp(LatestVersionUri);
+            versionRequest.Method = "GET";
+            versionRequest.ContentType = "text/plain";
+
+            try
+            {
+                IAsyncResult r = versionRequest.BeginGetResponse(new AsyncCallback(VersionCheckResponseCallback), versionRequest);
+            }
+            catch
+            {
+            }
+        }
+
+        private static void VersionCheckResponseCallback(IAsyncResult ar)
+        {
+            try
+            {
+                HttpWebRequest versionRequest = (HttpWebRequest)ar.AsyncState;
+                HttpWebResponse versionResponse = (HttpWebResponse)versionRequest.EndGetResponse(ar);
+
+                string latestVersionString = "";
+
+                using (Stream stream = versionResponse.GetResponseStream())
+                {
+                    using (StreamReader streamReader = new StreamReader(stream, Encoding.UTF8))
+                    {
+                        latestVersionString = streamReader.ReadToEnd().Trim();
+                    }
+                }
+
+                Version.TryParse(latestVersionString, out Version latestVersion);
+
+                if (latestVersion != null && latestVersion.CompareTo(Version.Parse(Application.ProductVersion)) > 0)
+                {
+                    // Newer version is available
+
+                    string newerMsiDirectory = Path.Combine(Path.GetTempPath(), "Office365APIEditor");
+                    if (!Directory.Exists(newerMsiDirectory))
+                    {
+                        Directory.CreateDirectory(newerMsiDirectory);
+                    }
+
+                    string newerMsiPath = Path.Combine(newerMsiDirectory, "Setup.msi");
+
+                    WebClient wc = new WebClient();
+                    wc.DownloadFile(LatestInstallerUri, newerMsiPath);
+
+                    Properties.Settings.Default.NewerInstallerPath = newerMsiPath;
+                }
+                else
+                {
+                    Properties.Settings.Default.NewerInstallerPath = "";
+                    Properties.Settings.Default.Save();
+                }
+            }
+            catch(Exception)
+            {
+                Properties.Settings.Default.NewerInstallerPath = "";
             }
         }
     }
