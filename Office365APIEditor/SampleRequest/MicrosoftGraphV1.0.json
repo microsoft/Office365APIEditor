@@ -5083,6 +5083,118 @@
               ]
             }
           ]
+        },
+        {
+          "displayName": "Attachment",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get attachment",
+              "sampleRequest": [
+                {
+                  "id": "940f4ee8-0b81-4b52-af2e-1c2f843038ca",
+                  "displayName": "Get file attachment",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/attachments/{id}",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "c5299cab-761a-4461-b351-89683832ac94",
+                  "displayName": "Get item attachment",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/attachments/{id}",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "5f3ff1c4-5ce9-456e-a07a-1c177f868dd2",
+                  "displayName": "Expand item attachment",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/attachments/{id}/?$expand=microsoft.graph.itemattachment/item",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "d97d72b1-7a38-4a39-ad9d-46c5a74faaa9",
+                  "displayName": "Get reference attachment",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/attachments/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Delete attachment",
+              "sampleRequest": [
+                {
+                  "id": "52b19e9b-c475-45af-b116-f4c7e03f3e4b",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}/attachments/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Focused Inbox",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Create Override",
+              "sampleRequest": [
+                {
+                  "id": "1af01a55-f8db-4722-b827-67644917a3a5",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/inferenceClassification/overrides",
+                  "header": [],
+                  "body": "{\r\n  \"classifyAs\": \"focused\",\r\n  \"senderEmailAddress\": {\r\n    \"name\": \"Samantha Booth\",\r\n    \"address\": \"samanthab@adatum.onmicrosoft.com\"\r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List Overrides",
+              "sampleRequest": [
+                {
+                  "id": "e4e42ab1-585e-4aa8-9dcb-3518ae6f7ff5",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/inferenceClassification/overrides",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update Override",
+              "sampleRequest": [
+                {
+                  "id": "79bab76a-6e46-46e5-bf41-fb05f951a76c",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/me/inferenceClassification/overrides/{id}",
+                  "header": [],
+                  "body": "{\r\n  \"classifyAs\": \"focused\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete Override",
+              "sampleRequest": [
+                {
+                  "id": "99333bb3-ca90-432f-92ba-8940ca6e193c",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/me/inferenceClassification/overrides/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
         }
       ]
     }
