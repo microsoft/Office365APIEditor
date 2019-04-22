@@ -839,5 +839,11 @@ namespace Office365APIEditor
             FocusedInboxOverrideForm focusedInboxOverrideForm = new FocusedInboxOverrideForm(pca, currentUser);
             focusedInboxOverrideForm.Show(this);
         }
+
+        private void versionInformationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VersionInformation versionInformation = new VersionInformation();
+            versionInformation.ShowDialog();
+        }
     }
 }
