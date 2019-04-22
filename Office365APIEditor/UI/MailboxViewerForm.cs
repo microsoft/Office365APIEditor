@@ -39,11 +39,7 @@ namespace Office365APIEditor
             windowToolStripMenuItem.Visible = false;
 
             // Change window title
-            string windowTitle = "Office365APIEditor - " + Application.ProductVersion;
-#if DEBUG
-            windowTitle += " [DEBUG]";
-#endif
-            Text = windowTitle + " - Mailbox Viewer";
+            Text = Util.GenerateWindowTitle("Mailbox Viewer");
         }
 
         private bool Prepare()

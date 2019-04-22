@@ -50,11 +50,7 @@ namespace Office365APIEditor
             button_ViewTokenInfo.Enabled = false;
 
             // Change window title
-            string windowTitle = "Office365APIEditor - " + Application.ProductVersion;
-#if DEBUG
-            windowTitle += " [DEBUG]";
-#endif
-            Text = windowTitle + " - Editor";
+            Text = Util.GenerateWindowTitle("Editor");
 
             // Enable Ctrl+A short cut key for all textbox.
             AddKeyDownEvent(this);

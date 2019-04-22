@@ -7,11 +7,11 @@ using Microsoft.Office365.OutlookServices;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace Office365APIEditor
@@ -437,6 +437,29 @@ namespace Office365APIEditor
                     return "";
                 }
             }
+        }
+
+        public static string GenerateWindowTitle(string FunctionName)
+        {
+            Version productVersion = Version.Parse(Application.ProductVersion);
+            string friendlyVersion = "";
+
+            if (productVersion.Revision == 0)
+            {
+                friendlyVersion = productVersion.ToString(3);
+            }
+            else
+            {
+                friendlyVersion = productVersion.ToString(4);
+            }
+
+            string debugIndicator = "";
+
+#if DEBUG
+            debugIndicator += "[DEBUG]";
+#endif
+
+            return $"Office365APIEditor - {FunctionName} - {friendlyVersion} {debugIndicator}";
         }
     }
 

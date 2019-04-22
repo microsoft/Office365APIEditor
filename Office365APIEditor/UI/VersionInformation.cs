@@ -33,7 +33,7 @@ namespace Office365APIEditor.UI
             debugIndicator += " (DEBUG)";
 #endif
 
-        label_Version.Text += friendlyVersion + debugIndicator;
+            label_Version.Text += friendlyVersion + debugIndicator;
         }
 
         private void button_OK_Click(object sender, EventArgs e)
