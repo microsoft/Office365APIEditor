@@ -105,7 +105,7 @@ namespace Office365APIEditor
                 Enabled = true;
             }
 
-            Util.WriteCustomLog("AcquireViewerTokenForm", stringBuilder.ToString());
+            Util.WriteSystemLog("AcquireViewerTokenForm", stringBuilder.ToString());
         }
     }
 }

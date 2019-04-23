@@ -23,23 +23,29 @@ namespace Office365APIEditor
         {
             get
             {
-                if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
-                {
-                    // ClickOnce scenario
+                string result = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Office365APIEditor");
 
-                    string result = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "Office365APIEditor");
-                    
-                    if (!Directory.Exists(result))
-                    {
-                        Directory.CreateDirectory(result);
-                    }
-
-                    return result;
-                }
-                else
+                if (!Directory.Exists(result))
                 {
-                    return System.Windows.Forms.Application.StartupPath;
+                    Directory.CreateDirectory(result);
                 }
+
+                return result;
+            }
+        }
+
+        public static string RunHistoryPath
+        {
+            get
+            {
+                string workingFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Office365APIEditor");
+
+                if (!Directory.Exists(workingFolder))
+                {
+                    Directory.CreateDirectory(workingFolder);
+                }
+
+                return Path.Combine(workingFolder, "RunHistory.xml");
             }
         }
 
@@ -149,18 +155,29 @@ namespace Office365APIEditor
             };
         }
         
-        public static bool WriteCustomLog(string Title, string Message)
+        public static bool WriteSystemLog(string Title, string Message)
         {
+            // Write log if SystemLogging flag is true.
+
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(Title);
             sb.AppendLine("DateTime : " + DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
             sb.AppendLine(Message);
 
-            return WriteLog(sb);
+            if (Properties.Settings.Default.SystemLogging)
+            {
+                return WriteLog(sb);
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public static bool WriteLog(StringBuilder Message)
         {
+            // Write log.
+
             Message.AppendLine("");
 
             string logFilePath = "";

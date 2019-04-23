@@ -58,7 +58,7 @@ namespace Office365APIEditor
             // Load Run History
             try
             {
-                string runHistoryFilePath = Path.Combine(Util.DefaultApplicationPath, "RunHistory.xml");
+                string runHistoryFilePath = Util.RunHistoryPath;
                 if (File.Exists(runHistoryFilePath))
                 {
                     using (FileStream stream = new FileStream(runHistoryFilePath, FileMode.Open))
@@ -610,10 +610,7 @@ namespace Office365APIEditor
                 if (ex.Response == null)
                 {
                     // Logging
-                    if (checkBox_Logging.Checked)
-                    {
-                        Util.WriteCustomLog("Response", ex.Message);
-                    }
+                    WriteResponseErrorLog(ex.Message);
 
                     DisplayResponse("Error", null, ex.Message);
 
@@ -646,10 +643,7 @@ namespace Office365APIEditor
             catch (Exception ex)
             {
                 // Logging
-                if (checkBox_Logging.Checked)
-                {
-                    Util.WriteCustomLog("Response", ex.Message);
-                }
+                WriteResponseErrorLog(ex.Message);
 
                 DisplayResponse("Error", null, ex.Message);
 
@@ -807,10 +801,7 @@ namespace Office365APIEditor
                 if (ex.Response == null)
                 {
                     // Logging
-                    if (checkBox_Logging.Checked)
-                    {
-                        Util.WriteCustomLog("Response", ex.Message);
-                    }
+                    WriteResponseErrorLog(ex.Message);
 
                     DisplayResponse("Error", null, ex.Message);
                 }
@@ -837,10 +828,7 @@ namespace Office365APIEditor
             catch (Exception ex)
             {
                 // Logging
-                if (checkBox_Logging.Checked)
-                {
-                    Util.WriteCustomLog("Response", ex.Message);
-                }
+                WriteResponseErrorLog(ex.Message);
 
                 DisplayResponse("Error", null, ex.Message);
             }
@@ -1063,6 +1051,18 @@ namespace Office365APIEditor
 
             Util.WriteLog(sb);
         }
+
+        private void WriteResponseErrorLog(string ErrorMessage)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Response");
+            sb.AppendLine(ErrorMessage);
+
+            if (checkBox_Logging.Checked)
+            {
+                Util.WriteLog(sb);
+            }
+        }
         
         private void AddRunHistory(WebRequest Request, string RequestHeader, string RequestBody, HttpWebResponse Response, string JsonResponse)
         {
@@ -1117,7 +1117,7 @@ namespace Office365APIEditor
 
             try
             {
-                FileStream stream = new FileStream(Path.Combine(Util.DefaultApplicationPath, "RunHistory.xml"), FileMode.Create);
+                FileStream stream = new FileStream(Util.RunHistoryPath, FileMode.Create);
 
                 using (StreamWriter writer = new StreamWriter(stream, Encoding.UTF8))
                 {

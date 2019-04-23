@@ -542,5 +542,17 @@ namespace Office365APIEditor.Properties {
                 this["NewerInstallerPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SystemLogging {
+            get {
+                return ((bool)(this["SystemLogging"]));
+            }
+            set {
+                this["SystemLogging"] = value;
+            }
+        }
     }
 }

@@ -23,7 +23,7 @@ namespace Office365APIEditor
 
         private void OnFormClosed(object sender, FormClosedEventArgs e)
         {
-            Util.WriteCustomLog("Office365APIEditor Closing Log", "Exit. Code 20");
+            Util.WriteSystemLog("Office365APIEditor Closing Log", "Exit. Code 20");
 
             if (!string.IsNullOrEmpty(Properties.Settings.Default.NewerInstallerPath) && File.Exists(Properties.Settings.Default.NewerInstallerPath))
             {
@@ -76,6 +76,11 @@ namespace Office365APIEditor
                 }
             }
 
+            // Turn off SystemLogging flag.
+            startupLog.AppendLine("Disable SystemLogging as default.");
+            Properties.Settings.Default.SystemLogging = false;
+            Properties.Settings.Default.Save();
+
             // Check the command line switches.
             startupLog.AppendLine("CommandLine : " + Environment.CommandLine);
             string[] switches = Environment.GetCommandLineArgs();
@@ -94,11 +99,11 @@ namespace Office365APIEditor
                 {
                     // Remove Run History file.
                     startupLog.AppendLine("The history file will be delete.");
-                    if (File.Exists(Path.Combine(Util.DefaultApplicationPath, "RunHistory.xml")))
+                    if (File.Exists(Util.RunHistoryPath))
                     {
                         try
                         {
-                            File.Delete(Path.Combine(Util.DefaultApplicationPath, "RunHistory.xml"));
+                            File.Delete(Util.RunHistoryPath);
                             startupLog.AppendLine("The history file was deleted.");
                         }
                         catch(Exception ex)
@@ -120,6 +125,13 @@ namespace Office365APIEditor
                     Properties.Settings.Default.Save();
                     startupLog.AppendLine("CustomDefinedScopes setting was saved.");
                 }
+                else if (command.ToLower() == ("/SystemLogging").ToLower())
+                {
+                    // Turn on SystemLogging flag.
+                    startupLog.AppendLine("Enable SystemLogging.");
+                    Properties.Settings.Default.SystemLogging = true;
+                    Properties.Settings.Default.Save();
+                }
             }
 
             // Set default log folder path.
@@ -134,7 +146,7 @@ namespace Office365APIEditor
             }
 
             // Write startup log.
-            Util.WriteCustomLog("Office365APIEditor startup log", startupLog.ToString());
+            Util.WriteSystemLog("Office365APIEditor startup log", startupLog.ToString());
 
             // Create the MyApplicationContext, that derives from ApplicationContext,
             // that manages when the application should exit.
@@ -182,7 +194,7 @@ namespace Office365APIEditor
             }
             finally
             {
-                Util.WriteCustomLog("Office365APIEditor Closing Log", "Exit. Code 10");
+                Util.WriteSystemLog("Office365APIEditor Closing Log", "Exit. Code 10");
             }
         }
 
