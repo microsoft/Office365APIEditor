@@ -18,6 +18,10 @@ namespace Office365APIEditor
 {
     public static class Util
     {
+        public const string LatestVersionUri = "https://office365apieditor.azurewebsites.net/latestmsi.txt";
+        public const string LatestMsiUri = "https://office365apieditor.azurewebsites.net/installers/Setup.msi";
+        public const string LatestZipUri = "https://office365apieditor.azurewebsites.net/installers/Office365APIEditor.zip";
+
         // DefaultApplicationPath is used as the default log path.
         public static string DefaultApplicationPath
         {
@@ -46,6 +50,16 @@ namespace Office365APIEditor
                 }
 
                 return Path.Combine(workingFolder, "RunHistory.xml");
+            }
+        }
+
+        public static bool IsMsiDeployed
+        {
+            get
+            {
+                string programFilesPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles).Replace(" (x86)", "");
+
+                return Application.StartupPath.StartsWith(programFilesPath);
             }
         }
 

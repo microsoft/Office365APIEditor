@@ -173,6 +173,12 @@
       <DependentUpon>AttachmentViewerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ClientInformation.cs" />
+    <Compile Include="UI\CheckUpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CheckUpdateForm.Designer.cs">
+      <DependentUpon>CheckUpdateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\DetailedTokenViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\AttachmentViewerForm.resx">
       <DependentUpon>AttachmentViewerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\CheckUpdateForm.resx">
+      <DependentUpon>CheckUpdateForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DetailedTokenViewer.resx">
       <DependentUpon>DetailedTokenViewer.cs</DependentUpon>

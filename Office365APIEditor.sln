@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Office365APIEditor", "Offic
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{55B2F04A-B5B1-4DD3-9149-D10750198019}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublishSite", "PublishSite\PublishSite.csproj", "{7D59CBD1-778D-4EBF-8A9D-B7C55CEA32FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PublishSite", "PublishSite\PublishSite.csproj", "{7D59CBD1-778D-4EBF-8A9D-B7C55CEA32FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -839,7 +839,15 @@ namespace Office365APIEditor
         private void versionInformationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             VersionInformation versionInformation = new VersionInformation();
+            versionInformation.Owner = this;
             versionInformation.ShowDialog();
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CheckUpdateForm checkUpdateForm = new CheckUpdateForm();
+            checkUpdateForm.Owner = this;
+            checkUpdateForm.ShowDialog();
         }
     }
 }

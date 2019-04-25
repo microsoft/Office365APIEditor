@@ -130,13 +130,13 @@
         "Entry"
         {
         "MsmKey" = "8:_1C7B872EE61AA0BD2CED65776F1CA061"
-        "OwnerKey" = "8:_A2C7549793E3F567D5DD7A863917B10A"
+        "OwnerKey" = "8:_916ECA9F59D1CEB0FF37DC0EBC6ADBAD"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_1C7B872EE61AA0BD2CED65776F1CA061"
-        "OwnerKey" = "8:_916ECA9F59D1CEB0FF37DC0EBC6ADBAD"
+        "OwnerKey" = "8:_A2C7549793E3F567D5DD7A863917B10A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -280,13 +280,13 @@
         "Entry"
         {
         "MsmKey" = "8:_368133AF517A83A1ADFE254C8AD56055"
-        "OwnerKey" = "8:_61F41F93EF4F9815C9FA05A7C9CEBC23"
+        "OwnerKey" = "8:_D274852DABCB4A4494D3A2692AAA9A5D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_368133AF517A83A1ADFE254C8AD56055"
-        "OwnerKey" = "8:_D274852DABCB4A4494D3A2692AAA9A5D"
+        "OwnerKey" = "8:_61F41F93EF4F9815C9FA05A7C9CEBC23"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -952,7 +952,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1C7B872EE61AA0BD2CED65776F1CA061"
+        "OwnerKey" = "8:_F2AA992CC4AB6876A55EB1558D678429"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_368133AF517A83A1ADFE254C8AD56055"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -965,18 +971,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_61F41F93EF4F9815C9FA05A7C9CEBC23"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_368133AF517A83A1ADFE254C8AD56055"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F2AA992CC4AB6876A55EB1558D678429"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1339,6 +1333,12 @@
         "OwnerKey" = "8:_E12A78DB43F94C3C321512AB019F14E6"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_1C7B872EE61AA0BD2CED65776F1CA061"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -1357,6 +1357,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -3644,15 +3652,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Office365APIEditor"
-        "ProductCode" = "8:{A00DFE28-EDFD-47BA-B242-EF7FA0A3D682}"
-        "PackageCode" = "8:{E95CC4D6-843E-4E4F-B94A-ABE7C6CE8041}"
+        "ProductCode" = "8:{0B61F1CD-3079-4E9E-8ADC-A0CA88B72826}"
+        "PackageCode" = "8:{D56A8367-DB90-4E59-8267-0D17E73EBDEC}"
         "UpgradeCode" = "8:{8A442988-BA7D-43E0-A2B9-F7790CA105FD}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:0.10.6"
+        "ProductVersion" = "8:0.10.10"
         "Manufacturer" = "8:Microsoft Corporation"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -4264,7 +4272,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D274852DABCB4A4494D3A2692AAA9A5D"
             {
-            "SourcePath" = "8:..\\Office365APIEditor\\obj\\Debug\\Office365APIEditor.exe"
+            "SourcePath" = "8:..\\Office365APIEditor\\obj\\Release\\Office365APIEditor.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"

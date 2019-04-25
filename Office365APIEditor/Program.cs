@@ -11,9 +11,6 @@ namespace Office365APIEditor
 {
     class MyApplicationContext : ApplicationContext
     {
-        const string LatestVersionUri = "https://office365apieditor.azurewebsites.net/latestmsi.txt";
-        const string LatestInstallerUri = "https://office365apieditor.azurewebsites.net/installers/Setup.msi";
-
         public MyApplicationContext()
         {
             MailboxViewerForm mailboxViewerForm = new MailboxViewerForm();
@@ -25,7 +22,7 @@ namespace Office365APIEditor
         {
             Util.WriteSystemLog("Office365APIEditor Closing Log", "Exit. Code 20");
 
-            if (!string.IsNullOrEmpty(Properties.Settings.Default.NewerInstallerPath) && File.Exists(Properties.Settings.Default.NewerInstallerPath))
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.NewerInstallerPath) && File.Exists(Properties.Settings.Default.NewerInstallerPath) && Util.IsMsiDeployed)
             {
                 // Newer installer is available
 
@@ -34,6 +31,22 @@ namespace Office365APIEditor
                     try
                     {
                         System.Diagnostics.Process msi = System.Diagnostics.Process.Start(Properties.Settings.Default.NewerInstallerPath);
+
+                        Properties.Settings.Default.NewerInstallerPath = "";
+                        Properties.Settings.Default.Save();
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            else if (!string.IsNullOrEmpty(Properties.Settings.Default.NewerInstallerPath) && Properties.Settings.Default.NewerInstallerPath == Util.LatestZipUri)
+            {
+                if (MessageBox.Show("Do you want to download the latest version of Office365APIEditor?", "Office365APIEditor", MessageBoxButtons.YesNo, MessageBoxIcon.None) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        System.Diagnostics.Process zip = System.Diagnostics.Process.Start(Properties.Settings.Default.NewerInstallerPath);
 
                         Properties.Settings.Default.NewerInstallerPath = "";
                         Properties.Settings.Default.Save();
@@ -85,6 +98,8 @@ namespace Office365APIEditor
             startupLog.AppendLine("CommandLine : " + Environment.CommandLine);
             string[] switches = Environment.GetCommandLineArgs();
 
+            bool systemLogging = false;
+
             foreach (string command in switches)
             {
                 if (command.ToLower() == ("/NoSetting").ToLower())
@@ -127,11 +142,17 @@ namespace Office365APIEditor
                 }
                 else if (command.ToLower() == ("/SystemLogging").ToLower())
                 {
-                    // Turn on SystemLogging flag.
-                    startupLog.AppendLine("Enable SystemLogging.");
-                    Properties.Settings.Default.SystemLogging = true;
-                    Properties.Settings.Default.Save();
+                    // Turn on SystemLogging flag later.
+                    systemLogging = true;
                 }
+            }
+
+            if (systemLogging)
+            {
+                // Turn on SystemLogging flag.
+                startupLog.AppendLine("Enable SystemLogging.");
+                Properties.Settings.Default.SystemLogging = true;
+                Properties.Settings.Default.Save();
             }
 
             // Set default log folder path.
@@ -205,7 +226,7 @@ namespace Office365APIEditor
 
             ServicePointManager.SecurityProtocol = ServicePointManager.SecurityProtocol | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
-            HttpWebRequest versionRequest = WebRequest.CreateHttp(LatestVersionUri);
+            HttpWebRequest versionRequest = WebRequest.CreateHttp(Util.LatestVersionUri);
             versionRequest.Method = "GET";
             versionRequest.ContentType = "text/plain";
 
@@ -241,28 +262,38 @@ namespace Office365APIEditor
                 {
                     // Newer version is available
 
-                    string newerMsiDirectory = Path.Combine(Path.GetTempPath(), "Office365APIEditor");
-                    if (!Directory.Exists(newerMsiDirectory))
+                    if (Util.IsMsiDeployed)
                     {
-                        Directory.CreateDirectory(newerMsiDirectory);
+                        string newerMsiDirectory = Path.Combine(Path.GetTempPath(), "Office365APIEditor");
+                        if (!Directory.Exists(newerMsiDirectory))
+                        {
+                            Directory.CreateDirectory(newerMsiDirectory);
+                        }
+
+                        string newerMsiPath = Path.Combine(newerMsiDirectory, "Setup.msi");
+
+                        WebClient wc = new WebClient();
+                        wc.DownloadFile(Util.LatestMsiUri, newerMsiPath);
+
+                        Properties.Settings.Default.NewerInstallerPath = newerMsiPath;
                     }
-
-                    string newerMsiPath = Path.Combine(newerMsiDirectory, "Setup.msi");
-
-                    WebClient wc = new WebClient();
-                    wc.DownloadFile(LatestInstallerUri, newerMsiPath);
-
-                    Properties.Settings.Default.NewerInstallerPath = newerMsiPath;
+                    else
+                    {
+                        Properties.Settings.Default.NewerInstallerPath = Util.LatestZipUri;
+                    }
                 }
                 else
                 {
                     Properties.Settings.Default.NewerInstallerPath = "";
-                    Properties.Settings.Default.Save();
                 }
             }
             catch(Exception)
             {
                 Properties.Settings.Default.NewerInstallerPath = "";
+            }
+            finally
+            {
+                Properties.Settings.Default.Save();
             }
         }
     }

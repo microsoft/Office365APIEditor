@@ -76,6 +76,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "VersionInformation";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Office365APIEditor";
             this.Load += new System.EventHandler(this.VersionInformation_Load);
             this.ResumeLayout(false);
