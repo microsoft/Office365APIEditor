@@ -46,8 +46,8 @@
             this.newEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accessTokenViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.versionInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.versionInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -207,19 +207,19 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
-            // versionInformationToolStripMenuItem
-            // 
-            this.versionInformationToolStripMenuItem.Name = "versionInformationToolStripMenuItem";
-            this.versionInformationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.versionInformationToolStripMenuItem.Text = "&Version Information";
-            this.versionInformationToolStripMenuItem.Click += new System.EventHandler(this.versionInformationToolStripMenuItem_Click);
-            // 
             // checkForUpdatesToolStripMenuItem
             // 
             this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.checkForUpdatesToolStripMenuItem.Text = "&Check for updates...";
             this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
+            // 
+            // versionInformationToolStripMenuItem
+            // 
+            this.versionInformationToolStripMenuItem.Name = "versionInformationToolStripMenuItem";
+            this.versionInformationToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.versionInformationToolStripMenuItem.Text = "&Version Information";
+            this.versionInformationToolStripMenuItem.Click += new System.EventHandler(this.versionInformationToolStripMenuItem_Click);
             // 
             // MailboxViewerForm
             // 
@@ -233,6 +233,7 @@
             this.Name = "MailboxViewerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Office365APIEditor - Mailbox Viewer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MailboxViewerForm_FormClosing);
             this.Load += new System.EventHandler(this.MailboxViewerForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

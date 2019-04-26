@@ -40,7 +40,8 @@
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip_AttachmentList = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ToolStripMenuItem_DisplayAttachments = new System.Windows.Forms.ToolStripMenuItem();
+            this.downloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -145,15 +146,20 @@
             // contextMenuStrip_AttachmentList
             // 
             this.contextMenuStrip_AttachmentList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItem_DisplayAttachments});
+            this.downloadToolStripMenuItem});
             this.contextMenuStrip_AttachmentList.Name = "contextMenuStrip_ItemList";
-            this.contextMenuStrip_AttachmentList.Size = new System.Drawing.Size(193, 26);
+            this.contextMenuStrip_AttachmentList.Size = new System.Drawing.Size(138, 26);
             // 
-            // ToolStripMenuItem_DisplayAttachments
+            // downloadToolStripMenuItem
             // 
-            this.ToolStripMenuItem_DisplayAttachments.Name = "ToolStripMenuItem_DisplayAttachments";
-            this.ToolStripMenuItem_DisplayAttachments.Size = new System.Drawing.Size(192, 22);
-            this.ToolStripMenuItem_DisplayAttachments.Text = "Display Attachments...";
+            this.downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
+            this.downloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.downloadToolStripMenuItem.Text = "Download...";
+            this.downloadToolStripMenuItem.Click += new System.EventHandler(this.downloadToolStripMenuItem_Click);
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "All files (*.*)|*.*";
             // 
             // AttachmentViewerForm
             // 
@@ -186,9 +192,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_AttachmentList;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DisplayAttachments;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ContentType;
+        private System.Windows.Forms.ToolStripMenuItem downloadToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

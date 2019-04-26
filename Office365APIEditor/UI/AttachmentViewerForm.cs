@@ -5,6 +5,8 @@ using Microsoft.Identity.Client;
 using Office365APIEditor.ViewerHelper.Attachments;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Office365APIEditor
@@ -90,7 +92,7 @@ namespace Office365APIEditor
                     Tag = attachment.Id
                 };
                 itemRow.CreateCells(dataGridView_AttachmentList, new object[] { name, id, contentType });
-                // itemRow.ContextMenuStrip = contextMenuStrip_AttachmentList;
+                itemRow.ContextMenuStrip = contextMenuStrip_AttachmentList;
 
                 if (dataGridView_AttachmentList.InvokeRequired)
                 {
@@ -103,7 +105,7 @@ namespace Office365APIEditor
             }
         }
 
-        private void dataGridView_AttachmentList_CellClick(object sender, DataGridViewCellEventArgs e)
+        private async void dataGridView_AttachmentList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
             {
@@ -130,19 +132,21 @@ namespace Office365APIEditor
                 col.HeaderCell.SortGlyphDirection = SortOrder.None;
             }
 
-            ShowAttachmentDetailAsync(attachmentId);
+            await ShowAttachmentDetailAsync(attachmentId);
         }
 
-        private async void ShowAttachmentDetailAsync(string attachmentId)
+        private async Task<bool> ShowAttachmentDetailAsync(string attachmentId)
         {
             try
             {
                 var attachment = await viewerHelper.GetAttachmentAsync(targetFolder.Type, targetItemId, attachmentId);
                 CreatePropTable(attachment);
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Office365APIEditor");
+                return false;
             }
         }
 
@@ -192,6 +196,166 @@ namespace Office365APIEditor
 
             // Select the row for the context menu.
             dataGridView_AttachmentList.Rows[e.RowIndex].Selected = true;
+        }
+
+        private async void downloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string attachmentId = "";
+
+            if (dataGridView_AttachmentList.SelectedRows == null || dataGridView_AttachmentList.SelectedRows.Count == 0)
+            {
+                if (dataGridView_AttachmentList.SelectedCells == null || dataGridView_AttachmentList.SelectedCells.Count == 0)
+                {
+                    // Attachment is not selected.
+                    return;
+                }
+                else
+                {
+                    // Cell is selected but row is not selected.
+                    
+                    // Select the row.
+                    dataGridView_AttachmentList.Rows[dataGridView_AttachmentList.SelectedCells[0].RowIndex].Selected = true;
+
+                    // Get the attachment ID of the selected row.
+                    attachmentId = dataGridView_AttachmentList.SelectedRows[0].Tag.ToString();
+
+                    currentId = attachmentId;
+
+                    // Reset rows.
+                    dataGridView_ItemProps.Rows.Clear();
+                    foreach (DataGridViewColumn col in dataGridView_ItemProps.Columns)
+                    {
+                        col.HeaderCell.SortGlyphDirection = SortOrder.None;
+                    }
+
+                    // Display the details of the selected attachment.
+                    await ShowAttachmentDetailAsync(attachmentId);
+                }
+            }
+
+            attachmentId = dataGridView_AttachmentList.SelectedRows[0].Tag.ToString();
+
+            // Get the type of attachment.
+
+            AttachmentType attachmentType = AttachmentType.FileAttachment;
+
+            try
+            {
+                attachmentType = GetAttachmentTypeOfSelectedAttachment();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Office365APIEditor");
+                return;
+            }
+
+            switch (attachmentType)
+            {
+                case AttachmentType.ItemAttachment:
+                    MessageBox.Show("The selected attachment is Item Attachment. You can not download this type of attachment using Office365APIEditor", "Office365APIEditor");
+                    break;
+                case AttachmentType.FileAttachment:
+                    saveFileDialog1.FileName = dataGridView_AttachmentList.SelectedRows[0].Cells[0].Value.ToString();
+
+                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        string rawContentBytes = "";
+
+                        try
+                        {
+                            rawContentBytes = GetContentBytesOfSelectedAttachment();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Office365APIEditor");
+                            return;
+                        }
+
+                        try
+                        {
+                            byte[] bytes = Convert.FromBase64String(rawContentBytes);
+
+                            using (FileStream fileStream = new FileStream(saveFileDialog1.FileName, FileMode.Create, FileAccess.Write))
+                            {
+                                fileStream.Write(bytes, 0, bytes.Length);
+                            }
+
+                            MessageBox.Show("The attachment file was saved successfully.", "Office365APIEditor");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+
+                    break;
+                case AttachmentType.ReferenceAttachment:
+                    MessageBox.Show("The selected attachment is Reference Attachment. You can not open this type of attachment using Office365APIEditor", "Office365APIEditor");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private AttachmentType GetAttachmentTypeOfSelectedAttachment()
+        {
+            bool found = false;
+            AttachmentType attachmentType = AttachmentType.FileAttachment;
+
+            foreach (DataGridViewRow prop in dataGridView_ItemProps.Rows)
+            {
+                if (prop.Cells[0].Value.ToString() == "@odata.type")
+                {
+                    if (prop.Cells[1].Value.ToString() == "#Microsoft.OutlookServices.FileAttachment")
+                    {
+                        found = true;
+                        attachmentType = AttachmentType.FileAttachment;
+                    }
+                    else if (prop.Cells[1].Value.ToString() == "#Microsoft.OutlookServices.ItemAttachment")
+                    {
+                        found = true;
+                        attachmentType = AttachmentType.ItemAttachment;
+                    }
+                    else if (prop.Cells[1].Value.ToString() == "#Microsoft.OutlookServices.ReferenceAttachment")
+                    {
+                        found = true;
+                        attachmentType = AttachmentType.ReferenceAttachment;
+                    }
+
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                throw new Exception("The specified attachment does not have appropriate @odata.type property.");
+            }
+
+            return attachmentType;
+        }
+
+        private string GetContentBytesOfSelectedAttachment()
+        {
+            bool found = false;
+            string contentBytes = "";
+
+            foreach (DataGridViewRow prop in dataGridView_ItemProps.Rows)
+            {
+                if (prop.Cells[0].Value.ToString().ToLowerInvariant() == "contentBytes".ToLowerInvariant())
+                {
+                    found = true;
+                    contentBytes = prop.Cells[1].Value.ToString();
+
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                throw new Exception("The specified attachment does not have appropriate contentBytes property.");
+            }
+
+            return contentBytes;
         }
     }
 }

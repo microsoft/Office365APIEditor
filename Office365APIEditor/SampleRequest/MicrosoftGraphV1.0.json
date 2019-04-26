@@ -5534,7 +5534,7 @@
                       "method": "POST",
                       "URI": "https://graph.microsoft.com/v1.0/me/messages",
                       "header": [],
-                      "body": "{\r\n    \"subject\":\"Did you see last night's game?\",\r\n    \"importance\":\"Low\",\r\n    \"body\":{\r\n        \"contentType\":\"HTML\",\r\n        \"content\":\"They were <b>awesome</b>!\"\r\n    },\r\n    \"toRecipients\":[\r\n        {\r\n            \"emailAddress\":{\r\n                \"address\":\"AdeleV@contoso.onmicrosoft.com\"\r\n            }\r\n        }\r\n    ],\r\n	  \"singleValueExtendedProperties\": [\r\n     {\r\n           \"id\":\"String {66f5a359-4659-4830-9070-00040ec6ac6e} Name Fun\",\r\n           \"value\":\"Food\"\r\n     }\r\n  ]\r\n}"
+                      "body": "{\r\n    \"subject\":\"Did you see last night's game?\",\r\n    \"importance\":\"Low\",\r\n    \"body\":{\r\n        \"contentType\":\"HTML\",\r\n        \"content\":\"They were <b>awesome</b>!\"\r\n    },\r\n    \"toRecipients\":[\r\n        {\r\n            \"emailAddress\":{\r\n                \"address\":\"AdeleV@contoso.onmicrosoft.com\"\r\n            }\r\n        }\r\n    ],\r\n    \"singleValueExtendedProperties\": [\r\n        {\r\n            \"id\":\"String {66f5a359-4659-4830-9070-00040ec6ac6e} Name Fun\",\r\n            \"value\":\"Food\"\r\n        }\r\n    ]\r\n}"
                     },
                     {
                       "id": "90cfb831-5010-42fa-ac44-3164ce4fd77b",
@@ -5542,7 +5542,7 @@
                       "method": "PATCH",
                       "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}",
                       "header": [],
-                      "body": "{\r\n	  \"singleValueExtendedProperties\": [\r\n     {\r\n           \"id\":\"String {66f5a359-4659-4830-9070-00047ec6ac6e} Name Color\",\r\n           \"value\":\"Green\"\r\n     }\r\n  ]\r\n}\r\n"
+                      "body": "{\r\n    \"singleValueExtendedProperties\": [\r\n        {\r\n            \"id\":\"String {66f5a359-4659-4830-9070-00047ec6ac6e} Name Color\",\r\n            \"value\":\"Green\"\r\n        }\r\n    ]\r\n}\r\n"
                     }
                   ]
                 },
@@ -5581,7 +5581,7 @@
                       "method": "POST",
                       "URI": "https://graph.microsoft.com/v1.0/me/messages",
                       "header": [],
-                      "body": "{\r\n    \"subject\":\"Did you see last night's game?\",\r\n    \"importance\":\"Low\",\r\n    \"body\":{\r\n        \"contentType\":\"HTML\",\r\n        \"content\":\"They were <b>awesome</b>!\"\r\n    },\r\n    \"toRecipients\":[\r\n        {\r\n            \"emailAddress\":{\r\n                \"address\":\"AdeleV@contoso.onmicrosoft.com\"\r\n            }\r\n        }\r\n    ],\r\n	\"multiValueExtendedProperties\": [\r\n		{\r\n			\"id\":\"StringArray {66f5a359-4659-4830-9070-00050ec6ac6e} Name Recreation\",\r\n			\"value\": [\"Food\", \"Hiking\", \"Swimming\"]\r\n		}\r\n	]\r\n}"
+                      "body": "{\r\n    \"subject\":\"Did you see last night's game?\",\r\n    \"importance\":\"Low\",\r\n    \"body\":{\r\n        \"contentType\":\"HTML\",\r\n        \"content\":\"They were <b>awesome</b>!\"\r\n    },\r\n    \"toRecipients\":[\r\n        {\r\n            \"emailAddress\":{\r\n                \"address\":\"AdeleV@contoso.onmicrosoft.com\"\r\n            }\r\n        }\r\n    ],\r\n\t\"multiValueExtendedProperties\": [\r\n        {\r\n            \"id\":\"StringArray {66f5a359-4659-4830-9070-00050ec6ac6e} Name Recreation\",\r\n            \"value\": [\"Food\", \"Hiking\", \"Swimming\"]\r\n        }\r\n    ]\r\n}"
                     },
                     {
                       "id": "f696fb77-2037-48b7-b441-73c7b16ddbdd",
@@ -5589,7 +5589,7 @@
                       "method": "PATCH",
                       "URI": "https://graph.microsoft.com/v1.0/me/messages/{id}",
                       "header": [],
-                      "body": "{\r\n  \"multiValueExtendedProperties\": [\r\n      {\r\n         \"id\":\"StringArray {66f5a359-4659-4830-9070-00049ec6ac6e} Name Palette\",\r\n         \"value\":[\"Green\", \"Aqua\", \"Blue\"]\r\n      }\r\n    ]\r\n}"
+                      "body": "{\r\n    \"multiValueExtendedProperties\": [\r\n        {\r\n            \"id\":\"StringArray {66f5a359-4659-4830-9070-00049ec6ac6e} Name Palette\",\r\n            \"value\":[\"Green\", \"Aqua\", \"Blue\"]\r\n        }\r\n    ]\r\n}"
                     }
                   ]
                 },
@@ -5605,6 +5605,392 @@
                       "body": ""
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Notes",
+      "secondLevelCategory": [
+        {
+          "displayName": "Notes",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List notebooks",
+              "sampleRequest": [
+                {
+                  "id": "41604d53-0bf1-4558-b5a2-d98c537a5972",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create notebook",
+              "sampleRequest": [
+                {
+                  "id": "7bcc308f-8945-4c12-a740-303bb5b073f1",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"Notebook name\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List sections",
+              "sampleRequest": [
+                {
+                  "id": "b2d270a7-fe94-4baf-bb60-aa656f61d12a",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/sections",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List section groups",
+              "sampleRequest": [
+                {
+                  "id": "11a392e9-c373-4c7e-90f8-ca86d53f3cc5",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/sectionGroups",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List pages",
+              "sampleRequest": [
+                {
+                  "id": "50e3bb9c-65d9-460a-9b02-cc1aae594931",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/pages",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create page",
+              "sampleRequest": [
+                {
+                  "id": "58694bd9-9ecb-4bac-ba41-75d259e17006",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/pages",
+                  "header": [
+                    {
+                      "name": "Content-type",
+                      "value": "text/html"
+                    }
+                  ],
+                  "body": "<!DOCTYPE html>\r\n<html>\r\n  <head>\r\n    <title>A page created by Microsoft Graph</title>\r\n    <meta name=\"created\" content=\"2015-07-22T09:00:00-08:00\" />\r\n  </head>\r\n  <body>\r\n    <p>New page.</p>\r\n  </body>\r\n</html>"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Notebooks",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List notebooks",
+              "sampleRequest": [
+                {
+                  "id": "a19ee98c-e23f-41f1-80c5-b7f2f007e930",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create notebook",
+              "sampleRequest": [
+                {
+                  "id": "97b95584-389c-4507-9acc-98ec575165a1",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"Notebook name\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get notebook",
+              "sampleRequest": [
+                {
+                  "id": "67aa6d4e-ee69-41b5-b39d-c6feded18edd",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get recent notebook",
+              "sampleRequest": [
+                {
+                  "id": "94a88a8b-5492-45f0-b061-ab1cce5a9c80",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks/getRecentNotebooks(includePersonalNotebooks=true)",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Copy notebook",
+              "sampleRequest": [
+                {
+                  "id": "af71503c-5471-4242-ac2c-67cc53fbd5e0",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks/{id}/copyNotebook",
+                  "header": [],
+                  "body": "{\r\n  \"renameAs\": \"renameAs-value\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List sections",
+              "sampleRequest": [
+                {
+                  "id": "0573e7e6-263b-4239-bda8-68a30e6e8cf0",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks/{id}/sections",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create sections",
+              "sampleRequest": [
+                {
+                  "id": "b1170423-35ab-461c-8df5-07d4a89a7205",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks/{id}/sections",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"Section name\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List section groups",
+              "sampleRequest": [
+                {
+                  "id": "e6e59919-4c3f-49c6-96fb-9fa41c9eb304",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks/{id}/sectionGroups",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create section group",
+              "sampleRequest": [
+                {
+                  "id": "d8ba11e6-7df2-4011-ace4-37bd19ffda74",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks/{id}/sectionGroups",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"Section group name\"\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Sections",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List sections",
+              "sampleRequest": [
+                {
+                  "id": "90e1411f-d22c-4e2a-a1cf-511bfe915c42",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/sections",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create section",
+              "sampleRequest": [
+                {
+                  "id": "108fbee6-17a3-47cb-9c45-0f17e57e4659",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks/{id}/sections",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"Section name\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get section",
+              "sampleRequest": [
+                {
+                  "id": "59dbeb71-78f5-4db4-a2af-2355c1b5a9ff",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/sections/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List pages",
+              "sampleRequest": [
+                {
+                  "id": "f67348ba-53e6-4547-b62f-f790e75b72da",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/sections/{id}/pages",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create page",
+              "sampleRequest": [
+                {
+                  "id": "7f1fc697-9eee-4588-b171-63e43c33ae70",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/sections/{id}/pages",
+                  "header": [
+                    {
+                      "name": "Content-type",
+                      "value": "text/html"
+                    }
+                  ],
+                  "body": "<!DOCTYPE html>\r\n<html>\r\n  <head>\r\n    <title>A page created by Microsoft Graph</title>\r\n    <meta name=\"created\" content=\"2015-07-22T09:00:00-08:00\" />\r\n  </head>\r\n  <body>\r\n    <p>New page.</p>\r\n  </body>\r\n</html>"
+                }
+              ]
+            },
+            {
+              "displayName": "Copy to notebook",
+              "sampleRequest": [
+                {
+                  "id": "0f321c72-7653-4c60-a422-5c2d749c5e59",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/sections/{id}/copyToNotebook",
+                  "header": [],
+                  "body": "{\r\n  \"id\": \"id-value\",\r\n  \"renameAs\": \"renameAs-value\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Copy to section group",
+              "sampleRequest": [
+                {
+                  "id": "7104f977-271e-4fa8-8e2a-451c19aa0d87",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/sections/{id}/copyToSectionGroup",
+                  "header": [],
+                  "body": "{\r\n  \"id\": \"id-value\",\r\n  \"renameAs\": \"renameAs-value\"\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Section groups",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List section groups",
+              "sampleRequest": [
+                {
+                  "id": "ba824399-88f8-4754-8728-6c9fae5552b8",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/sectionGroups",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create section group",
+              "sampleRequest": [
+                {
+                  "id": "f43b269e-b94b-4b56-a649-ca9eb749130a",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/notebooks/{id}/sectionGroups",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"Section group name\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get section group",
+              "sampleRequest": [
+                {
+                  "id": "19e15406-9fc8-490f-805a-914616bcd7ca",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/sectionGroups/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List sections",
+              "sampleRequest": [
+                {
+                  "id": "1f7703e1-278b-4c50-b0d6-4422edfdc0aa",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/sectionGroups/{id}/sections",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create section",
+              "sampleRequest": [
+                {
+                  "id": "70c3d25f-2997-490b-be47-b2180ea56896",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/sectionGroups/{id}/sections",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"Section name\"\r\n}"
                 }
               ]
             }

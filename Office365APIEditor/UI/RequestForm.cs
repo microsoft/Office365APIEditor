@@ -52,6 +52,39 @@ namespace Office365APIEditor
             // Change window title
             Text = Util.GenerateWindowTitle("Editor");
 
+            // Restore window location, size and state.
+
+            var savedBounds = Properties.Settings.Default.RequestFormBounds;
+            var savedWindowState = Properties.Settings.Default.RequestFormWindowState;
+
+            if (savedWindowState == FormWindowState.Minimized)
+            {
+                // We should not restore window location, size and state.
+                savedBounds = new Rectangle(0, 0, 0, 0);
+                savedWindowState = FormWindowState.Normal;
+            }
+            else if (savedWindowState == FormWindowState.Maximized)
+            {
+                // We should not restore window size.
+                savedBounds = new Rectangle(new Point(savedBounds.Location.X + 8, savedBounds.Y + 8), new Size(Width, Height));
+            }
+
+            if (!savedBounds.IsEmpty)
+            {
+                // We should not restore window size and location if it is out of screens.
+
+                foreach (Screen screen in Screen.AllScreens)
+                {
+                    if (screen.WorkingArea.Contains(savedBounds))
+                    {
+                        Bounds = savedBounds;
+                        break;
+                    }
+                }
+            }
+
+            WindowState = savedWindowState;
+
             // Enable Ctrl+A short cut key for all textbox.
             AddKeyDownEvent(this);
             
@@ -211,6 +244,14 @@ namespace Office365APIEditor
 
                 treeView_Example.Nodes.Add(rootNode);
             }
+        }
+
+        private void RequestForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Save window location and size.
+            Properties.Settings.Default.RequestFormBounds = Bounds;
+            Properties.Settings.Default.RequestFormWindowState = WindowState;
+            Properties.Settings.Default.Save();
         }
 
         private void InitSyntaxColoring(Scintilla scintilla)
@@ -467,6 +508,8 @@ namespace Office365APIEditor
             {
                 // Change cursor and UI.
                 Application.UseWaitCursor = true;
+                scintilla_RequestBody.UseWaitCursor = true;
+                scintilla_ResponseBody.UseWaitCursor = true;
                 button_Run.Text = "Running...";
                 button_Run.Enabled = false;
 
@@ -654,6 +697,8 @@ namespace Office365APIEditor
             {
                 // Change cursor and UI.
                 Application.UseWaitCursor = false;
+                scintilla_RequestBody.UseWaitCursor = false;
+                scintilla_ResponseBody.UseWaitCursor = false;
                 button_Run.Text = "Run";
                 button_Run.Enabled = true;
             }
@@ -761,6 +806,8 @@ namespace Office365APIEditor
             {
                 // Change a cursor.
                 Application.UseWaitCursor = true;
+                scintilla_RequestBody.UseWaitCursor = true;
+                scintilla_ResponseBody.UseWaitCursor = true;
 
                 // Get a RequestStream to POST a data.
                 using (Stream reqStream = request.GetRequestStream())
@@ -836,6 +883,8 @@ namespace Office365APIEditor
             {
                 // Change cursor.
                 Application.UseWaitCursor = false;
+                scintilla_RequestBody.UseWaitCursor = false;
+                scintilla_ResponseBody.UseWaitCursor = false;
             }
         }
 

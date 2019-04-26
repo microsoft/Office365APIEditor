@@ -7,6 +7,7 @@ using Office365APIEditor.UI;
 using Office365APIEditor.UI.FocusedInbox;
 using Office365APIEditor.ViewerHelper.Tasks;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Office365APIEditor
@@ -40,6 +41,47 @@ namespace Office365APIEditor
 
             // Change window title
             Text = Util.GenerateWindowTitle("Mailbox Viewer");
+
+            // Restore window location, size and state.
+
+            var savedBounds = Properties.Settings.Default.MailboxViewerFormBounds;
+            var savedWindowState = Properties.Settings.Default.MailboxViewerFormWindowState;
+
+            if (savedWindowState == FormWindowState.Minimized)
+            {
+                // We should not restore window location, size and state.
+                savedBounds = new Rectangle(0, 0, 0, 0);
+                savedWindowState = FormWindowState.Normal;
+            }
+            else if (savedWindowState == FormWindowState.Maximized)
+            {
+                // We should not restore window size.
+                savedBounds = new Rectangle(new Point(savedBounds.Location.X + 8, savedBounds.Y + 8), new Size(Width, Height));
+            }
+
+            if (!savedBounds.IsEmpty)
+            {
+                // We should not restore window size and location if it is out of screens.
+
+                foreach (Screen screen in Screen.AllScreens)
+                {
+                    if (screen.WorkingArea.Contains(savedBounds))
+                    {
+                        Bounds = savedBounds;
+                        break;
+                    }
+                }
+            }
+
+            WindowState = savedWindowState;
+        }
+
+        private void MailboxViewerForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Save window location and size.
+            Properties.Settings.Default.MailboxViewerFormBounds = Bounds;
+            Properties.Settings.Default.MailboxViewerFormWindowState = WindowState;
+            Properties.Settings.Default.Save();
         }
 
         private bool Prepare()
@@ -838,7 +880,7 @@ namespace Office365APIEditor
 
         private void versionInformationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            VersionInformation versionInformation = new VersionInformation();
+            VersionInformationForm versionInformation = new VersionInformationForm();
             versionInformation.Owner = this;
             versionInformation.ShowDialog();
         }

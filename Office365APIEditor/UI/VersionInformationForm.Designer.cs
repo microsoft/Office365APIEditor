@@ -1,6 +1,6 @@
 ﻿namespace Office365APIEditor.UI
 {
-    partial class VersionInformation
+    partial class VersionInformationForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VersionInformation));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VersionInformationForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label_Version = new System.Windows.Forms.Label();
             this.button_OK = new System.Windows.Forms.Button();

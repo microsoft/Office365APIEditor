@@ -554,5 +554,53 @@ namespace Office365APIEditor.Properties {
                 this["SystemLogging"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0, 0, 0")]
+        public global::System.Drawing.Rectangle MailboxViewerFormBounds {
+            get {
+                return ((global::System.Drawing.Rectangle)(this["MailboxViewerFormBounds"]));
+            }
+            set {
+                this["MailboxViewerFormBounds"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.Forms.FormWindowState MailboxViewerFormWindowState {
+            get {
+                return ((global::System.Windows.Forms.FormWindowState)(this["MailboxViewerFormWindowState"]));
+            }
+            set {
+                this["MailboxViewerFormWindowState"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0, 0, 0")]
+        public global::System.Drawing.Rectangle RequestFormBounds {
+            get {
+                return ((global::System.Drawing.Rectangle)(this["RequestFormBounds"]));
+            }
+            set {
+                this["RequestFormBounds"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.Forms.FormWindowState RequestFormWindowState {
+            get {
+                return ((global::System.Windows.Forms.FormWindowState)(this["RequestFormWindowState"]));
+            }
+            set {
+                this["RequestFormWindowState"] = value;
+            }
+        }
     }
 }

@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace Office365APIEditor.UI
 {
-    public partial class VersionInformation : Form
+    public partial class VersionInformationForm : Form
     {
-        public VersionInformation()
+        public VersionInformationForm()
         {
             InitializeComponent();
         }

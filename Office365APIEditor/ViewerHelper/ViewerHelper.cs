@@ -654,7 +654,7 @@ namespace Office365APIEditor.ViewerHelper
                             .Take(500)
                             .Select(a => new { a.Id, a.Name, a.ContentType })
                             .ExecuteAsync();
-
+                        
                         if (internalResult.CurrentPage.Count == 0)
                         {
                             // No attachments for this item.
