@@ -1021,8 +1021,15 @@ namespace Office365APIEditor
             }
             else
             {
-                dynamic parsedJson = JsonConvert.DeserializeObject(Data);
-                return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+                try
+                {
+                    dynamic parsedJson = JsonConvert.DeserializeObject(Data);
+                    return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+                }
+                catch
+                {
+                    return Data;
+                }
             }
         }
 

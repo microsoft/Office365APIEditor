@@ -5,6 +5,7 @@ using Microsoft.Identity.Client;
 using Office365APIEditor.ViewerHelper.Attachments;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -253,6 +254,10 @@ namespace Office365APIEditor
             {
                 case AttachmentType.ItemAttachment:
                     MessageBox.Show("The selected attachment is Item Attachment. You can not download this type of attachment using Office365APIEditor", "Office365APIEditor");
+
+                    // The request to get MIME content of itemAttachment will be like below.
+                    // https://outlook.office.com/api/beta/Users('6fc42d08-123b-405e-904d-545882e8922f@6d046331-5ea5-4306-87ae-8d51f3dcc71e')/Messages('AAMkAGYxOTczODY2LTQwYzktNDFmYS05ZTIzLWZmNjAxYmM1MWYwZABGAAAAAACmFAp715xPRpcdN7o1X1D7BwDKF8masRMzQ4BmqIbV6OsxAAAAAAEMAADKF8masRMzQ4BmqIbV6OsxAAM85mvEAAA=')/Attachments('AAMkAGYxOTczODY2LTQwYzktNDFmYS05ZTIzLWZmNjAxYmM1MWYwZABGAAAAAACmFAp715xPRpcdN7o1X1D7BwDKF8masRMzQ4BmqIbV6OsxAAAAAAEMAADKF8masRMzQ4BmqIbV6OsxAAM85mvEAAABEgAQAJHp5fRvE4ZIjU_j3_4mUYI=')/$value
+
                     break;
                 case AttachmentType.FileAttachment:
                     saveFileDialog1.FileName = dataGridView_AttachmentList.SelectedRows[0].Cells[0].Value.ToString();
@@ -290,7 +295,27 @@ namespace Office365APIEditor
 
                     break;
                 case AttachmentType.ReferenceAttachment:
-                    MessageBox.Show("The selected attachment is Reference Attachment. You can not open this type of attachment using Office365APIEditor", "Office365APIEditor");
+                    string sourceUrl = "";
+
+                    try
+                    {
+                        sourceUrl = GetSourceUrlOfSelectedAttachment();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Office365APIEditor");
+                        return;
+                    }
+
+                    try
+                    {
+                        Process.Start(sourceUrl);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
                     break;
                 default:
                     break;
@@ -356,6 +381,53 @@ namespace Office365APIEditor
             }
 
             return contentBytes;
+        }
+
+        private string GetSourceUrlOfSelectedAttachment()
+        {
+            bool found = false;
+            string sourceUrl = "";
+
+            foreach (DataGridViewRow prop in dataGridView_ItemProps.Rows)
+            {
+                if (prop.Cells[0].Value.ToString().ToLowerInvariant() == "sourceUrl".ToLowerInvariant())
+                {
+                    found = true;
+                    sourceUrl = prop.Cells[1].Value.ToString();
+
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                throw new Exception("The specified attachment does not have appropriate sourceUrl property.");
+            }
+
+            return sourceUrl;
+        }
+
+        private void dataGridView_ItemProps_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                // A header was double clicked.
+                return;
+            }
+
+            // Get the value of double-clicked row.
+            object name = dataGridView_ItemProps.Rows[e.RowIndex].Cells[0].Value;
+            string nameString = (name == null) ? "" : name.ToString();
+
+            object value = dataGridView_ItemProps.Rows[e.RowIndex].Cells[1].Value;
+            string valueString = (value == null) ? "" : value.ToString();
+
+
+            PropertyViewerForm propertyViewer = new PropertyViewerForm(nameString, valueString)
+            {
+                Owner = this
+            };
+            propertyViewer.Show();
         }
     }
 }

@@ -5995,6 +5995,255 @@
               ]
             }
           ]
+        },
+        {
+          "displayName": "Pages",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List pages",
+              "sampleRequest": [
+                {
+                  "id": "3aaf209d-3a18-43af-971c-008ea9ae0589",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/pages",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create page",
+              "sampleRequest": [
+                {
+                  "id": "fbfe2944-1fc2-4db2-99e2-61e2f5b4265d",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/sections/{id}/pages",
+                  "header": [
+                    {
+                      "name": "Content-type",
+                      "value": "text/html"
+                    }
+                  ],
+                  "body": "<!DOCTYPE html>\r\n<html>\r\n  <head>\r\n    <title>A page created by Microsoft Graph</title>\r\n    <meta name=\"created\" content=\"2015-07-22T09:00:00-08:00\" />\r\n  </head>\r\n  <body>\r\n    <p>New page.</p>\r\n  </body>\r\n</html>"
+                }
+              ]
+            },
+            {
+              "displayName": "Get page",
+              "sampleRequest": [
+                {
+                  "id": "84324bb8-865d-445c-b5e0-37613559ae1d",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/pages/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update page",
+              "sampleRequest": [
+                {
+                  "id": "d83cce12-e2b8-48b4-8cfe-90a62b846c15",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/pages/{id}/content",
+                  "header": [],
+                  "body": "[\r\n   {\r\n    'target':'#para-id',\r\n    'action':'insert',\r\n    'position':'before',\r\n    'content':'<img src=\"image-url-or-part-name\" alt=\"image-alt-text\" />'\r\n  }, \r\n  {\r\n    'target':'#list-id',\r\n    'action':'append',\r\n    'content':'<li>new-page-content</li>'\r\n  }\r\n]"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete page",
+              "sampleRequest": [
+                {
+                  "id": "07d435df-27a0-46f8-8953-bb81c6b51929",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/pages/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Copy to section",
+              "sampleRequest": [
+                {
+                  "id": "da6f9446-1f00-4fe5-a52e-71cf127c3fa7",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/pages/{id}/copyToSection",
+                  "header": [],
+                  "body": "{\r\n  \"id\": \"id-value\"\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Resources",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get resource",
+              "sampleRequest": [
+                {
+                  "id": "5076ee16-0974-41a0-8a2b-1429bbddd8c7",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/onenote/resources/{id}/content",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Personal contacts",
+      "secondLevelCategory": [
+        {
+          "displayName": "Contact",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List contacts",
+              "sampleRequest": [
+                {
+                  "id": "1829c2e3-867c-438f-9541-6c610a3cda0f",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contacts",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create contact",
+              "sampleRequest": [
+                {
+                  "id": "4cb25222-a022-4a40-9933-1ee7ef3b6633",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contacts",
+                  "header": [],
+                  "body": "{\r\n  \"givenName\": \"Pavel\",\r\n  \"surname\": \"Bansky\",\r\n  \"emailAddresses\": [\r\n    {\r\n      \"address\": \"pavelb@fabrikam.onmicrosoft.com\",\r\n      \"name\": \"Pavel Bansky\"\r\n    }\r\n  ],\r\n  \"businessPhones\": [\r\n    \"+1 732 555 0102\"\r\n  ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get contact",
+              "sampleRequest": [
+                {
+                  "id": "027a140e-9433-406d-9fbf-f9a7d2242dc2",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contacts/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update contact",
+              "sampleRequest": [
+                {
+                  "id": "f56d238c-3f74-4392-87a4-772530508a7e",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contacts/{id}",
+                  "header": [],
+                  "body": "{\r\n  \"homeAddress\": {\r\n    \"street\": \"123 Some street\",\r\n    \"city\": \"Seattle\",\r\n    \"state\": \"WA\",\r\n    \"postalCode\": \"98121\"\r\n  },\r\n  \"birthday\": \"1974-07-22\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete contact",
+              "sampleRequest": [
+                {
+                  "id": "009b9ea1-3e12-45af-805a-da46151ab184",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contacts/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get contact delta",
+              "sampleRequest": [
+                {
+                  "id": "ecc79142-b064-4437-877f-88d9e85772db",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contactFolders/{id}/contacts/delta?$select=displayName",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\", odata.maxpagesize=2"
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create open extension",
+              "sampleRequest": [
+                {
+                  "id": "050b0c9d-b070-4504-8704-90eb9c7b9d7a",
+                  "displayName": "Request 1",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contacts",
+                  "header": [],
+                  "body": "{\r\n  \"givenName\": \"Pavel\",\r\n  \"surname\": \"Bansky\",\r\n  \"emailAddresses\": [\r\n    {\r\n      \"address\": \"pavelb@fabrikam.onmicrosoft.com\",\r\n      \"name\": \"Pavel Bansky\"\r\n    }\r\n  ],\r\n  \"businessPhones\": [\r\n    \"+1 732 555 0102\"\r\n  ],\r\n  \"extensions\": [\r\n    {\r\n      \"@odata.type\": \"microsoft.graph.openTypeExtension\",\r\n      \"extensionName\": \"Com.Contoso.Referral\",\r\n      \"companyName\": \"Wingtip Toys\",\r\n      \"expirationDate\": \"${DateTime1MonthLater12}\",\r\n      \"dealValue\": 10000\r\n    }\r\n  ]\r\n}"
+                },
+                {
+                  "id": "249b9ae8-a78d-48a3-917b-36a3d9efbc1f",
+                  "displayName": "Request 2",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contacts/{id}/extensions",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.type\" : \"microsoft.graph.openTypeExtension\",\r\n  \"extensionName\" : \"Com.Contoso.Referral\",\r\n  \"companyName\" : \"Wingtip Toys\",\r\n  \"dealValue\" : 500050,\r\n  \"expirationDate\" : \"${DateTime1MonthLater12}\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get open extension",
+              "sampleRequest": [
+                {
+                  "id": "5b373908-1694-4205-8aea-f4a4c87d9203",
+                  "displayName": "Request 1",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contacts/{id}/extensions/{extensionName}",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "36737086-6a03-4bd3-946f-1a8d4f864505",
+                  "displayName": "Request 2",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contacts/{id}?$expand=extensions($filter=id eq 'Microsoft.OutlookServices.OpenTypeExtension.{extentionName}')",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "b5d9cb0a-1178-4239-b3ea-58cdca598f7e",
+                  "displayName": "Request 3",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contacts?$filter=Extensions/any(f:f/id eq '{extentionName}')&$expand=Extensions($filter=id eq '{extentionName}')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
         }
       ]
     }

@@ -459,6 +459,12 @@ namespace Office365APIEditor
 
             // Get folder props.    
 
+            if (treeView_Mailbox.SelectedNode == null || treeView_Mailbox.SelectedNode.Tag == null)
+            {
+                // Perhaps the user chose another folder by using the keyboard.
+                return;
+            }
+
             FolderInfo info = (FolderInfo)treeView_Mailbox.SelectedNode.Tag;
 
             switch (info.Type)

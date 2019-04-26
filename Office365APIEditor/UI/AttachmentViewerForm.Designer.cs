@@ -124,6 +124,7 @@
             this.dataGridView_ItemProps.ReadOnly = true;
             this.dataGridView_ItemProps.Size = new System.Drawing.Size(881, 262);
             this.dataGridView_ItemProps.TabIndex = 0;
+            this.dataGridView_ItemProps.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_ItemProps_CellDoubleClick);
             // 
             // Property
             // 
@@ -153,7 +154,7 @@
             // downloadToolStripMenuItem
             // 
             this.downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
-            this.downloadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.downloadToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.downloadToolStripMenuItem.Text = "Download...";
             this.downloadToolStripMenuItem.Click += new System.EventHandler(this.downloadToolStripMenuItem_Click);
             // 
