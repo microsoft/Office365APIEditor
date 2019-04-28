@@ -5274,7 +5274,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\", odata.maxpagesize=2"
+                      "value": "odata.maxpagesize=2"
                     }
                   ],
                   "body": ""
@@ -6186,7 +6186,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\", odata.maxpagesize=2"
+                      "value": "odata.maxpagesize=2"
                     }
                   ],
                   "body": ""
@@ -6238,6 +6238,1571 @@
                   "displayName": "Request 3",
                   "method": "GET",
                   "URI": "https://graph.microsoft.com/v1.0/me/contacts?$filter=Extensions/any(f:f/id eq '{extentionName}')&$expand=Extensions($filter=id eq '{extentionName}')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Contact folder",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List contact folders",
+              "sampleRequest": [
+                {
+                  "id": "9afe8a45-ba86-48ad-b951-64e7ac0db577",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contactFolders",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create contact folder",
+              "sampleRequest": [
+                {
+                  "id": "8b1bf2f9-ebdc-43a4-8167-bbe6c0100f28",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contactFolders",
+                  "header": [],
+                  "body": "{\r\n  \"parentFolderId\": \"parentFolderId-value\",\r\n  \"displayName\": \"displayName-value\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get contact folder",
+              "sampleRequest": [
+                {
+                  "id": "51306713-61d2-4a69-90c5-03947eb0388f",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contactFolders/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update contact folder",
+              "sampleRequest": [
+                {
+                  "id": "dabe7cad-9dff-4e13-b19a-40d17076150e",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contactFolders/{id}",
+                  "header": [],
+                  "body": "{\r\n  \"parentFolderId\": \"parentFolderId-value\",\r\n  \"displayName\": \"displayName-value\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete contact folder",
+              "sampleRequest": [
+                {
+                  "id": "233d8274-8306-4944-9866-1064e9b2e8ee",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contactFolders/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get contact folder delta",
+              "sampleRequest": [
+                {
+                  "id": "093ee2ca-4d33-489e-9794-b5012f28a2d5",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contactFolders/delta",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "odata.maxpagesize=2"
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List child folders",
+              "sampleRequest": [
+                {
+                  "id": "3cda5d97-a3b9-4a68-b290-ce934bd96de8",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contactFolders/{id}/childFolders",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create child folder",
+              "sampleRequest": [
+                {
+                  "id": "00bff1d9-3674-4b2a-9abf-e87bf0fed7e5",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contactFolders/{id}/childFolders",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"displayName-value\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List contacts in folder",
+              "sampleRequest": [
+                {
+                  "id": "9c1dcc59-fb66-48b0-9705-2ba0bc211252",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contactFolders/{id}/contacts",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create contact in folder",
+              "sampleRequest": [
+                {
+                  "id": "2a6f019e-35af-402f-820e-051072925b2d",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contactFolders/{id}/contacts",
+                  "header": [],
+                  "body": "{\r\n  \"givenName\": \"Pavel\",\r\n  \"surname\": \"Bansky\",\r\n  \"emailAddresses\": [\r\n    {\r\n      \"address\": \"pavelb@fabrikam.onmicrosoft.com\",\r\n      \"name\": \"Pavel Bansky\"\r\n    }\r\n  ],\r\n  \"businessPhones\": [\r\n    \"+1 732 555 0102\"\r\n  ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get contact delta",
+              "sampleRequest": [
+                {
+                  "id": "14faba18-033c-4ffd-8084-d13d34fee950",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/contactFolders/{id}/contacts/delta?$select=displayName",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "odata.maxpagesize=2"
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Categories",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List categories",
+              "sampleRequest": [
+                {
+                  "id": "0efbb4c9-308d-4f6f-8f96-2f913a313dca",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/outlook/masterCategories",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create category",
+              "sampleRequest": [
+                {
+                  "id": "b308b689-8a02-4c93-a212-cbc0a84697b0",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/outlook/masterCategories",
+                  "header": [],
+                  "body": "{\r\n      \"displayName\":\"Project expenses\",\r\n      \"color\":\"preset9\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get category",
+              "sampleRequest": [
+                {
+                  "id": "04fcf7f3-87c5-45f0-85ab-f44b7c94e6c5",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/outlook/masterCategories/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update category",
+              "sampleRequest": [
+                {
+                  "id": "51938e2b-4417-4849-902b-3fa4d2767e52",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/me/outlook/masterCategories/{id}",
+                  "header": [],
+                  "body": "{\r\n  \"color\":\"preset15\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete category",
+              "sampleRequest": [
+                {
+                  "id": "b13252c3-39ec-4f85-999f-5d391792a3ae",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/me/outlook/masterCategories/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Extended properties",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Single-value extended property",
+              "fourthLevelCategory": [
+                {
+                  "displayName": "Create single-value property",
+                  "sampleRequest": [
+                    {
+                      "id": "e6edfeff-8f47-42fd-97b3-7c5121c8d3a5",
+                      "displayName": "Request 1",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/v1.0/me/contacts",
+                      "header": [],
+                      "body": "{\r\n  \"givenName\": \"Pavel\",\r\n  \"surname\": \"Bansky\",\r\n  \"emailAddresses\": [\r\n    {\r\n      \"address\": \"pavelb@fabrikam.onmicrosoft.com\",\r\n      \"name\": \"Pavel Bansky\"\r\n    }\r\n  ],\r\n  \"businessPhones\": [\r\n    \"+1 732 555 0102\"\r\n  ],\r\n  \"singleValueExtendedProperties\": [\r\n     {\r\n           \"id\":\"String {66f5a359-4659-4830-9070-00040ec6ac6e} Name Fun\",\r\n           \"value\":\"Food\"\r\n     }\r\n  ]\r\n}"
+                    },
+                    {
+                      "id": "4ddae4a9-e0eb-4623-8ab8-dfc8a4c9f3c4",
+                      "displayName": "Request 2",
+                      "method": "PATCH",
+                      "URI": "https://graph.microsoft.com/v1.0/me/contacts/{id}",
+                      "header": [],
+                      "body": "{\r\n  \"singleValueExtendedProperties\": [\r\n      {\r\n         \"id\":\"String {66f5a359-4659-4830-9070-00047ec6ac6e} Name Color\",\r\n         \"value\":\"Green\"\r\n      }\r\n    ]\r\n}"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Get single-value property",
+                  "sampleRequest": [
+                    {
+                      "id": "bc82fe70-7c92-4f5e-bb96-e446f94a999e",
+                      "displayName": "Request 1",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/me/contacts/{id}?$expand=singleValueExtendedProperties($filter=id eq '{id_value}')",
+                      "header": [],
+                      "body": ""
+                    },
+                    {
+                      "id": "4476cd1c-d5c5-41ca-9780-7157d0463c4b",
+                      "displayName": "Request 2",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/me/contacts?$filter=singleValueExtendedProperties/Any(ep: ep/id eq '{id_value}' and ep/value eq '{property_value}')",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "displayName": "Multi-value extended property",
+              "fourthLevelCategory": [
+                {
+                  "displayName": "Create multi-value property",
+                  "sampleRequest": [
+                    {
+                      "id": "510d3fba-d01b-4629-a5e0-271d5adb4ffd",
+                      "displayName": "Request 1",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/v1.0/me/contacts",
+                      "header": [],
+                      "body": "{\r\n  \"givenName\": \"Pavel\",\r\n  \"surname\": \"Bansky\",\r\n  \"emailAddresses\": [\r\n    {\r\n      \"address\": \"pavelb@fabrikam.onmicrosoft.com\",\r\n      \"name\": \"Pavel Bansky\"\r\n    }\r\n  ],\r\n  \"businessPhones\": [\r\n    \"+1 732 555 0102\"\r\n  ],\r\n  \"multiValueExtendedProperties\": [\r\n     {\r\n           \"id\":\"StringArray {66f5a359-4659-4830-9070-00050ec6ac6e} Name Recreation\",\r\n           \"value\": [\"Food\", \"Hiking\", \"Swimming\"]\r\n     }\r\n  ]\r\n}"
+                    },
+                    {
+                      "id": "b3061d6c-2afa-4e82-9fa0-281d2bbbb063",
+                      "displayName": "Request 2",
+                      "method": "PATCH",
+                      "URI": "https://graph.microsoft.com/v1.0/me/contacts/{id}",
+                      "header": [],
+                      "body": "{\r\n  \"multiValueExtendedProperties\": [\r\n      {\r\n         \"id\":\"StringArray {66f5a359-4659-4830-9070-00049ec6ac6e} Name Palette\",\r\n         \"value\":[\"Green\", \"Aqua\", \"Blue\"]\r\n      }\r\n    ]\r\n}"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Get multi-value property",
+                  "sampleRequest": [
+                    {
+                      "id": "5d069243-14aa-46d8-a5dd-f1684f8a293c",
+                      "displayName": "Example",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/me/contacts/{id}?$expand=multiValueExtendedProperties($filter=id eq '{id_value}')",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Reports",
+      "secondLevelCategory": [
+        {
+          "displayName": "Microsoft Teams device usage",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get user detail",
+              "sampleRequest": [
+                {
+                  "id": "3fc3dbfe-9cf6-46b4-8ab5-113d43634322",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getTeamsDeviceUsageUserDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "3f428593-131f-4a0c-b17d-358ea5251a73",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getTeamsDeviceUsageUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get distribution user counts",
+              "sampleRequest": [
+                {
+                  "id": "49b6b491-31f5-43d1-9f28-bb4a1f6ee76e",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getTeamsDeviceUsageDistributionUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Microsoft Teams user activity",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get user detail",
+              "sampleRequest": [
+                {
+                  "id": "d81f3642-7bb4-4203-b142-c3e1176e4bd0",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getTeamsUserActivityUserDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get activity counts",
+              "sampleRequest": [
+                {
+                  "id": "7d17c8ad-7b6e-4fa4-b7b2-2a3963e9e73b",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getTeamsUserActivityCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "78d8067e-944c-4cfc-b6e8-82ef3faf3721",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getTeamsUserActivityUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Outlook activity",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get user detail",
+              "sampleRequest": [
+                {
+                  "id": "b543f14c-c9fe-49cb-9ec0-30eaf70a3b68",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getEmailActivityUserDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get activity counts",
+              "sampleRequest": [
+                {
+                  "id": "51b1dd81-79bf-458c-852d-0604c0d2e48e",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getEmailActivityCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "0f553f4d-f909-48dc-a9cc-67fd61386ddc",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getEmailActivityUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Outlook app usage",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get user datail",
+              "sampleRequest": [
+                {
+                  "id": "ce287680-e2b1-43ca-93fc-d7997e4ed5ed",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getEmailAppUsageUserDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get apps user counts",
+              "sampleRequest": [
+                {
+                  "id": "bcbfb3c8-604b-4696-836a-4ffde16333d6",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getEmailAppUsageAppsUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "f5078e24-09db-4170-8dd1-7481dc7d48dc",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getEmailAppUsageUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get versions user counts",
+              "sampleRequest": [
+                {
+                  "id": "c0ca93e7-b4b9-4841-92d1-788c3dc4942d",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getEmailAppUsageVersionsUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Outlook mailbox usage",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get mailbox detail",
+              "sampleRequest": [
+                {
+                  "id": "9b19bec4-55a4-48b1-9af8-ba61b58a0a7b",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getMailboxUsageDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get mailbox counts",
+              "sampleRequest": [
+                {
+                  "id": "07eb1d14-8d9b-4aaa-8c44-032bba49438c",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getMailboxUsageMailboxCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get quota status mailbox counts",
+              "sampleRequest": [
+                {
+                  "id": "9759a63f-bca8-49a9-af60-7e758eab5a57",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getMailboxUsageQuotaStatusMailboxCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get storage",
+              "sampleRequest": [
+                {
+                  "id": "e7327f88-e328-46d4-a454-66cd59abe9ed",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getMailboxUsageStorage(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Office 365 activations",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get user detail",
+              "sampleRequest": [
+                {
+                  "id": "edfda495-03a1-46ef-936a-18960f7b7db9",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOffice365ActivationsUserDetail",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get activation counts",
+              "sampleRequest": [
+                {
+                  "id": "325cbf3b-e434-411c-ba4f-a123edfebe67",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOffice365ActivationCounts",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "4f330405-62b8-4c1f-9801-0a2b39db605d",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOffice365ActivationsUserCounts",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Office 365 active users",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get user detail",
+              "sampleRequest": [
+                {
+                  "id": "9d47e925-0c13-452e-9ad9-6177c10d5014",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOffice365ActiveUserDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "fa3b3d19-c5e6-497e-bbfe-0e219cdc5318",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOffice365ActiveUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get services user counts",
+              "sampleRequest": [
+                {
+                  "id": "518a793d-3176-42fe-a865-489aba7e3e1d",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOffice365ServicesUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Office 365 groups activity",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get group detail",
+              "sampleRequest": [
+                {
+                  "id": "b48e37ae-8fc8-4400-9112-5cb4581f8ecb",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOffice365GroupsActivityDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get activity counts",
+              "sampleRequest": [
+                {
+                  "id": "64060865-1b6f-45dd-a495-728be07b8af8",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOffice365GroupsActivityCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get group counts",
+              "sampleRequest": [
+                {
+                  "id": "b6f1c0c8-2208-45ec-aa6a-2f8116a4b8fb",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOffice365GroupsActivityGroupCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get storage",
+              "sampleRequest": [
+                {
+                  "id": "baec1f9b-fab5-4271-a8bd-e3fe73d00424",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOffice365GroupsActivityStorage(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get file counts",
+              "sampleRequest": [
+                {
+                  "id": "ac96fc1f-8333-4486-8af8-170fefdbcd13",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOffice365GroupsActivityFileCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "OneDrive activity",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get user detail",
+              "sampleRequest": [
+                {
+                  "id": "d4ad53ca-b44c-4b7e-ab82-e35acf647e57",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOneDriveActivityUserDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "01ab1451-a0c3-4835-a5b2-a9430c7bd0fa",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOneDriveActivityUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get file counts",
+              "sampleRequest": [
+                {
+                  "id": "25c0ab53-b95a-43c4-a1bd-211db434fc0f",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOneDriveActivityFileCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "OneDrive usage",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get account detail",
+              "sampleRequest": [
+                {
+                  "id": "967f3716-6051-46b3-8b91-97665be69b4c",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOneDriveUsageAccountDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get account counts",
+              "sampleRequest": [
+                {
+                  "id": "16b73064-1213-45f6-bc85-a30bf50104a8",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOneDriveUsageAccountCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get file counts",
+              "sampleRequest": [
+                {
+                  "id": "4a570034-3a3e-4b07-9981-5d89626ae8a7",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOneDriveUsageFileCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get storage",
+              "sampleRequest": [
+                {
+                  "id": "91be728f-c5f7-4cbc-8abb-1f0151a48274",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getOneDriveUsageStorage(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "SharePoint activity",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get user detail",
+              "sampleRequest": [
+                {
+                  "id": "d0a5a044-2d65-4437-87b3-f67eb216d100",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSharePointActivityUserDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get file counts",
+              "sampleRequest": [
+                {
+                  "id": "7cebc422-bb3f-4176-abaf-e7dbc007a52e",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSharePointActivityFileCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "19fe2b96-c079-4317-8c88-0a3bd678b524",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSharePointActivityUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get pages",
+              "sampleRequest": [
+                {
+                  "id": "ea29d3ac-f7dd-4426-8b9a-b9817db5f9d4",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSharePointActivityPages(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "SharePoint site usage",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get site detail",
+              "sampleRequest": [
+                {
+                  "id": "e45b30a6-fc08-4e7d-9a64-9780c4ed1de2",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSharePointSiteUsageDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get file counts",
+              "sampleRequest": [
+                {
+                  "id": "ebb1a9b3-0a63-41aa-a22f-d78d1ba04de6",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSharePointSiteUsageFileCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get site counts",
+              "sampleRequest": [
+                {
+                  "id": "7a50a505-5edb-4379-a27e-0ff620d51a9d",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSharePointSiteUsageSiteCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get storage",
+              "sampleRequest": [
+                {
+                  "id": "f5723cdb-d58c-4e82-b583-5cf8f7acc90f",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSharePointSiteUsageStorage(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get pages",
+              "sampleRequest": [
+                {
+                  "id": "403c892b-68ec-4baa-93d9-90112a37368d",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSharePointSiteUsagePages(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Skype for Business activity",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get user detail",
+              "sampleRequest": [
+                {
+                  "id": "e508b751-0df1-4de9-88be-a48fd6b0968d",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessActivityUserDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get activity counts",
+              "sampleRequest": [
+                {
+                  "id": "9e039f81-0b56-4fe0-9f04-0fcddb451dd9",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessActivityCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "9de00018-b4c8-40ad-831b-31b75ca9da63",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessActivityUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Skype for Business device usage",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get user detail",
+              "sampleRequest": [
+                {
+                  "id": "176b38c4-2e53-46f9-a7f0-c974cd490328",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessDeviceUsageUserDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get distribution user counts",
+              "sampleRequest": [
+                {
+                  "id": "549fa932-d2bc-4c00-b18d-a23b1b771ad7",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessDeviceUsageDistributionUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "e36b0eaf-e0d3-4dec-9ae4-8aff570d1d00",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessDeviceUsageUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Skype for Business organizer activity",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get activity counts",
+              "sampleRequest": [
+                {
+                  "id": "a1218979-c312-4e6f-a6a2-e158051d623a",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessOrganizerActivityCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "ad028d02-0ab4-45be-b072-c679c7f02ad4",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessOrganizerActivityUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get minute counts",
+              "sampleRequest": [
+                {
+                  "id": "9120a762-cb49-44c8-ad87-ce3a38f4746b",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessOrganizerActivityMinuteCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Skype for Business participant activity",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get activity counts",
+              "sampleRequest": [
+                {
+                  "id": "053b9371-96a0-494e-8560-cc8777c8699a",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessParticipantActivityCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "51da1b55-2703-4622-8e0a-438e0f4e5c3e",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessParticipantActivityUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get minute counts",
+              "sampleRequest": [
+                {
+                  "id": "5d50bcf7-80b0-4804-8d3a-30b0c5e712d8",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessParticipantActivityMinuteCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Skype for Business peer-to-peer activity",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get activity counts",
+              "sampleRequest": [
+                {
+                  "id": "71f17aa5-e1b1-4a3c-8652-5fe424d07359",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessPeerToPeerActivityCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "bfe1676d-e749-4444-a7ad-a5c58dad2bca",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessPeerToPeerActivityUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get minute counts",
+              "sampleRequest": [
+                {
+                  "id": "2af3d596-265c-4457-8749-957ce8fef2c3",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getSkypeForBusinessPeerToPeerActivityMinuteCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Yammer activity",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get user detail",
+              "sampleRequest": [
+                {
+                  "id": "6c43fdab-e3e4-48b6-bcba-ed31b103864e",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getYammerActivityUserDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get activity counts",
+              "sampleRequest": [
+                {
+                  "id": "6b7ef9d7-66f3-49d4-87da-64fe95616b29",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getYammerActivityCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "9577fdc3-321d-41f5-87e5-c307d6586cf4",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getYammerActivityUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Yammer device usage",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get user detail",
+              "sampleRequest": [
+                {
+                  "id": "87654b98-e9ed-4e1b-b13d-a3a4f8c64b77",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getYammerDeviceUsageUserDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get distribution user counts",
+              "sampleRequest": [
+                {
+                  "id": "89774e65-8bee-4969-ba49-a034bc2ec581",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getYammerDeviceUsageDistributionUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get user counts",
+              "sampleRequest": [
+                {
+                  "id": "3b8f217c-6c5a-4940-8770-60e5f83c425d",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getYammerDeviceUsageUserCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Yammer groups activity",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get group detail",
+              "sampleRequest": [
+                {
+                  "id": "89252781-034e-4a4a-ba3b-73123b51059b",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getYammerGroupsActivityDetail(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get group counts",
+              "sampleRequest": [
+                {
+                  "id": "3f13b12f-fda0-47b5-be44-e4c073bc84c3",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getYammerGroupsActivityGroupCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get activity counts",
+              "sampleRequest": [
+                {
+                  "id": "ea311095-cbeb-469c-835c-1cf2f0341ee8",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/reports/getYammerGroupsActivityCounts(period='D7')",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Security",
+      "secondLevelCategory": [
+        {
+          "displayName": "Alerts",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List alerts",
+              "sampleRequest": [
+                {
+                  "id": "3c377397-2713-4094-96f3-f6e2c1434b30",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/security/alerts",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get alert",
+              "sampleRequest": [
+                {
+                  "id": "86f4f61c-4add-49d6-98a2-c43dfe7df450",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/security/alerts/{alert_id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update alert",
+              "sampleRequest": [
+                {
+                  "id": "1a536e61-c302-49d0-980a-6ab2f04d63d5",
+                  "displayName": "Request without Prefer header",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/security/alerts/{alert_id}",
+                  "header": [],
+                  "body": "{\r\n  \"assignedTo\": \"String\",\r\n  \"closedDateTime\": \"String (timestamp)\",\r\n  \"comments\": [\r\n    \"String\"\r\n  ],\r\n  \"feedback\": \"@odata.type: microsoft.graph.alertFeedback\",\r\n  \"status\": \"@odata.type: microsoft.graph.alertStatus\",\r\n  \"tags\": [\r\n    \"String\"\r\n  ],\r\n  \"vendorInformation\": {\r\n    \"provider\": \"String\",\r\n    \"vendor\": \"String\"\r\n  }\r\n}"
+                },
+                {
+                  "id": "0715f02d-59e5-4bc0-a305-8bf6f4c6ca58",
+                  "displayName": "Request with Prefer header",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/security/alerts/{alert_id}",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "return=minimal"
+                    }
+                  ],
+                  "body": "{\r\n  \"assignedTo\": \"String\",\r\n  \"closedDateTime\": \"String (timestamp)\",\r\n  \"comments\": [\r\n    \"String\"\r\n  ],\r\n  \"feedback\": \"@odata.type: microsoft.graph.alertFeedback\",\r\n  \"status\": \"@odata.type: microsoft.graph.alertStatus\",\r\n  \"tags\": [\r\n    \"String\"\r\n  ],\r\n  \"vendorInformation\": {\r\n    \"provider\": \"String\",\r\n    \"vendor\": \"String\"\r\n  }\r\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Sites and lists",
+      "secondLevelCategory": [
+        {
+          "displayName": "Sites",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get site",
+              "sampleRequest": [
+                {
+                  "id": "fb3699eb-a0c8-4733-b461-a783975849f6",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/sites/{site-id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get lists",
+              "sampleRequest": [
+                {
+                  "id": "f817d263-850e-4fdd-a28a-3f85a7a56535",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/sites/{site-id}/lists",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List subsites",
+              "sampleRequest": [
+                {
+                  "id": "1239e578-6cac-4dd3-9d6d-038990e199c4",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/sites/{site-id}/sites",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Lists",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get list",
+              "sampleRequest": [
+                {
+                  "id": "8d35e0c5-e570-45ce-b6d0-d6537715ff2d",
+                  "displayName": "Request 1",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/sites/{site-id}/lists/{list-id}",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "a20328ba-e037-468e-b8b1-69ac40253a4e",
+                  "displayName": "Request 2",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/sites/{site-id}/lists/{list-id}?select=id,name,lastModifiedDateTime&expand=columns(select=name,description),items(expand=fields(select=Name,Color,Quantity)",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get items",
+              "sampleRequest": [
+                {
+                  "id": "65b667ea-d28b-42ba-a14c-3fac47ddf4d1",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/sites/{site-id}/lists/{list-id}/items?expand=fields(select=Name,Color,Quantity)",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+
+            {
+              "displayName": "Create list",
+              "sampleRequest": [
+                {
+                  "id": "355b0fba-2bbb-4b45-8e46-a9cb8a58a501",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/sites/{site-id}/lists",
+                  "header": [],
+                  "body": "{\r\n  \"name\": \"Books\",\r\n  \"columns\": [\r\n    {\r\n      \"name\": \"Author\",\r\n      \"text\": { }\r\n    },\r\n    {\r\n      \"name\": \"PageCount\",\r\n      \"number\": { }\r\n    }\r\n  ],\r\n  \"list\": {\r\n    \"template\": \"genericList\"\r\n  }\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "ListItems",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get item",
+              "sampleRequest": [
+                {
+                  "id": "df3a9bbb-12ff-45d4-8cd1-7bfe2a5c2108",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/sites/{site-id}/lists/{list-id}/items/{item-id}?expand=fields",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create item",
+              "sampleRequest": [
+                {
+                  "id": "66ebc206-4848-4557-81ef-020df008a32e",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/sites/{site-id}/lists/{list-id}/items",
+                  "header": [],
+                  "body": "{\r\n  \"fields\": {\r\n    \"Title\": \"Widget\",\r\n    \"Color\": \"Purple\",\r\n    \"Weight\": 32\r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Update item",
+              "sampleRequest": [
+                {
+                  "id": "7f340aa9-a914-465e-b696-c7d771871515",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/sites/{site-id}/lists/{list-id}/items/{item-id}/fields",
+                  "header": [],
+                  "body": "{\r\n    \"Color\": \"Fuchsia\",\r\n    \"Quantity\": 934\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete item",
+              "sampleRequest": [
+                {
+                  "id": "55e4a614-8a15-4944-b95d-51070623440b",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/sites/{site-id}/lists/{list-id}/items/{item-id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List versions",
+              "sampleRequest": [
+                {
+                  "id": "12a4102b-e2fe-4084-9cda-890f26694c71",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/sites/{site-id}/lists/{list-id}/items/{item-id}/versions",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Social intelligence: People",
+      "secondLevelCategory": [
+        {
+          "displayName": "Person",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List people",
+              "sampleRequest": [
+                {
+                  "id": "ae40285d-98fa-4cc2-9564-07f6c6ed4f7a",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/people",
                   "header": [],
                   "body": ""
                 }

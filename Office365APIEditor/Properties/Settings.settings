@@ -83,6 +83,11 @@
   &lt;string&gt;https://graph.microsoft.com/Notes.Read.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Notes.ReadWrite.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/People.Read&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/People.Read.All&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/Reports.Read.All&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/SecurityEvents.Read.All&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/SecurityEvents.ReadWrite.All&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/Sites.Manage.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Sites.Read.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Sites.ReadWrite.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/User.Export.All&lt;/string&gt;
