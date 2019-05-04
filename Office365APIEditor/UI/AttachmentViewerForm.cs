@@ -69,6 +69,17 @@ namespace Office365APIEditor
                     }
 
                     break;
+                case FolderContentType.Task:
+                    try
+                    {
+                        result = await viewerRequestHelper.GetAllAttachmentsAsync(FolderContentType.Task, targetItemId);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                    break;
                 case FolderContentType.DummyCalendarGroupRoot:
                     break;
                 default:

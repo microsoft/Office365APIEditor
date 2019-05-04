@@ -17,7 +17,7 @@ namespace Office365APIEditor.ViewerHelper
             // Get all attachments of the specified item.
             // The property of the item to get is very limited.
 
-            client = Util.GetOutlookServicesClient(pca, currentUser);
+            Uri URL;
 
             List<AttachmentBase> result = new List<AttachmentBase>();
 
@@ -26,93 +26,37 @@ namespace Office365APIEditor.ViewerHelper
                 case FolderContentType.Message:
                 case FolderContentType.MsgFolderRoot:
                 case FolderContentType.Drafts:
-                    try
-                    {
-                        var internalResult = await client.Me.Messages[itemId].Attachments
-                            .OrderBy(a => a.Name)
-                            .Take(1000)
-                            .Select(a => new { a.Id, a.Name, a.ContentType })
-                            .ExecuteAsync();
-
-                        if (internalResult.CurrentPage.Count == 0)
-                        {
-                            // No attachments for this item.
-                            return result;
-                        }
-
-                        bool morePages = false;
-
-                        do
-                        {
-                            foreach (var attachment in internalResult.CurrentPage)
-                            {
-                                result.Add(AttachmentBase.CreateFromIdNameContentType(attachment.Id, attachment.Name, attachment.ContentType));
-                            }
-
-                            if (internalResult.MorePagesAvailable)
-                            {
-                                morePages = true;
-                                internalResult = await internalResult.GetNextPageAsync();
-                            }
-                            else
-                            {
-                                morePages = false;
-                            }
-                        } while (morePages);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
-                    break;
-                case FolderContentType.Contact:
-                    // In the implementation of OutlookServicesClient, contact item does not have attachment.
-
+                    URL = new Uri($"https://outlook.office.com/api/v2.0/me/messages/{itemId}/attachments/?$Top=1000&$select=Id,Name,ContentType");
                     break;
                 case FolderContentType.Calendar:
-                    try
-                    {
-                        var internalResult = await client.Me.Events[itemId].Attachments
-                            .OrderBy(a => a.Name)
-                            .Take(1000)
-                            .Select(a => new { a.Id, a.Name, a.ContentType })
-                            .ExecuteAsync();
-
-                        if (internalResult.CurrentPage.Count == 0)
-                        {
-                            // No attachments for this item.
-                            return result;
-                        }
-
-                        bool morePages = false;
-
-                        do
-                        {
-                            foreach (var attachment in internalResult.CurrentPage)
-                            {
-                                result.Add(AttachmentBase.CreateFromIdNameContentType(attachment.Id, attachment.Name, attachment.ContentType));
-                            }
-
-                            if (internalResult.MorePagesAvailable)
-                            {
-                                morePages = true;
-                                internalResult = await internalResult.GetNextPageAsync();
-                            }
-                            else
-                            {
-                                morePages = false;
-                            }
-                        } while (morePages);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
+                    URL = new Uri($"https://outlook.office.com/api/v2.0/me/events/{itemId}/attachments/?$Top=1000&$select=Id,Name,ContentType");
                     break;
-                case FolderContentType.DummyCalendarGroupRoot:
+                case FolderContentType.Task:
+                    URL = new Uri($"https://outlook.office.com/api/v2.0/me/tasks/{itemId}/attachments/?$Top=1000&$select=Id,Name,ContentType");
                     break;
+                case FolderContentType.Contact:
+                    // contact item (Contact API) does not have attachment.
                 default:
-                    break;
+                    return new List<AttachmentBase>();
+            }
+
+            try
+            {
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                string stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+
+                var jsonResponse = (JObject)JsonConvert.DeserializeObject(stringResponse);
+                var attachments = (JArray)jsonResponse.GetValue("value");
+
+                foreach (var item in attachments)
+                {
+                    var serializedObject = new AttachmentBase(JsonConvert.SerializeObject(item));
+                    result.Add(serializedObject);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             return result;
@@ -134,8 +78,11 @@ namespace Office365APIEditor.ViewerHelper
                 case FolderContentType.Calendar:
                     URL = new Uri("https://outlook.office.com/api/v2.0/me/events/" + itemId + "/attachments/" + attachmentId);
                     break;
+                case FolderContentType.Task:
+                    URL = new Uri("https://outlook.office.com/api/v2.0/me/tasks/" + itemId + "/attachments/" + attachmentId);
+                    break;
                 default:
-                    throw new Exception("FolderContentType must be Message, MsgFolderRoot or Calendar.");
+                    throw new Exception("FolderContentType must be Message, MsgFolderRoot, Drafts, Calendar or Task.");
             }
 
             string stringResponse = "";

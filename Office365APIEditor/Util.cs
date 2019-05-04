@@ -411,6 +411,7 @@ namespace Office365APIEditor
             return ar.AccessToken;
         }
 
+        [Obsolete]
         public static OutlookServicesClient GetOutlookServicesClient(PublicClientApplication pca, IAccount CurrentUser)
         {
             // Acquire access token again.
