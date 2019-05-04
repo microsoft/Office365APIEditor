@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
-using Microsoft.Identity.Client;
 using Office365APIEditor.UI;
 using Office365APIEditor.UI.FocusedInbox;
 using Office365APIEditor.ViewerHelper;
@@ -14,7 +13,6 @@ namespace Office365APIEditor
 {
     public partial class MailboxViewerForm : Form
     {
-        AuthenticationResult ar;
         ViewerRequestHelper viewerRequestHelper;
 
         MailFolder draftsFolder;
@@ -85,13 +83,12 @@ namespace Office365APIEditor
             // Use MSAL and acquire access token.
 
             AcquireViewerTokenForm acuireViewerTokenForm = new AcquireViewerTokenForm();
-            if (acuireViewerTokenForm.ShowDialog(out Global.pca, out ar) != DialogResult.OK)
+            if (acuireViewerTokenForm.ShowDialog(out Global.pca, out Global.LastAuthenticationResult) != DialogResult.OK)
             {
                 return false;
             }
 
-            string token = ar.AccessToken;
-            Global.currentUser = ar.Account;
+            Global.currentUser = Global.LastAuthenticationResult.Account;
 
             try
             {
@@ -772,6 +769,7 @@ namespace Office365APIEditor
         {
             Global.pca = null;
             Global.currentUser = null;
+            Global.LastAuthenticationResult = null;
             viewerRequestHelper = null;
             dataGridView_FolderProps.Rows.Clear();
             dataGridView_FolderProps.Columns.Clear();

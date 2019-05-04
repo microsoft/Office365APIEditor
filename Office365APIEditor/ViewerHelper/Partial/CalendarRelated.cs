@@ -24,8 +24,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                stringResponse = await SendGetRequestAsync(URL);
             }
             catch (Exception ex)
             {
@@ -64,8 +63,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                stringResponse = await SendGetRequestAsync(URL);
             }
             catch (Exception ex)
             {
@@ -103,8 +101,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                stringResponse = await SendGetRequestAsync(URL);
             }
             catch (Exception ex)
             {
@@ -122,10 +119,8 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-
                 Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/calendars/{FolderId}");
-                string rawJson = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                string rawJson = await SendGetRequestAsync(URL);
                 var calendar = new Calendar(rawJson);
 
                 return calendar;
@@ -156,8 +151,6 @@ namespace Office365APIEditor.ViewerHelper
 
         private async Task<PagedResponse<Event>> InternalGetPagedEventsAsync(Uri URL)
         {
-            string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-
             var result = new PagedResponse<Event>
             {
                 CurrentPage = new List<Event>()
@@ -166,7 +159,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 // Get a response and response stream.
-                string stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                string stringResponse = await SendGetRequestAsync(URL);
 
                 // Convert JSON response.
 
@@ -202,8 +195,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/events/{ItemId}");
 
-            string accessToken = await Util.GetAccessTokenAsync(Global.pca, Global.currentUser);
-            string stringResponse = await Util.SendGetRequestAsync(URL, accessToken, Global.currentUser.Username);
+            string stringResponse = await SendGetRequestAsync(URL);
             return new Event(stringResponse);
         }
     }

@@ -24,8 +24,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                stringResponse = await SendGetRequestAsync(URL);
             }
             catch (Exception ex)
             {
@@ -63,8 +62,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                stringResponse = await SendGetRequestAsync(URL);
             }
             catch (Exception ex)
             {
@@ -86,8 +84,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                stringResponse = await SendGetRequestAsync(URL);
             }
             catch (Exception ex)
             {
@@ -125,8 +122,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                stringResponse = await SendGetRequestAsync(URL);
             }
             catch (Exception ex)
             {
@@ -157,8 +153,6 @@ namespace Office365APIEditor.ViewerHelper
 
         private async Task<PagedResponse<Data.TaskAPI.Task>> InternalGetPagedTasksAsync(Uri URL)
         {
-            string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-
             var result = new PagedResponse<Data.TaskAPI.Task>
             {
                 CurrentPage = new List<Data.TaskAPI.Task>()
@@ -167,7 +161,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 // Get a response and response stream.
-                string stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                string stringResponse = await SendGetRequestAsync(URL);
 
                 // Convert JSON response.
 
@@ -202,9 +196,7 @@ namespace Office365APIEditor.ViewerHelper
         public async Task<Data.TaskAPI.Task> GetTaskAsync(string ItemId)
         {
             Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/tasks/{ItemId}");
-
-            string accessToken = await Util.GetAccessTokenAsync(Global.pca, Global.currentUser);
-            string stringResponse = await Util.SendGetRequestAsync(URL, accessToken, Global.currentUser.Username);
+            string stringResponse = await SendGetRequestAsync(URL);
             return new Data.TaskAPI.Task(stringResponse);
         }
     }

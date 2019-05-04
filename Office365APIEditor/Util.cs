@@ -383,6 +383,7 @@ namespace Office365APIEditor
             }
         }
 
+        [Obsolete]
         public static async Task<string> GetAccessTokenAsync(PublicClientApplication pca, IAccount CurrentUser)
         {
             // Acquire access token.

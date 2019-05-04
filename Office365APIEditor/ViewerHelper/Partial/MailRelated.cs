@@ -23,8 +23,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                string stringResponse = await SendGetRequestAsync(URL);
 
                 var jsonResponse = (JObject)JsonConvert.DeserializeObject(stringResponse);
                 var folders = (JArray)jsonResponse.GetValue("value");
@@ -49,10 +48,8 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-
                 Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{FolderId}");
-                string rawJson = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                string rawJson = await SendGetRequestAsync(URL);
                 var mailFolder = new MailFolder(rawJson);
 
                 return mailFolder;
@@ -74,21 +71,19 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-
                 // Inbox
                 Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/mailfolders/inbox/?$select=id,parentFolderId");
-                string rawJson = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                string rawJson = await SendGetRequestAsync(URL);
                 var inbox = new MailFolder(rawJson);
 
                 // Top of information store
                 URL = new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{inbox.ParentFolderId}/?$select=id,parentFolderId");
-                rawJson = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                rawJson = await SendGetRequestAsync(URL);
                 var topOfInformationStore = new MailFolder(rawJson);
 
                 // MsgFolderRoot
                 URL = new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{topOfInformationStore.ParentFolderId}/?$select=id,parentFolderId");
-                rawJson = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                rawJson = await SendGetRequestAsync(URL);
                 var msgFolderRoot = new MailFolder(rawJson);
 
                 return msgFolderRoot;
@@ -109,8 +104,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                stringResponse = await SendGetRequestAsync(URL);
             }
             catch (Exception ex)
             {
@@ -135,8 +129,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                stringResponse = await SendGetRequestAsync(URL);
 
                 var jsonResponse = (JObject)JsonConvert.DeserializeObject(stringResponse);
                 var messages = (JArray)jsonResponse.GetValue("value");
@@ -175,8 +168,6 @@ namespace Office365APIEditor.ViewerHelper
 
         private async Task<PagedResponse<Message>> InternalGetPagedMessagesAsync(Uri URL)
         {
-            string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-
             var result = new PagedResponse<Message>
             {
                 CurrentPage = new List<Message>()
@@ -185,7 +176,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 // Get a response and response stream.
-                string stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                string stringResponse = await SendGetRequestAsync(URL);
 
                 // Convert JSON response.
 
@@ -220,9 +211,7 @@ namespace Office365APIEditor.ViewerHelper
         public async Task<Message> GetMessageAsync(string ItemId)
         {
             Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/messages/{ItemId}");
-
-            string accessToken = await Util.GetAccessTokenAsync(Global.pca, Global.currentUser);
-            string stringResponse = await Util.SendGetRequestAsync(URL, accessToken, Global.currentUser.Username);
+            string stringResponse = await SendGetRequestAsync(URL);
             return new Message(stringResponse);
         }
 
@@ -266,8 +255,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.Username, postData);
+                string stringResponse = await SendPostRequestAsync(URL, postData);
             }
             catch (Exception ex)
             {
@@ -312,12 +300,9 @@ namespace Office365APIEditor.ViewerHelper
 
             Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/messages/{draftItemId}/send");
 
-            string postData = "";
-
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.Username, postData);
+                string stringResponse = await SendPostRequestAsync(URL, "");
             }
             catch (Exception ex)
             {
@@ -335,8 +320,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.Username, postData);
+                string stringResponse = await SendPostRequestAsync(URL, postData);
             }
             catch (Exception ex)
             {
@@ -378,14 +362,12 @@ namespace Office365APIEditor.ViewerHelper
             {
                 // First, update the draft item.
 
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-
                 Uri URL;
                 URL = new Uri($"https://outlook.office.com/api/v2.0/Me/messages/{draftItemId}");
 
                 string postData = CreatePostDataToUpdateDraft(newItem);
 
-                string result = await Util.SendPatchRequestAsync(URL, accessToken, currentUser.Username, postData);
+                string result = await SendPatchRequestAsync(URL, postData);
 
                 // Then, remove all attachment once.
 
@@ -394,7 +376,7 @@ namespace Office365APIEditor.ViewerHelper
                 foreach (var attach in currentAttachments)
                 {
                     URL = new Uri($"https://outlook.office.com/api/v2.0/Me/messages/{draftItemId}/attachments/{attach.Id}");
-                    result = await Util.SendDeleteRequestAsync(URL, accessToken, currentUser.Username);
+                    result = await SendDeleteRequestAsync(URL);
                 }
 
                 // Finally, upload new attachments.
@@ -414,7 +396,7 @@ namespace Office365APIEditor.ViewerHelper
                     }
 
                     URL = new Uri($"https://outlook.office.com/api/v2.0/Me/messages/{draftItemId}/attachments/");
-                    result = await Util.SendPostRequestAsync(URL, accessToken, currentUser.Username, postData);
+                    result = await SendPostRequestAsync(URL, postData);
                 }
             }
             catch (Exception ex)
@@ -563,8 +545,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                stringResponse = await SendGetRequestAsync(URL);
             }
             catch (Exception ex)
             {
@@ -632,8 +613,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendPostRequestAsync(URL, accessToken, currentUser.Username, postData);
+                string stringResponse = await SendPostRequestAsync(URL, postData);
             }
             catch (Exception ex)
             {
@@ -649,8 +629,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendDeleteRequestAsync(URL, accessToken, currentUser.Username);
+                string stringResponse = await SendDeleteRequestAsync(URL);
             }
             catch (Exception ex)
             {

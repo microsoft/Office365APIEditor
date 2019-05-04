@@ -42,8 +42,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                string stringResponse = await SendGetRequestAsync(URL);
 
                 var jsonResponse = (JObject)JsonConvert.DeserializeObject(stringResponse);
                 var attachments = (JArray)jsonResponse.GetValue("value");
@@ -89,8 +88,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                stringResponse = await SendGetRequestAsync(URL);
             }
             catch (Exception ex)
             {

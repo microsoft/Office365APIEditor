@@ -6,6 +6,7 @@ using Microsoft.OData.Client;
 using System;
 using System.Collections.Generic;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace Office365APIEditor.ViewerHelper
 {
@@ -37,6 +38,58 @@ namespace Office365APIEditor.ViewerHelper
         {
             // TODO : Implement logging feature
             // eventArgs.ToString();
+        }
+
+        public static async Task<string> SendGetRequestAsync(Uri URL)
+        {
+            try
+            {
+                var accessToken = await Global.GetAccessTokenAsync();
+                return await Util.SendGetRequestAsync(URL, accessToken, Global.currentUser.Username);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static async Task<string> SendPostRequestAsync(Uri URL, string PostData)
+        {
+            try
+            {
+                var accessToken = await Global.GetAccessTokenAsync();
+                return await Util.SendPostRequestAsync(URL, accessToken, Global.currentUser.Username, PostData);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static async Task<string> SendPatchRequestAsync(Uri URL, string PostData)
+        {
+            try
+            {
+                var accessToken = await Global.GetAccessTokenAsync();
+                return await Util.SendPatchRequestAsync(URL, accessToken, Global.currentUser.Username, PostData);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static async Task<string> SendDeleteRequestAsync(Uri URL)
+        {
+            try
+            {
+                var accessToken = await Global.GetAccessTokenAsync();
+                return await Util.SendDeleteRequestAsync(URL, accessToken, Global.currentUser.Username);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         private MailAddressCollection ConvertRecipientIListToMailAddressCollection(IList<Data.Recipient> recipients)

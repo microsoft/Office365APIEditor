@@ -23,8 +23,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                string stringResponse = await SendGetRequestAsync(URL);
 
                 var jsonResponse = (JObject)JsonConvert.DeserializeObject(stringResponse);
                 var folders = (JArray)jsonResponse.GetValue("value");
@@ -49,10 +48,8 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-
                 Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/contactfolders/{FolderId}");
-                string rawJson = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                string rawJson = await SendGetRequestAsync(URL);
                 var contactFolder = new ContactFolder(rawJson);
 
                 return contactFolder;
@@ -83,8 +80,6 @@ namespace Office365APIEditor.ViewerHelper
 
         private async Task<PagedResponse<Contact>> InternalGetPagedContactsAsync(Uri URL)
         {
-            string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-
             var result = new PagedResponse<Contact>
             {
                 CurrentPage = new List<Contact>()
@@ -93,7 +88,7 @@ namespace Office365APIEditor.ViewerHelper
             try
             {
                 // Get a response and response stream.
-                string stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
+                string stringResponse = await SendGetRequestAsync(URL);
 
                 // Convert JSON response.
 
@@ -128,9 +123,7 @@ namespace Office365APIEditor.ViewerHelper
         public async Task<Contact> GetContactAsync(string ItemId)
         {
             Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/contacts/{ItemId}");
-
-            string accessToken = await Util.GetAccessTokenAsync(Global.pca, Global.currentUser);
-            string stringResponse = await Util.SendGetRequestAsync(URL, accessToken, Global.currentUser.Username);
+            string stringResponse = await SendGetRequestAsync(URL);
             return new Contact(stringResponse);
         }
     }
