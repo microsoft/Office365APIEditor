@@ -59,7 +59,7 @@ namespace Office365APIEditor
 
             Text = typeForWindowTitle + " in " + targetFolderDisplayName;
 
-            viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
+            viewerRequestHelper = new ViewerRequestHelper();
 
             switch (targetFolder.Type)
             {

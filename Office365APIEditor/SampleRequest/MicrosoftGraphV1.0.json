@@ -4054,7 +4054,7 @@
               ]
             },
             {
-              "displayName": "Permanenlty delete item",
+              "displayName": "Permanently delete item",
               "sampleRequest": [
                 {
                   "id": "777ad8d7-6d58-4902-9ed5-71d750e2782e",
@@ -7803,6 +7803,1381 @@
                   "displayName": "Example",
                   "method": "GET",
                   "URI": "https://graph.microsoft.com/v1.0/me/people",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Tasks and plans",
+      "secondLevelCategory": [
+        {
+          "displayName": "Plan",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Create plan",
+              "sampleRequest": [
+                {
+                  "id": "b7994310-5fb2-4c72-ba01-fdd9f90551c3",
+                  "displayName": "Example",
+                  "method": "post",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/plans",
+                  "header": [],
+                  "body": "{\r\n  \"owner\": \"{group-id}\",\r\n  \"title\": \"title-value\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List plans for group",
+              "sampleRequest": [
+                {
+                  "id": "d0b4c201-39b8-47f0-9e69-88f0c4c18e4f",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{group-id}/planner/plans",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get plan",
+              "sampleRequest": [
+                {
+                  "id": "c4de15dd-9b6e-46c7-beea-fe6a227f300a",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/plans/{plan-id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List plan tasks",
+              "sampleRequest": [
+                {
+                  "id": "b0803d33-49b5-43a2-9ae1-24d14d638c07",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/plans/{plan-id}/tasks",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List plan buckets",
+              "sampleRequest": [
+                {
+                  "id": "618c1ba9-4c48-454c-beaa-36e5f75c3c99",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/plans/{plan-id}/buckets",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update plan",
+              "sampleRequest": [
+                {
+                  "id": "7a41432c-0112-4c41-a3ee-aafcd3d7c1a8",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/plans/{plan-id}",
+                  "header": [
+                    {
+                      "name": "If-Match",
+                      "value": "{Last known ETag value}"
+                    }
+                  ],
+                  "body": "{\r\n  \"title\": \"title-value\"\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Task",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Create task",
+              "sampleRequest": [
+                {
+                  "id": "0d6688a3-891b-4462-8d59-7cdde8893045",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/tasks",
+                  "header": [],
+                  "body": "{\r\n  \"planId\": \"{plan-id}\",\r\n  \"bucketId\": \"{bucket-id}\",\r\n  \"title\": \"Update client list\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get tasks for user",
+              "sampleRequest": [
+                {
+                  "id": "81979f73-6fbb-4e47-9347-416077e8b4de",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/planner/tasks",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get task",
+              "sampleRequest": [
+                {
+                  "id": "7ef7335d-aecf-4700-aa3a-ddc8c870bf46",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/tasks/{task-id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update task",
+              "sampleRequest": [
+                {
+                  "id": "3368e5ba-b630-4777-9aa9-3bb972efbdd3",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/tasks/{task-id}",
+                  "header": [
+                    {
+                      "name": "If-Match",
+                      "value": "{Last known ETag value}"
+                    }
+                  ],
+                  "body": "{\r\n  \"assignments\": {\r\n    \"{assignment-guid}\": {\r\n      \"@odata.type\": \"#microsoft.graph.plannerAssignment\",\r\n      \"orderHint\": \"N9917 U2883!\"\r\n    }\r\n  },\r\n  \"appliedCategories\": {\r\n    \"category3\": true,\r\n    \"category4\": false\r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete task",
+              "sampleRequest": [
+                {
+                  "id": "948c87c0-b6ad-4dfa-8122-1fcce4cb253a",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/tasks/{id}",
+                  "header": [
+                    {
+                      "name": "If-Match",
+                      "value": "{Last known ETag value}"
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Task details",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get task details",
+              "sampleRequest": [
+                {
+                  "id": "44cc1141-1ca8-42d8-ab87-f91c424680cd",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/tasks/{task-id}/details",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update task details",
+              "sampleRequest": [
+                {
+                  "id": "d778f024-31f9-46ae-914a-7d327d077a6b",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/tasks/{task-id}/details",
+                  "header": [
+                    {
+                      "name": "If-Match",
+                      "value": "{Last known ETag value}"
+                    }
+                  ],
+                  "body": "{\r\n  \"previewType\": \"noPreview\"\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Plan details",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get plan details",
+              "sampleRequest": [
+                {
+                  "id": "71193c6f-daca-4c80-90d7-16a0e69e0545",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/plans/{plan-id}/details",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update plan details",
+              "sampleRequest": [
+                {
+                  "id": "deb19bc9-2f95-47f6-8d25-8558198ccdec",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/plans/{plan-id}/details",
+                  "header": [
+                    {
+                      "name": "If-Match",
+                      "value": "{Last known ETag value}"
+                    }
+                  ],
+                  "body": "{\r\n  \"categoryDescriptions\": {\r\n    \"category1\": \"Indoors\",\r\n    \"category3\": null,\r\n  }\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Bucket",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Create bucket",
+              "sampleRequest": [
+                {
+                  "id": "1aa802ed-7304-474f-9dce-bc4a15b3f1dc",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/buckets",
+                  "header": [],
+                  "body": "{\r\n  \"name\": \"Advertising\",\r\n  \"planId\": \"{plan-id}\",\r\n  \"orderHint\": \" !\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get bucket",
+              "sampleRequest": [
+                {
+                  "id": "9090f1d2-324a-4496-9bb7-0c6242e4449a",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/buckets/{bucket-id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List bucket task",
+              "sampleRequest": [
+                {
+                  "id": "1049f6ae-8a44-4f2b-8c8c-c29158c69dca",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/buckets/{bucket-id}/tasks",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update bucket",
+              "sampleRequest": [
+                {
+                  "id": "6c089685-c91f-4d68-9762-6d1fbf643c57",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/buckets/{bucket-id}",
+                  "header": [
+                    {
+                      "name": "If-Match",
+                      "value": "{Last known ETag value}"
+                    }
+                  ],
+                  "body": "{\r\n  \"name\": \"Development\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete bucket",
+              "sampleRequest": [
+                {
+                  "id": "92b6e5fb-93b5-4ec2-80ab-ba989bc8374e",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/buckets/{bucket-id}",
+                  "header": [
+                    {
+                      "name": "If-Match",
+                      "value": "{Last known ETag value}"
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Assigned to task board format",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get assigned to task board format",
+              "sampleRequest": [
+                {
+                  "id": "e082f291-8281-4021-9b9a-6a6f1b9fe6d8",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/tasks/{task-id}/assignedToTaskBoardFormat",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update assigned to task board format",
+              "sampleRequest": [
+                {
+                  "id": "edfa3893-c388-4ede-8541-ad0a2a8886e7",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/tasks/{task-id}/assignedToTaskBoardFormat",
+                  "header": [
+                    {
+                      "name": "If-Match",
+                      "value": "{Last known ETag value}"
+                    }
+                  ],
+                  "body": "{\r\n  \"orderHintsByAssignee\": {\r\n    \"aaa27244-1db4-476a-a5cb-004607466324\": \"8566473P 957764Jk!\"\r\n  }\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Bucket task board task format",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get bucket task board format",
+              "sampleRequest": [
+                {
+                  "id": "ef02d1bf-d00d-4d5d-9402-28b881fa9a08",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/tasks/{task-id}/bucketTaskBoardFormat",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update bucket task board format",
+              "sampleRequest": [
+                {
+                  "id": "dbf662d6-dbd0-43af-942c-f2cdf17057cf",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/tasks/{task-id}/bucketTaskBoardFormat",
+                  "header": [
+                    {
+                      "name": "If-Match",
+                      "value": "{Last known ETag value}"
+                    }
+                  ],
+                  "body": "{\r\n  \"orderHint\": \"A6673H Ejkl!\"\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Progress task board task format",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get progress task board format",
+              "sampleRequest": [
+                {
+                  "id": "e57f6e07-8510-408b-a642-9a27c5c8e658",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/tasks/{task-id}/progressTaskBoardFormat",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update progress task board format",
+              "sampleRequest": [
+                {
+                  "id": "c90c8098-edd7-436f-a976-e1af3d0d7651",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/planner/tasks/{task-id}/progressTaskBoardFormat",
+                  "header": [
+                    {
+                      "name": "If-Match",
+                      "value": "{Last known ETag value}"
+                    }
+                  ],
+                  "body": "{\r\n  \"orderHint\": \"A6673H Ejkl!\"\r\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "displayName": "Teamwork",
+      "secondLevelCategory": [
+        {
+          "displayName": "Team",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Create team",
+              "sampleRequest": [
+                {
+                  "id": "ce46248d-9c7b-4450-b4b6-b3072d73d3b5",
+                  "displayName": "Example",
+                  "method": "PUT",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/team",
+                  "header": [],
+                  "body": "{  \r\n  \"memberSettings\": {\r\n    \"allowCreateUpdateChannels\": true\r\n  },\r\n  \"messagingSettings\": {\r\n    \"allowUserEditMessages\": true,\r\n    \"allowUserDeleteMessages\": true\r\n  },\r\n  \"funSettings\": {\r\n    \"allowGiphy\": true,\r\n    \"giphyContentRating\": \"strict\"\r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get team",
+              "sampleRequest": [
+                {
+                  "id": "10e52a2d-7389-4f74-8e65-02da2e4f93ab",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update team",
+              "sampleRequest": [
+                {
+                  "id": "5f325b4f-057f-426d-9259-a28ba2737fcd",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}",
+                  "header": [],
+                  "body": "{  \r\n  \"memberSettings\": {\r\n    \"allowCreateUpdateChannels\": true\r\n  },\r\n  \"messagingSettings\": {\r\n    \"allowUserEditMessages\": true,\r\n    \"allowUserDeleteMessages\": true\r\n  },\r\n  \"funSettings\": {\r\n    \"allowGiphy\": true,\r\n    \"giphyContentRating\": \"strict\"\r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Archive team",
+              "sampleRequest": [
+                {
+                  "id": "ae236723-021b-4d17-a461-986616c5b856",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/archive",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Unarchive team",
+              "sampleRequest": [
+                {
+                  "id": "10101d47-1db3-45bc-83a9-782217e46850",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/unarchive",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Clone team",
+              "sampleRequest": [
+                {
+                  "id": "99d361b3-b914-42f1-852c-d116ca7175f8",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/clone",
+                  "header": [],
+                  "body": "{\r\n     \"displayName\": \"Library Assist\",\r\n     \"description\": \"Self help community for library\",\r\n     \"mailNickname\": \"libassist\",\r\n     \"partsToClone\": \"apps,tabs,settings,channels,members\",\r\n     \"visibility\": \"public\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List your teams",
+              "sampleRequest": [
+                {
+                  "id": "ea0dfa0f-39c6-40ab-86b6-41cb5b7aac3e",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/joinedTeams",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Group (team)",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Create group",
+              "sampleRequest": [
+                {
+                  "id": "8a9690c6-6e5d-4138-9451-3a0108b2fabe",
+                  "displayName": "Request 1",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups",
+                  "header": [],
+                  "body": "{\r\n  \"description\": \"Self help community for library\",\r\n  \"displayName\": \"Library Assist\",\r\n  \"groupTypes\": [\r\n    \"Unified\"\r\n  ],\r\n  \"mailEnabled\": true,\r\n  \"mailNickname\": \"library\",\r\n  \"securityEnabled\": false\r\n}"
+                },
+                {
+                  "id": "c2d1d765-85cd-4f04-b4bd-1b39ad473959",
+                  "displayName": "Request 2",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups",
+                  "header": [],
+                  "body": "{\r\n  \"description\": \"Group with designated owner and members\",\r\n  \"displayName\": \"Operations group\",\r\n  \"groupTypes\": [\r\n    \"Unified\"\r\n  ],\r\n  \"mailEnabled\": true,\r\n  \"mailNickname\": \"operations2019\",\r\n  \"securityEnabled\": false,\r\n  \"owners@odata.bind\": [\r\n    \"https://graph.microsoft.com/v1.0/users/26be1845-4119-4801-a799-aea79d09f1a2\"\r\n  ],\r\n  \"members@odata.bind\": [\r\n    \"https://graph.microsoft.com/v1.0/users/ff7cb387-6688-423c-8188-3da9532a73cc\",\r\n    \"https://graph.microsoft.com/v1.0/users/69456242-0067-49d3-ba96-9de6f2728e14\"\r\n  ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get group",
+              "sampleRequest": [
+                {
+                  "id": "812db0be-4f4b-4209-82f7-207b65c538b5",
+                  "displayName": "Request 1",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "d482bbac-cfef-4214-a110-6546dc00820d",
+                  "displayName": "Request 2",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}?$select=allowExternalSenders,autoSubscribeNewMembers,isSubscribedByMail,unseenCount",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List groups",
+              "sampleRequest": [
+                {
+                  "id": "14ee4112-0ccb-45fa-bf15-a11c6cdefc13",
+                  "displayName": "Request 1",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "f50f381a-1f75-438c-869a-a15fc9ecd800",
+                  "displayName": "Request 2",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups?$filter=hasMembersWithLicenseErrors+eq+true&$select=id,displayName",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update group",
+              "sampleRequest": [
+                {
+                  "id": "e9e0faa5-3442-440c-b6b9-1ae8ff378ca0",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}",
+                  "header": [],
+                  "body": "{\r\n  \"description\": \"description-value\",\r\n  \"displayName\": \"displayName-value\",\r\n  \"groupTypes\": [\r\n    \"groupTypes-value\"\r\n  ],\r\n  \"mail\": \"mail-value\",\r\n  \"mailEnabled\": true,\r\n  \"mailNickname\": \"mailNickname-value\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete group",
+              "sampleRequest": [
+                {
+                  "id": "8d5c631f-0966-4614-bd61-93ed5bb3c559",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List joined teams",
+              "sampleRequest": [
+                {
+                  "id": "852a3b56-fcdd-42d5-8b49-1ee2e460aacf",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/me/joinedTeams",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List members",
+              "sampleRequest": [
+                {
+                  "id": "11227f42-d8a8-489a-8b3b-499fe0791b82",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/members",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Add member",
+              "sampleRequest": [
+                {
+                  "id": "e5e1cead-87ce-4c39-a697-a4031d7dd105",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/members/$ref",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.id\": \"https://graph.microsoft.com/v1.0/directoryObjects/{id}\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Remove member",
+              "sampleRequest": [
+                {
+                  "id": "ea3631b3-5f9f-4cf9-a842-948b807a2138",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/members/{id}/$ref",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List owners",
+              "sampleRequest": [
+                {
+                  "id": "f3481542-62f8-4c18-a92f-5e454db964fd",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/owners",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Add owner",
+              "sampleRequest": [
+                {
+                  "id": "d3a02349-8cdc-4e41-aa3b-8f3588fd6b05",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/owners/$ref",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.id\": \"https://graph.microsoft.com/v1.0/users/{id}\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Remove owner",
+              "sampleRequest": [
+                {
+                  "id": "349ec638-f847-4b51-9146-31eb2456ce28",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/owners/{id}/$ref",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get member groups",
+              "sampleRequest": [
+                {
+                  "id": "f6455475-06ee-49f5-9ecc-807597d50425",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/getMemberObjects",
+                  "header": [],
+                  "body": "{\r\n  \"securityEnabledOnly\": true\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get member objects",
+              "sampleRequest": [
+                {
+                  "id": "6e86c858-d647-4759-98f4-5d42c56e7e7e",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/me/getMemberObjects",
+                  "header": [],
+                  "body": "{\r\n  \"securityEnabledOnly\": true\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Check member groups",
+              "sampleRequest": [
+                {
+                  "id": "468f1a0f-97a3-4e4a-98ba-6048a6d8b438",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/checkMemberGroups",
+                  "header": [],
+                  "body": "{\r\n  \"groupIds\": [\r\n    \"groupIds-value\"\r\n  ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "List member of",
+              "sampleRequest": [
+                {
+                  "id": "1101be8f-ec26-4476-a224-364a1aa77011",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/memberOf",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get deleted group",
+              "sampleRequest": [
+                {
+                  "id": "ed0eeac5-8dfb-4912-b595-cfa42beffecd",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/directory/deletedItems/{object-id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List deleted groups",
+              "sampleRequest": [
+                {
+                  "id": "17526331-f2d1-4cd4-8818-b121c7a9447c",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/directory/deletedItems/microsoft.graph.group",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Permanently delete group",
+              "sampleRequest": [
+                {
+                  "id": "63c7ff22-b7eb-428b-a818-ecd1abe4648c",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/directory/deletedItems/{object-id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Restore delete group",
+              "sampleRequest": [
+                {
+                  "id": "f1f55749-aa0d-4e18-b7b2-e517d7f7d197",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/directory/deletedItems/{object-id}/restore",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Channel",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List channels",
+              "sampleRequest": [
+                {
+                  "id": "c9c71d4e-df39-4433-b0d7-2e9cec096418",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/channels",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create channel",
+              "sampleRequest": [
+                {
+                  "id": "8d3e87ed-86fb-4880-bef7-d980f6ef5de3",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/channels",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"Architecture Discussion\",\r\n  \"description\": \"This channel is where we debate all future architecture plans\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get channel",
+              "sampleRequest": [
+                {
+                  "id": "7d5443d9-3441-476c-8f3b-df615ac88d67",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/channels/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Apps",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List apps in team",
+              "sampleRequest": [
+                {
+                  "id": "744b4d0f-f090-45d9-9206-271ae41f0061",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/installedApps",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "738b763a-80e2-4609-8d0c-7b65fc9027b5",
+                  "displayName": "Example -- getting the names of the installed apps",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/installedApps?$expand=teamsAppDefinition",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Add app to team",
+              "sampleRequest": [
+                {
+                  "id": "95b1c9b1-b3ac-4b96-b883-fd2e48cb840e",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/installedApps",
+                  "header": [],
+                  "body": "{\r\n   \"teamsApp@odata.bind\":\"https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/12345678-9abc-def0-123456789a\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Remove app from team",
+              "sampleRequest": [
+                {
+                  "id": "c89baf68-39df-489a-bc27-5a3fbe72ec01",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/installedApps/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Publish apps to catalog",
+              "sampleRequest": [
+                {
+                  "id": "f0c259e6-4bce-480c-845b-fd8bf08e18d5",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps",
+                  "header": [
+                    {
+                      "name": "Content-Type",
+                      "value": "application/zip"
+                    }
+                  ],
+                  "body": "[Zip file containing a Teams app package]"
+                }
+              ]
+            },
+            {
+              "displayName": "List apps in catalog",
+              "sampleRequest": [
+                {
+                  "id": "107cfd06-e9be-49d2-8ec4-f9fb9e25a6e9",
+                  "displayName": "List all applications",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps?$filter=distributionMethod eq 'organization'",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update app in catalog",
+              "sampleRequest": [
+                {
+                  "id": "951b61c3-c723-492a-a40d-5710b4bc6b58",
+                  "displayName": "Example",
+                  "method": "PUT",
+                  "URI": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{id}",
+                  "header": [
+                    {
+                      "name": "Content-Type",
+                      "value": "application/zip"
+                    }
+                  ],
+                  "body": "[Zip file containing a Teams app package]"
+                }
+              ]
+            },
+            {
+              "displayName": "Remove app in catalog",
+              "sampleRequest": [
+                {
+                  "id": "2c0a2d74-492c-4ed6-a06a-0f451c30981f",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List tabs",
+              "sampleRequest": [
+                {
+                  "id": "6a0aefc9-8a15-4cf2-bd22-c911e80ad26c",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/channels/{id}/tabs?$expand=teamsApp",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get tab",
+              "sampleRequest": [
+                {
+                  "id": "49e837ff-6701-441c-a78f-62e49dc7b0cd",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/channels/{id}/tabs/{id}?$expand=teamsApp",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update tab",
+              "sampleRequest": [
+                {
+                  "id": "cf011069-1243-4f48-b7b7-1aee59177afc",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/channels/{id}/tabs/{id}",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"My Contoso Tab - updated\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete tab",
+              "sampleRequest": [
+                {
+                  "id": "62c4f744-deee-41ba-ba00-df2d1633bb4d",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/channels/{id}/tabs/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Add tab",
+              "sampleRequest": [
+                {
+                  "id": "c59f1625-561c-41e7-8155-bc832a32e62a",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/teams/{id}/channels/{id}/tabs",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"My Contoso Tab\",\r\n  \"teamsApp@odata.bind\" : \"https://graph.microsoft.com/v1.0/appCatalogs/teamsApps/06805b9e-77e3-4b93-ac81-525eb87513b8\",\r\n  \"configuration\": {\r\n    \"entityId\": \"2DCA2E6C7A10415CAF6B8AB6661B3154\",\r\n    \"contentUrl\": \"https://www.contoso.com/Orders/2DCA2E6C7A10415CAF6B8AB6661B3154/tabView\",\r\n    \"websiteUrl\": \"https://www.contoso.com/Orders/2DCA2E6C7A10415CAF6B8AB6661B3154\",\r\n    \"removeUrl\": \"https://www.contoso.com/Orders/2DCA2E6C7A10415CAF6B8AB6661B3154/uninstallTab\"\r\n  }\r\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Calendar",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List events",
+              "sampleRequest": [
+                {
+                  "id": "59dfaff6-7061-4f7b-80be-bb4626ab8c09",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create event",
+              "sampleRequest": [
+                {
+                  "id": "e163b630-feb6-4173-a11f-4eba79d2ad61",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events",
+                  "header": [],
+                  "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Conf Room 1\"\r\n  },\r\n  \"attendees\": []\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get event",
+              "sampleRequest": [
+                {
+                  "id": "5c16f060-1fb6-445d-889c-d3b9b7b55bab",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update event",
+              "sampleRequest": [
+                {
+                  "id": "d5413d58-ea31-4e5b-b5ca-90a8b1d1bf7f",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                    }
+                  ],
+                  "body": "{\r\n  \"location\":{\r\n      \"displayName\":\"Conf Room 2\"\r\n  }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete event",
+              "sampleRequest": [
+                {
+                  "id": "47512082-a7ed-4c82-ad25-34a41b1a7b80",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List calendar view",
+              "sampleRequest": [
+                {
+                  "id": "6a874de3-1ab5-48ab-963f-906d8208936e",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/calendarView?startDateTime=${DateTime1DayLater12}&endDateTime=${DateTime1MonthLater12}",
+                  "header": [
+                    {
+                      "name": "Prefer",
+                      "value": "outlook.timezone=\"Pacific Standard Time\", outlook.body-content-type=\"text\""
+                    }
+                  ],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List attachments",
+              "sampleRequest": [
+                {
+                  "id": "b0b40b25-b6f2-4d13-9366-5a65b0dcc957",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}/attachments",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Add attachment",
+              "sampleRequest": [
+                {
+                  "id": "c2ba681e-b521-4a8d-9ad3-d4a11b28f190",
+                  "displayName": "Request 1",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}/attachments",
+                  "header": [],
+                  "body": "{\r\n    \"@odata.type\": \"#microsoft.graph.fileAttachment\",\r\n    \"name\": \"menu.txt\",\r\n    \"contentBytes\": \"Q29mZmVl\"   \r\n}"
+                },
+                {
+                  "id": "1433fb8b-f799-4649-b3b6-c42eda8ef1a5",
+                  "displayName": "Request 2",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}/attachments",
+                  "header": [],
+                  "body": "{\r\n\t\"@odata.type\":\"#microsoft.graph.itemAttachment\",\r\n\t\"name\":\"test\",\r\n\t\"isInline\":false,\r\n\t\"item\":{\r\n\t\t\"@odata.type\":\"#microsoft.graph.message\",\r\n\t\t\"subject\":\"test\",\r\n\t\t\"body\":{\r\n\t\t\t\"contentType\":\"text\",\r\n\t\t\t\"content\":\"attachment body\"\r\n\t\t},\r\n\t\t\"sender\":{\r\n\t\t\t\"emailAddress\":{\r\n\t\t\t\t\"name\":\"Alex\",\r\n\t\t\t\t\"address\":\"alexd@contoso.com\"\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"from\":{\r\n\t\t\t\"emailAddress\":{\r\n\t\t\t\t\"name\":\"Alex\",\r\n\t\t\t\t\"address\":\"alexd@contoso.com\"\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"toRecipients\":[\r\n\t\t\t{\r\n\t\t\t\t\"emailAddress\":{\r\n\t\t\t\t\t\"name\":\"Janie\",\r\n\t\t\t\t\t\"address\":\"janiem@contoso.com\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t]\r\n\t}\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Create open extension",
+              "sampleRequest": [
+                {
+                  "id": "1a3b7756-43c3-46d5-b6ba-ee1597de27b4",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}/extensions",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.type\" : \"microsoft.graph.openTypeExtension\",\r\n  \"extensionName\" : \"Com.Contoso.Deal\",\r\n  \"companyName\" : \"Alpine Skis\",\r\n  \"dealValue\" : 1010100,\r\n  \"expirationDate\" : \"${DateTime1MonthLater12}\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get open extension",
+              "sampleRequest": [
+                {
+                  "id": "74f391dc-d7a8-4cfd-b71f-2c4383d17bbd",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/events/{id}/extensions/{extentionName}/",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Drive",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Get drive",
+              "sampleRequest": [
+                {
+                  "id": "9eb60ac4-2047-4d36-84ed-332753929f27",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/drive",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "List children",
+              "sampleRequest": [
+                {
+                  "id": "b95ef1c7-20ff-4f31-b35f-0440d8ab43cc",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/drive/items/{item-id}/children",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Plans",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List plans",
+              "sampleRequest": [
+                {
+                  "id": "2c5910c1-c157-4858-b5ff-a167f2fa648d",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{group-id}/planner/plans",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Notes",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List notebooks",
+              "sampleRequest": [
+                {
+                  "id": "93293e19-6670-42e3-a44a-a6fa4b461787",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/onenote/notebooks",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create notebook",
+              "sampleRequest": [
+                {
+                  "id": "ca85c19d-0704-4b02-a290-1663db726823",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/groups/{id}/onenote/notebooks",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"Notebook name\"\r\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    //{
+    //  "displayName": "Workbooks and charts",
+    //  "secondLevelCategory": []
+    //},
+    //{
+    //  "displayName": "Open extensions",
+    //  "secondLevelCategory": []
+    //},
+    {
+      "displayName": "Schema extensions",
+      "secondLevelCategory": [
+        {
+          "displayName": "Schema extensions",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List schema extentions",
+              "sampleRequest": [
+                {
+                  "id": "aa801957-37e4-4e4a-ad56-adc54b47cd75",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/schemaExtensions?$filter=id eq 'graphlearn_test'",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create schema extention",
+              "sampleRequest": [
+                {
+                  "id": "cb30ddf8-8efa-4afb-b7bf-bd582a039108",
+                  "displayName": "Request 1",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/schemaExtensions",
+                  "header": [],
+                  "body": "{\r\n    \"id\":\"graphlearn_courses\",\r\n    \"description\": \"Graph Learn training courses extensions\",\r\n    \"targetTypes\": [\r\n        \"Group\"\r\n    ],\r\n    \"properties\": [\r\n        {\r\n            \"name\": \"courseId\",\r\n            \"type\": \"Integer\"\r\n        },\r\n        {\r\n            \"name\": \"courseName\",\r\n            \"type\": \"String\"\r\n        },\r\n        {\r\n            \"name\": \"courseType\",\r\n            \"type\": \"String\"\r\n        }\r\n    ]\r\n}"
+                },
+                {
+                  "id": "87292236-8ed9-4c5a-8390-128a7d37c512",
+                  "displayName": "Request 2",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/v1.0/schemaExtensions",
+                  "header": [],
+                  "body": "{\r\n    \"id\":\"courses\",\r\n    \"description\": \"Graph Learn training courses extensions\",\r\n    \"targetTypes\": [\r\n        \"Group\"\r\n    ],\r\n    \"properties\": [\r\n        {\r\n            \"name\": \"courseId\",\r\n            \"type\": \"Integer\"\r\n        },\r\n        {\r\n            \"name\": \"courseName\",\r\n            \"type\": \"String\"\r\n        },\r\n        {\r\n            \"name\": \"courseType\",\r\n            \"type\": \"String\"\r\n        }\r\n    ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get schema extention",
+              "sampleRequest": [
+                {
+                  "id": "10174491-1f44-4ceb-badb-ab062b7d5bc5",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/v1.0/schemaExtensions/{id}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update schema extention",
+              "sampleRequest": [
+                {
+                  "id": "87ed2494-a1d3-495a-bcb3-9c8325b23297",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/v1.0/schemaExtensions/{id}",
+                  "header": [],
+                  "body": "{\r\n  \"properties\": [\r\n    {\r\n      \"name\":\"new-name-value\",\r\n      \"type\":\"new-type-value\"\r\n    },\r\n    {\r\n      \"name\":\"additional-name-value\",\r\n      \"type\":\"additional-type-value\"\r\n    }\r\n  ],\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete schema extention",
+              "sampleRequest": [
+                {
+                  "id": "1f577845-fbd6-448c-9e59-98b15501f989",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/v1.0/schemaExtensions/{id}",
                   "header": [],
                   "body": ""
                 }

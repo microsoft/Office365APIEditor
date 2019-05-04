@@ -12,14 +12,8 @@ namespace Office365APIEditor.ViewerHelper
 {
     partial class ViewerRequestHelper
     {
-        private PublicClientApplication pca;
-        private IAccount currentUser;
-
-        public ViewerRequestHelper(PublicClientApplication PCA, IAccount CurrentUser)
+        public ViewerRequestHelper()
         {
-            pca = PCA;
-            currentUser = CurrentUser;
-
             // TODO : Implement logging feature
             // Maybe in Util, not here.
             //client.Context.BuildingRequest += new EventHandler<BuildingRequestEventArgs>(

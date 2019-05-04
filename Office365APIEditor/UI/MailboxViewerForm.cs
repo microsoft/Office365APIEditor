@@ -92,7 +92,7 @@ namespace Office365APIEditor
 
             try
             {
-                viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
+                viewerRequestHelper = new ViewerRequestHelper();
 
                 // Get the Drafts folder.
                 GetDraftsFolderAsync();

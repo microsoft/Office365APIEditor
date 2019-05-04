@@ -50,6 +50,7 @@
   &lt;string&gt;https://outlook.office.com/user.read&lt;/string&gt;
   &lt;string&gt;https://outlook.office.com/user.readwrite&lt;/string&gt;
   &lt;string&gt;https://outlook.office.com/user.readbasic.all&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/AppCatalog.ReadWrite.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Calendars.Read&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Calendars.Read.Shared&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Calendars.ReadWrite&lt;/string&gt;

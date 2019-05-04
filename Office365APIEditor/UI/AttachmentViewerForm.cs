@@ -35,7 +35,7 @@ namespace Office365APIEditor
         {
             Text = "Attachments for '" + targetItemSubject + "'";
 
-            viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
+            viewerRequestHelper = new ViewerRequestHelper();
 
             List<AttachmentBase> result = new List<AttachmentBase>(); ;
 

@@ -25,7 +25,7 @@ namespace Office365APIEditor.UI.FocusedInbox
 
         private async void FocusedInboxOverrideForm_LoadAsync(object sender, EventArgs e)
         {
-            viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
+            viewerRequestHelper = new ViewerRequestHelper();
 
             try
             {
@@ -157,7 +157,7 @@ namespace Office365APIEditor.UI.FocusedInbox
             UseWaitCursor = true;
             Enabled = false;
 
-            viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
+            viewerRequestHelper = new ViewerRequestHelper();
 
             if (overridesToBeRemoved.Count != 0)
             {

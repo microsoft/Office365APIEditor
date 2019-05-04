@@ -68,7 +68,7 @@ namespace Office365APIEditor.UI
                 checkBox_SaveToSentItems.Checked = true;
                 checkBox_SaveToSentItems.Enabled = false;
 
-                viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
+                viewerRequestHelper = new ViewerRequestHelper();
                 var draftItem = await viewerRequestHelper.GetDraftMessageAsync(draftItemId);
 
                 if (comboBox_Importance.InvokeRequired)
@@ -257,7 +257,7 @@ namespace Office365APIEditor.UI
 
             Enabled = false;
 
-            viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
+            viewerRequestHelper = new ViewerRequestHelper();
 
             NewEmailMessage newItem;
 
@@ -325,7 +325,7 @@ namespace Office365APIEditor.UI
 
             Enabled = false;
 
-            viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
+            viewerRequestHelper = new ViewerRequestHelper();
 
             NewEmailMessage newItem;
 
