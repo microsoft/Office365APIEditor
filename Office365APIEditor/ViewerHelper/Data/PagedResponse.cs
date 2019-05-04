@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace Office365APIEditor.ViewerHelper
+namespace Office365APIEditor.ViewerHelper.Data
 {
     class PagedResponse<T>
     {

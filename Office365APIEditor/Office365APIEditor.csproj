@@ -271,20 +271,36 @@
       <DependentUpon>VersionInformationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Util.cs" />
-    <Compile Include="ViewerHelper\Attachments\AttachmentSummary.cs" />
-    <Compile Include="ViewerHelper\Attachments\AttachmentType.cs" />
-    <Compile Include="ViewerHelper\Attachments\FileAttachment.cs" />
-    <Compile Include="ViewerHelper\ContactSummary.cs" />
-    <Compile Include="ViewerHelper\EventSummary.cs" />
-    <Compile Include="ViewerHelper\FocusedInboxOverride.cs" />
-    <Compile Include="ViewerHelper\MessageSummary.cs" />
-    <Compile Include="ViewerHelper\NewEmailMessage.cs" />
-    <Compile Include="ViewerHelper\PagedResponse.cs" />
-    <Compile Include="ViewerHelper\SampleRequest\SampleRequest.cs" />
-    <Compile Include="ViewerHelper\Tasks\TaskFolder.cs" />
-    <Compile Include="ViewerHelper\Tasks\TaskGroup.cs" />
-    <Compile Include="ViewerHelper\Tasks\TaskSummary.cs" />
-    <Compile Include="ViewerHelper\ViewerHelper.cs" />
+    <Compile Include="ViewerHelper\Data\AttachmentAPI\AttachmentBase.cs" />
+    <Compile Include="ViewerHelper\Data\AttachmentAPI\AttachmentType.cs" />
+    <Compile Include="ViewerHelper\Data\AttachmentAPI\FileAttachment.cs" />
+    <Compile Include="ViewerHelper\Data\Attendee.cs" />
+    <Compile Include="ViewerHelper\Data\CalendarAPI\Event.cs" />
+    <Compile Include="ViewerHelper\Data\ContactsAPI\Contact.cs" />
+    <Compile Include="ViewerHelper\Data\CalendarAPI\Calendar.cs" />
+    <Compile Include="ViewerHelper\Data\CalendarAPI\CalendarGroup.cs" />
+    <Compile Include="ViewerHelper\Data\ContactsAPI\ContactFolder.cs" />
+    <Compile Include="ViewerHelper\Data\DateTimeOffset.cs" />
+    <Compile Include="ViewerHelper\Data\EmailAddress.cs" />
+    <Compile Include="ViewerHelper\Data\MailAPI\MailFolder.cs" />
+    <Compile Include="ViewerHelper\Data\MailAPI\Message.cs" />
+    <Compile Include="ViewerHelper\Data\OutlookRestApiBaseObject.cs" />
+    <Compile Include="ViewerHelper\Data\MailAPI\FocusedInboxOverride.cs" />
+    <Compile Include="ViewerHelper\Data\Recipient.cs" />
+    <Compile Include="ViewerHelper\Data\ResponseStatus.cs" />
+    <Compile Include="ViewerHelper\Data\TaskAPI\Task.cs" />
+    <Compile Include="ViewerHelper\Global.cs" />
+    <Compile Include="ViewerHelper\Data\MailAPI\NewEmailMessage.cs" />
+    <Compile Include="ViewerHelper\Data\PagedResponse.cs" />
+    <Compile Include="SampleRequest\SampleRequest.cs" />
+    <Compile Include="ViewerHelper\Data\TaskAPI\TaskFolder.cs" />
+    <Compile Include="ViewerHelper\Data\TaskAPI\TaskGroup.cs" />
+    <Compile Include="ViewerHelper\Partial\AttachmentRelated.cs" />
+    <Compile Include="ViewerHelper\Partial\CalendarRelated.cs" />
+    <Compile Include="ViewerHelper\Partial\ContactRelated.cs" />
+    <Compile Include="ViewerHelper\Partial\MailRelated.cs" />
+    <Compile Include="ViewerHelper\Partial\TaskRelated.cs" />
+    <Compile Include="ViewerHelper\ViewerRequestHelper.cs" />
     <EmbeddedResource Include="UI\AccessTokenWizard.resx">
       <DependentUpon>AccessTokenWizard.cs</DependentUpon>
       <SubType>Designer</SubType>

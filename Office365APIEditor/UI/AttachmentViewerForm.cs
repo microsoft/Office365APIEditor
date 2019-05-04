@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
-using Microsoft.Identity.Client;
-using Office365APIEditor.ViewerHelper.Attachments;
+using Office365APIEditor.ViewerHelper;
+using Office365APIEditor.ViewerHelper.Data.AttachmentAPI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,23 +14,18 @@ namespace Office365APIEditor
 {
     public partial class AttachmentViewerForm : Form
     {
-        PublicClientApplication pca;
         FolderInfo targetFolder;
         string targetItemId;
         string targetItemSubject;
 
-        IAccount currentUser;
-
-        private ViewerHelper.ViewerHelper viewerHelper;
+        private ViewerRequestHelper viewerRequestHelper;
 
         string currentId = "";
 
-        public AttachmentViewerForm(PublicClientApplication PCA, IAccount CurrentUser, FolderInfo TargetFolderInfo, string TargetItemID, string TargetItemSubject)
+        public AttachmentViewerForm(FolderInfo TargetFolderInfo, string TargetItemID, string TargetItemSubject)
         {
             InitializeComponent();
 
-            pca = PCA;
-            currentUser = CurrentUser;
             targetFolder = TargetFolderInfo;
             targetItemId = TargetItemID;
             targetItemSubject = TargetItemSubject;
@@ -40,9 +35,9 @@ namespace Office365APIEditor
         {
             Text = "Attachments for '" + targetItemSubject + "'";
 
-            viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
+            viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
 
-            List<AttachmentSummary> result = new List<AttachmentSummary>(); ;
+            List<AttachmentBase> result = new List<AttachmentBase>(); ;
 
             switch (targetFolder.Type)
             {
@@ -51,7 +46,7 @@ namespace Office365APIEditor
                 case FolderContentType.Drafts:
                     try
                     {
-                        result = await viewerHelper.GetAttachmentsAsync(FolderContentType.Message, targetItemId);
+                        result = await viewerRequestHelper.GetAllAttachmentsAsync(FolderContentType.Message, targetItemId);
                     }
                     catch (Exception ex)
                     {
@@ -66,7 +61,7 @@ namespace Office365APIEditor
                 case FolderContentType.Calendar:
                     try
                     {
-                        result = await viewerHelper.GetAttachmentsAsync(FolderContentType.Calendar, targetItemId);
+                        result = await viewerRequestHelper.GetAllAttachmentsAsync(FolderContentType.Calendar, targetItemId);
                     }
                     catch (Exception ex)
                     {
@@ -74,7 +69,7 @@ namespace Office365APIEditor
                     }
 
                     break;
-                case FolderContentType.DummyCalendarRoot:
+                case FolderContentType.DummyCalendarGroupRoot:
                     break;
                 default:
                     break;
@@ -140,7 +135,7 @@ namespace Office365APIEditor
         {
             try
             {
-                var attachment = await viewerHelper.GetAttachmentAsync(targetFolder.Type, targetItemId, attachmentId);
+                var attachment = await viewerRequestHelper.GetAttachmentAsync(targetFolder.Type, targetItemId, attachmentId);
                 CreatePropTable(attachment);
                 return true;
             }

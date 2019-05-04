@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
-using Office365APIEditor.ViewerHelper.Attachments;
+using Office365APIEditor.ViewerHelper.Data.AttachmentAPI;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -10,36 +10,28 @@ namespace Office365APIEditor.UI
 {
     public partial class NewAttachmentForm : Form
     {
-        private List<FileAttachment> originalAttachments;
-        private List<FileAttachment> newAttachments;
+        private List<AttachmentBase> attachments;
 
-        public NewAttachmentForm(List<FileAttachment> Attachments)
+        public NewAttachmentForm(List<AttachmentBase> Attachments)
         {
-            originalAttachments = Attachments;
+            attachments = Attachments;
 
             InitializeComponent();
         }
 
         private void NewAttachmentForm_Load(object sender, EventArgs e)
         {
-            foreach (var attachment in originalAttachments)
+            foreach (var attachment in attachments)
             {
-                if (attachment.FullPath == "")
-                {
-                    listBox_Attachments.Items.Add(attachment.Name);
-                }
-                else
-                {
-                    listBox_Attachments.Items.Add(attachment.FullPath);
-                }
+                listBox_Attachments.Items.Add(attachment.Name);
             }
         }
 
-        public DialogResult ShowDialog(out List<FileAttachment> SelectedAttachments)
+        public DialogResult ShowDialog(out List<AttachmentBase> SelectedAttachments)
         {
             DialogResult result = ShowDialog();
 
-            SelectedAttachments = newAttachments;
+            SelectedAttachments = attachments;
             return result;
         }
 
@@ -49,7 +41,8 @@ namespace Office365APIEditor.UI
             {
                 foreach (var file in openFileDialog1.FileNames)
                 {
-                    listBox_Attachments.Items.Add(file);
+                    listBox_Attachments.Items.Add(System.IO.Path.GetFileName(file));
+                    attachments.Add(FileAttachment.CreateFromFilePath(file));
                 }
             }
         }
@@ -61,6 +54,7 @@ namespace Office365APIEditor.UI
                 bool lastItemRemoved = (listBox_Attachments.SelectedIndex == listBox_Attachments.Items.Count - 1);
                 int removedIndex = listBox_Attachments.SelectedIndex;
 
+                attachments.RemoveAt(listBox_Attachments.SelectedIndex);
                 listBox_Attachments.Items.RemoveAt(listBox_Attachments.SelectedIndex);
 
                 if (listBox_Attachments.Items.Count != 0)
@@ -87,14 +81,6 @@ namespace Office365APIEditor.UI
 
             try
             {
-                newAttachments = new List<FileAttachment>();
-
-                foreach (string attachment in listBox_Attachments.Items)
-                {
-                    FileAttachment newAttachment = new FileAttachment(attachment);
-                    newAttachments.Add(newAttachment);
-                }
-
                 DialogResult = DialogResult.OK;
                 Close();
             }

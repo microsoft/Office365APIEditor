@@ -2,7 +2,7 @@
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
 using Newtonsoft.Json;
-using Office365APIEditor.ViewerHelper.SampleRequest;
+using Office365APIEditor.SampleRequestDefinition;
 using ScintillaNET;
 using System;
 using System.Collections;

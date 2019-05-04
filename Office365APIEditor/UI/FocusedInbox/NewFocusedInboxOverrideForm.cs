@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
-using Office365APIEditor.ViewerHelper;
+using Office365APIEditor.ViewerHelper.Data.MailAPI;
 using System;
 using System.Windows.Forms;
 

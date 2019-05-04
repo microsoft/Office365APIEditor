@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
-using Microsoft.Identity.Client;
 using Office365APIEditor.ViewerHelper;
+using Office365APIEditor.ViewerHelper.Data.MailAPI;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -11,32 +11,26 @@ namespace Office365APIEditor.UI.FocusedInbox
 {
     public partial class FocusedInboxOverrideForm : Form
     {
-        PublicClientApplication pca;
-        IAccount currentUser;
-
-        private ViewerHelper.ViewerHelper viewerHelper;
+        private ViewerRequestHelper viewerRequestHelper;
 
         private List<FocusedInboxOverride> originalOverrides = new List<FocusedInboxOverride>();
 
         private List<string> overridesToBeChanged = new List<string>();
         private List<string> overridesToBeRemoved = new List<string>();
 
-        public FocusedInboxOverrideForm(PublicClientApplication PCA, IAccount CurrentUser)
+        public FocusedInboxOverrideForm()
         {
             InitializeComponent();
-
-            pca = PCA;
-            currentUser = CurrentUser;
         }
 
         private async void FocusedInboxOverrideForm_LoadAsync(object sender, EventArgs e)
         {
-            viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
+            viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
 
             try
             {
                 // Get all focused inbox overrides.
-                originalOverrides = await viewerHelper.GetFocusedInboxOverridesAsync();
+                originalOverrides = await viewerRequestHelper.GetFocusedInboxOverridesAsync();
 
                 // Show current setting.
 
@@ -163,7 +157,7 @@ namespace Office365APIEditor.UI.FocusedInbox
             UseWaitCursor = true;
             Enabled = false;
 
-            viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
+            viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
 
             if (overridesToBeRemoved.Count != 0)
             {
@@ -173,7 +167,7 @@ namespace Office365APIEditor.UI.FocusedInbox
                 {
                     try
                     {
-                        await viewerHelper.RemoveFocusedInboxOverrideAsync(item);
+                        await viewerRequestHelper.RemoveFocusedInboxOverrideAsync(item);
                     }
                     catch (Exception ex)
                     {
@@ -197,7 +191,7 @@ namespace Office365APIEditor.UI.FocusedInbox
 
                     try
                     {
-                        await viewerHelper.AddOrUpdateFocusedInboxOverrideAsync(newOverride);
+                        await viewerRequestHelper.AddOrUpdateFocusedInboxOverrideAsync(newOverride);
                     }
                     catch (Exception ex)
                     {
@@ -215,7 +209,7 @@ namespace Office365APIEditor.UI.FocusedInbox
 
                     try
                     {
-                        await viewerHelper.AddOrUpdateFocusedInboxOverrideAsync(newOverride);
+                        await viewerRequestHelper.AddOrUpdateFocusedInboxOverrideAsync(newOverride);
                     }
                     catch (Exception ex)
                     {

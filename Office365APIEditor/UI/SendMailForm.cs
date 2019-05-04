@@ -8,52 +8,44 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Windows.Forms;
-using Microsoft.Identity.Client;
 using Office365APIEditor.ViewerHelper;
-using Office365APIEditor.ViewerHelper.Attachments;
+using Office365APIEditor.ViewerHelper.Data.AttachmentAPI;
+using Office365APIEditor.ViewerHelper.Data.MailAPI;
 
 namespace Office365APIEditor.UI
 {
     public partial class SendMailForm : Form
     {
-        PublicClientApplication pca;
         FolderInfo targetFolder;
         string targetFolderDisplayName;
         string draftItemId;
 
-        IAccount currentUser;
-        private ViewerHelper.ViewerHelper viewerHelper;
+        private ViewerRequestHelper viewerRequestHelper;
 
-        List<FileAttachment> attachments;
+        List<ViewerHelper.Data.AttachmentAPI.AttachmentBase> attachments;
 
-        public SendMailForm(PublicClientApplication PCA, IAccount CurrentUser)
+        public SendMailForm()
         {
             InitializeComponent();
 
-            pca = PCA;
-            currentUser = CurrentUser;
             targetFolder = new FolderInfo();
             targetFolderDisplayName = null;
             draftItemId = "";
         }
 
-        public SendMailForm(PublicClientApplication PCA, IAccount CurrentUser, string DraftItemId)
+        public SendMailForm(string DraftItemId)
         {
             InitializeComponent();
 
-            pca = PCA;
-            currentUser = CurrentUser;
             targetFolder = new FolderInfo();
             targetFolderDisplayName = null;
             draftItemId = DraftItemId;
         }
 
-        public SendMailForm(PublicClientApplication PCA, IAccount CurrentUser, FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
+        public SendMailForm(FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
         {
             InitializeComponent();
 
-            pca = PCA;
-            currentUser = CurrentUser;
             targetFolder = TargetFolderInfo;
             targetFolderDisplayName = TargetFolderDisplayName;
             draftItemId = "";
@@ -61,7 +53,7 @@ namespace Office365APIEditor.UI
 
         private async void SendMailForm_LoadAsync(object sender, EventArgs e)
         {
-            attachments = new List<FileAttachment>();
+            attachments = new List<ViewerHelper.Data.AttachmentAPI.AttachmentBase>();
 
             comboBox_Importance.SelectedIndex = 1;
             comboBox_BodyType.SelectedIndex = 0;
@@ -76,8 +68,8 @@ namespace Office365APIEditor.UI
                 checkBox_SaveToSentItems.Checked = true;
                 checkBox_SaveToSentItems.Enabled = false;
 
-                viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
-                var draftItem = await viewerHelper.GetDraftMessageAsync(draftItemId);
+                viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
+                var draftItem = await viewerRequestHelper.GetDraftMessageAsync(draftItemId);
 
                 if (comboBox_Importance.InvokeRequired)
                 {
@@ -199,11 +191,11 @@ namespace Office365APIEditor.UI
                     comboBox_BodyType.SelectedIndex = (int)draftItem.BodyType;
                 }
 
-                var attachList = await viewerHelper.GetAttachmentsAsync(FolderContentType.Message, draftItemId);
+                var attachList = await viewerRequestHelper.GetAllAttachmentsAsync(FolderContentType.Message, draftItemId);
 
                 foreach (var attach in attachList)
                 {
-                    Dictionary<string, string> fullAttachInfo = await viewerHelper.GetAttachmentAsync(FolderContentType.Message, draftItemId, attach.Id);
+                    Dictionary<string, string> fullAttachInfo = await viewerRequestHelper.GetAttachmentAsync(FolderContentType.Message, draftItemId, attach.Id);
 
                     string tempType = "";
                     string tempName = "";
@@ -229,7 +221,7 @@ namespace Office365APIEditor.UI
                     {
                         // This is a FileAttachment
 
-                        attachments.Add(new FileAttachment(tempName, tempContentBytes));
+                        attachments.Add(FileAttachment.CreateFromContentBytes(tempName, tempContentBytes));
                     }
                 }
 
@@ -265,7 +257,7 @@ namespace Office365APIEditor.UI
 
             Enabled = false;
 
-            viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
+            viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
 
             NewEmailMessage newItem;
 
@@ -284,16 +276,17 @@ namespace Office365APIEditor.UI
             {
                 if (draftItemId == "")
                 {
-                    await viewerHelper.SendMailAsync(newItem, checkBox_SaveToSentItems.Checked);
+                    await viewerRequestHelper.SendMailAsync(newItem, checkBox_SaveToSentItems.Checked);
                 }
                 else
                 {
                     // This is a draft message.
                     // Update then send it.
 
-                    await viewerHelper.UpdateDraftAsync(draftItemId, newItem);
-                    await viewerHelper.SendMailAsync(draftItemId);
+                    await viewerRequestHelper.UpdateDraftAsync(draftItemId, newItem);
+                    await viewerRequestHelper.SendMailAsync(draftItemId);
                 }
+
                 Close();
             }
             catch (WebException ex)
@@ -332,7 +325,7 @@ namespace Office365APIEditor.UI
 
             Enabled = false;
 
-            viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
+            viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
 
             NewEmailMessage newItem;
 
@@ -351,12 +344,12 @@ namespace Office365APIEditor.UI
             {
                 if (draftItemId == "")
                 {
-                    await viewerHelper.SaveDraftAsync(newItem);
+                    await viewerRequestHelper.SaveDraftAsync(newItem);
                 }
                 else
                 {
                     // This is a draft message.
-                    await viewerHelper.UpdateDraftAsync(draftItemId, newItem);
+                    await viewerRequestHelper.UpdateDraftAsync(draftItemId, newItem);
                 }
                 
                 Close();
@@ -454,7 +447,7 @@ namespace Office365APIEditor.UI
         {
             NewAttachmentForm newAttachmentForm = new NewAttachmentForm(attachments);
             
-            if (newAttachmentForm.ShowDialog(out List<FileAttachment> newAttachments) == DialogResult.OK)
+            if (newAttachmentForm.ShowDialog(out List<ViewerHelper.Data.AttachmentAPI.AttachmentBase> newAttachments) == DialogResult.OK)
             {
                 attachments = newAttachments;
             }

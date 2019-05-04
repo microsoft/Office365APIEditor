@@ -3,7 +3,7 @@
 
 using System.Net.Mail;
 
-namespace Office365APIEditor.ViewerHelper
+namespace Office365APIEditor.ViewerHelper.Data.MailAPI
 {
     public class FocusedInboxOverride
     {

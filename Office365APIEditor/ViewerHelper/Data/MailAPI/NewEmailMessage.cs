@@ -1,11 +1,10 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
-using Office365APIEditor.ViewerHelper.Attachments;
 using System.Collections.Generic;
 using System.Net.Mail;
 
-namespace Office365APIEditor.ViewerHelper
+namespace Office365APIEditor.ViewerHelper.Data.MailAPI
 {
     class NewEmailMessage
     {
@@ -19,7 +18,7 @@ namespace Office365APIEditor.ViewerHelper
         public bool RequestDeliveryReceipt;
         public bool RequestReadReceipt;
         public bool SaveToSentItems;
-        public List<FileAttachment> Attachments;
+        public List<Data.AttachmentAPI.AttachmentBase> Attachments;
     }
 
     public enum Importance

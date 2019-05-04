@@ -1,38 +1,31 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
-using Codeplex.Data;
-using Microsoft.Identity.Client;
-using Microsoft.Office365.OutlookServices;
 using Office365APIEditor.UI;
 using Office365APIEditor.ViewerHelper;
-using Office365APIEditor.ViewerHelper.Tasks;
+using Office365APIEditor.ViewerHelper.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Office365APIEditor
 {
     public partial class FolderViewerForm : Form
     {
-        PublicClientApplication pca;
         FolderInfo targetFolder;
         string targetFolderDisplayName;
-
-        IAccount currentUser;
 
         string currentId = "";
 
         private bool isFormClosing = false;
-        private ViewerHelper.ViewerHelper viewerHelper;
+        private ViewerRequestHelper viewerRequestHelper;
 
-        public FolderViewerForm(PublicClientApplication PCA, IAccount CurrentUser, FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
+        public FolderViewerForm(FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
         {
             InitializeComponent();
             
-            pca = PCA;
-            currentUser = CurrentUser;
             targetFolder = TargetFolderInfo;
             targetFolderDisplayName = TargetFolderDisplayName;
         }
@@ -66,7 +59,7 @@ namespace Office365APIEditor
 
             Text = typeForWindowTitle + " in " + targetFolderDisplayName;
 
-            viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
+            viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
 
             switch (targetFolder.Type)
             {
@@ -74,16 +67,18 @@ namespace Office365APIEditor
                     // Add columns.
                     PrepareMessageItemListColumns();
 
-                    // Get items.
-                    List<MessageSummary> messages = await viewerHelper.GetMessageSummaryAsync(targetFolder.ID);
-
-                    if (messages.Count != 0)
+                    bool hasMessageItem = await viewerRequestHelper.HasActualMessageItemAsync(targetFolder.ID);
+                    
+                    if (hasMessageItem)
                     {
-                        ShowMessages(messages);
+                        // Get items.
+                        await LoadAllMessagesAsync();
                     }
                     else
                     {
-                        var mailFolder = await viewerHelper.GetMailFolderAsync(targetFolder.ID, targetFolderDisplayName);
+                        // This folder seems to be a message folder but it does not contain message items.
+
+                        var mailFolder = await viewerRequestHelper.GetMailFolderAsync(targetFolder.ID);
                         
                         if (mailFolder.TotalItemCount != 0 && MessageBox.Show("TotalItemCount of this folder is not 0 but getting items of this folder was failed.\r\nDo you want to retry getting items as Contact item?", "Office365APIEditor", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
@@ -116,8 +111,7 @@ namespace Office365APIEditor
                             PrepareContactItemListColumns();
 
                             // Get items.
-                            List<ContactSummary> contactsInMailFolder = await viewerHelper.GetContactSummaryAsync(targetFolder.ID);
-                            ShowContacts(contactsInMailFolder);
+                            await LoadAllContactsAsync();
                         }
                     }
 
@@ -127,8 +121,7 @@ namespace Office365APIEditor
                     PrepareContactItemListColumns();
 
                     // Get items.
-                    List<ContactSummary> contacts = await viewerHelper.GetContactSummaryAsync(targetFolder.ID);
-                    ShowContacts(contacts);
+                    await LoadAllContactsAsync();
 
                     break;
                 case FolderContentType.Calendar:
@@ -136,8 +129,7 @@ namespace Office365APIEditor
                     PrepareCalendarItemListColumns();
 
                     // Get items.
-                    List<EventSummary> events = await viewerHelper.GetEventSummaryAsync(targetFolder.ID);
-                    ShowEvents(events);
+                    await LoadAllEventsAsync();
 
                     break;
                 case FolderContentType.MsgFolderRoot:
@@ -146,12 +138,7 @@ namespace Office365APIEditor
                     PrepareMessageItemListColumns();
 
                     // Get items.
-                    List<MessageSummary> messagesInMsgFolderRoot = await viewerHelper.GetMessageSummaryAsync(targetFolder.ID);
-
-                    if (messagesInMsgFolderRoot.Count != 0)
-                    {
-                        ShowMessages(messagesInMsgFolderRoot);
-                    }
+                    await LoadAllMessagesAsync();
 
                     break;
                 case FolderContentType.Task:
@@ -159,15 +146,10 @@ namespace Office365APIEditor
                     PrepareTaskItemListColumns();
 
                     // Get items.
-                    List<TaskSummary> tasks = await viewerHelper.GetTaskSummaryAsync(targetFolder.ID);
-
-                    if (tasks.Count != 0)
-                    {
-                        ShowTasks(tasks);
-                    }
+                    await LoadAllTasksAsync();
 
                     break;
-                case FolderContentType.DummyCalendarRoot:
+                case FolderContentType.DummyCalendarGroupRoot:
                 case FolderContentType.DummyTaskGroupRoot:
                 case FolderContentType.TaskGroup:
                 default:
@@ -275,7 +257,83 @@ namespace Office365APIEditor
             }
         }
 
-        private void ShowMessages(List<MessageSummary> messages)
+        private async Task<bool> LoadAllMessagesAsync()
+        {
+            var messages = await viewerRequestHelper.GetAllMessagesFirstPageAsync(targetFolder.ID);
+
+            do
+            {
+                ShowMessages(messages.CurrentPage);
+
+                if (!messages.MorePage)
+                {
+                    break;
+                }
+
+                messages = await viewerRequestHelper.GetAllMessagesPageAsync(messages.NextLink);
+            } while (messages.CurrentPage.Count > 0);
+
+            return true;
+        }
+
+        private async Task<bool> LoadAllContactsAsync()
+        {
+            var contacts = await viewerRequestHelper.GetAllContactsFirstPageAsync(targetFolder.ID);
+
+            do
+            {
+                ShowContacts(contacts.CurrentPage);
+
+                if (!contacts.MorePage)
+                {
+                    break;             
+                }
+
+                contacts = await viewerRequestHelper.GetAllContactsPageAsync(contacts.NextLink);
+            } while (contacts.CurrentPage.Count > 0);
+
+            return true;
+        }
+
+        private async Task<bool> LoadAllEventsAsync()
+        {
+            var events = await viewerRequestHelper.GetAllEventsFirstPageAsync(targetFolder.ID);
+
+            do
+            {
+                ShowEvents(events.CurrentPage);
+
+                if (!events.MorePage)
+                {
+                    break;
+                }
+
+                events = await viewerRequestHelper.GetAllEventsPageAsync(events.NextLink);
+            } while (events.CurrentPage.Count > 0);
+
+            return true;
+        }
+
+        private async Task<bool> LoadAllTasksAsync()
+        {
+            var tasks = await viewerRequestHelper.GetAllTasksFirstPageAsync(targetFolder.ID);
+
+            do
+            {
+                ShowTasks(tasks.CurrentPage);
+
+                if (!tasks.MorePage)
+                {
+                    break;
+                }
+
+                tasks = await viewerRequestHelper.GetAllTasksPageAsync(tasks.NextLink);
+            } while (tasks.CurrentPage.Count > 0);
+
+            return true;
+        }
+
+        private void ShowMessages(List<ViewerHelper.Data.MailAPI.Message> messages)
         {
             // Show all messages in List.
 
@@ -284,13 +342,13 @@ namespace Office365APIEditor
                 foreach (var item in messages)
                 {
                     // Add new row.
-                    string receivedDateTime = (item.ReceivedDateTime != null) ? item.ReceivedDateTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "";
-                    string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
-                    string sentDateTime = (item.SentDateTime != null) ? item.SentDateTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "";
+                    string receivedDateTime = item.ReceivedDateTime ?? "";
+                    string createdDateTime = item.CreatedDateTime ?? "";
+                    string sentDateTime = item.SentDateTime ?? "";
                     string subject = item.Subject ?? "";
                     string sender = (item.Sender != null && item.Sender.EmailAddress != null && item.Sender.EmailAddress.Address != null) ? item.Sender.EmailAddress.Address : "";
                     string recipients = (item.ToRecipients != null) ? ConvertRecipientsListToString(item.ToRecipients) : "";
-                    string isDraft = item.IsDraft.ToString();
+                    string isDraft = (item.IsDraft != null && item.IsDraft.HasValue) ? item.IsDraft.Value.ToString() : "";
 
                     DataGridViewRow itemRow = new DataGridViewRow
                     {
@@ -298,7 +356,7 @@ namespace Office365APIEditor
                     };
                     itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, sender, recipients, receivedDateTime, createdDateTime, sentDateTime });
 
-                    if (item.IsDraft)
+                    if (item.IsDraft != null && item.IsDraft.HasValue && item.IsDraft.Value == true)
                     {
                         // This item is draft.
                         itemRow.ContextMenuStrip = contextMenuStrip_ItemList_DraftItem;
@@ -337,7 +395,7 @@ namespace Office365APIEditor
             }
         }
 
-        private void ShowContacts(List<ContactSummary> contacts)
+        private void ShowContacts(List<ViewerHelper.Data.ContactsAPI.Contact> contacts)
         {
             // Show all contacts in List.
 
@@ -348,7 +406,7 @@ namespace Office365APIEditor
                     // Add new row.
 
                     string displayName = item.DisplayName ?? "";
-                    string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
+                    string createdDateTime = item.CreatedDateTime ?? "";
 
                     DataGridViewRow itemRow = new DataGridViewRow
                     {
@@ -385,7 +443,7 @@ namespace Office365APIEditor
             }
         }
 
-        private void ShowEvents(List<EventSummary> events)
+        private void ShowEvents(List<ViewerHelper.Data.CalendarAPI.Event> events)
         {
             // Show all events in List.
 
@@ -398,10 +456,10 @@ namespace Office365APIEditor
                     string subject = item.Subject ?? "";
                     string organizer = (item.Organizer != null && item.Organizer.EmailAddress != null && item.Organizer.EmailAddress.Address != null) ? item.Organizer.EmailAddress.Address : "";
                     string attendees = (item.Attendees != null) ? ConvertAttendeesListToString(item.Attendees) : "";
-                    string start = (item.Start != null) ? item.Start.DateTime : "";
-                    string end = (item.End != null) ? item.End.DateTime : "";
+                    string start = (item.Start != null) ? item.Start.ToString() : "";
+                    string end = (item.End != null) ? item.End.ToString() : "";
                     string isAllDay = (item.IsAllDay != null) ? item.IsAllDay.ToString() : "";
-                    string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
+                    string createdDateTime = item.CreatedDateTime ?? "";
 
                     DataGridViewRow itemRow = new DataGridViewRow
                     {
@@ -438,7 +496,7 @@ namespace Office365APIEditor
             }
         }
 
-        private void ShowTasks(List<TaskSummary> tasks)
+        private void ShowTasks(List<ViewerHelper.Data.TaskAPI.Task> tasks)
         {
             // Show all tasks in List.
 
@@ -448,9 +506,9 @@ namespace Office365APIEditor
                 {
                     // Add new row.
                     string subject = item.Subject ?? "";
-                    string hasAttachments = item.HasAttachments.ToString();
-                    string createdDateTime = (item.CreatedDateTime != null) ? item.CreatedDateTime.Value.ToString("yyyy/MM/dd HH:mm/ss") : "";
-                    string lastModifiedDateTime = (item.LastModifiedDateTime != null) ? item.LastModifiedDateTime.Value.ToString("yyyy/MM/dd HH:mm:ss") : "";
+                    string hasAttachments = (item.HasAttachments != null) ? item.HasAttachments.Value.ToString() : "";
+                    string createdDateTime = item.CreatedDateTime ?? "";
+                    string lastModifiedDateTime = item.LastModifiedDateTime ?? "";
                     string status = item.Status ?? "";
 
                     DataGridViewRow itemRow = new DataGridViewRow
@@ -524,7 +582,7 @@ namespace Office365APIEditor
             dataGridView_ItemList.Rows[e.RowIndex].Selected = true;
         }
 
-        private void dataGridView_ItemList_CellClick(object sender, DataGridViewCellEventArgs e)
+        private async void dataGridView_ItemList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
             {
@@ -556,18 +614,18 @@ namespace Office365APIEditor
                 case FolderContentType.Message:
                 case FolderContentType.MsgFolderRoot:
                 case FolderContentType.Drafts:
-                    GetMessageItemDetail(id);
+                    CreatePropTable(await viewerRequestHelper.GetMessageAsync(id));
                     break;
                 case FolderContentType.Contact:
-                    GetContactItemDetail(id);
+                    CreatePropTable(await viewerRequestHelper.GetContactAsync(id));
                     break;
                 case FolderContentType.Calendar:
-                    GetCalendarItemDetail(id);
+                    CreatePropTable(await viewerRequestHelper.GetEventAsync(id));
                     break;
                 case FolderContentType.Task:
-                    GetTaskItemDetail(id);
+                    CreatePropTable(await viewerRequestHelper.GetTaskAsync(id));
                     break;
-                case FolderContentType.DummyCalendarRoot:
+                case FolderContentType.DummyCalendarGroupRoot:
                 case FolderContentType.DummyTaskGroupRoot:
                 case FolderContentType.TaskGroup:
                     break;
@@ -576,62 +634,14 @@ namespace Office365APIEditor
             }
         }
 
-        private void GetMessageItemDetail(string ID)
+        private void CreatePropTable(OutlookRestApiBaseObject OutlookItem)
         {
-            // Get details of the message item.
-            GetItemDetail(new Uri("https://outlook.office.com/api/v2.0/me/messages/" + ID));
-        }
-
-        private void GetContactItemDetail(string ID)
-        {
-            // Get details of the contact item.
-            GetItemDetail(new Uri("https://outlook.office.com/api/v2.0/me/contacts/" + ID));
-        }
-
-        private void GetCalendarItemDetail(string ID)
-        {
-            // Get details of the contact item.
-            GetItemDetail(new Uri("https://outlook.office.com/api/v2.0/me/events/" + ID));
-        }
-
-        private void GetTaskItemDetail(string ID)
-        {
-            // Get details of the message item.
-            GetItemDetail(new Uri("https://outlook.office.com/api/v2.0/me/tasks/" + ID));
-        }
-
-        private async void GetItemDetail(Uri URL)
-        {
-            // We know that we can use OutlookServicesClient but this library doesn't include InferenceClassification and other new props.
+            var properties = OutlookItem.GetRawProperties();            
 
             try
             {
-                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
-                string result = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
-                var jsonResult = DynamicJson.Parse(result);
-
-                CreatePropTable(jsonResult);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Office365APIEditor");
-            }
-        }
-
-        private void CreatePropTable(dynamic itemResult)
-        {
-            DynamicJson dynamicJsonObject = itemResult;
-            
-            try
-            {
-                foreach (KeyValuePair<string, object> item in itemResult)
+                foreach (KeyValuePair<string, string> item in properties)
                 {
-                    if (!dynamicJsonObject.IsDefined(item.Key))
-                    {
-                        // Exclude non dynamic props.
-                        continue;
-                    }
-
                     DataGridViewRow propRow = new DataGridViewRow();
 
                     string valueString = (item.Value == null) ? "" : item.Value.ToString();
@@ -684,7 +694,7 @@ namespace Office365APIEditor
                 return;
             }
 
-            AttachmentViewerForm attachmentViewer = new AttachmentViewerForm(pca, currentUser, targetFolder, dataGridView_ItemList.SelectedRows[0].Tag.ToString(), dataGridView_ItemList.SelectedRows[0].Cells[0].Value.ToString());
+            AttachmentViewerForm attachmentViewer = new AttachmentViewerForm(targetFolder, dataGridView_ItemList.SelectedRows[0].Tag.ToString(), dataGridView_ItemList.SelectedRows[0].Cells[0].Value.ToString());
             attachmentViewer.Show();
         }
 
@@ -718,7 +728,7 @@ namespace Office365APIEditor
                 return;
             }
 
-            SendMailForm sendMailForm = new SendMailForm(pca, currentUser, dataGridView_ItemList.SelectedRows[0].Tag.ToString());
+            SendMailForm sendMailForm = new SendMailForm(dataGridView_ItemList.SelectedRows[0].Tag.ToString());
             sendMailForm.Show();
         }
     }

@@ -1,15 +1,13 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
-using System;
+using Microsoft.Identity.Client;
 
 namespace Office365APIEditor.ViewerHelper
 {
-    // Subset of Microsoft.Office365.OutlookServices.IMessage
-    class ContactSummary
+    public static class Global
     {
-        public string Id;
-        public string DisplayName;
-        public DateTimeOffset? CreatedDateTime;
+        public static PublicClientApplication pca;
+        public static IAccount currentUser;
     }
 }

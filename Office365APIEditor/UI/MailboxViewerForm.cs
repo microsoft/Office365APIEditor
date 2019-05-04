@@ -2,10 +2,10 @@
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
 using Microsoft.Identity.Client;
-using Microsoft.Office365.OutlookServices;
 using Office365APIEditor.UI;
 using Office365APIEditor.UI.FocusedInbox;
-using Office365APIEditor.ViewerHelper.Tasks;
+using Office365APIEditor.ViewerHelper;
+using Office365APIEditor.ViewerHelper.Data.MailAPI;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -14,14 +14,10 @@ namespace Office365APIEditor
 {
     public partial class MailboxViewerForm : Form
     {
-        PublicClientApplication pca;
         AuthenticationResult ar;
-        ViewerHelper.ViewerHelper viewerHelper;
+        ViewerRequestHelper viewerRequestHelper;
 
-        // Current user's info.
-        IAccount currentUser;
-
-        IMailFolder draftsFolder;
+        MailFolder draftsFolder;
 
         bool doubleClicked = false;
 
@@ -34,7 +30,7 @@ namespace Office365APIEditor
             InitializeComponent();
         }
 
-        private void MailboxViewerForm_Load(object sender, System.EventArgs e)
+        private void MailboxViewerForm_Load(object sender, EventArgs e)
         {
             closeSessionToolStripMenuItem.Enabled = false;
             windowToolStripMenuItem.Visible = false;
@@ -89,17 +85,17 @@ namespace Office365APIEditor
             // Use MSAL and acquire access token.
 
             AcquireViewerTokenForm acuireViewerTokenForm = new AcquireViewerTokenForm();
-            if (acuireViewerTokenForm.ShowDialog(out pca, out ar) != DialogResult.OK)
+            if (acuireViewerTokenForm.ShowDialog(out Global.pca, out ar) != DialogResult.OK)
             {
                 return false;
             }
 
             string token = ar.AccessToken;
-            currentUser = ar.Account;
+            Global.currentUser = ar.Account;
 
             try
             {
-                viewerHelper = new ViewerHelper.ViewerHelper(pca, currentUser);
+                viewerRequestHelper = new ViewerRequestHelper(Global.pca, Global.currentUser);
 
                 // Get the Drafts folder.
                 GetDraftsFolderAsync();
@@ -108,7 +104,7 @@ namespace Office365APIEditor
                 PrepareMsgFolderRootAsync();
                 
                 // Create Calendar dummy root folder.
-                PrepareCalendarRootFolder();
+                PrepareCalendarGroupRootFolder();
 
                 // Create TaskGroup dummy root folder.
                 PrepareTaskGroupRootFolder();
@@ -125,7 +121,7 @@ namespace Office365APIEditor
 
         private async void GetDraftsFolderAsync()
         {
-            draftsFolder = await viewerHelper.GetDraftsFolderAsync();
+            draftsFolder = await viewerRequestHelper.GetDraftsFolderAsync();
         }
 
         private async void PrepareMsgFolderRootAsync()
@@ -134,7 +130,7 @@ namespace Office365APIEditor
 
             try
             {
-                var msgFolderRoot = await viewerHelper.GetMsgFolderRootAsync();
+                var msgFolderRoot = await viewerRequestHelper.GetMsgFolderRootAsync();
 
                 TreeNode node = new TreeNode("MsgFolderRoot")
                 {
@@ -162,7 +158,7 @@ namespace Office365APIEditor
         {
             // Get all child MailFolder of specified folder, and add them to the tree.
 
-            var childMailFolders = await viewerHelper.GetAllChildMailFolderAsync(FolderId);
+            var childMailFolders = await viewerRequestHelper.GetAllChildMailFoldersAsync(FolderId);
 
             foreach (var folder in childMailFolders)
             {
@@ -218,7 +214,7 @@ namespace Office365APIEditor
         {
             // Get all child contact folders of specified folder, and add them to the tree.
 
-            var childContactFolders = await viewerHelper.GetAllChildContactFolderAsync(FolderId);
+            var childContactFolders = await viewerRequestHelper.GetAllChildContactFoldersAsync(FolderId);
 
             if (childContactFolders.Count == 0)
             {
@@ -266,7 +262,7 @@ namespace Office365APIEditor
             }
         }
 
-        private void PrepareCalendarRootFolder()
+        private void PrepareCalendarGroupRootFolder()
         {
             // Calendar object has no ParentID or ChildFolders.
             // So we use DummyCalendarRoot node as a parent folder of calendar folders.
@@ -274,7 +270,7 @@ namespace Office365APIEditor
             // Make a dummy node.
             TreeNode dummyCalendarRootNode = new TreeNode("Calendar Folders (Dummy Folder)")
             {
-                Tag = new FolderInfo() { ID = "", Type = FolderContentType.DummyCalendarRoot },
+                Tag = new FolderInfo() { ID = "", Type = FolderContentType.DummyCalendarGroupRoot },
                 ContextMenuStrip = null
             };
             dummyCalendarRootNode.Nodes.Add(new TreeNode()); // Add a dummy node.
@@ -289,21 +285,22 @@ namespace Office365APIEditor
             }
         }
 
-        private async void PrepareCalendarFoldersAsync(TreeNode FolderNode)
+        private async void PrepareCalendarGroupsAsync(TreeNode FolderNode)
         {
-            // Get all Calendars, and add them to the tree.
+            // Get all calendar groups, and add them to the tree.
 
             try
             {
-                var calendars = await viewerHelper.GetCalendarFoldersAsync();
+                var calendarGroups = await viewerRequestHelper.GetAllCalendarGroupsAsync();
 
-                foreach (var calendar in calendars)
+                foreach (var calendarGroup in calendarGroups)
                 {
-                    TreeNode node = new TreeNode(calendar.Name)
+                    TreeNode node = new TreeNode(calendarGroup.Name)
                     {
-                        Tag = new FolderInfo() { ID = calendar.Id, Type = FolderContentType.Calendar },
-                        ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                        Tag = new FolderInfo() { ID = calendarGroup.Id, Type = FolderContentType.CalendarGroup },
+                        ContextMenuStrip = null
                     };
+                    node.Nodes.Add(new TreeNode()); // Add a dummy node.
 
                     if (treeView_Mailbox.InvokeRequired)
                     {
@@ -325,6 +322,78 @@ namespace Office365APIEditor
                             // Remove a dummy node.
                             FolderNode.Nodes[0].Remove();
                             expandingNodeHasDummyNode = false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void PrepareCalendarFoldersAsync(string CalendarGroupId, TreeNode FolderNode)
+        {
+            // Get all Calendars, and add them to the tree.
+
+            try
+            {
+                var calendars = await viewerRequestHelper.GetAllCalendarFoldersAsync(CalendarGroupId);
+
+                if (calendars.Count == 0)
+                {
+                    if (treeView_Mailbox.InvokeRequired)
+                    {
+                        treeView_Mailbox.Invoke(new MethodInvoker(delegate {
+                            if (expandingNodeHasDummyNode)
+                            {
+                                // Remove a dummy node.
+                                FolderNode.Nodes[0].Remove();
+                                expandingNodeHasDummyNode = false;
+                            }
+                        }));
+                    }
+                    else
+                    {
+                        if (expandingNodeHasDummyNode)
+                        {
+                            // Remove a dummy node.
+                            FolderNode.Nodes[0].Remove();
+                            expandingNodeHasDummyNode = false;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var calendar in calendars)
+                    {
+                        TreeNode node = new TreeNode(calendar.Name)
+                        {
+                            Tag = new FolderInfo() { ID = calendar.Id, Type = FolderContentType.Calendar },
+                            ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                        };
+
+                        if (treeView_Mailbox.InvokeRequired)
+                        {
+                            treeView_Mailbox.Invoke(new MethodInvoker(delegate {
+                                FolderNode.Nodes.Add(node);
+                                if (expandingNodeHasDummyNode)
+                                {
+                                    // Remove a dummy node.
+                                    FolderNode.Nodes[0].Remove();
+                                    expandingNodeHasDummyNode = false;
+                                }
+                            }));
+                        }
+                        else
+                        {
+                            FolderNode.Nodes.Add(node);
+                            if (expandingNodeHasDummyNode)
+                            {
+                                // Remove a dummy node.
+                                FolderNode.Nodes[0].Remove();
+                                expandingNodeHasDummyNode = false;
+                            }
                         }
                     }
                 }
@@ -362,7 +431,7 @@ namespace Office365APIEditor
         {
             // Get all TaskGroups, and add them to the tree.
 
-            var taskGroups = await viewerHelper.GetAllTaskGroupAsync();
+            var taskGroups = await viewerRequestHelper.GetAllTaskGroupsAsync();
 
             foreach (var group in taskGroups)
             {
@@ -401,20 +470,13 @@ namespace Office365APIEditor
         {
             // Get all TaskFolders of specified TaskGroup, and add them to the tree.
 
-            var taskFolders = await viewerHelper.GetAllTaskFoldersAsync(TaskGroupId);
+            var taskFolders = await viewerRequestHelper.GetAllTaskFoldersAsync(TaskGroupId);
 
-            foreach (var folder in taskFolders)
+            if (taskFolders.Count == 0)
             {
-                TreeNode node = new TreeNode(folder.Name)
-                {
-                    Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Task, Expanded = true },
-                    ContextMenuStrip = contextMenuStrip_FolderTreeNode
-                };
-
                 if (treeView_Mailbox.InvokeRequired)
                 {
                     treeView_Mailbox.Invoke(new MethodInvoker(delegate {
-                        FolderNode.Nodes.Add(node);
                         if (expandingNodeHasDummyNode)
                         {
                             // Remove a dummy node.
@@ -425,7 +487,6 @@ namespace Office365APIEditor
                 }
                 else
                 {
-                    FolderNode.Nodes.Add(node);
                     if (expandingNodeHasDummyNode)
                     {
                         // Remove a dummy node.
@@ -434,9 +495,43 @@ namespace Office365APIEditor
                     }
                 }
             }
+            else
+            {
+                foreach (var folder in taskFolders)
+                {
+                    TreeNode node = new TreeNode(folder.Name)
+                    {
+                        Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Task, Expanded = true },
+                        ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                    };
+
+                    if (treeView_Mailbox.InvokeRequired)
+                    {
+                        treeView_Mailbox.Invoke(new MethodInvoker(delegate {
+                            FolderNode.Nodes.Add(node);
+                            if (expandingNodeHasDummyNode)
+                            {
+                                // Remove a dummy node.
+                                FolderNode.Nodes[0].Remove();
+                                expandingNodeHasDummyNode = false;
+                            }
+                        }));
+                    }
+                    else
+                    {
+                        FolderNode.Nodes.Add(node);
+                        if (expandingNodeHasDummyNode)
+                        {
+                            // Remove a dummy node.
+                            FolderNode.Nodes[0].Remove();
+                            expandingNodeHasDummyNode = false;
+                        }
+                    }
+                }
+            }
         }
 
-        private void treeView_Mailbox_AfterSelect(object sender, TreeViewEventArgs e)
+        private async void treeView_Mailbox_AfterSelect(object sender, TreeViewEventArgs e)
         {
             // Show information of selected folder.
 
@@ -467,236 +562,54 @@ namespace Office365APIEditor
 
             FolderInfo info = (FolderInfo)treeView_Mailbox.SelectedNode.Tag;
 
-            switch (info.Type)
-            {
-                case FolderContentType.Message:
-                case FolderContentType.MsgFolderRoot:
-                case FolderContentType.Drafts:
-                    GetMessageFolderProps(info.ID, treeView_Mailbox.SelectedNode.Text);
-                    break;
-                case FolderContentType.Contact:
-                    GetContactFolderProps(info.ID);
-                    break;
-                case FolderContentType.Calendar:
-                    GetCalendarFolderProps(info.ID);
-                    break;
-                case FolderContentType.TaskGroup:
-                    GetTaskGroupPropsAsync(info.ID);
-                    break;
-                case FolderContentType.Task:
-                    GetTaskFolderPropsAsync(info.ID);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private async void GetMessageFolderProps(string FolderId, string FolderDisplayName)
-        {
-            // Get the folder.
-            IMailFolder mailFolderResult = new MailFolder();
+            ViewerHelper.Data.OutlookRestApiBaseObject outlookFolder;
 
             try
             {
-                mailFolderResult = await viewerHelper.GetMailFolderAsync(FolderId, FolderDisplayName);
+                switch (info.Type)
+                {
+                    case FolderContentType.Message:
+                    case FolderContentType.MsgFolderRoot:
+                    case FolderContentType.Drafts:
+                        outlookFolder = await viewerRequestHelper.GetMailFolderAsync(info.ID);
+                        break;
+                    case FolderContentType.Contact:
+                        outlookFolder = await viewerRequestHelper.GetContactFolderAsync(info.ID);
+                        break;
+                    case FolderContentType.CalendarGroup:
+                        outlookFolder = await viewerRequestHelper.GetCalendarGroupAsync(info.ID);
+                        break;
+                    case FolderContentType.Calendar:
+                        outlookFolder = await viewerRequestHelper.GetCalendarAsync(info.ID);
+                        break;
+                    case FolderContentType.TaskGroup:
+                        outlookFolder = await viewerRequestHelper.GetTaskGroupAsync(info.ID);
+                        break;
+                    case FolderContentType.Task:
+                        outlookFolder = await viewerRequestHelper.GetTaskFolderAsync(info.ID);
+                        break;
+                    default:
+                        return;
+                }
+
+                // Add columns.
+                dataGridView_FolderProps.Columns.Add("Property", "Property");
+                dataGridView_FolderProps.Columns.Add("Value", "Value");
+                dataGridView_FolderProps.Columns.Add("Type", "Type");
+
+                // Add rows.
+                foreach (var item in outlookFolder.GetRawProperties())
+                {
+                    DataGridViewRow propTotalItemCount = new DataGridViewRow();
+                    propTotalItemCount.CreateCells(dataGridView_FolderProps, new object[] { item.Key, item.Value.ToString(), item.Value.GetType().ToString() });
+                    dataGridView_FolderProps.Rows.Add(propTotalItemCount);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Office365APIEditor");
                 return;
             }
-
-            // Add columns.
-            dataGridView_FolderProps.Columns.Add("Property", "Property");
-            dataGridView_FolderProps.Columns.Add("Value", "Value");
-            dataGridView_FolderProps.Columns.Add("Type", "Type");
-
-            // Add rows.
-
-            DataGridViewRow propChildFolderCount = new DataGridViewRow();
-            propChildFolderCount.CreateCells(dataGridView_FolderProps, new object[] { "ChildFolderCount", mailFolderResult.ChildFolderCount.Value, mailFolderResult.ChildFolderCount.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propChildFolderCount);
-
-            DataGridViewRow propDisplayName = new DataGridViewRow();
-            propDisplayName.CreateCells(dataGridView_FolderProps, new object[] { "DisplayName", mailFolderResult.DisplayName, mailFolderResult.DisplayName.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propDisplayName);
-
-            DataGridViewRow propId = new DataGridViewRow();
-            propId.CreateCells(dataGridView_FolderProps, new object[] { "Id", mailFolderResult.Id, mailFolderResult.Id.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propId);
-
-            DataGridViewRow propParentFolderId = new DataGridViewRow();
-            propParentFolderId.CreateCells(dataGridView_FolderProps, new object[] { "ParentFolderId", mailFolderResult.ParentFolderId, mailFolderResult.ParentFolderId.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propParentFolderId);
-
-            DataGridViewRow propTotalItemCount = new DataGridViewRow();
-            propTotalItemCount.CreateCells(dataGridView_FolderProps, new object[] { "TotalItemCount", mailFolderResult.TotalItemCount, mailFolderResult.TotalItemCount.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propTotalItemCount);
-
-            DataGridViewRow propUnreadItemCount = new DataGridViewRow();
-            propUnreadItemCount.CreateCells(dataGridView_FolderProps, new object[] { "UnreadItemCount", mailFolderResult.UnreadItemCount, mailFolderResult.UnreadItemCount.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propUnreadItemCount);
-        }
-
-        private async void GetContactFolderProps(string FolderId)
-        {
-            // Get the folder.
-            IContactFolder contactFolderResult = new ContactFolder();
-
-            try
-            {
-                contactFolderResult = await viewerHelper.GetContactFolderAsync(FolderId);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Office365APIEditor");
-                return;
-            }
-
-
-            // Add columns.
-            dataGridView_FolderProps.Columns.Add("Property", "Property");
-            dataGridView_FolderProps.Columns.Add("Value", "Value");
-            dataGridView_FolderProps.Columns.Add("Type", "Type");
-
-            // Add rows.
-
-            DataGridViewRow propDisplayName = new DataGridViewRow();
-            propDisplayName.CreateCells(dataGridView_FolderProps, new object[] { "DisplayName", contactFolderResult.DisplayName, contactFolderResult.DisplayName.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propDisplayName);
-
-            DataGridViewRow propId = new DataGridViewRow();
-            propId.CreateCells(dataGridView_FolderProps, new object[] { "Id", contactFolderResult.Id, contactFolderResult.Id.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propId);
-
-            DataGridViewRow propParentFolderId = new DataGridViewRow();
-            propParentFolderId.CreateCells(dataGridView_FolderProps, new object[] { "ParentFolderId", contactFolderResult.ParentFolderId, contactFolderResult.ParentFolderId.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propParentFolderId);
-        }
-
-        private async void GetCalendarFolderProps(string FolderId)
-        {
-            // Get the folder.
-            ICalendar calendarFolderResults = new Calendar();
-
-            try
-            {
-                calendarFolderResults = await viewerHelper.GetCalendarAsync(FolderId);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Office365APIEditor");
-                return;
-            }
-
-            // Add columns.
-            dataGridView_FolderProps.Columns.Add("Property", "Property");
-            dataGridView_FolderProps.Columns.Add("Value", "Value");
-            dataGridView_FolderProps.Columns.Add("Type", "Type");
-
-            // Add rows.
-
-            DataGridViewRow propChangeKey = new DataGridViewRow();
-            propChangeKey.CreateCells(dataGridView_FolderProps, new object[] { "ChangeKey", calendarFolderResults.ChangeKey, calendarFolderResults.ChangeKey.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propChangeKey);
-
-            DataGridViewRow propColor = new DataGridViewRow();
-            propColor.CreateCells(dataGridView_FolderProps, new object[] { "Color", calendarFolderResults.Color.ToString(), calendarFolderResults.Color.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propColor);
-
-            DataGridViewRow propId = new DataGridViewRow();
-            propId.CreateCells(dataGridView_FolderProps, new object[] { "Id", calendarFolderResults.Id, calendarFolderResults.Id.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propId);
-
-            DataGridViewRow propName = new DataGridViewRow();
-            propName.CreateCells(dataGridView_FolderProps, new object[] { "Name", calendarFolderResults.Name, calendarFolderResults.Name.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propName);
-        }
-
-        private async void GetTaskGroupPropsAsync(string TaskGroupId)
-        {
-            // Get the folder.
-            TaskGroup taskGroupResult = new TaskGroup();
-
-            try
-            {
-                taskGroupResult = await viewerHelper.GetTaskGroupAsync(TaskGroupId);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Office365APIEditor");
-                return;
-            }
-
-            // Add columns.
-            dataGridView_FolderProps.Columns.Add("Property", "Property");
-            dataGridView_FolderProps.Columns.Add("Value", "Value");
-            dataGridView_FolderProps.Columns.Add("Type", "Type");
-
-            // Add rows.
-
-            DataGridViewRow propChildFolderCount = new DataGridViewRow();
-            propChildFolderCount.CreateCells(dataGridView_FolderProps, new object[] { "ChangeKey", taskGroupResult.ChangeKey, taskGroupResult.ChangeKey.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propChildFolderCount);
-
-            DataGridViewRow propDisplayName = new DataGridViewRow();
-            propDisplayName.CreateCells(dataGridView_FolderProps, new object[] { "GroupKey", taskGroupResult.GroupKey, taskGroupResult.GroupKey.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propDisplayName);
-
-            DataGridViewRow propId = new DataGridViewRow();
-            propId.CreateCells(dataGridView_FolderProps, new object[] { "Id", taskGroupResult.Id, taskGroupResult.Id.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propId);
-
-            DataGridViewRow propParentFolderId = new DataGridViewRow();
-            propParentFolderId.CreateCells(dataGridView_FolderProps, new object[] { "IsDefaultGroup", taskGroupResult.IsDefaultGroup, taskGroupResult.IsDefaultGroup.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propParentFolderId);
-
-            DataGridViewRow propTotalItemCount = new DataGridViewRow();
-            propTotalItemCount.CreateCells(dataGridView_FolderProps, new object[] { "Name", taskGroupResult.Name, taskGroupResult.Name.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propTotalItemCount);
-        }
-
-        private async void GetTaskFolderPropsAsync(string TaskFolderId)
-        {
-            // Get the folder.
-            TaskFolder taskFolderResult = new TaskFolder();
-
-            try
-            {
-                taskFolderResult = await viewerHelper.GetTaskFolderAsync(TaskFolderId);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Office365APIEditor");
-                return;
-            }
-
-            // Add columns.
-            dataGridView_FolderProps.Columns.Add("Property", "Property");
-            dataGridView_FolderProps.Columns.Add("Value", "Value");
-            dataGridView_FolderProps.Columns.Add("Type", "Type");
-
-            // Add rows.
-
-            DataGridViewRow propChildFolderCount = new DataGridViewRow();
-            propChildFolderCount.CreateCells(dataGridView_FolderProps, new object[] { "ChangeKey", taskFolderResult.ChangeKey, taskFolderResult.ChangeKey.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propChildFolderCount);
-
-            DataGridViewRow propId = new DataGridViewRow();
-            propId.CreateCells(dataGridView_FolderProps, new object[] { "Id", taskFolderResult.Id, taskFolderResult.Id.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propId);
-
-            DataGridViewRow propParentFolderId = new DataGridViewRow();
-            propParentFolderId.CreateCells(dataGridView_FolderProps, new object[] { "IsDefaultFolder", taskFolderResult.IsDefaultFolder, taskFolderResult.IsDefaultFolder.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propParentFolderId);
-
-            DataGridViewRow propTotalItemCount = new DataGridViewRow();
-            propTotalItemCount.CreateCells(dataGridView_FolderProps, new object[] { "Name", taskFolderResult.Name, taskFolderResult.Name.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propTotalItemCount);
-            
-            DataGridViewRow propDisplayName = new DataGridViewRow();
-            propDisplayName.CreateCells(dataGridView_FolderProps, new object[] { "ParentGroupKey", taskFolderResult.ParentGroupKey, taskFolderResult.ParentGroupKey.GetType().ToString() });
-            dataGridView_FolderProps.Rows.Add(propDisplayName);
         }
 
         private void treeView_Mailbox_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -761,11 +674,20 @@ namespace Office365APIEditor
 
             if (folderInfo.Expanded == false)
             {
-                if (folderInfo.Type == FolderContentType.DummyCalendarRoot)
+                if (folderInfo.Type == FolderContentType.DummyCalendarGroupRoot)
                 {
                     expandingNodeHasDummyNode = true;
 
-                    PrepareCalendarFoldersAsync(e.Node);
+                    PrepareCalendarGroupsAsync(e.Node);
+
+                    folderInfo.Expanded = true;
+                    e.Node.Tag = folderInfo;
+                }
+                else if (folderInfo.Type == FolderContentType.CalendarGroup)
+                {
+                    expandingNodeHasDummyNode = true;
+
+                    PrepareCalendarFoldersAsync(folderInfo.ID, e.Node);
 
                     folderInfo.Expanded = true;
                     e.Node.Tag = folderInfo;
@@ -804,7 +726,7 @@ namespace Office365APIEditor
         private void OpenFolder(TreeNode SelectedNode)
         {
             // Open selected folder.
-            FolderViewerForm folderViewerForm = new FolderViewerForm(pca, currentUser, (FolderInfo)SelectedNode.Tag, SelectedNode.Text);
+            FolderViewerForm folderViewerForm = new FolderViewerForm((FolderInfo)SelectedNode.Tag, SelectedNode.Text);
             folderViewerForm.Show();
         }
 
@@ -848,7 +770,9 @@ namespace Office365APIEditor
 
         private void CloseCurrentSession()
         {
-            viewerHelper = null;
+            Global.pca = null;
+            Global.currentUser = null;
+            viewerRequestHelper = null;
             dataGridView_FolderProps.Rows.Clear();
             dataGridView_FolderProps.Columns.Clear();
             treeView_Mailbox.Nodes.Clear();
@@ -868,33 +792,37 @@ namespace Office365APIEditor
             if (treeView_Mailbox.SelectedNode != null)
             {
                 TreeNode selectedNode = treeView_Mailbox.SelectedNode;
-                SendMailForm sendMailForm = new SendMailForm(pca, currentUser, (FolderInfo)selectedNode.Tag, selectedNode.Text);
+                SendMailForm sendMailForm = new SendMailForm((FolderInfo)selectedNode.Tag, selectedNode.Text);
                 sendMailForm.Show(this);
             }
             else
             {
-                SendMailForm sendMailForm = new SendMailForm(pca, currentUser);
+                SendMailForm sendMailForm = new SendMailForm();
                 sendMailForm.Show(this);
             }
         }
 
         private void FocusedInboxOverridesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FocusedInboxOverrideForm focusedInboxOverrideForm = new FocusedInboxOverrideForm(pca, currentUser);
+            FocusedInboxOverrideForm focusedInboxOverrideForm = new FocusedInboxOverrideForm();
             focusedInboxOverrideForm.Show(this);
         }
 
         private void versionInformationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            VersionInformationForm versionInformation = new VersionInformationForm();
-            versionInformation.Owner = this;
+            VersionInformationForm versionInformation = new VersionInformationForm
+            {
+                Owner = this
+            };
             versionInformation.ShowDialog();
         }
 
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CheckUpdateForm checkUpdateForm = new CheckUpdateForm();
-            checkUpdateForm.Owner = this;
+            CheckUpdateForm checkUpdateForm = new CheckUpdateForm
+            {
+                Owner = this
+            };
             checkUpdateForm.ShowDialog();
         }
     }
