@@ -14,7 +14,6 @@ namespace Office365APIEditor.ViewerHelper
     {
         private PublicClientApplication pca;
         private IAccount currentUser;
-        OutlookServicesClient client;
 
         public ViewerRequestHelper(PublicClientApplication PCA, IAccount CurrentUser)
         {
@@ -41,7 +40,7 @@ namespace Office365APIEditor.ViewerHelper
             // eventArgs.ToString();
         }
 
-        private MailAddressCollection ConvertRecipientIListToMailAddressCollection(IList<Recipient> recipients)
+        private MailAddressCollection ConvertRecipientIListToMailAddressCollection(IList<Data.Recipient> recipients)
         {
             MailAddressCollection result = new MailAddressCollection();
 

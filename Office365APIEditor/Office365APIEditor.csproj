@@ -282,6 +282,7 @@
     <Compile Include="ViewerHelper\Data\ContactsAPI\ContactFolder.cs" />
     <Compile Include="ViewerHelper\Data\DateTimeOffset.cs" />
     <Compile Include="ViewerHelper\Data\EmailAddress.cs" />
+    <Compile Include="ViewerHelper\Data\ItemBody.cs" />
     <Compile Include="ViewerHelper\Data\MailAPI\MailFolder.cs" />
     <Compile Include="ViewerHelper\Data\MailAPI\Message.cs" />
     <Compile Include="ViewerHelper\Data\OutlookRestApiBaseObject.cs" />

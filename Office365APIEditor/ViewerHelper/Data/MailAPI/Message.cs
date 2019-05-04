@@ -7,8 +7,14 @@ namespace Office365APIEditor.ViewerHelper.Data.MailAPI
 {
     class Message : OutlookRestApiBaseObject
     {
+        private IList<Recipient> bccRecipients;
+        private ItemBody body;
+        private IList<Recipient> ccRecipients;
         private string createdDateTime;
+        private string importance;
+        private bool? isDeliveryReceiptRequested;
         private bool? isDraft;
+        private bool? isReadReceiptRequested;
         private string receivedDateTime;
         private Recipient sender;
         private string sentDateTime;
@@ -21,6 +27,51 @@ namespace Office365APIEditor.ViewerHelper.Data.MailAPI
 
         public Message(string JsonData) : base(JsonData)
         {
+        }
+
+        public IList<Recipient> BccRecipients
+        {
+            get
+            {
+                if (bccRecipients == null)
+                {
+                    bccRecipients = LoadPropertyFromRawJson("bccRecipients", new List<Recipient>());
+                }
+
+                return bccRecipients;
+            }
+
+            set => bccRecipients = value;
+        }
+
+        public ItemBody Body
+        {
+            get
+            {
+                if (body == null)
+                {
+                    body = LoadPropertyFromRawJson("body", new ItemBody());
+                }
+
+                return body;
+            }
+
+            set => body = value;
+        }
+
+        public IList<Recipient> CcRecipients
+        {
+            get
+            {
+                if (ccRecipients == null)
+                {
+                    ccRecipients = LoadPropertyFromRawJson("ccRecipients", new List<Recipient>());
+                }
+
+                return ccRecipients;
+            }
+
+            set => ccRecipients = value;
         }
 
         public string CreatedDateTime
@@ -38,6 +89,36 @@ namespace Office365APIEditor.ViewerHelper.Data.MailAPI
             set => createdDateTime = value;
         }
 
+        public string Importance
+        {
+            get
+            {
+                if (importance == null)
+                {
+                    importance = LoadPropertyFromRawJson<string>("importance", null);
+                }
+
+                return importance;
+            }
+
+            set => importance = value;
+        }
+
+        public bool? IsDeliveryReceiptRequested
+        {
+            get
+            {
+                if (isDeliveryReceiptRequested == null)
+                {
+                    isDeliveryReceiptRequested = LoadPropertyFromRawJson("isDeliveryReceiptRequested", new bool?());
+                }
+
+                return isDeliveryReceiptRequested;
+            }
+
+            set => isDeliveryReceiptRequested = value;
+        }
+
         public bool? IsDraft
         {
             get
@@ -51,6 +132,21 @@ namespace Office365APIEditor.ViewerHelper.Data.MailAPI
             }
 
             set => isDraft = value;
+        }
+
+        public bool? IsReadReceiptRequested
+        {
+            get
+            {
+                if (isReadReceiptRequested == null)
+                {
+                    isReadReceiptRequested = LoadPropertyFromRawJson("isReadReceiptRequested", new bool?());
+                }
+
+                return isReadReceiptRequested;
+            }
+
+            set => isReadReceiptRequested = value;
         }
 
         public string ReceivedDateTime

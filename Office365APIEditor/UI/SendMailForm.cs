@@ -394,9 +394,9 @@ namespace Office365APIEditor.UI
 
                 if (textBox_To.Text != "")
                 {
-                    foreach (var recipient in textBox_To.Text.Split(','))
+                    foreach (var recipient in textBox_To.Text.Split(';'))
                     {
-                        toMailAddresses.Add(recipient);
+                        toMailAddresses.Add(recipient.Trim());
                     }
                 }
 
@@ -406,9 +406,9 @@ namespace Office365APIEditor.UI
 
                 if (textBox_Cc.Text != "")
                 {
-                    foreach (var recipient in textBox_Cc.Text.Split(','))
+                    foreach (var recipient in textBox_Cc.Text.Split(';'))
                     {
-                        ccMailAddresses.Add(recipient);
+                        ccMailAddresses.Add(recipient.Trim());
                     }
                 }
 
@@ -418,9 +418,9 @@ namespace Office365APIEditor.UI
 
                 if (textBox_Bcc.Text != "")
                 {
-                    foreach (var recipient in textBox_Bcc.Text.Split(','))
+                    foreach (var recipient in textBox_Bcc.Text.Split(';'))
                     {
-                        bccMailAddresses.Add(recipient);
+                        bccMailAddresses.Add(recipient.Trim());
                     }
                 }
 

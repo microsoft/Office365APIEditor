@@ -3,7 +3,6 @@
 
 using Microsoft.Identity.Client;
 using Microsoft.OData.Client;
-using Microsoft.Office365.OutlookServices;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -412,11 +411,11 @@ namespace Office365APIEditor
         }
 
         [Obsolete]
-        public static OutlookServicesClient GetOutlookServicesClient(PublicClientApplication pca, IAccount CurrentUser)
+        public static Microsoft.Office365.OutlookServices.OutlookServicesClient GetOutlookServicesClient(PublicClientApplication pca, IAccount CurrentUser)
         {
             // Acquire access token again.
 
-            OutlookServicesClient newClient = new OutlookServicesClient(new Uri("https://outlook.office.com/api/v2.0"),
+            Microsoft.Office365.OutlookServices.OutlookServicesClient newClient = new Microsoft.Office365.OutlookServices.OutlookServicesClient(new Uri("https://outlook.office.com/api/v2.0"),
                 () =>
                 {
                     return Task.Run(async () =>

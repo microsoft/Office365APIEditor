@@ -17,48 +17,30 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get all MailFolders in the specified folder.
 
-            client = Util.GetOutlookServicesClient(pca, currentUser);
+            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{FolderId}/childfolders?$Top=1000&$select=Id,DisplayName,ChildFolderCount");
 
             List<MailFolder> result = new List<MailFolder>();
 
             try
             {
-                var childMailFolderResults = await client.Me.MailFolders[FolderId].ChildFolders
-                    .OrderBy(m => m.DisplayName)
-                    .Take(1000)
-                    .Select(m => new { m.Id, m.DisplayName, m.ChildFolderCount })
-                    .ExecuteAsync();
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                string stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
 
-                bool morePages = false;
+                var jsonResponse = (JObject)JsonConvert.DeserializeObject(stringResponse);
+                var folders = (JArray)jsonResponse.GetValue("value");
 
-                do
+                foreach (var item in folders)
                 {
-                    foreach (var folder in childMailFolderResults.CurrentPage)
-                    {
-                        var newMailFolder = MailFolder.CreateFromId(folder.Id);
-                        newMailFolder.DisplayName = folder.DisplayName;
-                        newMailFolder.ChildFolderCount = folder.ChildFolderCount;
-
-                        result.Add(newMailFolder);
-                    }
-
-                    if (childMailFolderResults.MorePagesAvailable)
-                    {
-                        morePages = true;
-                        childMailFolderResults = await childMailFolderResults.GetNextPageAsync();
-                    }
-                    else
-                    {
-                        morePages = false;
-                    }
-                } while (morePages);
-
-                return result;
+                    var serializedObject = new MailFolder(JsonConvert.SerializeObject(item));
+                    result.Add(serializedObject);
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+
+            return result;
         }
 
         public async Task<MailFolder> GetMailFolderAsync(string FolderId)
@@ -248,11 +230,9 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get the specified item as a draft item to send.
 
-            client = Util.GetOutlookServicesClient(pca, currentUser);
-
             try
             {
-                var draftItem = await client.Me.Messages[draftItemId].ExecuteAsync();
+                var draftItem = await GetMessageAsync(draftItemId);
 
                 NewEmailMessage newEmailMessage = new NewEmailMessage
                 {
@@ -260,11 +240,11 @@ namespace Office365APIEditor.ViewerHelper
                     CcRecipients = ConvertRecipientIListToMailAddressCollection(draftItem.CcRecipients),
                     BccRecipients = ConvertRecipientIListToMailAddressCollection(draftItem.BccRecipients),
                     Subject = draftItem.Subject ?? "",
-                    BodyType = (draftItem.Body != null) ? (BodyType)Enum.ToObject(typeof(BodyType), (int)draftItem.Body.ContentType) : BodyType.Text,
+                    BodyType = (draftItem.Body != null) ? (BodyType)Enum.Parse(typeof(BodyType), draftItem.Body.ContentType, true) : BodyType.Text,
                     Body = (draftItem.Body != null && draftItem.Body.Content != null) ? draftItem.Body.Content : "",
-                    Importance = (Importance)Enum.ToObject(typeof(Importance), (int)draftItem.Importance),
-                    RequestDeliveryReceipt = draftItem.IsDeliveryReceiptRequested ?? false,
-                    RequestReadReceipt = draftItem.IsReadReceiptRequested ?? false
+                    Importance = (draftItem.Importance != null) ? (Importance)Enum.Parse(typeof(Importance), draftItem.Importance, true) : Importance.Normal,
+                    RequestDeliveryReceipt = (draftItem.IsDeliveryReceiptRequested != null && draftItem.IsDeliveryReceiptRequested.HasValue) ? draftItem.IsDeliveryReceiptRequested.Value : false,
+                    RequestReadReceipt = (draftItem.IsReadReceiptRequested != null && draftItem.IsReadReceiptRequested.HasValue) ? draftItem.IsReadReceiptRequested.Value : false
                 };
 
                 return newEmailMessage;

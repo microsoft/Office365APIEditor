@@ -17,47 +17,30 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get all contact folders in the specified folder.
 
-            client = Util.GetOutlookServicesClient(pca, currentUser);
+            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/contactfolders/{FolderId}/childfolders/?$Top=1000&$select=Id,DisplayName");
 
             List<ContactFolder> result = new List<ContactFolder>();
 
             try
             {
-                var childContactFolderResults = await client.Me.ContactFolders[FolderId].ChildFolders
-                    .OrderBy(f => f.DisplayName)
-                    .Take(100)
-                    .Select(f => new { f.Id, f.DisplayName })
-                    .ExecuteAsync();
+                string accessToken = await Util.GetAccessTokenAsync(pca, currentUser);
+                string stringResponse = await Util.SendGetRequestAsync(URL, accessToken, currentUser.Username);
 
-                bool morePages = false;
+                var jsonResponse = (JObject)JsonConvert.DeserializeObject(stringResponse);
+                var folders = (JArray)jsonResponse.GetValue("value");
 
-                do
+                foreach (var item in folders)
                 {
-                    foreach (var folder in childContactFolderResults.CurrentPage)
-                    {
-                        var newContactFolder = ContactFolder.CreateFromId(folder.Id);
-                        newContactFolder.DisplayName = folder.DisplayName;
-
-                        result.Add(newContactFolder);
-                    }
-
-                    if (childContactFolderResults.MorePagesAvailable)
-                    {
-                        morePages = true;
-                        childContactFolderResults = await childContactFolderResults.GetNextPageAsync();
-                    }
-                    else
-                    {
-                        morePages = false;
-                    }
-                } while (morePages);
-
-                return result;
+                    var serializedObject = new ContactFolder(JsonConvert.SerializeObject(item));
+                    result.Add(serializedObject);
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+
+            return result;
         }
 
         public async Task<ContactFolder> GetContactFolderAsync(string FolderId)
