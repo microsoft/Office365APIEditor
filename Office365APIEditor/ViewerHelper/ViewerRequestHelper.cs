@@ -3,7 +3,6 @@
 
 using Microsoft.Identity.Client;
 using Microsoft.OData.Client;
-using Microsoft.Office365.OutlookServices;
 using System;
 using System.Collections.Generic;
 using System.Net.Mail;
