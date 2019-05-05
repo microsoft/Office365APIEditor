@@ -97,7 +97,7 @@ namespace Office365APIEditor
             comboBox_Page08_Resource.SelectedIndex = 1;
             comboBox_Page09_Resource.SelectedIndex = 1;
 
-            Size = new Size(433, 256);
+            Size = new Size(433, 286);
             CenterToParent();
         }
 
@@ -383,6 +383,7 @@ namespace Office365APIEditor
 
                     V2WebAppUtil v2WebAppUtil = new V2WebAppUtil()
                     {
+                        TenantName = textBox_Page06_TenantName.Text,
                         ClientID = textBox_Page06_ClientID.Text,
                         RedirectUri = textBox_Page06_RedirectUri.Text,
                         Scopes = textBox_Page06_Scopes.Text,
@@ -412,7 +413,7 @@ namespace Office365APIEditor
                             SaveSettings();
 
                             // Create a return value and close this window.
-                            clientInfo = new ClientInformation(tokenResponse, AuthEndpoints.OAuthV2, Resources.None, textBox_Page06_ClientID.Text, textBox_Page06_ClientSecret.Text, textBox_Page06_Scopes.Text, textBox_Page06_RedirectUri.Text);
+                            clientInfo = new ClientInformation(tokenResponse, AuthEndpoints.OAuthV2, Resources.None, textBox_Page06_ClientID.Text, textBox_Page06_ClientSecret.Text, textBox_Page06_Scopes.Text, textBox_Page06_RedirectUri.Text, textBox_Page06_TenantName.Text);
                             DialogResult = DialogResult.OK;
                             Close();
                         }
@@ -429,6 +430,7 @@ namespace Office365APIEditor
 
                     V2MobileAppUtil v2MobileAppUtil = new V2MobileAppUtil()
                     {
+                        TenantName = textBox_Page07_TenantName.Text,
                         ClientID = textBox_Page07_ClientID.Text,
                         RedirectUri = textBox_Page07_RedirectUri.Text,
                         Scopes = textBox_Page07_Scopes.Text
@@ -457,7 +459,7 @@ namespace Office365APIEditor
                             SaveSettings();
 
                             // Create a return value and close this window.
-                            clientInfo = new ClientInformation(tokenResponse, AuthEndpoints.OAuthV2, Resources.None, textBox_Page07_ClientID.Text, "", textBox_Page07_Scopes.Text, textBox_Page07_RedirectUri.Text);
+                            clientInfo = new ClientInformation(tokenResponse, AuthEndpoints.OAuthV2, Resources.None, textBox_Page07_ClientID.Text, "", textBox_Page07_Scopes.Text, textBox_Page07_RedirectUri.Text, textBox_Page07_TenantName.Text);
                             DialogResult = DialogResult.OK;
                             Close();
                         }

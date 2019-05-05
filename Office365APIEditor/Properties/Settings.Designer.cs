@@ -608,5 +608,41 @@ namespace Office365APIEditor.Properties {
                 this["RequestFormWindowState"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2WebAppTenantName {
+            get {
+                return ((string)(this["LastV2WebAppTenantName"]));
+            }
+            set {
+                this["LastV2WebAppTenantName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2MobileAppTenantName {
+            get {
+                return ((string)(this["LastV2MobileAppTenantName"]));
+            }
+            set {
+                this["LastV2MobileAppTenantName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2MobileAppRedirectUri {
+            get {
+                return ((string)(this["LastV2MobileAppRedirectUri"]));
+            }
+            set {
+                this["LastV2MobileAppRedirectUri"] = value;
+            }
+        }
     }
 }

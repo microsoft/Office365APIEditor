@@ -60,6 +60,15 @@ namespace Office365APIEditor
                     "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) +
                     "&scope=" + System.Web.HttpUtility.UrlEncode(ResourceOrScopeUri) +
                     "&response_mode=query";
+
+                if (AdminConsent)
+                {
+                    authenticationUrl += "&prompt=admin_consent";
+                }
+                else
+                {
+                    authenticationUrl += "&prompt=login";
+                }
             }
             else
             {

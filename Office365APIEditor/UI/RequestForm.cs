@@ -752,7 +752,7 @@ namespace Office365APIEditor
             decodedJsonResponse = "";
             indentedAndDecodedJsonResponse = "";
 
-            string endPoint = "https://login.microsoftonline.com/common/oauth2/";
+            string endPoint = $"https://login.microsoftonline.com/{clientInfo.TenantName.Replace("@", ".")}/oauth2/";
 
             // Build a POST body.
             string postBody = "";
@@ -786,7 +786,7 @@ namespace Office365APIEditor
                 {
                     // If _clientID has value, we're working with web app.
                     // So we have to add Client Secret.
-                    tempTable["client_secret"] = clientInfo.ClientSecret;
+                    tempTable["client_secret"] = System.Web.HttpUtility.UrlEncode(clientInfo.ClientSecret);
                 }
             }
 

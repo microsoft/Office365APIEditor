@@ -4,6 +4,7 @@ namespace Office365APIEditor.AccessTokenUtil
 {
     class V2MobileAppUtil : AccessTokenUtil
     {
+        public string TenantName { get; set; }
         public string ClientID { get; set; }
         public string RedirectUri { get; set; }
         public string Scopes { get; set; }
@@ -18,6 +19,11 @@ namespace Office365APIEditor.AccessTokenUtil
 
             bool result = false;
             List<string> errorList = new List<string>();
+
+            if (TenantName == "")
+            {
+                errorList.Add("Enter the Tenant Name.");
+            }
 
             if (ClientID == "")
             {
@@ -74,7 +80,7 @@ namespace Office365APIEditor.AccessTokenUtil
 
         private AcquireAuthorizationCodeResult AcquireAuthorizationCode()
         {
-            GetCodeForm getCodeForm = new GetCodeForm(ClientID, RedirectUri, Scopes, true);
+            GetCodeForm getCodeForm = new GetCodeForm(ClientID, RedirectUri, Scopes, true, TenantName);
 
             return AcquireAuthorizationCode(getCodeForm);
         }
@@ -88,7 +94,7 @@ namespace Office365APIEditor.AccessTokenUtil
                 "&code=" + AuthorizationCode +
                 "&scope=" + Scopes;
 
-            string endPoint = "https://login.microsoftonline.com/common/oauth2/v2.0/token";
+            string endPoint = $"https://login.microsoftonline.com/{TenantName}/oauth2/v2.0/token";
 
             return AcquireAccessToken(postBody, endPoint);
         }

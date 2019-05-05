@@ -12,8 +12,9 @@ namespace Office365APIEditor
         public string ClientSecret { get; private set; }
         public string Scopes { get; private set; }
         public string RedirectUri { get; private set; }
+        public string TenantName { get; private set; }
 
-        public ClientInformation(TokenResponse token, AuthEndpoints authType, Resources resource, string clientID, string clientSecret, string scopes, string redirectUri)
+        public ClientInformation(TokenResponse token, AuthEndpoints authType, Resources resource, string clientID, string clientSecret, string scopes, string redirectUri, string tenantName = "common")
         {
             Token = token;
             AuthType = authType;
@@ -22,6 +23,7 @@ namespace Office365APIEditor
             ClientSecret = clientSecret;
             Scopes = scopes;
             RedirectUri = redirectUri;
+            TenantName = tenantName;
         }
 
         public string ResourceUri
