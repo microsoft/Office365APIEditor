@@ -533,7 +533,8 @@ namespace Office365APIEditor
                     {
                         ClientID = Properties.Settings.Default.BuiltInAppClientId,
                         RedirectUri = Properties.Settings.Default.BuiltInAppRedirectUri,
-                        Scopes = textBox_Page11_Scopes.Text
+                        Scopes = textBox_Page11_Scopes.Text,
+                        TenantName = "common"
                     };
 
                     validateResult = builtInAppUtil.Validate();
