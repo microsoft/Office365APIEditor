@@ -705,6 +705,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_CC09D96D282041A69F5793F3D12BFDA2"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_D274852DABCB4A4494D3A2692AAA9A5D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3097,6 +3103,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CC09D96D282041A69F5793F3D12BFDA2"
+            {
+            "SourcePath" = "8:..\\Office365APIEditor\\icon6.ico"
+            "TargetName" = "8:icon6.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D78562C1FC36F39715241835E996050A"
             {
             "AssemblyRegister" = "3:1"
@@ -3660,15 +3686,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Office365APIEditor"
-        "ProductCode" = "8:{DD4B7CF5-E1CB-41D7-A35D-20A4C4B4A6E2}"
-        "PackageCode" = "8:{A59D2E19-A686-4120-A921-F4A97FD8A0AB}"
+        "ProductCode" = "8:{D80B3A87-AF63-4598-B78E-7DBA4584980E}"
+        "PackageCode" = "8:{0FE7B2DD-AAD3-4E08-8327-8659E9E151EB}"
         "UpgradeCode" = "8:{8A442988-BA7D-43E0-A2B9-F7790CA105FD}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:0.10.13"
+        "ProductVersion" = "8:0.10.14"
         "Manufacturer" = "8:Microsoft Corporation"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -3678,7 +3704,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_9ACA6A4782994758980E25C7E7851364"
+        "ARPPRODUCTICON" = "8:_CC09D96D282041A69F5793F3D12BFDA2"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -3792,7 +3818,7 @@
             "Target" = "8:_D274852DABCB4A4494D3A2692AAA9A5D"
             "Folder" = "8:_EDF0ADC29EF349FE962F744019AD862E"
             "WorkingFolder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
-            "Icon" = "8:_9ACA6A4782994758980E25C7E7851364"
+            "Icon" = "8:_CC09D96D282041A69F5793F3D12BFDA2"
             "Feature" = "8:"
             }
         }

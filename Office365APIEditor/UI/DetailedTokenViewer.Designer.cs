@@ -31,27 +31,27 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DetailedTokenViewer));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridView_Header = new System.Windows.Forms.DataGridView();
+            this.Type_Header = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description_Header = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Value_Header = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox_Header = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataGridView_Claim = new System.Windows.Forms.DataGridView();
+            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox_Claim = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.textBox_Signature = new System.Windows.Forms.TextBox();
             this.button_Close = new System.Windows.Forms.Button();
             this.checkBox_AdvancedView = new System.Windows.Forms.CheckBox();
-            this.dataGridView_Claim = new System.Windows.Forms.DataGridView();
-            this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridView_Header = new System.Windows.Forms.DataGridView();
-            this.Type_Header = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Description_Header = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Value_Header = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Claim)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Header)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Claim)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -80,6 +80,46 @@
             this.tabPage1.Text = "Header";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // dataGridView_Header
+            // 
+            this.dataGridView_Header.AllowUserToAddRows = false;
+            this.dataGridView_Header.AllowUserToDeleteRows = false;
+            this.dataGridView_Header.AllowUserToOrderColumns = true;
+            this.dataGridView_Header.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Header.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Type_Header,
+            this.Description_Header,
+            this.Value_Header});
+            this.dataGridView_Header.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView_Header.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView_Header.Name = "dataGridView_Header";
+            this.dataGridView_Header.ReadOnly = true;
+            this.dataGridView_Header.Size = new System.Drawing.Size(604, 318);
+            this.dataGridView_Header.TabIndex = 1;
+            // 
+            // Type_Header
+            // 
+            this.Type_Header.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Type_Header.HeaderText = "Type";
+            this.Type_Header.Name = "Type_Header";
+            this.Type_Header.ReadOnly = true;
+            this.Type_Header.Width = 54;
+            // 
+            // Description_Header
+            // 
+            this.Description_Header.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Description_Header.HeaderText = "Description";
+            this.Description_Header.Name = "Description_Header";
+            this.Description_Header.ReadOnly = true;
+            this.Description_Header.Width = 83;
+            // 
+            // Value_Header
+            // 
+            this.Value_Header.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Value_Header.HeaderText = "Value";
+            this.Value_Header.Name = "Value_Header";
+            this.Value_Header.ReadOnly = true;
+            // 
             // textBox_Header
             // 
             this.textBox_Header.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -103,6 +143,46 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Claim";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView_Claim
+            // 
+            this.dataGridView_Claim.AllowUserToAddRows = false;
+            this.dataGridView_Claim.AllowUserToDeleteRows = false;
+            this.dataGridView_Claim.AllowUserToOrderColumns = true;
+            this.dataGridView_Claim.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Claim.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Type,
+            this.Description,
+            this.Value});
+            this.dataGridView_Claim.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView_Claim.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView_Claim.Name = "dataGridView_Claim";
+            this.dataGridView_Claim.ReadOnly = true;
+            this.dataGridView_Claim.Size = new System.Drawing.Size(604, 318);
+            this.dataGridView_Claim.TabIndex = 1;
+            // 
+            // Type
+            // 
+            this.Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Type.HeaderText = "Type";
+            this.Type.Name = "Type";
+            this.Type.ReadOnly = true;
+            this.Type.Width = 54;
+            // 
+            // Description
+            // 
+            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            this.Description.Width = 83;
+            // 
+            // Value
+            // 
+            this.Value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Value.HeaderText = "Value";
+            this.Value.Name = "Value";
+            this.Value.ReadOnly = true;
             // 
             // textBox_Claim
             // 
@@ -163,86 +243,6 @@
             this.checkBox_AdvancedView.UseVisualStyleBackColor = true;
             this.checkBox_AdvancedView.CheckedChanged += new System.EventHandler(this.checkBox_AdvancedView_CheckedChanged);
             // 
-            // dataGridView_Claim
-            // 
-            this.dataGridView_Claim.AllowUserToAddRows = false;
-            this.dataGridView_Claim.AllowUserToDeleteRows = false;
-            this.dataGridView_Claim.AllowUserToOrderColumns = true;
-            this.dataGridView_Claim.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Claim.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Type,
-            this.Description,
-            this.Value});
-            this.dataGridView_Claim.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView_Claim.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView_Claim.Name = "dataGridView_Claim";
-            this.dataGridView_Claim.ReadOnly = true;
-            this.dataGridView_Claim.Size = new System.Drawing.Size(604, 318);
-            this.dataGridView_Claim.TabIndex = 1;
-            // 
-            // Type
-            // 
-            this.Type.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Type.HeaderText = "Type";
-            this.Type.Name = "Type";
-            this.Type.ReadOnly = true;
-            this.Type.Width = 54;
-            // 
-            // Description
-            // 
-            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Description.HeaderText = "Description";
-            this.Description.Name = "Description";
-            this.Description.ReadOnly = true;
-            this.Description.Width = 83;
-            // 
-            // Value
-            // 
-            this.Value.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Value.HeaderText = "Value";
-            this.Value.Name = "Value";
-            this.Value.ReadOnly = true;
-            // 
-            // dataGridView_Header
-            // 
-            this.dataGridView_Header.AllowUserToAddRows = false;
-            this.dataGridView_Header.AllowUserToDeleteRows = false;
-            this.dataGridView_Header.AllowUserToOrderColumns = true;
-            this.dataGridView_Header.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Header.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Type_Header,
-            this.Description_Header,
-            this.Value_Header});
-            this.dataGridView_Header.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView_Header.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView_Header.Name = "dataGridView_Header";
-            this.dataGridView_Header.ReadOnly = true;
-            this.dataGridView_Header.Size = new System.Drawing.Size(604, 318);
-            this.dataGridView_Header.TabIndex = 1;
-            // 
-            // Type_Header
-            // 
-            this.Type_Header.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Type_Header.HeaderText = "Type";
-            this.Type_Header.Name = "Type_Header";
-            this.Type_Header.ReadOnly = true;
-            this.Type_Header.Width = 54;
-            // 
-            // Description_Header
-            // 
-            this.Description_Header.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.Description_Header.HeaderText = "Description";
-            this.Description_Header.Name = "Description_Header";
-            this.Description_Header.ReadOnly = true;
-            this.Description_Header.Width = 83;
-            // 
-            // Value_Header
-            // 
-            this.Value_Header.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Value_Header.HeaderText = "Value";
-            this.Value_Header.Name = "Value_Header";
-            this.Value_Header.ReadOnly = true;
-            // 
             // DetailedTokenViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -262,12 +262,12 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Header)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Claim)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Claim)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Header)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

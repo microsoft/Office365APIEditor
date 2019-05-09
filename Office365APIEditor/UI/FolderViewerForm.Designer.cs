@@ -164,7 +164,7 @@
             this.toolStripMenuItem_DisplayAttachments_DraftItem,
             this.toolStripMenuItem_Edit_DraftItem});
             this.contextMenuStrip_ItemList_DraftItem.Name = "contextMenuStrip_ItemList";
-            this.contextMenuStrip_ItemList_DraftItem.Size = new System.Drawing.Size(193, 70);
+            this.contextMenuStrip_ItemList_DraftItem.Size = new System.Drawing.Size(193, 48);
             // 
             // toolStripMenuItem_DisplayAttachments_DraftItem
             // 

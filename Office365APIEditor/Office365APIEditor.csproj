@@ -51,7 +51,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>image.ico</ApplicationIcon>
+    <ApplicationIcon>icon6.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -320,6 +320,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FocusedInbox\FocusedInboxOverrideForm.resx">
       <DependentUpon>FocusedInboxOverrideForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FocusedInbox\NewFocusedInboxOverrideForm.resx">
       <DependentUpon>NewFocusedInboxOverrideForm.cs</DependentUpon>
@@ -384,6 +385,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="icon6.ico" />
     <Content Include="SampleRequest\MicrosoftGraphV1.0.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -394,7 +396,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icon.png" />
     <Content Include="image.ico" />
     <Content Include="Licenses\AsyncUsageAnalyzers.txt" />
     <Content Include="Licenses\DynamicJson.txt" />
