@@ -119,9 +119,12 @@ namespace Office365APIEditor
             previousPages.Add(currentPageIndex);
             currentPageIndex = PageIndexToShow;
 
-            Pages[(int)currentPageIndex].Top = 12;
-            Pages[(int)currentPageIndex].Left = 12;
+            Pages[(int)currentPageIndex].Top = 0;
+            Pages[(int)currentPageIndex].Left = 0;
             Pages[(int)currentPageIndex].Enabled = true;
+            Pages[(int)currentPageIndex].Dock = DockStyle.Top;
+            Pages[(int)currentPageIndex].Height = 212;
+            Pages[(int)currentPageIndex].Visible = true;
 
             if (Pages[(int)currentPageIndex].Tag != null && Pages[(int)currentPageIndex].Tag.ToString() != "")
             {
@@ -137,19 +140,26 @@ namespace Office365APIEditor
 
             if (previousPages.Count != 1)
             {
+                Pages[(int)previousPages[previousPages.Count - 1]].Dock = DockStyle.None;
                 Pages[(int)previousPages[previousPages.Count - 1]].Left = 1000;
                 Pages[(int)previousPages[previousPages.Count - 1]].Enabled = false;
+                Pages[(int)previousPages[previousPages.Count - 1]].Visible = false;
             }
         }
 
         private void button_Back_Click(object sender, EventArgs e)
         {
-            Pages[(int)previousPages[previousPages.Count - 1]].Top = 12;
-            Pages[(int)previousPages[previousPages.Count - 1]].Left = 12;
+            Pages[(int)previousPages[previousPages.Count - 1]].Top = 0;
+            Pages[(int)previousPages[previousPages.Count - 1]].Left = 0;
             Pages[(int)previousPages[previousPages.Count - 1]].Enabled = true;
+            Pages[(int)previousPages[previousPages.Count - 1]].Dock = DockStyle.Top;
+            Pages[(int)previousPages[previousPages.Count - 1]].Height = 212;
+            Pages[(int)previousPages[previousPages.Count - 1]].Visible = true;
 
+            Pages[(int)currentPageIndex].Dock = DockStyle.None;
             Pages[(int)currentPageIndex].Left = 1000;
             Pages[(int)currentPageIndex].Enabled = false;
+            Pages[(int)currentPageIndex].Visible = false;
 
             if (Pages[(int)currentPageIndex].Tag != null && Pages[(int)currentPageIndex].Tag.ToString() != "")
             {

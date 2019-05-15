@@ -419,6 +419,8 @@
             // 
             // textBox_BasicAuthPassword
             // 
+            this.textBox_BasicAuthPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_BasicAuthPassword.Location = new System.Drawing.Point(421, 5);
             this.textBox_BasicAuthPassword.Name = "textBox_BasicAuthPassword";
             this.textBox_BasicAuthPassword.Size = new System.Drawing.Size(253, 20);

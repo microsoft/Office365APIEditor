@@ -178,7 +178,7 @@
             this.panel_Page00.Controls.Add(this.radioButton_Page00_AppRegistrationPortal);
             this.panel_Page00.Controls.Add(this.radioButton_Page00_MicrosoftAzurePortal);
             this.panel_Page00.Controls.Add(this.label1);
-            this.panel_Page00.Location = new System.Drawing.Point(12, 12);
+            this.panel_Page00.Location = new System.Drawing.Point(426, 12);
             this.panel_Page00.Name = "panel_Page00";
             this.panel_Page00.Size = new System.Drawing.Size(400, 200);
             this.panel_Page00.TabIndex = 0;
@@ -200,7 +200,7 @@
             // 
             this.radioButton_Page00_AppRegistrationPortal.Location = new System.Drawing.Point(18, 86);
             this.radioButton_Page00_AppRegistrationPortal.Name = "radioButton_Page00_AppRegistrationPortal";
-            this.radioButton_Page00_AppRegistrationPortal.Size = new System.Drawing.Size(367, 43);
+            this.radioButton_Page00_AppRegistrationPortal.Size = new System.Drawing.Size(358, 43);
             this.radioButton_Page00_AppRegistrationPortal.TabIndex = 2;
             this.radioButton_Page00_AppRegistrationPortal.TabStop = true;
             this.radioButton_Page00_AppRegistrationPortal.Text = "v2.0 Endpoint\r\nIf you registered your application in App Registration Portal or t" +
@@ -231,7 +231,8 @@
             // 
             // button_Back
             // 
-            this.button_Back.Location = new System.Drawing.Point(174, 217);
+            this.button_Back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_Back.Location = new System.Drawing.Point(1417, 1018);
             this.button_Back.Name = "button_Back";
             this.button_Back.Size = new System.Drawing.Size(75, 23);
             this.button_Back.TabIndex = 100;
@@ -241,7 +242,8 @@
             // 
             // button_Next
             // 
-            this.button_Next.Location = new System.Drawing.Point(255, 217);
+            this.button_Next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_Next.Location = new System.Drawing.Point(1498, 1018);
             this.button_Next.Name = "button_Next";
             this.button_Next.Size = new System.Drawing.Size(75, 23);
             this.button_Next.TabIndex = 101;
@@ -251,8 +253,9 @@
             // 
             // button_Cancel
             // 
+            this.button_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_Cancel.Location = new System.Drawing.Point(337, 217);
+            this.button_Cancel.Location = new System.Drawing.Point(1580, 1018);
             this.button_Cancel.Name = "button_Cancel";
             this.button_Cancel.Size = new System.Drawing.Size(75, 23);
             this.button_Cancel.TabIndex = 102;
@@ -268,7 +271,7 @@
             this.panel_Page01.Controls.Add(this.radioButton_Page01_V1Native);
             this.panel_Page01.Controls.Add(this.radioButton_Page01_V1Web);
             this.panel_Page01.Controls.Add(this.label2);
-            this.panel_Page01.Location = new System.Drawing.Point(429, 12);
+            this.panel_Page01.Location = new System.Drawing.Point(832, 12);
             this.panel_Page01.Name = "panel_Page01";
             this.panel_Page01.Size = new System.Drawing.Size(400, 200);
             this.panel_Page01.TabIndex = 4;
@@ -359,11 +362,13 @@
             // 
             // comboBox_Page03_Resource
             // 
+            this.comboBox_Page03_Resource.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_Page03_Resource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Page03_Resource.FormattingEnabled = true;
             this.comboBox_Page03_Resource.Location = new System.Drawing.Point(102, 84);
             this.comboBox_Page03_Resource.Name = "comboBox_Page03_Resource";
-            this.comboBox_Page03_Resource.Size = new System.Drawing.Size(295, 21);
+            this.comboBox_Page03_Resource.Size = new System.Drawing.Size(284, 21);
             this.comboBox_Page03_Resource.TabIndex = 4;
             // 
             // linkLabel_Page03_WebApp
@@ -380,7 +385,6 @@
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.Location = new System.Drawing.Point(3, 35);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 13);
@@ -390,16 +394,17 @@
             // 
             // textBox_Page03_ClientSecret
             // 
+            this.textBox_Page03_ClientSecret.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page03_ClientSecret.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppClientSecret", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page03_ClientSecret.Location = new System.Drawing.Point(102, 110);
             this.textBox_Page03_ClientSecret.Name = "textBox_Page03_ClientSecret";
-            this.textBox_Page03_ClientSecret.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page03_ClientSecret.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page03_ClientSecret.TabIndex = 5;
             this.textBox_Page03_ClientSecret.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppClientSecret;
             // 
             // label10
             // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.Location = new System.Drawing.Point(3, 61);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(93, 13);
@@ -409,7 +414,6 @@
             // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.Location = new System.Drawing.Point(3, 113);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 13);
@@ -419,7 +423,6 @@
             // 
             // label6
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.Location = new System.Drawing.Point(3, 87);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(93, 13);
@@ -429,19 +432,23 @@
             // 
             // textBox_Page03_ClientID
             // 
+            this.textBox_Page03_ClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page03_ClientID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page03_ClientID.Location = new System.Drawing.Point(102, 32);
             this.textBox_Page03_ClientID.Name = "textBox_Page03_ClientID";
-            this.textBox_Page03_ClientID.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page03_ClientID.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page03_ClientID.TabIndex = 2;
             this.textBox_Page03_ClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppClientID;
             // 
             // textBox_Page03_RedirectUri
             // 
+            this.textBox_Page03_RedirectUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page03_RedirectUri.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppRedirectURL", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page03_RedirectUri.Location = new System.Drawing.Point(102, 58);
             this.textBox_Page03_RedirectUri.Name = "textBox_Page03_RedirectUri";
-            this.textBox_Page03_RedirectUri.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page03_RedirectUri.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page03_RedirectUri.TabIndex = 3;
             this.textBox_Page03_RedirectUri.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppRedirectURL;
             // 
@@ -461,7 +468,7 @@
             this.panel_Page02.Controls.Add(this.radioButton_Page02_V2Mobile);
             this.panel_Page02.Controls.Add(this.radioButton_Page02_V2Web);
             this.panel_Page02.Controls.Add(this.label7);
-            this.panel_Page02.Location = new System.Drawing.Point(835, 12);
+            this.panel_Page02.Location = new System.Drawing.Point(1238, 12);
             this.panel_Page02.Name = "panel_Page02";
             this.panel_Page02.Size = new System.Drawing.Size(400, 200);
             this.panel_Page02.TabIndex = 6;
@@ -540,11 +547,13 @@
             // 
             // comboBox_Page04_Resource
             // 
+            this.comboBox_Page04_Resource.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_Page04_Resource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Page04_Resource.FormattingEnabled = true;
             this.comboBox_Page04_Resource.Location = new System.Drawing.Point(102, 110);
             this.comboBox_Page04_Resource.Name = "comboBox_Page04_Resource";
-            this.comboBox_Page04_Resource.Size = new System.Drawing.Size(295, 21);
+            this.comboBox_Page04_Resource.Size = new System.Drawing.Size(284, 21);
             this.comboBox_Page04_Resource.TabIndex = 5;
             // 
             // label8
@@ -570,7 +579,6 @@
             // 
             // label13
             // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.Location = new System.Drawing.Point(3, 87);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(93, 13);
@@ -580,16 +588,17 @@
             // 
             // textBox_Page04_RedirectUri
             // 
+            this.textBox_Page04_RedirectUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page04_RedirectUri.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastNativeAppRedirectURL", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page04_RedirectUri.Location = new System.Drawing.Point(102, 84);
             this.textBox_Page04_RedirectUri.Name = "textBox_Page04_RedirectUri";
-            this.textBox_Page04_RedirectUri.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page04_RedirectUri.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page04_RedirectUri.TabIndex = 4;
             this.textBox_Page04_RedirectUri.Text = global::Office365APIEditor.Properties.Settings.Default.LastNativeAppRedirectURL;
             // 
             // label12
             // 
-            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.Location = new System.Drawing.Point(3, 61);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(93, 13);
@@ -599,7 +608,6 @@
             // 
             // label11
             // 
-            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.Location = new System.Drawing.Point(3, 35);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(93, 13);
@@ -609,25 +617,28 @@
             // 
             // textBox_Page04_ClientID
             // 
+            this.textBox_Page04_ClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page04_ClientID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastNativeAppClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page04_ClientID.Location = new System.Drawing.Point(102, 58);
             this.textBox_Page04_ClientID.Name = "textBox_Page04_ClientID";
-            this.textBox_Page04_ClientID.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page04_ClientID.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page04_ClientID.TabIndex = 3;
             this.textBox_Page04_ClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastNativeAppClientID;
             // 
             // textBox_Page04_TenantName
             // 
+            this.textBox_Page04_TenantName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page04_TenantName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastNativeAppTenantName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page04_TenantName.Location = new System.Drawing.Point(102, 32);
             this.textBox_Page04_TenantName.Name = "textBox_Page04_TenantName";
-            this.textBox_Page04_TenantName.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page04_TenantName.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page04_TenantName.TabIndex = 2;
             this.textBox_Page04_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastNativeAppTenantName;
             // 
             // label14
             // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.Location = new System.Drawing.Point(3, 113);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(93, 13);
@@ -670,11 +681,13 @@
             // 
             // comboBox_Page05_Resource
             // 
+            this.comboBox_Page05_Resource.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_Page05_Resource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Page05_Resource.FormattingEnabled = true;
             this.comboBox_Page05_Resource.Location = new System.Drawing.Point(102, 136);
             this.comboBox_Page05_Resource.Name = "comboBox_Page05_Resource";
-            this.comboBox_Page05_Resource.Size = new System.Drawing.Size(295, 21);
+            this.comboBox_Page05_Resource.Size = new System.Drawing.Size(284, 21);
             this.comboBox_Page05_Resource.TabIndex = 7;
             // 
             // label16
@@ -688,8 +701,9 @@
             // 
             // button_Page05_SelectCert
             // 
+            this.button_Page05_SelectCert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button_Page05_SelectCert.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_Page05_SelectCert.Location = new System.Drawing.Point(320, 82);
+            this.button_Page05_SelectCert.Location = new System.Drawing.Point(309, 82);
             this.button_Page05_SelectCert.Name = "button_Page05_SelectCert";
             this.button_Page05_SelectCert.Size = new System.Drawing.Size(77, 23);
             this.button_Page05_SelectCert.TabIndex = 5;
@@ -699,7 +713,6 @@
             // 
             // label36
             // 
-            this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label36.Location = new System.Drawing.Point(3, 87);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(93, 13);
@@ -709,16 +722,17 @@
             // 
             // textBox_Page05_CertPath
             // 
+            this.textBox_Page05_CertPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page05_CertPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyCertPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page05_CertPath.Location = new System.Drawing.Point(102, 84);
             this.textBox_Page05_CertPath.Name = "textBox_Page05_CertPath";
-            this.textBox_Page05_CertPath.Size = new System.Drawing.Size(212, 20);
+            this.textBox_Page05_CertPath.Size = new System.Drawing.Size(165, 20);
             this.textBox_Page05_CertPath.TabIndex = 4;
             this.textBox_Page05_CertPath.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyCertPath;
             // 
             // label32
             // 
-            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label32.Location = new System.Drawing.Point(3, 113);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(93, 13);
@@ -728,17 +742,18 @@
             // 
             // textBox_Page05_CertPass
             // 
+            this.textBox_Page05_CertPass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page05_CertPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyCertPass", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page05_CertPass.Location = new System.Drawing.Point(102, 110);
             this.textBox_Page05_CertPass.Name = "textBox_Page05_CertPass";
             this.textBox_Page05_CertPass.PasswordChar = '*';
-            this.textBox_Page05_CertPass.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page05_CertPass.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page05_CertPass.TabIndex = 6;
             this.textBox_Page05_CertPass.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyCertPass;
             // 
             // label33
             // 
-            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label33.Location = new System.Drawing.Point(3, 61);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(93, 13);
@@ -748,7 +763,6 @@
             // 
             // label34
             // 
-            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label34.Location = new System.Drawing.Point(3, 35);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(93, 13);
@@ -758,26 +772,29 @@
             // 
             // textBox_Page05_ClientID
             // 
+            this.textBox_Page05_ClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page05_ClientID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page05_ClientID.Location = new System.Drawing.Point(102, 58);
             this.textBox_Page05_ClientID.Name = "textBox_Page05_ClientID";
-            this.textBox_Page05_ClientID.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page05_ClientID.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page05_ClientID.TabIndex = 3;
             this.textBox_Page05_ClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyClientID;
             // 
             // textBox_Page05_TenantName
             // 
+            this.textBox_Page05_TenantName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page05_TenantName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyTenantName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page05_TenantName.Location = new System.Drawing.Point(102, 32);
             this.textBox_Page05_TenantName.Name = "textBox_Page05_TenantName";
-            this.textBox_Page05_TenantName.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page05_TenantName.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page05_TenantName.TabIndex = 2;
             this.textBox_Page05_TenantName.Tag = "";
             this.textBox_Page05_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyTenantName;
             // 
             // label35
             // 
-            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label35.Location = new System.Drawing.Point(3, 139);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(93, 13);
@@ -807,7 +824,6 @@
             // 
             // label49
             // 
-            this.label49.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label49.Location = new System.Drawing.Point(3, 39);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(93, 13);
@@ -817,10 +833,12 @@
             // 
             // textBox_Page06_TenantName
             // 
+            this.textBox_Page06_TenantName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page06_TenantName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2WebAppTenantName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page06_TenantName.Location = new System.Drawing.Point(102, 36);
             this.textBox_Page06_TenantName.Name = "textBox_Page06_TenantName";
-            this.textBox_Page06_TenantName.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page06_TenantName.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page06_TenantName.TabIndex = 1;
             this.textBox_Page06_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2WebAppTenantName;
             // 
@@ -835,16 +853,17 @@
             // 
             // textBox_Page06_ClientSecret
             // 
+            this.textBox_Page06_ClientSecret.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page06_ClientSecret.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2WebAppClientSecret", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page06_ClientSecret.Location = new System.Drawing.Point(102, 169);
             this.textBox_Page06_ClientSecret.Name = "textBox_Page06_ClientSecret";
-            this.textBox_Page06_ClientSecret.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page06_ClientSecret.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page06_ClientSecret.TabIndex = 6;
             this.textBox_Page06_ClientSecret.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2WebAppClientSecret;
             // 
             // label26
             // 
-            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label26.Location = new System.Drawing.Point(3, 172);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(93, 13);
@@ -864,25 +883,28 @@
             // 
             // textBox_Page06_Scopes
             // 
+            this.textBox_Page06_Scopes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page06_Scopes.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2WebAppScopes", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page06_Scopes.Location = new System.Drawing.Point(102, 114);
             this.textBox_Page06_Scopes.Name = "textBox_Page06_Scopes";
-            this.textBox_Page06_Scopes.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page06_Scopes.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page06_Scopes.TabIndex = 4;
             this.textBox_Page06_Scopes.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2WebAppScopes;
             // 
             // textBox_Page06_ClientID
             // 
+            this.textBox_Page06_ClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page06_ClientID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2WebAppClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page06_ClientID.Location = new System.Drawing.Point(102, 62);
             this.textBox_Page06_ClientID.Name = "textBox_Page06_ClientID";
-            this.textBox_Page06_ClientID.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page06_ClientID.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page06_ClientID.TabIndex = 2;
             this.textBox_Page06_ClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2WebAppClientID;
             // 
             // label29
             // 
-            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label29.Location = new System.Drawing.Point(3, 61);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(93, 13);
@@ -892,7 +914,6 @@
             // 
             // label30
             // 
-            this.label30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label30.Location = new System.Drawing.Point(3, 87);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(93, 13);
@@ -902,7 +923,6 @@
             // 
             // label31
             // 
-            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label31.Location = new System.Drawing.Point(3, 114);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(93, 13);
@@ -912,10 +932,12 @@
             // 
             // textBox_Page06_RedirectUri
             // 
+            this.textBox_Page06_RedirectUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page06_RedirectUri.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2WebAppRedirectUri", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page06_RedirectUri.Location = new System.Drawing.Point(102, 88);
             this.textBox_Page06_RedirectUri.Name = "textBox_Page06_RedirectUri";
-            this.textBox_Page06_RedirectUri.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page06_RedirectUri.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page06_RedirectUri.TabIndex = 3;
             this.textBox_Page06_RedirectUri.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2WebAppRedirectUri;
             // 
@@ -939,7 +961,6 @@
             // 
             // label50
             // 
-            this.label50.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label50.Location = new System.Drawing.Point(3, 39);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(93, 13);
@@ -949,10 +970,12 @@
             // 
             // textBox_Page07_TenantName
             // 
+            this.textBox_Page07_TenantName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page07_TenantName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2MobileAppTenantName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page07_TenantName.Location = new System.Drawing.Point(102, 36);
             this.textBox_Page07_TenantName.Name = "textBox_Page07_TenantName";
-            this.textBox_Page07_TenantName.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page07_TenantName.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page07_TenantName.TabIndex = 1;
             this.textBox_Page07_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2MobileAppTenantName;
             // 
@@ -977,25 +1000,28 @@
             // 
             // textBox_Page07_Scopes
             // 
+            this.textBox_Page07_Scopes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page07_Scopes.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2MobileAppScopes", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page07_Scopes.Location = new System.Drawing.Point(102, 114);
             this.textBox_Page07_Scopes.Name = "textBox_Page07_Scopes";
-            this.textBox_Page07_Scopes.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page07_Scopes.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page07_Scopes.TabIndex = 4;
             this.textBox_Page07_Scopes.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2MobileAppScopes;
             // 
             // textBox_Page07_ClientID
             // 
+            this.textBox_Page07_ClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page07_ClientID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2MobileAppClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page07_ClientID.Location = new System.Drawing.Point(102, 62);
             this.textBox_Page07_ClientID.Name = "textBox_Page07_ClientID";
-            this.textBox_Page07_ClientID.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page07_ClientID.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page07_ClientID.TabIndex = 2;
             this.textBox_Page07_ClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2MobileAppClientID;
             // 
             // label22
             // 
-            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label22.Location = new System.Drawing.Point(3, 65);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(93, 13);
@@ -1005,7 +1031,6 @@
             // 
             // label23
             // 
-            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label23.Location = new System.Drawing.Point(3, 91);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(93, 13);
@@ -1015,7 +1040,6 @@
             // 
             // label25
             // 
-            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label25.Location = new System.Drawing.Point(3, 117);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(93, 13);
@@ -1025,10 +1049,12 @@
             // 
             // textBox_Page07_RedirectUri
             // 
+            this.textBox_Page07_RedirectUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page07_RedirectUri.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2MobileAppRedirectUri", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page07_RedirectUri.Location = new System.Drawing.Point(102, 88);
             this.textBox_Page07_RedirectUri.Name = "textBox_Page07_RedirectUri";
-            this.textBox_Page07_RedirectUri.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page07_RedirectUri.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page07_RedirectUri.TabIndex = 3;
             this.textBox_Page07_RedirectUri.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2MobileAppRedirectUri;
             // 
@@ -1064,16 +1090,17 @@
             // 
             // comboBox_Page08_Resource
             // 
+            this.comboBox_Page08_Resource.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_Page08_Resource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Page08_Resource.FormattingEnabled = true;
             this.comboBox_Page08_Resource.Location = new System.Drawing.Point(102, 88);
             this.comboBox_Page08_Resource.Name = "comboBox_Page08_Resource";
-            this.comboBox_Page08_Resource.Size = new System.Drawing.Size(295, 21);
+            this.comboBox_Page08_Resource.Size = new System.Drawing.Size(284, 21);
             this.comboBox_Page08_Resource.TabIndex = 48;
             // 
             // label17
             // 
-            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.Location = new System.Drawing.Point(3, 39);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(93, 13);
@@ -1083,16 +1110,17 @@
             // 
             // textBox_Page08_ClientSecret
             // 
+            this.textBox_Page08_ClientSecret.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page08_ClientSecret.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyByKeyClientSecret", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page08_ClientSecret.Location = new System.Drawing.Point(102, 115);
             this.textBox_Page08_ClientSecret.Name = "textBox_Page08_ClientSecret";
-            this.textBox_Page08_ClientSecret.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page08_ClientSecret.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page08_ClientSecret.TabIndex = 49;
             this.textBox_Page08_ClientSecret.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyByKeyClientSecret;
             // 
             // label18
             // 
-            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.Location = new System.Drawing.Point(3, 65);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(93, 13);
@@ -1102,7 +1130,6 @@
             // 
             // label19
             // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.Location = new System.Drawing.Point(3, 118);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(93, 13);
@@ -1112,7 +1139,6 @@
             // 
             // label20
             // 
-            this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.Location = new System.Drawing.Point(3, 91);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(93, 13);
@@ -1122,19 +1148,23 @@
             // 
             // textBox_Page08_TenantName
             // 
+            this.textBox_Page08_TenantName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page08_TenantName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyByKeyTenantName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page08_TenantName.Location = new System.Drawing.Point(102, 36);
             this.textBox_Page08_TenantName.Name = "textBox_Page08_TenantName";
-            this.textBox_Page08_TenantName.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page08_TenantName.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page08_TenantName.TabIndex = 46;
             this.textBox_Page08_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyByKeyTenantName;
             // 
             // textBox_Page08_ClientID
             // 
+            this.textBox_Page08_ClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page08_ClientID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyByKeyClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page08_ClientID.Location = new System.Drawing.Point(102, 62);
             this.textBox_Page08_ClientID.Name = "textBox_Page08_ClientID";
-            this.textBox_Page08_ClientID.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page08_ClientID.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page08_ClientID.TabIndex = 47;
             this.textBox_Page08_ClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyByKeyClientID;
             // 
@@ -1168,16 +1198,17 @@
             // 
             // comboBox_Page09_Resource
             // 
+            this.comboBox_Page09_Resource.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_Page09_Resource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Page09_Resource.FormattingEnabled = true;
             this.comboBox_Page09_Resource.Location = new System.Drawing.Point(102, 84);
             this.comboBox_Page09_Resource.Name = "comboBox_Page09_Resource";
-            this.comboBox_Page09_Resource.Size = new System.Drawing.Size(295, 21);
+            this.comboBox_Page09_Resource.Size = new System.Drawing.Size(284, 21);
             this.comboBox_Page09_Resource.TabIndex = 4;
             // 
             // label24
             // 
-            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label24.Location = new System.Drawing.Point(3, 35);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(93, 13);
@@ -1187,7 +1218,6 @@
             // 
             // label27
             // 
-            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label27.Location = new System.Drawing.Point(3, 61);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(93, 13);
@@ -1197,7 +1227,6 @@
             // 
             // label37
             // 
-            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label37.Location = new System.Drawing.Point(3, 87);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(93, 13);
@@ -1207,16 +1236,20 @@
             // 
             // textBox_Page09_ClientID
             // 
+            this.textBox_Page09_ClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page09_ClientID.Location = new System.Drawing.Point(102, 32);
             this.textBox_Page09_ClientID.Name = "textBox_Page09_ClientID";
-            this.textBox_Page09_ClientID.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page09_ClientID.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page09_ClientID.TabIndex = 2;
             // 
             // textBox_Page09_RedirectUri
             // 
+            this.textBox_Page09_RedirectUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page09_RedirectUri.Location = new System.Drawing.Point(102, 58);
             this.textBox_Page09_RedirectUri.Name = "textBox_Page09_RedirectUri";
-            this.textBox_Page09_RedirectUri.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page09_RedirectUri.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page09_RedirectUri.TabIndex = 3;
             // 
             // label38
@@ -1303,16 +1336,17 @@
             // 
             // textBox_Page11_Scopes
             // 
+            this.textBox_Page11_Scopes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page11_Scopes.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastBuiltInAppScopes", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page11_Scopes.Location = new System.Drawing.Point(102, 32);
             this.textBox_Page11_Scopes.Name = "textBox_Page11_Scopes";
-            this.textBox_Page11_Scopes.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page11_Scopes.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page11_Scopes.TabIndex = 3;
             this.textBox_Page11_Scopes.Text = global::Office365APIEditor.Properties.Settings.Default.LastBuiltInAppScopes;
             // 
             // label42
             // 
-            this.label42.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label42.Location = new System.Drawing.Point(3, 35);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(93, 13);
@@ -1349,16 +1383,17 @@
             // 
             // textBox_Page12_ClientSecret
             // 
+            this.textBox_Page12_ClientSecret.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page12_ClientSecret.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientSecret", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page12_ClientSecret.Location = new System.Drawing.Point(102, 144);
             this.textBox_Page12_ClientSecret.Name = "textBox_Page12_ClientSecret";
-            this.textBox_Page12_ClientSecret.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page12_ClientSecret.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page12_ClientSecret.TabIndex = 5;
             this.textBox_Page12_ClientSecret.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientSecret;
             // 
             // label41
             // 
-            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label41.Location = new System.Drawing.Point(3, 147);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(93, 13);
@@ -1378,25 +1413,28 @@
             // 
             // textBox_Page12_Scopes
             // 
+            this.textBox_Page12_Scopes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page12_Scopes.Enabled = false;
             this.textBox_Page12_Scopes.Location = new System.Drawing.Point(102, 89);
             this.textBox_Page12_Scopes.Name = "textBox_Page12_Scopes";
-            this.textBox_Page12_Scopes.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page12_Scopes.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page12_Scopes.TabIndex = 3;
             this.textBox_Page12_Scopes.Text = "https://graph.microsoft.com/.default";
             // 
             // textBox_Page12_TenantName
             // 
+            this.textBox_Page12_TenantName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page12_TenantName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2WebAppAppOnlyByPasswordForMicrosoftGraphTenantName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page12_TenantName.Location = new System.Drawing.Point(102, 36);
             this.textBox_Page12_TenantName.Name = "textBox_Page12_TenantName";
-            this.textBox_Page12_TenantName.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page12_TenantName.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page12_TenantName.TabIndex = 1;
             this.textBox_Page12_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2WebAppAppOnlyByPasswordForMicrosoftGraphTenantName;
             // 
             // label43
             // 
-            this.label43.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label43.Location = new System.Drawing.Point(3, 39);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(93, 13);
@@ -1406,7 +1444,6 @@
             // 
             // label44
             // 
-            this.label44.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label44.Location = new System.Drawing.Point(3, 65);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(93, 13);
@@ -1416,7 +1453,6 @@
             // 
             // label45
             // 
-            this.label45.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label45.Location = new System.Drawing.Point(3, 92);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(93, 13);
@@ -1426,10 +1462,12 @@
             // 
             // textBox_Page12_ClientId
             // 
+            this.textBox_Page12_ClientId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page12_ClientId.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_Page12_ClientId.Location = new System.Drawing.Point(102, 62);
             this.textBox_Page12_ClientId.Name = "textBox_Page12_ClientId";
-            this.textBox_Page12_ClientId.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page12_ClientId.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page12_ClientId.TabIndex = 2;
             this.textBox_Page12_ClientId.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2WebAppAppOnlyByPasswordForMicrosoftGraphClientID;
             // 
@@ -1457,7 +1495,6 @@
             // 
             // label47
             // 
-            this.label47.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label47.Location = new System.Drawing.Point(3, 65);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(93, 13);
@@ -1467,14 +1504,15 @@
             // 
             // textBox_Page13_RedirectUri
             // 
+            this.textBox_Page13_RedirectUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page13_RedirectUri.Location = new System.Drawing.Point(102, 62);
             this.textBox_Page13_RedirectUri.Name = "textBox_Page13_RedirectUri";
-            this.textBox_Page13_RedirectUri.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page13_RedirectUri.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page13_RedirectUri.TabIndex = 4;
             // 
             // label48
             // 
-            this.label48.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label48.Location = new System.Drawing.Point(3, 39);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(93, 13);
@@ -1484,9 +1522,11 @@
             // 
             // textBox_Page13_ClientID
             // 
+            this.textBox_Page13_ClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Page13_ClientID.Location = new System.Drawing.Point(102, 36);
             this.textBox_Page13_ClientID.Name = "textBox_Page13_ClientID";
-            this.textBox_Page13_ClientID.Size = new System.Drawing.Size(295, 20);
+            this.textBox_Page13_ClientID.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page13_ClientID.TabIndex = 3;
             // 
             // AccessTokenWizard
@@ -1495,7 +1535,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_Cancel;
-            this.ClientSize = new System.Drawing.Size(1243, 1053);
+            this.ClientSize = new System.Drawing.Size(1667, 1053);
             this.Controls.Add(this.panel_Page13);
             this.Controls.Add(this.panel_Page12);
             this.Controls.Add(this.panel_Page11);
@@ -1506,12 +1546,12 @@
             this.Controls.Add(this.panel_Page06);
             this.Controls.Add(this.panel_Page05);
             this.Controls.Add(this.panel_Page04);
+            this.Controls.Add(this.button_Cancel);
+            this.Controls.Add(this.button_Next);
             this.Controls.Add(this.panel_Page02);
+            this.Controls.Add(this.button_Back);
             this.Controls.Add(this.panel_Page03);
             this.Controls.Add(this.panel_Page01);
-            this.Controls.Add(this.button_Cancel);
-            this.Controls.Add(this.button_Back);
-            this.Controls.Add(this.button_Next);
             this.Controls.Add(this.panel_Page00);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
