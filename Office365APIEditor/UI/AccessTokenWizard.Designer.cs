@@ -156,6 +156,7 @@
             this.textBox_Page13_RedirectUri = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
             this.textBox_Page13_ClientID = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panel_Page00.SuspendLayout();
             this.panel_Page01.SuspendLayout();
             this.panel_Page03.SuspendLayout();
@@ -170,10 +171,12 @@
             this.panel_Page11.SuspendLayout();
             this.panel_Page12.SuspendLayout();
             this.panel_Page13.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_Page00
             // 
+            this.panel_Page00.BackColor = System.Drawing.SystemColors.Control;
             this.panel_Page00.Controls.Add(this.radioButton_Page00_BuiltInAppOrBasicAuth);
             this.panel_Page00.Controls.Add(this.radioButton_Page00_AppRegistrationPortal);
             this.panel_Page00.Controls.Add(this.radioButton_Page00_MicrosoftAzurePortal);
@@ -232,7 +235,7 @@
             // button_Back
             // 
             this.button_Back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Back.Location = new System.Drawing.Point(1417, 1018);
+            this.button_Back.Location = new System.Drawing.Point(1417, 10);
             this.button_Back.Name = "button_Back";
             this.button_Back.Size = new System.Drawing.Size(75, 23);
             this.button_Back.TabIndex = 100;
@@ -243,7 +246,7 @@
             // button_Next
             // 
             this.button_Next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Next.Location = new System.Drawing.Point(1498, 1018);
+            this.button_Next.Location = new System.Drawing.Point(1498, 10);
             this.button_Next.Name = "button_Next";
             this.button_Next.Size = new System.Drawing.Size(75, 23);
             this.button_Next.TabIndex = 101;
@@ -255,7 +258,7 @@
             // 
             this.button_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_Cancel.Location = new System.Drawing.Point(1580, 1018);
+            this.button_Cancel.Location = new System.Drawing.Point(1580, 10);
             this.button_Cancel.Name = "button_Cancel";
             this.button_Cancel.Size = new System.Drawing.Size(75, 23);
             this.button_Cancel.TabIndex = 102;
@@ -1529,6 +1532,18 @@
             this.textBox_Page13_ClientID.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page13_ClientID.TabIndex = 3;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.button_Cancel);
+            this.panel1.Controls.Add(this.button_Back);
+            this.panel1.Controls.Add(this.button_Next);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 1013);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1667, 40);
+            this.panel1.TabIndex = 106;
+            // 
             // AccessTokenWizard
             // 
             this.AcceptButton = this.button_Next;
@@ -1536,6 +1551,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_Cancel;
             this.ClientSize = new System.Drawing.Size(1667, 1053);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel_Page13);
             this.Controls.Add(this.panel_Page12);
             this.Controls.Add(this.panel_Page11);
@@ -1546,10 +1562,7 @@
             this.Controls.Add(this.panel_Page06);
             this.Controls.Add(this.panel_Page05);
             this.Controls.Add(this.panel_Page04);
-            this.Controls.Add(this.button_Cancel);
-            this.Controls.Add(this.button_Next);
             this.Controls.Add(this.panel_Page02);
-            this.Controls.Add(this.button_Back);
             this.Controls.Add(this.panel_Page03);
             this.Controls.Add(this.panel_Page01);
             this.Controls.Add(this.panel_Page00);
@@ -1589,6 +1602,7 @@
             this.panel_Page12.PerformLayout();
             this.panel_Page13.ResumeLayout(false);
             this.panel_Page13.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1722,5 +1736,6 @@
         private System.Windows.Forms.TextBox textBox_Page06_TenantName;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.TextBox textBox_Page07_TenantName;
+        private System.Windows.Forms.Panel panel1;
     }
 }

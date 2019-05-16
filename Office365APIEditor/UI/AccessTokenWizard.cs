@@ -77,6 +77,10 @@ namespace Office365APIEditor
 
             Pages.ForEach(p => p.Enabled = false);
 
+            button_Back.BringToFront();
+            button_Next.BringToFront();
+            button_Cancel.BringToFront();
+
             // Go to the first page.
             ShowPage(PageIndex.Page00_PortalSelection);
 
