@@ -41,9 +41,6 @@ namespace Office365APIEditor
 
         private void AcquireViewerTokenForm_Load(object sender, EventArgs e)
         {
-            linkLabel_Portal.Text = "Enter the Application ID of your application registered in Application Registration Portal as a mobile (native) application.";
-            int startIndex = linkLabel_Portal.Text.IndexOf("Application Registration Portal", 0, linkLabel_Portal.Text.Length);
-            linkLabel_Portal.Links.Add(startIndex, ("Application Registration Portal").Length, "https://apps.dev.microsoft.com/");
         }
 
         private void linkLabel_Portal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -8,6 +8,9 @@ Download Office365APIEditor from [releases](https://github.com/Microsoft/Office3
 
 ## Features
 
+Click on the image below to see the introduction video.  
+[![Watch a video on YouTube](https://img.youtube.com/vi/Tm3APCwng6Y/maxresdefault.jpg)](http://www.youtube.com/watch?v=Tm3APCwng6Y "Introducing Office365APIEditor")
+
 ### Mailbox Viewer mode
 You can browse folders, items, and so on in your mailbox using Outlook REST API.
 
@@ -24,17 +27,18 @@ You can browse folders, items, and so on in your mailbox using Outlook REST API.
 You need the following to work with Office365APIEditor:
 - An Office 365 account or a Microsoft Account
 - Microsoft .NET Framework 4.5 or later
+- A minimum screen resolution of 1024 x 768
 
 You don't have to register your application in the Azure Active Directory or [Application Registration Portal](https://apps.dev.microsoft.com/) if you want to use the built-in application ID.
 
 ## Command-line switches
 
-| Switch     | Description                                 |
-|:-----------|:--------------------------------------------|
-| /NoSetting | Remove all user settings.                   |
-| /NoHistory | Remove all request and response history.    |
-| /CustomDefinedScopes | Remove all custom defined scopes. |
-| /SystemLogging | Enable system logging.                  |
+| Switch                    | Description                              |
+|:--------------------------|:-----------------------------------------|
+| /ResetSettings            | Reset all user settings.                 |
+| /RemoveHistory            | Remove all request and response history. |
+| /ResetCustomDefinedScopes | Reset all custom defined scopes.         |
+| /EnableSystemLogging      | Enable system logging.                   |
 
 ## Feedback
 

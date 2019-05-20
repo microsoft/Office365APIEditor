@@ -102,7 +102,7 @@ namespace Office365APIEditor
 
             foreach (string command in switches)
             {
-                if (command.ToLower() == ("/NoSetting").ToLower())
+                if (command.ToLower() == ("/ResetSettings").ToLower())
                 {
                     // Reset all settings.
                     startupLog.AppendLine("Setting will be reset.");
@@ -110,7 +110,7 @@ namespace Office365APIEditor
                     Properties.Settings.Default.Save();
                     startupLog.AppendLine("Setting was saved.");
                 }
-                else if(command.ToLower() == ("/NoHistory").ToLower())
+                else if(command.ToLower() == ("/RemoveHistory").ToLower())
                 {
                     // Remove Run History file.
                     startupLog.AppendLine("The history file will be delete.");
@@ -132,7 +132,7 @@ namespace Office365APIEditor
                         startupLog.AppendLine("The history file does not exist.");
                     }
                 }
-                else if (command.ToLower() == ("/CustomDefinedScopes").ToLower())
+                else if (command.ToLower() == ("/ResetCustomDefinedScopes").ToLower())
                 {
                     // Reset CustomDefinedScopes setting.
                     startupLog.AppendLine("CustomDefinedScopes will be reset.");
@@ -140,7 +140,7 @@ namespace Office365APIEditor
                     Properties.Settings.Default.Save();
                     startupLog.AppendLine("CustomDefinedScopes setting was saved.");
                 }
-                else if (command.ToLower() == ("/SystemLogging").ToLower())
+                else if (command.ToLower() == ("/EnableSystemLogging").ToLower())
                 {
                     // Turn on SystemLogging flag later.
                     systemLogging = true;
