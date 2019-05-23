@@ -35,7 +35,7 @@
             // 
             // button_OK
             // 
-            this.button_OK.Location = new System.Drawing.Point(297, 36);
+            this.button_OK.Location = new System.Drawing.Point(319, 36);
             this.button_OK.Name = "button_OK";
             this.button_OK.Size = new System.Drawing.Size(75, 23);
             this.button_OK.TabIndex = 0;
@@ -57,7 +57,7 @@
             this.AcceptButton = this.button_OK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 71);
+            this.ClientSize = new System.Drawing.Size(406, 71);
             this.Controls.Add(this.label_CheckResult);
             this.Controls.Add(this.button_OK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
