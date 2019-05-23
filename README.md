@@ -12,12 +12,12 @@ Click on the image below to see the introduction video.
 [![Watch a video on YouTube](https://img.youtube.com/vi/Tm3APCwng6Y/maxresdefault.jpg)](http://www.youtube.com/watch?v=Tm3APCwng6Y "Introducing Office365APIEditor")
 
 ### Mailbox Viewer mode
-You can browse folders, items, and so on in your mailbox using Outlook REST API.
+You can browse your mailbox contents such as folders, items, and mailbox properties using Outlook REST API.
 
 ### Editor mode
-- You can test Office 365 API, Microsoft Graph and Office 365 Management Activity API. We support following endpoints.
+- You can send requests to APIs such as Microsoft Graph. We support following endpoints.
 	- graph.microsoft.com (Microsoft Graph)
-	- outlook.office.com (Office 365 API - Exchange Online)
+	- outlook.office.com (Office 365 API - Outlook REST API)
 	- manage.office.com (Office 365 Management Activity API)
 
 - In addition to the built-in application ID, you can also use the application ID that you have registered in the Azure Active Directory to acquire an access token.
@@ -30,6 +30,9 @@ You need the following to work with Office365APIEditor:
 - A minimum screen resolution of 1024 x 768
 
 You don't have to register your application in the Azure Active Directory or [Application Registration Portal](https://apps.dev.microsoft.com/) if you want to use the built-in application ID.
+
+You can use both managed accounts and federated accounts as Office 365 accounts. But it is recommended to use managed accounts to simplify the authentication flow.
+If you are using AD FS in your organization, you might need to be enabled Forms Authentication to use federated accounts, because Office365APIEditor always send prompt=login and you need to type the user name on the authentication form.
 
 ## Command-line switches
 
