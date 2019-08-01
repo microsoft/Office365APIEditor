@@ -315,7 +315,14 @@ namespace Office365APIEditor
 
             try
             {
-                requestUri = new Uri(textBox_Request.Text);
+                string replacedUri = textBox_Request.Text;
+
+                if (Properties.Settings.Default.ReplacePlusSignInTheRequestURL)
+                {
+                    replacedUri = replacedUri.Replace("+", "%2B");
+                }
+
+                requestUri = new Uri(replacedUri);
             }
             catch
             {
@@ -328,7 +335,7 @@ namespace Office365APIEditor
                 return;
             }
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(textBox_Request.Text);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri);
             request.AllowAutoRedirect = Properties.Settings.Default.AllowAutoRedirect;
             request.UserAgent = Util.CustomUserAgent;
             request.ContentType = "application/json";

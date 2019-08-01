@@ -644,5 +644,17 @@ namespace Office365APIEditor.Properties {
                 this["LastV2MobileAppRedirectUri"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ReplacePlusSignInTheRequestURL {
+            get {
+                return ((bool)(this["ReplacePlusSignInTheRequestURL"]));
+            }
+            set {
+                this["ReplacePlusSignInTheRequestURL"] = value;
+            }
+        }
     }
 }

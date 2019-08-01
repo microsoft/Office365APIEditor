@@ -45,6 +45,7 @@
             this.comboBox_CustomUserAgentStyle = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.checkBox_ReplacePlusSignInTheRequestURL = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +72,7 @@
             // button_Cancel
             // 
             this.button_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_Cancel.Location = new System.Drawing.Point(333, 258);
+            this.button_Cancel.Location = new System.Drawing.Point(333, 281);
             this.button_Cancel.Name = "button_Cancel";
             this.button_Cancel.Size = new System.Drawing.Size(75, 23);
             this.button_Cancel.TabIndex = 20;
@@ -80,7 +81,7 @@
             // 
             // button_OK
             // 
-            this.button_OK.Location = new System.Drawing.Point(252, 258);
+            this.button_OK.Location = new System.Drawing.Point(252, 281);
             this.button_OK.Name = "button_OK";
             this.button_OK.Size = new System.Drawing.Size(75, 23);
             this.button_OK.TabIndex = 19;
@@ -196,13 +197,24 @@
             this.label4.TabIndex = 73;
             this.label4.Text = "* This is a preview feature.";
             // 
+            // checkBox_ReplacePlusSignInTheRequestURL
+            // 
+            this.checkBox_ReplacePlusSignInTheRequestURL.AutoSize = true;
+            this.checkBox_ReplacePlusSignInTheRequestURL.Location = new System.Drawing.Point(12, 258);
+            this.checkBox_ReplacePlusSignInTheRequestURL.Name = "checkBox_ReplacePlusSignInTheRequestURL";
+            this.checkBox_ReplacePlusSignInTheRequestURL.Size = new System.Drawing.Size(280, 17);
+            this.checkBox_ReplacePlusSignInTheRequestURL.TabIndex = 74;
+            this.checkBox_ReplacePlusSignInTheRequestURL.Text = "Replace the plus sign in the request URL with \"%2D\".";
+            this.checkBox_ReplacePlusSignInTheRequestURL.UseVisualStyleBackColor = true;
+            // 
             // RequestFormOptionForm
             // 
             this.AcceptButton = this.button_OK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_Cancel;
-            this.ClientSize = new System.Drawing.Size(414, 291);
+            this.ClientSize = new System.Drawing.Size(414, 315);
+            this.Controls.Add(this.checkBox_ReplacePlusSignInTheRequestURL);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.checkBox_AllowAutoRedirect);
             this.Controls.Add(this.groupBox1);
@@ -246,5 +258,6 @@
         private System.Windows.Forms.ComboBox comboBox_CustomUserAgentStyle;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox checkBox_ReplacePlusSignInTheRequestURL;
     }
 }
