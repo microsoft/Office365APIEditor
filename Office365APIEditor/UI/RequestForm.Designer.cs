@@ -571,7 +571,7 @@
             // label_StatusCode
             // 
             this.label_StatusCode.AutoSize = true;
-            this.label_StatusCode.Location = new System.Drawing.Point(70, 0);
+            this.label_StatusCode.Location = new System.Drawing.Point(70, 4);
             this.label_StatusCode.Name = "label_StatusCode";
             this.label_StatusCode.Size = new System.Drawing.Size(0, 13);
             this.label_StatusCode.TabIndex = 62;
