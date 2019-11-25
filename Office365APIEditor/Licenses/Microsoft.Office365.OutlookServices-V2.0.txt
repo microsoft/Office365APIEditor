@@ -1,3 +1,0 @@
-﻿Microsoft.Office365.OutlookServices-V2.0
-Copyright © Microsoft Corporation
-http://go.microsoft.com/fwlink/?LinkId=329770

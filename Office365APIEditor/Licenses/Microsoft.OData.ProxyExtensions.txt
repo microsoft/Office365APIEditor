@@ -1,3 +1,0 @@
-﻿Microsoft.OData.ProxyExtensions
-Copyright © Microsoft Corporation
-http://go.microsoft.com/fwlink/?LinkId=329770

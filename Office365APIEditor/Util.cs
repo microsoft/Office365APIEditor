@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
-using Microsoft.Identity.Client;
-using Microsoft.OData.Client;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -381,12 +379,6 @@ namespace Office365APIEditor
             {
                 throw ex;
             }
-        }
-
-        public static void InsertHeaders(object sender, SendingRequest2EventArgs e, string email)
-        {
-            e.RequestMessage.SetHeader("X-AnchorMailbox", email);
-            e.RequestMessage.SetHeader("Prefer", "outlook.timezone=\"" + System.TimeZoneInfo.Local.Id + "\"");
         }
 
         public static string[] MailboxViewerScopes()
