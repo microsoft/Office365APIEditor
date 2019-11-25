@@ -383,55 +383,6 @@ namespace Office365APIEditor
             }
         }
 
-        [Obsolete]
-        public static async Task<string> GetAccessTokenAsync(PublicClientApplication pca, IAccount CurrentUser)
-        {
-            // Acquire access token.
-            // This method is designed for GetOutlookServiceClient(), so if you need new OutlookServiceClient and new Access Token, you should use GetOutlookServiceClient().
-
-            AuthenticationResult ar;
-
-            try
-            {
-                var user = await pca.GetAccountAsync(CurrentUser.HomeAccountId.Identifier);
-                ar = await pca.AcquireTokenSilentAsync(MailboxViewerScopes(), user);
-            }
-            catch (Exception)
-            {
-                try
-                {
-                    ar = await pca.AcquireTokenAsync(MailboxViewerScopes(), CurrentUser, UIBehavior.ForceLogin, "");
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-            }
-
-            return ar.AccessToken;
-        }
-
-        [Obsolete]
-        public static Microsoft.Office365.OutlookServices.OutlookServicesClient GetOutlookServicesClient(PublicClientApplication pca, IAccount CurrentUser)
-        {
-            // Acquire access token again.
-
-            Microsoft.Office365.OutlookServices.OutlookServicesClient newClient = new Microsoft.Office365.OutlookServices.OutlookServicesClient(new Uri("https://outlook.office.com/api/v2.0"),
-                () =>
-                {
-                    return Task.Run(async () =>
-                    {
-                        string accessToken = await GetAccessTokenAsync(pca, CurrentUser);
-                        return accessToken;
-                    });
-                });
-
-            newClient.Context.SendingRequest2 += new EventHandler<SendingRequest2EventArgs>(
-                (eventSender, eventArgs) => InsertHeaders(eventSender, eventArgs, CurrentUser.Username));
-
-            return newClient;
-        }
-
         public static void InsertHeaders(object sender, SendingRequest2EventArgs e, string email)
         {
             e.RequestMessage.SetHeader("X-AnchorMailbox", email);

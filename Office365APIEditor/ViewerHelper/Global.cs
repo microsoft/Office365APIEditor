@@ -9,27 +9,26 @@ namespace Office365APIEditor.ViewerHelper
 {
     public static class Global
     {
-        public static PublicClientApplication pca;
+        public static IPublicClientApplication pca;
         public static IAccount currentUser;
         public static AuthenticationResult LastAuthenticationResult;
 
         private static async Task<AuthenticationResult> InternalGetAccessTokenAsync()
         {
             // Acquire access token.
-            // This method is designed for GetOutlookServiceClient(), so if you need new OutlookServiceClient and new Access Token, you should use GetOutlookServiceClient().
 
             AuthenticationResult result;
 
             try
             {
                 var user = await pca.GetAccountAsync(currentUser.HomeAccountId.Identifier);
-                result = await pca.AcquireTokenSilentAsync(Util.MailboxViewerScopes(), user);
+                result = await pca.AcquireTokenSilent(Util.MailboxViewerScopes(), user).ExecuteAsync();
             }
             catch (Exception)
             {
                 try
                 {
-                    result = await pca.AcquireTokenAsync(Util.MailboxViewerScopes(), currentUser, UIBehavior.ForceLogin, "");
+                    result = await pca.AcquireTokenInteractive(Util.MailboxViewerScopes()).WithAccount(currentUser).WithPrompt(Prompt.ForceLogin).ExecuteAsync();
                 }
                 catch (Exception ex)
                 {

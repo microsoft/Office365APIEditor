@@ -10,7 +10,7 @@ namespace Office365APIEditor
 {
     public partial class AcquireViewerTokenForm : Form
     {
-        PublicClientApplication _pca;
+        IPublicClientApplication _pca;
         AuthenticationResult _ar;
 
         public AcquireViewerTokenForm()
@@ -18,7 +18,7 @@ namespace Office365APIEditor
             InitializeComponent();
         }
 
-        public DialogResult ShowDialog(out PublicClientApplication pca, out AuthenticationResult ar)
+        public DialogResult ShowDialog(out IPublicClientApplication pca, out AuthenticationResult ar)
         {
             DialogResult result = ShowDialog();
 
@@ -60,7 +60,7 @@ namespace Office365APIEditor
 
             string[] scopes = Util.MailboxViewerScopes();
 
-            _pca = new PublicClientApplication(ClientId);
+            _pca = PublicClientApplicationBuilder.Create(ClientId).Build();
 
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -70,7 +70,7 @@ namespace Office365APIEditor
                 stringBuilder.AppendLine("Application ID : " + ClientId);
                 stringBuilder.AppendLine("Scope : " + string.Join(",", scopes));
 
-                _ar = await _pca.AcquireTokenAsync(scopes, "", UIBehavior.ForceLogin, "");
+                _ar = await _pca.AcquireTokenInteractive(scopes).WithPrompt(Prompt.ForceLogin).ExecuteAsync();
 
                 stringBuilder.AppendLine("Result : Success");
                 stringBuilder.AppendLine("AccessToken : " + (_ar.AccessToken ?? ""));
