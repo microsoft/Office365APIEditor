@@ -273,6 +273,9 @@ namespace Office365APIEditor
 
         private void button_Import_Click(object sender, EventArgs e)
         {
+            // Reset the previously selected file path
+            openFileDialog1.FileName = "";
+
             if (openFileDialog1.ShowDialog() != DialogResult.OK)
             {
                 return;
