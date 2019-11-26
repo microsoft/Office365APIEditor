@@ -138,6 +138,42 @@ namespace Office365APIEditor
             InitSyntaxColoring(scintilla_ResponseBody);
             scintilla_ResponseBody.ReadOnly = true;
 
+            // Folding
+            scintilla_ResponseBody.Lexer = Lexer.Json;
+
+            // Instruct the lexer to calculate folding
+            scintilla_ResponseBody.SetProperty("fold", "1");
+            scintilla_ResponseBody.SetProperty("fold.compact", "1");
+
+            // Configure a margin to display folding symbols
+            scintilla_ResponseBody.Margins[2].Type = MarginType.Symbol;
+            scintilla_ResponseBody.Margins[2].Mask = Marker.MaskFolders;
+            scintilla_ResponseBody.Margins[2].Sensitive = true;
+            scintilla_ResponseBody.Margins[2].Width = 20;
+
+            // Set colors for all folding markers
+            for (int i = 25; i <= 31; i++)
+            {
+                scintilla_ResponseBody.Markers[i].SetForeColor(SystemColors.ControlLightLight);
+                scintilla_ResponseBody.Markers[i].SetBackColor(SystemColors.ControlDark);
+            }
+
+            // Configure folding markers with respective symbols
+            scintilla_ResponseBody.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
+            scintilla_ResponseBody.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.BoxMinus;
+            scintilla_ResponseBody.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.BoxPlusConnected;
+            scintilla_ResponseBody.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
+            scintilla_ResponseBody.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.BoxMinusConnected;
+            scintilla_ResponseBody.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
+            scintilla_ResponseBody.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
+
+            // Enable automatic folding
+            scintilla_ResponseBody.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
+
+            // Enable URL Interaction
+            scintilla_ResponseBody.Styles[Style.Json.Uri].Hotspot = true;
+            scintilla_ResponseBody.HotspotClick += new System.EventHandler<ScintillaNET.HotspotClickEventArgs>(this.scintilla_HotspotClick);
+
             // Load sample request
 
             List<SampleRequestDefinitionRoot> sampleRequestDefinitionLists = new List<SampleRequestDefinitionRoot>();
@@ -1740,6 +1776,19 @@ namespace Office365APIEditor
             if (tabControl_LeftNavi.SelectedTab.Text == "Example")
             {
                 treeView_Example.Focus();
+            }
+        }
+
+        private async void scintilla_HotspotClick(object sender, HotspotClickEventArgs e)
+        {
+            var text = scintilla_ResponseBody.Lines[scintilla_ResponseBody.LineFromPosition(e.Position)].Text;
+            Regex urlRx = new Regex(@"((https?|ftp|file)\://|www.)[A-Za-z0-9\.\-]+(/[A-Za-z0-9\?\&\=;\+!'\(\)\*\-\._~%$]*)*", RegexOptions.IgnoreCase);
+            MatchCollection matches = urlRx.Matches(text);
+
+            if (System.Convert.ToBoolean(matches.Count) && button_Run.Enabled)
+            {
+                textBox_Request.Text = matches[0].Value;
+                await RunRequestAsync();
             }
         }
     }
