@@ -1,6 +1,6 @@
 # Office365APIEditor
 
-You can test Office 365 API, Microsoft Graph and Office 365 Management Activity API easily.
+You can test Office 365 API, Microsoft Graph, Office 365 Management Activity API and Azure Resource Manager API easily.
 
 ## Download options
 
@@ -19,6 +19,7 @@ You can browse your mailbox contents such as folders, items, and mailbox propert
 	- graph.microsoft.com (Microsoft Graph)
 	- outlook.office.com (Office 365 API - Outlook REST API)
 	- manage.office.com (Office 365 Management Activity API)
+	- management.azure.com (Azure Resource Manager API)
 
 - In addition to the built-in application ID, you can also use the application ID that you have registered in the Azure Active Directory to acquire an access token.
 
