@@ -398,8 +398,12 @@
     <Content Include="Licenses\Microsoft.Spatial.txt" />
     <Content Include="Licenses\Newtonsoft.Json.txt" />
     <Content Include="Licenses\System.Management.Automation.dll.txt" />
-    <None Include="SampleRequest\MicrosoftGraphBeta.json" />
-    <None Include="SampleRequest\Office365ManagementAPI.json" />
+    <None Include="SampleRequest\MicrosoftGraphBeta.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SampleRequest\Office365ManagementAPI.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="SampleRequest\READMD.md" />
   </ItemGroup>
   <ItemGroup>
