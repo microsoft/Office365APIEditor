@@ -182,7 +182,7 @@ namespace Office365APIEditor
             findReplaceDialog = new FindReplace(scintilla_ResponseBody); // For WinForms
 
             // Tie in FindReplace event
-            findReplaceDialog.KeyPressed += findReplace_KeyPressed;
+            findReplaceDialog.KeyPressed += findReplaceDialog_KeyPressed;
 
             // Tie in Scintilla event
             scintilla_ResponseBody.KeyDown += scintilla_KeyDown;
@@ -1840,7 +1840,7 @@ namespace Office365APIEditor
             }
         }
 
-        private void findReplace_KeyPressed(object sender, System.Windows.Forms.KeyEventArgs e)
+        private void findReplaceDialog_KeyPressed(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             scintilla_KeyDown(sender, e);
         }
