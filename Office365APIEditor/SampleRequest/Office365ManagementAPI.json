@@ -1,0 +1,167 @@
+﻿{
+  "displayName": "Office 365 Management API",
+  "description": "Office 365 Management API Endpoint Sample Requests",
+  "firstLevelCategory": [
+    {
+      "displayName": "Subscriptions",
+      "secondLevelCategory": [
+        {
+          "displayName": "Operations",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Start",
+              "sampleRequest": [
+                {
+                  "id": "5F67A370-E225-452D-AEBD-E45B899EFD6A",
+                  "displayName": "Audit.AzureActiveDirectory",
+                  "method": "POST",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/start?contentType=Audit.AzureActiveDirectory",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "5F67A370-E225-452D-AEBD-E45B899EFD6B",
+                  "displayName": "Audit.Exchange",
+                  "method": "POST",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/start?contentType=Audit.Exchange",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "5F67A370-E225-452D-AEBD-E45B899EFD6C",
+                  "displayName": "Audit.SharePoint",
+                  "method": "POST",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/start?contentType=Audit.SharePoint",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "5F67A370-E225-452D-AEBD-E45B899EFD6D",
+                  "displayName": "Audit.General",
+                  "method": "POST",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/start?contentType=Audit.General",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "5F67A370-E225-452D-AEBD-E45B899EFD6E",
+                  "displayName": "DLP.All",
+                  "method": "POST",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/start?contentType=DLP.All",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Stop",
+              "sampleRequest": [
+                {
+                  "id": "27746F97-8DA8-4ECE-A58B-2243293F0A22",
+                  "displayName": "Audit.AzureActiveDirectory",
+                  "method": "POST",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/stop?contentType=Audit.AzureActiveDirectory",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "27746F97-8DA8-4ECE-A58B-2243293F0A23",
+                  "displayName": "Audit.Exchange",
+                  "method": "POST",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/stop?contentType=Audit.Exchange",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "27746F97-8DA8-4ECE-A58B-2243293F0A24",
+                  "displayName": "Audit.SharePoint",
+                  "method": "POST",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/stop?contentType=Audit.SharePoint",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "27746F97-8DA8-4ECE-A58B-2243293F0A25",
+                  "displayName": "Audit.General",
+                  "method": "POST",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/stop?contentType=Audit.General",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "27746F97-8DA8-4ECE-A58B-2243293F0A26",
+                  "displayName": "DLP.All",
+                  "method": "POST",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/stop?contentType=DLP.All",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+
+
+            {
+              "displayName": "List subscriptions",
+              "sampleRequest": [
+                {
+                  "id": "27746F97-8DA8-4ECE-A58B-2243293F0A32",
+                  "displayName": "List current",
+                  "method": "GET",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/list",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+
+            {
+              "displayName": "List content",
+              "sampleRequest": [
+                {
+                  "id": "27746F97-8DA8-4ECE-A58B-2243293F0B22",
+                  "displayName": "Audit.AzureActiveDirectory",
+                  "method": "GET",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/content?contentType=Audit.AzureActiveDirectory",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "27746F97-8DA8-4ECE-A58B-2243293F0B23",
+                  "displayName": "Audit.Exchange",
+                  "method": "GET",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/content?contentType=Audit.Exchange",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "27746F97-8DA8-4ECE-A58B-2243293F0B24",
+                  "displayName": "Audit.SharePoint",
+                  "method": "GET",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/content?contentType=Audit.SharePoint",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "27746F97-8DA8-4ECE-A58B-2243293F0B25",
+                  "displayName": "Audit.General",
+                  "method": "GET",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/content?contentType=Audit.General",
+                  "header": [],
+                  "body": ""
+                },
+                {
+                  "id": "27746F97-8DA8-4ECE-A58B-2243293F0B26",
+                  "displayName": "DLP.All",
+                  "method": "GET",
+                  "URI": "https://manage.office.com/api/v1.0/{tenant_id}/activity/feed/subscriptions/content?contentType=DLP.All",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
