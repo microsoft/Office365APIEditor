@@ -125,7 +125,9 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\AD.System.Web.Helpers.dll.2.0.0\lib\net20\System.Web.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -396,6 +398,8 @@
     <Content Include="Licenses\Microsoft.Spatial.txt" />
     <Content Include="Licenses\Newtonsoft.Json.txt" />
     <Content Include="Licenses\System.Management.Automation.dll.txt" />
+    <None Include="SampleRequest\MicrosoftGraphBeta.json" />
+    <None Include="SampleRequest\Office365ManagementAPI.json" />
     <None Include="SampleRequest\READMD.md" />
   </ItemGroup>
   <ItemGroup>

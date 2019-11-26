@@ -73,7 +73,8 @@ namespace Office365APIEditor
                 {
                     "Exchange Online",
                     "Microsoft Graph",
-                    "Office 365 Management API"
+                    "Office 365 Management API",
+                    "Azure Resource Manager"
                 };
             }
         }
@@ -88,6 +89,8 @@ namespace Office365APIEditor
                     return "https://graph.microsoft.com/";
                 case "Office 365 Management API":
                     return "https://manage.office.com";
+                case "Azure Resource Manager":
+                    return "https://management.azure.com/";
                 default:
                     return "";
             }
@@ -103,6 +106,8 @@ namespace Office365APIEditor
                     return Resources.Graph;
                 case "Office 365 Management API":
                     return Resources.Management;
+                case "Azure Resource Manager":
+                    return Resources.AzureRM;
                 default:
                     return Resources.None;
             }
@@ -118,6 +123,8 @@ namespace Office365APIEditor
                     return "Microsoft Graph";
                 case Resources.Management:
                     return "Office 365 Management API";
+                case Resources.AzureRM:
+                    return "Azure Resource Manager";
                 case Resources.None:
                 default:
                     return "";
@@ -443,7 +450,8 @@ namespace Office365APIEditor
         None,
         Outlook,
         Graph,
-        Management
+        Management,
+        AzureRM
     }
 
     public struct FolderInfo
