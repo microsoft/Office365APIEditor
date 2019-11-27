@@ -9,10 +9,10 @@ namespace Office365APIEditor.ViewerHelper.Data.CalendarAPI
     {
         private string createdDateTime;
         private IList<Attendee> attendees;
-        private Data.DateTimeOffset end;
+        private DateTimeAndTimeZone end;
         private bool? isAllDay;
         private Recipient organizer;
-        private Data.DateTimeOffset start;
+        private DateTimeAndTimeZone start;
         private string subject;
 
         protected Event()
@@ -53,13 +53,13 @@ namespace Office365APIEditor.ViewerHelper.Data.CalendarAPI
             set => createdDateTime = value;
         }
 
-        public Data.DateTimeOffset End
+        public DateTimeAndTimeZone End
         {
             get
             {
                 if (end == null)
                 {
-                    end = LoadPropertyFromRawJson("end", new Data.DateTimeOffset());
+                    end = LoadPropertyFromRawJson("end", new DateTimeAndTimeZone());
                 }
 
                 return end;
@@ -98,13 +98,13 @@ namespace Office365APIEditor.ViewerHelper.Data.CalendarAPI
             set => organizer = value;
         }
 
-        public Data.DateTimeOffset Start
+        public DateTimeAndTimeZone Start
         {
             get
             {
                 if (start == null)
                 {
-                    start = LoadPropertyFromRawJson("start", new Data.DateTimeOffset());
+                    start = LoadPropertyFromRawJson("start", new DateTimeAndTimeZone());
                 }
 
                 return start;

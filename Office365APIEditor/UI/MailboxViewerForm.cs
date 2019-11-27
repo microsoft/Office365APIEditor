@@ -598,7 +598,7 @@ namespace Office365APIEditor
                 foreach (var item in outlookFolder.GetRawProperties())
                 {
                     DataGridViewRow propTotalItemCount = new DataGridViewRow();
-                    propTotalItemCount.CreateCells(dataGridView_FolderProps, new object[] { item.Key, item.Value.ToString(), item.Value.GetType().ToString() });
+                    propTotalItemCount.CreateCells(dataGridView_FolderProps, new object[] { item.Key, (item.Value == null) ? "" : item.Value.ToString(), (item.Value == null) ? "null" : item.Value.GetType().ToString() });
                     dataGridView_FolderProps.Rows.Add(propTotalItemCount);
                 }
             }

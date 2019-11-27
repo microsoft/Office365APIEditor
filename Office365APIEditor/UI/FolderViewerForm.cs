@@ -171,22 +171,22 @@ namespace Office365APIEditor
             {
                 dataGridView_ItemList.Invoke(new MethodInvoker(delegate
                 {
-                    dataGridView_ItemList.Columns.Add("Subject", "Subject");
-                    dataGridView_ItemList.Columns.Add("Sender", "Sender");
-                    dataGridView_ItemList.Columns.Add("ToRecipients", "ToRecipients");
-                    dataGridView_ItemList.Columns.Add("ReceivedDateTime", "ReceivedDateTime");
-                    dataGridView_ItemList.Columns.Add("CreatedDateTime", "CreatedDateTime");
-                    dataGridView_ItemList.Columns.Add("SentDateTime", "SentDateTime");
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Subject", HeaderText = "Subject", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Sender", HeaderText = "Sender", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "ToRecipients", HeaderText = "ToRecipients", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "ReceivedDateTime", HeaderText = "ReceivedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "CreatedDateTime", HeaderText = "CreatedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "SentDateTime", HeaderText = "SentDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
                 }));
             }
             else
             {
-                dataGridView_ItemList.Columns.Add("Subject", "Subject");
-                dataGridView_ItemList.Columns.Add("Sender", "Sender");
-                dataGridView_ItemList.Columns.Add("ToRecipients", "ToRecipients");
-                dataGridView_ItemList.Columns.Add("ReceivedDateTime", "ReceivedDateTime");
-                dataGridView_ItemList.Columns.Add("CreatedDateTime", "CreatedDateTime");
-                dataGridView_ItemList.Columns.Add("SentDateTime", "SentDateTime");
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Subject", HeaderText = "Subject", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Sender", HeaderText = "Sender", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "ToRecipients", HeaderText = "ToRecipients", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "ReceivedDateTime", HeaderText = "ReceivedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "CreatedDateTime", HeaderText = "CreatedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "SentDateTime", HeaderText = "SentDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
             }
         }
 
@@ -196,14 +196,14 @@ namespace Office365APIEditor
             {
                 dataGridView_ItemList.Invoke(new MethodInvoker(delegate
                 {
-                    dataGridView_ItemList.Columns.Add("DisplayName", "DisplayName");
-                    dataGridView_ItemList.Columns.Add("CreatedDateTime", "CreatedDateTime");
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "DisplayName", HeaderText = "DisplayName", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "CreatedDateTime", HeaderText = "CreatedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
                 }));
             }
             else
             {
-                dataGridView_ItemList.Columns.Add("DisplayName", "DisplayName");
-                dataGridView_ItemList.Columns.Add("CreatedDateTime", "CreatedDateTime");
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "DisplayName", HeaderText = "DisplayName", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "CreatedDateTime", HeaderText = "CreatedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
             }
         }
 
@@ -213,24 +213,24 @@ namespace Office365APIEditor
             {
                 dataGridView_ItemList.Invoke(new MethodInvoker(delegate
                 {
-                    dataGridView_ItemList.Columns.Add("Subject", "Subject");
-                    dataGridView_ItemList.Columns.Add("Organizer", "Organizer");
-                    dataGridView_ItemList.Columns.Add("Attendees", "Attendees");
-                    dataGridView_ItemList.Columns.Add("Start", "Start");
-                    dataGridView_ItemList.Columns.Add("End", "End");
-                    dataGridView_ItemList.Columns.Add("IsAllDay", "IsAllDay");
-                    dataGridView_ItemList.Columns.Add("CreatedDateTime", "CreatedDateTime");
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Subject", HeaderText = "Subject", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Organizer", HeaderText = "Organizer", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Attendees", HeaderText = "Attendees", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Start", HeaderText = "Start (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 120 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "End", HeaderText = "End (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 120 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "IsAllDay", HeaderText = "IsAllDay", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 60 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "CreatedDateTime", HeaderText = "CreatedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
                 }));
             }
             else
             {
-                dataGridView_ItemList.Columns.Add("Subject", "Subject");
-                dataGridView_ItemList.Columns.Add("Organizer", "Organizer");
-                dataGridView_ItemList.Columns.Add("Attendees", "Attendees");
-                dataGridView_ItemList.Columns.Add("Start", "Start");
-                dataGridView_ItemList.Columns.Add("End", "End");
-                dataGridView_ItemList.Columns.Add("IsAllDay", "IsAllDay");
-                dataGridView_ItemList.Columns.Add("CreatedDateTime", "CreatedDateTime");
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Subject", HeaderText = "Subject", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Organizer", HeaderText = "Organizer", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Attendees", HeaderText = "Attendees", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Start", HeaderText = "Start (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 120 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "End", HeaderText = "End (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 120 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "IsAllDay", HeaderText = "IsAllDay", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 60 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "CreatedDateTime", HeaderText = "CreatedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
             }
         }
 
@@ -240,20 +240,20 @@ namespace Office365APIEditor
             {
                 dataGridView_ItemList.Invoke(new MethodInvoker(delegate
                 {
-                    dataGridView_ItemList.Columns.Add("Subject", "Subject");
-                    dataGridView_ItemList.Columns.Add("HasAttachments", "HasAttachments");
-                    dataGridView_ItemList.Columns.Add("CreatedDateTime", "CreatedDateTime");
-                    dataGridView_ItemList.Columns.Add("LastModifiedDateTime", "LastModifiedDateTime");
-                    dataGridView_ItemList.Columns.Add("Status", "Status");
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Subject", HeaderText = "Subject", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "HasAttachments", HeaderText = "HasAttachments", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 60 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "CreatedDateTime", HeaderText = "CreatedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "LastModifiedDateTime", HeaderText = "LastModifiedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 180 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Status", HeaderText = "Status", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
                 }));
             }
             else
             {
-                dataGridView_ItemList.Columns.Add("Subject", "Subject");
-                dataGridView_ItemList.Columns.Add("HasAttachments", "HasAttachments");
-                dataGridView_ItemList.Columns.Add("CreatedDateTime", "CreatedDateTime");
-                dataGridView_ItemList.Columns.Add("LastModifiedDateTime", "LastModifiedDateTime");
-                dataGridView_ItemList.Columns.Add("Status", "Status");
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Subject", HeaderText = "Subject", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "HasAttachments", HeaderText = "HasAttachments", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 60 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "CreatedDateTime", HeaderText = "CreatedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "LastModifiedDateTime", HeaderText = "LastModifiedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 180 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Status", HeaderText = "Status", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
             }
         }
 
@@ -342,13 +342,28 @@ namespace Office365APIEditor
                 foreach (var item in messages)
                 {
                     // Add new row.
-                    string receivedDateTime = item.ReceivedDateTime ?? "";
-                    string createdDateTime = item.CreatedDateTime ?? "";
-                    string sentDateTime = item.SentDateTime ?? "";
+                    string rowReceivedDateTime = item.ReceivedDateTime ?? "";
+                    string rowCreatedDateTime = item.CreatedDateTime ?? "";
+                    string rowSentDateTime = item.SentDateTime ?? "";
                     string subject = item.Subject ?? "";
                     string sender = (item.Sender != null && item.Sender.EmailAddress != null && item.Sender.EmailAddress.Address != null) ? item.Sender.EmailAddress.Address : "";
                     string recipients = (item.ToRecipients != null) ? ConvertRecipientsListToString(item.ToRecipients) : "";
                     string isDraft = (item.IsDraft != null && item.IsDraft.HasValue) ? item.IsDraft.Value.ToString() : "";
+
+                    if (DateTime.TryParse(rowReceivedDateTime, out DateTime receivedDateTime) == false)
+                    {
+                        receivedDateTime = DateTime.MinValue;
+                    }
+
+                    if (DateTime.TryParse(rowCreatedDateTime, out DateTime createdDateTime) == false)
+                    {
+                        createdDateTime = DateTime.MinValue;
+                    }
+
+                    if (DateTime.TryParse(rowSentDateTime, out DateTime sentDateTime) == false)
+                    {
+                        sentDateTime = DateTime.MinValue;
+                    }
 
                     DataGridViewRow itemRow = new DataGridViewRow
                     {
@@ -406,7 +421,12 @@ namespace Office365APIEditor
                     // Add new row.
 
                     string displayName = item.DisplayName ?? "";
-                    string createdDateTime = item.CreatedDateTime ?? "";
+                    string rowCreatedDateTime = item.CreatedDateTime ?? "";
+
+                    if (DateTime.TryParse(rowCreatedDateTime, out DateTime createdDateTime) == false)
+                    {
+                        createdDateTime = DateTime.MinValue;
+                    }
 
                     DataGridViewRow itemRow = new DataGridViewRow
                     {
@@ -456,10 +476,15 @@ namespace Office365APIEditor
                     string subject = item.Subject ?? "";
                     string organizer = (item.Organizer != null && item.Organizer.EmailAddress != null && item.Organizer.EmailAddress.Address != null) ? item.Organizer.EmailAddress.Address : "";
                     string attendees = (item.Attendees != null) ? ConvertAttendeesListToString(item.Attendees) : "";
-                    string start = (item.Start != null) ? item.Start.ToString() : "";
-                    string end = (item.End != null) ? item.End.ToString() : "";
+                    DateTime start = (item.Start != null) ? item.Start.ToUniversalTime() : DateTime.MinValue;
+                    DateTime end = (item.End != null) ? item.End.ToUniversalTime() : DateTime.MinValue;
                     string isAllDay = (item.IsAllDay != null) ? item.IsAllDay.ToString() : "";
-                    string createdDateTime = item.CreatedDateTime ?? "";
+                    string rowCreatedDateTime = item.CreatedDateTime ?? "";
+
+                    if (DateTime.TryParse(rowCreatedDateTime, out DateTime createdDateTime) == false)
+                    {
+                        createdDateTime = DateTime.MinValue;
+                    }
 
                     DataGridViewRow itemRow = new DataGridViewRow
                     {
@@ -507,9 +532,19 @@ namespace Office365APIEditor
                     // Add new row.
                     string subject = item.Subject ?? "";
                     string hasAttachments = (item.HasAttachments != null) ? item.HasAttachments.Value.ToString() : "";
-                    string createdDateTime = item.CreatedDateTime ?? "";
-                    string lastModifiedDateTime = item.LastModifiedDateTime ?? "";
+                    string rowCreatedDateTime = item.CreatedDateTime ?? "";
+                    string rowLastModifiedDateTime = item.LastModifiedDateTime ?? "";
                     string status = item.Status ?? "";
+
+                    if (DateTime.TryParse(rowCreatedDateTime, out DateTime createdDateTime) == false)
+                    {
+                        createdDateTime = DateTime.MinValue;
+                    }
+
+                    if (DateTime.TryParse(rowLastModifiedDateTime, out DateTime lastModifiedDateTime) == false)
+                    {
+                        lastModifiedDateTime = DateTime.MinValue;
+                    }
 
                     DataGridViewRow itemRow = new DataGridViewRow
                     {

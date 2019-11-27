@@ -271,7 +271,7 @@
     <Compile Include="ViewerHelper\Data\CalendarAPI\Calendar.cs" />
     <Compile Include="ViewerHelper\Data\CalendarAPI\CalendarGroup.cs" />
     <Compile Include="ViewerHelper\Data\ContactsAPI\ContactFolder.cs" />
-    <Compile Include="ViewerHelper\Data\DateTimeOffset.cs" />
+    <Compile Include="ViewerHelper\Data\DateTimeAndTimeZone.cs" />
     <Compile Include="ViewerHelper\Data\EmailAddress.cs" />
     <Compile Include="ViewerHelper\Data\ItemBody.cs" />
     <Compile Include="ViewerHelper\Data\MailAPI\MailFolder.cs" />
