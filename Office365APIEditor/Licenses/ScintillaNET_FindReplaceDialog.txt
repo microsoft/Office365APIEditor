@@ -1,0 +1,2 @@
+﻿ScintillaNET_FindReplaceDialog
+https://github.com/ArmandoFerri/ScintillaNET.SearchBox
