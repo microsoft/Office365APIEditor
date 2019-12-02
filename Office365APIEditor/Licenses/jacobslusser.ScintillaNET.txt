@@ -1,2 +1,2 @@
-﻿jacobslusser.ScintillaNET.Signed
+﻿jacobslusser.ScintillaNET
 https://github.com/jacobslusser/ScintillaNET

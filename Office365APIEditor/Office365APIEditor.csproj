@@ -274,7 +274,7 @@
     <Compile Include="ViewerHelper\Data\CalendarAPI\Calendar.cs" />
     <Compile Include="ViewerHelper\Data\CalendarAPI\CalendarGroup.cs" />
     <Compile Include="ViewerHelper\Data\ContactsAPI\ContactFolder.cs" />
-    <Compile Include="ViewerHelper\Data\DateTimeOffset.cs" />
+    <Compile Include="ViewerHelper\Data\DateTimeAndTimeZone.cs" />
     <Compile Include="ViewerHelper\Data\EmailAddress.cs" />
     <Compile Include="ViewerHelper\Data\ItemBody.cs" />
     <Compile Include="ViewerHelper\Data\MailAPI\MailFolder.cs" />
@@ -380,6 +380,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Content Include="icon6.ico" />
+    <Content Include="Licenses\ScintillaNET_FindReplaceDialog.txt" />
     <Content Include="Resources\Clock.ico" />
     <Content Include="Resources\Clock.png" />
     <Content Include="Resources\DownButton.png" />
@@ -399,7 +400,7 @@
     <Content Include="image.ico" />
     <Content Include="Licenses\AsyncUsageAnalyzers.txt" />
     <Content Include="Licenses\DynamicJson.txt" />
-    <Content Include="Licenses\jacobslusser.ScintillaNET.Signed.txt" />
+    <Content Include="Licenses\jacobslusser.ScintillaNET.txt" />
     <Content Include="Licenses\Microsoft.Identity.Client.txt" />
     <Content Include="Licenses\Microsoft.IdentityModel.Clients.ActiveDirectory.txt" />
     <Content Include="Licenses\Microsoft.OData.Core.txt" />

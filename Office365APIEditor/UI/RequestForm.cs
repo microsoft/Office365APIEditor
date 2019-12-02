@@ -1795,7 +1795,7 @@ namespace Office365APIEditor
         private async void scintilla_HotspotClick(object sender, HotspotClickEventArgs e)
         {
             var text = scintilla_ResponseBody.Lines[scintilla_ResponseBody.LineFromPosition(e.Position)].Text;
-            Regex urlRx = new Regex(@"((https?|ftp|file)\://|www.)[A-Za-z0-9\.\-]+(/[A-Za-z0-9\?\&\=;\+!'\(\)\*\-\._~%$]*)*", RegexOptions.IgnoreCase);
+            Regex urlRx = new Regex(@"((https?|ftp|file)\://|www.)[A-Za-z0-9\.\-]+(/[A-Za-z0-9\?\&\=;\+!'\(\)\*\-\.\@_~%$]*)*", RegexOptions.IgnoreCase);
             MatchCollection matches = urlRx.Matches(text);
 
             if (System.Convert.ToBoolean(matches.Count) && button_Run.Enabled)
