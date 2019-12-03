@@ -1214,6 +1214,8 @@ namespace Office365APIEditor
             };
 
             // Add new history.
+            if (runHistory.RunInfo.Last().ResponseBody == newRunInfo.ResponseBody)
+                runHistory.RunInfo.RemoveAt(runHistory.RunInfo.Count - 1);
             runHistory.RunInfo.Add(newRunInfo);
 
             // Update the listbox.
