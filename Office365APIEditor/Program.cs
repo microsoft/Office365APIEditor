@@ -22,6 +22,7 @@ namespace Office365APIEditor
         {
             Util.WriteSystemLog("Office365APIEditor Closing Log", "Exit. Code 20");
 
+#if !DEBUG
             if (!string.IsNullOrEmpty(Properties.Settings.Default.NewerInstallerPath) && File.Exists(Properties.Settings.Default.NewerInstallerPath) && Util.IsMsiDeployed)
             {
                 // Newer installer is available
@@ -56,6 +57,7 @@ namespace Office365APIEditor
                     }
                 }
             }
+#endif
 
             Environment.Exit(0);
         }
