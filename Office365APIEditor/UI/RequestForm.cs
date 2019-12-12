@@ -176,7 +176,7 @@ namespace Office365APIEditor
 
             // Enable URL Interaction
             scintilla_ResponseBody.Styles[Style.Json.Uri].Hotspot = true;
-            scintilla_ResponseBody.HotspotClick += new System.EventHandler<ScintillaNET.HotspotClickEventArgs>(this.scintilla_HotspotClick);
+            scintilla_ResponseBody.HotspotClick += new EventHandler<HotspotClickEventArgs>(this.scintilla_HotspotClick);
 
             // Create instance of FindReplace with reference to a ScintillaNET control.
             findReplaceDialog = new FindReplace(scintilla_ResponseBody); // For WinForms
@@ -1121,7 +1121,17 @@ namespace Office365APIEditor
                 result = result.Replace("\\u" + key, CharTable[key].ToString());
             }
 
-            return Regex.Unescape(result);
+            try
+            {
+                result = Regex.Unescape(result);
+            }
+            catch
+            {
+                // If jsonResponse is not a JSON format text, Regex.Unescape will fail.
+                // Ignore it and return.
+            }
+
+            return result;
         }
 
         private void WriteRequestLog(WebRequest RequestToLog, string Body)
@@ -1795,13 +1805,89 @@ namespace Office365APIEditor
         private async void scintilla_HotspotClick(object sender, HotspotClickEventArgs e)
         {
             var text = scintilla_ResponseBody.Lines[scintilla_ResponseBody.LineFromPosition(e.Position)].Text;
-            Regex urlRx = new Regex(@"((https?|ftp|file)\://|www.)[A-Za-z0-9\.\-]+(/[A-Za-z0-9\?\&\=;\+!'\(\)\*\-\.\@_~%$]*)*", RegexOptions.IgnoreCase);
+            Regex urlRx = new Regex(@"((https?|ftp|file)\://|www.)[A-Za-z0-9\.\-]+(/[A-Za-z0-9\?\&\=;\+!'\(\)\*\-\.\@#_~%$]*)*", RegexOptions.IgnoreCase);
             MatchCollection matches = urlRx.Matches(text);
 
-            if (System.Convert.ToBoolean(matches.Count) && button_Run.Enabled)
+            if (Convert.ToBoolean(matches.Count))
             {
-                textBox_Request.Text = matches[0].Value;
-                await RunRequestAsync();
+                if (button_Run.Enabled)
+                {
+                    if (ResourceOrScopeMatch(matches[0].Value))
+                    {
+                        textBox_Request.Text = matches[0].Value;
+                        await RunRequestAsync();
+                    }
+                    else
+                    {
+                        var result = MessageBox.Show(
+                            "You may not have an access token for the following requests:" + Environment.NewLine + Environment.NewLine +
+                            matches[0].Value + Environment.NewLine + Environment.NewLine +
+                            "Do you want to open it in your default browser?" + Environment.NewLine +
+                            "If you click [No], office365APIEditor will run the request.",
+                            "Office365APIEditor",
+                            MessageBoxButtons.YesNo);
+
+                        if (result == DialogResult.Yes)
+                        {
+                            System.Diagnostics.Process.Start(matches[0].Value);
+                        }
+                        else
+                        {
+                            textBox_Request.Text = matches[0].Value;
+                            await RunRequestAsync();
+                        }
+                    }
+                }
+                else
+                {
+                    var result = MessageBox.Show(
+                        "You can't run the following request because you don't have an access token." + Environment.NewLine + Environment.NewLine +
+                        matches[0].Value + Environment.NewLine + Environment.NewLine +
+                        "Do you want to open it in your default browser?",
+                        "Office365APIEditor",
+                        MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(matches[0].Value);
+                    }
+                }
+            }
+        }
+
+        private bool ResourceOrScopeMatch(string URL)
+        {
+            if (clientInfo != null)
+            {
+                switch (clientInfo.Resource)
+                {
+                    case Resources.Outlook:
+                        return URL.StartsWith("https://outlook.office.com/api", StringComparison.InvariantCultureIgnoreCase);
+                    case Resources.Graph:
+                        return URL.StartsWith("https://graph.microsoft.com/", StringComparison.InvariantCultureIgnoreCase);
+                    case Resources.Management:
+                        return URL.StartsWith("https://manage.office.com/api/", StringComparison.InvariantCultureIgnoreCase);
+                    case Resources.AzureRM:
+                        return URL.StartsWith("https://management.azure.com/", StringComparison.InvariantCultureIgnoreCase);
+                    case Resources.None:
+                        if ((URL.StartsWith("https://outlook.office.com/api", StringComparison.InvariantCultureIgnoreCase) && clientInfo.Scopes.Contains("https://outlook.office.com/")) ||
+                            (URL.StartsWith("https://graph.microsoft.com/", StringComparison.InvariantCultureIgnoreCase) && clientInfo.Scopes.Contains("https://graph.microsoft.com/")) ||
+                            (URL.StartsWith("https://manage.office.com/api/", StringComparison.InvariantCultureIgnoreCase) && clientInfo.Scopes.Contains("https://manage.office.com/")) ||
+                            (URL.StartsWith("https://management.azure.com/", StringComparison.InvariantCultureIgnoreCase) && clientInfo.Scopes.Contains("https://management.azure.com/")))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    default:
+                        return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
 
