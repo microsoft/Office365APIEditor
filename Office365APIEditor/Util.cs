@@ -39,7 +39,7 @@ namespace Office365APIEditor
         {
             get
             {
-                string workingFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Office365APIEditor");
+                string workingFolder = Properties.Settings.Default.LogFolderPath;
 
                 if (!Directory.Exists(workingFolder))
                 {
