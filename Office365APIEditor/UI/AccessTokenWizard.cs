@@ -40,7 +40,8 @@ namespace Office365APIEditor
             Page10_BuiltInAppOrBasicAuthSelection = 10,
             Page11_BuiltInAppOptionForm = 11,
             Page12_V2AppOnlyByPasswordForMicrosoftGraphOptionForm = 12,
-            Page13_V2AdminConsentOptionForm = 13
+            Page13_V2AdminConsentOptionForm = 13,
+            Page14_SharePointOnlineAppOnlyOptionForm = 14
         }
 
         public AccessTokenWizard()
@@ -67,7 +68,8 @@ namespace Office365APIEditor
                 panel_Page10,
                 panel_Page11,
                 panel_Page12,
-                panel_Page13
+                panel_Page13,
+                panel_Page14
             };
 
             previousPages = new List<PageIndex>();
@@ -208,12 +210,18 @@ namespace Office365APIEditor
                         // Go to the next page.
                         ShowPage(PageIndex.Page02_AppRegistrationPortalAppSelection);
                     }
-                    else
+                    else if (radioButton_Page00_BuiltInAppOrBasicAuth.Checked)
                     {
                         // The user has no application
                         // Go to the next page.
                         // Create a return value and close this window.
                         ShowPage(PageIndex.Page10_BuiltInAppOrBasicAuthSelection);
+                    }
+                    else
+                    {
+                        // The user has the SharePoint Online App-Only REST API
+                        // Microsoft Azure Access Control Service application.
+                        ShowPage(PageIndex.Page14_SharePointOnlineAppOnlyOptionForm);
                     }
 
                     break;
@@ -624,6 +632,26 @@ namespace Office365APIEditor
                     
                     break;
 
+                case PageIndex.Page14_SharePointOnlineAppOnlyOptionForm:
+                    // Option form for the SharePoint Online App-Only REST API Microsoft Azure Access Control Service application.
+
+                    if (ValidateSharePointOnlineAppOnlyByKeyParam())
+                    {
+                        TokenResponse tokenResponse = AcquireSharePointOnlineAppOnlyAccessTokenByKey();
+
+                        if (tokenResponse != null)
+                        {
+                            SaveSettings();
+
+                            // Create a return value and close this window.
+                            clientInfo = new ClientInformation(tokenResponse, AuthEndpoints.OAuthV1, Util.ConvertResourceNameToResourceEnum(comboBox_Page08_Resource.SelectedText), textBox_Page08_ClientID.Text, "", "", "");
+                            DialogResult = DialogResult.OK;
+                            Close();
+                        }
+                    }
+
+                    break;
+
                 case PageIndex.None:
                 default:
                     break;
@@ -636,6 +664,61 @@ namespace Office365APIEditor
         {
             DialogResult = DialogResult.Cancel;
         }
+
+        #region Code for SharePoint Online App-Only REST API Microsoft Azure Access Control Service application.
+
+        private void linkLabel_Page14_SPOApp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_Web_application_for_SharePoint_Online_App-Only_Token.md");
+        }
+
+
+        private bool ValidateSharePointOnlineAppOnlyByKeyParam()
+        {
+            // Check the form for SharePoint Online App-Only REST API Microsoft Azure Access Control Service application..
+
+            if (textBox_Page14_TenantName.Text == "")
+            {
+                MessageBox.Show("Enter the Tenant Name.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_Page14_TenantID.Text == "")
+            {
+                MessageBox.Show("Enter the Tenant ID.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_Page14_ClientID.Text == "")
+            {
+                MessageBox.Show("Enter the Client ID.", "Office365APIEditor");
+                return false;
+            }
+            else if (textBox_Page14_ClientSecret.Text == "")
+            {
+                MessageBox.Show("Enter the Client Secret.", "Office365APIEditor");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private TokenResponse AcquireSharePointOnlineAppOnlyAccessTokenByKey()
+        {
+            string SharePointPrincipal = "00000003-0000-0ff1-ce00-000000000000";
+            string EndPointPrefix = textBox_Page14_TenantName.Text.Substring(0, textBox_Page14_TenantName.Text.IndexOf('.'));
+
+            // Build a POST body.
+            string postBody = "grant_type=client_credentials" +
+                "&resource=" + System.Web.HttpUtility.UrlEncode(SharePointPrincipal + "/" + EndPointPrefix + ".sharepoint.com@" + textBox_Page14_TenantID.Text) +
+                "&client_id=" + textBox_Page14_ClientID.Text + System.Web.HttpUtility.UrlEncode("@") + textBox_Page14_TenantID.Text +
+                "&client_secret=" + System.Web.HttpUtility.UrlEncode(textBox_Page14_ClientSecret.Text);
+
+            return AcquireAccessToken(postBody, "https://accounts.accesscontrol.windows.net/" + textBox_Page14_TenantID.Text + "/tokens/OAuth/2");
+        }
+
+        #endregion
+
 
         #region Code For V1 auth endpoint App Only Token by cert
 
