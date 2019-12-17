@@ -332,7 +332,7 @@ namespace Office365APIEditor.Properties {
                 this["LastWebAppAppOnlyTenantName"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -416,7 +416,22 @@ namespace Office365APIEditor.Properties {
                 this["LastWebAppAppOnlyByKeyTenantName"] = value;
             }
         }
-        
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastWebAppAppOnlyByKeyTenantID
+        {
+            get
+            {
+                return ((string)(this["LastWebAppAppOnlyByKeyTenantID"]));
+            }
+            set
+            {
+                this["LastWebAppAppOnlyByKeyTenantID"] = value;
+            }
+        }
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
