@@ -644,7 +644,7 @@ namespace Office365APIEditor
                             SaveSettings();
 
                             // Create a return value and close this window.
-                            clientInfo = new ClientInformation(tokenResponse, AuthEndpoints.OAuthV1, "", textBox_Page14_ClientID.Text, "", "", "");
+                            clientInfo = new ClientInformation(tokenResponse, AuthEndpoints.OAuthV1, Resources.None, textBox_Page14_ClientID.Text, "", "", "");
                             DialogResult = DialogResult.OK;
                             Close();
                         }
