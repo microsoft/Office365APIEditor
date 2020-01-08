@@ -682,11 +682,6 @@ namespace Office365APIEditor
                 MessageBox.Show("Enter the Tenant Name.", "Office365APIEditor");
                 return false;
             }
-            else if (textBox_Page14_TenantID.Text == "")
-            {
-                MessageBox.Show("Enter the Tenant ID.", "Office365APIEditor");
-                return false;
-            }
             else if (textBox_Page14_ClientID.Text == "")
             {
                 MessageBox.Show("Enter the Client ID.", "Office365APIEditor");
@@ -710,11 +705,11 @@ namespace Office365APIEditor
 
             // Build a POST body.
             string postBody = "grant_type=client_credentials" +
-                "&resource=" + System.Web.HttpUtility.UrlEncode(SharePointPrincipal + "/" + EndPointPrefix + ".sharepoint.com@" + textBox_Page14_TenantID.Text) +
-                "&client_id=" + textBox_Page14_ClientID.Text + System.Web.HttpUtility.UrlEncode("@") + textBox_Page14_TenantID.Text +
+                "&resource=" + System.Web.HttpUtility.UrlEncode(SharePointPrincipal + "/" + EndPointPrefix + ".sharepoint.com@" + textBox_Page14_TenantName.Text) +
+                "&client_id=" + textBox_Page14_ClientID.Text + System.Web.HttpUtility.UrlEncode("@") + textBox_Page14_TenantName.Text +
                 "&client_secret=" + System.Web.HttpUtility.UrlEncode(textBox_Page14_ClientSecret.Text);
 
-            return AcquireAccessToken(postBody, "https://accounts.accesscontrol.windows.net/" + textBox_Page14_TenantID.Text + "/tokens/OAuth/2");
+            return AcquireAccessToken(postBody, "https://accounts.accesscontrol.windows.net/" + textBox_Page14_TenantName.Text + "/tokens/OAuth/2");
         }
 
         #endregion

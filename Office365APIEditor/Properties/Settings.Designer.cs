@@ -332,7 +332,7 @@ namespace Office365APIEditor.Properties {
                 this["LastWebAppAppOnlyTenantName"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -416,22 +416,7 @@ namespace Office365APIEditor.Properties {
                 this["LastWebAppAppOnlyByKeyTenantName"] = value;
             }
         }
-
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LastWebAppAppOnlyByKeyTenantID
-        {
-            get
-            {
-                return ((string)(this["LastWebAppAppOnlyByKeyTenantID"]));
-            }
-            set
-            {
-                this["LastWebAppAppOnlyByKeyTenantID"] = value;
-            }
-        }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -669,6 +654,42 @@ namespace Office365APIEditor.Properties {
             }
             set {
                 this["ReplacePlusSignInTheRequestURL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastSpoAppOnlyByKeyTenantName {
+            get {
+                return ((string)(this["LastSpoAppOnlyByKeyTenantName"]));
+            }
+            set {
+                this["LastSpoAppOnlyByKeyTenantName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastSpoAppOnlyByKeyClientID {
+            get {
+                return ((string)(this["LastSpoAppOnlyByKeyClientID"]));
+            }
+            set {
+                this["LastSpoAppOnlyByKeyClientID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastSpoAppOnlyByKeyClientSecret {
+            get {
+                return ((string)(this["LastSpoAppOnlyByKeyClientSecret"]));
+            }
+            set {
+                this["LastSpoAppOnlyByKeyClientSecret"] = value;
             }
         }
     }
