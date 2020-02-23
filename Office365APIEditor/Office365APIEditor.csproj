@@ -379,7 +379,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Content Include="icon6.ico" />
+    <None Include="icon6.ico" />
     <Content Include="Icon7.ico" />
     <Content Include="Licenses\ScintillaNET_FindReplaceDialog.txt" />
     <Content Include="Resources\Clock.ico" />
@@ -399,7 +399,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="image.ico" />
+    <None Include="image.ico" />
     <Content Include="Licenses\AsyncUsageAnalyzers.txt" />
     <Content Include="Licenses\DynamicJson.txt" />
     <Content Include="Licenses\jacobslusser.ScintillaNET.txt" />
@@ -410,12 +410,12 @@
     <Content Include="Licenses\Microsoft.Spatial.txt" />
     <Content Include="Licenses\Newtonsoft.Json.txt" />
     <Content Include="Licenses\System.Management.Automation.dll.txt" />
-    <None Include="SampleRequest\MicrosoftGraphBeta.json">
+    <Content Include="SampleRequest\MicrosoftGraphBeta.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="SampleRequest\Office365ManagementAPI.json">
+    </Content>
+    <Content Include="SampleRequest\Office365ManagementAPI.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="SampleRequest\READMD.md" />
   </ItemGroup>
   <ItemGroup>
