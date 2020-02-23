@@ -32,6 +32,8 @@ namespace Office365APIEditor.UI.FocusedInbox
 
         private void NewFocusedInboxOverrideForm_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             if (editMode)
             {
                 // Edit mode.

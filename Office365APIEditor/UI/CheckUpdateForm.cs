@@ -18,6 +18,8 @@ namespace Office365APIEditor.UI
 
         private void CheckUpdateForm_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             StartLatestVersionCheck();            
         }
 

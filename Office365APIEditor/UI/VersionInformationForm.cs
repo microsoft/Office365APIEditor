@@ -15,6 +15,8 @@ namespace Office365APIEditor.UI
 
         private void VersionInformation_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             Version productVersion = Version.Parse(Application.ProductVersion);
             string friendlyVersion = "";
 

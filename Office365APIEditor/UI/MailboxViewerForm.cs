@@ -30,6 +30,8 @@ namespace Office365APIEditor
 
         private void MailboxViewerForm_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             closeSessionToolStripMenuItem.Enabled = false;
             windowToolStripMenuItem.Visible = false;
 

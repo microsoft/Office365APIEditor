@@ -31,6 +31,8 @@ namespace Office365APIEditor
 
         private void ScopeEditorForm_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             PrepareScopes(false);
         }
 

@@ -15,6 +15,8 @@ namespace Office365APIEditor
 
         private void RequestFormOptionForm_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             // Load saved settings.
 
             if (System.IO.Directory.Exists(Properties.Settings.Default.LogFolderPath))

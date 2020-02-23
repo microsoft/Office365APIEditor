@@ -51,6 +51,8 @@ namespace Office365APIEditor
 
         private void AccessTokenWizard_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             // Initialize objects.
 
             Pages = new List<Panel>

@@ -21,6 +21,8 @@ namespace Office365APIEditor.UI
 
         private void NewAttachmentForm_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             foreach (var attachment in attachments)
             {
                 listBox_Attachments.Items.Add(attachment.Name);

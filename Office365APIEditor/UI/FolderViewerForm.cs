@@ -32,6 +32,8 @@ namespace Office365APIEditor
 
         private async void FolderViewerForm_Load(object sender, System.EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             toolStripStatusLabel_Status.Text = "Loading all items...";
 
             string typeForWindowTitle = "";

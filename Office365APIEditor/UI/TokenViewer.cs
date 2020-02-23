@@ -36,6 +36,8 @@ namespace Office365APIEditor
 
         private void TokenViewer_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             textBox_IdToken.Text = rawIdToken;
             textBox_AccessToken.Text = rawAccessToken;
             textBox_RefreshToken.Text = rawRefreshToken;

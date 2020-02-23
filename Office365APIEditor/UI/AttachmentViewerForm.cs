@@ -33,6 +33,8 @@ namespace Office365APIEditor
 
         private async void AttachmentViewerForm_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             Text = "Attachments for '" + targetItemSubject + "'";
 
             viewerRequestHelper = new ViewerRequestHelper();

@@ -49,6 +49,8 @@ namespace Office365APIEditor
 
         private void RequestForm_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             button_RefreshToken.Enabled = false;
             button_Run.Enabled = false;
             button_ViewTokenInfo.Enabled = false;

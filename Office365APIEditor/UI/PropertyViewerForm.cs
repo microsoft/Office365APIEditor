@@ -22,6 +22,8 @@ namespace Office365APIEditor
 
         private void PropertyViewerForm_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             Location = new Point(
             Owner.Location.X + (Owner.Width - Width) / 2,
             Owner.Location.Y + (Owner.Height - Height) / 2);

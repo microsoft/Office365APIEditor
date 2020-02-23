@@ -51,7 +51,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon6.ico</ApplicationIcon>
+    <ApplicationIcon>Icon7.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -380,9 +380,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Content Include="icon6.ico" />
+    <Content Include="Icon7.ico" />
     <Content Include="Licenses\ScintillaNET_FindReplaceDialog.txt" />
     <Content Include="Resources\Clock.ico" />
     <Content Include="Resources\Clock.png" />
+    <None Include="Resources\DefaultIcon.ico" />
     <Content Include="Resources\DownButton.png" />
     <Content Include="Resources\Highlighter.png" />
     <Content Include="Resources\UpButton.png" />

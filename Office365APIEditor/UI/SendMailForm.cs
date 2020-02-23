@@ -53,6 +53,8 @@ namespace Office365APIEditor.UI
 
         private async void SendMailForm_LoadAsync(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             attachments = new List<ViewerHelper.Data.AttachmentAPI.AttachmentBase>();
 
             comboBox_Importance.SelectedIndex = 1;

@@ -24,6 +24,8 @@ namespace Office365APIEditor
 
         private void DetailedTokenViewer_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             // Disable advanced view.
             textBox_Header.Visible = true;
             dataGridView_Header.Visible = false;

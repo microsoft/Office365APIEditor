@@ -25,6 +25,8 @@ namespace Office365APIEditor.UI.FocusedInbox
 
         private async void FocusedInboxOverrideForm_LoadAsync(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             viewerRequestHelper = new ViewerRequestHelper();
 
             try

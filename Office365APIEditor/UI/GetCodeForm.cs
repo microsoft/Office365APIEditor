@@ -116,6 +116,8 @@ namespace Office365APIEditor
 
         private void GetCodeForm_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
+
             // Navigate to the sing-in page.
             webBrowser1.Navigate(authenticationUrl);
         }

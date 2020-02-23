@@ -41,6 +41,7 @@ namespace Office365APIEditor
 
         private void AcquireViewerTokenForm_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.DefaultIcon;
         }
 
         private void linkLabel_Portal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
