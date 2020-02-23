@@ -1226,7 +1226,9 @@ namespace Office365APIEditor
             };
 
             // Add new history.
-            if (runHistory.RunInfo.Last().ResponseBody == newRunInfo.ResponseBody)
+            if (Convert.ToBoolean(runHistory.RunInfo.Count) &&
+                    runHistory.RunInfo.Last().RequestUrl == newRunInfo.RequestUrl &&
+                    runHistory.RunInfo.Last().ResponseBody == newRunInfo.ResponseBody)
                 runHistory.RunInfo.RemoveAt(runHistory.RunInfo.Count - 1);
             runHistory.RunInfo.Add(newRunInfo);
 
