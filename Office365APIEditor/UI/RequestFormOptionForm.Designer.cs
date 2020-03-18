@@ -204,7 +204,7 @@
             this.checkBox_ReplacePlusSignInTheRequestURL.Name = "checkBox_ReplacePlusSignInTheRequestURL";
             this.checkBox_ReplacePlusSignInTheRequestURL.Size = new System.Drawing.Size(280, 17);
             this.checkBox_ReplacePlusSignInTheRequestURL.TabIndex = 74;
-            this.checkBox_ReplacePlusSignInTheRequestURL.Text = "Replace the plus sign in the request URL with \"%2D\".";
+            this.checkBox_ReplacePlusSignInTheRequestURL.Text = "Replace the plus sign in the request URL with \"%2B\".";
             this.checkBox_ReplacePlusSignInTheRequestURL.UseVisualStyleBackColor = true;
             // 
             // RequestFormOptionForm
