@@ -261,10 +261,47 @@ namespace Office365APIEditor
             switch (attachmentType)
             {
                 case AttachmentType.ItemAttachment:
-                    MessageBox.Show("The selected attachment is Item Attachment. You can not download this type of attachment using Office365APIEditor", "Office365APIEditor");
+                    if (Util.UseMicrosoftGraphInMailboxViewer)
+                    {
+                        saveFileDialog1.FileName = dataGridView_AttachmentList.SelectedRows[0].Cells[0].Value.ToString() + ".eml";
 
-                    // The request to get MIME content of itemAttachment will be like below.
-                    // https://outlook.office.com/api/beta/Users('6fc42d08-123b-405e-904d-545882e8922f@6d046331-5ea5-4306-87ae-8d51f3dcc71e')/Messages('AAMkAGYxOTczODY2LTQwYzktNDFmYS05ZTIzLWZmNjAxYmM1MWYwZABGAAAAAACmFAp715xPRpcdN7o1X1D7BwDKF8masRMzQ4BmqIbV6OsxAAAAAAEMAADKF8masRMzQ4BmqIbV6OsxAAM85mvEAAA=')/Attachments('AAMkAGYxOTczODY2LTQwYzktNDFmYS05ZTIzLWZmNjAxYmM1MWYwZABGAAAAAACmFAp715xPRpcdN7o1X1D7BwDKF8masRMzQ4BmqIbV6OsxAAAAAAEMAADKF8masRMzQ4BmqIbV6OsxAAM85mvEAAABEgAQAJHp5fRvE4ZIjU_j3_4mUYI=')/$value
+                        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                        {
+                            string rawContent = "";
+
+                            try
+                            {
+                                rawContent = await viewerRequestHelper.GetAttachmentRawContentAsync(targetFolder.Type, targetItemId, attachmentId);
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, "Office365APIEditor");
+                                return;
+                            }
+
+                            try
+                            {
+                                using (StreamWriter streamWriter = new StreamWriter(saveFileDialog1.FileName, false, System.Text.Encoding.UTF8))
+                                {
+                                    streamWriter.Write(rawContent);
+                                }
+
+                                MessageBox.Show("The attachment file was saved successfully.", "Office365APIEditor");
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("The selected attachment is Item Attachment. You can not download this type of attachment using Office365APIEditor", "Office365APIEditor");
+
+                        // The request to get MIME content of itemAttachment will be like below.
+                        // https://outlook.office.com/api/beta/Users('6fc42d08-123b-405e-904d-545882e8922f@6d046331-5ea5-4306-87ae-8d51f3dcc71e')/Messages('AAMkAGYxOTczODY2LTQwYzktNDFmYS05ZTIzLWZmNjAxYmM1MWYwZABGAAAAAACmFAp715xPRpcdN7o1X1D7BwDKF8masRMzQ4BmqIbV6OsxAAAAAAEMAADKF8masRMzQ4BmqIbV6OsxAAM85mvEAAA=')/Attachments('AAMkAGYxOTczODY2LTQwYzktNDFmYS05ZTIzLWZmNjAxYmM1MWYwZABGAAAAAACmFAp715xPRpcdN7o1X1D7BwDKF8masRMzQ4BmqIbV6OsxAAAAAAEMAADKF8masRMzQ4BmqIbV6OsxAAM85mvEAAABEgAQAJHp5fRvE4ZIjU_j3_4mUYI=')/$value
+
+                    }
 
                     break;
                 case AttachmentType.FileAttachment:
@@ -332,6 +369,23 @@ namespace Office365APIEditor
 
         private AttachmentType GetAttachmentTypeOfSelectedAttachment()
         {
+            string fileAttachmentOdataType;
+            string itemAttachmentOdataType;
+            string referenceAttachmentOdataType;
+
+            if (Util.UseMicrosoftGraphInMailboxViewer)
+            {
+                fileAttachmentOdataType = "#microsoft.graph.fileAttachment";
+                itemAttachmentOdataType = "#microsoft.graph.itemAttachment";
+                referenceAttachmentOdataType = "#microsoft.graph.referenceAttachment";
+            }
+            else
+            {
+                fileAttachmentOdataType = "#Microsoft.OutlookServices.FileAttachment";
+                itemAttachmentOdataType = "#Microsoft.OutlookServices.ItemAttachment";
+                referenceAttachmentOdataType = "#Microsoft.OutlookServices.ReferenceAttachment";
+            }
+
             bool found = false;
             AttachmentType attachmentType = AttachmentType.FileAttachment;
 
@@ -339,17 +393,17 @@ namespace Office365APIEditor
             {
                 if (prop.Cells[0].Value.ToString() == "@odata.type")
                 {
-                    if (prop.Cells[1].Value.ToString() == "#Microsoft.OutlookServices.FileAttachment")
+                    if (prop.Cells[1].Value.ToString() == fileAttachmentOdataType)
                     {
                         found = true;
                         attachmentType = AttachmentType.FileAttachment;
                     }
-                    else if (prop.Cells[1].Value.ToString() == "#Microsoft.OutlookServices.ItemAttachment")
+                    else if (prop.Cells[1].Value.ToString() == itemAttachmentOdataType)
                     {
                         found = true;
                         attachmentType = AttachmentType.ItemAttachment;
                     }
-                    else if (prop.Cells[1].Value.ToString() == "#Microsoft.OutlookServices.ReferenceAttachment")
+                    else if (prop.Cells[1].Value.ToString() == referenceAttachmentOdataType)
                     {
                         found = true;
                         attachmentType = AttachmentType.ReferenceAttachment;

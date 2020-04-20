@@ -18,7 +18,22 @@ namespace Office365APIEditor.ViewerHelper
             // Get all TaskGroups.
             // The property of the item to get is very limited.
 
-            Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/taskgroups?$top=1000&$select=Id,Name");
+            Uri URL;
+            string idAttributeName;
+            string nameAttributeName;
+
+            if (Util.UseMicrosoftGraphInMailboxViewer)
+            {
+                URL = new Uri($"https://graph.microsoft.com/beta/me/outlook/taskgroups?$top=1000&$select=Id,Name");
+                idAttributeName = "id";
+                nameAttributeName = "name";
+            }
+            else
+            {
+                URL = new Uri("https://outlook.office.com/api/v2.0/me/taskgroups?$top=1000&$select=Id,Name");
+                idAttributeName = "Id";
+                nameAttributeName = "Name";
+            }
 
             string stringResponse = "";
 
@@ -40,8 +55,8 @@ namespace Office365APIEditor.ViewerHelper
 
             foreach (var group in taskGroups)
             {
-                string id = group.Value<string>("Id");
-                string name = group.Value<string>("Name");
+                string id = group.Value<string>(idAttributeName);
+                string name = group.Value<string>(nameAttributeName);
 
                 var newTaskGroup = TaskGroup.CreateFromId(id);
                 newTaskGroup.Name = name;
@@ -56,7 +71,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get the specified TaskGroup.
 
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/taskgroups/{TaskGroupId}");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/beta/me/outlook/taskgroups/{TaskGroupId}") : new Uri($"https://outlook.office.com/api/v2.0/me/taskgroups/{TaskGroupId}");
 
             string stringResponse = "";
 
@@ -78,7 +93,22 @@ namespace Office365APIEditor.ViewerHelper
             // Get all TaskFolder in the specified TaskGroup.
             // The property of the item to get is very limited.
 
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/taskgroups/{TaskGroupId}/taskfolders?$select=Id,Name");
+            Uri URL;
+            string idAttributeName;
+            string nameAttributeName;
+
+            if (Util.UseMicrosoftGraphInMailboxViewer)
+            {
+                URL = new Uri($"https://graph.microsoft.com/beta/me/outlook/taskgroups/{TaskGroupId}/taskfolders?$select=Id,Name");
+                idAttributeName = "id";
+                nameAttributeName = "name";
+            }
+            else
+            {
+                URL = new Uri($"https://outlook.office.com/api/v2.0/me/taskgroups/{TaskGroupId}/taskfolders?$select=Id,Name");
+                idAttributeName = "Id";
+                nameAttributeName = "Name";
+            }
 
             string stringResponse = "";
 
@@ -100,8 +130,8 @@ namespace Office365APIEditor.ViewerHelper
 
             foreach (var folder in taskFolders)
             {
-                string id = folder.Value<string>("Id");
-                string name = folder.Value<string>("Name");
+                string id = folder.Value<string>(idAttributeName);
+                string name = folder.Value<string>(nameAttributeName);
 
                 TaskFolder newTaskFolder = TaskFolder.CreateFromId(id);
                 newTaskFolder.Name = name;
@@ -116,7 +146,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get the specified TaskFolder.
 
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/taskfolders/{TaskFolderId}");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/beta/me/outlook/taskfolders/{TaskFolderId}") : new Uri($"https://outlook.office.com/api/v2.0/me/taskfolders/{TaskFolderId}");
 
             string stringResponse = "";
 
@@ -138,7 +168,7 @@ namespace Office365APIEditor.ViewerHelper
             // Get a page of task items in the specified folder.
             // The property of the item to get is very limited.
 
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/TaskFolders/{FolderId}/tasks?$orderby=CreatedDateTime desc&$top=20&$select=Id,Subject,HasAttachments,CreatedDateTime,LastModifiedDateTime,Status");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/beta/me/outlook/taskfolders/{FolderId}/tasks?$orderby=CreatedDateTime desc&$top=20&$select=Id,Subject,HasAttachments,CreatedDateTime,LastModifiedDateTime,Status") : new Uri($"https://outlook.office.com/api/v2.0/me/TaskFolders/{FolderId}/tasks?$orderby=CreatedDateTime desc&$top=20&$select=Id,Subject,HasAttachments,CreatedDateTime,LastModifiedDateTime,Status");
             return await InternalGetPagedTasksAsync(URL);
         }
 
@@ -195,7 +225,7 @@ namespace Office365APIEditor.ViewerHelper
 
         public async Task<Data.TaskAPI.Task> GetTaskAsync(string ItemId)
         {
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/tasks/{ItemId}");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/beta/me/outlook/tasks/{ItemId}") : new Uri($"https://outlook.office.com/api/v2.0/me/tasks/{ItemId}");
             string stringResponse = await SendGetRequestAsync(URL);
             return new Data.TaskAPI.Task(stringResponse);
         }

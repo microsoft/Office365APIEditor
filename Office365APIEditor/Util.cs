@@ -390,8 +390,17 @@ namespace Office365APIEditor
 
         public static string[] MailboxViewerScopes()
         {
-            return new string[] { "https://outlook.office.com/Calendars.Read https://outlook.office.com/Calendars.ReadWrite https://outlook.office.com/Contacts.Read https://outlook.office.com/Contacts.ReadWrite https://outlook.office.com/Mail.Read https://outlook.office.com/Mail.ReadWrite https://outlook.office.com/tasks.read https://outlook.office.com/tasks.readwrite https://outlook.office.com/Mail.Send https://outlook.office.com/User.ReadBasic.All" };
+            if (UseMicrosoftGraphInMailboxViewer)
+            {
+                return new string[] { "https://graph.microsoft.com/Calendars.Read https://graph.microsoft.com/Calendars.ReadWrite https://graph.microsoft.com/Contacts.Read https://graph.microsoft.com/Contacts.ReadWrite https://graph.microsoft.com/Mail.Read https://graph.microsoft.com/Mail.ReadWrite https://graph.microsoft.com/Tasks.Read https://graph.microsoft.com/Tasks.ReadWrite https://graph.microsoft.com/Mail.Send https://graph.microsoft.com/User.ReadBasic.All" };
+            }
+            else
+            {
+                return new string[] { "https://outlook.office.com/Calendars.Read https://outlook.office.com/Calendars.ReadWrite https://outlook.office.com/Contacts.Read https://outlook.office.com/Contacts.ReadWrite https://outlook.office.com/Mail.Read https://outlook.office.com/Mail.ReadWrite https://outlook.office.com/tasks.read https://outlook.office.com/tasks.readwrite https://outlook.office.com/Mail.Send https://outlook.office.com/User.ReadBasic.All" };
+            }
         }
+
+        public static bool UseMicrosoftGraphInMailboxViewer => true;
 
         public static string EscapeForJson(string originalString)
         {

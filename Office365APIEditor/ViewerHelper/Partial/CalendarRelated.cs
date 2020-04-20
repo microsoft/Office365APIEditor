@@ -18,7 +18,23 @@ namespace Office365APIEditor.ViewerHelper
             // Get all calendar groups.
             // The property of the item to get is very limited.
 
-            Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/calendargroups?$top=100&$select=Id,Name");
+            Uri URL;
+            string idAttributeName;
+            string nameAttributeName;
+
+            if (Util.UseMicrosoftGraphInMailboxViewer)
+            {
+                URL = new Uri("https://graph.microsoft.com/v1.0/me/calendargroups?$top=100&$select=Id,Name");
+                idAttributeName = "id";
+                nameAttributeName = "name";
+            }
+            else
+            {
+                URL = new Uri("https://outlook.office.com/api/v2.0/me/calendargroups?$top=100&$select=Id,Name");
+                idAttributeName = "Id";
+                nameAttributeName = "Name";
+            }
+            
 
             string stringResponse = "";
 
@@ -40,8 +56,8 @@ namespace Office365APIEditor.ViewerHelper
 
             foreach (var group in calendarGroups)
             {
-                string id = group.Value<string>("Id");
-                string name = group.Value<string>("Name");
+                string id = group.Value<string>(idAttributeName);
+                string name = group.Value<string>(nameAttributeName);
 
                 var newCalendarGroup = CalendarGroup.CreateFromId(id);
                 newCalendarGroup.Name = name;
@@ -57,7 +73,22 @@ namespace Office365APIEditor.ViewerHelper
             // Get all calendars in the specified calendar group.
             // The property of the item to get is very limited.
 
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/calendargroups/{CalendarGroupId}/calendars?$top=1000&$select=Id,Name");
+            Uri URL;
+            string idAttributeName;
+            string nameAttributeName;
+
+            if (Util.UseMicrosoftGraphInMailboxViewer)
+            {
+                URL = new Uri($"https://graph.microsoft.com/v1.0/me/calendargroups/{CalendarGroupId}/calendars?$top=1000&$select=Id,Name");
+                idAttributeName = "id";
+                nameAttributeName = "name";
+            }
+            else
+            {
+                URL = new Uri($"https://outlook.office.com/api/v2.0/me/calendargroups/{CalendarGroupId}/calendars?$top=1000&$select=Id,Name");
+                idAttributeName = "Id";
+                nameAttributeName = "Name";
+            }
 
             string stringResponse = "";
 
@@ -79,8 +110,8 @@ namespace Office365APIEditor.ViewerHelper
 
             foreach (var folder in calendars)
             {
-                string id = folder.Value<string>("Id");
-                string name = folder.Value<string>("Name");
+                string id = folder.Value<string>(idAttributeName);
+                string name = folder.Value<string>(nameAttributeName);
 
                 var newCalendar = Calendar.CreateFromId(id);
                 newCalendar.Name = name;
@@ -95,7 +126,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get the specified calendar group.
 
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/calendargroups/{CalendarGroupId}");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/calendargroups/{CalendarGroupId}") : new Uri($"https://outlook.office.com/api/v2.0/me/calendargroups/{CalendarGroupId}");
 
             string stringResponse = "";
 
@@ -119,7 +150,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/calendars/{FolderId}");
+                Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/calendars/{FolderId}") : new Uri($"https://outlook.office.com/api/v2.0/me/calendars/{FolderId}");
                 string rawJson = await SendGetRequestAsync(URL);
                 var calendar = new Calendar(rawJson);
 
@@ -136,7 +167,7 @@ namespace Office365APIEditor.ViewerHelper
             // Get a page of event items in the specified folder.
             // The property of the item to get is very limited.
 
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/calendars/{FolderId}/events?$orderby=CreatedDateTime desc&$top=20&$select=Id,Subject,Organizer,Attendees,Start,End,IsAllDay,CreatedDateTime");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/calendars/{FolderId}/events?$orderby=CreatedDateTime desc&$top=20&$select=Id,Subject,Organizer,Attendees,Start,End,IsAllDay,CreatedDateTime") : new Uri($"https://outlook.office.com/api/v2.0/me/calendars/{FolderId}/events?$orderby=CreatedDateTime desc&$top=20&$select=Id,Subject,Organizer,Attendees,Start,End,IsAllDay,CreatedDateTime");
             return await InternalGetPagedEventsAsync(URL);
         }
 
@@ -193,7 +224,7 @@ namespace Office365APIEditor.ViewerHelper
 
         public async Task<Event> GetEventAsync(string ItemId)
         {
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/events/{ItemId}");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/events/{ItemId}") : new Uri($"https://outlook.office.com/api/v2.0/me/events/{ItemId}");
 
             string stringResponse = await SendGetRequestAsync(URL);
             return new Event(stringResponse);

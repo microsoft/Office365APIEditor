@@ -205,21 +205,21 @@ namespace Office365APIEditor.UI
                     
                     foreach (KeyValuePair<string, string> item in fullAttachInfo)
                     {
-                        if (item.Key == "@odata.type")
+                        if (item.Key.ToLowerInvariant() == "@odata.type")
                         {
                             tempType = (item.Value == null) ? "" : item.Value.ToString();
                         }
-                        else if (item.Key == "Name")
+                        else if (item.Key.ToLowerInvariant() == "name")
                         {
                             tempName = (item.Value == null) ? "" : item.Value.ToString();
                         }
-                        else if (item.Key == "ContentBytes")
+                        else if (item.Key.ToLowerInvariant() == "contentbytes")
                         {
                             tempContentBytes = (item.Value == null) ? "" : item.Value.ToString();
                         }
                     }
 
-                    if (tempType == "#Microsoft.OutlookServices.FileAttachment")
+                    if (tempType == (Util.UseMicrosoftGraphInMailboxViewer ? "#microsoft.graph.fileAttachment" : "#Microsoft.OutlookServices.FileAttachment"))
                     {
                         // This is a FileAttachment
 

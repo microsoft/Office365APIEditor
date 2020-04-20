@@ -409,7 +409,8 @@ namespace Office365APIEditor
             // So we use DummyTaskGroupRoot node as a parent folder of TaskGroups.
 
             // Make a dummy node.
-            TreeNode dummyTaskGroupRootNode = new TreeNode("Task Groups (Dummy Folder)")
+            string dummyNodeName = Util.UseMicrosoftGraphInMailboxViewer ? "Task Groups (Beta) (Dummy Folder)" : "Task Groups (Dummy Folder)";
+            TreeNode dummyTaskGroupRootNode = new TreeNode(dummyNodeName)
             {
                 Tag = new FolderInfo() { ID = "", Type = FolderContentType.DummyTaskGroupRoot },
                 ContextMenuStrip = null

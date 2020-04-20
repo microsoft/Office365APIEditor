@@ -17,7 +17,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get all MailFolders in the specified folder.
 
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{FolderId}/childfolders?$Top=1000&$select=Id,DisplayName,ChildFolderCount");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/mailfolders/{FolderId}/childfolders?$Top=1000&$select=Id,DisplayName,ChildFolderCount") : new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{FolderId}/childfolders?$Top=1000&$select=Id,DisplayName,ChildFolderCount");
 
             List<MailFolder> result = new List<MailFolder>();
 
@@ -48,7 +48,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{FolderId}");
+                Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/mailfolders/{FolderId}") : new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{FolderId}");
                 string rawJson = await SendGetRequestAsync(URL);
                 var mailFolder = new MailFolder(rawJson);
 
@@ -65,32 +65,56 @@ namespace Office365APIEditor.ViewerHelper
             // Get the folder ID of the parent folder of parent folder of Inbox.
             // It's MsgFolderRoot.
 
-            // We can't get the Top of Information Store folder directly.
-            // Following operation is available with v1.0 only.
-            // https://outlook.office.com/api/v1.0/me/RootFolder
-
-            try
+            if (Util.UseMicrosoftGraphInMailboxViewer)
             {
-                // Inbox
-                Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/mailfolders/inbox/?$select=id,parentFolderId");
-                string rawJson = await SendGetRequestAsync(URL);
-                var inbox = new MailFolder(rawJson);
+                try
+                {
+                    // Top of information store
+                    Uri URL = new Uri($"https://graph.microsoft.com/v1.0/me/mailfolders/msgfolderroot");
+                    string rawJson = await SendGetRequestAsync(URL);
+                    var topOfInformationStore = new MailFolder(rawJson);
 
-                // Top of information store
-                URL = new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{inbox.ParentFolderId}/?$select=id,parentFolderId");
-                rawJson = await SendGetRequestAsync(URL);
-                var topOfInformationStore = new MailFolder(rawJson);
+                    // MsgFolderRoot
+                    URL = new Uri($"https://graph.microsoft.com/v1.0/me/mailfolders/{topOfInformationStore.ParentFolderId}/?$select=id,parentFolderId");
+                    rawJson = await SendGetRequestAsync(URL);
+                    var msgFolderRoot = new MailFolder(rawJson);
 
-                // MsgFolderRoot
-                URL = new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{topOfInformationStore.ParentFolderId}/?$select=id,parentFolderId");
-                rawJson = await SendGetRequestAsync(URL);
-                var msgFolderRoot = new MailFolder(rawJson);
-
-                return msgFolderRoot;
+                    return msgFolderRoot;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
-            catch (Exception ex)
+            else
             {
-                throw ex;
+                // We can't get the Top of Information Store folder directly.
+                // Following operation is available with v1.0 only.
+                // https://outlook.office.com/api/v1.0/me/RootFolder
+
+                try
+                {
+                    // Inbox
+                    Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/mailfolders/inbox/?$select=id,parentFolderId");
+                    string rawJson = await SendGetRequestAsync(URL);
+                    var inbox = new MailFolder(rawJson);
+
+                    // Top of information store
+                    URL = new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{inbox.ParentFolderId}/?$select=id,parentFolderId");
+                    rawJson = await SendGetRequestAsync(URL);
+                    var topOfInformationStore = new MailFolder(rawJson);
+
+                    // MsgFolderRoot
+                    URL = new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{topOfInformationStore.ParentFolderId}/?$select=id,parentFolderId");
+                    rawJson = await SendGetRequestAsync(URL);
+                    var msgFolderRoot = new MailFolder(rawJson);
+
+                    return msgFolderRoot;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
 
@@ -98,7 +122,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get the folder ID of the Drafts.
 
-            Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/mailfolders/drafts/?$select=id");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri("https://graph.microsoft.com/v1.0/me/mailfolders/drafts/?$select=id") : new Uri("https://outlook.office.com/api/v2.0/me/mailfolders/drafts/?$select=id");
 
             string stringResponse = "";
 
@@ -121,7 +145,7 @@ namespace Office365APIEditor.ViewerHelper
 
             // Get the folder ID of the Drafts.
 
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{FolderId}/messages/?$select=id");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/mailfolders/{FolderId}/messages/?$select=id") : new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{FolderId}/messages/?$select=id");
 
             string stringResponse = "";
 
@@ -153,7 +177,7 @@ namespace Office365APIEditor.ViewerHelper
             // Get the first page of message items in the specified folder.
             // The property of the item to get is very limited.
 
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/MailFolders/{FolderId}/messages?$orderby=ReceivedDateTime desc&$top=20&$select=Id,Subject,Sender,ToRecipients,ReceivedDateTime,CreatedDateTime,SentDateTime,IsDraft");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/MailFolders/{FolderId}/messages?$orderby=ReceivedDateTime desc&$top=20&$select=Id,Subject,Sender,ToRecipients,ReceivedDateTime,CreatedDateTime,SentDateTime,IsDraft") : new Uri($"https://outlook.office.com/api/v2.0/me/MailFolders/{FolderId}/messages?$orderby=ReceivedDateTime desc&$top=20&$select=Id,Subject,Sender,ToRecipients,ReceivedDateTime,CreatedDateTime,SentDateTime,IsDraft");
             return await InternalGetPagedMessagesAsync(URL);
         }
 
@@ -210,7 +234,7 @@ namespace Office365APIEditor.ViewerHelper
 
         public async Task<Message> GetMessageAsync(string ItemId)
         {
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/messages/{ItemId}");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/messages/{ItemId}") : new Uri($"https://outlook.office.com/api/v2.0/me/messages/{ItemId}");
             string stringResponse = await SendGetRequestAsync(URL);
             return new Message(stringResponse);
         }
@@ -249,7 +273,7 @@ namespace Office365APIEditor.ViewerHelper
             // Send a mail.
             // SendMailAsync method of NuGet version OutlookServicesClient is not working, so we don't use that.
 
-            Uri URL = new Uri("https://outlook.office.com/api/v2.0/Me/SendMail");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri("https://graph.microsoft.com/v1.0/Me/SendMail") : new Uri("https://outlook.office.com/api/v2.0/Me/SendMail");
 
             string postData = CreatePostDataToSendNewMessageOnTheFly(newItem);
 
@@ -298,7 +322,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Send a draft mail.
 
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/messages/{draftItemId}/send");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/messages/{draftItemId}/send") : new Uri($"https://outlook.office.com/api/v2.0/me/messages/{draftItemId}/send");
 
             try
             {
@@ -314,7 +338,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Save a new draft mail.
 
-            Uri URL = new Uri("https://outlook.office.com/api/v2.0/Me/messages");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri("https://graph.microsoft.com/v1.0/me/messages") : new Uri("https://outlook.office.com/api/v2.0/Me/messages");
 
             string postData = CreatePostDataToSave(newItem);
 
@@ -363,7 +387,7 @@ namespace Office365APIEditor.ViewerHelper
                 // First, update the draft item.
 
                 Uri URL;
-                URL = new Uri($"https://outlook.office.com/api/v2.0/Me/messages/{draftItemId}");
+                URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/Me/messages/{draftItemId}") : new Uri($"https://outlook.office.com/api/v2.0/Me/messages/{draftItemId}");
 
                 string postData = CreatePostDataToUpdateDraft(newItem);
 
@@ -375,17 +399,30 @@ namespace Office365APIEditor.ViewerHelper
 
                 foreach (var attach in currentAttachments)
                 {
-                    URL = new Uri($"https://outlook.office.com/api/v2.0/Me/messages/{draftItemId}/attachments/{attach.Id}");
+                    URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/Me/messages/{draftItemId}/attachments/{attach.Id}") : new Uri($"https://outlook.office.com/api/v2.0/Me/messages/{draftItemId}/attachments/{attach.Id}");
                     result = await SendDeleteRequestAsync(URL);
                 }
 
                 // Finally, upload new attachments.
 
-                string attachmentTemplate = @"{
+                string attachmentTemplate;
+
+                if (Util.UseMicrosoftGraphInMailboxViewer)
+                {
+                    attachmentTemplate = @"{
+            ""@odata.type"": ""#microsoft.graph.fileAttachment"",
+            ""Name"": ""{FileName}"",
+            ""ContentBytes"": ""{ContentBytes}""
+        }";
+                }
+                else
+                {
+                    attachmentTemplate = @"{
             ""@odata.type"": ""#Microsoft.OutlookServices.FileAttachment"",
             ""Name"": ""{FileName}"",
             ""ContentBytes"": ""{ContentBytes}""
         }";
+                }                
 
                 foreach (var attach in newItem.Attachments)
                 {
@@ -395,7 +432,7 @@ namespace Office365APIEditor.ViewerHelper
                         postData = postData.Replace("{ContentBytes}", ((Data.AttachmentAPI.FileAttachment)attach).ContentBytes);
                     }
 
-                    URL = new Uri($"https://outlook.office.com/api/v2.0/Me/messages/{draftItemId}/attachments/");
+                    URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/Me/messages/{draftItemId}/attachments/") : new Uri($"https://outlook.office.com/api/v2.0/Me/messages/{draftItemId}/attachments/");
                     result = await SendPostRequestAsync(URL, postData);
                 }
             }
@@ -539,7 +576,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get the overrides that a user has set up to always classify messages from certain senders in specific ways.
 
-            Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/InferenceClassification/Overrides");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri("https://graph.microsoft.com/v1.0/me/inferenceClassification/overrides") : new Uri("https://outlook.office.com/api/v2.0/me/InferenceClassification/Overrides");
 
             string stringResponse = "";
 
@@ -559,20 +596,43 @@ namespace Office365APIEditor.ViewerHelper
 
             List<FocusedInboxOverride> result = new List<FocusedInboxOverride>();
 
+            string idAttributeName;
+            string classifyAsAttributeName;
+            string senderEmailAddressAttributeName;
+            string addressAttributeName;
+            string nameAttributeNmae;
+
+            if (Util.UseMicrosoftGraphInMailboxViewer)
+            {
+                idAttributeName = "id";
+                classifyAsAttributeName = "classifyAs";
+                senderEmailAddressAttributeName = "senderEmailAddress";
+                addressAttributeName = "address";
+                nameAttributeNmae = "name";
+            }
+            else
+            {
+                idAttributeName = "Id";
+                classifyAsAttributeName = "ClassifyAs";
+                senderEmailAddressAttributeName = "SenderEmailAddress";
+                addressAttributeName = "Address";
+                nameAttributeNmae = "Name";
+            }
+
             foreach (var item in messages)
             {
-                string id = item.Value<string>("Id");
-                string classifyAs = item.Value<string>("ClassifyAs");
+                string id = item.Value<string>(idAttributeName);
+                string classifyAs = item.Value<string>(classifyAsAttributeName);
 
-                JObject jObjectSender = item.Value<JObject>("SenderEmailAddress");
+                JObject jObjectSender = item.Value<JObject>(senderEmailAddressAttributeName);
                 FocusedInboxOverrideSender sender = new FocusedInboxOverrideSender();
 
-                if (jObjectSender != null && jObjectSender.TryGetValue("Address", out JToken jTokenAddress))
+                if (jObjectSender != null && jObjectSender.TryGetValue(addressAttributeName, out JToken jTokenAddress))
                 {
                     sender.Address = jTokenAddress.Value<string>();
                 }
 
-                if (jObjectSender != null && jObjectSender.TryGetValue("Name", out JToken jTokenName))
+                if (jObjectSender != null && jObjectSender.TryGetValue(nameAttributeNmae, out JToken jTokenName))
                 {
                     sender.Name = jTokenName.Value<string>();
                 }
@@ -595,7 +655,7 @@ namespace Office365APIEditor.ViewerHelper
             // PATCH request can update only ClassifyAs, and POST request can update both ClassifyAs and display name.
             // So, we use POST request when updating.
 
-            Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/InferenceClassification/Overrides");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri("https://graph.microsoft.com/v1.0/me/inferenceClassification/overrides") : new Uri("https://outlook.office.com/api/v2.0/me/InferenceClassification/Overrides");
 
             string postData = @"{
     ""ClassifyAs"": ""{Classify}"",
@@ -625,7 +685,9 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Remove a focused inbox override setting.
 
-            Uri URL = new Uri("https://outlook.office.com/api/v2.0/me/InferenceClassification/Overrides('" + FocusedInboxOverrideId + "')");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ?
+                new Uri("https://graph.microsoft.com/v1.0/me/inferenceClassification/overrides('" + FocusedInboxOverrideId + "')") :
+                new Uri("https://outlook.office.com/api/v2.0/me/InferenceClassification/Overrides('" + FocusedInboxOverrideId + "')");
 
             try
             {

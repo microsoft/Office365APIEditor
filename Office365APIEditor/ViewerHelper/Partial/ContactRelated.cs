@@ -17,7 +17,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get all contact folders in the specified folder.
 
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/contactfolders/{FolderId}/childfolders/?$Top=1000&$select=Id,DisplayName");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/contactfolders/{FolderId}/childfolders/?$Top=1000&$select=Id,DisplayName") : new Uri($"https://outlook.office.com/api/v2.0/me/contactfolders/{FolderId}/childfolders/?$Top=1000&$select=Id,DisplayName");
 
             List<ContactFolder> result = new List<ContactFolder>();
 
@@ -48,7 +48,7 @@ namespace Office365APIEditor.ViewerHelper
 
             try
             {
-                Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/contactfolders/{FolderId}");
+                Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/contactfolders/{FolderId}") : new Uri($"https://outlook.office.com/api/v2.0/me/contactfolders/{FolderId}");
                 string rawJson = await SendGetRequestAsync(URL);
                 var contactFolder = new ContactFolder(rawJson);
 
@@ -65,7 +65,7 @@ namespace Office365APIEditor.ViewerHelper
             // Get all contact items in the specified folder.
             // The property of the item to get is very limited.
 
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/ContactFolders/{FolderId}/contacts?$orderby=CreatedDateTime desc&$top=20&$select=Id,DisplayName,CreatedDateTime");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/ContactFolders/{FolderId}/contacts?$orderby=CreatedDateTime desc&$top=20&$select=Id,DisplayName,CreatedDateTime") : new Uri($"https://outlook.office.com/api/v2.0/me/ContactFolders/{FolderId}/contacts?$orderby=CreatedDateTime desc&$top=20&$select=Id,DisplayName,CreatedDateTime");
             return await InternalGetPagedContactsAsync(URL);
         }
 
@@ -122,7 +122,7 @@ namespace Office365APIEditor.ViewerHelper
 
         public async Task<Contact> GetContactAsync(string ItemId)
         {
-            Uri URL = new Uri($"https://outlook.office.com/api/v2.0/me/contacts/{ItemId}");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/contacts/{ItemId}") : new Uri($"https://outlook.office.com/api/v2.0/me/contacts/{ItemId}");
             string stringResponse = await SendGetRequestAsync(URL);
             return new Contact(stringResponse);
         }

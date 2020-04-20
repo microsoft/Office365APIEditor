@@ -26,13 +26,13 @@ namespace Office365APIEditor.ViewerHelper
                 case FolderContentType.Message:
                 case FolderContentType.MsgFolderRoot:
                 case FolderContentType.Drafts:
-                    URL = new Uri($"https://outlook.office.com/api/v2.0/me/messages/{itemId}/attachments/?$Top=1000&$select=Id,Name,ContentType");
+                    URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/messages/{itemId}/attachments/?$Top=1000&$select=Id,Name,ContentType") : new Uri($"https://outlook.office.com/api/v2.0/me/messages/{itemId}/attachments/?$Top=1000&$select=Id,Name,ContentType");
                     break;
                 case FolderContentType.Calendar:
-                    URL = new Uri($"https://outlook.office.com/api/v2.0/me/events/{itemId}/attachments/?$Top=1000&$select=Id,Name,ContentType");
+                    URL = Util.UseMicrosoftGraphInMailboxViewer? new Uri($"https://graph.microsoft.com/v1.0/me/events/{itemId}/attachments/?$Top=1000&$select=Id,Name,ContentType") : new Uri($"https://outlook.office.com/api/v2.0/me/events/{itemId}/attachments/?$Top=1000&$select=Id,Name,ContentType");
                     break;
                 case FolderContentType.Task:
-                    URL = new Uri($"https://outlook.office.com/api/v2.0/me/tasks/{itemId}/attachments/?$Top=1000&$select=Id,Name,ContentType");
+                    URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/beta/me/outlook/tasks/{itemId}/attachments/?$Top=1000&$select=Id,Name,ContentType") : new Uri($"https://outlook.office.com/api/v2.0/me/tasks/{itemId}/attachments/?$Top=1000&$select=Id,Name,ContentType");
                     break;
                 case FolderContentType.Contact:
                     // contact item (Contact API) does not have attachment.
@@ -72,13 +72,13 @@ namespace Office365APIEditor.ViewerHelper
                 case FolderContentType.Message:
                 case FolderContentType.MsgFolderRoot:
                 case FolderContentType.Drafts:
-                    URL = new Uri("https://outlook.office.com/api/v2.0/me/messages/" + itemId + "/attachments/" + attachmentId);
+                    URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri("https://graph.microsoft.com/beta/me/messages/" + itemId + "/attachments/" + attachmentId) : new Uri("https://outlook.office.com/api/v2.0/me/messages/" + itemId + "/attachments/" + attachmentId);
                     break;
                 case FolderContentType.Calendar:
-                    URL = new Uri("https://outlook.office.com/api/v2.0/me/events/" + itemId + "/attachments/" + attachmentId);
+                    URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri("https://graph.microsoft.com/beta/me/events/" + itemId + "/attachments/" + attachmentId) : new Uri("https://outlook.office.com/api/v2.0/me/events/" + itemId + "/attachments/" + attachmentId);
                     break;
                 case FolderContentType.Task:
-                    URL = new Uri("https://outlook.office.com/api/v2.0/me/tasks/" + itemId + "/attachments/" + attachmentId);
+                    URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri("https://graph.microsoft.com/beta/me/outlook/tasks/" + itemId + "/attachments/" + attachmentId) : new Uri("https://outlook.office.com/api/v2.0/me/tasks/" + itemId + "/attachments/" + attachmentId);
                     break;
                 default:
                     throw new Exception("FolderContentType must be Message, MsgFolderRoot, Drafts, Calendar or Task.");
@@ -105,6 +105,48 @@ namespace Office365APIEditor.ViewerHelper
             }
 
             return result;
+        }
+
+        public async Task<string> GetAttachmentRawContentAsync(FolderContentType folderContentType, string itemId, string attachmentId)
+        {
+            // Get the raw contents of the specified attachment.
+
+            if (!Util.UseMicrosoftGraphInMailboxViewer)
+            {
+                throw new NotImplementedException();
+            }
+
+            Uri URL;
+
+            switch (folderContentType)
+            {
+                case FolderContentType.Message:
+                case FolderContentType.MsgFolderRoot:
+                case FolderContentType.Drafts:
+                    URL = new Uri("https://graph.microsoft.com/v1.0/me/messages/" + itemId + "/attachments/" + attachmentId + "/$value");
+                    break;
+                case FolderContentType.Calendar:
+                    URL = new Uri("https://graph.microsoft.com/v1.0/me/events/" + itemId + "/attachments/" + attachmentId + "/$value");
+                    break;
+                case FolderContentType.Task:
+                    URL = new Uri("https://graph.microsoft.com/beta/me/outlook/tasks/" + itemId + "/attachments/" + attachmentId + "/$value");
+                    break;
+                default:
+                    throw new Exception("FolderContentType must be Message, MsgFolderRoot, Drafts, Calendar or Task.");
+            }
+
+            string stringResponse = "";
+
+            try
+            {
+                stringResponse = await SendGetRequestAsync(URL);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return stringResponse;
         }
     }
 }
