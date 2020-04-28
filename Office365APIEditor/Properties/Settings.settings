@@ -247,5 +247,8 @@
     <Setting Name="LastSpoAppOnlyByKeyClientSecret" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="ReplaceSharpSignInTheRequestURL" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

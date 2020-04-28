@@ -71,6 +71,7 @@ namespace Office365APIEditor
             textBox_CustomUserAgent.Text = Properties.Settings.Default.CustomUserAgent;
 
             checkBox_ReplacePlusSignInTheRequestURL.Checked = Properties.Settings.Default.ReplacePlusSignInTheRequestURL;
+            checkBox_ReplaceSharpSignInTheRequestURL.Checked = Properties.Settings.Default.ReplaceSharpSignInTheRequestURL;
         }
 
         private void button_LogFolderPathBrowse_Click(object sender, EventArgs e)
@@ -144,6 +145,7 @@ namespace Office365APIEditor
                 }
 
                 Properties.Settings.Default.ReplacePlusSignInTheRequestURL = checkBox_ReplacePlusSignInTheRequestURL.Checked;
+                Properties.Settings.Default.ReplaceSharpSignInTheRequestURL = checkBox_ReplaceSharpSignInTheRequestURL.Checked;
 
                 Properties.Settings.Default.Save();
 

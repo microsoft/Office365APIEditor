@@ -692,5 +692,17 @@ namespace Office365APIEditor.Properties {
                 this["LastSpoAppOnlyByKeyClientSecret"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ReplaceSharpSignInTheRequestURL {
+            get {
+                return ((bool)(this["ReplaceSharpSignInTheRequestURL"]));
+            }
+            set {
+                this["ReplaceSharpSignInTheRequestURL"] = value;
+            }
+        }
     }
 }

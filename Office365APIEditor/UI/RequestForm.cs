@@ -373,6 +373,11 @@ namespace Office365APIEditor
                     replacedUri = replacedUri.Replace("+", "%2B");
                 }
 
+                if (Properties.Settings.Default.ReplaceSharpSignInTheRequestURL)
+                {
+                    replacedUri = replacedUri.Replace("#", "%23");
+                }
+
                 requestUri = new Uri(replacedUri);
             }
             catch
