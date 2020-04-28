@@ -10,7 +10,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
+  solution: 'Office365APIEditor/Office365APIEditor.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Debug'
 
