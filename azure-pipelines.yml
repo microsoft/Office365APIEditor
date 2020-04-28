@@ -11,7 +11,7 @@ pool:
 
 variables:
   solution: 'Office365APIEditor/Office365APIEditor.csproj'
-  buildPlatform: 'Any CPU'
+  buildPlatform: 'AnyCPU'
   buildConfiguration: 'Release'
 
 steps:
