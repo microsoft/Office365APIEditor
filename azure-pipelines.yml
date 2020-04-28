@@ -35,7 +35,7 @@ steps:
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '../Office365APIEditor/obj/Release'
+    rootFolderOrFile: 'Office365APIEditor/obj/Release'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
