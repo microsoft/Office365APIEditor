@@ -38,5 +38,13 @@ steps:
     rootFolderOrFile: 'Office365APIEditor/obj/Release'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/Office365APIEditor_$(Build.BuildNumber).zip'
     replaceExistingArchive: true
+
+- task: AzureFileCopy@4
+  inputs:
+    SourcePath: '$(Build.ArtifactStagingDirectory)/Office365APIEditor_$(Build.BuildNumber).zip'
+    azureSubscription: 'Microsoft Azure 社内従量課金プラン(bf971e8f-dee6-4a35-851a-eb818e718a8a)'
+    Destination: 'AzureBlob'
+    storage: 'office365apieditor'
+    ContainerName: 'build'
