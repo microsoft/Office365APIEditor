@@ -33,6 +33,13 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      $buildNumber = [Regex]::Match((Get-Content "Properties\AssemblyInfo.cs"), "\[assembly: AssemblyVersion\(.(\d+)\.(\d+)\.(\d+)\.(\d+)").Value.Split('"')[1];
+      Write-Host $buildNumber
+
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: 'Office365APIEditor/bin/Release'
