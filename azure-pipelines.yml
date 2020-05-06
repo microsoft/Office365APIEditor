@@ -44,7 +44,7 @@ steps:
       Write-Host $buildNumber;
       $archivePath = $env:ArtifactStagingDirectory + "\Office365APIEditor_" + $buildNumber + ".zip";
       Write-Host $archivePath;
-      Compress-Archive -Path Office365APIEditor\bin\Release\*.* -DestinationPath $archivePath -Update;
+      Compress-Archive -Path Office365APIEditor\bin\Release\* -DestinationPath $archivePath -Update;
       Write-Host ('##vso[task.setvariable variable=archivePath;isOutput=true] ' + $archivePath);
 
 - task: ArchiveFiles@2
