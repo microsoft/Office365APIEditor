@@ -34,11 +34,16 @@ steps:
     configuration: '$(buildConfiguration)'
 
 - task: PowerShell@2
+  name: PowerShellTask
   inputs:
     targetType: 'inline'
     script: |
       $buildNumber = [Regex]::Match((Get-Content "Office365APIEditor\Properties\AssemblyInfo.cs"), "\[assembly: AssemblyVersion\(.(\d+)\.(\d+)\.(\d+)\.(\d+)").Value.Split('"')[1];
-      Write-Host $buildNumber
+      Write-Host $buildNumber;
+      $archivePath = $(Build.ArtifactStagingDirectory) + "\Office365APIEditor_" + $buildNumber + ".zip";
+      Write-Host $archivePath;
+      Write-Host (''##vso[task.setvariable variable=archivePath;isOutput=true]'' + $archivePath);
+      Compress-Archive -Path Office365APIEditor\bin\Release\*.* -DestinationPath $archivePath -Update;
 
 - task: ArchiveFiles@2
   inputs:
@@ -50,7 +55,7 @@ steps:
 
 - task: AzureFileCopy@4
   inputs:
-    SourcePath: '$(Build.ArtifactStagingDirectory)/Office365APIEditor_$(Build.BuildNumber).zip'
+    SourcePath: '$(PowerShellTask.archivePath)'
     azureSubscription: 'Microsoft Azure 社内従量課金プラン(bf971e8f-dee6-4a35-851a-eb818e718a8a)'
     Destination: 'AzureBlob'
     storage: 'office365apieditor'
