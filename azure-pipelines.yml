@@ -35,12 +35,14 @@ steps:
 
 - task: PowerShell@2
   name: PowerShellTask
+  env:
+    ArtifactStagingDirectory: $(Build.ArtifactStagingDirectory)
   inputs:
     targetType: 'inline'
     script: |
       $buildNumber = [Regex]::Match((Get-Content "Office365APIEditor\Properties\AssemblyInfo.cs"), "\[assembly: AssemblyVersion\(.(\d+)\.(\d+)\.(\d+)\.(\d+)").Value.Split('"')[1];
       Write-Host $buildNumber;
-      $archivePath = $(Build.ArtifactStagingDirectory) + "\Office365APIEditor_" + $buildNumber + ".zip";
+      $archivePath = $ArtifactStagingDirectory + "\Office365APIEditor_" + $buildNumber + ".zip";
       Write-Host $archivePath;
       Write-Host ('##vso[task.setvariable variable=archivePath;isOutput=true] ' + $archivePath);
       Compress-Archive -Path Office365APIEditor\bin\Release\*.* -DestinationPath $archivePath -Update;
