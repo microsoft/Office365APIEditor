@@ -47,14 +47,6 @@ steps:
       Compress-Archive -Path Office365APIEditor\bin\Release\* -DestinationPath $archivePath -Update;
       Write-Host ('##vso[task.setvariable variable=archivePath;isOutput=true] ' + $archivePath);
 
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: 'Office365APIEditor/bin/Release'
-    includeRootFolder: false
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/Office365APIEditor_$(Build.BuildNumber).zip'
-    replaceExistingArchive: true
-
 - task: AzureFileCopy@4
   inputs:
     SourcePath: '$(Build.ArtifactStagingDirectory)/*.zip'
