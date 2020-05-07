@@ -21,6 +21,12 @@
 |${DateToday}|DateTime.UtcNow.ToString("yyyy-MM-dd")|
 |${Date3MonthLater}|DateTime.UtcNow.AddMonths(3).ToString("yyyy-MM-dd")|
 
+## Time zone
+
+|Function|C# Code|
+|:-------|-------|
+|${LocalTimeZone}|Util.LocalTimeZoneId|
+
 ## Other
 
 |Function|C# Code|

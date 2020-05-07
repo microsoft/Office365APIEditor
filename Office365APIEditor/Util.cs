@@ -245,7 +245,7 @@ namespace Office365APIEditor
             request.Headers.Add("Authorization:Bearer " + AccessToken);
 
             request.Headers.Add("X-AnchorMailbox:" + MailAddress);
-            request.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+            request.Headers.Add("Prefer", "outlook.timezone=\"" + LocalTimeZoneId + "\"");
 
             request.Method = "GET";
 
@@ -278,7 +278,7 @@ namespace Office365APIEditor
             request.Headers.Add("Authorization:Bearer " + AccessToken);
 
             request.Headers.Add("X-AnchorMailbox:" + MailAddress);
-            request.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+            request.Headers.Add("Prefer", "outlook.timezone=\"" + LocalTimeZoneId + "\"");
 
             request.Method = "POST";
 
@@ -321,7 +321,7 @@ namespace Office365APIEditor
             request.Headers.Add("Authorization:Bearer " + AccessToken);
 
             request.Headers.Add("X-AnchorMailbox:" + MailAddress);
-            request.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+            request.Headers.Add("Prefer", "outlook.timezone=\"" + LocalTimeZoneId + "\"");
 
             request.Method = "DELETE";
 
@@ -354,7 +354,7 @@ namespace Office365APIEditor
             request.Headers.Add("Authorization:Bearer " + AccessToken);
 
             request.Headers.Add("X-AnchorMailbox:" + MailAddress);
-            request.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Local.Id + "\"");
+            request.Headers.Add("Prefer", "outlook.timezone=\"" + LocalTimeZoneId + "\"");
 
             request.Method = "PATCH";
 
@@ -385,6 +385,28 @@ namespace Office365APIEditor
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public static string LocalTimeZoneId
+        {
+            get
+            {
+                // Get the local time zone info.
+                // In the Windows sandbox environment, we cannot get the info correctly.
+                // So we need to check the value.
+
+                string localTimeZoneId = TimeZoneInfo.Local.Id;
+
+                if (!System.Text.RegularExpressions.Regex.IsMatch(localTimeZoneId, "^[ -~]"))
+                {
+                    // localTimeZoneId contains special character.
+                    return "UTC";
+                }
+                else
+                {
+                    return localTimeZoneId;
+                }
             }
         }
 

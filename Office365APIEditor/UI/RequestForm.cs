@@ -1678,7 +1678,7 @@ namespace Office365APIEditor
                     }
 
                     string headerName = header.Name;
-                    string headerValue = header.Value;
+                    string headerValue = RunBuiltInFunction(header.Value);
 
                     dataGridView_RequestHeader.Rows.Add(headerName, headerValue);
                 }
@@ -1769,6 +1769,11 @@ namespace Office365APIEditor
             if (requestBody.Contains("${Date3MonthLater}"))
             {
                 result = result.Replace("${Date3MonthLater}", utcNow.AddMonths(3).ToString("yyyy-MM-dd"));
+            }
+
+            if (requestBody.Contains("${LocalTimeZone}"))
+            {
+                result = result.Replace("${LocalTimeZone}", Util.LocalTimeZoneId);
             }
 
             if (requestBody.Contains("${Guid}"))

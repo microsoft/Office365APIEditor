@@ -147,7 +147,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
                   "body": ""
@@ -165,10 +165,10 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
-                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Does late morning work for you?\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\":\"samanthab@contoso.onmicrosoft.com\",\r\n        \"name\": \"Samantha Booth\"\r\n      },\r\n      \"type\": \"required\"\r\n    }\r\n  ]\r\n}"
+                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Does late morning work for you?\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\":\"samanthab@contoso.onmicrosoft.com\",\r\n        \"name\": \"Samantha Booth\"\r\n      },\r\n      \"type\": \"required\"\r\n    }\r\n  ]\r\n}"
                 },
                 {
                   "id": "53875c78-0983-4de7-a139-2b667d380733",
@@ -178,10 +178,10 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
-                  "body": "{\r\n  \"subject\": \"Plan summer company picnic\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Let's kick-start this event planning!\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\": \"DanaS@contoso.onmicrosoft.com\",\r\n        \"name\": \"Dana Swope\"\r\n      },\r\n      \"type\": \"Required\"\r\n    },\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\": \"AlexW@contoso.onmicrosoft.com\",\r\n        \"name\": \"Alex Wilber\"\r\n      },\r\n      \"type\": \"Required\"\r\n    }\r\n  ],\r\n  \"location\": {\r\n    \"displayName\": \"Conf Room 3; Fourth Coffee; Home Office\",\r\n    \"locationType\": \"Default\"\r\n  },\r\n  \"locations\": [\r\n    {\r\n      \"displayName\": \"Conf Room 3\"\r\n    },\r\n    {\r\n      \"displayName\": \"Fourth Coffee\",\r\n      \"address\": {\r\n        \"street\": \"4567 Main St\",\r\n        \"city\": \"Redmond\",\r\n        \"state\": \"WA\",\r\n        \"countryOrRegion\": \"US\",\r\n        \"postalCode\": \"32008\"\r\n      },\r\n      \"coordinates\": {\r\n        \"latitude\": 47.672,\r\n        \"longitude\": -102.103\r\n      }\r\n    },\r\n    {\r\n      \"displayName\": \"Home Office\"\r\n    }\r\n  ]\r\n}"
+                  "body": "{\r\n  \"subject\": \"Plan summer company picnic\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Let's kick-start this event planning!\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\": \"DanaS@contoso.onmicrosoft.com\",\r\n        \"name\": \"Dana Swope\"\r\n      },\r\n      \"type\": \"Required\"\r\n    },\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\": \"AlexW@contoso.onmicrosoft.com\",\r\n        \"name\": \"Alex Wilber\"\r\n      },\r\n      \"type\": \"Required\"\r\n    }\r\n  ],\r\n  \"location\": {\r\n    \"displayName\": \"Conf Room 3; Fourth Coffee; Home Office\",\r\n    \"locationType\": \"Default\"\r\n  },\r\n  \"locations\": [\r\n    {\r\n      \"displayName\": \"Conf Room 3\"\r\n    },\r\n    {\r\n      \"displayName\": \"Fourth Coffee\",\r\n      \"address\": {\r\n        \"street\": \"4567 Main St\",\r\n        \"city\": \"Redmond\",\r\n        \"state\": \"WA\",\r\n        \"countryOrRegion\": \"US\",\r\n        \"postalCode\": \"32008\"\r\n      },\r\n      \"coordinates\": {\r\n        \"latitude\": 47.672,\r\n        \"longitude\": -102.103\r\n      }\r\n    },\r\n    {\r\n      \"displayName\": \"Home Office\"\r\n    }\r\n  ]\r\n}"
                 },
                 {
                   "id": "552610a8-b198-4361-9ecc-a95772493f56",
@@ -189,7 +189,7 @@
                   "method": "POST",
                   "URI": "https://graph.microsoft.com/beta/me/events",
                   "header": [],
-                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Does noon time work for you?\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"recurrence\": {\r\n    \"pattern\": {\r\n      \"type\": \"weekly\",\r\n      \"interval\": 1,\r\n      \"daysOfWeek\": [ \"Monday\" ]\r\n    },\r\n    \"range\": {\r\n      \"type\": \"endDate\",\r\n      \"startDate\": \"${DateToday}\",\r\n      \"endDate\": \"${Date3MonthLater}\"\r\n    }\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\":\"AdeleV@contoso.onmicrosoft.com\",\r\n        \"name\": \"Adele Vance\"\r\n      },\r\n      \"type\": \"required\"\r\n    }\r\n  ]\r\n}"
+                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Does noon time work for you?\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"recurrence\": {\r\n    \"pattern\": {\r\n      \"type\": \"weekly\",\r\n      \"interval\": 1,\r\n      \"daysOfWeek\": [ \"Monday\" ]\r\n    },\r\n    \"range\": {\r\n      \"type\": \"endDate\",\r\n      \"startDate\": \"${DateToday}\",\r\n      \"endDate\": \"${Date3MonthLater}\"\r\n    }\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\":\"AdeleV@contoso.onmicrosoft.com\",\r\n        \"name\": \"Adele Vance\"\r\n      },\r\n      \"type\": \"required\"\r\n    }\r\n  ]\r\n}"
                 }
               ]
             },
@@ -282,10 +282,10 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
-                  "body": "{        \r\n    \"schedules\": [\"adelev@contoso.onmicrosoft.com\", \"meganb@contoso.onmicrosoft.com\"],\r\n    \"startTime\": {\r\n        \"dateTime\": \"${DateTime1HourLater}\",\r\n        \"timeZone\": \"Pacific Standard Time\"\r\n    },\r\n    \"endTime\": {\r\n        \"dateTime\": \"${DateTime1DayAnd1HourLater}\",\r\n        \"timeZone\": \"Pacific Standard Time\"\r\n    },\r\n    \"availabilityViewInterval\": \"60\"\r\n}"
+                  "body": "{        \r\n    \"schedules\": [\"adelev@contoso.onmicrosoft.com\", \"meganb@contoso.onmicrosoft.com\"],\r\n    \"startTime\": {\r\n        \"dateTime\": \"${DateTime1HourLater}\",\r\n        \"timeZone\": \"${LocalTimeZone}\"\r\n    },\r\n    \"endTime\": {\r\n        \"dateTime\": \"${DateTime1DayAnd1HourLater}\",\r\n        \"timeZone\": \"${LocalTimeZone}\"\r\n    },\r\n    \"availabilityViewInterval\": \"60\"\r\n}"
                 }
               ]
             },
@@ -300,10 +300,10 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
-                  "body": "{ \r\n  \"attendees\": [ \r\n    { \r\n      \"type\": \"required\",  \r\n      \"emailAddress\": { \r\n        \"name\": \"Alex Wilbur\",\r\n        \"address\": \"alexw@contoso.onmicrosoft.com\" \r\n      } \r\n    }\r\n  ],  \r\n  \"locationConstraint\": { \r\n    \"isRequired\": \"false\",  \r\n    \"suggestLocation\": \"false\",  \r\n    \"locations\": [ \r\n      { \r\n        \"resolveAvailability\": \"false\",\r\n        \"displayName\": \"Conf room Hood\" \r\n      } \r\n    ] \r\n  },  \r\n  \"timeConstraint\": {\r\n    \"activityDomain\":\"work\", \r\n    \"timeslots\": [ \r\n      { \r\n        \"start\": { \r\n          \"dateTime\": \"${DateTime1DayLater12}\",  \r\n          \"timeZone\": \"Pacific Standard Time\" \r\n        },  \r\n        \"end\": { \r\n          \"dateTime\": \"${DateTime1DayLater14}\",  \r\n          \"timeZone\": \"Pacific Standard Time\" \r\n        } \r\n      } \r\n    ] \r\n  },  \r\n  \"isOrganizerOptional\": \"false\",\r\n  \"meetingDuration\": \"PT1H\",\r\n  \"returnSuggestionReasons\": \"true\",\r\n  \"minimumAttendeePercentage\": \"100\"\r\n}"
+                  "body": "{ \r\n  \"attendees\": [ \r\n    { \r\n      \"type\": \"required\",  \r\n      \"emailAddress\": { \r\n        \"name\": \"Alex Wilbur\",\r\n        \"address\": \"alexw@contoso.onmicrosoft.com\" \r\n      } \r\n    }\r\n  ],  \r\n  \"locationConstraint\": { \r\n    \"isRequired\": \"false\",  \r\n    \"suggestLocation\": \"false\",  \r\n    \"locations\": [ \r\n      { \r\n        \"resolveAvailability\": \"false\",\r\n        \"displayName\": \"Conf room Hood\" \r\n      } \r\n    ] \r\n  },  \r\n  \"timeConstraint\": {\r\n    \"activityDomain\":\"work\", \r\n    \"timeslots\": [ \r\n      { \r\n        \"start\": { \r\n          \"dateTime\": \"${DateTime1DayLater12}\",  \r\n          \"timeZone\": \"${LocalTimeZone}\" \r\n        },  \r\n        \"end\": { \r\n          \"dateTime\": \"${DateTime1DayLater14}\",  \r\n          \"timeZone\": \"${LocalTimeZone}\" \r\n        } \r\n      } \r\n    ] \r\n  },  \r\n  \"isOrganizerOptional\": \"false\",\r\n  \"meetingDuration\": \"PT1H\",\r\n  \"returnSuggestionReasons\": \"true\",\r\n  \"minimumAttendeePercentage\": \"100\"\r\n}"
                 }
               ]
             }
@@ -1530,7 +1530,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
                   "body": ""
@@ -1548,10 +1548,10 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
-                  "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Conf Room 1\"\r\n  },\r\n  \"attendees\": []\r\n}"
+                  "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Conf Room 1\"\r\n  },\r\n  \"attendees\": []\r\n}"
                 }
               ]
             },
@@ -1566,7 +1566,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
                   "body": ""
@@ -1584,7 +1584,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
                   "body": "{\r\n  \"location\":{\r\n      \"displayName\":\"Conf Room 2\"\r\n  }\r\n}"
@@ -1615,7 +1615,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\", outlook.body-content-type=\"text\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\", outlook.body-content-type=\"text\""
                     }
                   ],
                   "body": ""
@@ -1633,7 +1633,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\", odata.maxpagesize=2"
+                      "value": "outlook.timezone=\"${LocalTimeZone}\", odata.maxpagesize=2"
                     }
                   ],
                   "body": ""
@@ -1958,7 +1958,7 @@
                       "method": "POST",
                       "URI": "https://graph.microsoft.com/beta/groups/{id}/events",
                       "header": [],
-                      "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"attendees\": [],\r\n  \"singleValueExtendedProperties\": [\r\n     {\r\n           \"id\":\"String {bcce69be-40c9-4c54-9505-8c0f24e44c62} Name Fun\",\r\n           \"value\":\"Food\"\r\n     }\r\n  ]\r\n}"
+                      "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"attendees\": [],\r\n  \"singleValueExtendedProperties\": [\r\n     {\r\n           \"id\":\"String {bcce69be-40c9-4c54-9505-8c0f24e44c62} Name Fun\",\r\n           \"value\":\"Food\"\r\n     }\r\n  ]\r\n}"
                     },
                     {
                       "id": "fdcc00db-0abb-4eff-90d2-37e3bc98d5e5",
@@ -2005,7 +2005,7 @@
                       "method": "POST",
                       "URI": "https://graph.microsoft.com/beta/groups/{id}/events",
                       "header": [],
-                      "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"attendees\": [],\r\n  \"multiValueExtendedProperties\": [\r\n     {\r\n           \"id\":\"StringArray {688251c1-7c66-47d3-adb7-c714aa4b457b} Name Recreation\",\r\n           \"value\":[\"Food\", \"Hiking\", \"Swimming\"]\r\n     }\r\n  ]\r\n}"
+                      "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"attendees\": [],\r\n  \"multiValueExtendedProperties\": [\r\n     {\r\n           \"id\":\"StringArray {688251c1-7c66-47d3-adb7-c714aa4b457b} Name Recreation\",\r\n           \"value\":[\"Food\", \"Hiking\", \"Swimming\"]\r\n     }\r\n  ]\r\n}"
                     },
                     {
                       "id": "78912a6b-9553-4f60-bf01-cbb841c80ba0",
@@ -2258,7 +2258,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
                   "body": ""
@@ -2276,10 +2276,10 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
-                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Does late morning work for you?\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\":\"samanthab@contoso.onmicrosoft.com\",\r\n        \"name\": \"Samantha Booth\"\r\n      },\r\n      \"type\": \"required\"\r\n    }\r\n  ]\r\n}"
+                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Does late morning work for you?\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\":\"samanthab@contoso.onmicrosoft.com\",\r\n        \"name\": \"Samantha Booth\"\r\n      },\r\n      \"type\": \"required\"\r\n    }\r\n  ]\r\n}"
                 },
                 {
                   "id": "57abc8ed-9a94-42f4-8363-465df19e492c",
@@ -2289,10 +2289,10 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
-                  "body": "{\r\n  \"subject\": \"Plan summer company picnic\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Let's kick-start this event planning!\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\": \"DanaS@contoso.onmicrosoft.com\",\r\n        \"name\": \"Dana Swope\"\r\n      },\r\n      \"type\": \"Required\"\r\n    },\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\": \"AlexW@contoso.onmicrosoft.com\",\r\n        \"name\": \"Alex Wilber\"\r\n      },\r\n      \"type\": \"Required\"\r\n    }\r\n  ],\r\n  \"location\": {\r\n    \"displayName\": \"Conf Room 3; Fourth Coffee; Home Office\",\r\n    \"locationType\": \"Default\"\r\n  },\r\n  \"locations\": [\r\n    {\r\n      \"displayName\": \"Conf Room 3\"\r\n    },\r\n    {\r\n      \"displayName\": \"Fourth Coffee\",\r\n      \"address\": {\r\n        \"street\": \"4567 Main St\",\r\n        \"city\": \"Redmond\",\r\n        \"state\": \"WA\",\r\n        \"countryOrRegion\": \"US\",\r\n        \"postalCode\": \"32008\"\r\n      },\r\n      \"coordinates\": {\r\n        \"latitude\": 47.672,\r\n        \"longitude\": -102.103\r\n      }\r\n    },\r\n    {\r\n      \"displayName\": \"Home Office\"\r\n    }\r\n  ]\r\n}"
+                  "body": "{\r\n  \"subject\": \"Plan summer company picnic\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Let's kick-start this event planning!\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\": \"DanaS@contoso.onmicrosoft.com\",\r\n        \"name\": \"Dana Swope\"\r\n      },\r\n      \"type\": \"Required\"\r\n    },\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\": \"AlexW@contoso.onmicrosoft.com\",\r\n        \"name\": \"Alex Wilber\"\r\n      },\r\n      \"type\": \"Required\"\r\n    }\r\n  ],\r\n  \"location\": {\r\n    \"displayName\": \"Conf Room 3; Fourth Coffee; Home Office\",\r\n    \"locationType\": \"Default\"\r\n  },\r\n  \"locations\": [\r\n    {\r\n      \"displayName\": \"Conf Room 3\"\r\n    },\r\n    {\r\n      \"displayName\": \"Fourth Coffee\",\r\n      \"address\": {\r\n        \"street\": \"4567 Main St\",\r\n        \"city\": \"Redmond\",\r\n        \"state\": \"WA\",\r\n        \"countryOrRegion\": \"US\",\r\n        \"postalCode\": \"32008\"\r\n      },\r\n      \"coordinates\": {\r\n        \"latitude\": 47.672,\r\n        \"longitude\": -102.103\r\n      }\r\n    },\r\n    {\r\n      \"displayName\": \"Home Office\"\r\n    }\r\n  ]\r\n}"
                 },
                 {
                   "id": "1b36044c-36be-42ce-bc18-c53ea938bdc2",
@@ -2300,7 +2300,7 @@
                   "method": "POST",
                   "URI": "https://graph.microsoft.com/beta/me/events",
                   "header": [],
-                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Does noon time work for you?\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"recurrence\": {\r\n    \"pattern\": {\r\n      \"type\": \"weekly\",\r\n      \"interval\": 1,\r\n      \"daysOfWeek\": [ \"Monday\" ]\r\n    },\r\n    \"range\": {\r\n      \"type\": \"endDate\",\r\n      \"startDate\": \"${DateToday}\",\r\n      \"endDate\": \"${Date3MonthLater}\"\r\n    }\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\":\"AdeleV@contoso.onmicrosoft.com\",\r\n        \"name\": \"Adele Vance\"\r\n      },\r\n      \"type\": \"required\"\r\n    }\r\n  ]\r\n}"
+                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Does noon time work for you?\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"recurrence\": {\r\n    \"pattern\": {\r\n      \"type\": \"weekly\",\r\n      \"interval\": 1,\r\n      \"daysOfWeek\": [ \"Monday\" ]\r\n    },\r\n    \"range\": {\r\n      \"type\": \"endDate\",\r\n      \"startDate\": \"${DateToday}\",\r\n      \"endDate\": \"${Date3MonthLater}\"\r\n    }\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\":\"AdeleV@contoso.onmicrosoft.com\",\r\n        \"name\": \"Adele Vance\"\r\n      },\r\n      \"type\": \"required\"\r\n    }\r\n  ]\r\n}"
                 }
               ]
             },
@@ -2315,7 +2315,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
                   "body": ""
@@ -2328,7 +2328,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
                   "body": ""
@@ -2435,7 +2435,7 @@
                   "method": "POST",
                   "URI": "https://graph.microsoft.com/beta/me/events/{id}/snoozeReminder",
                   "header": [],
-                  "body": "{\r\n  \"newReminderTime\": {\r\n    \"dateTime\": \"${DateTime1HourLater}\",\r\n    \"timeZone\": \"Pacific Standard Time\"\r\n  }\r\n}"
+                  "body": "{\r\n  \"newReminderTime\": {\r\n    \"dateTime\": \"${DateTime1HourLater}\",\r\n    \"timeZone\": \"${LocalTimeZone}\"\r\n  }\r\n}"
                 }
               ]
             },
@@ -2489,10 +2489,10 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
-                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Lunch Break\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [],\r\n  \"extensions\": [\r\n    {\r\n      \"@odata.type\": \"microsoft.graph.openTypeExtension\",\r\n      \"extensionName\": \"Com.Contoso.Referral\",\r\n      \"companyName\": \"Wingtip Toys\",\r\n      \"expirationDate\": \"${DateTime1DayLater14}\",\r\n      \"dealValue\": 10000\r\n    }\r\n  ]\r\n}"
+                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Lunch Break\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [],\r\n  \"extensions\": [\r\n    {\r\n      \"@odata.type\": \"microsoft.graph.openTypeExtension\",\r\n      \"extensionName\": \"Com.Contoso.Referral\",\r\n      \"companyName\": \"Wingtip Toys\",\r\n      \"expirationDate\": \"${DateTime1DayLater14}\",\r\n      \"dealValue\": 10000\r\n    }\r\n  ]\r\n}"
                 }
               ]
             },
@@ -2891,7 +2891,7 @@
                   "method": "POST",
                   "URI": "https://graph.microsoft.com/beta/me/calendars/{id}/events",
                   "header": [],
-                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Does late morning work for you?\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\":\"samanthab@contoso.onmicrosoft.com\",\r\n        \"name\": \"Samantha Booth\"\r\n      },\r\n      \"type\": \"required\"\r\n    }\r\n  ]\r\n}"
+                  "body": "{\r\n  \"subject\": \"Let's go for lunch\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Does late morning work for you?\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Harry's Bar\"\r\n  },\r\n  \"attendees\": [\r\n    {\r\n      \"emailAddress\": {\r\n        \"address\":\"samanthab@contoso.onmicrosoft.com\",\r\n        \"name\": \"Samantha Booth\"\r\n      },\r\n      \"type\": \"required\"\r\n    }\r\n  ]\r\n}"
                 }
               ]
             },
@@ -2919,10 +2919,10 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
-                  "body": "{\r\n    \"schedules\": [\"adelev@contoso.onmicrosoft.com\", \"meganb@contoso.onmicrosoft.com\"],\r\n    \"startTime\": {\r\n        \"dateTime\": \"${DateTime1HourLater}\",\r\n        \"timeZone\": \"Pacific Standard Time\"\r\n    },\r\n    \"endTime\": {\r\n        \"dateTime\": \"${DateTime1DayAnd1HourLater}\",\r\n        \"timeZone\": \"Pacific Standard Time\"\r\n    },\r\n    \"availabilityViewInterval\": \"60\"\r\n}"
+                  "body": "{\r\n    \"schedules\": [\"adelev@contoso.onmicrosoft.com\", \"meganb@contoso.onmicrosoft.com\"],\r\n    \"startTime\": {\r\n        \"dateTime\": \"${DateTime1HourLater}\",\r\n        \"timeZone\": \"${LocalTimeZone}\"\r\n    },\r\n    \"endTime\": {\r\n        \"dateTime\": \"${DateTime1DayAnd1HourLater}\",\r\n        \"timeZone\": \"${LocalTimeZone}\"\r\n    },\r\n    \"availabilityViewInterval\": \"60\"\r\n}"
                 }
               ]
             },
@@ -2937,10 +2937,10 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
-                  "body": "{ \r\n  \"attendees\": [ \r\n    { \r\n      \"type\": \"required\",  \r\n      \"emailAddress\": { \r\n        \"name\": \"Alex Wilbur\",\r\n        \"address\": \"alexw@contoso.onmicrosoft.com\" \r\n      } \r\n    }\r\n  ],  \r\n  \"locationConstraint\": { \r\n    \"isRequired\": \"false\",  \r\n    \"suggestLocation\": \"false\",  \r\n    \"locations\": [ \r\n      { \r\n        \"resolveAvailability\": \"false\",\r\n        \"displayName\": \"Conf room Hood\" \r\n      } \r\n    ] \r\n  },  \r\n  \"timeConstraint\": {\r\n    \"activityDomain\":\"work\", \r\n    \"timeslots\": [ \r\n      { \r\n        \"start\": { \r\n          \"dateTime\": \"${DateTime1HourLater}\",  \r\n          \"timeZone\": \"Pacific Standard Time\" \r\n        },  \r\n        \"end\": { \r\n          \"dateTime\": \"${DateTime1DayAnd1HourLater}\",  \r\n          \"timeZone\": \"Pacific Standard Time\" \r\n        } \r\n      } \r\n    ] \r\n  },  \r\n  \"isOrganizerOptional\": \"false\",\r\n  \"meetingDuration\": \"PT1H\",\r\n  \"returnSuggestionReasons\": \"true\",\r\n  \"minimumAttendeePercentage\": \"100\"\r\n}"
+                  "body": "{ \r\n  \"attendees\": [ \r\n    { \r\n      \"type\": \"required\",  \r\n      \"emailAddress\": { \r\n        \"name\": \"Alex Wilbur\",\r\n        \"address\": \"alexw@contoso.onmicrosoft.com\" \r\n      } \r\n    }\r\n  ],  \r\n  \"locationConstraint\": { \r\n    \"isRequired\": \"false\",  \r\n    \"suggestLocation\": \"false\",  \r\n    \"locations\": [ \r\n      { \r\n        \"resolveAvailability\": \"false\",\r\n        \"displayName\": \"Conf room Hood\" \r\n      } \r\n    ] \r\n  },  \r\n  \"timeConstraint\": {\r\n    \"activityDomain\":\"work\", \r\n    \"timeslots\": [ \r\n      { \r\n        \"start\": { \r\n          \"dateTime\": \"${DateTime1HourLater}\",  \r\n          \"timeZone\": \"${LocalTimeZone}\" \r\n        },  \r\n        \"end\": { \r\n          \"dateTime\": \"${DateTime1DayAnd1HourLater}\",  \r\n          \"timeZone\": \"${LocalTimeZone}\" \r\n        } \r\n      } \r\n    ] \r\n  },  \r\n  \"isOrganizerOptional\": \"false\",\r\n  \"meetingDuration\": \"PT1H\",\r\n  \"returnSuggestionReasons\": \"true\",\r\n  \"minimumAttendeePercentage\": \"100\"\r\n}"
                 }
               ]
             }
@@ -2960,7 +2960,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
                   "body": ""
@@ -2978,7 +2978,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\", odata.maxpagesize=2"
+                      "value": "outlook.timezone=\"${LocalTimeZone}\", odata.maxpagesize=2"
                     }
                   ],
                   "body": ""
@@ -3181,7 +3181,7 @@
                       "method": "POST",
                       "URI": "https://graph.microsoft.com/beta/me/events",
                       "header": [],
-                      "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"attendees\": [],\r\n  \"singleValueExtendedProperties\": [\r\n     {\r\n           \"id\":\"String {78e2fc29-fa08-42e7-97a3-4143576d8e96} Name Fun\",\r\n           \"value\":\"Food\"\r\n     }\r\n  ]\r\n}"
+                      "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"attendees\": [],\r\n  \"singleValueExtendedProperties\": [\r\n     {\r\n           \"id\":\"String {78e2fc29-fa08-42e7-97a3-4143576d8e96} Name Fun\",\r\n           \"value\":\"Food\"\r\n     }\r\n  ]\r\n}"
                     },
                     {
                       "id": "c40fcb6c-35a6-4c6d-80a1-75308942e828",
@@ -3228,7 +3228,7 @@
                       "method": "POST",
                       "URI": "https://graph.microsoft.com/beta/me/events",
                       "header": [],
-                      "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"attendees\": [],\r\n  \"multiValueExtendedProperties\": [\r\n     {\r\n           \"id\":\"StringArray {00abdc25-e820-4e9c-a2da-d51470d48968} Name Recreation\",\r\n           \"value\":[\"Food\", \"Hiking\", \"Swimming\"]\r\n     }\r\n  ]\r\n}"
+                      "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"attendees\": [],\r\n  \"multiValueExtendedProperties\": [\r\n     {\r\n           \"id\":\"StringArray {00abdc25-e820-4e9c-a2da-d51470d48968} Name Recreation\",\r\n           \"value\":[\"Food\", \"Hiking\", \"Swimming\"]\r\n     }\r\n  ]\r\n}"
                     },
                     {
                       "id": "1777066d-011e-40a4-bf52-4619f5c2628f",
@@ -5027,7 +5027,7 @@
                   "method": "POST",
                   "URI": "https://graph.microsoft.com/beta/me/messages/{id}/attachments",
                   "header": [],
-                  "body": "{\r\n  \"@odata.type\": \"#microsoft.graph.itemAttachment\",\r\n  \"name\": \"Holiday event\", \r\n  \"item\": {\r\n    \"@odata.type\": \"microsoft.graph.event\",\r\n    \"subject\": \"Discuss gifts for children\",\r\n    \"body\": {\r\n      \"contentType\": \"HTML\",\r\n      \"content\": \"Let's look for funding!\"\r\n    },\r\n    \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n    },\r\n    \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n    }\r\n  }\r\n}"
+                  "body": "{\r\n  \"@odata.type\": \"#microsoft.graph.itemAttachment\",\r\n  \"name\": \"Holiday event\", \r\n  \"item\": {\r\n    \"@odata.type\": \"microsoft.graph.event\",\r\n    \"subject\": \"Discuss gifts for children\",\r\n    \"body\": {\r\n      \"contentType\": \"HTML\",\r\n      \"content\": \"Let's look for funding!\"\r\n    },\r\n    \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n    },\r\n    \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n    }\r\n  }\r\n}"
                 }
               ]
             },
@@ -8881,7 +8881,7 @@
                   "method": "POST",
                   "URI": "https://graph.microsoft.com/beta/groups/{id}/events",
                   "header": [],
-                  "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"Pacific Standard Time\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Conf Room 1\"\r\n  },\r\n  \"attendees\": []\r\n}"
+                  "body": "{\r\n  \"subject\": \"Team meeting\",\r\n  \"body\": {\r\n    \"contentType\": \"HTML\",\r\n    \"content\": \"Monthly team meeting.\"\r\n  },\r\n  \"start\": {\r\n      \"dateTime\": \"${DateTime1DayLater12}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"end\": {\r\n      \"dateTime\": \"${DateTime1DayLater14}\",\r\n      \"timeZone\": \"${LocalTimeZone}\"\r\n  },\r\n  \"location\":{\r\n      \"displayName\":\"Conf Room 1\"\r\n  },\r\n  \"attendees\": []\r\n}"
                 }
               ]
             },
@@ -8896,7 +8896,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
                   "body": ""
@@ -8914,7 +8914,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\""
                     }
                   ],
                   "body": "{\r\n  \"location\":{\r\n      \"displayName\":\"Conf Room 2\"\r\n  }\r\n}"
@@ -8945,7 +8945,7 @@
                   "header": [
                     {
                       "name": "Prefer",
-                      "value": "outlook.timezone=\"Pacific Standard Time\", outlook.body-content-type=\"text\""
+                      "value": "outlook.timezone=\"${LocalTimeZone}\", outlook.body-content-type=\"text\""
                     }
                   ],
                   "body": ""
