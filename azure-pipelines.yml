@@ -1,0 +1,56 @@
+# .NET Desktop
+# Build and run tests for .NET Desktop or Windows classic desktop solutions.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: 'Office365APIEditor/Office365APIEditor.csproj'
+  buildPlatform: 'AnyCPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+    packagesdirectory: '..\packages'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: PowerShell@2
+  name: PowerShellTask
+  env:
+    ArtifactStagingDirectory: $(Build.ArtifactStagingDirectory)
+  inputs:
+    targetType: 'inline'
+    script: |
+      $buildNumber = [Regex]::Match((Get-Content "Office365APIEditor\Properties\AssemblyInfo.cs"), "\[assembly: AssemblyVersion\(.(\d+)\.(\d+)\.(\d+)\.(\d+)").Value.Split('"')[1];
+      Write-Host $buildNumber;
+      $archivePath = $env:ArtifactStagingDirectory + "\Office365APIEditor_" + $buildNumber + ".zip";
+      Write-Host $archivePath;
+      Compress-Archive -Path Office365APIEditor\bin\Release\* -DestinationPath $archivePath -Update;
+      Write-Host ('##vso[task.setvariable variable=archivePath;isOutput=true] ' + $archivePath);
+
+- task: AzureFileCopy@4
+  inputs:
+    SourcePath: '$(Build.ArtifactStagingDirectory)/*.zip'
+    azureSubscription: 'Microsoft Azure 社内従量課金プラン(bf971e8f-dee6-4a35-851a-eb818e718a8a)'
+    Destination: 'AzureBlob'
+    storage: 'office365apieditor'
+    ContainerName: 'build'
