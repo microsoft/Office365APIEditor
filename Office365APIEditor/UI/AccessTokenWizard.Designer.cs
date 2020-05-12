@@ -225,13 +225,14 @@
             // 
             // radioButton_Page00_AppRegistrationPortal
             // 
+            this.radioButton_Page00_AppRegistrationPortal.AutoSize = true;
             this.radioButton_Page00_AppRegistrationPortal.Location = new System.Drawing.Point(18, 83);
             this.radioButton_Page00_AppRegistrationPortal.Name = "radioButton_Page00_AppRegistrationPortal";
-            this.radioButton_Page00_AppRegistrationPortal.Size = new System.Drawing.Size(358, 43);
+            this.radioButton_Page00_AppRegistrationPortal.Size = new System.Drawing.Size(338, 43);
             this.radioButton_Page00_AppRegistrationPortal.TabIndex = 2;
             this.radioButton_Page00_AppRegistrationPortal.TabStop = true;
-            this.radioButton_Page00_AppRegistrationPortal.Text = "v2.0 Endpoint\r\nIf you registered your application in App Registration Portal or t" +
-    "he Azure Active Directory using \'App registrations\', select this option.";
+            this.radioButton_Page00_AppRegistrationPortal.Text = "v2.0 Endpoint\r\nSelect this option if your application is registered with Azure Ac" +
+    "tive \r\nDirectory and you want to dynamically acquire an access token.";
             this.radioButton_Page00_AppRegistrationPortal.UseVisualStyleBackColor = true;
             // 
             // radioButton_Page00_MicrosoftAzurePortal
@@ -240,11 +241,11 @@
             this.radioButton_Page00_MicrosoftAzurePortal.Checked = true;
             this.radioButton_Page00_MicrosoftAzurePortal.Location = new System.Drawing.Point(18, 34);
             this.radioButton_Page00_MicrosoftAzurePortal.Name = "radioButton_Page00_MicrosoftAzurePortal";
-            this.radioButton_Page00_MicrosoftAzurePortal.Size = new System.Drawing.Size(345, 43);
+            this.radioButton_Page00_MicrosoftAzurePortal.Size = new System.Drawing.Size(338, 43);
             this.radioButton_Page00_MicrosoftAzurePortal.TabIndex = 1;
             this.radioButton_Page00_MicrosoftAzurePortal.TabStop = true;
-            this.radioButton_Page00_MicrosoftAzurePortal.Text = "v1.0 Endpoint\r\nIf you registered your application in the Azure Active Directory u" +
-    "sing \r\n\'App registrations (Legacy)\', select this option.";
+            this.radioButton_Page00_MicrosoftAzurePortal.Text = "v1.0 Endpoint\r\nSelect this option if your application is registered with Azure Ac" +
+    "tive \r\nDirectory and you want to use the configured permissions.";
             this.radioButton_Page00_MicrosoftAzurePortal.UseVisualStyleBackColor = true;
             // 
             // label1
@@ -259,7 +260,7 @@
             // button_Back
             // 
             this.button_Back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Back.Location = new System.Drawing.Point(1404, 10);
+            this.button_Back.Location = new System.Drawing.Point(1116, 10);
             this.button_Back.Name = "button_Back";
             this.button_Back.Size = new System.Drawing.Size(75, 23);
             this.button_Back.TabIndex = 100;
@@ -270,7 +271,7 @@
             // button_Next
             // 
             this.button_Next.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Next.Location = new System.Drawing.Point(1485, 10);
+            this.button_Next.Location = new System.Drawing.Point(1197, 10);
             this.button_Next.Name = "button_Next";
             this.button_Next.Size = new System.Drawing.Size(75, 23);
             this.button_Next.TabIndex = 101;
@@ -282,7 +283,7 @@
             // 
             this.button_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button_Cancel.Location = new System.Drawing.Point(1567, 10);
+            this.button_Cancel.Location = new System.Drawing.Point(1279, 10);
             this.button_Cancel.Name = "button_Cancel";
             this.button_Cancel.Size = new System.Drawing.Size(75, 23);
             this.button_Cancel.TabIndex = 102;
@@ -320,10 +321,10 @@
             this.radioButton_Page01_V1AppOnlyByKey.AutoSize = true;
             this.radioButton_Page01_V1AppOnlyByKey.Location = new System.Drawing.Point(18, 106);
             this.radioButton_Page01_V1AppOnlyByKey.Name = "radioButton_Page01_V1AppOnlyByKey";
-            this.radioButton_Page01_V1AppOnlyByKey.Size = new System.Drawing.Size(239, 17);
+            this.radioButton_Page01_V1AppOnlyByKey.Size = new System.Drawing.Size(251, 17);
             this.radioButton_Page01_V1AppOnlyByKey.TabIndex = 4;
             this.radioButton_Page01_V1AppOnlyByKey.TabStop = true;
-            this.radioButton_Page01_V1AppOnlyByKey.Text = "Web app / API (Use App Only Token by key)";
+            this.radioButton_Page01_V1AppOnlyByKey.Text = "Web app (Use App Only Token by client secret)";
             this.radioButton_Page01_V1AppOnlyByKey.UseVisualStyleBackColor = true;
             // 
             // radioButton_Page01_V1AppOnlyByCert
@@ -331,10 +332,10 @@
             this.radioButton_Page01_V1AppOnlyByCert.AutoSize = true;
             this.radioButton_Page01_V1AppOnlyByCert.Location = new System.Drawing.Point(18, 83);
             this.radioButton_Page01_V1AppOnlyByCert.Name = "radioButton_Page01_V1AppOnlyByCert";
-            this.radioButton_Page01_V1AppOnlyByCert.Size = new System.Drawing.Size(268, 17);
+            this.radioButton_Page01_V1AppOnlyByCert.Size = new System.Drawing.Size(240, 17);
             this.radioButton_Page01_V1AppOnlyByCert.TabIndex = 3;
             this.radioButton_Page01_V1AppOnlyByCert.TabStop = true;
-            this.radioButton_Page01_V1AppOnlyByCert.Text = "Web app / API (Use App Only Token by certificate)";
+            this.radioButton_Page01_V1AppOnlyByCert.Text = "Web app (Use App Only Token by certificate)";
             this.radioButton_Page01_V1AppOnlyByCert.UseVisualStyleBackColor = true;
             // 
             // radioButton_Page01_V1Native
@@ -342,10 +343,10 @@
             this.radioButton_Page01_V1Native.AutoSize = true;
             this.radioButton_Page01_V1Native.Location = new System.Drawing.Point(18, 60);
             this.radioButton_Page01_V1Native.Name = "radioButton_Page01_V1Native";
-            this.radioButton_Page01_V1Native.Size = new System.Drawing.Size(77, 17);
+            this.radioButton_Page01_V1Native.Size = new System.Drawing.Size(226, 17);
             this.radioButton_Page01_V1Native.TabIndex = 2;
             this.radioButton_Page01_V1Native.TabStop = true;
-            this.radioButton_Page01_V1Native.Text = "Native app";
+            this.radioButton_Page01_V1Native.Text = "Public client/native (mobile && desktop) app";
             this.radioButton_Page01_V1Native.UseVisualStyleBackColor = true;
             // 
             // radioButton_Page01_V1Web
@@ -354,10 +355,10 @@
             this.radioButton_Page01_V1Web.Checked = true;
             this.radioButton_Page01_V1Web.Location = new System.Drawing.Point(18, 37);
             this.radioButton_Page01_V1Web.Name = "radioButton_Page01_V1Web";
-            this.radioButton_Page01_V1Web.Size = new System.Drawing.Size(97, 17);
+            this.radioButton_Page01_V1Web.Size = new System.Drawing.Size(69, 17);
             this.radioButton_Page01_V1Web.TabIndex = 1;
             this.radioButton_Page01_V1Web.TabStop = true;
-            this.radioButton_Page01_V1Web.Text = "Web app / API";
+            this.radioButton_Page01_V1Web.Text = "Web app";
             this.radioButton_Page01_V1Web.UseVisualStyleBackColor = true;
             // 
             // label2
@@ -436,7 +437,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(93, 13);
             this.label10.TabIndex = 41;
-            this.label10.Text = "Reply URL";
+            this.label10.Text = "Redirect URI";
             this.label10.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label5
@@ -445,7 +446,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 13);
             this.label5.TabIndex = 43;
-            this.label5.Text = "Key";
+            this.label5.Text = "Client secret";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label6
@@ -517,10 +518,10 @@
             this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.AutoSize = true;
             this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.Location = new System.Drawing.Point(18, 83);
             this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.Name = "radioButton_Page02_V2WebAppOnlyForMicrosoftGraph";
-            this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.Size = new System.Drawing.Size(311, 17);
+            this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.Size = new System.Drawing.Size(344, 17);
             this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.TabIndex = 5;
             this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.TabStop = true;
-            this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.Text = "Web (Use App Only Token by password for Microsoft Graph)";
+            this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.Text = "Web app (Use App Only Token by client secret for Microsoft Graph)";
             this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph.UseVisualStyleBackColor = true;
             // 
             // radioButton_Page02_V2Mobile
@@ -528,9 +529,9 @@
             this.radioButton_Page02_V2Mobile.AutoSize = true;
             this.radioButton_Page02_V2Mobile.Location = new System.Drawing.Point(18, 60);
             this.radioButton_Page02_V2Mobile.Name = "radioButton_Page02_V2Mobile";
-            this.radioButton_Page02_V2Mobile.Size = new System.Drawing.Size(171, 17);
+            this.radioButton_Page02_V2Mobile.Size = new System.Drawing.Size(192, 17);
             this.radioButton_Page02_V2Mobile.TabIndex = 2;
-            this.radioButton_Page02_V2Mobile.Text = "Public client (mobile && desktop)";
+            this.radioButton_Page02_V2Mobile.Text = "Public client (mobile && desktop) app";
             this.radioButton_Page02_V2Mobile.UseVisualStyleBackColor = true;
             // 
             // radioButton_Page02_V2Web
@@ -539,10 +540,10 @@
             this.radioButton_Page02_V2Web.Checked = true;
             this.radioButton_Page02_V2Web.Location = new System.Drawing.Point(18, 37);
             this.radioButton_Page02_V2Web.Name = "radioButton_Page02_V2Web";
-            this.radioButton_Page02_V2Web.Size = new System.Drawing.Size(48, 17);
+            this.radioButton_Page02_V2Web.Size = new System.Drawing.Size(69, 17);
             this.radioButton_Page02_V2Web.TabIndex = 1;
             this.radioButton_Page02_V2Web.TabStop = true;
-            this.radioButton_Page02_V2Web.Text = "Web";
+            this.radioButton_Page02_V2Web.Text = "Web app";
             this.radioButton_Page02_V2Web.UseVisualStyleBackColor = true;
             // 
             // label7
@@ -945,7 +946,7 @@
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(93, 13);
             this.label30.TabIndex = 37;
-            this.label30.Text = "Redirect URL";
+            this.label30.Text = "Redirect URI";
             this.label30.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label31
@@ -1249,7 +1250,7 @@
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(93, 13);
             this.label27.TabIndex = 41;
-            this.label27.Text = "Reply URL";
+            this.label27.Text = "Redirect URI";
             this.label27.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label37
@@ -1563,9 +1564,9 @@
             this.panel1.Controls.Add(this.button_Back);
             this.panel1.Controls.Add(this.button_Next);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 983);
+            this.panel1.Location = new System.Drawing.Point(0, 847);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1654, 40);
+            this.panel1.Size = new System.Drawing.Size(1366, 40);
             this.panel1.TabIndex = 106;
             // 
             // panel_Page14
@@ -1670,7 +1671,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_Cancel;
-            this.ClientSize = new System.Drawing.Size(1654, 1023);
+            this.ClientSize = new System.Drawing.Size(1366, 887);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel_Page13);
             this.Controls.Add(this.panel_Page12);

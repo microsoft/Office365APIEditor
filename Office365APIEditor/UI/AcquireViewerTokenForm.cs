@@ -18,6 +18,13 @@ namespace Office365APIEditor
             InitializeComponent();
         }
 
+        private void AcquireViewerTokenForm_Load(object sender, EventArgs e)
+        {
+            Icon = Properties.Resources.DefaultIcon;
+
+            button_UseBuiltInApp.Focus();
+        }
+
         public DialogResult ShowDialog(out IPublicClientApplication pca, out AuthenticationResult ar)
         {
             DialogResult result = ShowDialog();
@@ -28,25 +35,38 @@ namespace Office365APIEditor
             return result;
         }
 
-        private async void button_AcquireAccessToken_Click(object sender, EventArgs e)
+        private async void Button_UseMyApp_ClickAsync(object sender, EventArgs e)
         {
-            if (textBox_ClientID.Text == "")
+            if (!ValidateCustomClientID())
             {
-                MessageBox.Show("Enter the Application ID.", "Office365APIEditor");
                 return;
             }
 
             await AcquireAccessTokenAsync(textBox_ClientID.Text);
         }
 
-        private void AcquireViewerTokenForm_Load(object sender, EventArgs e)
+        private async void TextBox_ClientID_KeyDownAsync(object sender, KeyEventArgs e)
         {
-            Icon = Properties.Resources.DefaultIcon;
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (!ValidateCustomClientID())
+                {
+                    return;
+                }
+
+                await AcquireAccessTokenAsync(textBox_ClientID.Text);
+            }
         }
 
-        private void linkLabel_Portal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private bool ValidateCustomClientID()
         {
-            System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
+            if (textBox_ClientID.Text == "")
+            {
+                MessageBox.Show("Enter the Application ID.", "Office365APIEditor");
+                return false;
+            }
+
+            return true;
         }
 
         private async void button_UseBuiltInApp_ClickAsync(object sender, EventArgs e)
@@ -61,7 +81,7 @@ namespace Office365APIEditor
 
             string[] scopes = Util.MailboxViewerScopes();
 
-            _pca = PublicClientApplicationBuilder.Create(ClientId).Build();
+            _pca = PublicClientApplicationBuilder.Create(ClientId).WithDefaultRedirectUri().Build();
 
             StringBuilder stringBuilder = new StringBuilder();
 

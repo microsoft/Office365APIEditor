@@ -118,9 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label3.Text" xml:space="preserve">
-    <value>Enter the application ID of your application registered in Application Registration Portal  or Azure Active Directory.
+    <value>To start a new session, click the [Sign-in] button.
+
+If you want to use your own application which registered in Azure Active Directory, 
+enter the application ID and click [Use my application] button.
 Your application must be a public client application and support all types of accounts.
-If you want to use the built-in application ID, click [Use the built-in application].</value>
+The redirect URI must be https://login.microsoftonline.com/common/oauth2/nativeclient.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
