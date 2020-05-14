@@ -1,2 +1,4 @@
-﻿jacobslusser.ScintillaNET
-https://github.com/jacobslusser/ScintillaNET
+﻿ScintillaNET
+Copyright (c) 2017 Jacob Slusser
+Licensed under the MIT license.
+https://github.com/jacobslusser/ScintillaNET/blob/master/LICENSE

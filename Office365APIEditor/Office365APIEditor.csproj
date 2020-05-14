@@ -40,6 +40,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -113,12 +114,6 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
-    </Reference>
-    <Reference Include="ScintillaNET_FindReplaceDialog, Version=1.0.3.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ScintillaNET_FindReplaceDialog.1.0.3.3\lib\net40-client\ScintillaNET_FindReplaceDialog.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
@@ -147,6 +142,123 @@
     <Compile Include="AccessTokenUtil\V1WebAppUtil.cs" />
     <Compile Include="AccessTokenUtil\V2MobileAppUtil.cs" />
     <Compile Include="AccessTokenUtil\V2WebAppUtil.cs" />
+    <Compile Include="External\ScintillaNET FindReplaceDialog\CharacterRange.cs" />
+    <Compile Include="External\ScintillaNET FindReplaceDialog\FindAllResults\FindAllResultsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="External\ScintillaNET FindReplaceDialog\FindAllResults\FindAllResultsPanel.Designer.cs">
+      <DependentUpon>FindAllResultsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="External\ScintillaNET FindReplaceDialog\FindReplace\FindOption.cs" />
+    <Compile Include="External\ScintillaNET FindReplaceDialog\FindReplace\FindReplace.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="External\ScintillaNET FindReplaceDialog\FindReplace\FindReplaceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="External\ScintillaNET FindReplaceDialog\FindReplace\FindReplaceDialog.Designer.cs">
+      <DependentUpon>FindReplaceDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="External\ScintillaNET FindReplaceDialog\FindReplace\IncrementalSearcher.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="External\ScintillaNET FindReplaceDialog\FindReplace\IncrementalSearcher.Designer.cs">
+      <DependentUpon>IncrementalSearcher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="External\ScintillaNET FindReplaceDialog\FindReplace\ToolStripIncrementalSearcher.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="External\ScintillaNET FindReplaceDialog\GoTo\GoTo.cs" />
+    <Compile Include="External\ScintillaNET FindReplaceDialog\GoTo\GoToDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="External\ScintillaNET FindReplaceDialog\GoTo\GoToDialog.Designer.cs">
+      <DependentUpon>GoToDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="External\ScintillaNET\Annotation.cs" />
+    <Compile Include="External\ScintillaNET\AutoCSelectionEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\AutomaticFold.cs" />
+    <Compile Include="External\ScintillaNET\BeforeModificationEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\CaretStyle.cs" />
+    <Compile Include="External\ScintillaNET\ChangeAnnotationEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\CharAddedEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\Command.cs" />
+    <Compile Include="External\ScintillaNET\CopyFormat.cs" />
+    <Compile Include="External\ScintillaNET\Document.cs" />
+    <Compile Include="External\ScintillaNET\DoubleClickEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\DwellEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\EdgeMode.cs" />
+    <Compile Include="External\ScintillaNET\Eol.cs" />
+    <Compile Include="External\ScintillaNET\FlagsEnumConverter.cs" />
+    <Compile Include="External\ScintillaNET\FoldAction.cs" />
+    <Compile Include="External\ScintillaNET\FoldDisplayText.cs" />
+    <Compile Include="External\ScintillaNET\FoldFlags.cs" />
+    <Compile Include="External\ScintillaNET\FoldLevelFlags.cs" />
+    <Compile Include="External\ScintillaNET\FontQuality.cs" />
+    <Compile Include="External\ScintillaNET\GapBuffer.cs" />
+    <Compile Include="External\ScintillaNET\Helpers.cs" />
+    <Compile Include="External\ScintillaNET\HotspotClickEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\IdleStyling.cs" />
+    <Compile Include="External\ScintillaNET\ILoader.cs" />
+    <Compile Include="External\ScintillaNET\IndentView.cs" />
+    <Compile Include="External\ScintillaNET\Indicator.cs" />
+    <Compile Include="External\ScintillaNET\IndicatorClickEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\IndicatorCollection.cs" />
+    <Compile Include="External\ScintillaNET\IndicatorFlags.cs" />
+    <Compile Include="External\ScintillaNET\IndicatorReleaseEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\IndicatorStyle.cs" />
+    <Compile Include="External\ScintillaNET\InsertCheckEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\Lexer.cs" />
+    <Compile Include="External\ScintillaNET\Line.cs" />
+    <Compile Include="External\ScintillaNET\LineCollection.cs" />
+    <Compile Include="External\ScintillaNET\LineEndType.cs" />
+    <Compile Include="External\ScintillaNET\ListCompletionMethod.cs" />
+    <Compile Include="External\ScintillaNET\Loader.cs" />
+    <Compile Include="External\ScintillaNET\Margin.cs" />
+    <Compile Include="External\ScintillaNET\MarginClickEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\MarginCollection.cs" />
+    <Compile Include="External\ScintillaNET\MarginCursor.cs" />
+    <Compile Include="External\ScintillaNET\MarginOptions.cs" />
+    <Compile Include="External\ScintillaNET\MarginType.cs" />
+    <Compile Include="External\ScintillaNET\Marker.cs" />
+    <Compile Include="External\ScintillaNET\MarkerCollection.cs" />
+    <Compile Include="External\ScintillaNET\MarkerHandle.cs" />
+    <Compile Include="External\ScintillaNET\MarkerSymbol.cs" />
+    <Compile Include="External\ScintillaNET\ModificationEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\ModificationSource.cs" />
+    <Compile Include="External\ScintillaNET\MultiPaste.cs" />
+    <Compile Include="External\ScintillaNET\NativeMemoryStream.cs" />
+    <Compile Include="External\ScintillaNET\NativeMethods.cs" />
+    <Compile Include="External\ScintillaNET\NeedShownEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\Order.cs" />
+    <Compile Include="External\ScintillaNET\Phases.cs" />
+    <Compile Include="External\ScintillaNET\PopupMode.cs" />
+    <Compile Include="External\ScintillaNET\ProjectionEqualityComparer.cs" />
+    <Compile Include="External\ScintillaNET\PropertyType.cs" />
+    <Compile Include="External\ScintillaNET\Scintilla.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="External\ScintillaNET\ScintillaReader.cs" />
+    <Compile Include="External\ScintillaNET\SCNotificationEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\SearchFlags.cs" />
+    <Compile Include="External\ScintillaNET\Selection.cs" />
+    <Compile Include="External\ScintillaNET\SelectionCollection.cs" />
+    <Compile Include="External\ScintillaNET\Status.cs" />
+    <Compile Include="External\ScintillaNET\Style.cs" />
+    <Compile Include="External\ScintillaNET\StyleCase.cs" />
+    <Compile Include="External\ScintillaNET\StyleCollection.cs" />
+    <Compile Include="External\ScintillaNET\StyleNeededEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\TabDrawMode.cs" />
+    <Compile Include="External\ScintillaNET\Technology.cs" />
+    <Compile Include="External\ScintillaNET\Tuple.cs" />
+    <Compile Include="External\ScintillaNET\UpdateChange.cs" />
+    <Compile Include="External\ScintillaNET\UpdateUIEventArgs.cs" />
+    <Compile Include="External\ScintillaNET\VirtualSpace.cs" />
+    <Compile Include="External\ScintillaNET\WhitespaceMode.cs" />
+    <Compile Include="External\ScintillaNET\WrapIndentMode.cs" />
+    <Compile Include="External\ScintillaNET\WrapMode.cs" />
+    <Compile Include="External\ScintillaNET\WrapVisualFlagLocation.cs" />
+    <Compile Include="External\ScintillaNET\WrapVisualFlags.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="UI\AccessTokenWizard.cs">
       <SubType>Form</SubType>
@@ -296,6 +408,18 @@
     <Compile Include="ViewerHelper\Partial\MailRelated.cs" />
     <Compile Include="ViewerHelper\Partial\TaskRelated.cs" />
     <Compile Include="ViewerHelper\ViewerRequestHelper.cs" />
+    <EmbeddedResource Include="External\ScintillaNET FindReplaceDialog\FindAllResults\FindAllResultsPanel.resx">
+      <DependentUpon>FindAllResultsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="External\ScintillaNET FindReplaceDialog\FindReplace\FindReplaceDialog.resx">
+      <DependentUpon>FindReplaceDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="External\ScintillaNET FindReplaceDialog\FindReplace\IncrementalSearcher.resx">
+      <DependentUpon>IncrementalSearcher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="External\ScintillaNET FindReplaceDialog\GoTo\GoToDialog.resx">
+      <DependentUpon>GoToDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\AccessTokenWizard.resx">
       <DependentUpon>AccessTokenWizard.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -364,6 +488,18 @@
     <EmbeddedResource Include="UI\VersionInformationForm.resx">
       <DependentUpon>VersionInformationForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="External\ScintillaNET\x64\SciLexer.dll.gz" />
+    <Content Include="External\ScintillaNET FindReplaceDialog\Resources\Clock.ico" />
+    <Content Include="External\ScintillaNET FindReplaceDialog\Resources\Clock.png" />
+    <Content Include="External\ScintillaNET FindReplaceDialog\Resources\DeleteHS.png" />
+    <Content Include="External\ScintillaNET FindReplaceDialog\Resources\GoToNextMessage.png" />
+    <Content Include="External\ScintillaNET FindReplaceDialog\Resources\GoToPreviousMessage.png" />
+    <Content Include="External\ScintillaNET FindReplaceDialog\Resources\LineColorHS.png" />
+    <Content Include="External\ScintillaNET\x64\SciLexer.exp" />
+    <Content Include="External\ScintillaNET\x64\SciLexer.lib" />
+    <EmbeddedResource Include="External\ScintillaNET\x86\SciLexer.dll.gz" />
+    <Content Include="External\ScintillaNET\x86\SciLexer.exp" />
+    <Content Include="External\ScintillaNET\x86\SciLexer.lib" />
     <None Include="Office365APIEditor_1_TemporaryKey.pfx" />
     <None Include="Office365APIEditor_TemporaryKey.pfx" />
     <None Include="packages.config">
@@ -380,15 +516,17 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="icon6.ico" />
+    <Content Include="External\ScintillaNET\x64\License.txt" />
+    <Content Include="External\ScintillaNET\x64\SciLexer.dll" />
+    <Content Include="External\ScintillaNET\x64\SciLexer.pdb" />
+    <Content Include="External\ScintillaNET\x64\version.txt" />
+    <Content Include="External\ScintillaNET\x86\License.txt" />
+    <Content Include="External\ScintillaNET\x86\SciLexer.dll" />
+    <Content Include="External\ScintillaNET\x86\SciLexer.pdb" />
+    <Content Include="External\ScintillaNET\x86\version.txt" />
     <Content Include="Icon7.ico" />
     <Content Include="Licenses\ScintillaNET_FindReplaceDialog.txt" />
-    <Content Include="Resources\Clock.ico" />
-    <Content Include="Resources\Clock.png" />
     <None Include="Resources\DefaultIcon.ico" />
-    <Content Include="Resources\DownButton.png" />
-    <Content Include="Resources\Highlighter.png" />
-    <Content Include="Resources\UpButton.png" />
-    <Content Include="Resources\XToCloseButton.png" />
     <Content Include="SampleRequest\MicrosoftGraphV1.0.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -433,6 +571,7 @@
   <ItemGroup>
     <Analyzer Include="..\packages\AsyncUsageAnalyzers.1.0.0-alpha003\analyzers\dotnet\AsyncUsageAnalyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

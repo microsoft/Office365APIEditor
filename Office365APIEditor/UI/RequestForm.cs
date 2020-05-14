@@ -22,7 +22,7 @@ namespace Office365APIEditor
     public partial class RequestForm : Form
     {
         // Declare variable for FindReplace dialog
-        FindReplace findReplaceDialog;
+        FindReplace findReplaceDialog_ResponseBody;
 
         ClientInformation clientInfo;
 
@@ -136,6 +136,41 @@ namespace Office365APIEditor
             InitSyntaxColoring(scintilla_RequestBody);
             scintilla_RequestBody.ReadOnly = false;
 
+            // Folding
+            scintilla_RequestBody.Lexer = Lexer.Json;
+
+            // Instruct the lexer to calculate folding
+            scintilla_RequestBody.SetProperty("fold", "1");
+            scintilla_RequestBody.SetProperty("fold.compact", "1");
+
+            // Configure a margin to display folding symbols
+            scintilla_RequestBody.Margins[2].Type = MarginType.Symbol;
+            scintilla_RequestBody.Margins[2].Mask = Marker.MaskFolders;
+            scintilla_RequestBody.Margins[2].Sensitive = true;
+            scintilla_RequestBody.Margins[2].Width = 20;
+
+            // Set colors for all folding markers
+            for (int i = 25; i <= 31; i++)
+            {
+                scintilla_RequestBody.Markers[i].SetForeColor(SystemColors.ControlLightLight);
+                scintilla_RequestBody.Markers[i].SetBackColor(SystemColors.ControlDark);
+            }
+
+            // Configure folding markers with respective symbols
+            scintilla_RequestBody.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
+            scintilla_RequestBody.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.BoxMinus;
+            scintilla_RequestBody.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.BoxPlusConnected;
+            scintilla_RequestBody.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
+            scintilla_RequestBody.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.BoxMinusConnected;
+            scintilla_RequestBody.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
+            scintilla_RequestBody.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
+
+            // Enable automatic folding
+            scintilla_RequestBody.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
+
+            // Tie in Scintilla event
+            scintilla_RequestBody.KeyDown += Scintilla_RequestBody_KeyDown;
+
             // Response Body
             scintilla_ResponseBody = new Scintilla();
             tabPage2.Controls.Add(scintilla_ResponseBody);
@@ -181,13 +216,13 @@ namespace Office365APIEditor
             scintilla_ResponseBody.HotspotClick += new EventHandler<HotspotClickEventArgs>(this.scintilla_HotspotClick);
 
             // Create instance of FindReplace with reference to a ScintillaNET control.
-            findReplaceDialog = new FindReplace(scintilla_ResponseBody); // For WinForms
+            findReplaceDialog_ResponseBody = new FindReplace(scintilla_ResponseBody); // For WinForms
 
             // Tie in FindReplace event
-            findReplaceDialog.KeyPressed += findReplaceDialog_KeyPressed;
+            findReplaceDialog_ResponseBody.KeyPressed += FindReplaceDialog_ResponseBody_KeyPressed;
 
             // Tie in Scintilla event
-            scintilla_ResponseBody.KeyDown += scintilla_KeyDown;
+            scintilla_ResponseBody.KeyDown += Scintilla_ResponseBody_KeyDown;
 
             // Load sample request
 
@@ -1907,31 +1942,33 @@ namespace Office365APIEditor
             }
         }
 
-        private void scintilla_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        private void Scintilla_ResponseBody_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.F)
             {
-                findReplaceDialog.ShowFind();
+                findReplaceDialog_ResponseBody.ShowFind();
                 e.SuppressKeyPress = true;
             }
             else if (e.Shift && e.KeyCode == Keys.F3)
             {
-                findReplaceDialog.Window.FindPrevious();
+                findReplaceDialog_ResponseBody.Window.FindPrevious();
                 e.SuppressKeyPress = true;
             }
             else if (e.KeyCode == Keys.F3)
             {
-                findReplaceDialog.Window.FindNext();
+                findReplaceDialog_ResponseBody.Window.FindNext();
                 e.SuppressKeyPress = true;
             }
             else if (e.Control && e.KeyCode == Keys.H)
             {
-                findReplaceDialog.ShowReplace();
+                // Response text should not be replaced.
+
+                //findReplaceDialog.ShowReplace();
                 e.SuppressKeyPress = true;
             }
             else if (e.Control && e.KeyCode == Keys.I)
             {
-                findReplaceDialog.ShowIncrementalSearch();
+                findReplaceDialog_ResponseBody.ShowIncrementalSearch();
                 e.SuppressKeyPress = true;
             }
             else if (e.Control && e.KeyCode == Keys.G)
@@ -1942,9 +1979,40 @@ namespace Office365APIEditor
             }
         }
 
-        private void findReplaceDialog_KeyPressed(object sender, System.Windows.Forms.KeyEventArgs e)
+        private void FindReplaceDialog_ResponseBody_KeyPressed(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            scintilla_KeyDown(sender, e);
+            Scintilla_ResponseBody_KeyDown(sender, e);
+        }
+
+        private void Scintilla_RequestBody_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            // scintilla_RequestBody does not have FindReplace dialog.
+            // We need to suppress key press.
+
+            if (e.Control && e.KeyCode == Keys.F)
+            {
+                e.SuppressKeyPress = true;
+            }
+            else if (e.Shift && e.KeyCode == Keys.F3)
+            {
+                e.SuppressKeyPress = true;
+            }
+            else if (e.KeyCode == Keys.F3)
+            {
+                e.SuppressKeyPress = true;
+            }
+            else if (e.Control && e.KeyCode == Keys.H)
+            {
+                e.SuppressKeyPress = true;
+            }
+            else if (e.Control && e.KeyCode == Keys.I)
+            {
+                e.SuppressKeyPress = true;
+            }
+            else if (e.Control && e.KeyCode == Keys.G)
+            {
+                e.SuppressKeyPress = true;
+            }
         }
     }
 }
