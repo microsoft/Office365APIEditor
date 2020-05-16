@@ -171,6 +171,9 @@ namespace Office365APIEditor
             // Write startup log.
             Util.WriteSystemLog("Office365APIEditor startup log", startupLog.ToString());
 
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
             // Create the MyApplicationContext, that derives from ApplicationContext,
             // that manages when the application should exit.
 

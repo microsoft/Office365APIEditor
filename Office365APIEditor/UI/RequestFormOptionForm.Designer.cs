@@ -62,7 +62,7 @@
             this.button_LogFolderPathBrowse.Location = new System.Drawing.Point(327, 19);
             this.button_LogFolderPathBrowse.Name = "button_LogFolderPathBrowse";
             this.button_LogFolderPathBrowse.Size = new System.Drawing.Size(75, 23);
-            this.button_LogFolderPathBrowse.TabIndex = 16;
+            this.button_LogFolderPathBrowse.TabIndex = 1;
             this.button_LogFolderPathBrowse.Text = "Browse";
             this.button_LogFolderPathBrowse.UseVisualStyleBackColor = true;
             this.button_LogFolderPathBrowse.Click += new System.EventHandler(this.button_LogFolderPathBrowse_Click);
@@ -82,7 +82,7 @@
             this.button_Cancel.Location = new System.Drawing.Point(346, 288);
             this.button_Cancel.Name = "button_Cancel";
             this.button_Cancel.Size = new System.Drawing.Size(75, 23);
-            this.button_Cancel.TabIndex = 20;
+            this.button_Cancel.TabIndex = 99;
             this.button_Cancel.Text = "Cancel";
             this.button_Cancel.UseVisualStyleBackColor = true;
             // 
@@ -91,7 +91,7 @@
             this.button_OK.Location = new System.Drawing.Point(265, 288);
             this.button_OK.Name = "button_OK";
             this.button_OK.Size = new System.Drawing.Size(75, 23);
-            this.button_OK.TabIndex = 19;
+            this.button_OK.TabIndex = 98;
             this.button_OK.Text = "OK";
             this.button_OK.UseVisualStyleBackColor = true;
             this.button_OK.Click += new System.EventHandler(this.button_OK_Click);
@@ -101,8 +101,8 @@
             this.radioButton_DateTime.AutoSize = true;
             this.radioButton_DateTime.Location = new System.Drawing.Point(6, 42);
             this.radioButton_DateTime.Name = "radioButton_DateTime";
-            this.radioButton_DateTime.Size = new System.Drawing.Size(71, 17);
-            this.radioButton_DateTime.TabIndex = 18;
+            this.radioButton_DateTime.Size = new System.Drawing.Size(78, 20);
+            this.radioButton_DateTime.TabIndex = 4;
             this.radioButton_DateTime.TabStop = true;
             this.radioButton_DateTime.Text = "DateTime";
             this.radioButton_DateTime.UseVisualStyleBackColor = true;
@@ -112,8 +112,8 @@
             this.radioButton_Static.AutoSize = true;
             this.radioButton_Static.Location = new System.Drawing.Point(6, 19);
             this.radioButton_Static.Name = "radioButton_Static";
-            this.radioButton_Static.Size = new System.Drawing.Size(52, 17);
-            this.radioButton_Static.TabIndex = 17;
+            this.radioButton_Static.Size = new System.Drawing.Size(59, 20);
+            this.radioButton_Static.TabIndex = 3;
             this.radioButton_Static.TabStop = true;
             this.radioButton_Static.Text = "Static";
             this.radioButton_Static.UseVisualStyleBackColor = true;
@@ -123,7 +123,7 @@
             this.textBox_LogFolderPath.Location = new System.Drawing.Point(9, 21);
             this.textBox_LogFolderPath.Name = "textBox_LogFolderPath";
             this.textBox_LogFolderPath.Size = new System.Drawing.Size(312, 20);
-            this.textBox_LogFolderPath.TabIndex = 14;
+            this.textBox_LogFolderPath.TabIndex = 0;
             // 
             // groupBox1
             // 
@@ -132,7 +132,7 @@
             this.groupBox1.Location = new System.Drawing.Point(9, 48);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(393, 68);
-            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Log file name format";
             // 
@@ -141,8 +141,8 @@
             this.checkBox_AllowAutoRedirect.AutoSize = true;
             this.checkBox_AllowAutoRedirect.Location = new System.Drawing.Point(9, 122);
             this.checkBox_AllowAutoRedirect.Name = "checkBox_AllowAutoRedirect";
-            this.checkBox_AllowAutoRedirect.Size = new System.Drawing.Size(113, 17);
-            this.checkBox_AllowAutoRedirect.TabIndex = 67;
+            this.checkBox_AllowAutoRedirect.Size = new System.Drawing.Size(120, 21);
+            this.checkBox_AllowAutoRedirect.TabIndex = 5;
             this.checkBox_AllowAutoRedirect.Text = "Allow auto redirect";
             this.checkBox_AllowAutoRedirect.UseVisualStyleBackColor = true;
             // 
@@ -160,7 +160,7 @@
             this.textBox_CustomUserAgent.Location = new System.Drawing.Point(107, 46);
             this.textBox_CustomUserAgent.Name = "textBox_CustomUserAgent";
             this.textBox_CustomUserAgent.Size = new System.Drawing.Size(275, 20);
-            this.textBox_CustomUserAgent.TabIndex = 70;
+            this.textBox_CustomUserAgent.TabIndex = 8;
             // 
             // label3
             // 
@@ -178,7 +178,7 @@
             this.comboBox_CustomUserAgentStyle.Location = new System.Drawing.Point(107, 19);
             this.comboBox_CustomUserAgentStyle.Name = "comboBox_CustomUserAgentStyle";
             this.comboBox_CustomUserAgentStyle.Size = new System.Drawing.Size(275, 21);
-            this.comboBox_CustomUserAgentStyle.TabIndex = 72;
+            this.comboBox_CustomUserAgentStyle.TabIndex = 7;
             this.comboBox_CustomUserAgentStyle.SelectedIndexChanged += new System.EventHandler(this.comboBox_CustomUserAgentStyle_SelectedIndexChanged);
             // 
             // groupBox2
@@ -191,7 +191,7 @@
             this.groupBox2.Location = new System.Drawing.Point(9, 145);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(393, 101);
-            this.groupBox2.TabIndex = 73;
+            this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "UserAgent format";
             // 
@@ -209,8 +209,8 @@
             this.checkBox_ReplacePlusSignInTheRequestURL.AutoSize = true;
             this.checkBox_ReplacePlusSignInTheRequestURL.Location = new System.Drawing.Point(6, 6);
             this.checkBox_ReplacePlusSignInTheRequestURL.Name = "checkBox_ReplacePlusSignInTheRequestURL";
-            this.checkBox_ReplacePlusSignInTheRequestURL.Size = new System.Drawing.Size(236, 17);
-            this.checkBox_ReplacePlusSignInTheRequestURL.TabIndex = 74;
+            this.checkBox_ReplacePlusSignInTheRequestURL.Size = new System.Drawing.Size(243, 21);
+            this.checkBox_ReplacePlusSignInTheRequestURL.TabIndex = 9;
             this.checkBox_ReplacePlusSignInTheRequestURL.Text = "Replace \"+\" in the request URL with \"%2B\".";
             this.checkBox_ReplacePlusSignInTheRequestURL.UseVisualStyleBackColor = true;
             // 
@@ -257,8 +257,8 @@
             this.checkBox_ReplaceSharpSignInTheRequestURL.AutoSize = true;
             this.checkBox_ReplaceSharpSignInTheRequestURL.Location = new System.Drawing.Point(6, 29);
             this.checkBox_ReplaceSharpSignInTheRequestURL.Name = "checkBox_ReplaceSharpSignInTheRequestURL";
-            this.checkBox_ReplaceSharpSignInTheRequestURL.Size = new System.Drawing.Size(236, 17);
-            this.checkBox_ReplaceSharpSignInTheRequestURL.TabIndex = 75;
+            this.checkBox_ReplaceSharpSignInTheRequestURL.Size = new System.Drawing.Size(243, 21);
+            this.checkBox_ReplaceSharpSignInTheRequestURL.TabIndex = 10;
             this.checkBox_ReplaceSharpSignInTheRequestURL.Text = "Replace \"#\" in the request URL with \"%23\".";
             this.checkBox_ReplaceSharpSignInTheRequestURL.UseVisualStyleBackColor = true;
             // 

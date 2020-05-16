@@ -47,6 +47,8 @@ namespace Office365APIEditor.UI.FocusedInbox
                 // Create mode.
                 comboBox_Classify.SelectedIndex = 0;
             }
+
+            textBox_Name.Select();
         }
 
         public DialogResult ShowDialog(out FocusedInboxOverride newFocusedInboxOverride)
