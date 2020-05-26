@@ -1,2 +1,0 @@
-﻿Microsoft.OData.Edm
-http://go.microsoft.com/?linkid=9809688

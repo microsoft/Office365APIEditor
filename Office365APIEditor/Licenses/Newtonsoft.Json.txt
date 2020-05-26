@@ -1,2 +1,0 @@
-﻿Newtonsoft.Json
-https://raw.githubusercontent.com/JamesNK/Newtonsoft.Json/master/LICENSE.md

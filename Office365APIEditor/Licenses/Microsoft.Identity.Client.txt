@@ -1,3 +1,0 @@
-﻿Microsoft.Identity.Client
-(C) Microsoft Corporation. All rights reserved.
-http://go.microsoft.com/fwlink/?LinkId=317295

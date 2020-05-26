@@ -36,11 +36,26 @@ namespace Office365APIEditor.UI
 #endif
 
             label_Version.Text += friendlyVersion + debugIndicator;
+
+            // Read "3rd party notice.txt".
+            richTextBox_3rdPartyNotice.Text = Properties.Resources._3rd_party_notice;
         }
 
         private void button_OK_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void richTextBox_3rdPartyNotice_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            // Open the clicked URL.
+            try
+            {
+                System.Diagnostics.Process.Start(e.LinkText);
+            }
+            catch
+            {
+            }
         }
     }
 }

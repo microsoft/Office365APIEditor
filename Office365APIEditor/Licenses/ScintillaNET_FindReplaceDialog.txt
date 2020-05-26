@@ -1,4 +1,0 @@
-﻿ScintillaNET_FindReplaceDialog
-Copyright (c) 2017 Steve Towner
-Licensed under the MIT license.
-https://github.com/Stumpii/ScintillaNET-FindReplaceDialog/blob/master/LICENSE

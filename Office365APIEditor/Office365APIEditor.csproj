@@ -526,7 +526,7 @@
     <Content Include="External\ScintillaNET\x86\SciLexer.pdb" />
     <Content Include="External\ScintillaNET\x86\version.txt" />
     <Content Include="Icon7.ico" />
-    <Content Include="Licenses\ScintillaNET_FindReplaceDialog.txt" />
+    <Content Include="Licenses\3rd party notice.txt" />
     <None Include="Resources\DefaultIcon.ico" />
     <Content Include="SampleRequest\MicrosoftGraphV1.0.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -539,16 +539,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="image.ico" />
-    <Content Include="Licenses\AsyncUsageAnalyzers.txt" />
-    <Content Include="Licenses\DynamicJson.txt" />
-    <Content Include="Licenses\jacobslusser.ScintillaNET.txt" />
-    <Content Include="Licenses\Microsoft.Identity.Client.txt" />
-    <Content Include="Licenses\Microsoft.IdentityModel.Clients.ActiveDirectory.txt" />
-    <Content Include="Licenses\Microsoft.OData.Core.txt" />
-    <Content Include="Licenses\Microsoft.OData.Edm.txt" />
-    <Content Include="Licenses\Microsoft.Spatial.txt" />
-    <Content Include="Licenses\Newtonsoft.Json.txt" />
-    <Content Include="Licenses\System.Management.Automation.dll.txt" />
     <Content Include="SampleRequest\MicrosoftGraphBeta.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

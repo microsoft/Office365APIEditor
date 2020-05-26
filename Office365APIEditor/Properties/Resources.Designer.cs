@@ -61,6 +61,31 @@ namespace Office365APIEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to THIRD PARTY SOFTWARE NOTICES AND INFORMATION
+        ///
+        ///============================================
+        ///
+        ///ScintillaNET
+        ///Copyright (c) 2017 Jacob Slusser
+        ///Licensed under the MIT license.
+        ///https://github.com/jacobslusser/ScintillaNET/blob/master/LICENSE
+        ///
+        ///============================================
+        ///
+        ///ScintillaNET_FindReplaceDialog
+        ///Copyright (c) 2017 Steve Towner
+        ///Licensed under the MIT license.
+        ///https://github.com/Stumpii/ScintillaNET-FindReplaceDialog/blob/master/LICENSE
+        ///
+        ///======================================== [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string _3rd_party_notice {
+            get {
+                return ResourceManager.GetString("_3rd_party_notice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap Clock {
