@@ -28,6 +28,39 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: EsrpCodeSigning@1
+  inputs:
+    ConnectedServiceName: 'ESPR CodeSigning'
+    FolderPath: 'Office365APIEditor\bin\Release'
+    Pattern: 'Office365APIEditor.exe'
+    signConfigType: 'inlineSignParams'
+    inlineOperation: |
+      [
+              {
+                  "KeyCode" : "CP-230012",
+                  "OperationCode" : "SigntoolSign",
+                  "Parameters" : {
+                      "OpusName" : "Microsoft",
+                      "OpusInfo" : "http://www.microsoft.com",
+                      "FileDigest" : "/fd \"SHA256\"",
+                      "PageHash" : "/NPH",
+                      "TimeStamp" : "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
+                  },
+                  "ToolName" : "sign",
+                  "ToolVersion" : "1.0"
+              },
+              {
+                  "KeyCode" : "CP-230012",
+                  "OperationCode" : "SigntoolVerify",
+                  "Parameters" : {},
+                  "ToolName" : "sign",
+                  "ToolVersion" : "1.0"
+              }
+          ]
+    SessionTimeout: '60'
+    MaxConcurrency: '50'
+    MaxRetryAttempts: '5'
+
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
