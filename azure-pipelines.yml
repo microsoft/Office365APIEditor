@@ -61,6 +61,39 @@ steps:
     MaxConcurrency: '50'
     MaxRetryAttempts: '5'
 
+- task: EsrpCodeSigning@1
+  inputs:
+    ConnectedServiceName: 'ESPR CodeSigning'
+    FolderPath: 'Office365APIEditor\StagingMSI'
+    Pattern: 'Setup.msi'
+    signConfigType: 'inlineSignParams'
+    inlineOperation: |
+      [
+              {
+                  "KeyCode" : "CP-230012",
+                  "OperationCode" : "SigntoolSign",
+                  "Parameters" : {
+                      "OpusName" : "Microsoft",
+                      "OpusInfo" : "http://www.microsoft.com",
+                      "FileDigest" : "/fd \"SHA256\"",
+                      "PageHash" : "/NPH",
+                      "TimeStamp" : "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
+                  },
+                  "ToolName" : "sign",
+                  "ToolVersion" : "1.0"
+              },
+              {
+                  "KeyCode" : "CP-230012",
+                  "OperationCode" : "SigntoolVerify",
+                  "Parameters" : {},
+                  "ToolName" : "sign",
+                  "ToolVersion" : "1.0"
+              }
+          ]
+    SessionTimeout: '60'
+    MaxConcurrency: '50'
+    MaxRetryAttempts: '5'
+
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
@@ -77,12 +110,15 @@ steps:
       Write-Host $buildNumber;
       $archivePath = $env:ArtifactStagingDirectory + "\Office365APIEditor_" + $buildNumber + ".zip";
       Write-Host $archivePath;
+      Remove-Item Office365APIEditor\bin\Release\CodeSignSummary*.md;
       Compress-Archive -Path Office365APIEditor\bin\Release\* -DestinationPath $archivePath -Update;
       Write-Host ('##vso[task.setvariable variable=archivePath;isOutput=true] ' + $archivePath);
+      $msiPath = $env:ArtifactStagingDirectory + "\Office365APIEditor_" + $buildNumber + ".msi";
+      Move-Item -Path Office365APIEditor\StagingMSI\Setup.msi -Destination $msiPath
 
 - task: AzureFileCopy@4
   inputs:
-    SourcePath: '$(Build.ArtifactStagingDirectory)/*.zip'
+    SourcePath: '$(Build.ArtifactStagingDirectory)/*'
     azureSubscription: 'Microsoft Azure 社内従量課金プラン(bf971e8f-dee6-4a35-851a-eb818e718a8a)'
     Destination: 'AzureBlob'
     storage: 'office365apieditor'
