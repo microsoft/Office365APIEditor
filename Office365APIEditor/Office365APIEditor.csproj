@@ -286,6 +286,12 @@
     <Compile Include="UI\CheckUpdateForm.Designer.cs">
       <DependentUpon>CheckUpdateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\CreateEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CreateEventForm.Designer.cs">
+      <DependentUpon>CreateEventForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\DetailedTokenViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -383,6 +389,8 @@
     <Compile Include="ViewerHelper\Data\AttachmentAPI\FileAttachment.cs" />
     <Compile Include="ViewerHelper\Data\Attendee.cs" />
     <Compile Include="ViewerHelper\Data\CalendarAPI\Event.cs" />
+    <Compile Include="ViewerHelper\Data\CalendarAPI\NewEvent.cs" />
+    <Compile Include="ViewerHelper\Data\CalendarAPI\PatternedRecurrence.cs" />
     <Compile Include="ViewerHelper\Data\ContactsAPI\Contact.cs" />
     <Compile Include="ViewerHelper\Data\CalendarAPI\Calendar.cs" />
     <Compile Include="ViewerHelper\Data\CalendarAPI\CalendarGroup.cs" />
@@ -433,6 +441,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\CheckUpdateForm.resx">
       <DependentUpon>CheckUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\CreateEventForm.resx">
+      <DependentUpon>CreateEventForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DetailedTokenViewer.resx">
       <DependentUpon>DetailedTokenViewer.cs</DependentUpon>
@@ -562,7 +573,10 @@
   <ItemGroup>
     <Analyzer Include="..\packages\AsyncUsageAnalyzers.1.0.0-alpha003\analyzers\dotnet\AsyncUsageAnalyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="FilesForMSI\" />
+    <Folder Include="StagingMSI\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,0 +1,602 @@
+﻿// Copyright (c) Microsoft. All rights reserved. 
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
+
+using Office365APIEditor.ViewerHelper;
+using Office365APIEditor.ViewerHelper.Data.CalendarAPI;
+using Office365APIEditor.ViewerHelper.Data.MailAPI;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Net.Mail;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Office365APIEditor.UI
+{
+    public partial class CreateEventForm : Form
+    {
+        FolderInfo targetFolder;
+        string targetFolderDisplayName;
+        string draftItemId;
+
+        private ViewerRequestHelper viewerRequestHelper;
+
+        List<ViewerHelper.Data.AttachmentAPI.AttachmentBase> attachments;
+
+        public CreateEventForm()
+        {
+            InitializeComponent();
+
+            targetFolder = new FolderInfo();
+            targetFolderDisplayName = null;
+            draftItemId = "";
+        }
+        
+        public CreateEventForm(FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
+        {
+            InitializeComponent();
+
+            targetFolder = TargetFolderInfo;
+            targetFolderDisplayName = TargetFolderDisplayName;
+            draftItemId = "";
+        }
+
+        private async void CreateEventForm_LoadAsync(object sender, EventArgs e)
+        {
+            Icon = Properties.Resources.DefaultIcon;
+            
+            attachments = new List<ViewerHelper.Data.AttachmentAPI.AttachmentBase>();
+
+            viewerRequestHelper = new ViewerRequestHelper();
+
+            groupBox_Recurring_Pattern.Enabled = false;
+            groupBox_Recurring_Range.Enabled = false;
+
+            radioButton_Recurring_Pattern_Daily.Checked = true;
+
+            groupBox_Recurring_Pattern_Weekly.Enabled = false;
+            groupBox_Recurring_Pattern_Monthly.Enabled = false;
+            groupBox_Recurring_Pattern_Yearly.Enabled = false;
+
+            comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.Items.Add("First");
+            comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.Items.Add("Second");
+            comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.Items.Add("Third");
+            comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.Items.Add("Fourth");
+            comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.Items.Add("Last");
+
+            comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Items.Add("First");
+            comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Items.Add("Second");
+            comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Items.Add("Third");
+            comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Items.Add("Fourth");
+            comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Items.Add("Last");
+
+            for (int i = 1; i <= 100 ; i++)
+            {
+                comboBox_Recurring_Pattern_Daily_Interval.Items.Add(i);
+                comboBox_Recurring_Pattern_Weekly_Interval.Items.Add(i);
+                comboBox_Recurring_Pattern_Monthly_Interval.Items.Add(i);
+                comboBox_Recurring_Pattern_Yearly_Interval.Items.Add(i);
+                comboBox_Recurring_Range_NumberOfConcurrences.Items.Add(i);
+            }
+
+            comboBox_Recurring_Pattern_Daily_Interval.SelectedItem = 1;
+            comboBox_Recurring_Pattern_Weekly_Interval.SelectedItem = 1;
+            comboBox_Recurring_Pattern_Monthly_Interval.SelectedItem = 1;
+            comboBox_Recurring_Pattern_Yearly_Interval.SelectedItem = 1;
+            comboBox_Recurring_Range_NumberOfConcurrences.SelectedItem = 10;
+
+            radioButton_Recurring_Pattern_Monthly_MonthlyPattern.Checked = true;
+            ToggleMonthlyPatternUI(true);
+
+            for (int i = 1; i <= 31; i++)
+            {
+                comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.Items.Add(i);
+                comboBox_Recurring_Pattern_Yearly_Absolute_Day.Items.Add(i);
+            }
+
+            for (int i = 1; i <= 12; i++)
+            {
+                string monthName = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames[i - 1];
+                comboBox_Recurring_Pattern_Yearly_Absolute_Month.Items.Add(monthName);
+                comboBox_Recurring_Pattern_Yearly_Relative_Month.Items.Add(monthName);
+            }
+ 
+            comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.SelectedItem = 1;
+
+            radioButton_Recurring_Pattern_Yearly_OnSpecificDay.Checked = true;
+            ToggleYearlyPatternUI(true);
+
+            radioButton_Recurring_Range_NoEnd.Checked = true;
+
+            DateTime now = DateTime.Now; // Use local time;
+            DateTime tempStartDateTime = now;
+
+            if (tempStartDateTime.Minute < 30)
+            {
+                tempStartDateTime = tempStartDateTime.AddMinutes(30 - tempStartDateTime.Minute);
+            }
+            else if (tempStartDateTime.Minute == 30)
+            {
+                tempStartDateTime = tempStartDateTime.AddMinutes(30);
+            }
+            else if (30 < tempStartDateTime.Minute && tempStartDateTime.Minute < 60)
+            {
+                tempStartDateTime = tempStartDateTime.AddMinutes(60 - tempStartDateTime.Minute);
+            }
+
+            dateTimePicker_Basic_StartDate.Value = tempStartDateTime;
+            dateTimePicker_Basic_StartTime.Value = tempStartDateTime;
+
+            DateTime tempEndDateTime = tempStartDateTime.AddMinutes(30);
+            dateTimePicker_Basic_EndDate.Value = tempEndDateTime;
+            dateTimePicker_Basic_EndTime.Value = tempEndDateTime;
+
+            textBox_Basic_TimeZone.Text = Util.LocalTimeZoneId;
+
+            comboBox_OnlineMeeting_Provider.Items.Add("None");
+            comboBox_OnlineMeeting_Provider.SelectedIndex = 0;
+
+            // Get allowedOnlineMeetingProviders
+
+            try
+            {
+                var allowedOnlineMeetingProviders = await viewerRequestHelper.GetAllowdOnlineMeetingProvidersAsync();
+
+                if (allowedOnlineMeetingProviders == null || allowedOnlineMeetingProviders.Count == 0)
+                {
+                    throw new Exception("Microsoft Graph request was succeeded, but allowedOnlineMeetingProviders property is null or empty.");
+                }
+
+                if (allowedOnlineMeetingProviders.Count == 1 && allowedOnlineMeetingProviders[0] == "unknown")
+                {
+                    throw new Exception("Microsoft Graph request was succeeded, but allowedOnlineMeetingProviders property contains only 'unknown'");
+                }
+
+                foreach (var provider in allowedOnlineMeetingProviders)
+                {
+                    if (provider != "unknown")
+                    {
+                        comboBox_OnlineMeeting_Provider.Items.Add(provider);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not get allowed online meeting providers." + Environment.NewLine + Environment.NewLine + ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void DateTimePicker_Basic_StartDate_ValueChanged(object sender, EventArgs e)
+        {
+            // dateTimePicker_Recurring_Range_Start and dateTimePicker_Basic_StartDate need to be same.
+
+            var newStartDate = ((DateTimePicker)sender).Value;
+            var oldStartDate = dateTimePicker_Recurring_Range_Start.Value;
+
+            if (newStartDate.Date != oldStartDate.Date)
+            {
+                dateTimePicker_Recurring_Range_Start.Value = newStartDate;
+            }
+
+            UpdateRecurringSetting(newStartDate);
+        }
+
+        private void UpdateRecurringSetting(DateTime newStartDate)
+        {
+            // Update reccuring settings
+
+            if (!checkBox_Recurring_IsRecurring.Checked)
+            {
+                checkBox_Recurring_Pattern_Weekly_Sunday.Checked = false;
+                checkBox_Recurring_Pattern_Weekly_Monday.Checked = false;
+                checkBox_Recurring_Pattern_Weekly_Tuesday.Checked = false;
+                checkBox_Recurring_Pattern_Weekly_Wednesday.Checked = false;
+                checkBox_Recurring_Pattern_Weekly_Thursday.Checked = false;
+                checkBox_Recurring_Pattern_Weekly_Friday.Checked = false;
+                checkBox_Recurring_Pattern_Weekly_Saturday.Checked = false;
+
+                if (comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.Items.Count == 31)
+                {
+                    comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.SelectedItem = newStartDate.Day;
+                }
+
+                var tempDayOfWeekIndex = (int)(Math.Ceiling(newStartDate.Day / 7.0) - 1.0);
+                
+                if (newStartDate.AddDays(7).Month != newStartDate.Month)
+                {
+                    tempDayOfWeekIndex = 4; // Last
+                }
+
+                if (comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.Items.Count == 5)
+                {
+                    comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.SelectedIndex = tempDayOfWeekIndex;
+                }
+
+                checkBox_Recurring_Pattern_Monthly_Sunday.Checked = false;
+                checkBox_Recurring_Pattern_Monthly_Monday.Checked = false;
+                checkBox_Recurring_Pattern_Monthly_Tuesday.Checked = false;
+                checkBox_Recurring_Pattern_Monthly_Wednesday.Checked = false;
+                checkBox_Recurring_Pattern_Monthly_Thursday.Checked = false;
+                checkBox_Recurring_Pattern_Monthly_Friday.Checked = false;
+                checkBox_Recurring_Pattern_Monthly_Saturday.Checked = false;
+
+                if (comboBox_Recurring_Pattern_Yearly_Absolute_Month.Items.Count == 12)
+                {
+                    comboBox_Recurring_Pattern_Yearly_Absolute_Month.SelectedIndex = newStartDate.Month - 1;
+                }
+
+                if (comboBox_Recurring_Pattern_Yearly_Absolute_Day.Items.Count == 31)
+                {
+                    comboBox_Recurring_Pattern_Yearly_Absolute_Day.SelectedIndex = newStartDate.Day - 1;
+                }
+
+                if (comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Items.Count == 5)
+                {
+                    comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.SelectedIndex = tempDayOfWeekIndex;
+                }
+
+                if (comboBox_Recurring_Pattern_Yearly_Relative_Month.Items.Count == 12)
+                {
+                    comboBox_Recurring_Pattern_Yearly_Relative_Month.SelectedIndex = newStartDate.Month - 1;
+                }
+
+                checkBox_Recurring_Pattern_Yearly_Sunday.Checked = false;
+                checkBox_Recurring_Pattern_Yearly_Monday.Checked = false;
+                checkBox_Recurring_Pattern_Yearly_Tuesday.Checked = false;
+                checkBox_Recurring_Pattern_Yearly_Wednesday.Checked = false;
+                checkBox_Recurring_Pattern_Yearly_Thursday.Checked = false;
+                checkBox_Recurring_Pattern_Yearly_Friday.Checked = false;
+                checkBox_Recurring_Pattern_Yearly_Saturday.Checked = false;
+
+                switch (newStartDate.DayOfWeek)
+                {
+                    case DayOfWeek.Sunday:
+                        checkBox_Recurring_Pattern_Weekly_Sunday.Checked = true;
+                        checkBox_Recurring_Pattern_Monthly_Sunday.Checked = true;
+                        checkBox_Recurring_Pattern_Yearly_Sunday.Checked = true;
+                        break;
+                    case DayOfWeek.Monday:
+                        checkBox_Recurring_Pattern_Weekly_Monday.Checked = true;
+                        checkBox_Recurring_Pattern_Monthly_Monday.Checked = true;
+                        checkBox_Recurring_Pattern_Yearly_Monday.Checked = true;
+                        break;
+                    case DayOfWeek.Tuesday:
+                        checkBox_Recurring_Pattern_Weekly_Tuesday.Checked = true;
+                        checkBox_Recurring_Pattern_Monthly_Tuesday.Checked = true;
+                        checkBox_Recurring_Pattern_Yearly_Tuesday.Checked = true;
+                        break;
+                    case DayOfWeek.Wednesday:
+                        checkBox_Recurring_Pattern_Weekly_Wednesday.Checked = true;
+                        checkBox_Recurring_Pattern_Monthly_Wednesday.Checked = true;
+                        checkBox_Recurring_Pattern_Yearly_Wednesday.Checked = true;
+                        break;
+                    case DayOfWeek.Thursday:
+                        checkBox_Recurring_Pattern_Weekly_Thursday.Checked = true;
+                        checkBox_Recurring_Pattern_Monthly_Thursday.Checked = true;
+                        checkBox_Recurring_Pattern_Yearly_Thursday.Checked = true;
+                        break;
+                    case DayOfWeek.Friday:
+                        checkBox_Recurring_Pattern_Weekly_Friday.Checked = true;
+                        checkBox_Recurring_Pattern_Monthly_Friday.Checked = true;
+                        checkBox_Recurring_Pattern_Yearly_Friday.Checked = true;
+                        break;
+                    case DayOfWeek.Saturday:
+                        checkBox_Recurring_Pattern_Weekly_Saturday.Checked = true;
+                        checkBox_Recurring_Pattern_Monthly_Saturday.Checked = true;
+                        checkBox_Recurring_Pattern_Yearly_Saturday.Checked = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (dateTimePicker_Recurring_Range_EndByDate.Value.Date < newStartDate)
+            {
+                // The end date of recurring must be in the future.
+                dateTimePicker_Recurring_Range_EndByDate.Value = newStartDate;
+                dateTimePicker_Recurring_Range_EndByDate.MinDate = newStartDate;
+            }
+        }
+
+        private void CheckBox_Basic_IsAllDay_CheckedChanged(object sender, EventArgs e)
+        {
+            bool isAllDay = ((CheckBox)sender).Checked;
+
+            dateTimePicker_Basic_StartTime.Enabled = !isAllDay;
+            dateTimePicker_Basic_EndDate.Enabled = !isAllDay;
+            dateTimePicker_Basic_EndTime.Enabled = !isAllDay;
+        }
+
+        private void CheckBox_Recurring_IsRecurring_CheckedChanged(object sender, EventArgs e)
+        {
+            bool isRecurring = ((CheckBox)sender).Checked;
+
+            groupBox_Recurring_Pattern.Enabled = isRecurring;
+            groupBox_Recurring_Range.Enabled = isRecurring;
+        }
+
+        private void DateTimePicker_Recurring_Range_Start_ValueChanged(object sender, EventArgs e)
+        {
+            // dateTimePicker_Recurring_Range_Start and dateTimePicker_Basic_StartDate need to be same.
+
+            var newStartDate = ((DateTimePicker)sender).Value;
+            var oldStartDate = dateTimePicker_Basic_StartDate.Value;
+
+            if (newStartDate.Date != oldStartDate.Date)
+            {
+                dateTimePicker_Basic_StartDate.Value = newStartDate;
+            }
+
+            UpdateRecurringSetting(newStartDate);
+        }
+
+        private void radioButton_Recurring_Pattern_Daily_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox_Recurring_Pattern_Daily.Enabled = radioButton_Recurring_Pattern_Daily.Checked;
+        }
+
+        private void radioButton_Recurring_Pattern_Weekly_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox_Recurring_Pattern_Weekly.Enabled = radioButton_Recurring_Pattern_Weekly.Checked;
+        }
+
+        private void radioButton_Recurring_Pattern_Monthly_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox_Recurring_Pattern_Monthly.Enabled = radioButton_Recurring_Pattern_Monthly.Checked;
+        }
+
+        private void radioButton_Recurring_Pattern_Yearly_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBox_Recurring_Pattern_Yearly.Enabled = radioButton_Recurring_Pattern_Yearly.Checked;
+        }
+
+        private void radioButton_Recurring_Pattern_Monthly_MonthlyPattern_CheckedChanged(object sender, EventArgs e)
+        {
+            ToggleMonthlyPatternUI(true);
+        }
+
+        private void radioButton_Recurring_Pattern_Monthly_RelativeMonthlyPattern_CheckedChanged(object sender, EventArgs e)
+        {
+            ToggleMonthlyPatternUI(false);
+        }
+
+        private void ToggleMonthlyPatternUI(bool enableMonthlyPattern)
+        {
+            comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.Enabled = enableMonthlyPattern;
+            label_Recurring_Pattern_Monthly_DayOfTheMonth.Enabled = enableMonthlyPattern;
+
+            comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.Enabled = !enableMonthlyPattern;
+            label_Recurring_Pattern_Monthly_DayOfWeekIndex.Enabled = !enableMonthlyPattern;
+            checkBox_Recurring_Pattern_Monthly_Sunday.Enabled = !enableMonthlyPattern;
+            checkBox_Recurring_Pattern_Monthly_Monday.Enabled = !enableMonthlyPattern;
+            checkBox_Recurring_Pattern_Monthly_Tuesday.Enabled = !enableMonthlyPattern;
+            checkBox_Recurring_Pattern_Monthly_Wednesday.Enabled = !enableMonthlyPattern;
+            checkBox_Recurring_Pattern_Monthly_Thursday.Enabled = !enableMonthlyPattern;
+            checkBox_Recurring_Pattern_Monthly_Friday.Enabled = !enableMonthlyPattern;
+            checkBox_Recurring_Pattern_Monthly_Saturday.Enabled = !enableMonthlyPattern;
+        }
+
+        private void radioButton_Recurring_Pattern_Yearly_OnSpecificDay_CheckedChanged(object sender, EventArgs e)
+        {
+            ToggleYearlyPatternUI(true);
+        }
+
+        private void radioButton_Recurring_Pattern_Yearly_RelativeYearlyPattern_CheckedChanged(object sender, EventArgs e)
+        {
+            ToggleYearlyPatternUI(false);
+        }
+
+        private void ToggleYearlyPatternUI(bool enableOnSpecificDay)
+        {
+            comboBox_Recurring_Pattern_Yearly_Absolute_Month.Enabled = enableOnSpecificDay;
+            label_Recurring_Pattern_Yearly_Absolute_Date.Enabled = enableOnSpecificDay;
+            comboBox_Recurring_Pattern_Yearly_Absolute_Day.Enabled = enableOnSpecificDay;
+
+            label_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Enabled = !enableOnSpecificDay;
+            comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Enabled = !enableOnSpecificDay;
+            label_Recurring_Pattern_Yearly_Relative_Month.Enabled = !enableOnSpecificDay;
+            checkBox_Recurring_Pattern_Yearly_Sunday.Enabled = !enableOnSpecificDay;
+            checkBox_Recurring_Pattern_Yearly_Monday.Enabled = !enableOnSpecificDay;
+            checkBox_Recurring_Pattern_Yearly_Tuesday.Enabled = !enableOnSpecificDay;
+            checkBox_Recurring_Pattern_Yearly_Wednesday.Enabled = !enableOnSpecificDay;
+            checkBox_Recurring_Pattern_Yearly_Thursday.Enabled = !enableOnSpecificDay;
+            checkBox_Recurring_Pattern_Yearly_Friday.Enabled = !enableOnSpecificDay;
+            checkBox_Recurring_Pattern_Yearly_Saturday.Enabled = !enableOnSpecificDay;
+        }
+
+        private void radioButton_Recurring_Range_EndAfter_CheckedChanged(object sender, EventArgs e)
+        {
+            comboBox_Recurring_Range_NumberOfConcurrences.Enabled = ((RadioButton)sender).Checked;
+        }
+
+        private void radioButton_Recurring_Range_EndBy_CheckedChanged(object sender, EventArgs e)
+        {
+            dateTimePicker_Recurring_Range_EndByDate.Enabled = ((RadioButton)sender).Checked;
+        }
+
+        private void Button_Save_Click(object sender, EventArgs e)
+        {
+            // Save new event.
+
+            Enabled = false;
+
+            viewerRequestHelper = new ViewerRequestHelper();
+
+            NewEvent newItem;
+
+            try
+            {
+                newItem = CreateNewEventObject();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Enabled = true;
+                return;
+            }
+        }
+
+        private NewEvent CreateNewEventObject()
+        {
+            NewEvent newItem = new NewEvent();
+
+            newItem.Subject = textBox_Basic_Title.Text;
+
+            try
+            {
+                MailAddressCollection requiredMailAddresses = new MailAddressCollection();
+
+                if (textBox_Basic_RequiredAttendees.Text != "")
+                {
+                    foreach (var recipient in textBox_Basic_RequiredAttendees.Text.Split(';'))
+                    {
+                        requiredMailAddresses.Add(recipient.Trim());
+                    }
+                }
+
+                newItem.RequiredAttendees = requiredMailAddresses;
+
+                MailAddressCollection optionalMailAddresses = new MailAddressCollection();
+
+                if (textBox_Basic_OptionalAttendees.Text != "")
+                {
+                    foreach (var recipient in textBox_Basic_OptionalAttendees.Text.Split(';'))
+                    {
+                        optionalMailAddresses.Add(recipient.Trim());
+                    }
+                }
+
+                newItem.OptionalAttendees = optionalMailAddresses;
+
+                MailAddressCollection resourceMailAddresses = new MailAddressCollection();
+
+                if (textBox_Basic_ResourceAttendees.Text != "")
+                {
+                    foreach (var recipient in textBox_Basic_ResourceAttendees.Text.Split(';'))
+                    {
+                        resourceMailAddresses.Add(recipient.Trim());
+                    }
+                }
+
+                newItem.ResourceAttendees = resourceMailAddresses;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Invalid attendees. " + ex.Message, ex);
+            }
+
+            newItem.Location = textBox_Basic_Location.Text;
+            newItem.IsAllDay = checkBox_Basic_IsAllDay.Checked;
+            newItem.Start = new ViewerHelper.Data.DateTimeAndTimeZone()
+            {
+                DateTime = new DateTime(
+                    dateTimePicker_Basic_StartDate.Value.Year,
+                    dateTimePicker_Basic_StartDate.Value.Month,
+                    dateTimePicker_Basic_StartDate.Value.Day,
+                    dateTimePicker_Basic_StartTime.Value.Hour,
+                    dateTimePicker_Basic_StartTime.Value.Minute,
+                    0).ToString("yyyy-MM-ddTmm:HH:ss"),
+                TimeZone = textBox_Basic_TimeZone.Text
+            };
+
+            newItem.End = new ViewerHelper.Data.DateTimeAndTimeZone()
+            {
+                DateTime = new DateTime(
+                    dateTimePicker_Basic_EndDate.Value.Year,
+                    dateTimePicker_Basic_EndDate.Value.Month,
+                    dateTimePicker_Basic_EndDate.Value.Day,
+                    dateTimePicker_Basic_EndTime.Value.Hour,
+                    dateTimePicker_Basic_EndTime.Value.Minute,
+                    0).ToString("yyyy-MM-ddTmm:HH:ss"),
+                TimeZone = textBox_Basic_TimeZone.Text
+            };
+
+            newItem.BodyType = (BodyType)comboBox_BodyType.SelectedIndex;
+            newItem.Body = textBox_Body.Text;
+            //newItem.Importance = (Importance)comboBox_Importance.SelectedIndex;
+            //newItem.Attachments = attachments;
+
+            // Recurring
+            if (checkBox_Recurring_IsRecurring.Checked)
+            {
+                newItem.Recurrence = new PatternedRecurrence();
+
+                if (radioButton_Recurring_Pattern_Daily.Checked)
+                {
+                    // Daily
+                    newItem.Recurrence.Pattern.Type = RecurrencePatternType.Daily;
+                    newItem.Recurrence.Pattern.Interval = (int)comboBox_Recurring_Pattern_Daily_Interval.SelectedValue;
+                }
+                else if (radioButton_Recurring_Pattern_Weekly.Checked)
+                {
+                    // Weekly
+                    newItem.Recurrence.Pattern.Type = RecurrencePatternType.Weekly;
+                    newItem.Recurrence.Pattern.Interval = (int)comboBox_Recurring_Pattern_Weekly_Interval.SelectedValue;
+
+                    List<DayOfWeek> daysOfWeek = new List<DayOfWeek>();
+
+                    if (checkBox_Recurring_Pattern_Weekly_Sunday.Checked)
+                    {
+                        daysOfWeek.Add(DayOfWeek.Sunday);
+                    }
+
+                    if (checkBox_Recurring_Pattern_Weekly_Monday.Checked)
+                    {
+                        daysOfWeek.Add(DayOfWeek.Monday);
+                    }
+
+                    if (checkBox_Recurring_Pattern_Weekly_Thursday.Checked)
+                    {
+                        daysOfWeek.Add(DayOfWeek.Thursday);
+                    }
+
+                    if (checkBox_Recurring_Pattern_Weekly_Wednesday.Checked)
+                    {
+                        daysOfWeek.Add(DayOfWeek.Wednesday);
+                    }
+
+                    if (checkBox_Recurring_Pattern_Weekly_Thursday.Checked)
+                    {
+                        daysOfWeek.Add(DayOfWeek.Thursday);
+                    }
+
+                    if (checkBox_Recurring_Pattern_Weekly_Friday.Checked)
+                    {
+                        daysOfWeek.Add(DayOfWeek.Friday);
+                    }
+
+                    if (checkBox_Recurring_Pattern_Weekly_Saturday.Checked)
+                    {
+                        daysOfWeek.Add(DayOfWeek.Saturday);
+                    }
+
+                    if (daysOfWeek.Count == 0)
+                    {
+                        throw new Exception("For the weekly recurring event, select at least one day of the week.");
+                    }
+
+                    newItem.Recurrence.Pattern.DaysOfWeek = daysOfWeek.ToArray(); ;
+
+                    newItem.Recurrence.Pattern.FirstDayOfWeek = DayOfWeek.Sunday;
+                }
+                else if (radioButton_Recurring_Pattern_Monthly.Checked)
+                {
+                    // Monthly
+
+
+                }
+
+            }
+            else
+            {
+                newItem.Recurrence = null;
+            }
+
+            return newItem;
+        }
+    }
+}

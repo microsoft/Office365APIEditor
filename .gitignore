@@ -249,4 +249,6 @@ paket-files/
 .idea/
 *.sln.iml
 
+# MSI build related files
+Office365APIEditor/FilesForMSI
 Memo.txt

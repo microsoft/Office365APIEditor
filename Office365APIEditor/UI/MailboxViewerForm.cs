@@ -803,6 +803,24 @@ namespace Office365APIEditor
             }
         }
 
+        private void newEventToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Coming soon!");
+            return;
+
+            if (treeView_Mailbox.SelectedNode != null && ((FolderInfo)treeView_Mailbox.SelectedNode.Tag).Type == FolderContentType.Calendar)
+            {
+                TreeNode selectedNode = treeView_Mailbox.SelectedNode;
+                CreateEventForm createEventForm = new CreateEventForm((FolderInfo)selectedNode.Tag, selectedNode.Text);
+                createEventForm.Show(this);
+            }
+            else
+            {
+                CreateEventForm createEventForm = new CreateEventForm();
+                createEventForm.Show(this);
+            }
+        }
+
         private void FocusedInboxOverridesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FocusedInboxOverrideForm focusedInboxOverrideForm = new FocusedInboxOverrideForm();

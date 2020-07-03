@@ -34,7 +34,7 @@ namespace Office365APIEditor.ViewerHelper
                 idAttributeName = "Id";
                 nameAttributeName = "Name";
             }
-            
+
 
             string stringResponse = "";
 
@@ -155,6 +155,36 @@ namespace Office365APIEditor.ViewerHelper
                 var calendar = new Calendar(rawJson);
 
                 return calendar;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<List<string>> GetAllowdOnlineMeetingProvidersAsync()
+        {
+            // Get allowedOnlineMeetingProviders property.
+
+            if (!Util.UseMicrosoftGraphInMailboxViewer)
+            {
+                throw new NotImplementedException("UseMicrosoftGraphInMailboxViewer must be true.");
+            }
+
+            try
+            {
+                Uri URL = new Uri("https://graph.microsoft.com/v1.0/me/calendar?$select=allowedOnlineMeetingProviders");
+                string rawJson = await SendGetRequestAsync(URL);
+                var jsonResponse = (JObject)JsonConvert.DeserializeObject(rawJson);
+
+                List<string> result = new List<string>();
+
+                foreach ( var provider in jsonResponse.Property("allowedOnlineMeetingProviders").Values())
+                {
+                    result.Add(provider.Value<string>());
+                }
+
+                return result;
             }
             catch (Exception ex)
             {
