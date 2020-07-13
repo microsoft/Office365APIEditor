@@ -253,7 +253,7 @@ namespace Office365APIEditor.ViewerHelper
                     CcRecipients = ConvertRecipientIListToMailAddressCollection(draftItem.CcRecipients),
                     BccRecipients = ConvertRecipientIListToMailAddressCollection(draftItem.BccRecipients),
                     Subject = draftItem.Subject ?? "",
-                    BodyType = (draftItem.Body != null) ? (BodyType)Enum.Parse(typeof(BodyType), draftItem.Body.ContentType, true) : BodyType.Text,
+                    BodyType = (draftItem.Body != null) ? draftItem.Body.ContentType : BodyType.Text,
                     Body = (draftItem.Body != null && draftItem.Body.Content != null) ? draftItem.Body.Content : "",
                     Importance = (draftItem.Importance != null) ? (Importance)Enum.Parse(typeof(Importance), draftItem.Importance, true) : Importance.Normal,
                     RequestDeliveryReceipt = (draftItem.IsDeliveryReceiptRequested != null && draftItem.IsDeliveryReceiptRequested.HasValue) ? draftItem.IsDeliveryReceiptRequested.Value : false,

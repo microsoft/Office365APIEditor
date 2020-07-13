@@ -316,7 +316,7 @@
             this.Button_Save.TabIndex = 23;
             this.Button_Save.Text = "Save";
             this.Button_Save.UseVisualStyleBackColor = true;
-            this.Button_Save.Click += new System.EventHandler(this.Button_Save_Click);
+            this.Button_Save.Click += new System.EventHandler(this.Button_Save_ClickAsync);
             // 
             // dateTimePicker_Basic_StartTime
             // 

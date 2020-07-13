@@ -136,4 +136,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.AcquireViewerTokenForm.Button_UseMyApp_ClickAsync(System.Object,System.EventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.AcquireViewerTokenForm.TextBox_ClientID_KeyDownAsync(System.Object,System.Windows.Forms.KeyEventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.UI.CreateEventForm.CreateEventForm_LoadAsync(System.Object,System.EventArgs)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("AsyncUsage.CSharp.Reliability", "AvoidAsyncVoid:Avoid async void", Justification = "<Pending>", Scope = "member", Target = "~M:Office365APIEditor.UI.CreateEventForm.Button_Save_ClickAsync(System.Object,System.EventArgs)")]
 

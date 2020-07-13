@@ -389,6 +389,7 @@
     <Compile Include="ViewerHelper\Data\AttachmentAPI\FileAttachment.cs" />
     <Compile Include="ViewerHelper\Data\Attendee.cs" />
     <Compile Include="ViewerHelper\Data\CalendarAPI\Event.cs" />
+    <Compile Include="ViewerHelper\Data\CalendarAPI\Location.cs" />
     <Compile Include="ViewerHelper\Data\CalendarAPI\NewEvent.cs" />
     <Compile Include="ViewerHelper\Data\CalendarAPI\PatternedRecurrence.cs" />
     <Compile Include="ViewerHelper\Data\ContactsAPI\Contact.cs" />

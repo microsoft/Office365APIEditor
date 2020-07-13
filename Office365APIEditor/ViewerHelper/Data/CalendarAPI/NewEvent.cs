@@ -1,25 +1,43 @@
-﻿using System;
+﻿// Copyright (c) Microsoft. All rights reserved. 
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using Office365APIEditor.ViewerHelper.Data.MailAPI;
+using System.Runtime.Serialization;
 
 namespace Office365APIEditor.ViewerHelper.Data.CalendarAPI
 {
+    [DataContract]
     class NewEvent
     {
+        public NewEvent()
+        {
+            Attendees = new List<Attendee>();
+            Location = new Location();
+            Body = new ItemBody();
+        }
+
+        [DataMember(Name = "subject")]
         public string Subject;
-        public MailAddressCollection RequiredAttendees;
-        public MailAddressCollection OptionalAttendees;
-        public MailAddressCollection ResourceAttendees;
-        public string Location;
+
+        [DataMember(Name = "attendees")]
+        public List<Attendee> Attendees;
+
+        [DataMember(Name = "location")]
+        public Location Location;
+
+        [DataMember(Name = "isAllDay")]
         public bool IsAllDay;
+
+        [DataMember(Name = "start")]
         public DateTimeAndTimeZone Start;
+
+        [DataMember(Name = "end")]
         public DateTimeAndTimeZone End;
-        public BodyType BodyType;
-        public string Body;
+
+        [DataMember(Name = "body")]
+        public ItemBody Body;
+
+        [DataMember(Name = "recurrence")]
         public PatternedRecurrence Recurrence;
     }
 }

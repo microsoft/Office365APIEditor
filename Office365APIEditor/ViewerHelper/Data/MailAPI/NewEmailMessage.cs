@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Net.Mail;
+using System.Runtime.Serialization;
 
 namespace Office365APIEditor.ViewerHelper.Data.MailAPI
 {
@@ -28,9 +29,13 @@ namespace Office365APIEditor.ViewerHelper.Data.MailAPI
         High = 2
     }
 
+    [DataContract]
     public enum BodyType
     {
+        [EnumMember(Value = "text")]
         Text = 0,
+
+        [EnumMember(Value = "html")]
         HTML = 1
     }
 }

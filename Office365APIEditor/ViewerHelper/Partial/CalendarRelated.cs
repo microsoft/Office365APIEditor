@@ -7,6 +7,9 @@ using Office365APIEditor.ViewerHelper.Data;
 using Office365APIEditor.ViewerHelper.Data.CalendarAPI;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Office365APIEditor.ViewerHelper
@@ -258,6 +261,43 @@ namespace Office365APIEditor.ViewerHelper
 
             string stringResponse = await SendGetRequestAsync(URL);
             return new Event(stringResponse);
+        }
+
+        public async Task CreateEventAsync(NewEvent newItem)
+        {
+            // Create an event.
+
+            if (!Util.UseMicrosoftGraphInMailboxViewer)
+            {
+                throw new NotImplementedException();
+            }
+
+            Uri URL = new Uri("https://graph.microsoft.com/v1.0/me/events");
+
+            string postData = CreatePostDataToCreateNewEvent(newItem);
+
+            try
+            {
+                string stringResponse = await SendPostRequestAsync(URL, postData);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private string CreatePostDataToCreateNewEvent(NewEvent newItem)
+        {
+            string result;
+
+            using (var stream = new MemoryStream())
+            {
+                var serializer = new DataContractJsonSerializer(typeof(NewEvent));
+                serializer.WriteObject(stream, newItem);
+                result = Encoding.UTF8.GetString(stream.ToArray());
+            }
+
+            return result;
         }
     }
 }
