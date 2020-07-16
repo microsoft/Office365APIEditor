@@ -44,7 +44,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.dateTimePicker_Basic_EndDate = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox_Basic_TimeZone = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox_OnlineMeeting_Provider = new System.Windows.Forms.ComboBox();
             this.comboBox_BodyType = new System.Windows.Forms.ComboBox();
@@ -124,6 +123,7 @@
             this.dateTimePicker_Recurring_Range_Start = new System.Windows.Forms.DateTimePicker();
             this.label25 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.comboBox_Basic_TimeZone = new System.Windows.Forms.ComboBox();
             this.groupBox_Recurring_Pattern.SuspendLayout();
             this.groupBox_Recurring_Pattern_Weekly.SuspendLayout();
             this.groupBox_Recurring_Pattern_Daily.SuspendLayout();
@@ -147,10 +147,12 @@
             // 
             // textBox_Basic_Title
             // 
+            this.textBox_Basic_Title.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Basic_Title.Location = new System.Drawing.Point(118, 6);
             this.textBox_Basic_Title.Name = "textBox_Basic_Title";
-            this.textBox_Basic_Title.Size = new System.Drawing.Size(319, 20);
-            this.textBox_Basic_Title.TabIndex = 1;
+            this.textBox_Basic_Title.Size = new System.Drawing.Size(640, 20);
+            this.textBox_Basic_Title.TabIndex = 10;
             // 
             // label2
             // 
@@ -163,17 +165,21 @@
             // 
             // textBox_Basic_RequiredAttendees
             // 
+            this.textBox_Basic_RequiredAttendees.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Basic_RequiredAttendees.Location = new System.Drawing.Point(118, 32);
             this.textBox_Basic_RequiredAttendees.Name = "textBox_Basic_RequiredAttendees";
-            this.textBox_Basic_RequiredAttendees.Size = new System.Drawing.Size(319, 20);
-            this.textBox_Basic_RequiredAttendees.TabIndex = 3;
+            this.textBox_Basic_RequiredAttendees.Size = new System.Drawing.Size(640, 20);
+            this.textBox_Basic_RequiredAttendees.TabIndex = 11;
             // 
             // textBox_Basic_OptionalAttendees
             // 
+            this.textBox_Basic_OptionalAttendees.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Basic_OptionalAttendees.Location = new System.Drawing.Point(118, 58);
             this.textBox_Basic_OptionalAttendees.Name = "textBox_Basic_OptionalAttendees";
-            this.textBox_Basic_OptionalAttendees.Size = new System.Drawing.Size(319, 20);
-            this.textBox_Basic_OptionalAttendees.TabIndex = 5;
+            this.textBox_Basic_OptionalAttendees.Size = new System.Drawing.Size(640, 20);
+            this.textBox_Basic_OptionalAttendees.TabIndex = 12;
             // 
             // label3
             // 
@@ -186,10 +192,12 @@
             // 
             // textBox_Basic_Location
             // 
+            this.textBox_Basic_Location.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Basic_Location.Location = new System.Drawing.Point(118, 110);
             this.textBox_Basic_Location.Name = "textBox_Basic_Location";
-            this.textBox_Basic_Location.Size = new System.Drawing.Size(319, 20);
-            this.textBox_Basic_Location.TabIndex = 7;
+            this.textBox_Basic_Location.Size = new System.Drawing.Size(640, 20);
+            this.textBox_Basic_Location.TabIndex = 14;
             // 
             // label4
             // 
@@ -202,10 +210,12 @@
             // 
             // textBox_Basic_ResourceAttendees
             // 
+            this.textBox_Basic_ResourceAttendees.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Basic_ResourceAttendees.Location = new System.Drawing.Point(118, 84);
             this.textBox_Basic_ResourceAttendees.Name = "textBox_Basic_ResourceAttendees";
-            this.textBox_Basic_ResourceAttendees.Size = new System.Drawing.Size(319, 20);
-            this.textBox_Basic_ResourceAttendees.TabIndex = 9;
+            this.textBox_Basic_ResourceAttendees.Size = new System.Drawing.Size(640, 20);
+            this.textBox_Basic_ResourceAttendees.TabIndex = 13;
             // 
             // label5
             // 
@@ -222,7 +232,7 @@
             this.dateTimePicker_Basic_StartDate.Location = new System.Drawing.Point(118, 136);
             this.dateTimePicker_Basic_StartDate.Name = "dateTimePicker_Basic_StartDate";
             this.dateTimePicker_Basic_StartDate.Size = new System.Drawing.Size(100, 20);
-            this.dateTimePicker_Basic_StartDate.TabIndex = 10;
+            this.dateTimePicker_Basic_StartDate.TabIndex = 15;
             this.dateTimePicker_Basic_StartDate.ValueChanged += new System.EventHandler(this.DateTimePicker_Basic_StartDate_ValueChanged);
             // 
             // label6
@@ -240,7 +250,7 @@
             this.checkBox_Basic_IsAllDay.Location = new System.Drawing.Point(289, 136);
             this.checkBox_Basic_IsAllDay.Name = "checkBox_Basic_IsAllDay";
             this.checkBox_Basic_IsAllDay.Size = new System.Drawing.Size(57, 17);
-            this.checkBox_Basic_IsAllDay.TabIndex = 12;
+            this.checkBox_Basic_IsAllDay.TabIndex = 17;
             this.checkBox_Basic_IsAllDay.Text = "All day";
             this.checkBox_Basic_IsAllDay.UseVisualStyleBackColor = true;
             this.checkBox_Basic_IsAllDay.CheckedChanged += new System.EventHandler(this.CheckBox_Basic_IsAllDay_CheckedChanged);
@@ -260,7 +270,7 @@
             this.dateTimePicker_Basic_EndDate.Location = new System.Drawing.Point(118, 162);
             this.dateTimePicker_Basic_EndDate.Name = "dateTimePicker_Basic_EndDate";
             this.dateTimePicker_Basic_EndDate.Size = new System.Drawing.Size(100, 20);
-            this.dateTimePicker_Basic_EndDate.TabIndex = 14;
+            this.dateTimePicker_Basic_EndDate.TabIndex = 18;
             // 
             // label8
             // 
@@ -270,13 +280,6 @@
             this.label8.Size = new System.Drawing.Size(56, 13);
             this.label8.TabIndex = 15;
             this.label8.Text = "Time zone";
-            // 
-            // textBox_Basic_TimeZone
-            // 
-            this.textBox_Basic_TimeZone.Location = new System.Drawing.Point(118, 188);
-            this.textBox_Basic_TimeZone.Name = "textBox_Basic_TimeZone";
-            this.textBox_Basic_TimeZone.Size = new System.Drawing.Size(319, 20);
-            this.textBox_Basic_TimeZone.TabIndex = 16;
             // 
             // label9
             // 
@@ -294,7 +297,7 @@
             this.comboBox_OnlineMeeting_Provider.Location = new System.Drawing.Point(134, 15);
             this.comboBox_OnlineMeeting_Provider.Name = "comboBox_OnlineMeeting_Provider";
             this.comboBox_OnlineMeeting_Provider.Size = new System.Drawing.Size(121, 21);
-            this.comboBox_OnlineMeeting_Provider.TabIndex = 18;
+            this.comboBox_OnlineMeeting_Provider.TabIndex = 200;
             // 
             // comboBox_BodyType
             // 
@@ -306,14 +309,14 @@
             this.comboBox_BodyType.Location = new System.Drawing.Point(118, 214);
             this.comboBox_BodyType.Name = "comboBox_BodyType";
             this.comboBox_BodyType.Size = new System.Drawing.Size(92, 21);
-            this.comboBox_BodyType.TabIndex = 20;
+            this.comboBox_BodyType.TabIndex = 21;
             // 
             // Button_Save
             // 
             this.Button_Save.Location = new System.Drawing.Point(18, 12);
             this.Button_Save.Name = "Button_Save";
             this.Button_Save.Size = new System.Drawing.Size(75, 23);
-            this.Button_Save.TabIndex = 23;
+            this.Button_Save.TabIndex = 0;
             this.Button_Save.Text = "Save";
             this.Button_Save.UseVisualStyleBackColor = true;
             this.Button_Save.Click += new System.EventHandler(this.Button_Save_ClickAsync);
@@ -326,7 +329,7 @@
             this.dateTimePicker_Basic_StartTime.Name = "dateTimePicker_Basic_StartTime";
             this.dateTimePicker_Basic_StartTime.ShowUpDown = true;
             this.dateTimePicker_Basic_StartTime.Size = new System.Drawing.Size(59, 20);
-            this.dateTimePicker_Basic_StartTime.TabIndex = 24;
+            this.dateTimePicker_Basic_StartTime.TabIndex = 16;
             // 
             // dateTimePicker_Basic_EndTime
             // 
@@ -336,7 +339,7 @@
             this.dateTimePicker_Basic_EndTime.Name = "dateTimePicker_Basic_EndTime";
             this.dateTimePicker_Basic_EndTime.ShowUpDown = true;
             this.dateTimePicker_Basic_EndTime.Size = new System.Drawing.Size(59, 20);
-            this.dateTimePicker_Basic_EndTime.TabIndex = 25;
+            this.dateTimePicker_Basic_EndTime.TabIndex = 19;
             // 
             // checkBox_Recurring_IsRecurring
             // 
@@ -344,7 +347,7 @@
             this.checkBox_Recurring_IsRecurring.Location = new System.Drawing.Point(6, 6);
             this.checkBox_Recurring_IsRecurring.Name = "checkBox_Recurring_IsRecurring";
             this.checkBox_Recurring_IsRecurring.Size = new System.Drawing.Size(72, 17);
-            this.checkBox_Recurring_IsRecurring.TabIndex = 26;
+            this.checkBox_Recurring_IsRecurring.TabIndex = 100;
             this.checkBox_Recurring_IsRecurring.Text = "Recurring";
             this.checkBox_Recurring_IsRecurring.UseVisualStyleBackColor = true;
             this.checkBox_Recurring_IsRecurring.CheckedChanged += new System.EventHandler(this.CheckBox_Recurring_IsRecurring_CheckedChanged);
@@ -362,7 +365,7 @@
             this.groupBox_Recurring_Pattern.Location = new System.Drawing.Point(8, 28);
             this.groupBox_Recurring_Pattern.Name = "groupBox_Recurring_Pattern";
             this.groupBox_Recurring_Pattern.Size = new System.Drawing.Size(754, 280);
-            this.groupBox_Recurring_Pattern.TabIndex = 27;
+            this.groupBox_Recurring_Pattern.TabIndex = 101;
             this.groupBox_Recurring_Pattern.TabStop = false;
             this.groupBox_Recurring_Pattern.Text = "Pattern";
             // 
@@ -381,7 +384,7 @@
             this.groupBox_Recurring_Pattern_Weekly.Location = new System.Drawing.Point(81, 43);
             this.groupBox_Recurring_Pattern_Weekly.Name = "groupBox_Recurring_Pattern_Weekly";
             this.groupBox_Recurring_Pattern_Weekly.Size = new System.Drawing.Size(667, 56);
-            this.groupBox_Recurring_Pattern_Weekly.TabIndex = 50;
+            this.groupBox_Recurring_Pattern_Weekly.TabIndex = 105;
             this.groupBox_Recurring_Pattern_Weekly.TabStop = false;
             // 
             // label14
@@ -400,7 +403,7 @@
             this.comboBox_Recurring_Pattern_Weekly_Interval.Location = new System.Drawing.Point(46, 11);
             this.comboBox_Recurring_Pattern_Weekly_Interval.Name = "comboBox_Recurring_Pattern_Weekly_Interval";
             this.comboBox_Recurring_Pattern_Weekly_Interval.Size = new System.Drawing.Size(57, 21);
-            this.comboBox_Recurring_Pattern_Weekly_Interval.TabIndex = 32;
+            this.comboBox_Recurring_Pattern_Weekly_Interval.TabIndex = 107;
             // 
             // label13
             // 
@@ -417,7 +420,7 @@
             this.checkBox_Recurring_Pattern_Weekly_Sunday.Location = new System.Drawing.Point(9, 36);
             this.checkBox_Recurring_Pattern_Weekly_Sunday.Name = "checkBox_Recurring_Pattern_Weekly_Sunday";
             this.checkBox_Recurring_Pattern_Weekly_Sunday.Size = new System.Drawing.Size(45, 17);
-            this.checkBox_Recurring_Pattern_Weekly_Sunday.TabIndex = 28;
+            this.checkBox_Recurring_Pattern_Weekly_Sunday.TabIndex = 108;
             this.checkBox_Recurring_Pattern_Weekly_Sunday.Text = "Sun";
             this.checkBox_Recurring_Pattern_Weekly_Sunday.UseVisualStyleBackColor = true;
             // 
@@ -427,7 +430,7 @@
             this.checkBox_Recurring_Pattern_Weekly_Saturday.Location = new System.Drawing.Point(351, 36);
             this.checkBox_Recurring_Pattern_Weekly_Saturday.Name = "checkBox_Recurring_Pattern_Weekly_Saturday";
             this.checkBox_Recurring_Pattern_Weekly_Saturday.Size = new System.Drawing.Size(42, 17);
-            this.checkBox_Recurring_Pattern_Weekly_Saturday.TabIndex = 39;
+            this.checkBox_Recurring_Pattern_Weekly_Saturday.TabIndex = 114;
             this.checkBox_Recurring_Pattern_Weekly_Saturday.Text = "Sat";
             this.checkBox_Recurring_Pattern_Weekly_Saturday.UseVisualStyleBackColor = true;
             // 
@@ -437,7 +440,7 @@
             this.checkBox_Recurring_Pattern_Weekly_Monday.Location = new System.Drawing.Point(67, 36);
             this.checkBox_Recurring_Pattern_Weekly_Monday.Name = "checkBox_Recurring_Pattern_Weekly_Monday";
             this.checkBox_Recurring_Pattern_Weekly_Monday.Size = new System.Drawing.Size(47, 17);
-            this.checkBox_Recurring_Pattern_Weekly_Monday.TabIndex = 34;
+            this.checkBox_Recurring_Pattern_Weekly_Monday.TabIndex = 109;
             this.checkBox_Recurring_Pattern_Weekly_Monday.Text = "Mon";
             this.checkBox_Recurring_Pattern_Weekly_Monday.UseVisualStyleBackColor = true;
             // 
@@ -447,7 +450,7 @@
             this.checkBox_Recurring_Pattern_Weekly_Friday.Location = new System.Drawing.Point(305, 36);
             this.checkBox_Recurring_Pattern_Weekly_Friday.Name = "checkBox_Recurring_Pattern_Weekly_Friday";
             this.checkBox_Recurring_Pattern_Weekly_Friday.Size = new System.Drawing.Size(37, 17);
-            this.checkBox_Recurring_Pattern_Weekly_Friday.TabIndex = 38;
+            this.checkBox_Recurring_Pattern_Weekly_Friday.TabIndex = 113;
             this.checkBox_Recurring_Pattern_Weekly_Friday.Text = "Fri";
             this.checkBox_Recurring_Pattern_Weekly_Friday.UseVisualStyleBackColor = true;
             // 
@@ -457,7 +460,7 @@
             this.checkBox_Recurring_Pattern_Weekly_Tuesday.Location = new System.Drawing.Point(127, 36);
             this.checkBox_Recurring_Pattern_Weekly_Tuesday.Name = "checkBox_Recurring_Pattern_Weekly_Tuesday";
             this.checkBox_Recurring_Pattern_Weekly_Tuesday.Size = new System.Drawing.Size(45, 17);
-            this.checkBox_Recurring_Pattern_Weekly_Tuesday.TabIndex = 35;
+            this.checkBox_Recurring_Pattern_Weekly_Tuesday.TabIndex = 110;
             this.checkBox_Recurring_Pattern_Weekly_Tuesday.Text = "Tue";
             this.checkBox_Recurring_Pattern_Weekly_Tuesday.UseVisualStyleBackColor = true;
             // 
@@ -467,7 +470,7 @@
             this.checkBox_Recurring_Pattern_Weekly_Thursday.Location = new System.Drawing.Point(247, 36);
             this.checkBox_Recurring_Pattern_Weekly_Thursday.Name = "checkBox_Recurring_Pattern_Weekly_Thursday";
             this.checkBox_Recurring_Pattern_Weekly_Thursday.Size = new System.Drawing.Size(45, 17);
-            this.checkBox_Recurring_Pattern_Weekly_Thursday.TabIndex = 37;
+            this.checkBox_Recurring_Pattern_Weekly_Thursday.TabIndex = 112;
             this.checkBox_Recurring_Pattern_Weekly_Thursday.Text = "Thu";
             this.checkBox_Recurring_Pattern_Weekly_Thursday.UseVisualStyleBackColor = true;
             // 
@@ -477,7 +480,7 @@
             this.checkBox_Recurring_Pattern_Weekly_Wednesday.Location = new System.Drawing.Point(185, 36);
             this.checkBox_Recurring_Pattern_Weekly_Wednesday.Name = "checkBox_Recurring_Pattern_Weekly_Wednesday";
             this.checkBox_Recurring_Pattern_Weekly_Wednesday.Size = new System.Drawing.Size(49, 17);
-            this.checkBox_Recurring_Pattern_Weekly_Wednesday.TabIndex = 36;
+            this.checkBox_Recurring_Pattern_Weekly_Wednesday.TabIndex = 110;
             this.checkBox_Recurring_Pattern_Weekly_Wednesday.Text = "Wed";
             this.checkBox_Recurring_Pattern_Weekly_Wednesday.UseVisualStyleBackColor = true;
             // 
@@ -489,7 +492,7 @@
             this.groupBox_Recurring_Pattern_Daily.Location = new System.Drawing.Point(81, 6);
             this.groupBox_Recurring_Pattern_Daily.Name = "groupBox_Recurring_Pattern_Daily";
             this.groupBox_Recurring_Pattern_Daily.Size = new System.Drawing.Size(667, 38);
-            this.groupBox_Recurring_Pattern_Daily.TabIndex = 49;
+            this.groupBox_Recurring_Pattern_Daily.TabIndex = 103;
             this.groupBox_Recurring_Pattern_Daily.TabStop = false;
             // 
             // label12
@@ -517,7 +520,7 @@
             this.comboBox_Recurring_Pattern_Daily_Interval.Location = new System.Drawing.Point(46, 11);
             this.comboBox_Recurring_Pattern_Daily_Interval.Name = "comboBox_Recurring_Pattern_Daily_Interval";
             this.comboBox_Recurring_Pattern_Daily_Interval.Size = new System.Drawing.Size(57, 21);
-            this.comboBox_Recurring_Pattern_Daily_Interval.TabIndex = 29;
+            this.comboBox_Recurring_Pattern_Daily_Interval.TabIndex = 106;
             // 
             // groupBox_Recurring_Pattern_Yearly
             // 
@@ -543,7 +546,7 @@
             this.groupBox_Recurring_Pattern_Yearly.Location = new System.Drawing.Point(81, 181);
             this.groupBox_Recurring_Pattern_Yearly.Name = "groupBox_Recurring_Pattern_Yearly";
             this.groupBox_Recurring_Pattern_Yearly.Size = new System.Drawing.Size(667, 92);
-            this.groupBox_Recurring_Pattern_Yearly.TabIndex = 48;
+            this.groupBox_Recurring_Pattern_Yearly.TabIndex = 109;
             this.groupBox_Recurring_Pattern_Yearly.TabStop = false;
             // 
             // checkBox_Recurring_Pattern_Yearly_Sunday
@@ -552,7 +555,7 @@
             this.checkBox_Recurring_Pattern_Yearly_Sunday.Location = new System.Drawing.Point(197, 67);
             this.checkBox_Recurring_Pattern_Yearly_Sunday.Name = "checkBox_Recurring_Pattern_Yearly_Sunday";
             this.checkBox_Recurring_Pattern_Yearly_Sunday.Size = new System.Drawing.Size(45, 17);
-            this.checkBox_Recurring_Pattern_Yearly_Sunday.TabIndex = 54;
+            this.checkBox_Recurring_Pattern_Yearly_Sunday.TabIndex = 134;
             this.checkBox_Recurring_Pattern_Yearly_Sunday.Text = "Sun";
             this.checkBox_Recurring_Pattern_Yearly_Sunday.UseVisualStyleBackColor = true;
             // 
@@ -562,7 +565,7 @@
             this.checkBox_Recurring_Pattern_Yearly_Saturday.Location = new System.Drawing.Point(539, 67);
             this.checkBox_Recurring_Pattern_Yearly_Saturday.Name = "checkBox_Recurring_Pattern_Yearly_Saturday";
             this.checkBox_Recurring_Pattern_Yearly_Saturday.Size = new System.Drawing.Size(42, 17);
-            this.checkBox_Recurring_Pattern_Yearly_Saturday.TabIndex = 60;
+            this.checkBox_Recurring_Pattern_Yearly_Saturday.TabIndex = 140;
             this.checkBox_Recurring_Pattern_Yearly_Saturday.Text = "Sat";
             this.checkBox_Recurring_Pattern_Yearly_Saturday.UseVisualStyleBackColor = true;
             // 
@@ -581,7 +584,7 @@
             this.checkBox_Recurring_Pattern_Yearly_Monday.Location = new System.Drawing.Point(255, 67);
             this.checkBox_Recurring_Pattern_Yearly_Monday.Name = "checkBox_Recurring_Pattern_Yearly_Monday";
             this.checkBox_Recurring_Pattern_Yearly_Monday.Size = new System.Drawing.Size(47, 17);
-            this.checkBox_Recurring_Pattern_Yearly_Monday.TabIndex = 55;
+            this.checkBox_Recurring_Pattern_Yearly_Monday.TabIndex = 135;
             this.checkBox_Recurring_Pattern_Yearly_Monday.Text = "Mon";
             this.checkBox_Recurring_Pattern_Yearly_Monday.UseVisualStyleBackColor = true;
             // 
@@ -592,7 +595,7 @@
             this.comboBox_Recurring_Pattern_Yearly_Absolute_Month.Location = new System.Drawing.Point(325, 13);
             this.comboBox_Recurring_Pattern_Yearly_Absolute_Month.Name = "comboBox_Recurring_Pattern_Yearly_Absolute_Month";
             this.comboBox_Recurring_Pattern_Yearly_Absolute_Month.Size = new System.Drawing.Size(77, 21);
-            this.comboBox_Recurring_Pattern_Yearly_Absolute_Month.TabIndex = 50;
+            this.comboBox_Recurring_Pattern_Yearly_Absolute_Month.TabIndex = 130;
             // 
             // checkBox_Recurring_Pattern_Yearly_Friday
             // 
@@ -600,7 +603,7 @@
             this.checkBox_Recurring_Pattern_Yearly_Friday.Location = new System.Drawing.Point(493, 67);
             this.checkBox_Recurring_Pattern_Yearly_Friday.Name = "checkBox_Recurring_Pattern_Yearly_Friday";
             this.checkBox_Recurring_Pattern_Yearly_Friday.Size = new System.Drawing.Size(37, 17);
-            this.checkBox_Recurring_Pattern_Yearly_Friday.TabIndex = 59;
+            this.checkBox_Recurring_Pattern_Yearly_Friday.TabIndex = 139;
             this.checkBox_Recurring_Pattern_Yearly_Friday.Text = "Fri";
             this.checkBox_Recurring_Pattern_Yearly_Friday.UseVisualStyleBackColor = true;
             // 
@@ -611,7 +614,7 @@
             this.comboBox_Recurring_Pattern_Yearly_Interval.Location = new System.Drawing.Point(46, 13);
             this.comboBox_Recurring_Pattern_Yearly_Interval.Name = "comboBox_Recurring_Pattern_Yearly_Interval";
             this.comboBox_Recurring_Pattern_Yearly_Interval.Size = new System.Drawing.Size(57, 21);
-            this.comboBox_Recurring_Pattern_Yearly_Interval.TabIndex = 55;
+            this.comboBox_Recurring_Pattern_Yearly_Interval.TabIndex = 127;
             // 
             // checkBox_Recurring_Pattern_Yearly_Tuesday
             // 
@@ -619,7 +622,7 @@
             this.checkBox_Recurring_Pattern_Yearly_Tuesday.Location = new System.Drawing.Point(315, 67);
             this.checkBox_Recurring_Pattern_Yearly_Tuesday.Name = "checkBox_Recurring_Pattern_Yearly_Tuesday";
             this.checkBox_Recurring_Pattern_Yearly_Tuesday.Size = new System.Drawing.Size(45, 17);
-            this.checkBox_Recurring_Pattern_Yearly_Tuesday.TabIndex = 56;
+            this.checkBox_Recurring_Pattern_Yearly_Tuesday.TabIndex = 136;
             this.checkBox_Recurring_Pattern_Yearly_Tuesday.Text = "Tue";
             this.checkBox_Recurring_Pattern_Yearly_Tuesday.UseVisualStyleBackColor = true;
             // 
@@ -638,7 +641,7 @@
             this.checkBox_Recurring_Pattern_Yearly_Thursday.Location = new System.Drawing.Point(435, 67);
             this.checkBox_Recurring_Pattern_Yearly_Thursday.Name = "checkBox_Recurring_Pattern_Yearly_Thursday";
             this.checkBox_Recurring_Pattern_Yearly_Thursday.Size = new System.Drawing.Size(45, 17);
-            this.checkBox_Recurring_Pattern_Yearly_Thursday.TabIndex = 58;
+            this.checkBox_Recurring_Pattern_Yearly_Thursday.TabIndex = 138;
             this.checkBox_Recurring_Pattern_Yearly_Thursday.Text = "Thu";
             this.checkBox_Recurring_Pattern_Yearly_Thursday.UseVisualStyleBackColor = true;
             // 
@@ -649,7 +652,7 @@
             this.comboBox_Recurring_Pattern_Yearly_Relative_Month.Location = new System.Drawing.Point(551, 40);
             this.comboBox_Recurring_Pattern_Yearly_Relative_Month.Name = "comboBox_Recurring_Pattern_Yearly_Relative_Month";
             this.comboBox_Recurring_Pattern_Yearly_Relative_Month.Size = new System.Drawing.Size(77, 21);
-            this.comboBox_Recurring_Pattern_Yearly_Relative_Month.TabIndex = 49;
+            this.comboBox_Recurring_Pattern_Yearly_Relative_Month.TabIndex = 133;
             // 
             // checkBox_Recurring_Pattern_Yearly_Wednesday
             // 
@@ -657,7 +660,7 @@
             this.checkBox_Recurring_Pattern_Yearly_Wednesday.Location = new System.Drawing.Point(373, 67);
             this.checkBox_Recurring_Pattern_Yearly_Wednesday.Name = "checkBox_Recurring_Pattern_Yearly_Wednesday";
             this.checkBox_Recurring_Pattern_Yearly_Wednesday.Size = new System.Drawing.Size(49, 17);
-            this.checkBox_Recurring_Pattern_Yearly_Wednesday.TabIndex = 57;
+            this.checkBox_Recurring_Pattern_Yearly_Wednesday.TabIndex = 137;
             this.checkBox_Recurring_Pattern_Yearly_Wednesday.Text = "Wed";
             this.checkBox_Recurring_Pattern_Yearly_Wednesday.UseVisualStyleBackColor = true;
             // 
@@ -677,7 +680,7 @@
             this.comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Location = new System.Drawing.Point(426, 40);
             this.comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Name = "comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex";
             this.comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Size = new System.Drawing.Size(57, 21);
-            this.comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.TabIndex = 45;
+            this.comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.TabIndex = 132;
             // 
             // label_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex
             // 
@@ -695,7 +698,7 @@
             this.comboBox_Recurring_Pattern_Yearly_Absolute_Day.Location = new System.Drawing.Point(426, 13);
             this.comboBox_Recurring_Pattern_Yearly_Absolute_Day.Name = "comboBox_Recurring_Pattern_Yearly_Absolute_Day";
             this.comboBox_Recurring_Pattern_Yearly_Absolute_Day.Size = new System.Drawing.Size(57, 21);
-            this.comboBox_Recurring_Pattern_Yearly_Absolute_Day.TabIndex = 42;
+            this.comboBox_Recurring_Pattern_Yearly_Absolute_Day.TabIndex = 131;
             // 
             // label_Recurring_Pattern_Yearly_Absolute_Date
             // 
@@ -712,7 +715,7 @@
             this.radioButton_Recurring_Pattern_Yearly_RelativeYearlyPattern.Location = new System.Drawing.Point(170, 41);
             this.radioButton_Recurring_Pattern_Yearly_RelativeYearlyPattern.Name = "radioButton_Recurring_Pattern_Yearly_RelativeYearlyPattern";
             this.radioButton_Recurring_Pattern_Yearly_RelativeYearlyPattern.Size = new System.Drawing.Size(133, 17);
-            this.radioButton_Recurring_Pattern_Yearly_RelativeYearlyPattern.TabIndex = 42;
+            this.radioButton_Recurring_Pattern_Yearly_RelativeYearlyPattern.TabIndex = 129;
             this.radioButton_Recurring_Pattern_Yearly_RelativeYearlyPattern.TabStop = true;
             this.radioButton_Recurring_Pattern_Yearly_RelativeYearlyPattern.Text = "Relative Yearly Pattern";
             this.radioButton_Recurring_Pattern_Yearly_RelativeYearlyPattern.UseVisualStyleBackColor = true;
@@ -724,7 +727,7 @@
             this.radioButton_Recurring_Pattern_Yearly_OnSpecificDay.Location = new System.Drawing.Point(170, 14);
             this.radioButton_Recurring_Pattern_Yearly_OnSpecificDay.Name = "radioButton_Recurring_Pattern_Yearly_OnSpecificDay";
             this.radioButton_Recurring_Pattern_Yearly_OnSpecificDay.Size = new System.Drawing.Size(98, 17);
-            this.radioButton_Recurring_Pattern_Yearly_OnSpecificDay.TabIndex = 41;
+            this.radioButton_Recurring_Pattern_Yearly_OnSpecificDay.TabIndex = 128;
             this.radioButton_Recurring_Pattern_Yearly_OnSpecificDay.TabStop = true;
             this.radioButton_Recurring_Pattern_Yearly_OnSpecificDay.Text = "On specific day";
             this.radioButton_Recurring_Pattern_Yearly_OnSpecificDay.UseVisualStyleBackColor = true;
@@ -751,7 +754,7 @@
             this.groupBox_Recurring_Pattern_Monthly.Location = new System.Drawing.Point(81, 96);
             this.groupBox_Recurring_Pattern_Monthly.Name = "groupBox_Recurring_Pattern_Monthly";
             this.groupBox_Recurring_Pattern_Monthly.Size = new System.Drawing.Size(667, 86);
-            this.groupBox_Recurring_Pattern_Monthly.TabIndex = 40;
+            this.groupBox_Recurring_Pattern_Monthly.TabIndex = 107;
             this.groupBox_Recurring_Pattern_Monthly.TabStop = false;
             // 
             // checkBox_Recurring_Pattern_Monthly_Sunday
@@ -760,7 +763,7 @@
             this.checkBox_Recurring_Pattern_Monthly_Sunday.Location = new System.Drawing.Point(197, 65);
             this.checkBox_Recurring_Pattern_Monthly_Sunday.Name = "checkBox_Recurring_Pattern_Monthly_Sunday";
             this.checkBox_Recurring_Pattern_Monthly_Sunday.Size = new System.Drawing.Size(45, 17);
-            this.checkBox_Recurring_Pattern_Monthly_Sunday.TabIndex = 40;
+            this.checkBox_Recurring_Pattern_Monthly_Sunday.TabIndex = 120;
             this.checkBox_Recurring_Pattern_Monthly_Sunday.Text = "Sun";
             this.checkBox_Recurring_Pattern_Monthly_Sunday.UseVisualStyleBackColor = true;
             // 
@@ -770,7 +773,7 @@
             this.checkBox_Recurring_Pattern_Monthly_Saturday.Location = new System.Drawing.Point(539, 65);
             this.checkBox_Recurring_Pattern_Monthly_Saturday.Name = "checkBox_Recurring_Pattern_Monthly_Saturday";
             this.checkBox_Recurring_Pattern_Monthly_Saturday.Size = new System.Drawing.Size(42, 17);
-            this.checkBox_Recurring_Pattern_Monthly_Saturday.TabIndex = 46;
+            this.checkBox_Recurring_Pattern_Monthly_Saturday.TabIndex = 126;
             this.checkBox_Recurring_Pattern_Monthly_Saturday.Text = "Sat";
             this.checkBox_Recurring_Pattern_Monthly_Saturday.UseVisualStyleBackColor = true;
             // 
@@ -789,7 +792,7 @@
             this.checkBox_Recurring_Pattern_Monthly_Monday.Location = new System.Drawing.Point(255, 65);
             this.checkBox_Recurring_Pattern_Monthly_Monday.Name = "checkBox_Recurring_Pattern_Monthly_Monday";
             this.checkBox_Recurring_Pattern_Monthly_Monday.Size = new System.Drawing.Size(47, 17);
-            this.checkBox_Recurring_Pattern_Monthly_Monday.TabIndex = 41;
+            this.checkBox_Recurring_Pattern_Monthly_Monday.TabIndex = 121;
             this.checkBox_Recurring_Pattern_Monthly_Monday.Text = "Mon";
             this.checkBox_Recurring_Pattern_Monthly_Monday.UseVisualStyleBackColor = true;
             // 
@@ -800,7 +803,7 @@
             this.comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.Location = new System.Drawing.Point(426, 38);
             this.comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.Name = "comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex";
             this.comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.Size = new System.Drawing.Size(57, 21);
-            this.comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.TabIndex = 47;
+            this.comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.TabIndex = 119;
             // 
             // checkBox_Recurring_Pattern_Monthly_Friday
             // 
@@ -808,7 +811,7 @@
             this.checkBox_Recurring_Pattern_Monthly_Friday.Location = new System.Drawing.Point(493, 65);
             this.checkBox_Recurring_Pattern_Monthly_Friday.Name = "checkBox_Recurring_Pattern_Monthly_Friday";
             this.checkBox_Recurring_Pattern_Monthly_Friday.Size = new System.Drawing.Size(37, 17);
-            this.checkBox_Recurring_Pattern_Monthly_Friday.TabIndex = 45;
+            this.checkBox_Recurring_Pattern_Monthly_Friday.TabIndex = 125;
             this.checkBox_Recurring_Pattern_Monthly_Friday.Text = "Fri";
             this.checkBox_Recurring_Pattern_Monthly_Friday.UseVisualStyleBackColor = true;
             // 
@@ -819,7 +822,7 @@
             this.comboBox_Recurring_Pattern_Monthly_Interval.Location = new System.Drawing.Point(46, 11);
             this.comboBox_Recurring_Pattern_Monthly_Interval.Name = "comboBox_Recurring_Pattern_Monthly_Interval";
             this.comboBox_Recurring_Pattern_Monthly_Interval.Size = new System.Drawing.Size(57, 21);
-            this.comboBox_Recurring_Pattern_Monthly_Interval.TabIndex = 52;
+            this.comboBox_Recurring_Pattern_Monthly_Interval.TabIndex = 115;
             // 
             // checkBox_Recurring_Pattern_Monthly_Tuesday
             // 
@@ -827,7 +830,7 @@
             this.checkBox_Recurring_Pattern_Monthly_Tuesday.Location = new System.Drawing.Point(315, 65);
             this.checkBox_Recurring_Pattern_Monthly_Tuesday.Name = "checkBox_Recurring_Pattern_Monthly_Tuesday";
             this.checkBox_Recurring_Pattern_Monthly_Tuesday.Size = new System.Drawing.Size(45, 17);
-            this.checkBox_Recurring_Pattern_Monthly_Tuesday.TabIndex = 42;
+            this.checkBox_Recurring_Pattern_Monthly_Tuesday.TabIndex = 122;
             this.checkBox_Recurring_Pattern_Monthly_Tuesday.Text = "Tue";
             this.checkBox_Recurring_Pattern_Monthly_Tuesday.UseVisualStyleBackColor = true;
             // 
@@ -846,7 +849,7 @@
             this.checkBox_Recurring_Pattern_Monthly_Thursday.Location = new System.Drawing.Point(435, 65);
             this.checkBox_Recurring_Pattern_Monthly_Thursday.Name = "checkBox_Recurring_Pattern_Monthly_Thursday";
             this.checkBox_Recurring_Pattern_Monthly_Thursday.Size = new System.Drawing.Size(45, 17);
-            this.checkBox_Recurring_Pattern_Monthly_Thursday.TabIndex = 44;
+            this.checkBox_Recurring_Pattern_Monthly_Thursday.TabIndex = 124;
             this.checkBox_Recurring_Pattern_Monthly_Thursday.Text = "Thu";
             this.checkBox_Recurring_Pattern_Monthly_Thursday.UseVisualStyleBackColor = true;
             // 
@@ -865,7 +868,7 @@
             this.checkBox_Recurring_Pattern_Monthly_Wednesday.Location = new System.Drawing.Point(373, 65);
             this.checkBox_Recurring_Pattern_Monthly_Wednesday.Name = "checkBox_Recurring_Pattern_Monthly_Wednesday";
             this.checkBox_Recurring_Pattern_Monthly_Wednesday.Size = new System.Drawing.Size(49, 17);
-            this.checkBox_Recurring_Pattern_Monthly_Wednesday.TabIndex = 43;
+            this.checkBox_Recurring_Pattern_Monthly_Wednesday.TabIndex = 123;
             this.checkBox_Recurring_Pattern_Monthly_Wednesday.Text = "Wed";
             this.checkBox_Recurring_Pattern_Monthly_Wednesday.UseVisualStyleBackColor = true;
             // 
@@ -876,7 +879,7 @@
             this.comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.Location = new System.Drawing.Point(426, 11);
             this.comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.Name = "comboBox_Recurring_Pattern_Monthly_DayOfTheMonth";
             this.comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.Size = new System.Drawing.Size(57, 21);
-            this.comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.TabIndex = 41;
+            this.comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.TabIndex = 118;
             // 
             // label_Recurring_Pattern_Monthly_DayOfTheMonth
             // 
@@ -893,7 +896,7 @@
             this.radioButton_Recurring_Pattern_Monthly_RelativeMonthlyPattern.Location = new System.Drawing.Point(170, 39);
             this.radioButton_Recurring_Pattern_Monthly_RelativeMonthlyPattern.Name = "radioButton_Recurring_Pattern_Monthly_RelativeMonthlyPattern";
             this.radioButton_Recurring_Pattern_Monthly_RelativeMonthlyPattern.Size = new System.Drawing.Size(141, 17);
-            this.radioButton_Recurring_Pattern_Monthly_RelativeMonthlyPattern.TabIndex = 42;
+            this.radioButton_Recurring_Pattern_Monthly_RelativeMonthlyPattern.TabIndex = 117;
             this.radioButton_Recurring_Pattern_Monthly_RelativeMonthlyPattern.TabStop = true;
             this.radioButton_Recurring_Pattern_Monthly_RelativeMonthlyPattern.Text = "Relative Monthly Pattern";
             this.radioButton_Recurring_Pattern_Monthly_RelativeMonthlyPattern.UseVisualStyleBackColor = true;
@@ -905,7 +908,7 @@
             this.radioButton_Recurring_Pattern_Monthly_MonthlyPattern.Location = new System.Drawing.Point(170, 12);
             this.radioButton_Recurring_Pattern_Monthly_MonthlyPattern.Name = "radioButton_Recurring_Pattern_Monthly_MonthlyPattern";
             this.radioButton_Recurring_Pattern_Monthly_MonthlyPattern.Size = new System.Drawing.Size(99, 17);
-            this.radioButton_Recurring_Pattern_Monthly_MonthlyPattern.TabIndex = 41;
+            this.radioButton_Recurring_Pattern_Monthly_MonthlyPattern.TabIndex = 116;
             this.radioButton_Recurring_Pattern_Monthly_MonthlyPattern.TabStop = true;
             this.radioButton_Recurring_Pattern_Monthly_MonthlyPattern.Text = "Monthly Pattern";
             this.radioButton_Recurring_Pattern_Monthly_MonthlyPattern.UseVisualStyleBackColor = true;
@@ -917,7 +920,7 @@
             this.radioButton_Recurring_Pattern_Yearly.Location = new System.Drawing.Point(6, 195);
             this.radioButton_Recurring_Pattern_Yearly.Name = "radioButton_Recurring_Pattern_Yearly";
             this.radioButton_Recurring_Pattern_Yearly.Size = new System.Drawing.Size(54, 17);
-            this.radioButton_Recurring_Pattern_Yearly.TabIndex = 3;
+            this.radioButton_Recurring_Pattern_Yearly.TabIndex = 108;
             this.radioButton_Recurring_Pattern_Yearly.TabStop = true;
             this.radioButton_Recurring_Pattern_Yearly.Text = "Yearly";
             this.radioButton_Recurring_Pattern_Yearly.UseVisualStyleBackColor = true;
@@ -929,7 +932,7 @@
             this.radioButton_Recurring_Pattern_Monthly.Location = new System.Drawing.Point(6, 108);
             this.radioButton_Recurring_Pattern_Monthly.Name = "radioButton_Recurring_Pattern_Monthly";
             this.radioButton_Recurring_Pattern_Monthly.Size = new System.Drawing.Size(62, 17);
-            this.radioButton_Recurring_Pattern_Monthly.TabIndex = 2;
+            this.radioButton_Recurring_Pattern_Monthly.TabIndex = 106;
             this.radioButton_Recurring_Pattern_Monthly.TabStop = true;
             this.radioButton_Recurring_Pattern_Monthly.Text = "Monthly";
             this.radioButton_Recurring_Pattern_Monthly.UseVisualStyleBackColor = true;
@@ -941,7 +944,7 @@
             this.radioButton_Recurring_Pattern_Weekly.Location = new System.Drawing.Point(6, 53);
             this.radioButton_Recurring_Pattern_Weekly.Name = "radioButton_Recurring_Pattern_Weekly";
             this.radioButton_Recurring_Pattern_Weekly.Size = new System.Drawing.Size(61, 17);
-            this.radioButton_Recurring_Pattern_Weekly.TabIndex = 1;
+            this.radioButton_Recurring_Pattern_Weekly.TabIndex = 104;
             this.radioButton_Recurring_Pattern_Weekly.TabStop = true;
             this.radioButton_Recurring_Pattern_Weekly.Text = "Weekly";
             this.radioButton_Recurring_Pattern_Weekly.UseVisualStyleBackColor = true;
@@ -953,7 +956,7 @@
             this.radioButton_Recurring_Pattern_Daily.Location = new System.Drawing.Point(6, 16);
             this.radioButton_Recurring_Pattern_Daily.Name = "radioButton_Recurring_Pattern_Daily";
             this.radioButton_Recurring_Pattern_Daily.Size = new System.Drawing.Size(48, 17);
-            this.radioButton_Recurring_Pattern_Daily.TabIndex = 0;
+            this.radioButton_Recurring_Pattern_Daily.TabIndex = 102;
             this.radioButton_Recurring_Pattern_Daily.TabStop = true;
             this.radioButton_Recurring_Pattern_Daily.Text = "Daily";
             this.radioButton_Recurring_Pattern_Daily.UseVisualStyleBackColor = true;
@@ -971,10 +974,11 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(772, 421);
-            this.tabControl1.TabIndex = 50;
+            this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.comboBox_Basic_TimeZone);
             this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.textBox_Body);
             this.tabPage1.Controls.Add(this.comboBox_BodyType);
@@ -992,7 +996,6 @@
             this.tabPage1.Controls.Add(this.textBox_Basic_ResourceAttendees);
             this.tabPage1.Controls.Add(this.dateTimePicker_Basic_StartDate);
             this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.textBox_Basic_TimeZone);
             this.tabPage1.Controls.Add(this.checkBox_Basic_IsAllDay);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.label7);
@@ -1023,7 +1026,7 @@
             this.textBox_Body.Multiline = true;
             this.textBox_Body.Name = "textBox_Body";
             this.textBox_Body.Size = new System.Drawing.Size(749, 148);
-            this.textBox_Body.TabIndex = 26;
+            this.textBox_Body.TabIndex = 22;
             // 
             // tabPage2
             // 
@@ -1051,7 +1054,7 @@
             this.groupBox_Recurring_Range.Location = new System.Drawing.Point(8, 312);
             this.groupBox_Recurring_Range.Name = "groupBox_Recurring_Range";
             this.groupBox_Recurring_Range.Size = new System.Drawing.Size(754, 69);
-            this.groupBox_Recurring_Range.TabIndex = 28;
+            this.groupBox_Recurring_Range.TabIndex = 141;
             this.groupBox_Recurring_Range.TabStop = false;
             this.groupBox_Recurring_Range.Text = "Range";
             // 
@@ -1062,7 +1065,7 @@
             this.comboBox_Recurring_Range_NumberOfConcurrences.Location = new System.Drawing.Point(298, 42);
             this.comboBox_Recurring_Range_NumberOfConcurrences.Name = "comboBox_Recurring_Range_NumberOfConcurrences";
             this.comboBox_Recurring_Range_NumberOfConcurrences.Size = new System.Drawing.Size(57, 21);
-            this.comboBox_Recurring_Range_NumberOfConcurrences.TabIndex = 56;
+            this.comboBox_Recurring_Range_NumberOfConcurrences.TabIndex = 145;
             // 
             // dateTimePicker_Recurring_Range_EndByDate
             // 
@@ -1070,7 +1073,7 @@
             this.dateTimePicker_Recurring_Range_EndByDate.Location = new System.Drawing.Point(481, 43);
             this.dateTimePicker_Recurring_Range_EndByDate.Name = "dateTimePicker_Recurring_Range_EndByDate";
             this.dateTimePicker_Recurring_Range_EndByDate.Size = new System.Drawing.Size(100, 20);
-            this.dateTimePicker_Recurring_Range_EndByDate.TabIndex = 52;
+            this.dateTimePicker_Recurring_Range_EndByDate.TabIndex = 146;
             // 
             // radioButton_Recurring_Range_EndBy
             // 
@@ -1078,7 +1081,7 @@
             this.radioButton_Recurring_Range_EndBy.Location = new System.Drawing.Point(386, 45);
             this.radioButton_Recurring_Range_EndBy.Name = "radioButton_Recurring_Range_EndBy";
             this.radioButton_Recurring_Range_EndBy.Size = new System.Drawing.Size(82, 17);
-            this.radioButton_Recurring_Range_EndBy.TabIndex = 51;
+            this.radioButton_Recurring_Range_EndBy.TabIndex = 144;
             this.radioButton_Recurring_Range_EndBy.TabStop = true;
             this.radioButton_Recurring_Range_EndBy.Text = "End by date";
             this.radioButton_Recurring_Range_EndBy.UseVisualStyleBackColor = true;
@@ -1090,7 +1093,7 @@
             this.radioButton_Recurring_Range_EndAfter.Location = new System.Drawing.Point(142, 45);
             this.radioButton_Recurring_Range_EndAfter.Name = "radioButton_Recurring_Range_EndAfter";
             this.radioButton_Recurring_Range_EndAfter.Size = new System.Drawing.Size(143, 17);
-            this.radioButton_Recurring_Range_EndAfter.TabIndex = 49;
+            this.radioButton_Recurring_Range_EndAfter.TabIndex = 143;
             this.radioButton_Recurring_Range_EndAfter.TabStop = true;
             this.radioButton_Recurring_Range_EndAfter.Text = "End after # occurrences:";
             this.radioButton_Recurring_Range_EndAfter.UseVisualStyleBackColor = true;
@@ -1102,7 +1105,7 @@
             this.radioButton_Recurring_Range_NoEnd.Location = new System.Drawing.Point(43, 45);
             this.radioButton_Recurring_Range_NoEnd.Name = "radioButton_Recurring_Range_NoEnd";
             this.radioButton_Recurring_Range_NoEnd.Size = new System.Drawing.Size(61, 17);
-            this.radioButton_Recurring_Range_NoEnd.TabIndex = 48;
+            this.radioButton_Recurring_Range_NoEnd.TabIndex = 142;
             this.radioButton_Recurring_Range_NoEnd.TabStop = true;
             this.radioButton_Recurring_Range_NoEnd.Text = "No End";
             this.radioButton_Recurring_Range_NoEnd.UseVisualStyleBackColor = true;
@@ -1122,7 +1125,7 @@
             this.dateTimePicker_Recurring_Range_Start.Location = new System.Drawing.Point(43, 17);
             this.dateTimePicker_Recurring_Range_Start.Name = "dateTimePicker_Recurring_Range_Start";
             this.dateTimePicker_Recurring_Range_Start.Size = new System.Drawing.Size(100, 20);
-            this.dateTimePicker_Recurring_Range_Start.TabIndex = 12;
+            this.dateTimePicker_Recurring_Range_Start.TabIndex = 141;
             this.dateTimePicker_Recurring_Range_Start.ValueChanged += new System.EventHandler(this.DateTimePicker_Recurring_Range_Start_ValueChanged);
             // 
             // label25
@@ -1145,6 +1148,15 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Online meeting";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // comboBox_Basic_TimeZone
+            // 
+            this.comboBox_Basic_TimeZone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_Basic_TimeZone.FormattingEnabled = true;
+            this.comboBox_Basic_TimeZone.Location = new System.Drawing.Point(118, 188);
+            this.comboBox_Basic_TimeZone.Name = "comboBox_Basic_TimeZone";
+            this.comboBox_Basic_TimeZone.Size = new System.Drawing.Size(319, 21);
+            this.comboBox_Basic_TimeZone.TabIndex = 20;
             // 
             // CreateEventForm
             // 
@@ -1198,7 +1210,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DateTimePicker dateTimePicker_Basic_EndDate;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox_Basic_TimeZone;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comboBox_OnlineMeeting_Provider;
         private System.Windows.Forms.ComboBox comboBox_BodyType;
@@ -1278,5 +1289,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox_Body;
         private System.Windows.Forms.ComboBox comboBox_Recurring_Range_NumberOfConcurrences;
+        private System.Windows.Forms.ComboBox comboBox_Basic_TimeZone;
     }
 }

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
@@ -473,6 +474,116 @@ namespace Office365APIEditor
 #endif
 
             return $"Office365APIEditor - {FunctionName} - {friendlyVersion} {debugIndicator}";
+        }
+
+        public static ReadOnlyCollection<string> GetCalendarApiSupportedTimeZones()
+        {
+            // https://docs.microsoft.com/en-us/graph/api/resources/datetimetimezone?view=graph-rest-1.0#additional-time-zones
+            // As of 2020/07/16
+
+            List<string> timeZones = new List<string>();
+
+            timeZones.Add("Etc/GMT+12");
+            timeZones.Add("Etc/GMT+11");
+            timeZones.Add("Pacific/Honolulu");
+            timeZones.Add("America/Anchorage");
+            timeZones.Add("America/Santa_Isabel");
+            timeZones.Add("America/Los_Angeles");
+            timeZones.Add("America/Phoenix");
+            timeZones.Add("America/Chihuahua");
+            timeZones.Add("America/Denver");
+            timeZones.Add("America/Guatemala");
+            timeZones.Add("America/Chicago");
+            timeZones.Add("America/Mexico_City");
+            timeZones.Add("America/Regina");
+            timeZones.Add("America/Bogota");
+            timeZones.Add("America/New_York");
+            timeZones.Add("America/Indiana/Indianapolis");
+            timeZones.Add("America/Caracas");
+            timeZones.Add("America/Asuncion");
+            timeZones.Add("America/Halifax");
+            timeZones.Add("America/Cuiaba");
+            timeZones.Add("America/La_Paz");
+            timeZones.Add("America/Santiago");
+            timeZones.Add("America/St_Johns");
+            timeZones.Add("America/Sao_Paulo");
+            timeZones.Add("America/Argentina/Buenos_Aires");
+            timeZones.Add("America/Cayenne");
+            timeZones.Add("America/Godthab");
+            timeZones.Add("America/Montevideo");
+            timeZones.Add("America/Bahia");
+            timeZones.Add("Etc/GMT+2");
+            timeZones.Add("Atlantic/Azores");
+            timeZones.Add("Atlantic/Cape_Verde");
+            timeZones.Add("Africa/Casablanca");
+            timeZones.Add("Etc/GMT");
+            timeZones.Add("Europe/London");
+            timeZones.Add("Atlantic/Reykjavik");
+            timeZones.Add("Europe/Berlin");
+            timeZones.Add("Europe/Budapest");
+            timeZones.Add("Europe/Paris");
+            timeZones.Add("Europe/Warsaw");
+            timeZones.Add("Africa/Lagos");
+            timeZones.Add("Africa/Windhoek");
+            timeZones.Add("Europe/Bucharest");
+            timeZones.Add("Asia/Beirut");
+            timeZones.Add("Africa/Cairo");
+            timeZones.Add("Asia/Damascus");
+            timeZones.Add("Africa/Johannesburg");
+            timeZones.Add("Europe/Kiev"); // Europe/Kyiv (Kiev)
+            timeZones.Add("Europe/Istanbul");
+            timeZones.Add("Asia/Jerusalem");
+            timeZones.Add("Asia/Amman");
+            timeZones.Add("Asia/Baghdad");
+            timeZones.Add("Europe/Kaliningrad");
+            timeZones.Add("Asia/Riyadh");
+            timeZones.Add("Africa/Nairobi");
+            timeZones.Add("Asia/Tehran");
+            timeZones.Add("Asia/Dubai");
+            timeZones.Add("Asia/Baku");
+            timeZones.Add("Europe/Moscow");
+            timeZones.Add("Indian/Mauritius");
+            timeZones.Add("Asia/Tbilisi");
+            timeZones.Add("Asia/Yerevan");
+            timeZones.Add("Asia/Kabul");
+            timeZones.Add("Asia/Karachi");
+            timeZones.Add("Asia/Tashkent"); // Asia/Toshkent (Tashkent)
+            timeZones.Add("Asia/Kolkata");
+            timeZones.Add("Asia/Colombo");
+            timeZones.Add("Asia/Kathmandu");
+            timeZones.Add("Asia/Almaty"); // Asia/Astana (Almaty)
+            timeZones.Add("Asia/Dhaka");
+            timeZones.Add("Asia/Yekaterinburg");
+            timeZones.Add("Asia/Rangoon"); // Asia/Yangon (Rangoon)
+            timeZones.Add("Asia/Bangkok");
+            timeZones.Add("Asia/Novosibirsk");
+            timeZones.Add("Asia/Shanghai");
+            timeZones.Add("Asia/Krasnoyarsk");
+            timeZones.Add("Asia/Singapore");
+            timeZones.Add("Australia/Perth");
+            timeZones.Add("Asia/Taipei");
+            timeZones.Add("Asia/Ulaanbaatar");
+            timeZones.Add("Asia/Irkutsk");
+            timeZones.Add("Asia/Tokyo");
+            timeZones.Add("Asia/Seoul");
+            timeZones.Add("Australia/Adelaide");
+            timeZones.Add("Australia/Darwin");
+            timeZones.Add("Australia/Brisbane");
+            timeZones.Add("Australia/Sydney");
+            timeZones.Add("Pacific/Port_Moresby");
+            timeZones.Add("Australia/Hobart");
+            timeZones.Add("Asia/Yakutsk");
+            timeZones.Add("Pacific/Guadalcanal");
+            timeZones.Add("Asia/Vladivostok");
+            timeZones.Add("Pacific/Auckland");
+            timeZones.Add("Etc/GMT-12");
+            timeZones.Add("Pacific/Fiji");
+            timeZones.Add("Asia/Magadan");
+            timeZones.Add("Pacific/Tongatapu");
+            timeZones.Add("Pacific/Apia");
+            timeZones.Add("Pacific/Kiritimati");
+
+            return new ReadOnlyCollection<string>(timeZones);
         }
     }
 

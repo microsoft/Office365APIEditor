@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Office365APIEditor.UI
@@ -132,9 +133,40 @@ namespace Office365APIEditor.UI
             dateTimePicker_Basic_EndDate.Value = tempEndDateTime;
             dateTimePicker_Basic_EndTime.Value = tempEndDateTime;
 
-            textBox_Basic_TimeZone.Text = Util.LocalTimeZoneId;
+            string localTimeZone = Util.LocalTimeZoneId;
+
+            // Load all system time zones and add them to the combo box.
+            var timeZoneCollection = TimeZoneInfo.GetSystemTimeZones();
+            foreach (var timeZone in timeZoneCollection)
+            {
+                var matches = Regex.Matches(timeZone.DisplayName, @"^\(UTC.*\)\s");
+
+                if (matches.Count == 1)
+                {
+                    comboBox_Basic_TimeZone.Items.Add($"{matches[0]} {timeZone.Id}");
+                }
+                else
+                {
+                    comboBox_Basic_TimeZone.Items.Add(timeZone.Id);
+                }
+
+                if (timeZone.Id == localTimeZone)
+                {
+                    // Select local time zone.
+                    comboBox_Basic_TimeZone.SelectedIndex = comboBox_Basic_TimeZone.Items.Count - 1;
+                }
+            }
+
+            // Load all calendar API supported time zones and add them to the combo box.
+            foreach (var timeZone in Util.GetCalendarApiSupportedTimeZones())
+            {
+                comboBox_Basic_TimeZone.Items.Add(timeZone);
+            }
 
             comboBox_BodyType.SelectedIndex = 1;
+
+            comboBox_Recurring_Range_NumberOfConcurrences.Enabled = false;
+            dateTimePicker_Recurring_Range_EndByDate.Enabled = false;
 
             comboBox_OnlineMeeting_Provider.Items.Add("None");
             comboBox_OnlineMeeting_Provider.SelectedIndex = 0;
@@ -167,6 +199,8 @@ namespace Office365APIEditor.UI
             {
                 MessageBox.Show("Could not get allowed online meeting providers." + Environment.NewLine + Environment.NewLine + ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
+            textBox_Basic_Title.Focus();
         }
 
         private void DateTimePicker_Basic_StartDate_ValueChanged(object sender, EventArgs e)
@@ -296,8 +330,8 @@ namespace Office365APIEditor.UI
             if (dateTimePicker_Recurring_Range_EndByDate.Value.Date < newStartDate)
             {
                 // The end date of recurring must be in the future.
-                dateTimePicker_Recurring_Range_EndByDate.Value = newStartDate;
                 dateTimePicker_Recurring_Range_EndByDate.MinDate = newStartDate;
+                dateTimePicker_Recurring_Range_EndByDate.Value = newStartDate;
             }
         }
 
@@ -514,6 +548,16 @@ namespace Office365APIEditor.UI
 
             newItem.Location.DisplayName = textBox_Basic_Location.Text;
             newItem.IsAllDay = checkBox_Basic_IsAllDay.Checked;
+
+            string selectedTimeZone = comboBox_Basic_TimeZone.SelectedItem.ToString();
+            var matches = Regex.Matches(selectedTimeZone, @"^\(UTC.*\)\s");
+
+            if (matches.Count != 0)
+            {
+                // selectedTimeZone contains offset information.
+                selectedTimeZone = selectedTimeZone.Remove(0, matches[0].Length + 1);
+            }
+
             newItem.Start = new DateTimeAndTimeZone()
             {
                 DateTime = new DateTime(
@@ -523,7 +567,7 @@ namespace Office365APIEditor.UI
                     dateTimePicker_Basic_StartTime.Value.Hour,
                     dateTimePicker_Basic_StartTime.Value.Minute,
                     0).ToString("yyyy-MM-ddTHH:mm:ss"),
-                TimeZone = textBox_Basic_TimeZone.Text
+                TimeZone = selectedTimeZone
             };
 
             newItem.End = new DateTimeAndTimeZone()
@@ -535,7 +579,7 @@ namespace Office365APIEditor.UI
                     dateTimePicker_Basic_EndTime.Value.Hour,
                     dateTimePicker_Basic_EndTime.Value.Minute,
                     0).ToString("yyyy-MM-ddTHH:mm:ss"),
-                TimeZone = textBox_Basic_TimeZone.Text
+                TimeZone = selectedTimeZone
             };
 
             newItem.Body.ContentType = (BodyType)comboBox_BodyType.SelectedIndex;
@@ -662,7 +706,7 @@ namespace Office365APIEditor.UI
                     dateTimePicker_Recurring_Range_Start.Value.Month,
                     dateTimePicker_Recurring_Range_Start.Value.Day,
                     0, 0, 0);
-                newItem.Recurrence.Range.RecurrenceTimeZone = textBox_Basic_TimeZone.Text;
+                newItem.Recurrence.Range.RecurrenceTimeZone = selectedTimeZone;
 
                 if (radioButton_Recurring_Range_NoEnd.Checked)
                 {
@@ -689,6 +733,18 @@ namespace Office365APIEditor.UI
             else
             {
                 newItem.Recurrence = null;
+            }
+
+            if (comboBox_OnlineMeeting_Provider.Items.Count > 0 && comboBox_OnlineMeeting_Provider.SelectedItem.ToString().ToLower() != "unknown" && comboBox_OnlineMeeting_Provider.SelectedItem.ToString().ToLower() != "none")
+            {
+                // This is an online meeting.
+
+                newItem.IsOnlineMeeting = true;
+                newItem.OnlineMeetingProvider = comboBox_OnlineMeeting_Provider.SelectedItem.ToString();
+            }
+            else {
+                newItem.IsOnlineMeeting = false;
+                newItem.OnlineMeetingProvider = null;
             }
 
             return newItem;

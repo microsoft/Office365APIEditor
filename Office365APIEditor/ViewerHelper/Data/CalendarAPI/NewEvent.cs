@@ -39,5 +39,11 @@ namespace Office365APIEditor.ViewerHelper.Data.CalendarAPI
 
         [DataMember(Name = "recurrence")]
         public PatternedRecurrence Recurrence;
+
+        [DataMember(Name = "isOnlineMeeting", EmitDefaultValue = false)]
+        public bool IsOnlineMeeting;
+
+        [DataMember(Name = "onlineMeetingProvider", EmitDefaultValue = false)]
+        public string OnlineMeetingProvider;
     }
 }
