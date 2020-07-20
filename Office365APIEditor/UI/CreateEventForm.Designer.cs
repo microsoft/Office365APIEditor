@@ -110,6 +110,7 @@
             this.radioButton_Recurring_Pattern_Daily = new System.Windows.Forms.RadioButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.comboBox_Basic_TimeZone = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox_Body = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -123,7 +124,6 @@
             this.dateTimePicker_Recurring_Range_Start = new System.Windows.Forms.DateTimePicker();
             this.label25 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.comboBox_Basic_TimeZone = new System.Windows.Forms.ComboBox();
             this.groupBox_Recurring_Pattern.SuspendLayout();
             this.groupBox_Recurring_Pattern_Weekly.SuspendLayout();
             this.groupBox_Recurring_Pattern_Daily.SuspendLayout();
@@ -649,7 +649,7 @@
             // 
             this.comboBox_Recurring_Pattern_Yearly_Relative_Month.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Recurring_Pattern_Yearly_Relative_Month.FormattingEnabled = true;
-            this.comboBox_Recurring_Pattern_Yearly_Relative_Month.Location = new System.Drawing.Point(551, 40);
+            this.comboBox_Recurring_Pattern_Yearly_Relative_Month.Location = new System.Drawing.Point(572, 40);
             this.comboBox_Recurring_Pattern_Yearly_Relative_Month.Name = "comboBox_Recurring_Pattern_Yearly_Relative_Month";
             this.comboBox_Recurring_Pattern_Yearly_Relative_Month.Size = new System.Drawing.Size(77, 21);
             this.comboBox_Recurring_Pattern_Yearly_Relative_Month.TabIndex = 133;
@@ -667,7 +667,7 @@
             // label_Recurring_Pattern_Yearly_Relative_Month
             // 
             this.label_Recurring_Pattern_Yearly_Relative_Month.AutoSize = true;
-            this.label_Recurring_Pattern_Yearly_Relative_Month.Location = new System.Drawing.Point(505, 43);
+            this.label_Recurring_Pattern_Yearly_Relative_Month.Location = new System.Drawing.Point(524, 43);
             this.label_Recurring_Pattern_Yearly_Relative_Month.Name = "label_Recurring_Pattern_Yearly_Relative_Month";
             this.label_Recurring_Pattern_Yearly_Relative_Month.Size = new System.Drawing.Size(40, 13);
             this.label_Recurring_Pattern_Yearly_Relative_Month.TabIndex = 48;
@@ -679,7 +679,7 @@
             this.comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.FormattingEnabled = true;
             this.comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Location = new System.Drawing.Point(426, 40);
             this.comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Name = "comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex";
-            this.comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Size = new System.Drawing.Size(57, 21);
+            this.comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.Size = new System.Drawing.Size(74, 21);
             this.comboBox_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex.TabIndex = 132;
             // 
             // label_Recurring_Pattern_Yearly_Relative_DayOfWeekIndex
@@ -697,7 +697,7 @@
             this.comboBox_Recurring_Pattern_Yearly_Absolute_Day.FormattingEnabled = true;
             this.comboBox_Recurring_Pattern_Yearly_Absolute_Day.Location = new System.Drawing.Point(426, 13);
             this.comboBox_Recurring_Pattern_Yearly_Absolute_Day.Name = "comboBox_Recurring_Pattern_Yearly_Absolute_Day";
-            this.comboBox_Recurring_Pattern_Yearly_Absolute_Day.Size = new System.Drawing.Size(57, 21);
+            this.comboBox_Recurring_Pattern_Yearly_Absolute_Day.Size = new System.Drawing.Size(74, 21);
             this.comboBox_Recurring_Pattern_Yearly_Absolute_Day.TabIndex = 131;
             // 
             // label_Recurring_Pattern_Yearly_Absolute_Date
@@ -802,7 +802,7 @@
             this.comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.FormattingEnabled = true;
             this.comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.Location = new System.Drawing.Point(426, 38);
             this.comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.Name = "comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex";
-            this.comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.Size = new System.Drawing.Size(57, 21);
+            this.comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.Size = new System.Drawing.Size(74, 21);
             this.comboBox_Recurring_Pattern_Monthly_DayOfWeekIndex.TabIndex = 119;
             // 
             // checkBox_Recurring_Pattern_Monthly_Friday
@@ -878,7 +878,7 @@
             this.comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.FormattingEnabled = true;
             this.comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.Location = new System.Drawing.Point(426, 11);
             this.comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.Name = "comboBox_Recurring_Pattern_Monthly_DayOfTheMonth";
-            this.comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.Size = new System.Drawing.Size(57, 21);
+            this.comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.Size = new System.Drawing.Size(74, 21);
             this.comboBox_Recurring_Pattern_Monthly_DayOfTheMonth.TabIndex = 118;
             // 
             // label_Recurring_Pattern_Monthly_DayOfTheMonth
@@ -1007,6 +1007,15 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Basic";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox_Basic_TimeZone
+            // 
+            this.comboBox_Basic_TimeZone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_Basic_TimeZone.FormattingEnabled = true;
+            this.comboBox_Basic_TimeZone.Location = new System.Drawing.Point(118, 188);
+            this.comboBox_Basic_TimeZone.Name = "comboBox_Basic_TimeZone";
+            this.comboBox_Basic_TimeZone.Size = new System.Drawing.Size(319, 21);
+            this.comboBox_Basic_TimeZone.TabIndex = 20;
             // 
             // label10
             // 
@@ -1148,15 +1157,6 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Online meeting";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // comboBox_Basic_TimeZone
-            // 
-            this.comboBox_Basic_TimeZone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_Basic_TimeZone.FormattingEnabled = true;
-            this.comboBox_Basic_TimeZone.Location = new System.Drawing.Point(118, 188);
-            this.comboBox_Basic_TimeZone.Name = "comboBox_Basic_TimeZone";
-            this.comboBox_Basic_TimeZone.Size = new System.Drawing.Size(319, 21);
-            this.comboBox_Basic_TimeZone.TabIndex = 20;
             // 
             // CreateEventForm
             // 
