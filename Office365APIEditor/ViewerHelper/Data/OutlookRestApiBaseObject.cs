@@ -5,9 +5,11 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Office365APIEditor.ViewerHelper.Data
 {
+    [DataContract]
     public class OutlookRestApiBaseObject
     {
         private string id;

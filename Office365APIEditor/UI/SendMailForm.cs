@@ -5,10 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Net.Mail;
 using System.Text;
 using System.Windows.Forms;
 using Office365APIEditor.ViewerHelper;
+using Office365APIEditor.ViewerHelper.Data;
 using Office365APIEditor.ViewerHelper.Data.AttachmentAPI;
 using Office365APIEditor.ViewerHelper.Data.MailAPI;
 
@@ -22,7 +22,7 @@ namespace Office365APIEditor.UI
 
         private ViewerRequestHelper viewerRequestHelper;
 
-        List<ViewerHelper.Data.AttachmentAPI.AttachmentBase> attachments;
+        List<FileAttachment> attachments;
 
         public SendMailForm()
         {
@@ -55,7 +55,7 @@ namespace Office365APIEditor.UI
         {
             Icon = Properties.Resources.DefaultIcon;
 
-            attachments = new List<ViewerHelper.Data.AttachmentAPI.AttachmentBase>();
+            attachments = new List<FileAttachment>();
 
             comboBox_Importance.SelectedIndex = 1;
             comboBox_BodyType.SelectedIndex = 0;
@@ -71,7 +71,18 @@ namespace Office365APIEditor.UI
                 checkBox_SaveToSentItems.Enabled = false;
 
                 viewerRequestHelper = new ViewerRequestHelper();
-                var draftItem = await viewerRequestHelper.GetDraftMessageAsync(draftItemId);
+                NewEmailMessage draftItem;
+
+                try
+                {
+                    draftItem = await viewerRequestHelper.GetDraftMessageAsync(draftItemId);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Close();
+                    return;
+                }
 
                 if (comboBox_Importance.InvokeRequired)
                 {
@@ -101,24 +112,24 @@ namespace Office365APIEditor.UI
                 {
                     checkBox_RequestDeliveryReceipt.Invoke(new MethodInvoker(delegate
                     {
-                        checkBox_RequestDeliveryReceipt.Checked = draftItem.RequestDeliveryReceipt; ;
+                        checkBox_RequestDeliveryReceipt.Checked = draftItem.IsDeliveryReceiptRequested;
                     }));
                 }
                 else
                 {
-                    checkBox_RequestDeliveryReceipt.Checked = draftItem.RequestDeliveryReceipt;
+                    checkBox_RequestDeliveryReceipt.Checked = draftItem.IsDeliveryReceiptRequested;
                 }
                 
                 if (checkBox_RequestReadReceipt.InvokeRequired)
                 {
                     checkBox_RequestReadReceipt.Invoke(new MethodInvoker(delegate
                     {
-                        checkBox_RequestReadReceipt.Checked = draftItem.RequestReadReceipt;
+                        checkBox_RequestReadReceipt.Checked = draftItem.IsReadReceiptRequested;
                     }));
                 }
                 else
                 {
-                    checkBox_RequestReadReceipt.Checked = draftItem.RequestReadReceipt;
+                    checkBox_RequestReadReceipt.Checked = draftItem.IsReadReceiptRequested;
                 }
                 
                 if (textBox_To.InvokeRequired)
@@ -173,24 +184,24 @@ namespace Office365APIEditor.UI
                 {
                     textBox_Body.Invoke(new MethodInvoker(delegate
                     {
-                        textBox_Body.Text = draftItem.Body;
+                        textBox_Body.Text = draftItem.Body.Content;
                     }));
                 }
                 else
                 {
-                    textBox_Body.Text = draftItem.Body;
+                    textBox_Body.Text = draftItem.Body.Content;
                 }
 
                 if (comboBox_BodyType.InvokeRequired)
                 {
                     comboBox_BodyType.Invoke(new MethodInvoker(delegate
                     {
-                        comboBox_BodyType.SelectedIndex = (int)draftItem.BodyType;
+                        comboBox_BodyType.SelectedIndex = (int)draftItem.Body.ContentType;
                     }));
                 }
                 else
                 {
-                    comboBox_BodyType.SelectedIndex = (int)draftItem.BodyType;
+                    comboBox_BodyType.SelectedIndex = (int)draftItem.Body.ContentType;
                 }
 
                 var attachList = await viewerRequestHelper.GetAllAttachmentsAsync(FolderContentType.Message, draftItemId);
@@ -241,16 +252,16 @@ namespace Office365APIEditor.UI
             }
         }
 
-        private string RecipientsString(MailAddressCollection mailAddresses)
+        private string RecipientsString(List<Recipient> mailAddresses)
         {
-            List<string> mails = new List<string>();
+            List<string> temp = new List<string>();
 
-            foreach (var item in mailAddresses)
+            foreach (var recipient in mailAddresses)
             {
-                mails.Add(item.Address);
+                temp.Add(recipient.EmailAddress.Address);
             }
 
-            return string.Join("; ", mails.ToArray());
+            return string.Join("; ", temp.ToArray());
         }
 
         private async void Button_Send_ClickAsync(object sender, EventArgs e)
@@ -392,37 +403,37 @@ namespace Office365APIEditor.UI
 
             try
             {
-                MailAddressCollection toMailAddresses = new MailAddressCollection();
+                List<Recipient> toMailAddresses = new List<Recipient>();
 
                 if (textBox_To.Text != "")
                 {
                     foreach (var recipient in textBox_To.Text.Split(';'))
                     {
-                        toMailAddresses.Add(recipient.Trim());
+                        toMailAddresses.Add(new Recipient("", recipient.Trim()));
                     }
                 }
 
                 newItem.ToRecipients = toMailAddresses;
 
-                MailAddressCollection ccMailAddresses = new MailAddressCollection();
+                List<Recipient> ccMailAddresses = new List<Recipient>();
 
                 if (textBox_Cc.Text != "")
                 {
                     foreach (var recipient in textBox_Cc.Text.Split(';'))
                     {
-                        ccMailAddresses.Add(recipient.Trim());
+                        ccMailAddresses.Add(new Recipient("", recipient.Trim()));
                     }
                 }
 
                 newItem.CcRecipients = ccMailAddresses;
 
-                MailAddressCollection bccMailAddresses = new MailAddressCollection();
+                List<Recipient> bccMailAddresses = new List<Recipient>();
 
                 if (textBox_Bcc.Text != "")
                 {
                     foreach (var recipient in textBox_Bcc.Text.Split(';'))
                     {
-                        bccMailAddresses.Add(recipient.Trim());
+                        bccMailAddresses.Add(new Recipient("", recipient.Trim()));
                     }
                 }
 
@@ -434,13 +445,12 @@ namespace Office365APIEditor.UI
             }
 
             newItem.Subject = textBox_Subject.Text;
-            newItem.BodyType = (BodyType)comboBox_BodyType.SelectedIndex;
-            newItem.Body = textBox_Body.Text;
+            newItem.Body.ContentType = (BodyType)comboBox_BodyType.SelectedIndex;
+            newItem.Body.Content = textBox_Body.Text;
             newItem.Importance = (Importance)comboBox_Importance.SelectedIndex;
-            newItem.RequestDeliveryReceipt = checkBox_RequestDeliveryReceipt.Checked;
-            newItem.RequestReadReceipt = checkBox_RequestReadReceipt.Checked;
+            newItem.IsDeliveryReceiptRequested = checkBox_RequestDeliveryReceipt.Checked;
+            newItem.IsReadReceiptRequested = checkBox_RequestReadReceipt.Checked;
             newItem.Attachments = attachments;
-            newItem.SaveToSentItems = checkBox_SaveToSentItems.Checked;
 
             return newItem;
         }
@@ -449,7 +459,7 @@ namespace Office365APIEditor.UI
         {
             NewAttachmentForm newAttachmentForm = new NewAttachmentForm(attachments);
             
-            if (newAttachmentForm.ShowDialog(out List<ViewerHelper.Data.AttachmentAPI.AttachmentBase> newAttachments) == DialogResult.OK)
+            if (newAttachmentForm.ShowDialog(out List<ViewerHelper.Data.AttachmentAPI.FileAttachment> newAttachments) == DialogResult.OK)
             {
                 attachments = newAttachments;
             }

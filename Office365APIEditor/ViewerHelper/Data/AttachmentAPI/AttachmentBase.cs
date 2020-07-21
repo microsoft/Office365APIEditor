@@ -2,9 +2,11 @@
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
 using System;
+using System.Runtime.Serialization;
 
 namespace Office365APIEditor.ViewerHelper.Data.AttachmentAPI
 {
+    [DataContract]
     public class AttachmentBase : OutlookRestApiBaseObject
     {
         private string contentType;
@@ -88,6 +90,7 @@ namespace Office365APIEditor.ViewerHelper.Data.AttachmentAPI
             protected set => isInline = value;
         }
 
+        [DataMember(Name = "name")]
         public string Name
         {
             get

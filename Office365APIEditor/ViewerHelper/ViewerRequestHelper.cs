@@ -2,8 +2,6 @@
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
 using System;
-using System.Collections.Generic;
-using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace Office365APIEditor.ViewerHelper
@@ -66,18 +64,6 @@ namespace Office365APIEditor.ViewerHelper
             {
                 throw ex;
             }
-        }
-
-        private MailAddressCollection ConvertRecipientIListToMailAddressCollection(IList<Data.Recipient> recipients)
-        {
-            MailAddressCollection result = new MailAddressCollection();
-
-            foreach (var recipient in recipients)
-            {
-                result.Add(new MailAddress(recipient.EmailAddress.Address, recipient.EmailAddress.Name));
-            }
-
-            return result;
         }
 
         private DateTimeOffset? ConvertDateTimeToDateTimeOffset(DateTime dateTimeValue)

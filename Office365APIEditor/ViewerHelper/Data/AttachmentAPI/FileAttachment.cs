@@ -3,9 +3,11 @@
 
 using System;
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace Office365APIEditor.ViewerHelper.Data.AttachmentAPI
 {
+    [DataContract]
     public class FileAttachment : AttachmentBase
     {
         private string contentBytes;
@@ -63,6 +65,23 @@ namespace Office365APIEditor.ViewerHelper.Data.AttachmentAPI
             return fileAttachment;
         }
 
+        [DataMember(Name = "@odata.type")]
+        public string ODataType
+        {
+            get
+            {
+                if (Util.UseMicrosoftGraphInMailboxViewer)
+                {
+                    return "#microsoft.graph.fileAttachment";
+                }
+                else
+                {
+                    return "#Microsoft.OutlookServices.FileAttachment";
+                }
+            }
+            set { }
+        }
+
         public override AttachmentType AttachmentType
         {
             get
@@ -72,6 +91,7 @@ namespace Office365APIEditor.ViewerHelper.Data.AttachmentAPI
         }
 
         // base64-encoded contents of the file
+        [DataMember(Name = "contentBytes")]
         public string ContentBytes {
             get
             {

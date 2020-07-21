@@ -7,6 +7,10 @@ using Office365APIEditor.ViewerHelper.Data;
 using Office365APIEditor.ViewerHelper.Data.MailAPI;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Office365APIEditor.ViewerHelper
@@ -249,16 +253,18 @@ namespace Office365APIEditor.ViewerHelper
 
                 NewEmailMessage newEmailMessage = new NewEmailMessage
                 {
-                    ToRecipients = ConvertRecipientIListToMailAddressCollection(draftItem.ToRecipients),
-                    CcRecipients = ConvertRecipientIListToMailAddressCollection(draftItem.CcRecipients),
-                    BccRecipients = ConvertRecipientIListToMailAddressCollection(draftItem.BccRecipients),
+                    ToRecipients = new List<Recipient>(draftItem.ToRecipients),
+                    CcRecipients = new List<Recipient>(draftItem.CcRecipients),
+                    BccRecipients = new List<Recipient>(draftItem.BccRecipients),
                     Subject = draftItem.Subject ?? "",
-                    BodyType = (draftItem.Body != null) ? draftItem.Body.ContentType : BodyType.Text,
-                    Body = (draftItem.Body != null && draftItem.Body.Content != null) ? draftItem.Body.Content : "",
+                    Body = new ItemBody(),
                     Importance = (draftItem.Importance != null) ? (Importance)Enum.Parse(typeof(Importance), draftItem.Importance, true) : Importance.Normal,
-                    RequestDeliveryReceipt = (draftItem.IsDeliveryReceiptRequested != null && draftItem.IsDeliveryReceiptRequested.HasValue) ? draftItem.IsDeliveryReceiptRequested.Value : false,
-                    RequestReadReceipt = (draftItem.IsReadReceiptRequested != null && draftItem.IsReadReceiptRequested.HasValue) ? draftItem.IsReadReceiptRequested.Value : false
+                    IsDeliveryReceiptRequested = (draftItem.IsDeliveryReceiptRequested != null && draftItem.IsDeliveryReceiptRequested.HasValue) ? draftItem.IsDeliveryReceiptRequested.Value : false,
+                    IsReadReceiptRequested = (draftItem.IsReadReceiptRequested != null && draftItem.IsReadReceiptRequested.HasValue) ? draftItem.IsReadReceiptRequested.Value : false
                 };
+
+                newEmailMessage.Body.ContentType = (draftItem.Body != null) ? draftItem.Body.ContentType : BodyType.Text;
+                newEmailMessage.Body.Content = (draftItem.Body != null && draftItem.Body.Content != null) ? draftItem.Body.Content : "";
 
                 return newEmailMessage;
             }
@@ -275,7 +281,7 @@ namespace Office365APIEditor.ViewerHelper
 
             Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri("https://graph.microsoft.com/v1.0/Me/SendMail") : new Uri("https://outlook.office.com/api/v2.0/Me/SendMail");
 
-            string postData = CreatePostDataToSendNewMessageOnTheFly(newItem);
+            string postData = CreatePostDataToSendNewMessageOnTheFly(newItem, saveToSentItems);
 
             try
             {
@@ -287,33 +293,18 @@ namespace Office365APIEditor.ViewerHelper
             }
         }
 
-        private string CreatePostDataToSendNewMessageOnTheFly(NewEmailMessage newItem)
+        private string CreatePostDataToSendNewMessageOnTheFly(NewEmailMessage newItem, bool saveToSentItems)
         {
-            // Create POST data for sending a new message on the fly.
-
             string postData = @"{
-    ""Message"": {
-        ""ReplyTo"": [],
-        ""ToRecipients"": [{ToRecipients}],
-        ""CcRecipients"": [{CcRecipients}],
-        ""BccRecipients"": [{BccRecipients}],
-        ""Subject"": ""{Subject}"",
-        ""Body"": {
-            ""ContentType"": ""{ContentType}"",
-            ""Content"": ""{Content}""
-        },
-        ""Importance"": ""{Importance}"",
-        ""IsDeliveryReceiptRequested"": {IsDeliveryReceiptRequested},
-        ""IsReadReceiptRequested"": {IsReadReceiptRequested},
-        ""Categories"": [],
-        ""Attachments"": [{Attachments}]
-    },
+    ""Message"": {messageJson},
     ""SaveToSentItems"": ""{SaveToSentItems}""
 }";
 
-            postData = CreateMessageBase(newItem, postData);
+            string messageJson = CreatePostDataToSave(newItem);
 
-            postData = postData.Replace("{SaveToSentItems}", newItem.SaveToSentItems.ToString().ToLower());
+            postData = postData.Replace("{messageJson}", messageJson);
+
+            postData = postData.Replace("{SaveToSentItems}", saveToSentItems.ToString().ToLower());
 
             return postData;
         }
@@ -356,26 +347,16 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Create POST data for sending or saving new item from NewEmailMessage.
 
-            string postData = @"{
-        ""ReplyTo"": [],
-        ""ToRecipients"": [{ToRecipients}],
-        ""CcRecipients"": [{CcRecipients}],
-        ""BccRecipients"": [{BccRecipients}],
-        ""Subject"": ""{Subject}"",
-        ""Body"": {
-            ""ContentType"": ""{ContentType}"",
-            ""Content"": ""{Content}""
-        },
-        ""Importance"": ""{Importance}"",
-        ""IsDeliveryReceiptRequested"": {IsDeliveryReceiptRequested},
-        ""IsReadReceiptRequested"": {IsReadReceiptRequested},
-        ""Categories"": [],
-        ""Attachments"": [{Attachments}]
-    }";
+            string result;
 
-            postData = CreateMessageBase(newItem, postData);
+            using (var stream = new MemoryStream())
+            {
+                var serializer = new DataContractJsonSerializer(typeof(NewEmailMessage));
+                serializer.WriteObject(stream, newItem);
+                result = Encoding.UTF8.GetString(stream.ToArray());
+            }
 
-            return postData;
+            return result;
         }
 
         public async Task UpdateDraftAsync(string draftItemId, NewEmailMessage newItem)
@@ -391,7 +372,10 @@ namespace Office365APIEditor.ViewerHelper
 
                 string postData = CreatePostDataToUpdateDraft(newItem);
 
-                string result = await SendPatchRequestAsync(URL, postData);
+                // Remove attachment information to reduce the size.
+                string postDataWithoutAttachment = Regex.Replace(postData, @"\""attachments\"":\[.*\],", @"""attachments"":[],", RegexOptions.Singleline);
+
+                string result = await SendPatchRequestAsync(URL, postDataWithoutAttachment);
 
                 // Then, remove all attachment once.
 
@@ -403,33 +387,16 @@ namespace Office365APIEditor.ViewerHelper
                     result = await SendDeleteRequestAsync(URL);
                 }
 
-                // Finally, upload new attachments.
-
-                string attachmentTemplate;
-
-                if (Util.UseMicrosoftGraphInMailboxViewer)
-                {
-                    attachmentTemplate = @"{
-            ""@odata.type"": ""#microsoft.graph.fileAttachment"",
-            ""Name"": ""{FileName}"",
-            ""ContentBytes"": ""{ContentBytes}""
-        }";
-                }
-                else
-                {
-                    attachmentTemplate = @"{
-            ""@odata.type"": ""#Microsoft.OutlookServices.FileAttachment"",
-            ""Name"": ""{FileName}"",
-            ""ContentBytes"": ""{ContentBytes}""
-        }";
-                }                
-
                 foreach (var attach in newItem.Attachments)
                 {
                     if (attach is Data.AttachmentAPI.FileAttachment)
                     {
-                        postData = attachmentTemplate.Replace("{FileName}", attach.Name);
-                        postData = postData.Replace("{ContentBytes}", ((Data.AttachmentAPI.FileAttachment)attach).ContentBytes);
+                        using (var stream = new MemoryStream())
+                        {
+                            var serializer = new DataContractJsonSerializer(typeof(Data.AttachmentAPI.FileAttachment));
+                            serializer.WriteObject(stream, attach);
+                            postData = Encoding.UTF8.GetString(stream.ToArray());
+                        }
                     }
 
                     URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/Me/messages/{draftItemId}/attachments/") : new Uri($"https://outlook.office.com/api/v2.0/Me/messages/{draftItemId}/attachments/");
@@ -446,130 +413,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Create POST data for sending or saving new item from NewEmailMessage.
 
-            string postData = @"{
-        ""ReplyTo"": [],
-        ""ToRecipients"": [{ToRecipients}],
-        ""CcRecipients"": [{CcRecipients}],
-        ""BccRecipients"": [{BccRecipients}],
-        ""Subject"": ""{Subject}"",
-        ""Body"": {
-            ""ContentType"": ""{ContentType}"",
-            ""Content"": ""{Content}""
-        },
-        ""Importance"": ""{Importance}"",
-        ""IsDeliveryReceiptRequested"": {IsDeliveryReceiptRequested},
-        ""IsReadReceiptRequested"": {IsReadReceiptRequested},
-        ""Categories"": []
-    }";
-
-            postData = CreateMessageBase(newItem, postData);
-
-            return postData;
-        }
-
-        private string CreateMessageBase(NewEmailMessage newItem, string basePostData)
-        {
-            string emailAddressTemplate = @"{
-            ""EmailAddress"": {
-                ""Address"": ""{Address}"",
-                ""Name"": ""{DisplayName}""
-            }
-        }";
-
-            string attachmentTemplate = @"{
-            ""@odata.type"": ""#Microsoft.OutlookServices.FileAttachment"",
-            ""Name"": ""{FileName}"",
-            ""ContentBytes"": ""{ContentBytes}""
-        }";
-
-            if (newItem.ToRecipients != null && newItem.ToRecipients.Count != 0)
-            {
-                List<string> recipientList = new List<string>();
-                foreach (var recipient in newItem.ToRecipients)
-                {
-                    string newResipient = emailAddressTemplate.Replace("{Address}", recipient.Address).Replace("{DisplayName}", Util.EscapeForJson(recipient.DisplayName));
-                    recipientList.Add(newResipient);
-                }
-
-                string recipients = string.Join(", ", recipientList);
-
-                basePostData = basePostData.Replace("{ToRecipients}", recipients);
-            }
-            else
-            {
-                basePostData = basePostData.Replace("{ToRecipients}", "");
-            }
-
-            if (newItem.CcRecipients != null && newItem.CcRecipients.Count != 0)
-            {
-                List<string> recipientList = new List<string>();
-                foreach (var recipient in newItem.CcRecipients)
-                {
-                    string newResipient = emailAddressTemplate.Replace("{Address}", recipient.Address).Replace("{DisplayName}", Util.EscapeForJson(recipient.DisplayName));
-                    recipientList.Add(newResipient);
-                }
-
-                string recipients = string.Join(", ", recipientList);
-
-                basePostData = basePostData.Replace("{CcRecipients}", recipients);
-            }
-            else
-            {
-                basePostData = basePostData.Replace("{CcRecipients}", "");
-            }
-
-            if (newItem.BccRecipients != null && newItem.BccRecipients.Count != 0)
-            {
-                List<string> recipientList = new List<string>();
-                foreach (var recipient in newItem.BccRecipients)
-                {
-                    string newResipient = emailAddressTemplate.Replace("{Address}", recipient.Address).Replace("{DisplayName}", Util.EscapeForJson(recipient.DisplayName));
-                    recipientList.Add(newResipient);
-                }
-
-                string recipients = string.Join(", ", recipientList);
-
-                basePostData = basePostData.Replace("{BccRecipients}", recipients);
-            }
-            else
-            {
-                basePostData = basePostData.Replace("{BccRecipients}", "");
-            }
-
-            basePostData = basePostData.Replace("{Subject}", Util.EscapeForJson(newItem.Subject));
-
-            basePostData = basePostData.Replace("{ContentType}", newItem.BodyType.ToString());
-
-            basePostData = basePostData.Replace("{Content}", Util.EscapeForJson(newItem.Body));
-
-            basePostData = basePostData.Replace("{Importance}", newItem.Importance.ToString());
-
-            basePostData = basePostData.Replace("{IsDeliveryReceiptRequested}", newItem.RequestDeliveryReceipt.ToString().ToLower());
-
-            basePostData = basePostData.Replace("{IsReadReceiptRequested}", newItem.RequestReadReceipt.ToString().ToLower());
-
-            if (newItem.Attachments != null && newItem.Attachments.Count != 0)
-            {
-                List<string> attachmentList = new List<string>();
-                foreach (var attachment in newItem.Attachments)
-                {
-                    if (attachment is Data.AttachmentAPI.FileAttachment)
-                    {
-                        string newAttachment = attachmentTemplate.Replace("{FileName}", attachment.Name).Replace("{ContentBytes}", ((Data.AttachmentAPI.FileAttachment)attachment).ContentBytes);
-                        attachmentList.Add(newAttachment);
-                    }
-                }
-
-                string attachments = string.Join(", ", attachmentList);
-
-                basePostData = basePostData.Replace("{Attachments}", attachments);
-            }
-            else
-            {
-                basePostData = basePostData.Replace("{Attachments}", "");
-            }
-
-            return basePostData;
+            return CreatePostDataToSave(newItem);
         }
 
         public async Task<List<FocusedInboxOverride>> GetFocusedInboxOverridesAsync()

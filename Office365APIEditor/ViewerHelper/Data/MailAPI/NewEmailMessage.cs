@@ -1,25 +1,58 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
+using System;
 using System.Collections.Generic;
-using System.Net.Mail;
 using System.Runtime.Serialization;
 
 namespace Office365APIEditor.ViewerHelper.Data.MailAPI
 {
+    [DataContract(Name = "message")]
     class NewEmailMessage
     {
-        public MailAddressCollection ToRecipients;
-        public MailAddressCollection CcRecipients;
-        public MailAddressCollection BccRecipients;
+        public NewEmailMessage()
+        {
+            Body = new ItemBody();
+        }
+
+        [DataMember(Name = "toRecipients")]
+        public List<Recipient> ToRecipients;
+
+        [DataMember(Name = "ccRecipients")]
+        public List<Recipient> CcRecipients;
+
+        [DataMember(Name = "bccRecipients")]
+        public List<Recipient> BccRecipients;
+
+        [DataMember(Name = "subject")]
         public string Subject;
-        public BodyType BodyType;
-        public string Body;
+
+        [DataMember(Name = "body")]
+        public ItemBody Body;
+
         public Importance Importance;
-        public bool RequestDeliveryReceipt;
-        public bool RequestReadReceipt;
-        public bool SaveToSentItems;
-        public List<Data.AttachmentAPI.AttachmentBase> Attachments;
+
+        [DataMember(Name = "importance")]
+        private string ImportanceString
+        {
+            get
+            {
+                return Importance.ToString();
+            }
+            set
+            {
+                Importance = (Importance)Enum.Parse(typeof(Importance), value);
+            }
+        }
+
+        [DataMember(Name = "isDeliveryReceiptRequested")]
+        public bool IsDeliveryReceiptRequested;
+
+        [DataMember(Name = "isReadReceiptRequested")]
+        public bool IsReadReceiptRequested;
+
+        [DataMember(Name = "attachments", EmitDefaultValue = false)]
+        public List<AttachmentAPI.FileAttachment> Attachments;
     }
 
     public enum Importance

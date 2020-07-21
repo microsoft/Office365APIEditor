@@ -29,7 +29,7 @@ namespace Office365APIEditor.ViewerHelper.Data
         private string ContentTypeString
         {
             get { return ContentType.ToString().ToLower(); }
-            set { ContentType = (BodyType)Enum.Parse(typeof(BodyType), value); }
+            set { ContentType = (BodyType)Enum.Parse(typeof(BodyType), value, true); }
         }
     }
 }

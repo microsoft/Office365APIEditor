@@ -10,9 +10,9 @@ namespace Office365APIEditor.UI
 {
     public partial class NewAttachmentForm : Form
     {
-        private List<AttachmentBase> attachments;
+        private List<FileAttachment> attachments;
 
-        public NewAttachmentForm(List<AttachmentBase> Attachments)
+        public NewAttachmentForm(List<FileAttachment> Attachments)
         {
             attachments = Attachments;
 
@@ -29,7 +29,7 @@ namespace Office365APIEditor.UI
             }
         }
 
-        public DialogResult ShowDialog(out List<AttachmentBase> SelectedAttachments)
+        public DialogResult ShowDialog(out List<FileAttachment> SelectedAttachments)
         {
             DialogResult result = ShowDialog();
 
