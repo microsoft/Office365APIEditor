@@ -24,6 +24,7 @@ namespace ScintillaNET_FindReplaceDialog
         private List<string> _mruReplace;
         private Scintilla _scintilla;
         private CharacterRange _searchRange;
+        private bool userClosedHidden = false; // Windows is hidden because user closed the window
 
         #endregion Fields
 
@@ -121,6 +122,7 @@ namespace ScintillaNET_FindReplaceDialog
             {
                 e.Cancel = true;
                 Hide();
+                userClosedHidden = true;
             }
         }
 
@@ -706,13 +708,25 @@ namespace ScintillaNET_FindReplaceDialog
             int x = Scintilla.PointXFromPosition(pos);
             int y = Scintilla.PointYFromPosition(pos);
 
-            Point cursorPoint = Scintilla.PointToScreen(new Point(x, y));
+            Point scintillaCursorPoint = Scintilla.PointToScreen(new Point(x, y));
+            Screen scintillaCurrentScreen = Screen.FromPoint(scintillaCursorPoint);
+            Screen findReplaceDialogCurrentScreen = Screen.FromPoint(Location);
 
-            Rectangle r = new Rectangle(Location, Size);
-            if (r.Contains(cursorPoint))
+            bool sameScreen = scintillaCurrentScreen.Equals(findReplaceDialogCurrentScreen);
+
+            if (!sameScreen)
+            {
+                // Move FindReplaceDialog window to the same screen.
+                Location = scintillaCursorPoint;
+            }
+
+            Rectangle findReplaceDialogCurrentRectangle = new Rectangle(Location, Size);
+
+            if (findReplaceDialogCurrentRectangle.Contains(scintillaCursorPoint))
             {
                 Point newLocation;
-                if (cursorPoint.Y < (Screen.PrimaryScreen.Bounds.Height / 2))
+
+                if (scintillaCursorPoint.Y < (scintillaCurrentScreen.Bounds.Height / 2))
                 {
                     //TODO - replace lineheight with ScintillaNET command, when added
                     int SCI_TEXTHEIGHT = 2279;
@@ -721,7 +735,7 @@ namespace ScintillaNET_FindReplaceDialog
                     
                     // Top half of the screen
                     newLocation = Scintilla.PointToClient(
-                        new Point(Location.X, cursorPoint.Y + lineHeight * 2));
+                        new Point(Location.X, scintillaCursorPoint.Y + lineHeight * 2));
                 }
                 else
                 {
@@ -732,11 +746,61 @@ namespace ScintillaNET_FindReplaceDialog
                     
                     // Bottom half of the screen
                     newLocation = Scintilla.PointToClient(
-                        new Point(Location.X, cursorPoint.Y - Height - (lineHeight * 2)));
+                        new Point(Location.X, scintillaCursorPoint.Y - Height - (lineHeight * 2)));
                 }
+
                 newLocation = Scintilla.PointToScreen(newLocation);
                 Location = newLocation;
             }
+        }
+
+        public virtual void ForceMoveFormAwayFromSelection()
+        {
+            int pos = Scintilla.CurrentPosition;
+            int x = Scintilla.PointXFromPosition(pos);
+            int y = Scintilla.PointYFromPosition(pos);
+
+            Point scintillaCursorPoint = Scintilla.PointToScreen(new Point(x, y));
+            Screen scintillaCurrentScreen = Screen.FromPoint(scintillaCursorPoint);
+            Screen findReplaceDialogCurrentScreen = Screen.FromPoint(Location);
+
+            bool sameScreen = scintillaCurrentScreen.Equals(findReplaceDialogCurrentScreen);
+
+            if (!sameScreen)
+            {
+                // Move FindReplaceDialog window to the same screen.
+                Location = scintillaCursorPoint;
+            }
+
+            Rectangle findReplaceDialogCurrentRectangle = new Rectangle(Location, Size);
+
+            Point newLocation;
+
+            if (scintillaCursorPoint.Y < (scintillaCurrentScreen.Bounds.Height / 2))
+            {
+                //TODO - replace lineheight with ScintillaNET command, when added
+                int SCI_TEXTHEIGHT = 2279;
+                int lineHeight = Scintilla.DirectMessage(SCI_TEXTHEIGHT, IntPtr.Zero, IntPtr.Zero).ToInt32();
+                // int lineHeight = Scintilla.Lines[Scintilla.LineFromPosition(pos)].Height;
+
+                // Top half of the screen
+                newLocation = Scintilla.PointToClient(
+                    new Point(scintillaCursorPoint.X, scintillaCursorPoint.Y + lineHeight * 2));
+            }
+            else
+            {
+                //TODO - replace lineheight with ScintillaNET command, when added
+                int SCI_TEXTHEIGHT = 2279;
+                int lineHeight = Scintilla.DirectMessage(SCI_TEXTHEIGHT, IntPtr.Zero, IntPtr.Zero).ToInt32();
+                // int lineHeight = Scintilla.Lines[Scintilla.LineFromPosition(pos)].Height;
+
+                // Bottom half of the screen
+                newLocation = Scintilla.PointToClient(
+                    new Point(scintillaCursorPoint.X, scintillaCursorPoint.Y - Height - (lineHeight * 2)));
+            }
+
+            newLocation = Scintilla.PointToScreen(newLocation);
+            Location = newLocation;
         }
 
         public void ReplaceNext()
@@ -798,7 +862,11 @@ namespace ScintillaNET_FindReplaceDialog
 
             lblStatus.Text = string.Empty;
 
-            MoveFormAwayFromSelection();
+            if (userClosedHidden)
+            {
+                // Move the windows only when window is displayed.
+                MoveFormAwayFromSelection();
+            }
 
             base.OnActivated(e);
         }
@@ -1014,6 +1082,7 @@ namespace ScintillaNET_FindReplaceDialog
         private void FindReplaceDialog_Activated(object sender, EventArgs e)
         {
             this.Opacity = 1.0;
+            userClosedHidden = false;
         }
 
         private void FindReplaceDialog_Deactivate(object sender, EventArgs e)
@@ -1139,5 +1208,10 @@ namespace ScintillaNET_FindReplaceDialog
         }
 
         #endregion Methods
+
+        private void FindReplaceDialog_Load(object sender, EventArgs e)
+        {
+            ForceMoveFormAwayFromSelection();
+        }
     }
 }

@@ -830,7 +830,10 @@ namespace ScintillaNET_FindReplaceDialog
 			if (!_window.Visible)
 				_window.Show(_scintilla.FindForm());
 
-			_window.tabAll.SelectedTab = _window.tabAll.TabPages["tpgFind"];
+            // Activate the window to update the opacity.
+            _window.Activate();
+
+            _window.tabAll.SelectedTab = _window.tabAll.TabPages["tpgFind"];
 
             // The text of scintilla_ResponseBody in RequestForm should not be replaced.
             // Disable the Replace tab temporary.
@@ -858,6 +861,9 @@ namespace ScintillaNET_FindReplaceDialog
 		{
 			if (!_window.Visible)
 				_window.Show(_scintilla.FindForm());
+
+            // Activate the window to update the opacity.
+            _window.Activate();
 
             // The Replace tab is disabled if ShowFind() is already called.
             // So we need to enable it.
