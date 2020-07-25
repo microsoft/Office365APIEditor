@@ -1,4 +1,4 @@
-# How to register a V1 Web application
+# How to register a V2 Web application
 
 This tutorial introduces how to register the application using Microsoft Azure portal. Once you have registered an application by following this tutorial, you can use it as a "Web app" in Office365APIEditor.
 
@@ -17,11 +17,12 @@ This tutorial introduces how to register the application using Microsoft Azure p
 13. Select the duration of the key. (e.g. in 2 years)
 14. Click [Add].
 15. Copy the [Value] to the safety place.
-16. Click [API permissions] and add the necessary permissions for your application. If your application has to read the messages in the users' mailbox using Microsoft Graph, you have to add the [Mail.Read] permission under [Delegated permissions] of [Microsoft Graph].
-17. Check the following values and use them in Office365APIEditor.
+16. Check the following values and use them in Office365APIEditor.
 
   | Value in Azure portal  | Textbox in Office365APIEditor |  
   |:-----------------------|-------------------------------|  
   |Application (client) ID |Application ID                 |  
   |Redirect URI            |Redirect URI                   |  
   |Value of Client secret  |Client secret                  |  
+
+  [Tenant name] is your Office 365 tenant name. (e.g. contoso.onmicrosoft.com)

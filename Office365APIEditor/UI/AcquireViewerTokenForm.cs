@@ -125,5 +125,10 @@ namespace Office365APIEditor
 
             Util.WriteSystemLog("AcquireViewerTokenForm", stringBuilder.ToString());
         }
+
+        private void LinkLabel_LearnMore_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/microsoft/Office365APIEditor/tree/master/tutorials/Start_new_Mailbox_Viewer_Session.md");
+        }
     }
 }

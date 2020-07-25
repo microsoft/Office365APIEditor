@@ -30,11 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccessTokenWizard));
             this.panel_Page00 = new System.Windows.Forms.Panel();
+            this.linkLabel_Page00 = new System.Windows.Forms.LinkLabel();
             this.radioButton_Page00_SharePointOnlineAppOnly = new System.Windows.Forms.RadioButton();
             this.radioButton_Page00_BuiltInAppOrBasicAuth = new System.Windows.Forms.RadioButton();
             this.radioButton_Page00_AppRegistrationPortal = new System.Windows.Forms.RadioButton();
             this.radioButton_Page00_MicrosoftAzurePortal = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
             this.button_Back = new System.Windows.Forms.Button();
             this.button_Next = new System.Windows.Forms.Button();
             this.button_Cancel = new System.Windows.Forms.Button();
@@ -47,7 +47,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel_Page03 = new System.Windows.Forms.Panel();
             this.comboBox_Page03_Resource = new System.Windows.Forms.ComboBox();
-            this.linkLabel_Page03_WebApp = new System.Windows.Forms.LinkLabel();
+            this.linkLabel_Page03 = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox_Page03_ClientSecret = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -55,7 +55,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBox_Page03_ClientID = new System.Windows.Forms.TextBox();
             this.textBox_Page03_RedirectUri = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel_Page02 = new System.Windows.Forms.Panel();
             this.radioButton_Page02_V2AdminConsent = new System.Windows.Forms.RadioButton();
             this.radioButton_Page02_V2WebAppOnlyForMicrosoftGraph = new System.Windows.Forms.RadioButton();
@@ -64,8 +63,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.panel_Page04 = new System.Windows.Forms.Panel();
             this.comboBox_Page04_Resource = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.linkLabel_Page04_NativeApp = new System.Windows.Forms.LinkLabel();
+            this.linkLabel_Page04 = new System.Windows.Forms.LinkLabel();
             this.label13 = new System.Windows.Forms.Label();
             this.textBox_Page04_RedirectUri = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -74,9 +72,8 @@
             this.textBox_Page04_TenantName = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.panel_Page05 = new System.Windows.Forms.Panel();
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly = new System.Windows.Forms.LinkLabel();
+            this.linkLabel_Page05 = new System.Windows.Forms.LinkLabel();
             this.comboBox_Page05_Resource = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.button_Page05_SelectCert = new System.Windows.Forms.Button();
             this.label36 = new System.Windows.Forms.Label();
             this.textBox_Page05_CertPath = new System.Windows.Forms.TextBox();
@@ -90,7 +87,6 @@
             this.panel_Page06 = new System.Windows.Forms.Panel();
             this.label49 = new System.Windows.Forms.Label();
             this.textBox_Page06_TenantName = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.textBox_Page06_ClientSecret = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.button_Page06_ScopeEditor = new System.Windows.Forms.Button();
@@ -103,7 +99,6 @@
             this.panel_Page07 = new System.Windows.Forms.Panel();
             this.label50 = new System.Windows.Forms.Label();
             this.textBox_Page07_TenantName = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.button_Page07_ScopeEditor = new System.Windows.Forms.Button();
             this.textBox_Page07_Scopes = new System.Windows.Forms.TextBox();
             this.textBox_Page07_ClientID = new System.Windows.Forms.TextBox();
@@ -112,7 +107,7 @@
             this.label25 = new System.Windows.Forms.Label();
             this.textBox_Page07_RedirectUri = new System.Windows.Forms.TextBox();
             this.panel_Page08 = new System.Windows.Forms.Panel();
-            this.linkLabel_Page08_WebAppAppOnlyByKey = new System.Windows.Forms.LinkLabel();
+            this.linkLabel_Page08 = new System.Windows.Forms.LinkLabel();
             this.comboBox_Page08_Resource = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.textBox_Page08_ClientSecret = new System.Windows.Forms.TextBox();
@@ -121,7 +116,6 @@
             this.label20 = new System.Windows.Forms.Label();
             this.textBox_Page08_TenantName = new System.Windows.Forms.TextBox();
             this.textBox_Page08_ClientID = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
             this.openFileDialog_PFX = new System.Windows.Forms.OpenFileDialog();
             this.panel_Page09 = new System.Windows.Forms.Panel();
             this.comboBox_Page09_Resource = new System.Windows.Forms.ComboBox();
@@ -141,7 +135,6 @@
             this.textBox_Page11_Scopes = new System.Windows.Forms.TextBox();
             this.label42 = new System.Windows.Forms.Label();
             this.panel_Page12 = new System.Windows.Forms.Panel();
-            this.label40 = new System.Windows.Forms.Label();
             this.textBox_Page12_ClientSecret = new System.Windows.Forms.TextBox();
             this.label41 = new System.Windows.Forms.Label();
             this.button_Page12_ScopeEditor = new System.Windows.Forms.Button();
@@ -160,13 +153,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel_Page14 = new System.Windows.Forms.Panel();
             this.textBox_Page14_ClientID = new System.Windows.Forms.TextBox();
-            this.linkLabel_Page14_SPOApp = new System.Windows.Forms.LinkLabel();
+            this.linkLabel_Page14 = new System.Windows.Forms.LinkLabel();
             this.label51 = new System.Windows.Forms.Label();
             this.textBox_Page14_ClientSecret = new System.Windows.Forms.TextBox();
             this.label53 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.textBox_Page14_TenantName = new System.Windows.Forms.TextBox();
-            this.label55 = new System.Windows.Forms.Label();
+            this.linkLabel_Page06 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel_Page07 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel_Page12 = new System.Windows.Forms.LinkLabel();
             this.panel_Page00.SuspendLayout();
             this.panel_Page01.SuspendLayout();
             this.panel_Page03.SuspendLayout();
@@ -188,16 +183,27 @@
             // panel_Page00
             // 
             this.panel_Page00.BackColor = System.Drawing.SystemColors.Control;
+            this.panel_Page00.Controls.Add(this.linkLabel_Page00);
             this.panel_Page00.Controls.Add(this.radioButton_Page00_SharePointOnlineAppOnly);
             this.panel_Page00.Controls.Add(this.radioButton_Page00_BuiltInAppOrBasicAuth);
             this.panel_Page00.Controls.Add(this.radioButton_Page00_AppRegistrationPortal);
             this.panel_Page00.Controls.Add(this.radioButton_Page00_MicrosoftAzurePortal);
-            this.panel_Page00.Controls.Add(this.label1);
             this.panel_Page00.Location = new System.Drawing.Point(426, 12);
             this.panel_Page00.Name = "panel_Page00";
             this.panel_Page00.Size = new System.Drawing.Size(400, 200);
             this.panel_Page00.TabIndex = 0;
             this.panel_Page00.Tag = "radioButton_Page00_MicrosoftAzurePortal";
+            // 
+            // linkLabel_Page00
+            // 
+            this.linkLabel_Page00.AutoSize = true;
+            this.linkLabel_Page00.Location = new System.Drawing.Point(15, 10);
+            this.linkLabel_Page00.Name = "linkLabel_Page00";
+            this.linkLabel_Page00.Size = new System.Drawing.Size(235, 13);
+            this.linkLabel_Page00.TabIndex = 5;
+            this.linkLabel_Page00.TabStop = true;
+            this.linkLabel_Page00.Text = "Which OAuth endpoint do you use? Learn more.";
+            this.linkLabel_Page00.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
             // radioButton_Page00_SharePointOnlineAppOnly
             // 
@@ -247,15 +253,6 @@
             this.radioButton_Page00_MicrosoftAzurePortal.Text = "v1.0 Endpoint\r\nSelect this option if your application is registered with Azure Ac" +
     "tive \r\nDirectory and you want to use the configured permissions.";
             this.radioButton_Page00_MicrosoftAzurePortal.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(176, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Which OAuth endpoint do you use?";
             // 
             // button_Back
             // 
@@ -373,7 +370,7 @@
             // panel_Page03
             // 
             this.panel_Page03.Controls.Add(this.comboBox_Page03_Resource);
-            this.panel_Page03.Controls.Add(this.linkLabel_Page03_WebApp);
+            this.panel_Page03.Controls.Add(this.linkLabel_Page03);
             this.panel_Page03.Controls.Add(this.label4);
             this.panel_Page03.Controls.Add(this.textBox_Page03_ClientSecret);
             this.panel_Page03.Controls.Add(this.label10);
@@ -381,7 +378,6 @@
             this.panel_Page03.Controls.Add(this.label6);
             this.panel_Page03.Controls.Add(this.textBox_Page03_ClientID);
             this.panel_Page03.Controls.Add(this.textBox_Page03_RedirectUri);
-            this.panel_Page03.Controls.Add(this.label3);
             this.panel_Page03.Location = new System.Drawing.Point(12, 268);
             this.panel_Page03.Name = "panel_Page03";
             this.panel_Page03.Size = new System.Drawing.Size(400, 200);
@@ -399,17 +395,16 @@
             this.comboBox_Page03_Resource.Size = new System.Drawing.Size(284, 21);
             this.comboBox_Page03_Resource.TabIndex = 4;
             // 
-            // linkLabel_Page03_WebApp
+            // linkLabel_Page03
             // 
-            this.linkLabel_Page03_WebApp.AutoSize = true;
-            this.linkLabel_Page03_WebApp.Location = new System.Drawing.Point(102, 10);
-            this.linkLabel_Page03_WebApp.Name = "linkLabel_Page03_WebApp";
-            this.linkLabel_Page03_WebApp.Size = new System.Drawing.Size(140, 13);
-            this.linkLabel_Page03_WebApp.TabIndex = 1;
-            this.linkLabel_Page03_WebApp.TabStop = true;
-            this.linkLabel_Page03_WebApp.Text = "How to register applications.";
-            this.linkLabel_Page03_WebApp.Visible = false;
-            this.linkLabel_Page03_WebApp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Page03_WebApp_LinkClicked);
+            this.linkLabel_Page03.AutoSize = true;
+            this.linkLabel_Page03.Location = new System.Drawing.Point(15, 10);
+            this.linkLabel_Page03.Name = "linkLabel_Page03";
+            this.linkLabel_Page03.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_Page03.TabIndex = 1;
+            this.linkLabel_Page03.TabStop = true;
+            this.linkLabel_Page03.Text = "Fill out the form. Learn more.";
+            this.linkLabel_Page03.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
             // label4
             // 
@@ -480,15 +475,6 @@
             this.textBox_Page03_RedirectUri.TabIndex = 3;
             this.textBox_Page03_RedirectUri.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppRedirectURL;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 10);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Fill out the form.";
-            // 
             // panel_Page02
             // 
             this.panel_Page02.Controls.Add(this.radioButton_Page02_V2AdminConsent);
@@ -558,8 +544,7 @@
             // panel_Page04
             // 
             this.panel_Page04.Controls.Add(this.comboBox_Page04_Resource);
-            this.panel_Page04.Controls.Add(this.label8);
-            this.panel_Page04.Controls.Add(this.linkLabel_Page04_NativeApp);
+            this.panel_Page04.Controls.Add(this.linkLabel_Page04);
             this.panel_Page04.Controls.Add(this.label13);
             this.panel_Page04.Controls.Add(this.textBox_Page04_RedirectUri);
             this.panel_Page04.Controls.Add(this.label12);
@@ -584,26 +569,16 @@
             this.comboBox_Page04_Resource.Size = new System.Drawing.Size(284, 21);
             this.comboBox_Page04_Resource.TabIndex = 5;
             // 
-            // label8
+            // linkLabel_Page04
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(15, 10);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(81, 13);
-            this.label8.TabIndex = 47;
-            this.label8.Text = "Fill out the form.";
-            // 
-            // linkLabel_Page04_NativeApp
-            // 
-            this.linkLabel_Page04_NativeApp.AutoSize = true;
-            this.linkLabel_Page04_NativeApp.Location = new System.Drawing.Point(102, 10);
-            this.linkLabel_Page04_NativeApp.Name = "linkLabel_Page04_NativeApp";
-            this.linkLabel_Page04_NativeApp.Size = new System.Drawing.Size(140, 13);
-            this.linkLabel_Page04_NativeApp.TabIndex = 1;
-            this.linkLabel_Page04_NativeApp.TabStop = true;
-            this.linkLabel_Page04_NativeApp.Text = "How to register applications.";
-            this.linkLabel_Page04_NativeApp.Visible = false;
-            this.linkLabel_Page04_NativeApp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Page04_NativeApp_LinkClicked);
+            this.linkLabel_Page04.AutoSize = true;
+            this.linkLabel_Page04.Location = new System.Drawing.Point(15, 10);
+            this.linkLabel_Page04.Name = "linkLabel_Page04";
+            this.linkLabel_Page04.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_Page04.TabIndex = 1;
+            this.linkLabel_Page04.TabStop = true;
+            this.linkLabel_Page04.Text = "Fill out the form. Learn more.";
+            this.linkLabel_Page04.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
             // label13
             // 
@@ -676,9 +651,8 @@
             // 
             // panel_Page05
             // 
-            this.panel_Page05.Controls.Add(this.linkLabel_linkLabel_Page05_WebAppAppOnly);
+            this.panel_Page05.Controls.Add(this.linkLabel_Page05);
             this.panel_Page05.Controls.Add(this.comboBox_Page05_Resource);
-            this.panel_Page05.Controls.Add(this.label16);
             this.panel_Page05.Controls.Add(this.button_Page05_SelectCert);
             this.panel_Page05.Controls.Add(this.label36);
             this.panel_Page05.Controls.Add(this.textBox_Page05_CertPath);
@@ -695,17 +669,16 @@
             this.panel_Page05.TabIndex = 8;
             this.panel_Page05.Tag = "textBox_Page05_TenantName";
             // 
-            // linkLabel_linkLabel_Page05_WebAppAppOnly
+            // linkLabel_Page05
             // 
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.AutoSize = true;
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.Location = new System.Drawing.Point(102, 10);
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.Name = "linkLabel_linkLabel_Page05_WebAppAppOnly";
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.Size = new System.Drawing.Size(140, 13);
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.TabIndex = 1;
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.TabStop = true;
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.Text = "How to register applications.";
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.Visible = false;
-            this.linkLabel_linkLabel_Page05_WebAppAppOnly.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Page05_WebAppAppOnly_LinkClicked);
+            this.linkLabel_Page05.AutoSize = true;
+            this.linkLabel_Page05.Location = new System.Drawing.Point(15, 10);
+            this.linkLabel_Page05.Name = "linkLabel_Page05";
+            this.linkLabel_Page05.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_Page05.TabIndex = 1;
+            this.linkLabel_Page05.TabStop = true;
+            this.linkLabel_Page05.Text = "Fill out the form. Learn more.";
+            this.linkLabel_Page05.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
             // comboBox_Page05_Resource
             // 
@@ -717,15 +690,6 @@
             this.comboBox_Page05_Resource.Name = "comboBox_Page05_Resource";
             this.comboBox_Page05_Resource.Size = new System.Drawing.Size(284, 21);
             this.comboBox_Page05_Resource.TabIndex = 7;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(15, 10);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(81, 13);
-            this.label16.TabIndex = 59;
-            this.label16.Text = "Fill out the form.";
             // 
             // button_Page05_SelectCert
             // 
@@ -832,9 +796,9 @@
             // 
             // panel_Page06
             // 
+            this.panel_Page06.Controls.Add(this.linkLabel_Page06);
             this.panel_Page06.Controls.Add(this.label49);
             this.panel_Page06.Controls.Add(this.textBox_Page06_TenantName);
-            this.panel_Page06.Controls.Add(this.label9);
             this.panel_Page06.Controls.Add(this.textBox_Page06_ClientSecret);
             this.panel_Page06.Controls.Add(this.label26);
             this.panel_Page06.Controls.Add(this.button_Page06_ScopeEditor);
@@ -869,15 +833,6 @@
             this.textBox_Page06_TenantName.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page06_TenantName.TabIndex = 1;
             this.textBox_Page06_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2WebAppTenantName;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 10);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(81, 13);
-            this.label9.TabIndex = 47;
-            this.label9.Text = "Fill out the form.";
             // 
             // textBox_Page06_ClientSecret
             // 
@@ -971,9 +926,9 @@
             // 
             // panel_Page07
             // 
+            this.panel_Page07.Controls.Add(this.linkLabel_Page07);
             this.panel_Page07.Controls.Add(this.label50);
             this.panel_Page07.Controls.Add(this.textBox_Page07_TenantName);
-            this.panel_Page07.Controls.Add(this.label15);
             this.panel_Page07.Controls.Add(this.button_Page07_ScopeEditor);
             this.panel_Page07.Controls.Add(this.textBox_Page07_Scopes);
             this.panel_Page07.Controls.Add(this.textBox_Page07_ClientID);
@@ -1006,15 +961,6 @@
             this.textBox_Page07_TenantName.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page07_TenantName.TabIndex = 1;
             this.textBox_Page07_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastV2MobileAppTenantName;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(15, 10);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(81, 13);
-            this.label15.TabIndex = 48;
-            this.label15.Text = "Fill out the form.";
             // 
             // button_Page07_ScopeEditor
             // 
@@ -1088,7 +1034,7 @@
             // 
             // panel_Page08
             // 
-            this.panel_Page08.Controls.Add(this.linkLabel_Page08_WebAppAppOnlyByKey);
+            this.panel_Page08.Controls.Add(this.linkLabel_Page08);
             this.panel_Page08.Controls.Add(this.comboBox_Page08_Resource);
             this.panel_Page08.Controls.Add(this.label17);
             this.panel_Page08.Controls.Add(this.textBox_Page08_ClientSecret);
@@ -1097,24 +1043,22 @@
             this.panel_Page08.Controls.Add(this.label20);
             this.panel_Page08.Controls.Add(this.textBox_Page08_TenantName);
             this.panel_Page08.Controls.Add(this.textBox_Page08_ClientID);
-            this.panel_Page08.Controls.Add(this.label21);
             this.panel_Page08.Location = new System.Drawing.Point(835, 474);
             this.panel_Page08.Name = "panel_Page08";
             this.panel_Page08.Size = new System.Drawing.Size(400, 200);
             this.panel_Page08.TabIndex = 8;
             this.panel_Page08.Tag = "textBox_Page08_TenantName";
             // 
-            // linkLabel_Page08_WebAppAppOnlyByKey
+            // linkLabel_Page08
             // 
-            this.linkLabel_Page08_WebAppAppOnlyByKey.AutoSize = true;
-            this.linkLabel_Page08_WebAppAppOnlyByKey.Location = new System.Drawing.Point(102, 10);
-            this.linkLabel_Page08_WebAppAppOnlyByKey.Name = "linkLabel_Page08_WebAppAppOnlyByKey";
-            this.linkLabel_Page08_WebAppAppOnlyByKey.Size = new System.Drawing.Size(140, 13);
-            this.linkLabel_Page08_WebAppAppOnlyByKey.TabIndex = 43;
-            this.linkLabel_Page08_WebAppAppOnlyByKey.TabStop = true;
-            this.linkLabel_Page08_WebAppAppOnlyByKey.Text = "How to register applications.";
-            this.linkLabel_Page08_WebAppAppOnlyByKey.Visible = false;
-            this.linkLabel_Page08_WebAppAppOnlyByKey.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Page08_WebAppAppOnlyByKey_LinkClicked);
+            this.linkLabel_Page08.AutoSize = true;
+            this.linkLabel_Page08.Location = new System.Drawing.Point(15, 10);
+            this.linkLabel_Page08.Name = "linkLabel_Page08";
+            this.linkLabel_Page08.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_Page08.TabIndex = 43;
+            this.linkLabel_Page08.TabStop = true;
+            this.linkLabel_Page08.Text = "Fill out the form. Learn more.";
+            this.linkLabel_Page08.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
             // comboBox_Page08_Resource
             // 
@@ -1162,7 +1106,7 @@
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(93, 13);
             this.label19.TabIndex = 53;
-            this.label19.Text = "Key";
+            this.label19.Text = "Client secret";
             this.label19.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label20
@@ -1195,15 +1139,6 @@
             this.textBox_Page08_ClientID.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page08_ClientID.TabIndex = 47;
             this.textBox_Page08_ClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyByKeyClientID;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(15, 10);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(81, 13);
-            this.label21.TabIndex = 44;
-            this.label21.Text = "Fill out the form.";
             // 
             // openFileDialog_PFX
             // 
@@ -1384,7 +1319,7 @@
             // 
             // panel_Page12
             // 
-            this.panel_Page12.Controls.Add(this.label40);
+            this.panel_Page12.Controls.Add(this.linkLabel_Page12);
             this.panel_Page12.Controls.Add(this.textBox_Page12_ClientSecret);
             this.panel_Page12.Controls.Add(this.label41);
             this.panel_Page12.Controls.Add(this.button_Page12_ScopeEditor);
@@ -1399,15 +1334,6 @@
             this.panel_Page12.Size = new System.Drawing.Size(400, 200);
             this.panel_Page12.TabIndex = 104;
             this.panel_Page12.Tag = "textBox_Page12_TenantName";
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(15, 10);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(81, 13);
-            this.label40.TabIndex = 47;
-            this.label40.Text = "Fill out the form.";
             // 
             // textBox_Page12_ClientSecret
             // 
@@ -1572,13 +1498,12 @@
             // panel_Page14
             // 
             this.panel_Page14.Controls.Add(this.textBox_Page14_ClientID);
-            this.panel_Page14.Controls.Add(this.linkLabel_Page14_SPOApp);
+            this.panel_Page14.Controls.Add(this.linkLabel_Page14);
             this.panel_Page14.Controls.Add(this.label51);
             this.panel_Page14.Controls.Add(this.textBox_Page14_ClientSecret);
             this.panel_Page14.Controls.Add(this.label53);
             this.panel_Page14.Controls.Add(this.label54);
             this.panel_Page14.Controls.Add(this.textBox_Page14_TenantName);
-            this.panel_Page14.Controls.Add(this.label55);
             this.panel_Page14.Location = new System.Drawing.Point(835, 886);
             this.panel_Page14.Name = "panel_Page14";
             this.panel_Page14.Size = new System.Drawing.Size(400, 200);
@@ -1596,16 +1521,16 @@
             this.textBox_Page14_ClientID.TabIndex = 47;
             this.textBox_Page14_ClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastSpoAppOnlyByKeyClientID;
             // 
-            // linkLabel_Page14_SPOApp
+            // linkLabel_Page14
             // 
-            this.linkLabel_Page14_SPOApp.AutoSize = true;
-            this.linkLabel_Page14_SPOApp.Location = new System.Drawing.Point(102, 10);
-            this.linkLabel_Page14_SPOApp.Name = "linkLabel_Page14_SPOApp";
-            this.linkLabel_Page14_SPOApp.Size = new System.Drawing.Size(140, 13);
-            this.linkLabel_Page14_SPOApp.TabIndex = 43;
-            this.linkLabel_Page14_SPOApp.TabStop = true;
-            this.linkLabel_Page14_SPOApp.Text = "How to register applications.";
-            this.linkLabel_Page14_SPOApp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Page14_SPOApp_LinkClicked);
+            this.linkLabel_Page14.AutoSize = true;
+            this.linkLabel_Page14.Location = new System.Drawing.Point(15, 10);
+            this.linkLabel_Page14.Name = "linkLabel_Page14";
+            this.linkLabel_Page14.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_Page14.TabIndex = 43;
+            this.linkLabel_Page14.TabStop = true;
+            this.linkLabel_Page14.Text = "Fill out the form. Learn more.";
+            this.linkLabel_Page14.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
             // label51
             // 
@@ -1656,14 +1581,38 @@
             this.textBox_Page14_TenantName.TabIndex = 46;
             this.textBox_Page14_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastSpoAppOnlyByKeyTenantName;
             // 
-            // label55
+            // linkLabel_Page06
             // 
-            this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(15, 10);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(81, 13);
-            this.label55.TabIndex = 44;
-            this.label55.Text = "Fill out the form.";
+            this.linkLabel_Page06.AutoSize = true;
+            this.linkLabel_Page06.Location = new System.Drawing.Point(15, 10);
+            this.linkLabel_Page06.Name = "linkLabel_Page06";
+            this.linkLabel_Page06.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_Page06.TabIndex = 47;
+            this.linkLabel_Page06.TabStop = true;
+            this.linkLabel_Page06.Text = "Fill out the form. Learn more.";
+            this.linkLabel_Page06.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
+            // 
+            // linkLabel_Page07
+            // 
+            this.linkLabel_Page07.AutoSize = true;
+            this.linkLabel_Page07.Location = new System.Drawing.Point(15, 10);
+            this.linkLabel_Page07.Name = "linkLabel_Page07";
+            this.linkLabel_Page07.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_Page07.TabIndex = 57;
+            this.linkLabel_Page07.TabStop = true;
+            this.linkLabel_Page07.Text = "Fill out the form. Learn more.";
+            this.linkLabel_Page07.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
+            // 
+            // linkLabel_Page12
+            // 
+            this.linkLabel_Page12.AutoSize = true;
+            this.linkLabel_Page12.Location = new System.Drawing.Point(15, 10);
+            this.linkLabel_Page12.Name = "linkLabel_Page12";
+            this.linkLabel_Page12.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_Page12.TabIndex = 58;
+            this.linkLabel_Page12.TabStop = true;
+            this.linkLabel_Page12.Text = "Fill out the form. Learn more.";
+            this.linkLabel_Page12.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
             // AccessTokenWizard
             // 
@@ -1681,13 +1630,13 @@
             this.Controls.Add(this.panel_Page08);
             this.Controls.Add(this.panel_Page07);
             this.Controls.Add(this.panel_Page06);
+            this.Controls.Add(this.panel_Page14);
             this.Controls.Add(this.panel_Page05);
             this.Controls.Add(this.panel_Page04);
             this.Controls.Add(this.panel_Page02);
             this.Controls.Add(this.panel_Page03);
             this.Controls.Add(this.panel_Page01);
             this.Controls.Add(this.panel_Page00);
-            this.Controls.Add(this.panel_Page14);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -1737,7 +1686,6 @@
         private System.Windows.Forms.RadioButton radioButton_Page00_BuiltInAppOrBasicAuth;
         private System.Windows.Forms.RadioButton radioButton_Page00_AppRegistrationPortal;
         private System.Windows.Forms.RadioButton radioButton_Page00_MicrosoftAzurePortal;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button_Back;
         private System.Windows.Forms.Button button_Next;
         private System.Windows.Forms.Button button_Cancel;
@@ -1746,8 +1694,7 @@
         private System.Windows.Forms.RadioButton radioButton_Page01_V1Web;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel_Page03;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.LinkLabel linkLabel_Page03_WebApp;
+        private System.Windows.Forms.LinkLabel linkLabel_Page03;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox_Page03_ClientSecret;
         private System.Windows.Forms.Label label10;
@@ -1765,8 +1712,7 @@
         private System.Windows.Forms.Panel panel_Page06;
         private System.Windows.Forms.Panel panel_Page07;
         private System.Windows.Forms.Panel panel_Page08;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.LinkLabel linkLabel_Page04_NativeApp;
+        private System.Windows.Forms.LinkLabel linkLabel_Page04;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBox_Page04_RedirectUri;
         private System.Windows.Forms.Label label12;
@@ -1775,7 +1721,6 @@
         private System.Windows.Forms.TextBox textBox_Page04_TenantName;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox comboBox_Page04_Resource;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox_Page06_ClientSecret;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Button button_Page06_ScopeEditor;
@@ -1785,7 +1730,6 @@
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.TextBox textBox_Page06_RedirectUri;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button button_Page07_ScopeEditor;
         private System.Windows.Forms.TextBox textBox_Page07_Scopes;
         private System.Windows.Forms.TextBox textBox_Page07_ClientID;
@@ -1794,7 +1738,6 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.TextBox textBox_Page07_RedirectUri;
         private System.Windows.Forms.ComboBox comboBox_Page05_Resource;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button button_Page05_SelectCert;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.TextBox textBox_Page05_CertPath;
@@ -1807,7 +1750,7 @@
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.OpenFileDialog openFileDialog_PFX;
         private System.Windows.Forms.RadioButton radioButton_Page01_V1AppOnlyByCert;
-        private System.Windows.Forms.LinkLabel linkLabel_linkLabel_Page05_WebAppAppOnly;
+        private System.Windows.Forms.LinkLabel linkLabel_Page05;
         private System.Windows.Forms.RadioButton radioButton_Page01_V1AppOnlyByKey;
         private System.Windows.Forms.ComboBox comboBox_Page08_Resource;
         private System.Windows.Forms.Label label17;
@@ -1817,7 +1760,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox textBox_Page08_TenantName;
         private System.Windows.Forms.TextBox textBox_Page08_ClientID;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.RadioButton radioButton_Page01_V1AdminConsent;
         private System.Windows.Forms.Panel panel_Page09;
         private System.Windows.Forms.ComboBox comboBox_Page09_Resource;
@@ -1827,7 +1769,7 @@
         private System.Windows.Forms.TextBox textBox_Page09_ClientID;
         private System.Windows.Forms.TextBox textBox_Page09_RedirectUri;
         private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.LinkLabel linkLabel_Page08_WebAppAppOnlyByKey;
+        private System.Windows.Forms.LinkLabel linkLabel_Page08;
         private System.Windows.Forms.Panel panel_Page10;
         private System.Windows.Forms.RadioButton radioButton_Page10_BasicAuth;
         private System.Windows.Forms.RadioButton radioButton_Page10_BuiltInApp;
@@ -1840,7 +1782,6 @@
         private System.Windows.Forms.RadioButton radioButton_Page02_V2AdminConsent;
         private System.Windows.Forms.RadioButton radioButton_Page02_V2WebAppOnlyForMicrosoftGraph;
         private System.Windows.Forms.Panel panel_Page12;
-        private System.Windows.Forms.Label label40;
         private System.Windows.Forms.TextBox textBox_Page12_ClientSecret;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Button button_Page12_ScopeEditor;
@@ -1864,12 +1805,15 @@
         private System.Windows.Forms.RadioButton radioButton_Page00_SharePointOnlineAppOnly;
         private System.Windows.Forms.Panel panel_Page14;
         private System.Windows.Forms.TextBox textBox_Page14_ClientID;
-        private System.Windows.Forms.LinkLabel linkLabel_Page14_SPOApp;
+        private System.Windows.Forms.LinkLabel linkLabel_Page14;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.TextBox textBox_Page14_ClientSecret;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.TextBox textBox_Page14_TenantName;
-        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.LinkLabel linkLabel_Page00;
+        private System.Windows.Forms.LinkLabel linkLabel_Page06;
+        private System.Windows.Forms.LinkLabel linkLabel_Page07;
+        private System.Windows.Forms.LinkLabel linkLabel_Page12;
     }
 }

@@ -85,6 +85,18 @@ namespace Office365APIEditor
             button_Next.BringToFront();
             button_Cancel.BringToFront();
 
+            // Initialize links.
+
+            CreateLearnMoreLink(linkLabel_Page00, "https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/Acquire_new_access_token_for_Editor_Mode.md");
+            CreateLearnMoreLink(linkLabel_Page03, "https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V1_Web_application.md");
+            CreateLearnMoreLink(linkLabel_Page04, "https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V1_Native_application.md");
+            CreateLearnMoreLink(linkLabel_Page05, "https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V1_Web_application_for_App_Only_Token.md");
+            CreateLearnMoreLink(linkLabel_Page08, "https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V1_Web_application_for_App_Only_Token_Key_Auth.md");
+            CreateLearnMoreLink(linkLabel_Page06, "https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V2_Web_application.md");
+            CreateLearnMoreLink(linkLabel_Page07, "https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V2_Native_application.md");
+            CreateLearnMoreLink(linkLabel_Page12, "https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V2_Web_application_for_App_Only_Token_Key_Auth.md");
+            CreateLearnMoreLink(linkLabel_Page14, "https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_Web_application_for_SharePoint_Online_App-Only_Token.md");
+
             // Go to the first page.
             ShowPage(PageIndex.Page00_PortalSelection);
 
@@ -669,12 +681,6 @@ namespace Office365APIEditor
 
         #region Code for SharePoint Online App-Only REST API Microsoft Azure Access Control Service application.
 
-        private void linkLabel_Page14_SPOApp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_Web_application_for_SharePoint_Online_App-Only_Token.md");
-        }
-
-
         private bool ValidateSharePointOnlineAppOnlyByKeyParam()
         {
             // Check the form for SharePoint Online App-Only REST API Microsoft Azure Access Control Service application..
@@ -1043,24 +1049,15 @@ namespace Office365APIEditor
 
         #endregion
 
-        private void linkLabel_Page03_WebApp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void CreateLearnMoreLink(LinkLabel linkLabel, string url)
         {
-            System.Diagnostics.Process.Start("https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V1_Web_application.md");
+            linkLabel.Links.Add(linkLabel.Text.IndexOf("Learn more"), 10, url);
         }
 
-        private void linkLabel_Page04_NativeApp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V1_Native_application.md");
-        }
 
-        private void linkLabel_Page05_WebAppAppOnly_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V1_Web_application_for_App_Only_Token.md");
-        }
-
-        private void linkLabel_Page08_WebAppAppOnlyByKey_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_V1_Web_application_for_App_Only_Token_Key_Auth.md");
+            System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
         }
 
         private TokenResponse AcquireAccessToken(string PostBody, string EndPointUrl)

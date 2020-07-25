@@ -1,7 +1,6 @@
 # How to register a Web application for SharePoint Online App-Only Token
 
-This tutorial introduces how to register the application using SharePoint Online Portal.
-Once you registered an application by following this tutorial, you can use it as a "SharePoint Online App-Only REST API" in Office365APIEditor.
+This tutorial introduces how to register the application using SharePoint Online Portal. Once you have registered an application by following this tutorial, you can use it as a "SharePoint Online App-Only REST API" in Office365APIEditor.
 
 1. Go to https://\<tenantName\>.sharepoint.com/_layouts/15/appregnew.aspx
 

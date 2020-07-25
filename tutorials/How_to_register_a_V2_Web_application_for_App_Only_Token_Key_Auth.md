@@ -1,6 +1,6 @@
-# How to register a V1 Web application and client secret for App Only Token
+# How to register a V2 Web application and client secret for App Only Token
 
-This tutorial introduces how to register the application using Microsoft Azure portal. Once you have registered an application by following this tutorial, you can use it as a "Web app (Use App Only Token by client secret)" in Office365APIEditor.
+This tutorial introduces how to register the application using Microsoft Azure portal. Once you have registered an application by following this tutorial, you can use it as a "Web app (Use App Only Token by client secret for Microsoft Graph)" in Office365APIEditor.
 
 1. Go to https://portal.azure.com/ and sign in using your tenant administrator account.
 2. Click [Azure Active Directory] in the left panel.

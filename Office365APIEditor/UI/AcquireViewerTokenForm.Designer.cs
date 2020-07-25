@@ -36,6 +36,7 @@
             this.button_UseBuiltInApp = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.linkLabel_LearnMore = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // textBox_ClientID
@@ -83,7 +84,7 @@
             this.button_UseBuiltInApp.Name = "button_UseBuiltInApp";
             this.button_UseBuiltInApp.Size = new System.Drawing.Size(75, 23);
             this.button_UseBuiltInApp.TabIndex = 1;
-            this.button_UseBuiltInApp.Text = "Sign-in";
+            this.button_UseBuiltInApp.Text = "Sign in";
             this.button_UseBuiltInApp.UseVisualStyleBackColor = true;
             this.button_UseBuiltInApp.Click += new System.EventHandler(this.button_UseBuiltInApp_ClickAsync);
             // 
@@ -104,12 +105,24 @@
             this.label3.TabIndex = 0;
             this.label3.Text = resources.GetString("label3.Text");
             // 
+            // linkLabel_LearnMore
+            // 
+            this.linkLabel_LearnMore.AutoSize = true;
+            this.linkLabel_LearnMore.Location = new System.Drawing.Point(93, 175);
+            this.linkLabel_LearnMore.Name = "linkLabel_LearnMore";
+            this.linkLabel_LearnMore.Size = new System.Drawing.Size(60, 13);
+            this.linkLabel_LearnMore.TabIndex = 7;
+            this.linkLabel_LearnMore.TabStop = true;
+            this.linkLabel_LearnMore.Text = "Learn more";
+            this.linkLabel_LearnMore.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LearnMore_LinkClicked);
+            // 
             // AcquireViewerTokenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_Cancel;
             this.ClientSize = new System.Drawing.Size(489, 209);
+            this.Controls.Add(this.linkLabel_LearnMore);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button_UseBuiltInApp);
@@ -138,5 +151,6 @@
         private System.Windows.Forms.Button button_UseBuiltInApp;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.LinkLabel linkLabel_LearnMore;
     }
 }

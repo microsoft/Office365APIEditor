@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label3.Text" xml:space="preserve">
-    <value>To start a new session, click the [Sign-in] button.
+    <value>To start new Mailbox Viewer session, click [Sign in].
 
 If you want to use your own application which registered in Azure Active Directory, 
-enter the application ID and click [Use my application] button.
+enter the application ID and click [Use my application].
 Your application must be a public client application and support all types of accounts.
 The redirect URI must be https://login.microsoftonline.com/common/oauth2/nativeclient.</value>
   </data>
