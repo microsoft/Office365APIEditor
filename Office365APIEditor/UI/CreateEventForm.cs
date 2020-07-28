@@ -7,6 +7,7 @@ using Office365APIEditor.ViewerHelper.Data.CalendarAPI;
 using Office365APIEditor.ViewerHelper.Data.MailAPI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -48,6 +49,9 @@ namespace Office365APIEditor.UI
             Icon = Properties.Resources.DefaultIcon;
             
             attachments = new List<ViewerHelper.Data.AttachmentAPI.AttachmentBase>();
+
+            // Display the window in the center of the parent window.
+            Location = new Point(Owner.Location.X + (Owner.Width - Width) / 2, Owner.Location.Y + (Owner.Height - Height) / 2);
 
             viewerRequestHelper = new ViewerRequestHelper();
 

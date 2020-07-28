@@ -1167,6 +1167,7 @@
             this.Controls.Add(this.Button_Save);
             this.MinimumSize = new System.Drawing.Size(816, 530);
             this.Name = "CreateEventForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "New Event";
             this.Load += new System.EventHandler(this.CreateEventForm_LoadAsync);
             this.groupBox_Recurring_Pattern.ResumeLayout(false);
