@@ -85,6 +85,7 @@
             this.textBox_Page05_TenantName = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
             this.panel_Page06 = new System.Windows.Forms.Panel();
+            this.linkLabel_Page06 = new System.Windows.Forms.LinkLabel();
             this.label49 = new System.Windows.Forms.Label();
             this.textBox_Page06_TenantName = new System.Windows.Forms.TextBox();
             this.textBox_Page06_ClientSecret = new System.Windows.Forms.TextBox();
@@ -97,6 +98,7 @@
             this.label31 = new System.Windows.Forms.Label();
             this.textBox_Page06_RedirectUri = new System.Windows.Forms.TextBox();
             this.panel_Page07 = new System.Windows.Forms.Panel();
+            this.linkLabel_Page07 = new System.Windows.Forms.LinkLabel();
             this.label50 = new System.Windows.Forms.Label();
             this.textBox_Page07_TenantName = new System.Windows.Forms.TextBox();
             this.button_Page07_ScopeEditor = new System.Windows.Forms.Button();
@@ -135,6 +137,7 @@
             this.textBox_Page11_Scopes = new System.Windows.Forms.TextBox();
             this.label42 = new System.Windows.Forms.Label();
             this.panel_Page12 = new System.Windows.Forms.Panel();
+            this.linkLabel_Page12 = new System.Windows.Forms.LinkLabel();
             this.textBox_Page12_ClientSecret = new System.Windows.Forms.TextBox();
             this.label41 = new System.Windows.Forms.Label();
             this.button_Page12_ScopeEditor = new System.Windows.Forms.Button();
@@ -159,9 +162,6 @@
             this.label53 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.textBox_Page14_TenantName = new System.Windows.Forms.TextBox();
-            this.linkLabel_Page06 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel_Page07 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel_Page12 = new System.Windows.Forms.LinkLabel();
             this.panel_Page00.SuspendLayout();
             this.panel_Page01.SuspendLayout();
             this.panel_Page03.SuspendLayout();
@@ -729,7 +729,7 @@
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(93, 13);
             this.label32.TabIndex = 57;
-            this.label32.Text = "Password for cert";
+            this.label32.Text = "Password";
             this.label32.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBox_Page05_CertPass
@@ -813,6 +813,17 @@
             this.panel_Page06.Size = new System.Drawing.Size(400, 200);
             this.panel_Page06.TabIndex = 8;
             this.panel_Page06.Tag = "textBox_Page06_TenantName";
+            // 
+            // linkLabel_Page06
+            // 
+            this.linkLabel_Page06.AutoSize = true;
+            this.linkLabel_Page06.Location = new System.Drawing.Point(15, 10);
+            this.linkLabel_Page06.Name = "linkLabel_Page06";
+            this.linkLabel_Page06.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_Page06.TabIndex = 47;
+            this.linkLabel_Page06.TabStop = true;
+            this.linkLabel_Page06.Text = "Fill out the form. Learn more.";
+            this.linkLabel_Page06.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
             // label49
             // 
@@ -941,6 +952,17 @@
             this.panel_Page07.Size = new System.Drawing.Size(400, 200);
             this.panel_Page07.TabIndex = 8;
             this.panel_Page07.Tag = "textBox_Page07_TenantName";
+            // 
+            // linkLabel_Page07
+            // 
+            this.linkLabel_Page07.AutoSize = true;
+            this.linkLabel_Page07.Location = new System.Drawing.Point(15, 10);
+            this.linkLabel_Page07.Name = "linkLabel_Page07";
+            this.linkLabel_Page07.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_Page07.TabIndex = 57;
+            this.linkLabel_Page07.TabStop = true;
+            this.linkLabel_Page07.Text = "Fill out the form. Learn more.";
+            this.linkLabel_Page07.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
             // label50
             // 
@@ -1335,6 +1357,17 @@
             this.panel_Page12.TabIndex = 104;
             this.panel_Page12.Tag = "textBox_Page12_TenantName";
             // 
+            // linkLabel_Page12
+            // 
+            this.linkLabel_Page12.AutoSize = true;
+            this.linkLabel_Page12.Location = new System.Drawing.Point(15, 10);
+            this.linkLabel_Page12.Name = "linkLabel_Page12";
+            this.linkLabel_Page12.Size = new System.Drawing.Size(140, 13);
+            this.linkLabel_Page12.TabIndex = 58;
+            this.linkLabel_Page12.TabStop = true;
+            this.linkLabel_Page12.Text = "Fill out the form. Learn more.";
+            this.linkLabel_Page12.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
+            // 
             // textBox_Page12_ClientSecret
             // 
             this.textBox_Page12_ClientSecret.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1580,39 +1613,6 @@
             this.textBox_Page14_TenantName.Size = new System.Drawing.Size(284, 20);
             this.textBox_Page14_TenantName.TabIndex = 46;
             this.textBox_Page14_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastSpoAppOnlyByKeyTenantName;
-            // 
-            // linkLabel_Page06
-            // 
-            this.linkLabel_Page06.AutoSize = true;
-            this.linkLabel_Page06.Location = new System.Drawing.Point(15, 10);
-            this.linkLabel_Page06.Name = "linkLabel_Page06";
-            this.linkLabel_Page06.Size = new System.Drawing.Size(140, 13);
-            this.linkLabel_Page06.TabIndex = 47;
-            this.linkLabel_Page06.TabStop = true;
-            this.linkLabel_Page06.Text = "Fill out the form. Learn more.";
-            this.linkLabel_Page06.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
-            // 
-            // linkLabel_Page07
-            // 
-            this.linkLabel_Page07.AutoSize = true;
-            this.linkLabel_Page07.Location = new System.Drawing.Point(15, 10);
-            this.linkLabel_Page07.Name = "linkLabel_Page07";
-            this.linkLabel_Page07.Size = new System.Drawing.Size(140, 13);
-            this.linkLabel_Page07.TabIndex = 57;
-            this.linkLabel_Page07.TabStop = true;
-            this.linkLabel_Page07.Text = "Fill out the form. Learn more.";
-            this.linkLabel_Page07.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
-            // 
-            // linkLabel_Page12
-            // 
-            this.linkLabel_Page12.AutoSize = true;
-            this.linkLabel_Page12.Location = new System.Drawing.Point(15, 10);
-            this.linkLabel_Page12.Name = "linkLabel_Page12";
-            this.linkLabel_Page12.Size = new System.Drawing.Size(140, 13);
-            this.linkLabel_Page12.TabIndex = 58;
-            this.linkLabel_Page12.TabStop = true;
-            this.linkLabel_Page12.Text = "Fill out the form. Learn more.";
-            this.linkLabel_Page12.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_LinkClicked);
             // 
             // AccessTokenWizard
             // 

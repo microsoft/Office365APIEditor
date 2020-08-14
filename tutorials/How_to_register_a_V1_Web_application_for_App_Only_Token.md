@@ -52,4 +52,4 @@ This tutorial introduces how to register the application using Microsoft Azure p
   |Application (client) ID |Application ID                 |  
 
   [Tenant name] is your Office 365 tenant name. (e.g. contoso.onmicrosoft.com)  
-  [Certificate Path] is the file path of the exported PFX file, and [Password for cert] is the password of the PFX file.
+  [Certificate Path] is the file path of the exported PFX file, and [Password] is the password of the PFX file.
