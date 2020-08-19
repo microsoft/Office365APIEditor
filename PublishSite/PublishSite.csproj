@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="xcopy /I /D /Y &quot;$(SolutionDir)Setup\$(Configuration)&quot; &quot;$(ProjectDir)wwwroot\installers&quot;&#xD;&#xA;powershell.exe -Command &quot;$(ProjectDir)PreBuild.ps1 -MsiPath &quot;$(ProjectDir)wwwroot\installers\Setup.msi&quot; -VersionOutPath &quot;$(ProjectDir)wwwroot\latestMsi.txt&quot; -ReleaseFolder '$(SolutionDir)Office365APIEditor\Bin\$(Configuration)' -ZipOutDir '$(ProjectDir)wwwroot\installers'&quot;" />
+    <Exec Command="powershell.exe -Command &quot;$(ProjectDir)PreBuild.ps1 -wwwrootPath &quot;$(ProjectDir)wwwroot&quot;" />
   </Target>
 
 </Project>
