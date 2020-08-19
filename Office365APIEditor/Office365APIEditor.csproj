@@ -557,7 +557,7 @@
     <Content Include="SampleRequest\Office365ManagementAPI.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="SampleRequest\READMD.md" />
+    <None Include="SampleRequest\README.md" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
