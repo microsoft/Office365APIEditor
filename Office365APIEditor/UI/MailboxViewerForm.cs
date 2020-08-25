@@ -403,31 +403,6 @@ namespace Office365APIEditor
             }
         }
 
-        [Obsolete]
-        private void PrepareTaskGroupRootFolder()
-        {
-            // TaskGroup object has no ParentID or ChildFolders.
-            // So we use DummyTaskGroupRoot node as a parent folder of TaskGroups.
-
-            // Make a dummy node.
-            string dummyNodeName = Util.UseMicrosoftGraphInMailboxViewer ? "Task Groups (Beta) (Dummy Folder)" : "Task Groups (Dummy Folder)";
-            TreeNode dummyTaskGroupRootNode = new TreeNode(dummyNodeName)
-            {
-                Tag = new FolderInfo() { ID = "", Type = FolderContentType.DummyTaskGroupRoot },
-                ContextMenuStrip = null
-            };
-            dummyTaskGroupRootNode.Nodes.Add(new TreeNode()); // Add a dummy node.
-
-            if (treeView_Mailbox.InvokeRequired)
-            {
-                treeView_Mailbox.Invoke(new MethodInvoker(delegate { treeView_Mailbox.Nodes.Add(dummyTaskGroupRootNode); }));
-            }
-            else
-            {
-                treeView_Mailbox.Nodes.Add(dummyTaskGroupRootNode);
-            }
-        }
-
         private void PrepareToDoRootFolder()
         {
             // Use DummyTaskGroupRoot node as a parent folder of To Do.
@@ -448,46 +423,6 @@ namespace Office365APIEditor
             else
             {
                 treeView_Mailbox.Nodes.Add(dummyToDoRootNode);
-            }
-        }
-
-        [Obsolete]
-        private async void PrepareTaskGroupsAsync(TreeNode FolderNode)
-        {
-            // Get all TaskGroups, and add them to the tree.
-
-            var taskGroups = await viewerRequestHelper.GetAllTaskGroupsAsync();
-
-            foreach (var group in taskGroups)
-            {
-                TreeNode node = new TreeNode(group.Name)
-                {
-                    Tag = new FolderInfo() { ID = group.Id, Type = FolderContentType.TaskGroup, Expanded = false },
-                };
-                node.Nodes.Add(new TreeNode()); // Add a dummy node.
-
-                if (treeView_Mailbox.InvokeRequired)
-                {
-                    treeView_Mailbox.Invoke(new MethodInvoker(delegate {
-                        FolderNode.Nodes.Add(node);
-                        if (expandingNodeHasDummyNode)
-                        {
-                            // Remove a dummy node.
-                            FolderNode.Nodes[0].Remove();
-                            expandingNodeHasDummyNode = false;
-                        }
-                    }));
-                }
-                else
-                {
-                    FolderNode.Nodes.Add(node);
-                    if (expandingNodeHasDummyNode)
-                    {
-                        // Remove a dummy node.
-                        FolderNode.Nodes[0].Remove();
-                        expandingNodeHasDummyNode = false;
-                    }
-                }
             }
         }
 
@@ -527,72 +462,6 @@ namespace Office365APIEditor
                     TreeNode node = new TreeNode(toDoTaskList.DisplayName)
                     {
                         Tag = new FolderInfo() { ID = toDoTaskList.Id, Type = FolderContentType.Task, Expanded = true },
-                        ContextMenuStrip = contextMenuStrip_FolderTreeNode
-                    };
-
-                    if (treeView_Mailbox.InvokeRequired)
-                    {
-                        treeView_Mailbox.Invoke(new MethodInvoker(delegate {
-                            FolderNode.Nodes.Add(node);
-                            if (expandingNodeHasDummyNode)
-                            {
-                                // Remove a dummy node.
-                                FolderNode.Nodes[0].Remove();
-                                expandingNodeHasDummyNode = false;
-                            }
-                        }));
-                    }
-                    else
-                    {
-                        FolderNode.Nodes.Add(node);
-                        if (expandingNodeHasDummyNode)
-                        {
-                            // Remove a dummy node.
-                            FolderNode.Nodes[0].Remove();
-                            expandingNodeHasDummyNode = false;
-                        }
-                    }
-                }
-            }
-        }
-
-        [Obsolete]
-        private async void PrepareTaskFoldersAsync(string TaskGroupId, TreeNode FolderNode)
-        {
-            // Get all TaskFolders of specified TaskGroup, and add them to the tree.
-
-            var taskFolders = await viewerRequestHelper.GetAllTaskFoldersAsync(TaskGroupId);
-
-            if (taskFolders.Count == 0)
-            {
-                if (treeView_Mailbox.InvokeRequired)
-                {
-                    treeView_Mailbox.Invoke(new MethodInvoker(delegate {
-                        if (expandingNodeHasDummyNode)
-                        {
-                            // Remove a dummy node.
-                            FolderNode.Nodes[0].Remove();
-                            expandingNodeHasDummyNode = false;
-                        }
-                    }));
-                }
-                else
-                {
-                    if (expandingNodeHasDummyNode)
-                    {
-                        // Remove a dummy node.
-                        FolderNode.Nodes[0].Remove();
-                        expandingNodeHasDummyNode = false;
-                    }
-                }
-            }
-            else
-            {
-                foreach (var folder in taskFolders)
-                {
-                    TreeNode node = new TreeNode(folder.Name)
-                    {
-                        Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Task, Expanded = true },
                         ContextMenuStrip = contextMenuStrip_FolderTreeNode
                     };
 

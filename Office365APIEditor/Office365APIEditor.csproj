@@ -405,21 +405,17 @@
     <Compile Include="ViewerHelper\Data\MailAPI\FocusedInboxOverride.cs" />
     <Compile Include="ViewerHelper\Data\Recipient.cs" />
     <Compile Include="ViewerHelper\Data\ResponseStatus.cs" />
-    <Compile Include="ViewerHelper\Data\TaskAPI\Task.cs" />
     <Compile Include="ViewerHelper\Data\ToDoAPI\ToDoTask.cs" />
     <Compile Include="ViewerHelper\Data\ToDoAPI\ToDoTaskList.cs" />
     <Compile Include="ViewerHelper\Global.cs" />
     <Compile Include="ViewerHelper\Data\MailAPI\NewEmailMessage.cs" />
     <Compile Include="ViewerHelper\Data\PagedResponse.cs" />
     <Compile Include="SampleRequest\SampleRequest.cs" />
-    <Compile Include="ViewerHelper\Data\TaskAPI\TaskFolder.cs" />
-    <Compile Include="ViewerHelper\Data\TaskAPI\TaskGroup.cs" />
     <Compile Include="ViewerHelper\Partial\AttachmentRelated.cs" />
     <Compile Include="ViewerHelper\Partial\CalendarRelated.cs" />
     <Compile Include="ViewerHelper\Partial\ContactRelated.cs" />
     <Compile Include="ViewerHelper\Partial\MailRelated.cs" />
     <Compile Include="ViewerHelper\Partial\ToDoRelated.cs" />
-    <Compile Include="ViewerHelper\Partial\TaskRelated.cs" />
     <Compile Include="ViewerHelper\ViewerRequestHelper.cs" />
     <EmbeddedResource Include="External\ScintillaNET FindReplaceDialog\FindAllResults\FindAllResultsPanel.resx">
       <DependentUpon>FindAllResultsPanel.cs</DependentUpon>

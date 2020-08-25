@@ -237,30 +237,6 @@ namespace Office365APIEditor
             }
         }
 
-        [Obsolete]
-        private void PrepareTaskItemListColumns()
-        {
-            if (dataGridView_ItemList.InvokeRequired)
-            {
-                dataGridView_ItemList.Invoke(new MethodInvoker(delegate
-                {
-                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Subject", HeaderText = "Subject", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
-                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "HasAttachments", HeaderText = "HasAttachments", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 60 });
-                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "CreatedDateTime", HeaderText = "CreatedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
-                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "LastModifiedDateTime", HeaderText = "LastModifiedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 180 });
-                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Status", HeaderText = "Status", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
-                }));
-            }
-            else
-            {
-                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Subject", HeaderText = "Subject", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
-                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "HasAttachments", HeaderText = "HasAttachments", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 60 });
-                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "CreatedDateTime", HeaderText = "CreatedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
-                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "LastModifiedDateTime", HeaderText = "LastModifiedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 180 });
-                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Status", HeaderText = "Status", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
-            }
-        }
-
         private void PrepareToDoTaskListColumns()
         {
             if (dataGridView_ItemList.InvokeRequired)
@@ -335,26 +311,6 @@ namespace Office365APIEditor
 
                 events = await viewerRequestHelper.GetAllEventsPageAsync(events.NextLink);
             } while (events.CurrentPage.Count > 0);
-
-            return true;
-        }
-
-        [Obsolete]
-        private async Task<bool> LoadAllTasksAsync()
-        {
-            var tasks = await viewerRequestHelper.GetAllTasksFirstPageAsync(targetFolder.ID);
-
-            do
-            {
-                ShowTasks(tasks.CurrentPage);
-
-                if (!tasks.MorePage)
-                {
-                    break;
-                }
-
-                tasks = await viewerRequestHelper.GetAllTasksPageAsync(tasks.NextLink);
-            } while (tasks.CurrentPage.Count > 0);
 
             return true;
         }
@@ -537,67 +493,6 @@ namespace Office365APIEditor
                         Tag = item.Id
                     };
                     itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, organizer, attendees, start, end, isAllDay, createdDateTime });
-                    itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
-
-                    if (dataGridView_ItemList.InvokeRequired)
-                    {
-                        dataGridView_ItemList.Invoke(new MethodInvoker(delegate { dataGridView_ItemList.Rows.Add(itemRow); }));
-                    }
-                    else
-                    {
-                        dataGridView_ItemList.Rows.Add(itemRow);
-                    }
-                }
-            }
-            catch (InvalidOperationException ex)
-            {
-                if (isFormClosing)
-                {
-                    // It seems that this window was closed.
-                    // Do nothing.
-                }
-                else
-                {
-                    MessageBox.Show(ex.Message, "Office365APIEditor");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.GetType().FullName + "\r\n" + ex.Message, "Office365APIEditor");
-            }
-        }
-
-        [Obsolete]
-        private void ShowTasks(List<ViewerHelper.Data.TaskAPI.Task> tasks)
-        {
-            // Show all tasks in List.
-
-            try
-            {
-                foreach (var item in tasks)
-                {
-                    // Add new row.
-                    string subject = item.Subject ?? "";
-                    string hasAttachments = (item.HasAttachments != null) ? item.HasAttachments.Value.ToString() : "";
-                    string rowCreatedDateTime = item.CreatedDateTime ?? "";
-                    string rowLastModifiedDateTime = item.LastModifiedDateTime ?? "";
-                    string status = item.Status ?? "";
-
-                    if (DateTime.TryParse(rowCreatedDateTime, out DateTime createdDateTime) == false)
-                    {
-                        createdDateTime = DateTime.MinValue;
-                    }
-
-                    if (DateTime.TryParse(rowLastModifiedDateTime, out DateTime lastModifiedDateTime) == false)
-                    {
-                        lastModifiedDateTime = DateTime.MinValue;
-                    }
-
-                    DataGridViewRow itemRow = new DataGridViewRow
-                    {
-                        Tag = item.Id
-                    };
-                    itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, hasAttachments, createdDateTime, lastModifiedDateTime, status });
                     itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
 
                     if (dataGridView_ItemList.InvokeRequired)
