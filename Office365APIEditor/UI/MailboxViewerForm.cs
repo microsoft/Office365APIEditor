@@ -105,8 +105,8 @@ namespace Office365APIEditor
                 // Create Calendar dummy root folder.
                 PrepareCalendarGroupRootFolder();
 
-                // Create TaskGroup dummy root folder.
-                PrepareTaskGroupRootFolder();
+                // Create To Do dummy root folder.
+                PrepareToDoRootFolder();
 
                 return true;
             }
@@ -403,6 +403,7 @@ namespace Office365APIEditor
             }
         }
 
+        [Obsolete]
         private void PrepareTaskGroupRootFolder()
         {
             // TaskGroup object has no ParentID or ChildFolders.
@@ -427,6 +428,30 @@ namespace Office365APIEditor
             }
         }
 
+        private void PrepareToDoRootFolder()
+        {
+            // Use DummyTaskGroupRoot node as a parent folder of To Do.
+
+            // Make a dummy node.
+            string dummyNodeName = "To Do Tasks (Beta) (Dummy Folder)";
+            TreeNode dummyToDoRootNode = new TreeNode(dummyNodeName)
+            {
+                Tag = new FolderInfo() { ID = "", Type = FolderContentType.DummyTaskGroupRoot },
+                ContextMenuStrip = null
+            };
+            dummyToDoRootNode.Nodes.Add(new TreeNode()); // Add a dummy node.
+
+            if (treeView_Mailbox.InvokeRequired)
+            {
+                treeView_Mailbox.Invoke(new MethodInvoker(delegate { treeView_Mailbox.Nodes.Add(dummyToDoRootNode); }));
+            }
+            else
+            {
+                treeView_Mailbox.Nodes.Add(dummyToDoRootNode);
+            }
+        }
+
+        [Obsolete]
         private async void PrepareTaskGroupsAsync(TreeNode FolderNode)
         {
             // Get all TaskGroups, and add them to the tree.
@@ -466,6 +491,72 @@ namespace Office365APIEditor
             }
         }
 
+        private async void PrepareToDoTaskListsAsync(TreeNode FolderNode)
+        {
+            // Get all To Do lists, and add them to the tree.
+
+            var toDoTaskLists = await viewerRequestHelper.GetAllToDoTaskListsAsync();
+
+            if (toDoTaskLists.Count == 0)
+            {
+                if (treeView_Mailbox.InvokeRequired)
+                {
+                    treeView_Mailbox.Invoke(new MethodInvoker(delegate {
+                        if (expandingNodeHasDummyNode)
+                        {
+                            // Remove a dummy node.
+                            FolderNode.Nodes[0].Remove();
+                            expandingNodeHasDummyNode = false;
+                        }
+                    }));
+                }
+                else
+                {
+                    if (expandingNodeHasDummyNode)
+                    {
+                        // Remove a dummy node.
+                        FolderNode.Nodes[0].Remove();
+                        expandingNodeHasDummyNode = false;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var toDoTaskList in toDoTaskLists)
+                {
+                    TreeNode node = new TreeNode(toDoTaskList.DisplayName)
+                    {
+                        Tag = new FolderInfo() { ID = toDoTaskList.Id, Type = FolderContentType.Task, Expanded = true },
+                        ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                    };
+
+                    if (treeView_Mailbox.InvokeRequired)
+                    {
+                        treeView_Mailbox.Invoke(new MethodInvoker(delegate {
+                            FolderNode.Nodes.Add(node);
+                            if (expandingNodeHasDummyNode)
+                            {
+                                // Remove a dummy node.
+                                FolderNode.Nodes[0].Remove();
+                                expandingNodeHasDummyNode = false;
+                            }
+                        }));
+                    }
+                    else
+                    {
+                        FolderNode.Nodes.Add(node);
+                        if (expandingNodeHasDummyNode)
+                        {
+                            // Remove a dummy node.
+                            FolderNode.Nodes[0].Remove();
+                            expandingNodeHasDummyNode = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        [Obsolete]
         private async void PrepareTaskFoldersAsync(string TaskGroupId, TreeNode FolderNode)
         {
             // Get all TaskFolders of specified TaskGroup, and add them to the tree.
@@ -582,11 +673,8 @@ namespace Office365APIEditor
                     case FolderContentType.Calendar:
                         outlookFolder = await viewerRequestHelper.GetCalendarAsync(info.ID);
                         break;
-                    case FolderContentType.TaskGroup:
-                        outlookFolder = await viewerRequestHelper.GetTaskGroupAsync(info.ID);
-                        break;
                     case FolderContentType.Task:
-                        outlookFolder = await viewerRequestHelper.GetTaskFolderAsync(info.ID);
+                        outlookFolder = await viewerRequestHelper.GetToDoTaskListAsync(info.ID);
                         break;
                     default:
                         return;
@@ -696,16 +784,7 @@ namespace Office365APIEditor
                 {
                     expandingNodeHasDummyNode = true;
 
-                    PrepareTaskGroupsAsync(e.Node);
-
-                    folderInfo.Expanded = true;
-                    e.Node.Tag = folderInfo;
-                }
-                else if (folderInfo.Type == FolderContentType.TaskGroup)
-                {
-                    expandingNodeHasDummyNode = true;
-
-                    PrepareTaskFoldersAsync(folderInfo.ID, e.Node);
+                    PrepareToDoTaskListsAsync(e.Node);
 
                     folderInfo.Expanded = true;
                     e.Node.Tag = folderInfo;

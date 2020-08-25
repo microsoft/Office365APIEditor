@@ -13,6 +13,7 @@ namespace Office365APIEditor.ViewerHelper
 {
     partial class ViewerRequestHelper
     {
+        [Obsolete]
         public async Task<List<TaskGroup>> GetAllTaskGroupsAsync()
         {
             // Get all TaskGroups.
@@ -67,6 +68,7 @@ namespace Office365APIEditor.ViewerHelper
             return result;
         }
 
+        [Obsolete]
         public async Task<TaskGroup> GetTaskGroupAsync(string TaskGroupId)
         {
             // Get the specified TaskGroup.
@@ -88,6 +90,7 @@ namespace Office365APIEditor.ViewerHelper
             return new TaskGroup(stringResponse);
         }
 
+        [Obsolete]
         public async Task<List<TaskFolder>> GetAllTaskFoldersAsync(string TaskGroupId)
         {
             // Get all TaskFolder in the specified TaskGroup.
@@ -142,6 +145,7 @@ namespace Office365APIEditor.ViewerHelper
             return result;
         }
 
+        [Obsolete]
         public async Task<TaskFolder> GetTaskFolderAsync(string TaskFolderId)
         {
             // Get the specified TaskFolder.
@@ -163,6 +167,7 @@ namespace Office365APIEditor.ViewerHelper
             return new TaskFolder(stringResponse);
         }
 
+        [Obsolete]
         public async Task<PagedResponse<Data.TaskAPI.Task>> GetAllTasksFirstPageAsync(string FolderId)
         {
             // Get a page of task items in the specified folder.
@@ -172,6 +177,7 @@ namespace Office365APIEditor.ViewerHelper
             return await InternalGetPagedTasksAsync(URL);
         }
 
+        [Obsolete]
         public async Task<PagedResponse<Data.TaskAPI.Task>> GetAllTasksPageAsync(string NextLink)
         {
             // Get a page of task items using the specified NextLink.
@@ -181,6 +187,7 @@ namespace Office365APIEditor.ViewerHelper
             return await InternalGetPagedTasksAsync(URL);
         }
 
+        [Obsolete]
         private async Task<PagedResponse<Data.TaskAPI.Task>> InternalGetPagedTasksAsync(Uri URL)
         {
             var result = new PagedResponse<Data.TaskAPI.Task>
@@ -223,6 +230,7 @@ namespace Office365APIEditor.ViewerHelper
             }
         }
 
+        [Obsolete]
         public async Task<Data.TaskAPI.Task> GetTaskAsync(string ItemId)
         {
             Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/beta/me/outlook/tasks/{ItemId}") : new Uri($"https://outlook.office.com/api/v2.0/me/tasks/{ItemId}");

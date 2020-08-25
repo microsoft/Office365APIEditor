@@ -4,6 +4,7 @@
 using Office365APIEditor.UI;
 using Office365APIEditor.ViewerHelper;
 using Office365APIEditor.ViewerHelper.Data;
+using Office365APIEditor.ViewerHelper.Data.ToDoAPI;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -52,7 +53,7 @@ namespace Office365APIEditor
                     typeForWindowTitle = "Calendar items";
                     break;
                 case FolderContentType.Task:
-                    typeForWindowTitle = "Task items";
+                    typeForWindowTitle = "To Do tasks";
                     break;
                 default:
                     typeForWindowTitle = "items";
@@ -145,10 +146,10 @@ namespace Office365APIEditor
                     break;
                 case FolderContentType.Task:
                     // Add Columns.
-                    PrepareTaskItemListColumns();
+                    PrepareToDoTaskListColumns();
 
                     // Get items.
-                    await LoadAllTasksAsync();
+                    await LoadAllToDoTasksAsync();
 
                     break;
                 case FolderContentType.DummyCalendarGroupRoot:
@@ -236,6 +237,7 @@ namespace Office365APIEditor
             }
         }
 
+        [Obsolete]
         private void PrepareTaskItemListColumns()
         {
             if (dataGridView_ItemList.InvokeRequired)
@@ -253,6 +255,27 @@ namespace Office365APIEditor
             {
                 dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Subject", HeaderText = "Subject", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
                 dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "HasAttachments", HeaderText = "HasAttachments", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 60 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "CreatedDateTime", HeaderText = "CreatedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "LastModifiedDateTime", HeaderText = "LastModifiedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 180 });
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Status", HeaderText = "Status", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+            }
+        }
+
+        private void PrepareToDoTaskListColumns()
+        {
+            if (dataGridView_ItemList.InvokeRequired)
+            {
+                dataGridView_ItemList.Invoke(new MethodInvoker(delegate
+                {
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Title", HeaderText = "Title", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "CreatedDateTime", HeaderText = "CreatedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "LastModifiedDateTime", HeaderText = "LastModifiedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 180 });
+                    dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Status", HeaderText = "Status", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
+                }));
+            }
+            else
+            {
+                dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Title", HeaderText = "Title", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
                 dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "CreatedDateTime", HeaderText = "CreatedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 160 });
                 dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "LastModifiedDateTime", HeaderText = "LastModifiedDateTime (UTC)", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 180 });
                 dataGridView_ItemList.Columns.Add(new DataGridViewTextBoxColumn() { Name = "Status", HeaderText = "Status", Resizable = DataGridViewTriState.True, AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet, Frozen = false, MinimumWidth = 100 });
@@ -316,6 +339,7 @@ namespace Office365APIEditor
             return true;
         }
 
+        [Obsolete]
         private async Task<bool> LoadAllTasksAsync()
         {
             var tasks = await viewerRequestHelper.GetAllTasksFirstPageAsync(targetFolder.ID);
@@ -331,6 +355,26 @@ namespace Office365APIEditor
 
                 tasks = await viewerRequestHelper.GetAllTasksPageAsync(tasks.NextLink);
             } while (tasks.CurrentPage.Count > 0);
+
+            return true;
+        }
+
+        private async Task<bool> LoadAllToDoTasksAsync()
+        {
+            var toDoTasks = await viewerRequestHelper.GetAllToDoTasksFirstPageAsync(targetFolder.ID);
+
+            do
+            {
+                //ShowTasks(toDoTasks.CurrentPage);
+                ShowToDoTasks(toDoTasks.CurrentPage);
+
+                if (!toDoTasks.MorePage)
+                {
+                    break;
+                }
+
+                toDoTasks = await viewerRequestHelper.GetAllToDoTasksPageAsync(toDoTasks.NextLink);
+            } while (toDoTasks.CurrentPage.Count > 0);
 
             return true;
         }
@@ -523,6 +567,7 @@ namespace Office365APIEditor
             }
         }
 
+        [Obsolete]
         private void ShowTasks(List<ViewerHelper.Data.TaskAPI.Task> tasks)
         {
             // Show all tasks in List.
@@ -554,6 +599,68 @@ namespace Office365APIEditor
                     };
                     itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, hasAttachments, createdDateTime, lastModifiedDateTime, status });
                     itemRow.ContextMenuStrip = contextMenuStrip_ItemList;
+
+                    if (dataGridView_ItemList.InvokeRequired)
+                    {
+                        dataGridView_ItemList.Invoke(new MethodInvoker(delegate { dataGridView_ItemList.Rows.Add(itemRow); }));
+                    }
+                    else
+                    {
+                        dataGridView_ItemList.Rows.Add(itemRow);
+                    }
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                if (isFormClosing)
+                {
+                    // It seems that this window was closed.
+                    // Do nothing.
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "Office365APIEditor");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.GetType().FullName + "\r\n" + ex.Message, "Office365APIEditor");
+            }
+        }
+
+        private void ShowToDoTasks(List<ToDoTask> toDoTasks)
+        {
+            // Show all ToDoTasks in List.
+
+            try
+            {
+                foreach (var item in toDoTasks)
+                {
+                    // Add new row.
+                    string subject = item.Title ?? "";
+                    string rowCreatedDateTime = item.CreatedDateTime ?? "";
+                    string rowLastModifiedDateTime = item.LastModifiedDateTime ?? "";
+                    string status = item.Status ?? "";
+
+                    if (DateTime.TryParse(rowCreatedDateTime, out DateTime createdDateTime) == false)
+                    {
+                        createdDateTime = DateTime.MinValue;
+                    }
+
+                    if (DateTime.TryParse(rowLastModifiedDateTime, out DateTime lastModifiedDateTime) == false)
+                    {
+                        lastModifiedDateTime = DateTime.MinValue;
+                    }
+
+                    DataGridViewRow itemRow = new DataGridViewRow
+                    {
+                        Tag = item.Id
+                    };
+                    itemRow.CreateCells(dataGridView_ItemList, new object[] { subject, createdDateTime, lastModifiedDateTime, status });
+
+                    // Currently, ToDoTask does not support attachment.
+                    // TODO: Add new ContextMenuStrip to view linkedResources.
+                    itemRow.ContextMenuStrip = null;
 
                     if (dataGridView_ItemList.InvokeRequired)
                     {
@@ -660,7 +767,7 @@ namespace Office365APIEditor
                     CreatePropTable(await viewerRequestHelper.GetEventAsync(id));
                     break;
                 case FolderContentType.Task:
-                    CreatePropTable(await viewerRequestHelper.GetTaskAsync(id));
+                    CreatePropTable(await viewerRequestHelper.GetToDoTaskAsync(targetFolder.ID, id));
                     break;
                 case FolderContentType.DummyCalendarGroupRoot:
                 case FolderContentType.DummyTaskGroupRoot:
