@@ -136,6 +136,7 @@
   &lt;string&gt;https://graph.microsoft.com/Sites.Read.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Sites.ReadWrite.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Sites.FullControl.All&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/Tasks.ReadWrite&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Team.ReadBasic.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/TeamMember.Read.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/TeamMember.ReadWrite.All&lt;/string&gt;
@@ -191,6 +192,7 @@
   &lt;string&gt;https://graph.microsoft.com/MailboxSettings.Read&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/MailboxSettings.ReadWrite&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/People.Read&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/Tasks.ReadWrite&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/User.Read&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/User.ReadWrite&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/User.ReadBasic.All&lt;/string&gt;

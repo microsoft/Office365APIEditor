@@ -212,35 +212,36 @@ namespace Office365APIEditor.Properties {
             "e.All</string>\r\n  <string>https://graph.microsoft.com/Sites.Read.All</string>\r\n " +
             " <string>https://graph.microsoft.com/Sites.ReadWrite.All</string>\r\n  <string>htt" +
             "ps://graph.microsoft.com/Sites.FullControl.All</string>\r\n  <string>https://graph" +
-            ".microsoft.com/Team.ReadBasic.All</string>\r\n  <string>https://graph.microsoft.co" +
-            "m/TeamMember.Read.All</string>\r\n  <string>https://graph.microsoft.com/TeamMember" +
-            ".ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Teams.ReadBasic.A" +
-            "ll</string>\r\n  <string>https://graph.microsoft.com/TeamsApp.Read.Group</string>\r" +
-            "\n  <string>https://graph.microsoft.com/TeamsAppInstallation.ReadForUser</string>" +
-            "\r\n  <string>https://graph.microsoft.com/TeamsAppInstallation.ReadWriteForUser</s" +
-            "tring>\r\n  <string>https://graph.microsoft.com/TeamsAppInstallation.ReadForTeam</" +
-            "string>\r\n  <string>https://graph.microsoft.com/TeamsAppInstallation.ReadWriteFor" +
-            "Team</string>\r\n  <string>https://graph.microsoft.com/TeamSettings.Read.All</stri" +
-            "ng>\r\n  <string>https://graph.microsoft.com/TeamSettings.Read.Group</string>\r\n  <" +
-            "string>https://graph.microsoft.com/TeamSettings.ReadWrite.All</string>\r\n  <strin" +
-            "g>https://graph.microsoft.com/TeamsSettings.Read.All</string>\r\n  <string>https:/" +
-            "/graph.microsoft.com/TeamsSettings.ReadWrite.All</string>\r\n  <string>https://gra" +
-            "ph.microsoft.com/TeamsTab.Create</string>\r\n  <string>https://graph.microsoft.com" +
-            "/TeamsTab.Create.Group</string>\r\n  <string>https://graph.microsoft.com/TeamsTab." +
-            "Delete.Group</string>\r\n  <string>https://graph.microsoft.com/TeamsTab.Edit.Group" +
-            "</string>\r\n  <string>https://graph.microsoft.com/TeamsTab.Read.All</string>\r\n  <" +
-            "string>https://graph.microsoft.com/TeamsTab.Read.Group</string>\r\n  <string>https" +
-            "://graph.microsoft.com/TeamsTab.ReadWrite.All</string>\r\n  <string>https://graph." +
-            "microsoft.com/ThreatIndicators.ReadWrite.OwnedBy</string>\r\n  <string>https://gra" +
-            "ph.microsoft.com/ThreatIndicators.Read.All</string>\r\n  <string>https://graph.mic" +
-            "rosoft.com/User.Export.All</string>\r\n  <string>https://graph.microsoft.com/User." +
-            "Invite.All</string>\r\n  <string>https://graph.microsoft.com/User.ManageIdentities" +
-            ".All</string>\r\n  <string>https://graph.microsoft.com/User.Read</string>\r\n  <stri" +
-            "ng>https://graph.microsoft.com/User.Read.All</string>\r\n  <string>https://graph.m" +
-            "icrosoft.com/User.ReadBasic.All</string>\r\n  <string>https://graph.microsoft.com/" +
-            "User.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/User.ReadWrite.Al" +
-            "l</string>\r\n  <string>https://graph.microsoft.com/UserActivity.ReadWrite.Created" +
-            "ByApp</string>\r\n</ArrayOfString>")]
+            ".microsoft.com/Tasks.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/T" +
+            "eam.ReadBasic.All</string>\r\n  <string>https://graph.microsoft.com/TeamMember.Rea" +
+            "d.All</string>\r\n  <string>https://graph.microsoft.com/TeamMember.ReadWrite.All</" +
+            "string>\r\n  <string>https://graph.microsoft.com/Teams.ReadBasic.All</string>\r\n  <" +
+            "string>https://graph.microsoft.com/TeamsApp.Read.Group</string>\r\n  <string>https" +
+            "://graph.microsoft.com/TeamsAppInstallation.ReadForUser</string>\r\n  <string>http" +
+            "s://graph.microsoft.com/TeamsAppInstallation.ReadWriteForUser</string>\r\n  <strin" +
+            "g>https://graph.microsoft.com/TeamsAppInstallation.ReadForTeam</string>\r\n  <stri" +
+            "ng>https://graph.microsoft.com/TeamsAppInstallation.ReadWriteForTeam</string>\r\n " +
+            " <string>https://graph.microsoft.com/TeamSettings.Read.All</string>\r\n  <string>h" +
+            "ttps://graph.microsoft.com/TeamSettings.Read.Group</string>\r\n  <string>https://g" +
+            "raph.microsoft.com/TeamSettings.ReadWrite.All</string>\r\n  <string>https://graph." +
+            "microsoft.com/TeamsSettings.Read.All</string>\r\n  <string>https://graph.microsoft" +
+            ".com/TeamsSettings.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com" +
+            "/TeamsTab.Create</string>\r\n  <string>https://graph.microsoft.com/TeamsTab.Create" +
+            ".Group</string>\r\n  <string>https://graph.microsoft.com/TeamsTab.Delete.Group</st" +
+            "ring>\r\n  <string>https://graph.microsoft.com/TeamsTab.Edit.Group</string>\r\n  <st" +
+            "ring>https://graph.microsoft.com/TeamsTab.Read.All</string>\r\n  <string>https://g" +
+            "raph.microsoft.com/TeamsTab.Read.Group</string>\r\n  <string>https://graph.microso" +
+            "ft.com/TeamsTab.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Th" +
+            "reatIndicators.ReadWrite.OwnedBy</string>\r\n  <string>https://graph.microsoft.com" +
+            "/ThreatIndicators.Read.All</string>\r\n  <string>https://graph.microsoft.com/User." +
+            "Export.All</string>\r\n  <string>https://graph.microsoft.com/User.Invite.All</stri" +
+            "ng>\r\n  <string>https://graph.microsoft.com/User.ManageIdentities.All</string>\r\n " +
+            " <string>https://graph.microsoft.com/User.Read</string>\r\n  <string>https://graph" +
+            ".microsoft.com/User.Read.All</string>\r\n  <string>https://graph.microsoft.com/Use" +
+            "r.ReadBasic.All</string>\r\n  <string>https://graph.microsoft.com/User.ReadWrite</" +
+            "string>\r\n  <string>https://graph.microsoft.com/User.ReadWrite.All</string>\r\n  <s" +
+            "tring>https://graph.microsoft.com/UserActivity.ReadWrite.CreatedByApp</string>\r\n" +
+            "</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection PredefinedScopes {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["PredefinedScopes"]));
@@ -265,10 +266,10 @@ namespace Office365APIEditor.Properties {
             "nd</string>\r\n  <string>https://graph.microsoft.com/Mail.Send.Shared</string>\r\n  " +
             "<string>https://graph.microsoft.com/MailboxSettings.Read</string>\r\n  <string>htt" +
             "ps://graph.microsoft.com/MailboxSettings.ReadWrite</string>\r\n  <string>https://g" +
-            "raph.microsoft.com/People.Read</string>\r\n  <string>https://graph.microsoft.com/U" +
-            "ser.Read</string>\r\n  <string>https://graph.microsoft.com/User.ReadWrite</string>" +
-            "\r\n  <string>https://graph.microsoft.com/User.ReadBasic.All</string>\r\n</ArrayOfSt" +
-            "ring>")]
+            "raph.microsoft.com/People.Read</string>\r\n  <string>https://graph.microsoft.com/T" +
+            "asks.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/User.Read</string" +
+            ">\r\n  <string>https://graph.microsoft.com/User.ReadWrite</string>\r\n  <string>http" +
+            "s://graph.microsoft.com/User.ReadBasic.All</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection DefaultScopes {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["DefaultScopes"]));
