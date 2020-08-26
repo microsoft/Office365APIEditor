@@ -20,7 +20,6 @@ namespace Office365APIEditor.UI
     {
         FolderInfo targetFolder;
         string targetFolderDisplayName;
-        string draftItemId;
 
         private ViewerRequestHelper viewerRequestHelper;
 
@@ -32,7 +31,6 @@ namespace Office365APIEditor.UI
 
             targetFolder = new FolderInfo();
             targetFolderDisplayName = null;
-            draftItemId = "";
         }
         
         public CreateEventForm(FolderInfo TargetFolderInfo, string TargetFolderDisplayName)
@@ -41,7 +39,6 @@ namespace Office365APIEditor.UI
 
             targetFolder = TargetFolderInfo;
             targetFolderDisplayName = TargetFolderDisplayName;
-            draftItemId = "";
         }
 
         private async void CreateEventForm_LoadAsync(object sender, EventArgs e)

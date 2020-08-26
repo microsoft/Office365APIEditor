@@ -15,10 +15,10 @@ namespace ScintillaNET_FindReplaceDialog
 	[TypeConverterAttribute(typeof(System.ComponentModel.ExpandableObjectConverter))]
 	public class FindReplace : Component
 	{
-		#region Fields
+        #region Fields
 
-		private SearchFlags _flags;
-		private IncrementalSearcher _incrementalSearcher;
+        private const SearchFlags _flags = SearchFlags.None;
+        private IncrementalSearcher _incrementalSearcher;
 		private Indicator _indicator;
 		private int _lastReplaceAllOffset = 0;
 		private CharacterRange _lastReplaceAllRangeToSearch;
@@ -458,7 +458,7 @@ namespace ScintillaNET_FindReplaceDialog
 
 		public List<CharacterRange> FindAll(CharacterRange rangeToSearch, string searchString, SearchFlags flags, bool Mark, bool Highlight)
 		{
-			return FindAll(rangeToSearch.cpMin, rangeToSearch.cpMax, searchString, _flags, Mark, Highlight);
+			return FindAll(rangeToSearch.cpMin, rangeToSearch.cpMax, searchString, flags, Mark, Highlight);
 		}
 
 		public List<CharacterRange> FindAll(Regex findExpression, bool Mark, bool Highlight)
@@ -721,7 +721,7 @@ namespace ScintillaNET_FindReplaceDialog
 
 		public int ReplaceAll(CharacterRange rangeToSearch, string searchString, string replaceString, SearchFlags flags, bool Mark, bool Highlight)
 		{
-			return ReplaceAll(rangeToSearch.cpMin, rangeToSearch.cpMax, searchString, replaceString, _flags, Mark, Highlight);
+			return ReplaceAll(rangeToSearch.cpMin, rangeToSearch.cpMax, searchString, replaceString, flags, Mark, Highlight);
 		}
 
 		public int ReplaceAll(Regex findExpression, string replaceString, bool Mark, bool Highlight)
