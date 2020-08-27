@@ -3,7 +3,7 @@
 
 namespace Office365APIEditor.ViewerHelper.Data.ContactsAPI
 {
-    class ContactFolder : OutlookRestApiBaseObject
+    class ContactFolder : MicrosoftGraphBaseObject
     {
         private string displayName;
         private string parentFolderId;

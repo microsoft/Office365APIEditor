@@ -673,7 +673,7 @@ namespace Office365APIEditor
             }
         }
 
-        private void CreatePropTable(OutlookRestApiBaseObject OutlookItem)
+        private void CreatePropTable(MicrosoftGraphBaseObject OutlookItem)
         {
             var properties = OutlookItem.GetRawProperties();            
 

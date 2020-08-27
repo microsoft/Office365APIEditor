@@ -3,7 +3,7 @@
 
 namespace Office365APIEditor.ViewerHelper.Data.ToDoAPI
 {
-    class ToDoTaskList : OutlookRestApiBaseObject
+    class ToDoTaskList : MicrosoftGraphBaseObject
     {
         private string displayName;
 

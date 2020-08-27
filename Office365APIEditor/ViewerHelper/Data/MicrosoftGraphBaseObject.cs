@@ -10,15 +10,15 @@ using System.Runtime.Serialization;
 namespace Office365APIEditor.ViewerHelper.Data
 {
     [DataContract]
-    public class OutlookRestApiBaseObject
+    public class MicrosoftGraphBaseObject
     {
         private string id;
 
-        protected OutlookRestApiBaseObject()
+        protected MicrosoftGraphBaseObject()
         {
         }
 
-        public OutlookRestApiBaseObject(string JsonData)
+        public MicrosoftGraphBaseObject(string JsonData)
         {
             RawJson = JsonData;
         }

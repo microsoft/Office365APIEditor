@@ -3,7 +3,7 @@
 
 namespace Office365APIEditor.ViewerHelper.Data.ToDoAPI
 {
-    class ToDoTask : OutlookRestApiBaseObject
+    class ToDoTask : MicrosoftGraphBaseObject
     {
         private string createdDateTime;
         private string lastModifiedDateTime;

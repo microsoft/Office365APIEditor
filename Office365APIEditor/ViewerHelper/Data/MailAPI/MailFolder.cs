@@ -3,7 +3,7 @@
 
 namespace Office365APIEditor.ViewerHelper.Data.MailAPI
 {
-    class MailFolder : OutlookRestApiBaseObject
+    class MailFolder : MicrosoftGraphBaseObject
     {
         private string displayName;
         private string parentFolderId;

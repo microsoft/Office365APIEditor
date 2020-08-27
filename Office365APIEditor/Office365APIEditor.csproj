@@ -401,7 +401,7 @@
     <Compile Include="ViewerHelper\Data\ItemBody.cs" />
     <Compile Include="ViewerHelper\Data\MailAPI\MailFolder.cs" />
     <Compile Include="ViewerHelper\Data\MailAPI\Message.cs" />
-    <Compile Include="ViewerHelper\Data\OutlookRestApiBaseObject.cs" />
+    <Compile Include="ViewerHelper\Data\MicrosoftGraphBaseObject.cs" />
     <Compile Include="ViewerHelper\Data\MailAPI\FocusedInboxOverride.cs" />
     <Compile Include="ViewerHelper\Data\Recipient.cs" />
     <Compile Include="ViewerHelper\Data\ResponseStatus.cs" />

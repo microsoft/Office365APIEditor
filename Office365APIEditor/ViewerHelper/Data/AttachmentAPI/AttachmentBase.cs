@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace Office365APIEditor.ViewerHelper.Data.AttachmentAPI
 {
     [DataContract]
-    public class AttachmentBase : OutlookRestApiBaseObject
+    public class AttachmentBase : MicrosoftGraphBaseObject
     {
         private string contentType;
         private string lastModifiedDateTime;

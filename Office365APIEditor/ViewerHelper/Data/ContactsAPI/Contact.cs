@@ -3,7 +3,7 @@
 
 namespace Office365APIEditor.ViewerHelper.Data.ContactsAPI
 {
-    class Contact : OutlookRestApiBaseObject
+    class Contact : MicrosoftGraphBaseObject
     {
         private string createdDateTime;
         private string displayName;

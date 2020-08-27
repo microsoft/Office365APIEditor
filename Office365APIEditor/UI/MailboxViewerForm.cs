@@ -522,7 +522,7 @@ namespace Office365APIEditor
 
             FolderInfo info = (FolderInfo)treeView_Mailbox.SelectedNode.Tag;
 
-            ViewerHelper.Data.OutlookRestApiBaseObject outlookFolder;
+            ViewerHelper.Data.MicrosoftGraphBaseObject outlookFolder;
 
             try
             {

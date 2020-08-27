@@ -3,7 +3,7 @@
 
 namespace Office365APIEditor.ViewerHelper.Data.CalendarAPI
 {
-    class Calendar : OutlookRestApiBaseObject
+    class Calendar : MicrosoftGraphBaseObject
     {
         private string name;
         private string changeKey;

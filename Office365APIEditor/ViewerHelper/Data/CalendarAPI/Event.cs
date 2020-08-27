@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Office365APIEditor.ViewerHelper.Data.CalendarAPI
 {
-    class Event : OutlookRestApiBaseObject
+    class Event : MicrosoftGraphBaseObject
     {
         private string createdDateTime;
         private IList<Attendee> attendees;

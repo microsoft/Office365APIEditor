@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Office365APIEditor.ViewerHelper.Data.MailAPI
 {
-    class Message : OutlookRestApiBaseObject
+    class Message : MicrosoftGraphBaseObject
     {
         private IList<Recipient> bccRecipients;
         private ItemBody body;
