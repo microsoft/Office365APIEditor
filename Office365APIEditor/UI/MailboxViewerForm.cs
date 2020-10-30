@@ -4,6 +4,7 @@
 using Office365APIEditor.UI;
 using Office365APIEditor.UI.FocusedInbox;
 using Office365APIEditor.ViewerHelper;
+using Office365APIEditor.ViewerHelper.Data.CalendarAPI;
 using Office365APIEditor.ViewerHelper.Data.MailAPI;
 using System;
 using System.Drawing;
@@ -16,6 +17,7 @@ namespace Office365APIEditor
         ViewerRequestHelper viewerRequestHelper;
 
         MailFolder draftsFolder;
+        Calendar defaultCalendar;
 
         bool doubleClicked = false;
 
@@ -108,6 +110,9 @@ namespace Office365APIEditor
                 // Create To Do dummy root folder.
                 PrepareToDoRootFolder();
 
+                // Get the default calendar folder.
+                GetDefaultCalendarAsync();
+
                 return true;
             }
             catch (Exception ex)
@@ -123,6 +128,11 @@ namespace Office365APIEditor
             draftsFolder = await viewerRequestHelper.GetDraftsFolderAsync();
         }
 
+        private async void GetDefaultCalendarAsync()
+        {
+            defaultCalendar = await viewerRequestHelper.GetDefaultCalendarAsync();
+        }
+
         private async void PrepareMsgFolderRootAsync()
         {
             // Get MsgFolderRoot and add it to the tree.
@@ -134,7 +144,7 @@ namespace Office365APIEditor
                 TreeNode node = new TreeNode("MsgFolderRoot")
                 {
                     Tag = new FolderInfo() { ID = msgFolderRoot.Id, Type = FolderContentType.MsgFolderRoot, Expanded = false },
-                    ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                    ContextMenuStrip = contextMenuStrip_FolderTreeMailFolderNode
                 };
                 node.Nodes.Add(new TreeNode()); // Add a dummy node.
 
@@ -176,7 +186,7 @@ namespace Office365APIEditor
                 TreeNode node = new TreeNode(folder.DisplayName)
                 {
                     Tag = new FolderInfo() { ID = folder.Id, Type = folderContentType, Expanded = false },
-                    ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                    ContextMenuStrip = contextMenuStrip_FolderTreeMailFolderNode
                 };
 
                 if (folder.ChildFolderCount >= 1)
@@ -232,7 +242,7 @@ namespace Office365APIEditor
                 TreeNode node = new TreeNode(folder.DisplayName)
                 {
                     Tag = new FolderInfo() { ID = folder.Id, Type = FolderContentType.Contact, Expanded = false },
-                    ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                    ContextMenuStrip = contextMenuStrip_FolderTreeMailFolderNode
                 };
                 node.Nodes.Add(new TreeNode()); // Add a dummy node.
 
@@ -369,7 +379,7 @@ namespace Office365APIEditor
                         TreeNode node = new TreeNode(calendar.Name)
                         {
                             Tag = new FolderInfo() { ID = calendar.Id, Type = FolderContentType.Calendar },
-                            ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                            ContextMenuStrip = contextMenuStrip_FolderTreeCalendarNode
                         };
 
                         if (treeView_Mailbox.InvokeRequired)
@@ -462,7 +472,7 @@ namespace Office365APIEditor
                     TreeNode node = new TreeNode(toDoTaskList.DisplayName)
                     {
                         Tag = new FolderInfo() { ID = toDoTaskList.Id, Type = FolderContentType.Task, Expanded = true },
-                        ContextMenuStrip = contextMenuStrip_FolderTreeNode
+                        ContextMenuStrip = contextMenuStrip_FolderTreeMailFolderNode
                     };
 
                     if (treeView_Mailbox.InvokeRequired)
@@ -589,10 +599,49 @@ namespace Office365APIEditor
             }
         }
 
-        private void ToolStripMenuItem_OpenContentTable_Click(object sender, EventArgs e)
+        private void ToolStripMenuItem_MailFolder_OpenContentTable_Click(object sender, EventArgs e)
         {
             // Open selected folder.
             OpenFolder(treeView_Mailbox.SelectedNode);
+        }
+
+
+        private void ToolStripMenuItem_Calendar_OpenContentTable_Click(object sender, EventArgs e)
+        {
+            // Open selected folder.
+            OpenFolder(treeView_Mailbox.SelectedNode);
+        }
+
+        private void ToolStripMenuItem_Calendar_OpenCalendarView_Click(object sender, EventArgs e)
+        {
+            // Open calendar view.
+            OpenCalendarView();
+        }
+
+        private void OpenCalendarView()
+        {
+            if (treeView_Mailbox.SelectedNode != null && ((FolderInfo)treeView_Mailbox.SelectedNode.Tag).Type == FolderContentType.Calendar)
+            {
+                // Use the selected calendar
+
+                TreeNode selectedNode = treeView_Mailbox.SelectedNode;
+                CalendarViewForm calendarViewForm = new CalendarViewForm((FolderInfo)selectedNode.Tag, selectedNode.Text);
+                calendarViewForm.Show(this);
+            }
+            else
+            {
+                // Use the default Calendar
+
+                FolderInfo folderInfo = new FolderInfo()
+                {
+                    ID = defaultCalendar.Id,
+                    Type = FolderContentType.Calendar,
+                    Expanded = false
+                };
+
+                CalendarViewForm calendarViewForm = new CalendarViewForm(folderInfo, defaultCalendar.Name);
+                calendarViewForm.Show(this);
+            }
         }
 
         private void treeView_Mailbox_MouseDown(object sender, MouseEventArgs e)
@@ -764,6 +813,11 @@ namespace Office365APIEditor
                 CreateEventForm createEventForm = new CreateEventForm();
                 createEventForm.Show(this);
             }
+        }
+
+        private void CalendarViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenCalendarView();
         }
 
         private void FocusedInboxOverridesToolStripMenuItem_Click(object sender, EventArgs e)

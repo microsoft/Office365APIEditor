@@ -585,6 +585,15 @@ namespace Office365APIEditor
 
             return new ReadOnlyCollection<string>(timeZones);
         }
+
+        public static DialogResult ShowErrorWindow(Exception Exception, Form OwnerWindow)
+        {
+            UI.ErrorForm errorForm = new UI.ErrorForm(Exception, OwnerWindow)
+            {
+                Owner = OwnerWindow
+            };
+            return errorForm.ShowDialog();
+        }
     }
 
     public enum Resources

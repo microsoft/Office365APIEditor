@@ -280,6 +280,12 @@
       <DependentUpon>AttachmentViewerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ClientInformation.cs" />
+    <Compile Include="UI\CalendarViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CalendarViewForm.Designer.cs">
+      <DependentUpon>CalendarViewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\CheckUpdateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -299,6 +305,12 @@
       <DependentUpon>DetailedTokenViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="External\DynamicJson.cs" />
+    <Compile Include="UI\ErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ErrorForm.Designer.cs">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\FocusedInbox\FocusedInboxOverrideForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -439,6 +451,9 @@
     <EmbeddedResource Include="UI\AttachmentViewerForm.resx">
       <DependentUpon>AttachmentViewerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\CalendarViewForm.resx">
+      <DependentUpon>CalendarViewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\CheckUpdateForm.resx">
       <DependentUpon>CheckUpdateForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -447,6 +462,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DetailedTokenViewer.resx">
       <DependentUpon>DetailedTokenViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ErrorForm.resx">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FocusedInbox\FocusedInboxOverrideForm.resx">
       <DependentUpon>FocusedInboxOverrideForm.cs</DependentUpon>

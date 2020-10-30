@@ -147,6 +147,24 @@ namespace Office365APIEditor.ViewerHelper
             return calendarGroup;
         }
 
+        public async Task<Calendar> GetDefaultCalendarAsync()
+        {
+            // Get the default Calendar
+
+            try
+            {
+                Uri URL = new Uri($"https://graph.microsoft.com/v1.0/me/calendar");
+                string rawJson = await SendGetRequestAsync(URL);
+                var calendar = new Calendar(rawJson);
+
+                return calendar;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public async Task<Calendar> GetCalendarAsync(string FolderId)
         {
             // Get the specified Calendar
@@ -253,6 +271,18 @@ namespace Office365APIEditor.ViewerHelper
             {
                 throw ex;
             }
+        }
+
+        public async Task<PagedResponse<Event>> GetCalendarViewFirstPageAsync(string FolderId, DateTime StartDateTimeInUtc, DateTime EndDateTimeInUtc)
+        {
+            // Get a CalendarView page in the specified folder.
+            // The property of the item to get is very limited.
+
+            string start = StartDateTimeInUtc.ToString("yyyy-MM-ddTHH:mm:ss");
+            string end = EndDateTimeInUtc.ToString("yyyy-MM-ddTHH:mm:ss");
+
+            Uri URL = new Uri($"https://graph.microsoft.com/v1.0/me/calendars/{FolderId}/calendarView?startDateTime={start}&endDateTime={end}&$top=20&$select=Id,Subject,Organizer,Attendees,Start,End,IsAllDay");
+            return await InternalGetPagedEventsAsync(URL);
         }
 
         public async Task<Event> GetEventAsync(string ItemId)

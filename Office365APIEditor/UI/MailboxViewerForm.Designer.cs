@@ -33,29 +33,34 @@
             this.treeView_Mailbox = new System.Windows.Forms.TreeView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridView_FolderProps = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip_FolderTreeNode = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ToolStripMenuItem_OpenContentTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip_FolderTreeMailFolderNode = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItem_MailFolder_OpenContentTable = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeSessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.focusedInboxOverridesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calendarViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.accessTokenViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.versionInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip_FolderTreeCalendarNode = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItem_Calendar_OpenContentTable = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_Calendar_OpenCalendarView = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_FolderProps)).BeginInit();
-            this.contextMenuStrip_FolderTreeNode.SuspendLayout();
+            this.contextMenuStrip_FolderTreeMailFolderNode.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.contextMenuStrip_FolderTreeCalendarNode.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView_Mailbox
@@ -103,20 +108,20 @@
             this.dataGridView_FolderProps.Size = new System.Drawing.Size(495, 429);
             this.dataGridView_FolderProps.TabIndex = 0;
             // 
-            // contextMenuStrip_FolderTreeNode
+            // contextMenuStrip_FolderTreeMailFolderNode
             // 
-            this.contextMenuStrip_FolderTreeNode.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.contextMenuStrip_FolderTreeNode.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItem_OpenContentTable});
-            this.contextMenuStrip_FolderTreeNode.Name = "contextMenuStrip_FolderTreeNode";
-            this.contextMenuStrip_FolderTreeNode.Size = new System.Drawing.Size(299, 40);
+            this.contextMenuStrip_FolderTreeMailFolderNode.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.contextMenuStrip_FolderTreeMailFolderNode.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItem_MailFolder_OpenContentTable});
+            this.contextMenuStrip_FolderTreeMailFolderNode.Name = "contextMenuStrip_FolderTreeNode";
+            this.contextMenuStrip_FolderTreeMailFolderNode.Size = new System.Drawing.Size(177, 26);
             // 
-            // ToolStripMenuItem_OpenContentTable
+            // ToolStripMenuItem_MailFolder_OpenContentTable
             // 
-            this.ToolStripMenuItem_OpenContentTable.Name = "ToolStripMenuItem_OpenContentTable";
-            this.ToolStripMenuItem_OpenContentTable.Size = new System.Drawing.Size(298, 36);
-            this.ToolStripMenuItem_OpenContentTable.Text = "Open content table";
-            this.ToolStripMenuItem_OpenContentTable.Click += new System.EventHandler(this.ToolStripMenuItem_OpenContentTable_Click);
+            this.ToolStripMenuItem_MailFolder_OpenContentTable.Name = "ToolStripMenuItem_MailFolder_OpenContentTable";
+            this.ToolStripMenuItem_MailFolder_OpenContentTable.Size = new System.Drawing.Size(176, 22);
+            this.ToolStripMenuItem_MailFolder_OpenContentTable.Text = "Open content table";
+            this.ToolStripMenuItem_MailFolder_OpenContentTable.Click += new System.EventHandler(this.ToolStripMenuItem_MailFolder_OpenContentTable_Click);
             // 
             // menuStrip1
             // 
@@ -128,7 +133,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(680, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(680, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -138,20 +143,20 @@
             this.newSessionToolStripMenuItem,
             this.closeSessionToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 38);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newSessionToolStripMenuItem
             // 
             this.newSessionToolStripMenuItem.Name = "newSessionToolStripMenuItem";
-            this.newSessionToolStripMenuItem.Size = new System.Drawing.Size(264, 38);
+            this.newSessionToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.newSessionToolStripMenuItem.Text = "&New Session...";
             this.newSessionToolStripMenuItem.Click += new System.EventHandler(this.newSessionToolStripMenuItem_Click);
             // 
             // closeSessionToolStripMenuItem
             // 
             this.closeSessionToolStripMenuItem.Name = "closeSessionToolStripMenuItem";
-            this.closeSessionToolStripMenuItem.Size = new System.Drawing.Size(264, 38);
+            this.closeSessionToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.closeSessionToolStripMenuItem.Text = "&Close Session";
             this.closeSessionToolStripMenuItem.Click += new System.EventHandler(this.closeSessionToolStripMenuItem_Click);
             // 
@@ -160,24 +165,39 @@
             this.windowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newMessageToolStripMenuItem,
             this.newEventToolStripMenuItem,
-            this.focusedInboxOverridesToolStripMenuItem});
+            this.focusedInboxOverridesToolStripMenuItem,
+            this.calendarViewToolStripMenuItem});
             this.windowToolStripMenuItem.Name = "windowToolStripMenuItem";
-            this.windowToolStripMenuItem.Size = new System.Drawing.Size(114, 38);
+            this.windowToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
             this.windowToolStripMenuItem.Text = "&Window";
             // 
             // newMessageToolStripMenuItem
             // 
             this.newMessageToolStripMenuItem.Name = "newMessageToolStripMenuItem";
-            this.newMessageToolStripMenuItem.Size = new System.Drawing.Size(392, 38);
+            this.newMessageToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.newMessageToolStripMenuItem.Text = "New &Message...";
             this.newMessageToolStripMenuItem.Click += new System.EventHandler(this.NewMessageToolStripMenuItem_Click);
+            // 
+            // newEventToolStripMenuItem
+            // 
+            this.newEventToolStripMenuItem.Name = "newEventToolStripMenuItem";
+            this.newEventToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.newEventToolStripMenuItem.Text = "New &Event...";
+            this.newEventToolStripMenuItem.Click += new System.EventHandler(this.newEventToolStripMenuItem_Click);
             // 
             // focusedInboxOverridesToolStripMenuItem
             // 
             this.focusedInboxOverridesToolStripMenuItem.Name = "focusedInboxOverridesToolStripMenuItem";
-            this.focusedInboxOverridesToolStripMenuItem.Size = new System.Drawing.Size(392, 38);
+            this.focusedInboxOverridesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.focusedInboxOverridesToolStripMenuItem.Text = "&Focused Inbox Overrides...";
             this.focusedInboxOverridesToolStripMenuItem.Click += new System.EventHandler(this.FocusedInboxOverridesToolStripMenuItem_Click);
+            // 
+            // calendarViewToolStripMenuItem
+            // 
+            this.calendarViewToolStripMenuItem.Name = "calendarViewToolStripMenuItem";
+            this.calendarViewToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.calendarViewToolStripMenuItem.Text = "&Calendar View...";
+            this.calendarViewToolStripMenuItem.Click += new System.EventHandler(this.CalendarViewToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -185,20 +205,20 @@
             this.newEditorToolStripMenuItem,
             this.accessTokenViewerToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(84, 38);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // newEditorToolStripMenuItem
             // 
             this.newEditorToolStripMenuItem.Name = "newEditorToolStripMenuItem";
-            this.newEditorToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
+            this.newEditorToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.newEditorToolStripMenuItem.Text = "New &Editor...";
             this.newEditorToolStripMenuItem.Click += new System.EventHandler(this.newEditorToolStripMenuItem_Click);
             // 
             // accessTokenViewerToolStripMenuItem
             // 
             this.accessTokenViewerToolStripMenuItem.Name = "accessTokenViewerToolStripMenuItem";
-            this.accessTokenViewerToolStripMenuItem.Size = new System.Drawing.Size(362, 38);
+            this.accessTokenViewerToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.accessTokenViewerToolStripMenuItem.Text = "&Generic Token Viewer...";
             this.accessTokenViewerToolStripMenuItem.Click += new System.EventHandler(this.accessTokenViewerToolStripMenuItem_Click);
             // 
@@ -208,29 +228,45 @@
             this.checkForUpdatesToolStripMenuItem,
             this.versionInformationToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(77, 38);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // checkForUpdatesToolStripMenuItem
             // 
             this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(326, 38);
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.checkForUpdatesToolStripMenuItem.Text = "&Check for updates...";
             this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // versionInformationToolStripMenuItem
             // 
             this.versionInformationToolStripMenuItem.Name = "versionInformationToolStripMenuItem";
-            this.versionInformationToolStripMenuItem.Size = new System.Drawing.Size(326, 38);
+            this.versionInformationToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
             this.versionInformationToolStripMenuItem.Text = "&Version Information";
             this.versionInformationToolStripMenuItem.Click += new System.EventHandler(this.versionInformationToolStripMenuItem_Click);
             // 
-            // newEventToolStripMenuItem
+            // contextMenuStrip_FolderTreeCalendarNode
             // 
-            this.newEventToolStripMenuItem.Name = "newEventToolStripMenuItem";
-            this.newEventToolStripMenuItem.Size = new System.Drawing.Size(392, 38);
-            this.newEventToolStripMenuItem.Text = "New &Event...";
-            this.newEventToolStripMenuItem.Click += new System.EventHandler(this.newEventToolStripMenuItem_Click);
+            this.contextMenuStrip_FolderTreeCalendarNode.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.contextMenuStrip_FolderTreeCalendarNode.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItem_Calendar_OpenContentTable,
+            this.ToolStripMenuItem_Calendar_OpenCalendarView});
+            this.contextMenuStrip_FolderTreeCalendarNode.Name = "contextMenuStrip_FolderTreeNode";
+            this.contextMenuStrip_FolderTreeCalendarNode.Size = new System.Drawing.Size(181, 70);
+            // 
+            // ToolStripMenuItem_Calendar_OpenContentTable
+            // 
+            this.ToolStripMenuItem_Calendar_OpenContentTable.Name = "ToolStripMenuItem_Calendar_OpenContentTable";
+            this.ToolStripMenuItem_Calendar_OpenContentTable.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItem_Calendar_OpenContentTable.Text = "Open content table";
+            this.ToolStripMenuItem_Calendar_OpenContentTable.Click += new System.EventHandler(this.ToolStripMenuItem_Calendar_OpenContentTable_Click);
+            // 
+            // ToolStripMenuItem_Calendar_OpenCalendarView
+            // 
+            this.ToolStripMenuItem_Calendar_OpenCalendarView.Name = "ToolStripMenuItem_Calendar_OpenCalendarView";
+            this.ToolStripMenuItem_Calendar_OpenCalendarView.Size = new System.Drawing.Size(180, 22);
+            this.ToolStripMenuItem_Calendar_OpenCalendarView.Text = "Open calendar view";
+            this.ToolStripMenuItem_Calendar_OpenCalendarView.Click += new System.EventHandler(this.ToolStripMenuItem_Calendar_OpenCalendarView_Click);
             // 
             // MailboxViewerForm
             // 
@@ -251,9 +287,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_FolderProps)).EndInit();
-            this.contextMenuStrip_FolderTreeNode.ResumeLayout(false);
+            this.contextMenuStrip_FolderTreeMailFolderNode.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.contextMenuStrip_FolderTreeCalendarNode.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -263,8 +300,8 @@
         private System.Windows.Forms.TreeView treeView_Mailbox;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView dataGridView_FolderProps;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_FolderTreeNode;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_OpenContentTable;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_FolderTreeMailFolderNode;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_MailFolder_OpenContentTable;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newSessionToolStripMenuItem;
@@ -279,5 +316,9 @@
         private System.Windows.Forms.ToolStripMenuItem versionInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newEventToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calendarViewToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip_FolderTreeCalendarNode;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Calendar_OpenContentTable;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Calendar_OpenCalendarView;
     }
 }

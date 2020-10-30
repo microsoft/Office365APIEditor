@@ -484,6 +484,13 @@ namespace Office365APIEditor
             object value = dataGridView_ItemProps.Rows[e.RowIndex].Cells[1].Value;
             string valueString = (value == null) ? "" : value.ToString();
 
+            if (valueString.Length > 10000)
+            {
+                if (MessageBox.Show($"The value of {nameString} is too long. It might take time to show the property value. Do you want to continue?", "Office365APIEditor", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
 
             PropertyViewerForm propertyViewer = new PropertyViewerForm(nameString, valueString)
             {
