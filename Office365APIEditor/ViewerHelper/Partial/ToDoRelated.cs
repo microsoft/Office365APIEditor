@@ -21,7 +21,7 @@ namespace Office365APIEditor.ViewerHelper
             string idAttributeName;
             string displayNameAttributeName;
 
-            URL = new Uri($"https://graph.microsoft.com/beta/me/todo/lists");
+            URL = new Uri($"https://graph.microsoft.com/v1.0/me/todo/lists");
             idAttributeName = "id";
             displayNameAttributeName = "displayName";
 
@@ -61,7 +61,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get the specified ToDoTaskList.
 
-            Uri URL = new Uri($"https://graph.microsoft.com/beta/me/todo/lists/{ToDoTaskListId}");
+            Uri URL = new Uri($"https://graph.microsoft.com/v1.0/me/todo/lists/{ToDoTaskListId}");
 
             string stringResponse = "";
 
@@ -82,7 +82,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get a page of ToDoTasks in the specified ToDoTaskList.
 
-            Uri URL = new Uri($"https://graph.microsoft.com/beta/me/todo/lists/{ToDoTaskListId}/tasks?$orderby=CreatedDateTime desc&$top=20");
+            Uri URL = new Uri($"https://graph.microsoft.com/v1.0/me/todo/lists/{ToDoTaskListId}/tasks?$orderby=CreatedDateTime desc&$top=20");
             return await InternalGetPagedToDoTasksAsync(URL);
         }
 
@@ -138,7 +138,7 @@ namespace Office365APIEditor.ViewerHelper
 
         public async Task<ToDoTask> GetToDoTaskAsync(string toDoTaskListId, string toDoTaskId)
         {
-            Uri URL = new Uri($"https://graph.microsoft.com/beta/me/todo/lists/{toDoTaskListId}/tasks/{toDoTaskId}");
+            Uri URL = new Uri($"https://graph.microsoft.com/v1.0/me/todo/lists/{toDoTaskListId}/tasks/{toDoTaskId}");
             string stringResponse = await SendGetRequestAsync(URL);
             return new ToDoTask(stringResponse);
         }
