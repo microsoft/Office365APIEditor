@@ -418,7 +418,7 @@ namespace Office365APIEditor
             // Use DummyTaskGroupRoot node as a parent folder of To Do.
 
             // Make a dummy node.
-            string dummyNodeName = "To Do Tasks (Beta) (Dummy Folder)";
+            string dummyNodeName = "To Do Tasks (Dummy Folder)";
             TreeNode dummyToDoRootNode = new TreeNode(dummyNodeName)
             {
                 Tag = new FolderInfo() { ID = "", Type = FolderContentType.DummyTaskGroupRoot },
