@@ -9096,6 +9096,299 @@
         }
       ]
     },
+    {
+      "displayName": "To-do tasks",
+      "secondLevelCategory": [
+        {
+          "displayName": "Task list",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List task lists",
+              "sampleRequest": [
+                {
+                  "id": "36d09ebc-26b3-4bd0-8f7b-178d7ecb0841",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create task lists",
+              "sampleRequest": [
+                {
+                  "id": "a1f12485-1f56-4f57-9a83-8f2622adb38d",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"Travel items\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get task list",
+              "sampleRequest": [
+                {
+                  "id": "e2beec04-59ea-4f16-a0d1-4b964c282034",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update task list",
+              "sampleRequest": [
+                {
+                  "id": "7aafbc74-36ec-4d75-8fce-4c1ca947aee4",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}",
+                  "header": [],
+                  "body": "{\r\n  \"displayName\": \"Vacation Plan\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete task list",
+              "sampleRequest": [
+                {
+                  "id": "a13e6b69-951f-4d87-93d0-8a5b9c77d07e",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get task list delta",
+              "sampleRequest": [
+                {
+                  "id": "a70dfd5d-fe3a-4497-8073-6d87a5ae8a35",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/delta",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create open extension",
+              "sampleRequest": [
+                {
+                  "id": "10ef3c5e-cccc-4831-9ad2-5a5f3c548bd5",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/extensions",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.type\" : \"microsoft.graph.openTypeExtension\",\r\n  \"extensionName\" : \"Com.Contoso.Deal\",\r\n  \"companyName\" : \"Alpine Skis\",\r\n  \"dealValue\" : 1010100,\r\n  \"expirationDate\" : \"${DateTime1MonthLater12}\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get open extension",
+              "sampleRequest": [
+                {
+                  "id": "a50cb43b-75c5-4231-8f7d-52c2d4a2f971",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/extensions/{extentionName}/",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Task",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List tasks",
+              "sampleRequest": [
+                {
+                  "id": "c7635e8b-d81f-4230-b237-f98d407d3a91",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/tasks",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create task",
+              "sampleRequest": [
+                {
+                  "id": "bdbce790-0503-43bb-8f8a-24a7733626c5",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/tasks",
+                  "header": [],
+                  "body": "{\r\n   \"title\":\"A new task\",\r\n   \"linkedResources\":[\r\n      {\r\n         \"webUrl\":\"http://microsoft.com\",\r\n         \"applicationName\":\"Microsoft\",\r\n         \"displayName\":\"Microsoft\"\r\n      }\r\n   ]\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get task",
+              "sampleRequest": [
+                {
+                  "id": "39cee269-f790-441d-b31b-cbb9cfd7575e",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/tasks/{taskId}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update task",
+              "sampleRequest": [
+                {
+                  "id": "57b1b1e4-8e0f-4e0b-a660-12a7b329ff90",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/tasks/{taskId}",
+                  "header": [],
+                  "body": "{\r\n   \"dueDateTime\":{\r\n      \"dateTime\":\"${DateTime1MonthLater12}\",\r\n      \"timeZone\":\"${LocalTimeZone}\"\r\n   }\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete task",
+              "sampleRequest": [
+                {
+                  "id": "8b6daeac-45d4-4aff-b869-b1754f603307",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/tasks/{taskId}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Get task delta",
+              "sampleRequest": [
+                {
+                  "id": "841104cf-4225-4f1f-b1cf-9070e11c6548",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/tasks/delta",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create open extension",
+              "sampleRequest": [
+                {
+                  "id": "1db40017-677b-4d08-83f7-0c865614f868",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/tasks/{taskId}/extensions",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.type\" : \"microsoft.graph.openTypeExtension\",\r\n  \"extensionName\" : \"Com.Contoso.Deal\",\r\n  \"companyName\" : \"Alpine Skis\",\r\n  \"dealValue\" : 1010100,\r\n  \"expirationDate\" : \"${DateTime1MonthLater12}\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get open extension",
+              "sampleRequest": [
+                {
+                  "id": "f60e26bc-c025-4d24-b013-c620be814c1c",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/tasks/{taskId}/extensions/{extentionName}/",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "displayName": "Linked resource",
+          "thirdLevelCategory": [
+            {
+              "displayName": "List linkedResources",
+              "sampleRequest": [
+                {
+                  "id": "353b3b3b-a06b-440d-85cf-7c9d7dc27769",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/tasks/{taskId}/linkedResources",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Create linkedResource",
+              "sampleRequest": [
+                {
+                  "id": "e631401c-91b7-430d-82e6-e2879c0432f5",
+                  "displayName": "Example",
+                  "method": "POST",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/tasks/{taskId}/linkedResources",
+                  "header": [],
+                  "body": "{\r\n  \"webUrl\": \"https://microsoft.com\",\r\n  \"applicationName\": \"Microsoft\",\r\n  \"displayName\": \"Microsoft\",\r\n  \"externalId\": \"${Guid}\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Get linkedResource",
+              "sampleRequest": [
+                {
+                  "id": "28270f5f-db6b-46cb-9885-db7a616cbe6b",
+                  "displayName": "Example",
+                  "method": "GET",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/tasks/{taskId}/linkedResources/{linkedResourcesId}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "displayName": "Update linkedResource",
+              "sampleRequest": [
+                {
+                  "id": "f0dade78-5cf5-4f8c-a26f-0a72a006d254",
+                  "displayName": "Example",
+                  "method": "PATCH",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/tasks/{taskId}/linkedResources/{linkedResourcesId}",
+                  "header": [],
+                  "body": "{\r\n  \"@odata.type\": \"#microsoft.graph.linkedResource\",\r\n  \"webUrl\": \"http://microsoft.com\",\r\n  \"applicationName\": \"Microsoft\",\r\n  \"displayName\": \"Microsoft\"\r\n}"
+                }
+              ]
+            },
+            {
+              "displayName": "Delete linkedResource",
+              "sampleRequest": [
+                {
+                  "id": "717f1553-a357-4224-94af-0c402d587f30",
+                  "displayName": "Example",
+                  "method": "DELETE",
+                  "URI": "https://graph.microsoft.com/beta/me/todo/lists/{todoTaskListId}/tasks/{taskId}/linkedResources/{linkedResourcesId}",
+                  "header": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     //{
     //  "displayName": "Workbooks and charts",
     //  "secondLevelCategory": []
