@@ -15,26 +15,20 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_00D7845A532D4EABAB07E65311119E2F"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_0308E43FD67143F89E5C40BE604A209F"
+        "MsmKey" = "8:_0462FEE9C07045D79D7358ECF0B9C055"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_07176C0B53841B0C63499F4133392AD5"
-        "OwnerKey" = "8:_B5706A319CAE408AA01AAC2AB1E355E1"
+        "OwnerKey" = "8:_DFE4D9FE1AD642D1912766D055CA02D5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_09160B5C5528C6C97B3E808235F6702F"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -46,19 +40,19 @@
         "Entry"
         {
         "MsmKey" = "8:_12F2EF8FD89B84B0CF6578D0C3811E80"
-        "OwnerKey" = "8:_E0DE78526A1F41F9BC97D182603BDF79"
+        "OwnerKey" = "8:_3E0551465E5C4D7DAA58CC753039F7E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_12F2EF8FD89B84B0CF6578D0C3811E80"
-        "OwnerKey" = "8:_EB644095767D4A68A1A900168F67751D"
+        "OwnerKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_12F2EF8FD89B84B0CF6578D0C3811E80"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -76,19 +70,19 @@
         "Entry"
         {
         "MsmKey" = "8:_17DD390C98878309DB5278086B8B47C3"
-        "OwnerKey" = "8:_E0DE78526A1F41F9BC97D182603BDF79"
+        "OwnerKey" = "8:_3E0551465E5C4D7DAA58CC753039F7E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_17DD390C98878309DB5278086B8B47C3"
-        "OwnerKey" = "8:_EB644095767D4A68A1A900168F67751D"
+        "OwnerKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_17DD390C98878309DB5278086B8B47C3"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -99,26 +93,26 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_1953939B48654C2F884E9DFD3268EA64"
+        "MsmKey" = "8:_19E79993EDC047FB9C6F8FD3F7FADDA7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_1A4A3F9138083A9441E284E01FA68C72"
-        "OwnerKey" = "8:_B5706A319CAE408AA01AAC2AB1E355E1"
+        "OwnerKey" = "8:_DFE4D9FE1AD642D1912766D055CA02D5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_1E2ADFE5B82B41ED8D100495FA49A6BF"
+        "MsmKey" = "8:_1D0590D57BA74D9DBF4856F9AA12B56E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_216BBB091781F7432BE904B0B491D086"
-        "OwnerKey" = "8:_B5706A319CAE408AA01AAC2AB1E355E1"
+        "OwnerKey" = "8:_DFE4D9FE1AD642D1912766D055CA02D5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -130,19 +124,19 @@
         "Entry"
         {
         "MsmKey" = "8:_275F768AF8098D3F8959403ABD385398"
-        "OwnerKey" = "8:_E0DE78526A1F41F9BC97D182603BDF79"
+        "OwnerKey" = "8:_3E0551465E5C4D7DAA58CC753039F7E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_275F768AF8098D3F8959403ABD385398"
-        "OwnerKey" = "8:_EB644095767D4A68A1A900168F67751D"
+        "OwnerKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_275F768AF8098D3F8959403ABD385398"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -160,25 +154,31 @@
         "Entry"
         {
         "MsmKey" = "8:_2861B084CD76A686F25B27163A6E6AD8"
-        "OwnerKey" = "8:_E0DE78526A1F41F9BC97D182603BDF79"
+        "OwnerKey" = "8:_3E0551465E5C4D7DAA58CC753039F7E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_2861B084CD76A686F25B27163A6E6AD8"
-        "OwnerKey" = "8:_EB644095767D4A68A1A900168F67751D"
+        "OwnerKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_2861B084CD76A686F25B27163A6E6AD8"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_2861B084CD76A686F25B27163A6E6AD8"
         "OwnerKey" = "8:_57C8090442217BA521C9A21151D17081"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2C2BE9F348BB4A5486A489342A4F5092"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -190,7 +190,7 @@
         "Entry"
         {
         "MsmKey" = "8:_368133AF517A83A1ADFE254C8AD56055"
-        "OwnerKey" = "8:_1E2ADFE5B82B41ED8D100495FA49A6BF"
+        "OwnerKey" = "8:_1D0590D57BA74D9DBF4856F9AA12B56E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -202,19 +202,19 @@
         "Entry"
         {
         "MsmKey" = "8:_3C5A7F09AC277A2F4376346E572894BE"
-        "OwnerKey" = "8:_E0DE78526A1F41F9BC97D182603BDF79"
+        "OwnerKey" = "8:_3E0551465E5C4D7DAA58CC753039F7E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_3C5A7F09AC277A2F4376346E572894BE"
-        "OwnerKey" = "8:_EB644095767D4A68A1A900168F67751D"
+        "OwnerKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_3C5A7F09AC277A2F4376346E572894BE"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -225,19 +225,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_40374B31D0A24C0CA2D1EDE1539C9D67"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_409092B351664A0C85F16C3EA5F9FFBB"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4346A256E31B4954B28876B3A4460FBB"
+        "MsmKey" = "8:_3E0551465E5C4D7DAA58CC753039F7E5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -250,19 +238,13 @@
         "Entry"
         {
         "MsmKey" = "8:_467FF187FB030B4FDEEAA1A026903FD0"
-        "OwnerKey" = "8:_EB644095767D4A68A1A900168F67751D"
+        "OwnerKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_467FF187FB030B4FDEEAA1A026903FD0"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_495C702F9D984E969842CCCF8EDE017A"
-        "OwnerKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -274,19 +256,19 @@
         "Entry"
         {
         "MsmKey" = "8:_4D63B15FABD9EC1A4D68E2B61D84B4C5"
-        "OwnerKey" = "8:_E0DE78526A1F41F9BC97D182603BDF79"
+        "OwnerKey" = "8:_3E0551465E5C4D7DAA58CC753039F7E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_4D63B15FABD9EC1A4D68E2B61D84B4C5"
-        "OwnerKey" = "8:_EB644095767D4A68A1A900168F67751D"
+        "OwnerKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_4D63B15FABD9EC1A4D68E2B61D84B4C5"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -298,13 +280,13 @@
         "Entry"
         {
         "MsmKey" = "8:_4F8C43028A3811195895815CE3B3F202"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_52655A335BA2EB74539568AE3F42117B"
-        "OwnerKey" = "8:_0308E43FD67143F89E5C40BE604A209F"
+        "OwnerKey" = "8:_6123C63CEC954986BAA4DEFC22CCE5BE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -322,13 +304,19 @@
         "Entry"
         {
         "MsmKey" = "8:_52655A335BA2EB74539568AE3F42117B"
-        "OwnerKey" = "8:_6A0C2A1E857C4EF9A81E2FB64E1B0523"
+        "OwnerKey" = "8:_BB576DD999754039B422EBE45306DD58"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_531759DA5B0C4AD2B22E7A4F98EAB14F"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_57C8090442217BA521C9A21151D17081"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -340,19 +328,19 @@
         "Entry"
         {
         "MsmKey" = "8:_586F880C86B3F52A28372430000BB4D1"
-        "OwnerKey" = "8:_E0DE78526A1F41F9BC97D182603BDF79"
+        "OwnerKey" = "8:_3E0551465E5C4D7DAA58CC753039F7E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_586F880C86B3F52A28372430000BB4D1"
-        "OwnerKey" = "8:_EB644095767D4A68A1A900168F67751D"
+        "OwnerKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_586F880C86B3F52A28372430000BB4D1"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -363,6 +351,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_6123C63CEC954986BAA4DEFC22CCE5BE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_64467D45A8FFE0DD43032CABDF91D2AC"
         "OwnerKey" = "8:_09160B5C5528C6C97B3E808235F6702F"
         "MsmSig" = "8:_UNDEFINED"
@@ -370,19 +364,19 @@
         "Entry"
         {
         "MsmKey" = "8:_64467D45A8FFE0DD43032CABDF91D2AC"
-        "OwnerKey" = "8:_E0DE78526A1F41F9BC97D182603BDF79"
+        "OwnerKey" = "8:_3E0551465E5C4D7DAA58CC753039F7E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_64467D45A8FFE0DD43032CABDF91D2AC"
-        "OwnerKey" = "8:_EB644095767D4A68A1A900168F67751D"
+        "OwnerKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_64467D45A8FFE0DD43032CABDF91D2AC"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -393,19 +387,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6A0C2A1E857C4EF9A81E2FB64E1B0523"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_842200F1867E4C778551C77210BBFDD8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8666AE98E585419FB7DB779A5F4C1B31"
+        "MsmKey" = "8:_75698C20881244C6AE9D6363C180606C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -418,19 +400,19 @@
         "Entry"
         {
         "MsmKey" = "8:_8996E30DA56A541839A3F0C9273F4E5B"
-        "OwnerKey" = "8:_E0DE78526A1F41F9BC97D182603BDF79"
+        "OwnerKey" = "8:_3E0551465E5C4D7DAA58CC753039F7E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_8996E30DA56A541839A3F0C9273F4E5B"
-        "OwnerKey" = "8:_EB644095767D4A68A1A900168F67751D"
+        "OwnerKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_8996E30DA56A541839A3F0C9273F4E5B"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -442,109 +424,127 @@
         "Entry"
         {
         "MsmKey" = "8:_8BE633A83D8BE3A977A4AF5E1D82A310"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8EF318B213444998A232847369D3E27E"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_8F0744127446831DD486FC5262D9C0A3"
-        "OwnerKey" = "8:_B5706A319CAE408AA01AAC2AB1E355E1"
+        "OwnerKey" = "8:_DFE4D9FE1AD642D1912766D055CA02D5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_98899DA3C351ECAD36B6805EC32664BE"
-        "OwnerKey" = "8:_09160B5C5528C6C97B3E808235F6702F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_98899DA3C351ECAD36B6805EC32664BE"
-        "OwnerKey" = "8:_E0DE78526A1F41F9BC97D182603BDF79"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_98899DA3C351ECAD36B6805EC32664BE"
-        "OwnerKey" = "8:_EB644095767D4A68A1A900168F67751D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_98899DA3C351ECAD36B6805EC32664BE"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_98899DA3C351ECAD36B6805EC32664BE"
-        "OwnerKey" = "8:_57C8090442217BA521C9A21151D17081"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9FE3B9F80A290908232481F2BDCD8502"
-        "OwnerKey" = "8:_09160B5C5528C6C97B3E808235F6702F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9FE3B9F80A290908232481F2BDCD8502"
-        "OwnerKey" = "8:_E0DE78526A1F41F9BC97D182603BDF79"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9FE3B9F80A290908232481F2BDCD8502"
-        "OwnerKey" = "8:_EB644095767D4A68A1A900168F67751D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9FE3B9F80A290908232481F2BDCD8502"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9FE3B9F80A290908232481F2BDCD8502"
-        "OwnerKey" = "8:_57C8090442217BA521C9A21151D17081"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B5706A319CAE408AA01AAC2AB1E355E1"
+        "MsmKey" = "8:_93561ABE82A049C79C0B5FE3D7D2902F"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_98899DA3C351ECAD36B6805EC32664BE"
+        "OwnerKey" = "8:_09160B5C5528C6C97B3E808235F6702F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_98899DA3C351ECAD36B6805EC32664BE"
+        "OwnerKey" = "8:_3E0551465E5C4D7DAA58CC753039F7E5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_98899DA3C351ECAD36B6805EC32664BE"
+        "OwnerKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_98899DA3C351ECAD36B6805EC32664BE"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_98899DA3C351ECAD36B6805EC32664BE"
+        "OwnerKey" = "8:_57C8090442217BA521C9A21151D17081"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9956246A91C9418AA1418931A5737CEB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_997CA4574C8540B78C7D0C2F7C5C2A49"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9FE3B9F80A290908232481F2BDCD8502"
+        "OwnerKey" = "8:_09160B5C5528C6C97B3E808235F6702F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9FE3B9F80A290908232481F2BDCD8502"
+        "OwnerKey" = "8:_3E0551465E5C4D7DAA58CC753039F7E5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9FE3B9F80A290908232481F2BDCD8502"
+        "OwnerKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9FE3B9F80A290908232481F2BDCD8502"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9FE3B9F80A290908232481F2BDCD8502"
+        "OwnerKey" = "8:_57C8090442217BA521C9A21151D17081"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_B92940152727F2E7713137B0EB36D05F"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_BB41BA8F11244A4F888E370F97CDFA5E"
+        "MsmKey" = "8:_BB576DD999754039B422EBE45306DD58"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_C35297D2ED2C4E13AC2B4766BA6AE478"
+        "MsmKey" = "8:_BC016A09971D4F8EAACC92365A6E6271"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_C41B51DE4A976480862C7C1046FEC70B"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CD95B9A8BED04011A422F85823997AFB"
-        "OwnerKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -556,19 +556,19 @@
         "Entry"
         {
         "MsmKey" = "8:_CDB54E6AB93CE0937F63E600FBC28257"
-        "OwnerKey" = "8:_E0DE78526A1F41F9BC97D182603BDF79"
+        "OwnerKey" = "8:_3E0551465E5C4D7DAA58CC753039F7E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_CDB54E6AB93CE0937F63E600FBC28257"
-        "OwnerKey" = "8:_EB644095767D4A68A1A900168F67751D"
+        "OwnerKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_CDB54E6AB93CE0937F63E600FBC28257"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -579,25 +579,25 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_E0DE78526A1F41F9BC97D182603BDF79"
+        "MsmKey" = "8:_D1A6B2D8AF3D47BA8D7FF8771E69D6AD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "MsmKey" = "8:_D86AA09A68D6482098EEE49D3DEEF0E6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E83C1F4323E34742A4694330B541A9CB"
+        "MsmKey" = "8:_DFE4D9FE1AD642D1912766D055CA02D5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_EB644095767D4A68A1A900168F67751D"
+        "MsmKey" = "8:_E0625652D91F4CCBA9C49138ACDEA918"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -610,31 +610,25 @@
         "Entry"
         {
         "MsmKey" = "8:_F047C04E6E9216C82819A2CD1D0FDFE6"
-        "OwnerKey" = "8:_E0DE78526A1F41F9BC97D182603BDF79"
+        "OwnerKey" = "8:_3E0551465E5C4D7DAA58CC753039F7E5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F047C04E6E9216C82819A2CD1D0FDFE6"
-        "OwnerKey" = "8:_EB644095767D4A68A1A900168F67751D"
+        "OwnerKey" = "8:_9A5236B7AF7A465BB9B236DDC89E31EA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F047C04E6E9216C82819A2CD1D0FDFE6"
-        "OwnerKey" = "8:_E76F7C4E25CF45628987D9D60DCE3E69"
+        "OwnerKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F047C04E6E9216C82819A2CD1D0FDFE6"
         "OwnerKey" = "8:_57C8090442217BA521C9A21151D17081"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F29E05A76030472EA04D7A449F2BBF97"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -645,14 +639,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F9ABA4D5315E4432A4292F5D27A4459D"
+        "MsmKey" = "8:_FCDA14CA1ED945218135A85B38B0D5F3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FDA274CA434940E8984925F1A72ED2E8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_FEDCA9033578DD35A2F27A56060CBAA3"
-        "OwnerKey" = "8:_B5706A319CAE408AA01AAC2AB1E355E1"
+        "OwnerKey" = "8:_DFE4D9FE1AD642D1912766D055CA02D5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -664,19 +664,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_40374B31D0A24C0CA2D1EDE1539C9D67"
+        "OwnerKey" = "8:_19E79993EDC047FB9C6F8FD3F7FADDA7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1E2ADFE5B82B41ED8D100495FA49A6BF"
+        "OwnerKey" = "8:_1D0590D57BA74D9DBF4856F9AA12B56E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B5706A319CAE408AA01AAC2AB1E355E1"
+        "OwnerKey" = "8:_DFE4D9FE1AD642D1912766D055CA02D5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -724,7 +724,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BB41BA8F11244A4F888E370F97CDFA5E"
+        "OwnerKey" = "8:_2C2BE9F348BB4A5486A489342A4F5092"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -838,13 +838,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6A0C2A1E857C4EF9A81E2FB64E1B0523"
+        "OwnerKey" = "8:_BB576DD999754039B422EBE45306DD58"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0308E43FD67143F89E5C40BE604A209F"
+        "OwnerKey" = "8:_6123C63CEC954986BAA4DEFC22CCE5BE"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -942,41 +942,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_00D7845A532D4EABAB07E65311119E2F"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0462FEE9C07045D79D7358ECF0B9C055"
             {
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Office365APIEditor.pdb"
-            "TargetName" = "8:Office365APIEditor.pdb"
-            "Tag" = "8:"
-            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0308E43FD67143F89E5C40BE604A209F"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Identity.Client, Version=4.7.1.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_0308E43FD67143F89E5C40BE604A209F"
-                    {
-                    "Name" = "8:Microsoft.Identity.Client.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.Identity.Client.dll"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Office365APIEditor.exe.config"
+            "TargetName" = "8:Office365APIEditor.exe.config"
             "Tag" = "8:"
             "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
             "Condition" = "8:"
@@ -1117,10 +1086,21 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1953939B48654C2F884E9DFD3268EA64"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_19E79993EDC047FB9C6F8FD3F7FADDA7"
             {
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Newtonsoft.Json.xml"
-            "TargetName" = "8:Newtonsoft.Json.xml"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_19E79993EDC047FB9C6F8FD3F7FADDA7"
+                    {
+                    "Name" = "8:System.Web.Helpers.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\System.Web.Helpers.dll"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
             "Condition" = "8:"
@@ -1168,14 +1148,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1E2ADFE5B82B41ED8D100495FA49A6BF"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1D0590D57BA74D9DBF4856F9AA12B56E"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_1E2ADFE5B82B41ED8D100495FA49A6BF"
+                    "_1D0590D57BA74D9DBF4856F9AA12B56E"
                     {
                     "Name" = "8:System.Management.Automation.dll"
                     "Attributes" = "3:512"
@@ -1292,6 +1272,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2C2BE9F348BB4A5486A489342A4F5092"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_2C2BE9F348BB4A5486A489342A4F5092"
+                    {
+                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Newtonsoft.Json.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_368133AF517A83A1ADFE254C8AD56055"
             {
             "AssemblyRegister" = "3:1"
@@ -1354,63 +1365,23 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_40374B31D0A24C0CA2D1EDE1539C9D67"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3E0551465E5C4D7DAA58CC753039F7E5"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Microsoft.Spatial, Version=6.18.0.10905, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_40374B31D0A24C0CA2D1EDE1539C9D67"
+                    "_3E0551465E5C4D7DAA58CC753039F7E5"
                     {
-                    "Name" = "8:System.Web.Helpers.dll"
+                    "Name" = "8:Microsoft.Spatial.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\System.Web.Helpers.dll"
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.Spatial.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_409092B351664A0C85F16C3EA5F9FFBB"
-            {
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\SampleRequest\\MicrosoftGraphV1.0.json"
-            "TargetName" = "8:MicrosoftGraphV1.0.json"
-            "Tag" = "8:"
-            "Folder" = "8:_E3885795636D4D179AD7D17A0A7FFBF1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4346A256E31B4954B28876B3A4460FBB"
-            {
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\SampleRequest\\Office365ManagementAPI.json"
-            "TargetName" = "8:Office365ManagementAPI.json"
-            "Tag" = "8:"
-            "Folder" = "8:_E3885795636D4D179AD7D17A0A7FFBF1"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1454,26 +1425,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_495C702F9D984E969842CCCF8EDE017A"
-            {
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.Identity.Client.xml"
-            "TargetName" = "8:Microsoft.Identity.Client.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4D63B15FABD9EC1A4D68E2B61D84B4C5"
@@ -1569,6 +1520,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_531759DA5B0C4AD2B22E7A4F98EAB14F"
+            {
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.OData.Core.xml"
+            "TargetName" = "8:Microsoft.OData.Core.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_57C8090442217BA521C9A21151D17081"
             {
             "AssemblyRegister" = "3:1"
@@ -1631,6 +1602,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6123C63CEC954986BAA4DEFC22CCE5BE"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Microsoft.Identity.Client, Version=4.7.1.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_6123C63CEC954986BAA4DEFC22CCE5BE"
+                    {
+                    "Name" = "8:Microsoft.Identity.Client.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.Identity.Client.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_64467D45A8FFE0DD43032CABDF91D2AC"
             {
             "AssemblyRegister" = "3:1"
@@ -1662,61 +1664,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6A0C2A1E857C4EF9A81E2FB64E1B0523"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_75698C20881244C6AE9D6363C180606C"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.IdentityModel.Clients.ActiveDirectory, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_6A0C2A1E857C4EF9A81E2FB64E1B0523"
-                    {
-                    "Name" = "8:Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_842200F1867E4C778551C77210BBFDD8"
-            {
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\SampleRequest\\MicrosoftGraphBeta.json"
-            "TargetName" = "8:MicrosoftGraphBeta.json"
-            "Tag" = "8:"
-            "Folder" = "8:_E3885795636D4D179AD7D17A0A7FFBF1"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8666AE98E585419FB7DB779A5F4C1B31"
-            {
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.OData.Edm.xml"
-            "TargetName" = "8:Microsoft.OData.Edm.xml"
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.IdentityModel.Clients.ActiveDirectory.xml"
+            "TargetName" = "8:Microsoft.IdentityModel.Clients.ActiveDirectory.xml"
             "Tag" = "8:"
             "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
             "Condition" = "8:"
@@ -1795,6 +1746,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8EF318B213444998A232847369D3E27E"
+            {
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Office365APIEditor.pdb"
+            "TargetName" = "8:Office365APIEditor.pdb"
+            "Tag" = "8:"
+            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8F0744127446831DD486FC5262D9C0A3"
             {
             "AssemblyRegister" = "3:1"
@@ -1824,6 +1795,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_93561ABE82A049C79C0B5FE3D7D2902F"
+            {
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\SampleRequest\\Office365ManagementAPI.json"
+            "TargetName" = "8:Office365ManagementAPI.json"
+            "Tag" = "8:"
+            "Folder" = "8:_E3885795636D4D179AD7D17A0A7FFBF1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_98899DA3C351ECAD36B6805EC32664BE"
@@ -1857,6 +1848,77 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9956246A91C9418AA1418931A5737CEB"
+            {
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.IdentityModel.Clients.ActiveDirectory.pdb"
+            "TargetName" = "8:Microsoft.IdentityModel.Clients.ActiveDirectory.pdb"
+            "Tag" = "8:"
+            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_997CA4574C8540B78C7D0C2F7C5C2A49"
+            {
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\SampleRequest\\MicrosoftGraphBeta.json"
+            "TargetName" = "8:MicrosoftGraphBeta.json"
+            "Tag" = "8:"
+            "Folder" = "8:_E3885795636D4D179AD7D17A0A7FFBF1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9A5236B7AF7A465BB9B236DDC89E31EA"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Microsoft.OData.Edm, Version=6.18.0.10905, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_9A5236B7AF7A465BB9B236DDC89E31EA"
+                    {
+                    "Name" = "8:Microsoft.OData.Edm.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.OData.Edm.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9FE3B9F80A290908232481F2BDCD8502"
             {
             "AssemblyRegister" = "3:1"
@@ -1886,37 +1948,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B5706A319CAE408AA01AAC2AB1E355E1"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Office365APIEditor, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_B5706A319CAE408AA01AAC2AB1E355E1"
-                    {
-                    "Name" = "8:Office365APIEditor.exe"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Office365APIEditor.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B92940152727F2E7713137B0EB36D05F"
@@ -1950,20 +1981,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BB41BA8F11244A4F888E370F97CDFA5E"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BB576DD999754039B422EBE45306DD58"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Microsoft.IdentityModel.Clients.ActiveDirectory, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_BB41BA8F11244A4F888E370F97CDFA5E"
+                    "_BB576DD999754039B422EBE45306DD58"
                     {
-                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Name" = "8:Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Newtonsoft.Json.dll"
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
@@ -1981,10 +2012,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C35297D2ED2C4E13AC2B4766BA6AE478"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BC016A09971D4F8EAACC92365A6E6271"
             {
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.IdentityModel.Clients.ActiveDirectory.pdb"
-            "TargetName" = "8:Microsoft.IdentityModel.Clients.ActiveDirectory.pdb"
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.Spatial.xml"
+            "TargetName" = "8:Microsoft.Spatial.xml"
             "Tag" = "8:"
             "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
             "Condition" = "8:"
@@ -2032,26 +2063,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CD95B9A8BED04011A422F85823997AFB"
-            {
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.OData.Core.xml"
-            "TargetName" = "8:Microsoft.OData.Core.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CDB54E6AB93CE0937F63E600FBC28257"
             {
             "AssemblyRegister" = "3:1"
@@ -2083,20 +2094,60 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E0DE78526A1F41F9BC97D182603BDF79"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D1A6B2D8AF3D47BA8D7FF8771E69D6AD"
+            {
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Newtonsoft.Json.xml"
+            "TargetName" = "8:Newtonsoft.Json.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D86AA09A68D6482098EEE49D3DEEF0E6"
+            {
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\SampleRequest\\MicrosoftGraphV1.0.json"
+            "TargetName" = "8:MicrosoftGraphV1.0.json"
+            "Tag" = "8:"
+            "Folder" = "8:_E3885795636D4D179AD7D17A0A7FFBF1"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DFE4D9FE1AD642D1912766D055CA02D5"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Spatial, Version=6.18.0.10905, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Office365APIEditor, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_E0DE78526A1F41F9BC97D182603BDF79"
+                    "_DFE4D9FE1AD642D1912766D055CA02D5"
                     {
-                    "Name" = "8:Microsoft.Spatial.dll"
+                    "Name" = "8:Office365APIEditor.exe"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.Spatial.dll"
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Office365APIEditor.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
@@ -2114,72 +2165,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E76F7C4E25CF45628987D9D60DCE3E69"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E0625652D91F4CCBA9C49138ACDEA918"
             {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.OData.Core, Version=6.18.0.10905, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_E76F7C4E25CF45628987D9D60DCE3E69"
-                    {
-                    "Name" = "8:Microsoft.OData.Core.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.OData.Core.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E83C1F4323E34742A4694330B541A9CB"
-            {
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.IdentityModel.Clients.ActiveDirectory.xml"
-            "TargetName" = "8:Microsoft.IdentityModel.Clients.ActiveDirectory.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EB644095767D4A68A1A900168F67751D"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.OData.Edm, Version=6.18.0.10905, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_EB644095767D4A68A1A900168F67751D"
-                    {
-                    "Name" = "8:Microsoft.OData.Edm.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.OData.Edm.dll"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.Identity.Client.xml"
+            "TargetName" = "8:Microsoft.Identity.Client.xml"
             "Tag" = "8:"
             "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
             "Condition" = "8:"
@@ -2227,26 +2216,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F29E05A76030472EA04D7A449F2BBF97"
-            {
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Office365APIEditor.exe.config"
-            "TargetName" = "8:Office365APIEditor.exe.config"
-            "Tag" = "8:"
-            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F2AA992CC4AB6876A55EB1558D678429"
             {
             "AssemblyRegister" = "3:1"
@@ -2278,10 +2247,41 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F9ABA4D5315E4432A4292F5D27A4459D"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FCDA14CA1ED945218135A85B38B0D5F3"
             {
-            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.Spatial.xml"
-            "TargetName" = "8:Microsoft.Spatial.xml"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Microsoft.OData.Core, Version=6.18.0.10905, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_FCDA14CA1ED945218135A85B38B0D5F3"
+                    {
+                    "Name" = "8:Microsoft.OData.Core.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.OData.Core.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FDA274CA434940E8984925F1A72ED2E8"
+            {
+            "SourcePath" = "8:..\\Office365APIEditor\\FilesForMSI\\Microsoft.OData.Edm.xml"
+            "TargetName" = "8:Microsoft.OData.Edm.xml"
             "Tag" = "8:"
             "Folder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
             "Condition" = "8:"
@@ -2407,15 +2407,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Office365APIEditor"
-        "ProductCode" = "8:{3919C4AB-F15F-44AE-97CE-449775758CD5}"
-        "PackageCode" = "8:{11DFC4B5-99D2-4EAC-AFD8-608D82EF8867}"
+        "ProductCode" = "8:{B9356473-4BC5-439D-84D8-B0431E6B572B}"
+        "PackageCode" = "8:{BE8982AA-6C2A-4C52-874B-C23DE7491605}"
         "UpgradeCode" = "8:{8A442988-BA7D-43E0-A2B9-F7790CA105FD}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.0"
+        "ProductVersion" = "8:1.1.1"
         "Manufacturer" = "8:Microsoft Corporation"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -2425,7 +2425,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_B5706A319CAE408AA01AAC2AB1E355E1"
+        "ARPPRODUCTICON" = "8:_DFE4D9FE1AD642D1912766D055CA02D5"
         "ARPIconIndex" = "3:32512"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -2528,7 +2528,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A88F0AAEC63D4CDE87E8736F43DB7C99"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_F3038E32AD954351A857D4D74BAF8B49"
             {
             "Name" = "8:Office365APIEditor"
             "Arguments" = "8:"
@@ -2536,10 +2536,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:32512"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_B5706A319CAE408AA01AAC2AB1E355E1"
+            "Target" = "8:_DFE4D9FE1AD642D1912766D055CA02D5"
             "Folder" = "8:_EDF0ADC29EF349FE962F744019AD862E"
             "WorkingFolder" = "8:_6ED438E281C34CC29FC697D0A01E610D"
-            "Icon" = "8:_B5706A319CAE408AA01AAC2AB1E355E1"
+            "Icon" = "8:_DFE4D9FE1AD642D1912766D055CA02D5"
             "Feature" = "8:"
             }
         }
