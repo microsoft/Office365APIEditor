@@ -24,7 +24,7 @@ namespace Office365APIEditor
         {
             if (IsV2 && AdminConsent)
             {
-                InternalInitializationV2AdminConsent(ClientID, RedirectUri);
+                InternalInitializationV2AdminConsent(ClientID, RedirectUri, ResourceOrScopeUri);
             }
             else
             {
@@ -92,7 +92,7 @@ namespace Office365APIEditor
             webBrowser1.DocumentTitleChanged += new EventHandler(webBrowser1_DocumentTitleChanged);
         }
 
-        private void InternalInitializationV2AdminConsent(string ClientID, string RedirectUri)
+        private void InternalInitializationV2AdminConsent(string ClientID, string RedirectUri, string Scope)
         {
             InitializeComponent();
 
@@ -102,9 +102,10 @@ namespace Office365APIEditor
 
             string endPoint = "https://login.microsoftonline.com/";
 
-            authenticationUrl = endPoint + "common/adminconsent?" +
+            authenticationUrl = endPoint + "organizations/v2.0/adminconsent?" +
                     "&client_id=" + ClientID +
-                    "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri);
+                    "&redirect_uri=" + System.Web.HttpUtility.UrlEncode(RedirectUri) +
+                    "&scope=" + System.Web.HttpUtility.UrlEncode(Scope);
 
             webBrowser1.DocumentTitleChanged += new EventHandler(webBrowser1_DocumentTitleChanged);
         }

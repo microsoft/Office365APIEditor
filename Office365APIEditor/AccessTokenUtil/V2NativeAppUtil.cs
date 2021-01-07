@@ -2,14 +2,14 @@
 
 namespace Office365APIEditor.AccessTokenUtil
 {
-    class V2MobileAppUtil : AccessTokenUtil
+    class V2NativeAppUtil : AccessTokenUtil
     {
         public string TenantName { get; set; }
         public string ClientID { get; set; }
         public string RedirectUri { get; set; }
         public string Scopes { get; set; }
 
-        public V2MobileAppUtil()
+        public V2NativeAppUtil()
         {
         }
 

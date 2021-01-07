@@ -141,7 +141,7 @@
     <Compile Include="AccessTokenUtil\AccessTokenUtil.cs" />
     <Compile Include="AccessTokenUtil\V1NativeAppUtil.cs" />
     <Compile Include="AccessTokenUtil\V1WebAppUtil.cs" />
-    <Compile Include="AccessTokenUtil\V2MobileAppUtil.cs" />
+    <Compile Include="AccessTokenUtil\V2NativeAppUtil.cs" />
     <Compile Include="AccessTokenUtil\V2WebAppUtil.cs" />
     <Compile Include="External\ScintillaNET FindReplaceDialog\CharacterRange.cs" />
     <Compile Include="External\ScintillaNET FindReplaceDialog\FindAllResults\FindAllResultsPanel.cs">
@@ -266,6 +266,109 @@
     </Compile>
     <Compile Include="UI\AccessTokenWizard.Designer.cs">
       <DependentUpon>AccessTokenWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\AccessTokenWizardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\AccessTokenWizardForm.Designer.cs">
+      <DependentUpon>AccessTokenWizardForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\BuiltInAppOrBasicAuthSelectionPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\BuiltInAppOrBasicAuthSelectionPage.Designer.cs">
+      <DependentUpon>BuiltInAppOrBasicAuthSelectionPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\BuiltInAppSettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\BuiltInAppSettingPage.Designer.cs">
+      <DependentUpon>BuiltInAppSettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\IAccessTokenWizardPage.cs" />
+    <Compile Include="UI\AccessTokenWizard\SharePointOnlineAppOnlySettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\SharePointOnlineAppOnlySettingPage.Designer.cs">
+      <DependentUpon>SharePointOnlineAppOnlySettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V1EndpointAdminConsentSettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V1EndpointAdminConsentSettingPage.Designer.cs">
+      <DependentUpon>V1EndpointAdminConsentSettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V1EndpointAppOnlyByCertSettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V1EndpointAppOnlyByCertSettingPage.Designer.cs">
+      <DependentUpon>V1EndpointAppOnlyByCertSettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V1EndpointAppOnlyByKeySettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V1EndpointAppOnlyByKeySettingPage.Designer.cs">
+      <DependentUpon>V1EndpointAppOnlyByKeySettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V1EndpointAppSelectionPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V1EndpointAppSelectionPage.Designer.cs">
+      <DependentUpon>V1EndpointAppSelectionPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V1EndpointNativeAppSettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V1EndpointNativeAppSettingPage.Designer.cs">
+      <DependentUpon>V1EndpointNativeAppSettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V1EndpointWebAppSettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V1EndpointWebAppSettingPage.Designer.cs">
+      <DependentUpon>V1EndpointWebAppSettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V2EndpointAdminConsentSettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V2EndpointAdminConsentSettingPage.Designer.cs">
+      <DependentUpon>V2EndpointAdminConsentSettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V2EndpointAppOnlyByCertSettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V2EndpointAppOnlyByCertSettingPage.Designer.cs">
+      <DependentUpon>V2EndpointAppOnlyByCertSettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V2EndpointAppOnlyByKeySettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V2EndpointAppOnlyByKeySettingPage.Designer.cs">
+      <DependentUpon>V2EndpointAppOnlyByKeySettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V2EndpointAppSelectionPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V2EndpointAppSelectionPage.Designer.cs">
+      <DependentUpon>V2EndpointAppSelectionPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V2EndpointNativeAppSettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V2EndpointNativeAppSettingPage.Designer.cs">
+      <DependentUpon>V2EndpointNativeAppSettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V2EndpointWebAppSettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\V2EndpointWebAppSettingPage.Designer.cs">
+      <DependentUpon>V2EndpointWebAppSettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\WelcomePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\WelcomePage.Designer.cs">
+      <DependentUpon>WelcomePage.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\AcquireViewerTokenForm.cs">
       <SubType>Form</SubType>
@@ -444,6 +547,57 @@
     <EmbeddedResource Include="UI\AccessTokenWizard.resx">
       <DependentUpon>AccessTokenWizard.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\AccessTokenWizardForm.resx">
+      <DependentUpon>AccessTokenWizardForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\BuiltInAppOrBasicAuthSelectionPage.resx">
+      <DependentUpon>BuiltInAppOrBasicAuthSelectionPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\BuiltInAppSettingPage.resx">
+      <DependentUpon>BuiltInAppSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\SharePointOnlineAppOnlySettingPage.resx">
+      <DependentUpon>SharePointOnlineAppOnlySettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\V1EndpointAdminConsentSettingPage.resx">
+      <DependentUpon>V1EndpointAdminConsentSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\V1EndpointAppOnlyByCertSettingPage.resx">
+      <DependentUpon>V1EndpointAppOnlyByCertSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\V1EndpointAppOnlyByKeySettingPage.resx">
+      <DependentUpon>V1EndpointAppOnlyByKeySettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\V1EndpointAppSelectionPage.resx">
+      <DependentUpon>V1EndpointAppSelectionPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\V1EndpointNativeAppSettingPage.resx">
+      <DependentUpon>V1EndpointNativeAppSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\V1EndpointWebAppSettingPage.resx">
+      <DependentUpon>V1EndpointWebAppSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\V2EndpointAdminConsentSettingPage.resx">
+      <DependentUpon>V2EndpointAdminConsentSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\V2EndpointAppOnlyByCertSettingPage.resx">
+      <DependentUpon>V2EndpointAppOnlyByCertSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\V2EndpointAppOnlyByKeySettingPage.resx">
+      <DependentUpon>V2EndpointAppOnlyByKeySettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\V2EndpointAppSelectionPage.resx">
+      <DependentUpon>V2EndpointAppSelectionPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\V2EndpointNativeAppSettingPage.resx">
+      <DependentUpon>V2EndpointNativeAppSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\V2EndpointWebAppSettingPage.resx">
+      <DependentUpon>V2EndpointWebAppSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\WelcomePage.resx">
+      <DependentUpon>WelcomePage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\AcquireViewerTokenForm.resx">
       <DependentUpon>AcquireViewerTokenForm.cs</DependentUpon>

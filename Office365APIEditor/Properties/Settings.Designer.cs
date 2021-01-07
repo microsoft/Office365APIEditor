@@ -12,7 +12,7 @@ namespace Office365APIEditor.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -764,6 +764,54 @@ namespace Office365APIEditor.Properties {
             }
             set {
                 this["ReplaceSharpSignInTheRequestURL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2WebAppAppOnlyByCertTenantName {
+            get {
+                return ((string)(this["LastV2WebAppAppOnlyByCertTenantName"]));
+            }
+            set {
+                this["LastV2WebAppAppOnlyByCertTenantName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2WebAppAppOnlyByCertClientID {
+            get {
+                return ((string)(this["LastV2WebAppAppOnlyByCertClientID"]));
+            }
+            set {
+                this["LastV2WebAppAppOnlyByCertClientID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2WebAppAppOnlyByCertCertPath {
+            get {
+                return ((string)(this["LastV2WebAppAppOnlyByCertCertPath"]));
+            }
+            set {
+                this["LastV2WebAppAppOnlyByCertCertPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastV2WebAppAppOnlyByCertCertPass {
+            get {
+                return ((string)(this["LastV2WebAppAppOnlyByCertCertPass"]));
+            }
+            set {
+                this["LastV2WebAppAppOnlyByCertCertPass"] = value;
             }
         }
     }

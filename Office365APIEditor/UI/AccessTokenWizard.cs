@@ -464,7 +464,7 @@ namespace Office365APIEditor
                 case PageIndex.Page07_V2MobileAppOptionForm:
                     // Option form for V2 auth endpoint Web App
 
-                    V2MobileAppUtil v2MobileAppUtil = new V2MobileAppUtil()
+                    V2NativeAppUtil v2MobileAppUtil = new V2NativeAppUtil()
                     {
                         TenantName = textBox_Page07_TenantName.Text,
                         ClientID = textBox_Page07_ClientID.Text,
@@ -565,7 +565,7 @@ namespace Office365APIEditor
                 case PageIndex.Page11_BuiltInAppOptionForm:
                     // Option form for the built-in app.
                     
-                    V2MobileAppUtil builtInAppUtil = new V2MobileAppUtil()
+                    V2NativeAppUtil builtInAppUtil = new V2NativeAppUtil()
                     {
                         ClientID = Properties.Settings.Default.BuiltInAppClientId,
                         RedirectUri = Properties.Settings.Default.BuiltInAppRedirectUri,

@@ -16,6 +16,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ScintillaNET_FindReplaceDialog;
+using Office365APIEditor.UI.AccessTokenWizard;
 
 namespace Office365APIEditor
 {
@@ -1030,16 +1031,26 @@ namespace Office365APIEditor
 
                 try
                 {
-                    string contentType = Headers.GetValues("Content-Type")[0];
-                    if (contentType == "image/jpeg" || contentType == "image/png")
+                    var contentTypeHeaders = Headers.GetValues("Content-Type");
+
+                    if (contentTypeHeaders != null && contentTypeHeaders.Length != 0)
                     {
-                        isImage = true;
+                        string contentType = contentTypeHeaders[0];
+                        if (contentType == "image/jpeg" || contentType == "image/png")
+                        {
+                            isImage = true;
+                        }
                     }
 
-                    string contentDisposition = Headers.GetValues("content-disposition")[0];
-                    if (Regex.IsMatch(contentDisposition, "^attachment; filename=\".*\\.csv\"$"))
+                    var contentDispositionHeaders = Headers.GetValues("content-disposition");
+
+                    if (contentDispositionHeaders != null && contentDispositionHeaders.Length != 0)
                     {
-                        isCSV = true;
+                        string contentDisposition = contentDispositionHeaders[0];
+                        if (Regex.IsMatch(contentDisposition, "^attachment; filename=\".*\\.csv\"$"))
+                        {
+                            isCSV = true;
+                        }
                     }
                 }
                 catch { }
@@ -1306,8 +1317,8 @@ namespace Office365APIEditor
 
         private void newAccessTokenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AccessTokenWizard accessTokenWizard = new AccessTokenWizard();
-            if (accessTokenWizard.ShowDialog(out ClientInformation newClientInfo) == DialogResult.OK)
+            AccessTokenWizardForm accessTokenWizardForm = new AccessTokenWizardForm();
+            if (accessTokenWizardForm.ShowDialog(out ClientInformation newClientInfo) == DialogResult.OK)
             {
                 // Override current info.
                 clientInfo = newClientInfo;

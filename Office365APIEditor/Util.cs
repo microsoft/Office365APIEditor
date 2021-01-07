@@ -173,7 +173,23 @@ namespace Office365APIEditor
                 id_token = value.IdToken
             };
         }
-        
+
+        public static TokenResponse ConvertAuthenticationResultToTokenResponse(Microsoft.Identity.Client.AuthenticationResult value)
+        {
+            return new TokenResponse
+            {
+                token_type = "",
+                expires_in = "",
+                scope = string.Join(",", value.Scopes),
+                expires_on = value.ExpiresOn.ToString(),
+                not_before = "",
+                resource = "",
+                access_token = value.AccessToken,
+                // refresh_token = value.RefreshToken,
+                id_token = value.IdToken
+            };
+        }
+
         public static bool WriteSystemLog(string Title, string Message)
         {
             // Write log if SystemLogging flag is true.
