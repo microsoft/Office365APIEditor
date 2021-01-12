@@ -16,15 +16,20 @@ namespace Office365APIEditor.UI.AccessTokenWizard
         {
             var wizard = (AccessTokenWizardForm)Parent;
 
-            if (radioButton_BasicAuth.Checked)
-            {
-                // Basic auth
-                wizard.CloseWizard(new ClientInformation(new TokenResponse(), AuthEndpoints.Basic, Resources.None, "", "", "", ""));
-            }
-            else
+            if (radioButton_BuiltInApp.Checked)
             {
                 // Built-in app
                 wizard.ShowPage(AccessTokenWizardForm.PageIndex.BuiltInAppSettingPage);
+            }
+            else if (radioButton_PreAcquiredAccessToken.Checked)
+            {
+                // Pre-acquired access token
+                wizard.ShowPage(AccessTokenWizardForm.PageIndex.PreAcquiredAccessTokenSettingPage);
+            }
+            else if (radioButton_BasicAuth.Checked)
+            {
+                // Basic auth
+                wizard.CloseWizard(new ClientInformation(new TokenResponse(), AuthEndpoints.Basic, Resources.None, "", "", "", ""));
             }
         }
     }

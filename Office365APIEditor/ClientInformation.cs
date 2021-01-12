@@ -50,6 +50,7 @@ namespace Office365APIEditor
     {
         Basic,
         OAuthV1,
-        OAuthV2
+        OAuthV2,
+        PreAcquired
     }
 }

@@ -1343,7 +1343,7 @@ namespace Office365APIEditor
                     textBox_BasicAuthPassword.Text = "OAuth (V1 Endpoint)";
                     textBox_BasicAuthPassword.UseSystemPasswordChar = false;
                 }
-                else
+                else if (clientInfo.AuthType == AuthEndpoints.OAuthV2)
                 {
                     // OAuth V2
 
@@ -1351,6 +1351,16 @@ namespace Office365APIEditor
                     textBox_BasicAuthSMTPAddress.Text = "OAuth (V2 Endpoint)";
                     textBox_BasicAuthPassword.Enabled = false;
                     textBox_BasicAuthPassword.Text = "OAuth (V2 Endpoint)";
+                    textBox_BasicAuthPassword.UseSystemPasswordChar = false;
+                }
+                else
+                {
+                    // Pre-acquired access token
+
+                    textBox_BasicAuthSMTPAddress.Enabled = false;
+                    textBox_BasicAuthSMTPAddress.Text = "OAuth (Pre-acquired)";
+                    textBox_BasicAuthPassword.Enabled = false;
+                    textBox_BasicAuthPassword.Text = "OAuth (Pre-acquired)";
                     textBox_BasicAuthPassword.UseSystemPasswordChar = false;
                 }
 

@@ -286,6 +286,12 @@
       <DependentUpon>BuiltInAppSettingPage.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\AccessTokenWizard\IAccessTokenWizardPage.cs" />
+    <Compile Include="UI\AccessTokenWizard\PreAcquiredAccessTokenSettingPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\PreAcquiredAccessTokenSettingPage.Designer.cs">
+      <DependentUpon>PreAcquiredAccessTokenSettingPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\AccessTokenWizard\SharePointOnlineAppOnlySettingPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -556,6 +562,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\AccessTokenWizard\BuiltInAppSettingPage.resx">
       <DependentUpon>BuiltInAppSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\PreAcquiredAccessTokenSettingPage.resx">
+      <DependentUpon>PreAcquiredAccessTokenSettingPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\AccessTokenWizard\SharePointOnlineAppOnlySettingPage.resx">
       <DependentUpon>SharePointOnlineAppOnlySettingPage.cs</DependentUpon>

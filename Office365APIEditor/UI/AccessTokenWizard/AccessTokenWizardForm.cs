@@ -39,7 +39,8 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             V2EndpointAppOnlyByCertSettingPage = 12,
             V2EndpointAppOnlyByKeySettingPage = 13,
             V2EndpointAdminConsentSettingPage = 14,
-            BuiltInAppSettingPage = 15
+            BuiltInAppSettingPage = 15,
+            PreAcquiredAccessTokenSettingPage = 16
         }
 
         public AccessTokenWizardForm()
@@ -72,6 +73,7 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             V2EndpointAppOnlyByKeySettingPage v2EndpointAppOnlyByKeySettingPage = new V2EndpointAppOnlyByKeySettingPage();
             V2EndpointAdminConsentSettingPage v2EndpointAdminConsentSettingPage = new V2EndpointAdminConsentSettingPage();
             BuiltInAppSettingPage builtInAppSettingPage = new BuiltInAppSettingPage();
+            PreAcquiredAccessTokenSettingPage preAcquiredAccessTokenSettingPage = new PreAcquiredAccessTokenSettingPage();
 
             pages = new List<IAccessTokenWizardPage>
             {
@@ -90,7 +92,8 @@ namespace Office365APIEditor.UI.AccessTokenWizard
                 v2EndpointAppOnlyByCertSettingPage,
                 v2EndpointAppOnlyByKeySettingPage,
                 v2EndpointAdminConsentSettingPage,
-                builtInAppSettingPage
+                builtInAppSettingPage,
+                preAcquiredAccessTokenSettingPage
             };
 
             foreach (Control page in pages)
