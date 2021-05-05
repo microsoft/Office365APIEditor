@@ -115,6 +115,7 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             this.Name = "V1EndpointAppSelectionPage";
             this.Size = new System.Drawing.Size(400, 200);
             this.Tag = "";
+            this.Load += new System.EventHandler(this.V1EndpointAppSelectionPage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

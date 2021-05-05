@@ -814,5 +814,16 @@ namespace Office365APIEditor.Properties {
                 this["LastV2WebAppAppOnlyByCertCertPass"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::Office365APIEditor.Settings.AccessTokenWizardAppContainer AccessTokenWizardApps {
+            get {
+                return ((global::Office365APIEditor.Settings.AccessTokenWizardAppContainer)(this["AccessTokenWizardApps"]));
+            }
+            set {
+                this["AccessTokenWizardApps"] = value;
+            }
+        }
     }
 }

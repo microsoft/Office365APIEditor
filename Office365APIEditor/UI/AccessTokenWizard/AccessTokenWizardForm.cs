@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
+using Office365APIEditor.Settings;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -172,6 +173,11 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             button_Back.Enabled = true;
         }
 
+        internal void GoToNextPage()
+        {
+            button_Next.PerformClick();
+        }
+
         private void Button_Back_Click(object sender, EventArgs e)
         {
             Control previousPage = (Control)pages[(int)previousPages[previousPages.Count - 1]];
@@ -276,6 +282,20 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             }
 
             return result;
+        }
+
+        internal AccessTokenWizardAppSetting LoadSavedApp()
+        {
+            SavedAppSelectorForm savedAppSelectorForm = new SavedAppSelectorForm();
+            savedAppSelectorForm.Owner = this;
+
+            if (savedAppSelectorForm.ShowDialog(out AccessTokenWizardAppSetting result) == DialogResult.OK)
+            {
+                return result;
+            }
+            else {
+                return null;
+            }
         }
     }
 }

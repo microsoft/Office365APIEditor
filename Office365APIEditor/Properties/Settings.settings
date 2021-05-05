@@ -333,5 +333,8 @@
     <Setting Name="LastV2WebAppAppOnlyByCertCertPass" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="AccessTokenWizardApps" Type="Office365APIEditor.Settings.AccessTokenWizardAppContainer" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

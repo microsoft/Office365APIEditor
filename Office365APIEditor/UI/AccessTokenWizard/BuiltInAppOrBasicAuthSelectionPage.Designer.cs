@@ -86,6 +86,7 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             this.Controls.Add(this.label28);
             this.Name = "BuiltInAppOrBasicAuthSelectionPage";
             this.Size = new System.Drawing.Size(400, 200);
+            this.Load += new System.EventHandler(this.BuiltInAppOrBasicAuthSelectionPage_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
+using Office365APIEditor.Settings;
 using System;
 using System.Windows.Forms;
 
@@ -21,6 +22,15 @@ namespace Office365APIEditor.UI.AccessTokenWizard
 
             // Initialize link.
             linkLabel_Description.Links.Add(linkLabel_Description.Text.IndexOf("Learn more"), 10, "https://github.com/Microsoft/Office365APIEditor/blob/master/tutorials/How_to_register_a_Web_application_for_SharePoint_Online_App-Only_Token.md");
+
+            var lastAppSetting = Properties.Settings.Default.AccessTokenWizardApps.LastApps.Find(AppSettingType.LastSharePointOnlineAppOnlyApp);
+
+            if (lastAppSetting != null)
+            {
+                textBox_TenantName.Text = lastAppSetting.TenantName;
+                textBox_ClientID.Text = lastAppSetting.ApplicationId;
+                textBox_ClientSecret.Text = lastAppSetting.ClientSecret;
+            }
         }
 
         private void LinkLabel_Description_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -36,6 +46,33 @@ namespace Office365APIEditor.UI.AccessTokenWizard
 
                 if (tokenResponse != null)
                 {
+                    // Save settings.
+                    Properties.Settings.Default.AccessTokenWizardApps.LastApps.Update(AppSettingType.LastSharePointOnlineAppOnlyApp, new AccessTokenWizardAppSetting()
+                    {
+                        DisplayName = AppSettingType.LastSharePointOnlineAppOnlyApp.ToString(),
+                        TenantName = textBox_TenantName.Text,
+                        ApplicationId = textBox_ClientID.Text,
+                        ClientSecret = textBox_ClientSecret.Text
+                    });
+
+                    if (checkBox_SaveAsNewApp.Checked)
+                    {
+                        // Save this app to the app library.
+                        string newAppDisplayName = Properties.Settings.Default.AccessTokenWizardApps.SavedApps.FindNewAppDisplayName();
+
+                        Properties.Settings.Default.AccessTokenWizardApps.SavedApps.AddForce(new AccessTokenWizardAppSetting()
+                        {
+                            DisplayName = newAppDisplayName,
+                            TenantName = textBox_TenantName.Text,
+                            ApplicationId = textBox_ClientID.Text,
+                            ClientSecret = textBox_ClientSecret.Text
+                        });
+
+                        MessageBox.Show("Your app was added to your App Library as '" + newAppDisplayName + "'.", "Office365APIEditor");
+                    }
+
+                    Properties.Settings.Default.Save();
+
                     // Close wizard.
                     wizard.CloseWizard(new ClientInformation(tokenResponse, AuthEndpoints.OAuthV1, Resources.None, textBox_ClientID.Text, "", "", ""));
                 }
@@ -79,6 +116,18 @@ namespace Office365APIEditor.UI.AccessTokenWizard
                 "&client_secret=" + System.Web.HttpUtility.UrlEncode(textBox_ClientSecret.Text);
 
             return wizard.AcquireAccessToken(postBody, "https://accounts.accesscontrol.windows.net/" + textBox_TenantName.Text + "/tokens/OAuth/2");
+        }
+
+        private void Button_LoadSavedApp_Click(object sender, EventArgs e)
+        {
+            AccessTokenWizardAppSetting savedApp = wizard.LoadSavedApp();
+
+            if (savedApp != null)
+            {
+                textBox_TenantName.Text = savedApp.TenantName;
+                textBox_ClientID.Text = savedApp.ApplicationId;
+                textBox_ClientSecret.Text = savedApp.ClientSecret;
+            }
         }
     }
 }

@@ -49,7 +49,7 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             // 
             // label47
             // 
-            this.label47.Location = new System.Drawing.Point(3, 63);
+            this.label47.Location = new System.Drawing.Point(3, 59);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(93, 13);
             this.label47.TabIndex = 51;
@@ -60,14 +60,14 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             // 
             this.textBox_RedirectUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_RedirectUri.Location = new System.Drawing.Point(102, 60);
+            this.textBox_RedirectUri.Location = new System.Drawing.Point(102, 56);
             this.textBox_RedirectUri.Name = "textBox_RedirectUri";
             this.textBox_RedirectUri.Size = new System.Drawing.Size(284, 20);
             this.textBox_RedirectUri.TabIndex = 1;
             // 
             // label48
             // 
-            this.label48.Location = new System.Drawing.Point(3, 37);
+            this.label48.Location = new System.Drawing.Point(3, 33);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(93, 13);
             this.label48.TabIndex = 50;
@@ -78,7 +78,7 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             // 
             this.textBox_ClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_ClientID.Location = new System.Drawing.Point(102, 34);
+            this.textBox_ClientID.Location = new System.Drawing.Point(102, 30);
             this.textBox_ClientID.Name = "textBox_ClientID";
             this.textBox_ClientID.Size = new System.Drawing.Size(284, 20);
             this.textBox_ClientID.TabIndex = 0;
@@ -89,14 +89,14 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_Resource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Resource.FormattingEnabled = true;
-            this.comboBox_Resource.Location = new System.Drawing.Point(102, 86);
+            this.comboBox_Resource.Location = new System.Drawing.Point(102, 82);
             this.comboBox_Resource.Name = "comboBox_Resource";
             this.comboBox_Resource.Size = new System.Drawing.Size(284, 21);
             this.comboBox_Resource.TabIndex = 65;
             // 
             // label45
             // 
-            this.label45.Location = new System.Drawing.Point(3, 89);
+            this.label45.Location = new System.Drawing.Point(3, 85);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(93, 13);
             this.label45.TabIndex = 66;

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization.Json;
@@ -198,6 +199,8 @@ namespace Office365APIEditor
             sb.AppendLine(Title);
             sb.AppendLine("DateTime : " + DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
             sb.AppendLine(Message);
+
+            Debug.WriteLine(sb.ToString());
 
             if (Properties.Settings.Default.SystemLogging)
             {
@@ -614,11 +617,11 @@ namespace Office365APIEditor
 
     public enum Resources
     {
-        None,
-        Outlook,
-        Graph,
-        Management,
-        AzureRM
+        None = -1,
+        Outlook = 0,
+        Graph = 1,
+        Management = 2,
+        AzureRM = 3
     }
 
     public struct FolderInfo

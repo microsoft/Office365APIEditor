@@ -261,6 +261,11 @@
     <Compile Include="External\ScintillaNET\WrapVisualFlagLocation.cs" />
     <Compile Include="External\ScintillaNET\WrapVisualFlags.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Settings\AccessTokenWizardAppContainerConverter.cs" />
+    <Compile Include="Settings\AccessTokenWizardAppSetting.cs" />
+    <Compile Include="Settings\AccessTokenWizardAppContainer.cs" />
+    <Compile Include="Settings\AccessTokenWizardAppSettingCollection.cs" />
+    <Compile Include="Settings\AppSettingType.cs" />
     <Compile Include="UI\AccessTokenWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -291,6 +296,12 @@
     </Compile>
     <Compile Include="UI\AccessTokenWizard\PreAcquiredAccessTokenSettingPage.Designer.cs">
       <DependentUpon>PreAcquiredAccessTokenSettingPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\SavedAppSelectorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AccessTokenWizard\SavedAppSelectorForm.Designer.cs">
+      <DependentUpon>SavedAppSelectorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\AccessTokenWizard\SharePointOnlineAppOnlySettingPage.cs">
       <SubType>UserControl</SubType>
@@ -565,6 +576,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\AccessTokenWizard\PreAcquiredAccessTokenSettingPage.resx">
       <DependentUpon>PreAcquiredAccessTokenSettingPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AccessTokenWizard\SavedAppSelectorForm.resx">
+      <DependentUpon>SavedAppSelectorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\AccessTokenWizard\SharePointOnlineAppOnlySettingPage.resx">
       <DependentUpon>SharePointOnlineAppOnlySettingPage.cs</DependentUpon>

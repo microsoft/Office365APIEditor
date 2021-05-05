@@ -42,6 +42,8 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             this.textBox_TenantName = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
             this.openFileDialog_PFX = new System.Windows.Forms.OpenFileDialog();
+            this.checkBox_SaveAsNewApp = new System.Windows.Forms.CheckBox();
+            this.button_LoadSavedApp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // linkLabel_Description
@@ -91,12 +93,10 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             // 
             this.textBox_CertPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_CertPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyCertPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_CertPath.Location = new System.Drawing.Point(102, 82);
             this.textBox_CertPath.Name = "textBox_CertPath";
             this.textBox_CertPath.Size = new System.Drawing.Size(165, 20);
             this.textBox_CertPath.TabIndex = 2;
-            this.textBox_CertPath.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyCertPath;
             // 
             // label32
             // 
@@ -111,13 +111,11 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             // 
             this.textBox_CertPass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_CertPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyCertPass", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_CertPass.Location = new System.Drawing.Point(102, 108);
             this.textBox_CertPass.Name = "textBox_CertPass";
             this.textBox_CertPass.PasswordChar = '*';
             this.textBox_CertPass.Size = new System.Drawing.Size(284, 20);
             this.textBox_CertPass.TabIndex = 4;
-            this.textBox_CertPass.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyCertPass;
             // 
             // label33
             // 
@@ -141,24 +139,20 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             // 
             this.textBox_ClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_ClientID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_ClientID.Location = new System.Drawing.Point(102, 56);
             this.textBox_ClientID.Name = "textBox_ClientID";
             this.textBox_ClientID.Size = new System.Drawing.Size(284, 20);
             this.textBox_ClientID.TabIndex = 1;
-            this.textBox_ClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyClientID;
             // 
             // textBox_TenantName
             // 
             this.textBox_TenantName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_TenantName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppAppOnlyTenantName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_TenantName.Location = new System.Drawing.Point(102, 30);
             this.textBox_TenantName.Name = "textBox_TenantName";
             this.textBox_TenantName.Size = new System.Drawing.Size(284, 20);
             this.textBox_TenantName.TabIndex = 0;
             this.textBox_TenantName.Tag = "";
-            this.textBox_TenantName.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppAppOnlyTenantName;
             // 
             // label35
             // 
@@ -173,10 +167,34 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             // 
             this.openFileDialog_PFX.Filter = "Personal Information Exchange (*.pfx)|*.pfx";
             // 
+            // checkBox_SaveAsNewApp
+            // 
+            this.checkBox_SaveAsNewApp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBox_SaveAsNewApp.AutoSize = true;
+            this.checkBox_SaveAsNewApp.Location = new System.Drawing.Point(18, 180);
+            this.checkBox_SaveAsNewApp.Name = "checkBox_SaveAsNewApp";
+            this.checkBox_SaveAsNewApp.Size = new System.Drawing.Size(242, 17);
+            this.checkBox_SaveAsNewApp.TabIndex = 204;
+            this.checkBox_SaveAsNewApp.Text = "Save this app to the app library as a new app.";
+            this.checkBox_SaveAsNewApp.UseVisualStyleBackColor = true;
+            // 
+            // button_LoadSavedApp
+            // 
+            this.button_LoadSavedApp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_LoadSavedApp.Location = new System.Drawing.Point(263, 3);
+            this.button_LoadSavedApp.Name = "button_LoadSavedApp";
+            this.button_LoadSavedApp.Size = new System.Drawing.Size(123, 23);
+            this.button_LoadSavedApp.TabIndex = 203;
+            this.button_LoadSavedApp.Text = "Load Saved App";
+            this.button_LoadSavedApp.UseVisualStyleBackColor = true;
+            this.button_LoadSavedApp.Click += new System.EventHandler(this.Button_LoadSavedApp_Click);
+            // 
             // V1EndpointAppOnlyByCertSettingPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkBox_SaveAsNewApp);
+            this.Controls.Add(this.button_LoadSavedApp);
             this.Controls.Add(this.linkLabel_Description);
             this.Controls.Add(this.comboBox_Resource);
             this.Controls.Add(this.button_SelectCert);
@@ -213,5 +231,7 @@ namespace Office365APIEditor.UI.AccessTokenWizard
         private System.Windows.Forms.TextBox textBox_TenantName;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.OpenFileDialog openFileDialog_PFX;
+        private System.Windows.Forms.CheckBox checkBox_SaveAsNewApp;
+        private System.Windows.Forms.Button button_LoadSavedApp;
     }
 }

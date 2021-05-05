@@ -38,6 +38,8 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             this.label6 = new System.Windows.Forms.Label();
             this.textBox_ClientID = new System.Windows.Forms.TextBox();
             this.textBox_RedirectUri = new System.Windows.Forms.TextBox();
+            this.button_LoadSavedApp = new System.Windows.Forms.Button();
+            this.checkBox_SaveAsNewApp = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // comboBox_Resource
@@ -75,12 +77,10 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             // 
             this.textBox_ClientSecret.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_ClientSecret.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppClientSecret", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_ClientSecret.Location = new System.Drawing.Point(102, 108);
             this.textBox_ClientSecret.Name = "textBox_ClientSecret";
             this.textBox_ClientSecret.Size = new System.Drawing.Size(284, 20);
             this.textBox_ClientSecret.TabIndex = 3;
-            this.textBox_ClientSecret.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppClientSecret;
             // 
             // label10
             // 
@@ -113,28 +113,48 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             // 
             this.textBox_ClientID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_ClientID.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppClientID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_ClientID.Location = new System.Drawing.Point(102, 30);
             this.textBox_ClientID.Name = "textBox_ClientID";
             this.textBox_ClientID.Size = new System.Drawing.Size(284, 20);
             this.textBox_ClientID.TabIndex = 0;
-            this.textBox_ClientID.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppClientID;
             // 
             // textBox_RedirectUri
             // 
             this.textBox_RedirectUri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox_RedirectUri.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Office365APIEditor.Properties.Settings.Default, "LastWebAppRedirectURL", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.textBox_RedirectUri.Location = new System.Drawing.Point(102, 56);
             this.textBox_RedirectUri.Name = "textBox_RedirectUri";
             this.textBox_RedirectUri.Size = new System.Drawing.Size(284, 20);
             this.textBox_RedirectUri.TabIndex = 1;
-            this.textBox_RedirectUri.Text = global::Office365APIEditor.Properties.Settings.Default.LastWebAppRedirectURL;
+            // 
+            // button_LoadSavedApp
+            // 
+            this.button_LoadSavedApp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_LoadSavedApp.Location = new System.Drawing.Point(263, 3);
+            this.button_LoadSavedApp.Name = "button_LoadSavedApp";
+            this.button_LoadSavedApp.Size = new System.Drawing.Size(123, 23);
+            this.button_LoadSavedApp.TabIndex = 201;
+            this.button_LoadSavedApp.Text = "Load Saved App";
+            this.button_LoadSavedApp.UseVisualStyleBackColor = true;
+            this.button_LoadSavedApp.Click += new System.EventHandler(this.Button_LoadSavedApp_Click);
+            // 
+            // checkBox_SaveAsNewApp
+            // 
+            this.checkBox_SaveAsNewApp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBox_SaveAsNewApp.AutoSize = true;
+            this.checkBox_SaveAsNewApp.Location = new System.Drawing.Point(18, 180);
+            this.checkBox_SaveAsNewApp.Name = "checkBox_SaveAsNewApp";
+            this.checkBox_SaveAsNewApp.Size = new System.Drawing.Size(242, 17);
+            this.checkBox_SaveAsNewApp.TabIndex = 202;
+            this.checkBox_SaveAsNewApp.Text = "Save this app to the app library as a new app.";
+            this.checkBox_SaveAsNewApp.UseVisualStyleBackColor = true;
             // 
             // V1EndpointWebAppSettingPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkBox_SaveAsNewApp);
+            this.Controls.Add(this.button_LoadSavedApp);
             this.Controls.Add(this.comboBox_Resource);
             this.Controls.Add(this.linkLabel_Description);
             this.Controls.Add(this.label4);
@@ -164,5 +184,7 @@ namespace Office365APIEditor.UI.AccessTokenWizard
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox_ClientID;
         private System.Windows.Forms.TextBox textBox_RedirectUri;
+        private System.Windows.Forms.Button button_LoadSavedApp;
+        private System.Windows.Forms.CheckBox checkBox_SaveAsNewApp;
     }
 }

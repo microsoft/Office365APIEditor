@@ -2,6 +2,7 @@
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Office365APIEditor.Settings;
 using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
@@ -30,7 +31,20 @@ namespace Office365APIEditor.UI.AccessTokenWizard
                 comboBox_Resource.Items.Add(item);
             }
 
-            comboBox_Resource.SelectedIndex = 1;
+            var lastAppSetting = Properties.Settings.Default.AccessTokenWizardApps.LastApps.Find(AppSettingType.LastV1EndpointAppOnlyByCertApp);
+
+            if (lastAppSetting != null)
+            {
+                textBox_TenantName.Text = lastAppSetting.TenantName;
+                textBox_ClientID.Text = lastAppSetting.ApplicationId;
+                textBox_CertPath.Text = lastAppSetting.CertificatePath;
+                textBox_CertPass.Text = lastAppSetting.CertificatePassword;
+                comboBox_Resource.SelectedIndex = lastAppSetting.Resource == Resources.None ? 1 : (int)lastAppSetting.Resource;
+            }
+            else
+            {
+                comboBox_Resource.SelectedIndex = 1;
+            }
         }
 
         private void LinkLabel_Description_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -56,7 +70,38 @@ namespace Office365APIEditor.UI.AccessTokenWizard
 
                 if (tokenResponse != null)
                 {
-                    AccessTokenWizardForm wizard = (AccessTokenWizardForm)Parent;
+                    // Save settings.
+                    Properties.Settings.Default.AccessTokenWizardApps.LastApps.Update(AppSettingType.LastV1EndpointAppOnlyByCertApp, new AccessTokenWizardAppSetting()
+                    {
+                        DisplayName = AppSettingType.LastV1EndpointAppOnlyByCertApp.ToString(),
+                        TenantName = textBox_TenantName.Text,
+                        ApplicationId = textBox_ClientID.Text,
+                        CertificatePath = textBox_CertPath.Text,
+                        CertificatePassword = textBox_CertPass.Text,
+                        Resource = (Resources)Enum.ToObject(typeof(Resources), comboBox_Resource.SelectedIndex)
+                    });
+
+                    if (checkBox_SaveAsNewApp.Checked)
+                    {
+                        // Save this app to the app library.
+                        string newAppDisplayName = Properties.Settings.Default.AccessTokenWizardApps.SavedApps.FindNewAppDisplayName();
+
+                        Properties.Settings.Default.AccessTokenWizardApps.SavedApps.AddForce(new AccessTokenWizardAppSetting()
+                        {
+                            DisplayName = newAppDisplayName,
+                            TenantName = textBox_TenantName.Text,
+                            ApplicationId = textBox_ClientID.Text,
+                            CertificatePath = textBox_CertPath.Text,
+                            CertificatePassword = textBox_CertPass.Text,
+                            Resource = (Resources)Enum.ToObject(typeof(Resources), comboBox_Resource.SelectedIndex)
+                        });
+
+                        MessageBox.Show("Your app was added to your App Library as '" + newAppDisplayName + "'.", "Office365APIEditor");
+                    }
+
+                    Properties.Settings.Default.Save();
+
+                    // Close wizard.
                     wizard.CloseWizard(new ClientInformation(tokenResponse, AuthEndpoints.OAuthV1, Util.ConvertResourceNameToResourceEnum(comboBox_Resource.SelectedItem.ToString()), textBox_ClientID.Text, "", "", ""));
                 }
             }
@@ -144,6 +189,20 @@ namespace Office365APIEditor.UI.AccessTokenWizard
             {
                 MessageBox.Show(ex.Message, "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
+            }
+        }
+
+        private void Button_LoadSavedApp_Click(object sender, EventArgs e)
+        {
+            AccessTokenWizardAppSetting savedApp = wizard.LoadSavedApp();
+
+            if (savedApp != null)
+            {
+                textBox_TenantName.Text = savedApp.TenantName;
+                textBox_ClientID.Text = savedApp.ApplicationId;
+                textBox_CertPath.Text = savedApp.CertificatePath;
+                textBox_CertPass.Text = savedApp.CertificatePassword;
+                comboBox_Resource.SelectedIndex = (int)savedApp.Resource;
             }
         }
     }
