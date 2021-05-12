@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Specialized;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Office365APIEditor
@@ -15,9 +16,15 @@ namespace Office365APIEditor
         // Return value
         private string _acquiredCode = "";
 
+        // Help URI to display if the authorization code could not be acquired.
+        private Uri helpUri;
+
         public GetCodeForm(string ClientID, string RedirectUri, string ResourceOrScopeUri, bool IsV2 = false, string TenantName = "")
         {
             InternalInitialization(ClientID, RedirectUri, ResourceOrScopeUri, IsV2, TenantName, false);
+
+            // Handle the HelpRequested event.
+            HelpRequested += new HelpEventHandler(this.GetCodeForm_HelpRequested);
         }
 
         public GetCodeForm(string ClientID, string RedirectUri, string ResourceOrScopeUri, bool IsV2, bool AdminConsent)
@@ -129,7 +136,7 @@ namespace Office365APIEditor
 
             if (e.Url.AbsoluteUri.ToLower().StartsWith(redirectUrl.ToLower()))
             {
-                if (e.Url.AbsoluteUri.Contains("code"))
+                if (e.Url.AbsoluteUri.Contains("code="))
                 {
                     // Get the Authorization Code from a query string.
 
@@ -165,7 +172,50 @@ namespace Office365APIEditor
                     {
                         // Redirected to redirectUrl but we couldn't get the Authorization Code.
 
-                        MessageBox.Show("Redirected to the following URL." + Environment.NewLine + Environment.NewLine + System.Web.HttpUtility.UrlDecode(e.Url.AbsoluteUri), "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        StringBuilder message = new StringBuilder();
+
+                        message.AppendLine("Failed to get the authorization code.");
+                        message.AppendLine("");
+
+                        var queryString = e.Url.AbsoluteUri.Substring(e.Url.AbsoluteUri.IndexOf("?"));
+                        NameValueCollection queries = System.Web.HttpUtility.ParseQueryString(queryString);
+
+                        foreach (string queryName in queries)
+                        {
+                            message.AppendLine(queryName + ":");
+                            message.AppendLine(System.Web.HttpUtility.UrlDecode(queries[queryName]));
+                            message.AppendLine("");
+
+                            if (queryName.ToLower() == "error_uri")
+                            {
+                                // Save the help Uri.
+
+                                string errorUri = System.Web.HttpUtility.UrlDecode(queries[queryName]);
+
+                                if (errorUri != null && errorUri != "")
+                                {
+                                    if (Uri.TryCreate(errorUri, UriKind.Absolute, out Uri result))
+                                    {
+                                        helpUri = result;
+                                    }
+                                    else
+                                    {
+                                        helpUri = null;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (helpUri != null)
+                        {
+                            // Show message box with "Help" button.
+                            MessageBox.Show(message.ToString(), "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, 0, true);
+                        }
+                        else
+                        {
+                            // Show message box without "Help" button.
+                            MessageBox.Show(message.ToString(), "Office365APIEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
 
                         this.DialogResult = DialogResult.No;
                         this.Close();
@@ -175,6 +225,18 @@ namespace Office365APIEditor
 
             // If we couldn't get the Authorization Code, do nothing.
             // Authorization is in progress, or error messages is displayed on the page.
+        }
+
+        private void GetCodeForm_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            if (helpUri != null)
+            {
+                System.Diagnostics.Process.Start(helpUri.ToString());
+            }
+            else
+            {
+                MessageBox.Show("No help URL is available.", "Office365APIEditor");
+            }
         }
 
         public DialogResult ShowDialog(out string code)
