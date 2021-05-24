@@ -21,7 +21,7 @@ namespace Office365APIEditor.ViewerHelper
         {
             // Get all MailFolders in the specified folder.
 
-            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/mailfolders/{FolderId}/childfolders?$Top=1000&$select=Id,DisplayName,ChildFolderCount") : new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{FolderId}/childfolders?$Top=1000&$select=Id,DisplayName,ChildFolderCount");
+            Uri URL = Util.UseMicrosoftGraphInMailboxViewer ? new Uri($"https://graph.microsoft.com/v1.0/me/mailfolders/{FolderId}/childfolders?includeHiddenFolders=true&$Top=1000&$select=Id,DisplayName,ChildFolderCount") : new Uri($"https://outlook.office.com/api/v2.0/me/mailfolders/{FolderId}/childfolders?$Top=1000&$select=Id,DisplayName,ChildFolderCount");
 
             List<MailFolder> result = new List<MailFolder>();
 
