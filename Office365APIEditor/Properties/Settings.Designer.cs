@@ -517,27 +517,21 @@ namespace Office365APIEditor.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("389b1b32-b5d5-43b2-bddc-84ce938d6737")]
         public string BuiltInAppClientId {
             get {
                 return ((string)(this["BuiltInAppClientId"]));
             }
-            set {
-                this["BuiltInAppClientId"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("urn:ietf:wg:oauth:2.0:oob")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://login.microsoftonline.com/common/oauth2/nativeclient")]
         public string BuiltInAppRedirectUri {
             get {
                 return ((string)(this["BuiltInAppRedirectUri"]));
-            }
-            set {
-                this["BuiltInAppRedirectUri"] = value;
             }
         }
         
