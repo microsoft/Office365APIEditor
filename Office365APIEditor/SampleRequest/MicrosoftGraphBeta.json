@@ -3357,14 +3357,216 @@
         }
       ]
     },
-    //{
-    //  "displayName": "Device and apps",
-    //  "secondLevelCategory": []
-    //},
-    //{
-    //  "displayName": "Education",
-    //  "secondLevelCategory": []
-    //},
+    {
+      "displayName": "Device and apps",
+      "secondLevelCategory": [
+        {
+          "displayName": "Service health and communications",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Service health",
+              "fourthLevelCategory": [
+                {
+                  "displayName": "List health overview",
+                  "sampleRequest": [
+                    {
+                      "id": "ef29b091-959a-403f-9f3f-1a0c78d6b9c2",
+                      "displayName": "Get serviceHealth resources",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/healthOverviews",
+                      "header": [],
+                      "body": ""
+                    },
+                    {
+                      "id": "adbd0e46-9d9e-4844-b3a6-6c98b15eff2a",
+                      "displayName": "Include navigation property issues",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/healthOverviews?$expand=issues",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Get service health",
+                  "sampleRequest": [
+                    {
+                      "id": "6cf31e4e-7f06-4820-b384-3a119a4a621d",
+                      "displayName": "Get the properties of a serviceHealth object",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/healthOverviews/{ServiceName}",
+                      "header": [],
+                      "body": ""
+                    },
+                    {
+                      "id": "4a236143-c91a-4e37-91bf-a45c46d0fdb3",
+                      "displayName": "Include navigation property issues",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/healthOverviews/{ServiceName}?$expand=issues",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "displayName": "Service health issue",
+              "fourthLevelCategory": [
+                {
+                  "displayName": "List issues",
+                  "sampleRequest": [
+                    {
+                      "id": "b62496fe-48e2-47f2-be6b-20d8d3d0550d",
+                      "displayName": "Example",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/issues",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Get issue",
+                  "sampleRequest": [
+                    {
+                      "id": "7acfa62e-ce06-4c30-b9c4-855f7a23a608",
+                      "displayName": "Example",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/issues/{serviceHealthIssueId}",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Get post-incident review report",
+                  "sampleRequest": [
+                    {
+                      "id": "93ab27d8-e564-469e-913a-6387133d8a9a",
+                      "displayName": "Example",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/issues/{serviceHealthIssueId}/incidentReport",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "displayName": "Service update message",
+              "fourthLevelCategory": [
+                {
+                  "displayName": "List messages",
+                  "sampleRequest": [
+                    {
+                      "id": "a18249e3-0fcb-4794-aaf1-1c58eb43e27b",
+                      "displayName": "Example",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/messages",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Get message",
+                  "sampleRequest": [
+                    {
+                      "id": "53add0a3-94e6-4ee4-8829-8db23aa83b2c",
+                      "displayName": "Example",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/messages/{serviceUpdateMessageId}",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Mark read status",
+                  "sampleRequest": [
+                    {
+                      "id": "33e9d197-818e-4ec7-8c73-499ce5e3eaec",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/messages/markRead",
+                      "header": [],
+                      "body": "{\r\n  \"messageIds\": [\"{serviceUpdateMessageId}\"]\r\n},"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Mark unread status",
+                  "sampleRequest": [
+                    {
+                      "id": "9bd0904c-f607-42d2-a710-67c4a5aeea94",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/messages/markUnread",
+                      "header": [],
+                      "body": "{\r\n  \"messageIds\": [\"{serviceUpdateMessageId}\"]\r\n},"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Archive status",
+                  "sampleRequest": [
+                    {
+                      "id": "2bca26dd-92e0-4206-8939-5269261595ea",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/messages/archive",
+                      "header": [],
+                      "body": "{\r\n  \"messageIds\": [\"{serviceUpdateMessageId}\"]\r\n},"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Unarchive status",
+                  "sampleRequest": [
+                    {
+                      "id": "320835ab-c2c6-40c5-80b3-b1c31ae313dc",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/messages/unarchive",
+                      "header": [],
+                      "body": "{\r\n  \"messageIds\": [\"{serviceUpdateMessageId}\"]\r\n},"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Mark favorite status",
+                  "sampleRequest": [
+                    {
+                      "id": "2e210892-d336-41d3-ae7a-b18f706a0149",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/messages/favorite",
+                      "header": [],
+                      "body": "{\r\n  \"messageIds\": [\"{serviceUpdateMessageId}\"]\r\n},"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Remove favorite status",
+                  "sampleRequest": [
+                    {
+                      "id": "9569e4ab-f0a7-45ff-8c58-0512a8c7aad5",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/beta/admin/serviceAnnouncement/messages/unfavorite",
+                      "header": [],
+                      "body": "{\r\n  \"messageIds\": [\"{serviceUpdateMessageId}\"]\r\n},"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     {
       "displayName": "Files",
       "secondLevelCategory": [

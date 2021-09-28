@@ -3357,10 +3357,216 @@
         }
       ]
     },
-    //{
-    //  "displayName": "Device and apps",
-    //  "secondLevelCategory": []
-    //},
+    {
+      "displayName": "Device and apps",
+      "secondLevelCategory": [
+        {
+          "displayName": "Service health and communications",
+          "thirdLevelCategory": [
+            {
+              "displayName": "Service health",
+              "fourthLevelCategory": [
+                {
+                  "displayName": "List health overview",
+                  "sampleRequest": [
+                    {
+                      "id": "c816338b-5fa1-4da9-b2fc-68b82074cce6",
+                      "displayName": "Get serviceHealth resources",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/healthOverviews",
+                      "header": [],
+                      "body": ""
+                    },
+                    {
+                      "id": "46308f16-7b8a-4db7-89f9-746bee6c0101",
+                      "displayName": "Include navigation property issues",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/healthOverviews?$expand=issues",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Get service health",
+                  "sampleRequest": [
+                    {
+                      "id": "028a1415-40ce-4bd1-b0b6-9d03216fb767",
+                      "displayName": "Get the properties of a serviceHealth object",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/healthOverviews/{ServiceName}",
+                      "header": [],
+                      "body": ""
+                    },
+                    {
+                      "id": "cf3b8ad8-d970-428e-9008-fcb2bb69d46f",
+                      "displayName": "Include navigation property issues",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/healthOverviews/{ServiceName}?$expand=issues",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "displayName": "Service health issue",
+              "fourthLevelCategory": [
+                {
+                  "displayName": "List issues",
+                  "sampleRequest": [
+                    {
+                      "id": "703c16b4-5171-4c1d-9c9c-c382b12efb6f",
+                      "displayName": "Example",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/issues",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Get issue",
+                  "sampleRequest": [
+                    {
+                      "id": "3eecfc68-0118-4b71-8aa7-f3c36c4e85ae",
+                      "displayName": "Example",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/issues/{serviceHealthIssueId}",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Get post-incident review report",
+                  "sampleRequest": [
+                    {
+                      "id": "53b7d1b0-1e7b-4bc4-a68b-cb6f9cd56e56",
+                      "displayName": "Example",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/issues/{serviceHealthIssueId}/incidentReport",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "displayName": "Service update message",
+              "fourthLevelCategory": [
+                {
+                  "displayName": "List messages",
+                  "sampleRequest": [
+                    {
+                      "id": "3a0c93ad-314c-4765-878e-55c84c7d8c7c",
+                      "displayName": "Example",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/messages",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Get message",
+                  "sampleRequest": [
+                    {
+                      "id": "ef3cc99b-9d11-4b38-87bd-34581270114d",
+                      "displayName": "Example",
+                      "method": "GET",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/messages/{serviceUpdateMessageId}",
+                      "header": [],
+                      "body": ""
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Mark read status",
+                  "sampleRequest": [
+                    {
+                      "id": "97a97c8d-47b6-4980-95a6-fd535e9813e6",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/messages/markRead",
+                      "header": [],
+                      "body": "{\r\n  \"messageIds\": [\"{serviceUpdateMessageId}\"]\r\n},"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Mark unread status",
+                  "sampleRequest": [
+                    {
+                      "id": "6e4562ca-0a17-4fe7-890d-b2d204b03a34",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/messages/markUnread",
+                      "header": [],
+                      "body": "{\r\n  \"messageIds\": [\"{serviceUpdateMessageId}\"]\r\n},"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Archive status",
+                  "sampleRequest": [
+                    {
+                      "id": "e43df64b-61d5-4efd-8cdd-de609c5d0408",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/messages/archive",
+                      "header": [],
+                      "body": "{\r\n  \"messageIds\": [\"{serviceUpdateMessageId}\"]\r\n},"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Unarchive status",
+                  "sampleRequest": [
+                    {
+                      "id": "91d7ac0c-2db4-454e-ad3b-9dade5cbbf10",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/messages/unarchive",
+                      "header": [],
+                      "body": "{\r\n  \"messageIds\": [\"{serviceUpdateMessageId}\"]\r\n},"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Mark favorite status",
+                  "sampleRequest": [
+                    {
+                      "id": "62750440-62ff-4511-89a9-91fc19e558fe",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/messages/favorite",
+                      "header": [],
+                      "body": "{\r\n  \"messageIds\": [\"{serviceUpdateMessageId}\"]\r\n},"
+                    }
+                  ]
+                },
+                {
+                  "displayName": "Remove favorite status",
+                  "sampleRequest": [
+                    {
+                      "id": "b5bf3ed7-1907-44fc-bc24-5ca2bdd5ec78",
+                      "displayName": "Example",
+                      "method": "POST",
+                      "URI": "https://graph.microsoft.com/v1.0/admin/serviceAnnouncement/messages/unfavorite",
+                      "header": [],
+                      "body": "{\r\n  \"messageIds\": [\"{serviceUpdateMessageId}\"]\r\n},"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     //{
     //  "displayName": "Education",
     //  "secondLevelCategory": []
@@ -9479,6 +9685,42 @@
           ]
         }
       ]
-    }
+    }//,
+    //{
+    //  "displayName": "",
+    //  "secondLevelCategory": [
+    //    {
+    //      "displayName": "",
+    //      "thirdLevelCategory": [
+    //        {
+    //          "displayName": "",
+    //          "fourthLevelCategory": [
+    //            {
+    //              "displayName": "",
+    //              "sampleRequest": [
+    //                {
+    //                  "id": "",
+    //                  "displayName": "",
+    //                  "method": "",
+    //                  "URI": "",
+    //                  "header": [],
+    //                  "body": ""
+    //                },
+    //                {
+    //                  "id": "",
+    //                  "displayName": "",
+    //                  "method": "",
+    //                  "URI": "",
+    //                  "header": [],
+    //                  "body": ""
+    //                }
+    //              ]
+    //            }
+    //          ]
+    //        }
+    //      ]
+    //    }
+    //  ]
+    //}
   ]
 }

@@ -132,6 +132,9 @@
   &lt;string&gt;https://graph.microsoft.com/SecurityEvents.ReadWrite.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/SecurityActions.Read.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/SecurityActions.ReadWrite.All&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/ServiceHealth.Read.All&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/ServiceMessage.Read.All&lt;/string&gt;
+  &lt;string&gt;https://graph.microsoft.com/ServiceMessageViewpoint.Write&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Sites.Manage.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Sites.Read.All&lt;/string&gt;
   &lt;string&gt;https://graph.microsoft.com/Sites.ReadWrite.All&lt;/string&gt;
