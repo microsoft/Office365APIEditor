@@ -39,13 +39,6 @@ OR PERFORMANCE OF THIS SOFTWARE.
 
 ============================================
 
-AsyncUsageAnalyzers
-Copyright (c) Tunnel Vision Laboratories, LLC. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License")
-https://github.com/DotNetAnalyzers/AsyncUsageAnalyzers/blob/master/LICENSE
-
-============================================
-
 DynamicJson
 
 * created and maintained by neuecc <ils@neue.cc>
