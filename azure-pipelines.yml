@@ -124,7 +124,7 @@ steps:
 - task: AzureFileCopy@4
   inputs:
     SourcePath: '$(Build.ArtifactStagingDirectory)/*'
-    azureSubscription: 'Microsoft Azure 社内従量課金プラン(bf971e8f-dee6-4a35-851a-eb818e718a8a)'
+    azureSubscription: 'Azure Resource Manager service connection'
     Destination: 'AzureBlob'
     storage: 'office365apieditor'
     ContainerName: 'build'
