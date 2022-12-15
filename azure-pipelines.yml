@@ -28,6 +28,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '2.1'
+
 - task: EsrpCodeSigning@1
   inputs:
     ConnectedServiceName: 'ESPR CodeSigning'
