@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. 
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information. 
 
+using Office365APIEditor.ViewerHelper.Data.MailAPI;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -45,5 +47,14 @@ namespace Office365APIEditor.ViewerHelper.Data.CalendarAPI
 
         [DataMember(Name = "onlineMeetingProvider", EmitDefaultValue = false)]
         public string OnlineMeetingProvider;
+
+        public Sensitivity Sensitivity;
+
+        [DataMember(Name = "sensitivity", EmitDefaultValue = false)]
+        private string SensitivityString
+        {
+            get { return Sensitivity.ToString().ToLower(); }
+            set { Sensitivity = (Sensitivity)Enum.Parse(typeof(Sensitivity), value, true); }
+        }
     }
 }

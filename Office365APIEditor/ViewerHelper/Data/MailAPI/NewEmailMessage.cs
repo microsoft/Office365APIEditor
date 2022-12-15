@@ -71,4 +71,20 @@ namespace Office365APIEditor.ViewerHelper.Data.MailAPI
         [EnumMember(Value = "html")]
         HTML = 1
     }
+
+    [DataContract]
+    public enum Sensitivity
+    {
+        [EnumMember(Value = "normal")]
+        Normal = 0,
+
+        [EnumMember(Value = "personal")]
+        Personal = 1,
+
+        [EnumMember(Value = "private")]
+        Private = 2,
+
+        [EnumMember(Value = "confidential")]
+        Confidential = 3
+    }
 }

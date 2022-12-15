@@ -164,7 +164,8 @@ namespace Office365APIEditor.UI
                 comboBox_Basic_TimeZone.Items.Add(timeZone);
             }
 
-            comboBox_BodyType.SelectedIndex = 1;
+            comboBox_BodyType.SelectedIndex = 1; // HTML
+            comboBox_Sensitivity.SelectedIndex = 0; // Normal
 
             comboBox_Recurring_Range_NumberOfConcurrences.Enabled = false;
             dateTimePicker_Recurring_Range_EndByDate.Enabled = false;
@@ -585,6 +586,7 @@ namespace Office365APIEditor.UI
 
             newItem.Body.ContentType = (BodyType)comboBox_BodyType.SelectedIndex;
             newItem.Body.Content = textBox_Body.Text;
+            newItem.Sensitivity = (Sensitivity)comboBox_Sensitivity.SelectedIndex;
             //newItem.Importance = (Importance)comboBox_Importance.SelectedIndex;
             //newItem.Attachments = attachments;
 

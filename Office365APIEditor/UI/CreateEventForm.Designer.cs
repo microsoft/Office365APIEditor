@@ -124,6 +124,8 @@
             this.dateTimePicker_Recurring_Range_Start = new System.Windows.Forms.DateTimePicker();
             this.label25 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.comboBox_Sensitivity = new System.Windows.Forms.ComboBox();
             this.groupBox_Recurring_Pattern.SuspendLayout();
             this.groupBox_Recurring_Pattern_Weekly.SuspendLayout();
             this.groupBox_Recurring_Pattern_Daily.SuspendLayout();
@@ -978,6 +980,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.comboBox_Sensitivity);
+            this.tabPage1.Controls.Add(this.label15);
             this.tabPage1.Controls.Add(this.comboBox_Basic_TimeZone);
             this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.textBox_Body);
@@ -1158,6 +1162,29 @@
             this.tabPage3.Text = "Online meeting";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(484, 142);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(57, 13);
+            this.label15.TabIndex = 52;
+            this.label15.Text = "Sensitivity:";
+            // 
+            // comboBox_Sensitivity
+            // 
+            this.comboBox_Sensitivity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_Sensitivity.FormattingEnabled = true;
+            this.comboBox_Sensitivity.Items.AddRange(new object[] {
+            "Normal",
+            "Personal",
+            "Private",
+            "Confidential"});
+            this.comboBox_Sensitivity.Location = new System.Drawing.Point(547, 139);
+            this.comboBox_Sensitivity.Name = "comboBox_Sensitivity";
+            this.comboBox_Sensitivity.Size = new System.Drawing.Size(92, 21);
+            this.comboBox_Sensitivity.TabIndex = 53;
+            // 
             // CreateEventForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1291,5 +1318,7 @@
         private System.Windows.Forms.TextBox textBox_Body;
         private System.Windows.Forms.ComboBox comboBox_Recurring_Range_NumberOfConcurrences;
         private System.Windows.Forms.ComboBox comboBox_Basic_TimeZone;
+        private System.Windows.Forms.ComboBox comboBox_Sensitivity;
+        private System.Windows.Forms.Label label15;
     }
 }
