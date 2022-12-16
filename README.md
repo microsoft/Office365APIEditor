@@ -27,7 +27,7 @@ You can browse your mailbox contents such as folders, items, and mailbox propert
 
 You need the following to work with Office365APIEditor:
 - An Office 365 account or a Microsoft Account
-- Microsoft .NET Framework 4.5 or later
+- Microsoft .NET Framework 4.8 or later
 - A minimum screen resolution of 1024 x 768
 
 You don't have to register your application in the Azure Active Directory if you want to use the built-in application ID.
