@@ -12,7 +12,7 @@ namespace Office365APIEditor.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.0.3.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -116,165 +116,6 @@ namespace Office365APIEditor.Properties {
             }
             set {
                 this["BasicAuthSmtpAddress"] = value;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>offline_access</string>\r\n  <string>openid</string>\r\n  <string>profile</str" +
-            "ing>\r\n  <string>email</string>\r\n  <string>https://outlook.office.com/calendars.r" +
-            "ead</string>\r\n  <string>https://outlook.office.com/calendars.read.shared</string" +
-            ">\r\n  <string>https://outlook.office.com/calendars.readwrite</string>\r\n  <string>" +
-            "https://outlook.office.com/calendars.readwrite.shared</string>\r\n  <string>https:" +
-            "//outlook.office.com/contacts.read</string>\r\n  <string>https://outlook.office.co" +
-            "m/contacts.readwrite</string>\r\n  <string>https://outlook.office.com/mail.read</s" +
-            "tring>\r\n  <string>https://outlook.office.com/mail.readwrite</string>\r\n  <string>" +
-            "https://outlook.office.com/mail.send</string>\r\n  <string>https://outlook.office." +
-            "com/mailboxsettings.read</string>\r\n  <string>https://outlook.office.com/mailboxs" +
-            "ettings.readwrite</string>\r\n  <string>https://outlook.office.com/people.read</st" +
-            "ring>\r\n  <string>https://outlook.office.com/tasks.read</string>\r\n  <string>https" +
-            "://outlook.office.com/tasks.readwrite</string>\r\n  <string>https://outlook.office" +
-            ".com/user.read</string>\r\n  <string>https://outlook.office.com/user.readwrite</st" +
-            "ring>\r\n  <string>https://outlook.office.com/user.readbasic.all</string>\r\n  <stri" +
-            "ng>https://graph.microsoft.com/Analytics.Read</string>\r\n  <string>https://graph." +
-            "microsoft.com/AppCatalog.Read.All</string>\r\n  <string>https://graph.microsoft.co" +
-            "m/AppCatalog.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Booki" +
-            "ngs.Read.All</string>\r\n  <string>https://graph.microsoft.com/BookingsAppointment" +
-            ".ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Bookings.ReadWrit" +
-            "e.All</string>\r\n  <string>https://graph.microsoft.com/Bookings.Manage.All</strin" +
-            "g>\r\n  <string>https://graph.microsoft.com/Calendars.Read</string>\r\n  <string>htt" +
-            "ps://graph.microsoft.com/Calendars.Read.Shared</string>\r\n  <string>https://graph" +
-            ".microsoft.com/Calendars.ReadWrite</string>\r\n  <string>https://graph.microsoft.c" +
-            "om/Calendars.ReadWrite.Shared</string>\r\n  <string>https://graph.microsoft.com/Ch" +
-            "annel.ReadBasic.All</string>\r\n  <string>https://graph.microsoft.com/Channel.Crea" +
-            "te</string>\r\n  <string>https://graph.microsoft.com/Channel.Create.Group</string>" +
-            "\r\n  <string>https://graph.microsoft.com/Channel.Delete.All</string>\r\n  <string>h" +
-            "ttps://graph.microsoft.com/Channel.Delete.Group</string>\r\n  <string>https://grap" +
-            "h.microsoft.com/ChannelSettings.Edit.Group</string>\r\n  <string>https://graph.mic" +
-            "rosoft.com/ChannelSettings.Read.All</string>\r\n  <string>https://graph.microsoft." +
-            "com/ChannelSettings.Read.Group</string>\r\n  <string>https://graph.microsoft.com/C" +
-            "hannelSettings.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Cha" +
-            "nnelMember.Read.All</string>\r\n  <string>https://graph.microsoft.com/ChannelMembe" +
-            "r.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/ChannelMessage.R" +
-            "ead.All</string>\r\n  <string>https://graph.microsoft.com/ChannelMessage.Read.Grou" +
-            "p</string>\r\n  <string>https://graph.microsoft.com/ChannelMessage.Send</string>\r\n" +
-            "  <string>https://graph.microsoft.com/Chat.Read.All</string>\r\n  <string>https://" +
-            "graph.microsoft.com/Chat.ReadBasic.All</string>\r\n  <string>https://graph.microso" +
-            "ft.com/Chat.UpdatePolicyViolation.All</string>\r\n  <string>https://graph.microsof" +
-            "t.com/Contacts.Read</string>\r\n  <string>https://graph.microsoft.com/Contacts.Rea" +
-            "d.Shared</string>\r\n  <string>https://graph.microsoft.com/Contacts.ReadWrite</str" +
-            "ing>\r\n  <string>https://graph.microsoft.com/Contacts.ReadWrite.Shared</string>\r\n" +
-            "  <string>https://graph.microsoft.com/Device.Read</string>\r\n  <string>https://gr" +
-            "aph.microsoft.com/Device.Command</string>\r\n  <string>https://graph.microsoft.com" +
-            "/Directory.Read.All</string>\r\n  <string>https://graph.microsoft.com/Directory.Re" +
-            "adWrite.All</string>\r\n  <string>https://graph.microsoft.com/Directory.AccessAsUs" +
-            "er.All</string>\r\n  <string>https://graph.microsoft.com/Files.Read</string>\r\n  <s" +
-            "tring>https://graph.microsoft.com/Files.Read.All</string>\r\n  <string>https://gra" +
-            "ph.microsoft.com/Files.ReadWrite</string>\r\n  <string>https://graph.microsoft.com" +
-            "/Files.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Group.Read." +
-            "All</string>\r\n  <string>https://graph.microsoft.com/Group.ReadWrite.All</string>" +
-            "\r\n  <string>https://graph.microsoft.com/GroupMember.Read.All</string>\r\n  <string" +
-            ">https://graph.microsoft.com/GroupMember.ReadWrite.All</string>\r\n  <string>https" +
-            "://graph.microsoft.com/IdentityProvider.Read.All</string>\r\n  <string>https://gra" +
-            "ph.microsoft.com/IdentityProvider.ReadWrite.All</string>\r\n  <string>https://grap" +
-            "h.microsoft.com/Mail.Read</string>\r\n  <string>https://graph.microsoft.com/Mail.R" +
-            "eadBasic</string>\r\n  <string>https://graph.microsoft.com/Mail.ReadWrite</string>" +
-            "\r\n  <string>https://graph.microsoft.com/Mail.Read.Shared</string>\r\n  <string>htt" +
-            "ps://graph.microsoft.com/Mail.ReadWrite.Shared</string>\r\n  <string>https://graph" +
-            ".microsoft.com/Mail.Send</string>\r\n  <string>https://graph.microsoft.com/Mail.Se" +
-            "nd.Shared</string>\r\n  <string>https://graph.microsoft.com/MailboxSettings.Read</" +
-            "string>\r\n  <string>https://graph.microsoft.com/MailboxSettings.ReadWrite</string" +
-            ">\r\n  <string>https://graph.microsoft.com/Member.Read.Group</string>\r\n  <string>h" +
-            "ttps://graph.microsoft.com/Member.Read.Hidden</string>\r\n  <string>https://graph." +
-            "microsoft.com/Notes.Create</string>\r\n  <string>https://graph.microsoft.com/Notes" +
-            ".Read</string>\r\n  <string>https://graph.microsoft.com/Notes.ReadWrite</string>\r\n" +
-            "  <string>https://graph.microsoft.com/Notes.Read.All</string>\r\n  <string>https:/" +
-            "/graph.microsoft.com/Notes.ReadWrite.All</string>\r\n  <string>https://graph.micro" +
-            "soft.com/OnlineMeetings.Read</string>\r\n  <string>https://graph.microsoft.com/Onl" +
-            "ineMeetings.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/Organizati" +
-            "on.Read.All</string>\r\n  <string>https://graph.microsoft.com/Organization.ReadWri" +
-            "te.All</string>\r\n  <string>https://graph.microsoft.com/OrgContact.Read.All</stri" +
-            "ng>\r\n  <string>https://graph.microsoft.com/Owner.Read.Group</string>\r\n  <string>" +
-            "https://graph.microsoft.com/People.Read</string>\r\n  <string>https://graph.micros" +
-            "oft.com/People.Read.All</string>\r\n  <string>https://graph.microsoft.com/Place.Re" +
-            "ad.All</string>\r\n  <string>https://graph.microsoft.com/Place.ReadWrite.All</stri" +
-            "ng>\r\n  <string>https://graph.microsoft.com/Presence.Read</string>\r\n  <string>htt" +
-            "ps://graph.microsoft.com/Presence.Read.All</string>\r\n  <string>https://graph.mic" +
-            "rosoft.com/PrivilegedAccess.ReadWrite.AzureAD</string>\r\n  <string>https://graph." +
-            "microsoft.com/PrivilegedAccess.ReadWrite.AzureResources</string>\r\n  <string>http" +
-            "s://graph.microsoft.com/Reports.Read.All</string>\r\n  <string>https://graph.micro" +
-            "soft.com/SecurityEvents.Read.All</string>\r\n  <string>https://graph.microsoft.com" +
-            "/SecurityEvents.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Se" +
-            "curityActions.Read.All</string>\r\n  <string>https://graph.microsoft.com/SecurityA" +
-            "ctions.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/ServiceHeal" +
-            "th.Read.All</string>\r\n  <string>https://graph.microsoft.com/ServiceMessage.Read." +
-            "All</string>\r\n  <string>https://graph.microsoft.com/ServiceMessageViewpoint.Writ" +
-            "e</string>\r\n  <string>https://graph.microsoft.com/Sites.Manage.All</string>\r\n  <" +
-            "string>https://graph.microsoft.com/Sites.Read.All</string>\r\n  <string>https://gr" +
-            "aph.microsoft.com/Sites.ReadWrite.All</string>\r\n  <string>https://graph.microsof" +
-            "t.com/Sites.FullControl.All</string>\r\n  <string>https://graph.microsoft.com/Task" +
-            "s.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/Team.ReadBasic.All</" +
-            "string>\r\n  <string>https://graph.microsoft.com/TeamMember.Read.All</string>\r\n  <" +
-            "string>https://graph.microsoft.com/TeamMember.ReadWrite.All</string>\r\n  <string>" +
-            "https://graph.microsoft.com/Teams.ReadBasic.All</string>\r\n  <string>https://grap" +
-            "h.microsoft.com/TeamsApp.Read.Group</string>\r\n  <string>https://graph.microsoft." +
-            "com/TeamsAppInstallation.ReadForUser</string>\r\n  <string>https://graph.microsoft" +
-            ".com/TeamsAppInstallation.ReadWriteForUser</string>\r\n  <string>https://graph.mic" +
-            "rosoft.com/TeamsAppInstallation.ReadForTeam</string>\r\n  <string>https://graph.mi" +
-            "crosoft.com/TeamsAppInstallation.ReadWriteForTeam</string>\r\n  <string>https://gr" +
-            "aph.microsoft.com/TeamSettings.Read.All</string>\r\n  <string>https://graph.micros" +
-            "oft.com/TeamSettings.Read.Group</string>\r\n  <string>https://graph.microsoft.com/" +
-            "TeamSettings.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Teams" +
-            "Settings.Read.All</string>\r\n  <string>https://graph.microsoft.com/TeamsSettings." +
-            "ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/TeamsTab.Create</s" +
-            "tring>\r\n  <string>https://graph.microsoft.com/TeamsTab.Create.Group</string>\r\n  " +
-            "<string>https://graph.microsoft.com/TeamsTab.Delete.Group</string>\r\n  <string>ht" +
-            "tps://graph.microsoft.com/TeamsTab.Edit.Group</string>\r\n  <string>https://graph." +
-            "microsoft.com/TeamsTab.Read.All</string>\r\n  <string>https://graph.microsoft.com/" +
-            "TeamsTab.Read.Group</string>\r\n  <string>https://graph.microsoft.com/TeamsTab.Rea" +
-            "dWrite.All</string>\r\n  <string>https://graph.microsoft.com/ThreatIndicators.Read" +
-            "Write.OwnedBy</string>\r\n  <string>https://graph.microsoft.com/ThreatIndicators.R" +
-            "ead.All</string>\r\n  <string>https://graph.microsoft.com/User.Export.All</string>" +
-            "\r\n  <string>https://graph.microsoft.com/User.Invite.All</string>\r\n  <string>http" +
-            "s://graph.microsoft.com/User.ManageIdentities.All</string>\r\n  <string>https://gr" +
-            "aph.microsoft.com/User.Read</string>\r\n  <string>https://graph.microsoft.com/User" +
-            ".Read.All</string>\r\n  <string>https://graph.microsoft.com/User.ReadBasic.All</st" +
-            "ring>\r\n  <string>https://graph.microsoft.com/User.ReadWrite</string>\r\n  <string>" +
-            "https://graph.microsoft.com/User.ReadWrite.All</string>\r\n  <string>https://graph" +
-            ".microsoft.com/UserActivity.ReadWrite.CreatedByApp</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection PredefinedScopes {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["PredefinedScopes"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
-            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
-            "tring>offline_access</string>\r\n  <string>https://graph.microsoft.com/Calendars.R" +
-            "ead</string>\r\n  <string>https://graph.microsoft.com/Calendars.Read.Shared</strin" +
-            "g>\r\n  <string>https://graph.microsoft.com/Calendars.ReadWrite</string>\r\n  <strin" +
-            "g>https://graph.microsoft.com/Calendars.ReadWrite.Shared</string>\r\n  <string>htt" +
-            "ps://graph.microsoft.com/Contacts.Read</string>\r\n  <string>https://graph.microso" +
-            "ft.com/Contacts.Read.Shared</string>\r\n  <string>https://graph.microsoft.com/Cont" +
-            "acts.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/Contacts.ReadWrit" +
-            "e.Shared</string>\r\n  <string>https://graph.microsoft.com/Mail.Read</string>\r\n  <" +
-            "string>https://graph.microsoft.com/Mail.ReadWrite</string>\r\n  <string>https://gr" +
-            "aph.microsoft.com/Mail.Read.Shared</string>\r\n  <string>https://graph.microsoft.c" +
-            "om/Mail.ReadWrite.Shared</string>\r\n  <string>https://graph.microsoft.com/Mail.Se" +
-            "nd</string>\r\n  <string>https://graph.microsoft.com/Mail.Send.Shared</string>\r\n  " +
-            "<string>https://graph.microsoft.com/MailboxSettings.Read</string>\r\n  <string>htt" +
-            "ps://graph.microsoft.com/MailboxSettings.ReadWrite</string>\r\n  <string>https://g" +
-            "raph.microsoft.com/People.Read</string>\r\n  <string>https://graph.microsoft.com/T" +
-            "asks.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/User.Read</string" +
-            ">\r\n  <string>https://graph.microsoft.com/User.ReadWrite</string>\r\n  <string>http" +
-            "s://graph.microsoft.com/User.ReadBasic.All</string>\r\n</ArrayOfString>")]
-        public global::System.Collections.Specialized.StringCollection DefaultScopes {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["DefaultScopes"]));
             }
         }
         
@@ -819,6 +660,167 @@ namespace Office365APIEditor.Properties {
             }
             set {
                 this["AccessTokenWizardApps"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsd=\"http://www.w3." +
+            "org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n  <s" +
+            "tring>offline_access</string>\r\n  <string>openid</string>\r\n  <string>profile</str" +
+            "ing>\r\n  <string>email</string>\r\n  <string>https://outlook.office.com/calendars.r" +
+            "ead</string>\r\n  <string>https://outlook.office.com/calendars.read.shared</string" +
+            ">\r\n  <string>https://outlook.office.com/calendars.readwrite</string>\r\n  <string>" +
+            "https://outlook.office.com/calendars.readwrite.shared</string>\r\n  <string>https:" +
+            "//outlook.office.com/contacts.read</string>\r\n  <string>https://outlook.office.co" +
+            "m/contacts.readwrite</string>\r\n  <string>https://outlook.office.com/mail.read</s" +
+            "tring>\r\n  <string>https://outlook.office.com/mail.readwrite</string>\r\n  <string>" +
+            "https://outlook.office.com/mail.send</string>\r\n  <string>https://outlook.office." +
+            "com/mailboxsettings.read</string>\r\n  <string>https://outlook.office.com/mailboxs" +
+            "ettings.readwrite</string>\r\n  <string>https://outlook.office.com/people.read</st" +
+            "ring>\r\n  <string>https://outlook.office.com/tasks.read</string>\r\n  <string>https" +
+            "://outlook.office.com/tasks.readwrite</string>\r\n  <string>https://outlook.office" +
+            ".com/user.read</string>\r\n  <string>https://outlook.office.com/user.readwrite</st" +
+            "ring>\r\n  <string>https://outlook.office.com/user.readbasic.all</string>\r\n  <stri" +
+            "ng>https://graph.microsoft.com/Analytics.Read</string>\r\n  <string>https://graph." +
+            "microsoft.com/AppCatalog.Read.All</string>\r\n  <string>https://graph.microsoft.co" +
+            "m/AppCatalog.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Booki" +
+            "ngs.Read.All</string>\r\n  <string>https://graph.microsoft.com/BookingsAppointment" +
+            ".ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Bookings.ReadWrit" +
+            "e.All</string>\r\n  <string>https://graph.microsoft.com/Bookings.Manage.All</strin" +
+            "g>\r\n  <string>https://graph.microsoft.com/Calendars.Read</string>\r\n  <string>htt" +
+            "ps://graph.microsoft.com/Calendars.Read.Shared</string>\r\n  <string>https://graph" +
+            ".microsoft.com/Calendars.ReadWrite</string>\r\n  <string>https://graph.microsoft.c" +
+            "om/Calendars.ReadWrite.Shared</string>\r\n  <string>https://graph.microsoft.com/Ch" +
+            "annel.ReadBasic.All</string>\r\n  <string>https://graph.microsoft.com/Channel.Crea" +
+            "te</string>\r\n  <string>https://graph.microsoft.com/Channel.Create.Group</string>" +
+            "\r\n  <string>https://graph.microsoft.com/Channel.Delete.All</string>\r\n  <string>h" +
+            "ttps://graph.microsoft.com/Channel.Delete.Group</string>\r\n  <string>https://grap" +
+            "h.microsoft.com/ChannelSettings.Edit.Group</string>\r\n  <string>https://graph.mic" +
+            "rosoft.com/ChannelSettings.Read.All</string>\r\n  <string>https://graph.microsoft." +
+            "com/ChannelSettings.Read.Group</string>\r\n  <string>https://graph.microsoft.com/C" +
+            "hannelSettings.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Cha" +
+            "nnelMember.Read.All</string>\r\n  <string>https://graph.microsoft.com/ChannelMembe" +
+            "r.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/ChannelMessage.R" +
+            "ead.All</string>\r\n  <string>https://graph.microsoft.com/ChannelMessage.Read.Grou" +
+            "p</string>\r\n  <string>https://graph.microsoft.com/ChannelMessage.Send</string>\r\n" +
+            "  <string>https://graph.microsoft.com/Chat.Read.All</string>\r\n  <string>https://" +
+            "graph.microsoft.com/Chat.ReadBasic.All</string>\r\n  <string>https://graph.microso" +
+            "ft.com/Chat.UpdatePolicyViolation.All</string>\r\n  <string>https://graph.microsof" +
+            "t.com/Contacts.Read</string>\r\n  <string>https://graph.microsoft.com/Contacts.Rea" +
+            "d.Shared</string>\r\n  <string>https://graph.microsoft.com/Contacts.ReadWrite</str" +
+            "ing>\r\n  <string>https://graph.microsoft.com/Contacts.ReadWrite.Shared</string>\r\n" +
+            "  <string>https://graph.microsoft.com/Device.Read</string>\r\n  <string>https://gr" +
+            "aph.microsoft.com/Device.Command</string>\r\n  <string>https://graph.microsoft.com" +
+            "/Directory.Read.All</string>\r\n  <string>https://graph.microsoft.com/Directory.Re" +
+            "adWrite.All</string>\r\n  <string>https://graph.microsoft.com/Directory.AccessAsUs" +
+            "er.All</string>\r\n  <string>https://graph.microsoft.com/Files.Read</string>\r\n  <s" +
+            "tring>https://graph.microsoft.com/Files.Read.All</string>\r\n  <string>https://gra" +
+            "ph.microsoft.com/Files.ReadWrite</string>\r\n  <string>https://graph.microsoft.com" +
+            "/Files.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Group.Read." +
+            "All</string>\r\n  <string>https://graph.microsoft.com/Group.ReadWrite.All</string>" +
+            "\r\n  <string>https://graph.microsoft.com/GroupMember.Read.All</string>\r\n  <string" +
+            ">https://graph.microsoft.com/GroupMember.ReadWrite.All</string>\r\n  <string>https" +
+            "://graph.microsoft.com/IdentityProvider.Read.All</string>\r\n  <string>https://gra" +
+            "ph.microsoft.com/IdentityProvider.ReadWrite.All</string>\r\n  <string>https://grap" +
+            "h.microsoft.com/Mail.Read</string>\r\n  <string>https://graph.microsoft.com/Mail.R" +
+            "eadBasic</string>\r\n  <string>https://graph.microsoft.com/Mail.ReadWrite</string>" +
+            "\r\n  <string>https://graph.microsoft.com/Mail.Read.Shared</string>\r\n  <string>htt" +
+            "ps://graph.microsoft.com/Mail.ReadWrite.Shared</string>\r\n  <string>https://graph" +
+            ".microsoft.com/Mail.Send</string>\r\n  <string>https://graph.microsoft.com/Mail.Se" +
+            "nd.Shared</string>\r\n  <string>https://graph.microsoft.com/MailboxSettings.Read</" +
+            "string>\r\n  <string>https://graph.microsoft.com/MailboxSettings.ReadWrite</string" +
+            ">\r\n  <string>https://graph.microsoft.com/Member.Read.Group</string>\r\n  <string>h" +
+            "ttps://graph.microsoft.com/Member.Read.Hidden</string>\r\n  <string>https://graph." +
+            "microsoft.com/Notes.Create</string>\r\n  <string>https://graph.microsoft.com/Notes" +
+            ".Read</string>\r\n  <string>https://graph.microsoft.com/Notes.ReadWrite</string>\r\n" +
+            "  <string>https://graph.microsoft.com/Notes.Read.All</string>\r\n  <string>https:/" +
+            "/graph.microsoft.com/Notes.ReadWrite.All</string>\r\n  <string>https://graph.micro" +
+            "soft.com/OnlineMeetings.Read</string>\r\n  <string>https://graph.microsoft.com/Onl" +
+            "ineMeetings.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/Organizati" +
+            "on.Read.All</string>\r\n  <string>https://graph.microsoft.com/Organization.ReadWri" +
+            "te.All</string>\r\n  <string>https://graph.microsoft.com/OrgContact.Read.All</stri" +
+            "ng>\r\n  <string>https://graph.microsoft.com/Owner.Read.Group</string>\r\n  <string>" +
+            "https://graph.microsoft.com/People.Read</string>\r\n  <string>https://graph.micros" +
+            "oft.com/People.Read.All</string>\r\n  <string>https://graph.microsoft.com/Place.Re" +
+            "ad.All</string>\r\n  <string>https://graph.microsoft.com/Place.ReadWrite.All</stri" +
+            "ng>\r\n  <string>https://graph.microsoft.com/Presence.Read</string>\r\n  <string>htt" +
+            "ps://graph.microsoft.com/Presence.Read.All</string>\r\n  <string>https://graph.mic" +
+            "rosoft.com/PrivilegedAccess.ReadWrite.AzureAD</string>\r\n  <string>https://graph." +
+            "microsoft.com/PrivilegedAccess.ReadWrite.AzureResources</string>\r\n  <string>http" +
+            "s://graph.microsoft.com/Reports.Read.All</string>\r\n  <string>https://graph.micro" +
+            "soft.com/SecurityAlert.Read.All</string>\r\n  <string>https://graph.microsoft.com/" +
+            "SecurityAlert.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Secu" +
+            "rityEvents.Read.All</string>\r\n  <string>https://graph.microsoft.com/SecurityEven" +
+            "ts.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/SecurityActions" +
+            ".Read.All</string>\r\n  <string>https://graph.microsoft.com/SecurityActions.ReadWr" +
+            "ite.All</string>\r\n  <string>https://graph.microsoft.com/ServiceHealth.Read.All</" +
+            "string>\r\n  <string>https://graph.microsoft.com/ServiceMessage.Read.All</string>\r" +
+            "\n  <string>https://graph.microsoft.com/ServiceMessageViewpoint.Write</string>\r\n " +
+            " <string>https://graph.microsoft.com/Sites.Manage.All</string>\r\n  <string>https:" +
+            "//graph.microsoft.com/Sites.Read.All</string>\r\n  <string>https://graph.microsoft" +
+            ".com/Sites.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/Sites.F" +
+            "ullControl.All</string>\r\n  <string>https://graph.microsoft.com/Tasks.ReadWrite</" +
+            "string>\r\n  <string>https://graph.microsoft.com/Team.ReadBasic.All</string>\r\n  <s" +
+            "tring>https://graph.microsoft.com/TeamMember.Read.All</string>\r\n  <string>https:" +
+            "//graph.microsoft.com/TeamMember.ReadWrite.All</string>\r\n  <string>https://graph" +
+            ".microsoft.com/Teams.ReadBasic.All</string>\r\n  <string>https://graph.microsoft.c" +
+            "om/TeamsApp.Read.Group</string>\r\n  <string>https://graph.microsoft.com/TeamsAppI" +
+            "nstallation.ReadForUser</string>\r\n  <string>https://graph.microsoft.com/TeamsApp" +
+            "Installation.ReadWriteForUser</string>\r\n  <string>https://graph.microsoft.com/Te" +
+            "amsAppInstallation.ReadForTeam</string>\r\n  <string>https://graph.microsoft.com/T" +
+            "eamsAppInstallation.ReadWriteForTeam</string>\r\n  <string>https://graph.microsoft" +
+            ".com/TeamSettings.Read.All</string>\r\n  <string>https://graph.microsoft.com/TeamS" +
+            "ettings.Read.Group</string>\r\n  <string>https://graph.microsoft.com/TeamSettings." +
+            "ReadWrite.All</string>\r\n  <string>https://graph.microsoft.com/TeamsSettings.Read" +
+            ".All</string>\r\n  <string>https://graph.microsoft.com/TeamsSettings.ReadWrite.All" +
+            "</string>\r\n  <string>https://graph.microsoft.com/TeamsTab.Create</string>\r\n  <st" +
+            "ring>https://graph.microsoft.com/TeamsTab.Create.Group</string>\r\n  <string>https" +
+            "://graph.microsoft.com/TeamsTab.Delete.Group</string>\r\n  <string>https://graph.m" +
+            "icrosoft.com/TeamsTab.Edit.Group</string>\r\n  <string>https://graph.microsoft.com" +
+            "/TeamsTab.Read.All</string>\r\n  <string>https://graph.microsoft.com/TeamsTab.Read" +
+            ".Group</string>\r\n  <string>https://graph.microsoft.com/TeamsTab.ReadWrite.All</s" +
+            "tring>\r\n  <string>https://graph.microsoft.com/ThreatIndicators.ReadWrite.OwnedBy" +
+            "</string>\r\n  <string>https://graph.microsoft.com/ThreatIndicators.Read.All</stri" +
+            "ng>\r\n  <string>https://graph.microsoft.com/User.Export.All</string>\r\n  <string>h" +
+            "ttps://graph.microsoft.com/User.Invite.All</string>\r\n  <string>https://graph.mic" +
+            "rosoft.com/User.ManageIdentities.All</string>\r\n  <string>https://graph.microsoft" +
+            ".com/User.Read</string>\r\n  <string>https://graph.microsoft.com/User.Read.All</st" +
+            "ring>\r\n  <string>https://graph.microsoft.com/User.ReadBasic.All</string>\r\n  <str" +
+            "ing>https://graph.microsoft.com/User.ReadWrite</string>\r\n  <string>https://graph" +
+            ".microsoft.com/User.ReadWrite.All</string>\r\n  <string>https://graph.microsoft.co" +
+            "m/UserActivity.ReadWrite.CreatedByApp</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection PredefinedScopes {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["PredefinedScopes"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsd=\"http://www.w3." +
+            "org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n  <s" +
+            "tring>offline_access</string>\r\n  <string>https://graph.microsoft.com/Calendars.R" +
+            "ead</string>\r\n  <string>https://graph.microsoft.com/Calendars.Read.Shared</strin" +
+            "g>\r\n  <string>https://graph.microsoft.com/Calendars.ReadWrite</string>\r\n  <strin" +
+            "g>https://graph.microsoft.com/Calendars.ReadWrite.Shared</string>\r\n  <string>htt" +
+            "ps://graph.microsoft.com/Contacts.Read</string>\r\n  <string>https://graph.microso" +
+            "ft.com/Contacts.Read.Shared</string>\r\n  <string>https://graph.microsoft.com/Cont" +
+            "acts.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/Contacts.ReadWrit" +
+            "e.Shared</string>\r\n  <string>https://graph.microsoft.com/Mail.Read</string>\r\n  <" +
+            "string>https://graph.microsoft.com/Mail.ReadWrite</string>\r\n  <string>https://gr" +
+            "aph.microsoft.com/Mail.Read.Shared</string>\r\n  <string>https://graph.microsoft.c" +
+            "om/Mail.ReadWrite.Shared</string>\r\n  <string>https://graph.microsoft.com/Mail.Se" +
+            "nd</string>\r\n  <string>https://graph.microsoft.com/Mail.Send.Shared</string>\r\n  " +
+            "<string>https://graph.microsoft.com/MailboxSettings.Read</string>\r\n  <string>htt" +
+            "ps://graph.microsoft.com/MailboxSettings.ReadWrite</string>\r\n  <string>https://g" +
+            "raph.microsoft.com/People.Read</string>\r\n  <string>https://graph.microsoft.com/T" +
+            "asks.ReadWrite</string>\r\n  <string>https://graph.microsoft.com/User.Read</string" +
+            ">\r\n  <string>https://graph.microsoft.com/User.ReadWrite</string>\r\n  <string>http" +
+            "s://graph.microsoft.com/User.ReadBasic.All</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection DefaultScopes {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["DefaultScopes"]));
             }
         }
     }
