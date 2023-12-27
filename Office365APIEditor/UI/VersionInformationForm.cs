@@ -17,25 +17,7 @@ namespace Office365APIEditor.UI
         {
             Icon = Properties.Resources.DefaultIcon;
 
-            Version productVersion = Version.Parse(Application.ProductVersion);
-            string friendlyVersion = "";
-
-            if (productVersion.Revision == 0)
-            {
-                friendlyVersion = productVersion.ToString(3);
-            }
-            else
-            {
-                friendlyVersion = productVersion.ToString(4);
-            }
-
-            string debugIndicator = "";
-
-#if DEBUG
-            debugIndicator += " (DEBUG)";
-#endif
-
-            label_Version.Text += friendlyVersion + debugIndicator;
+            label_Version.Text += Util.VersionString;
 
             // Read "3rd party notice.txt".
             richTextBox_3rdPartyNotice.Text = Properties.Resources._3rd_party_notice;

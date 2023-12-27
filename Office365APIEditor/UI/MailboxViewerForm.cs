@@ -784,6 +784,12 @@ namespace Office365APIEditor
             };
             tokenView.Show(this);
         }
+        private void optionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Open the Option window
+            RequestFormOptionForm optionForm = new RequestFormOptionForm();
+            optionForm.ShowDialog();
+        }
 
         private void NewMessageToolStripMenuItem_Click(object sender, EventArgs e)
         {

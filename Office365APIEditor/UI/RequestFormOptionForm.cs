@@ -54,7 +54,7 @@ namespace Office365APIEditor
 
             checkBox_AllowAutoRedirect.Checked = Properties.Settings.Default.AllowAutoRedirect;
 
-            comboBox_CustomUserAgentStyle.Items.Add("Use system default UserAgent");
+            comboBox_CustomUserAgentStyle.Items.Add("Use default UserAgent");
             comboBox_CustomUserAgentStyle.Items.Add("Use custom UserAgent");
             //comboBox_CustomUserAgentStyle.Items.Add("Add custom UserAgent value as prefix");
             //comboBox_CustomUserAgentStyle.Items.Add("Add custom UserAgent value as suffix");
@@ -81,7 +81,7 @@ namespace Office365APIEditor
             textBox_CustomUserAgent.Text = Properties.Settings.Default.CustomUserAgent;
 
             //
-            // Load Encode tab.
+            // Load Editor - Encode tab.
             //
 
             checkBox_ReplacePlusSignInTheRequestURL.Checked = Properties.Settings.Default.ReplacePlusSignInTheRequestURL;

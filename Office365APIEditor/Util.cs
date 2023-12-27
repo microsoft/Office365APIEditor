@@ -260,6 +260,7 @@ namespace Office365APIEditor
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
             request.AllowAutoRedirect = true;
+            request.UserAgent = Util.CustomUserAgent;
             request.ContentType = "application/json";
 
             request.Headers.Add("Authorization:Bearer " + AccessToken);
@@ -293,6 +294,7 @@ namespace Office365APIEditor
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
             request.AllowAutoRedirect = true;
+            request.UserAgent = Util.CustomUserAgent;
             request.ContentType = "application/json";
 
             request.Headers.Add("Authorization:Bearer " + AccessToken);
@@ -336,6 +338,7 @@ namespace Office365APIEditor
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
             request.AllowAutoRedirect = true;
+            request.UserAgent = Util.CustomUserAgent;
             request.ContentType = "application/json";
 
             request.Headers.Add("Authorization:Bearer " + AccessToken);
@@ -369,6 +372,7 @@ namespace Office365APIEditor
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
             request.AllowAutoRedirect = true;
+            request.UserAgent = Util.CustomUserAgent;
             request.ContentType = "application/json";
 
             request.Headers.Add("Authorization:Bearer " + AccessToken);
@@ -457,9 +461,11 @@ namespace Office365APIEditor
                 // Custom UserAgent is a preview feature.
                 // We don't change all of UserAgent because we don't want to use urlmon.dll or ActiveX to change UserAgent of WebBrowser control.
 
+                string defaultUserAgent = "Office365APIEditor/" + VersionString;
+
                 if (Properties.Settings.Default.CustomUserAgentMode == 0)
                 {
-                    return "";
+                    return defaultUserAgent;
                 }
                 else if (Properties.Settings.Default.CustomUserAgentMode == 1)
                 {
@@ -467,7 +473,7 @@ namespace Office365APIEditor
                 }
                 else
                 {
-                    return "";
+                    return defaultUserAgent;
                 }
             }
         }
@@ -612,6 +618,32 @@ namespace Office365APIEditor
                 Owner = OwnerWindow
             };
             return errorForm.ShowDialog();
+        }
+
+        public static string VersionString
+        {
+            get
+            {
+                Version productVersion = Version.Parse(Application.ProductVersion);
+                string friendlyVersion = "";
+
+                if (productVersion.Revision == 0)
+                {
+                    friendlyVersion = productVersion.ToString(3);
+                }
+                else
+                {
+                    friendlyVersion = productVersion.ToString(4);
+                }
+
+                string debugIndicator = "";
+
+#if DEBUG
+                debugIndicator += " (DEBUG)";
+#endif
+
+                return friendlyVersion + debugIndicator;
+            }
         }
     }
 
